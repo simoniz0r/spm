@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.0.1"
+X="0.0.2"
 
 helpfunc () {
 printf '%s\n' "appimgman $X
@@ -97,6 +97,7 @@ updatelistfunc () { # Regenerate AppImages-bintray.lst from bintray, download Ap
         fi
     fi
     echo "Regenerating AppImages-bintray.lst from https://dl.bintray.com/probono/AppImages/ ..."
+    cd ~/.config/appimgman
     wget --show-progress --quiet "https://dl.bintray.com/probono/AppImages/" -O - | sed 's/<\/*[^>]*>//g' | grep -o '.*AppImage' | cut -f1 -d"-" | sort -u > ~/.config/appimgman/AppImages-bintray.lst || { echo "wget failed; exiting..."; exit 1; }
     echo "AppImages-bintray.lst updated!"
     echo "Downloading AppImages-github.lst from appimgman github repo..."
