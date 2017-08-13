@@ -1,4 +1,5 @@
 # appimgman
+![appimgman](/Screenshot.png)
 
 Usage: appimgman [option] [AppImage]
 
