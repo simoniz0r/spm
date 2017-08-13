@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.0.2"
+X="0.0.3"
 
 helpfunc () {
 printf '%s\n' "appimgman $X
@@ -391,14 +391,14 @@ case $1 in
         ;;
     list|-l) # List installed AppImages, AppImages-bintray.lst, and AppImages-github.lst or list info about specified AppImage
         if [ -z "$2" ]; then
-            echo "Installed:"
-            echo "$(dir -C -w 1 ~/.config/appimgman/installed | sed ':a;N;$!ba;s/\n/ | /g')"
+            echo "$(dir -C -w 1 ~/.config/appimgman/installed | wc -l) AppImages installed:"
+            dir -C -w 1 ~/.config/appimgman/installed | pr -tT --column=3 -w 125
             echo
             echo "$(cat ~/.config/appimgman/AppImages-bintray.lst | wc -l) Bintray AppImages available for install:"
-            echo "$(cat ~/.config/appimgman/AppImages-bintray.lst | sed ':a;N;$!ba;s/\n/ | /g')"
+            cat ./.config/appimgman/AppImages-bintray.lst | pr -tT --column=3 -w 125
             echo
             echo "$(cat ~/.config/appimgman/AppImages-github.lst | wc -l) Github AppImages available for install:"
-            echo "$(cat ~/.config/appimgman/AppImages-github.lst | cut -f1 -d" " | sed ':a;N;$!ba;s/\n/ | /g')"
+            cat ./.config/appimgman/AppImages-github.lst | cut -f1 -d" " | pr -tT --column=3 -w 125
         else
             if [ -f ~/.config/appimgman/installed/"$2" ]; then
                 echo "Current installed $2 information:"
@@ -421,7 +421,8 @@ case $1 in
         fi
         ;;
     list-installed|-li) # List information about installed AppImages
-        echo "$(dir -C -w 1 ~/.config/appimgman/installed | sed ':a;N;$!ba;s/\n/ | /g')"
+        echo "$(dir -C -w 1 ~/.config/appimgman/installed | wc -l) AppImages installed:"
+        dir -C -w 1 ~/.config/appimgman/installed | pr -tT --column=3 -w 125
         echo
         for AppImage in $(dir -C -w 1 ~/.config/appimgman/installed); do
             echo "$AppImage installed information:"
