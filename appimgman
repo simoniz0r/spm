@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.0.3"
+X="0.0.4"
 
 helpfunc () {
 printf '%s\n' "appimgman $X
@@ -18,8 +18,8 @@ release on the app's github page.  This allows appimgman to easily provide a lis
 install, and it also allows appimgman to check for AppImage upgrades just by checking the version of
 the AppImage from bintray and latest github releases.
 
-AppImages are installed to '/usr/local/bin/AppImageName', and symlinks are created for the .desktop and
-executable files.  Information for installed AppImages is stored in '~/.config/appimgman/installed'.
+AppImages are installed to '/usr/local/bin/AppImageName'. Information for installed AppImages is stored in
+'~/.config/appimgman/installed'.
 
 Packages on your system should not conflict with AppImages installed through appimgman, but appimgman will not
 allow AppImages that have the same name as existing commands on your system to be installed.
