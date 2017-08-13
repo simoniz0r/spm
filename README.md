@@ -16,13 +16,13 @@ Packages on your system should not conflict with AppImages installed through app
 allow AppImages that have the same name as existing commands on your system to be installed.
 
 Arguments:
-    list - list all installed AppImages and all AppImages known by appimgman or info about the specified AppImage
-    list-installed - list all installed AppImages and install info
-    install - install an AppImage automatically if in AppImages-bintray.lst
-    remove - remove an installed AppImage
-    update - update AppImages-bintray.lst from appimgman's github repo and check for AppImage upgrades
-    update-force - add specified AppImage to upgrade-list without checking versions
-    upgrade - upgrade AppImages with available upgrades or upgrade the specified AppImage to the latest version
+- list - list all installed AppImages and all AppImages known by appimgman or info about the specified AppImage
+- list-installed - list all installed AppImages and install info
+- install - install an AppImage automatically if in AppImages-bintray.lst
+- remove - remove an installed AppImage
+- update - update AppImages-bintray.lst from appimgman's github repo and check for AppImage upgrades
+- update-force - add specified AppImage to upgrade-list without checking versions
+- upgrade - upgrade AppImages with available upgrades or upgrade the specified AppImage to the latest version
 
 See https://github.com/simoniz0r/appimgman for more help or to report issues.
 
