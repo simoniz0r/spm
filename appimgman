@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.0.5"
+X="0.0.6"
 
 helpfunc () {
 printf '%s\n' "appimgman $X
@@ -59,6 +59,9 @@ appimgvercheckfunc () { # Check version by getting the latest version from the b
     elif [ "$GITHUB_IMG" = "TRUE" ]; then
         GITHUB_APP_URL="$(grep -wi "$INSTIMG" ~/.config/appimgman/AppImages-github.lst | cut -f2- -d" ")"
         NEW_APPIMAGE="$(wget --quiet "$GITHUB_APP_URL" -O - | grep -i '.*64.AppImage' | sed -n 2p | cut -f4- -d'"' | tr -d '"')"
+        if [ -z "$NEW_APPIMAGE" ]; then
+            NEW_APPIMAGE="$(wget --quiet "$GITHUB_APP_URL" -O - | grep -i '.*.AppImage' | sed -n 2p | cut -f4- -d'"' | tr -d '"')"
+        fi
         NEW_APPIMAGE="${NEW_APPIMAGE##*/}"
         if [[ "$NEW_APPIMAGE" != "$APPIMAGE" ]]; then
             NEW_UPGRADE="TRUE"
@@ -116,7 +119,7 @@ updatelistfunc () { # Regenerate AppImages-bintray.lst from bintray, download Ap
             echo "Checking $AppImage version..."
             appcheckfunc "$AppImage"
             appimgvercheckfunc
-            if grep -q "$AppImage" ~/.config/appimgman/upgrade-list.lst; then
+            if grep -qw "$AppImage" ~/.config/appimgman/upgrade-list.lst; then
                 echo "$(tput setaf 2)New upgrade available for $AppImage -- $NEW_APPIMAGE !"
                 echo "$AppImage is already marked for upgrade!"
                 echo "Run 'appimgman upgrade' to upgrade $AppImage$(tput sgr0)"
@@ -139,7 +142,7 @@ updatelistfunc () { # Regenerate AppImages-bintray.lst from bintray, download Ap
             echo "No new AppImage upgrades."
         fi
     else
-        if grep -q "$2" ~/.config/appimgman/upgrade-list.lst; then
+        if grep -qw "$2" ~/.config/appimgman/upgrade-list.lst; then
             echo "$(tput setaf 2)$2 is already marked for upgrade!"
             echo "Run 'appimgman upgrade $2' to upgrade $2$(tput sgr0)"
             exit 0
@@ -168,6 +171,9 @@ appimgdlfunc () { # wget latest url from bintray website and wget it
     elif [ "$GITHUB_IMG" = "TRUE" ]; then
         GITHUB_APP_URL="$(grep -wi "$INSTIMG" ~/.config/appimgman/AppImages-github.lst | cut -f2- -d" ")"
         APPIMAGE_URL="$(wget --quiet "$GITHUB_APP_URL" -O - | grep -i '.*64.AppImage' | sed -n 2p | cut -f4- -d'"' | tr -d '"')"
+        if [ -z "$APPIMAGE_URL" ]; then
+            APPIMAGE_URL="$(wget --quiet "$GITHUB_APP_URL" -O - | grep -i '.*.AppImage' | sed -n 2p | cut -f4- -d'"' | tr -d '"')"
+        fi
         APPIMAGE="${APPIMAGE_URL##*/}"
         wget --show-progress --quiet "$APPIMAGE_URL" -O ~/.config/appimgman/cache/"$INSTIMG" || { echo "wget $APPIMAGE_URL failed; exiting..."; exit 1; }
     fi
@@ -207,7 +213,7 @@ appimgremovefunc () { # rm AppImage in /usr/local/bin and remove install info fi
             ;;
     esac
     if [ -f ~/.config/appimgman/upgrade-list.lst ]; then
-        if grep -q "$REMIMG" ~/.config/appimgman/upgrade-list.lst; then
+        if grep -qw "$REMIMG" ~/.config/appimgman/upgrade-list.lst; then
             if [ "$(cat ~/.config/appimgman/upgrade-list.lst | wc -l)" = "1" ]; then
                 rm ~/.config/appimgman/upgrade-list.lst
             else
@@ -294,7 +300,7 @@ case $1 in
             exit 1
         fi
         if [ -f ~/.config/appimgman/upgrade-list.lst ]; then
-            if grep -q "$INSTIMG" ~/.config/appimgman/upgrade-list.lst; then
+            if grep -qw "$INSTIMG" ~/.config/appimgman/upgrade-list.lst; then
                 echo "$(tput setaf 2)$INSTIMG is already marked for upgrade!"
                 echo "Run 'appimgman upgrade $INSTIMG' to upgrade $INSTIMG$(tput sgr0)"
                 exit 0
@@ -351,7 +357,7 @@ case $1 in
             rm -rf ~/.config/appimgman/cache/*
             rm -f ~/.config/appimgman/upgrade-list.lst
             exit 0
-        elif grep -q "$2" ~/.config/appimgman/upgrade-list.lst; then
+        elif grep -qw "$2" ~/.config/appimgman/upgrade-list.lst; then
             INSTIMG="$2"
             echo "$INSTIMG will be upgraded to the latest version."
             read -p "Continue? Y/N " UPGRADEANSWER
@@ -409,13 +415,16 @@ case $1 in
                 echo "Current installed $2 information:"
                 cat ~/.config/appimgman/installed/"$2"
                 echo "INSTALLED=\"YES\""
-            elif grep -q "$2" ~/.config/appimgman/AppImages-bintray.lst; then
+            elif grep -qw "$2" ~/.config/appimgman/AppImages-bintray.lst; then
                 echo "$2 AppImage information:"
                 echo "APPIMAGE=\"$(wget -q "https://bintray.com/package/files/probono/AppImages/$2?order=desc&sort=fileLastModified&basePath=&tab=files" -O - | grep -e '64.AppImage">' | cut -d '"' -f 6 | head -n 1)\""
                 echo "INSTALLED=\"NO\""
-            elif grep -q "$2" ~/.config/appimgman/AppImages-github.lst; then
-                GITHUB_APP_URL="$(grep -wi "$2" ~/.config/appimgman/AppImages-github.lst | cut -f2- -d" ")"
+            elif grep -qw "$2" ~/.config/appimgman/AppImages-github.lst; then
+                GITHUB_APP_URL="$(grep -w "$2" ~/.config/appimgman/AppImages-github.lst | cut -f2- -d" ")"
                 APPIMAGE="$(wget --quiet "$GITHUB_APP_URL" -O - | grep -i '.*64.AppImage' | sed -n 2p | cut -f4- -d'"' | tr -d '"')"
+                if [ -z "$APPIMAGE" ]; then
+                    APPIMAGE="$(wget --quiet "$GITHUB_APP_URL" -O - | grep -i '.*.AppImage' | sed -n 2p | cut -f4- -d'"' | tr -d '"')"
+                fi
                 echo "$2 AppImage information:"
                 echo "APPIMAGE=\"${APPIMAGE##*/}\""
                 echo "INSTALLED=\"NO\""
