@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.0.6"
+X="0.0.7"
 
 helpfunc () {
 printf '%s\n' "appimgman $X
@@ -50,11 +50,14 @@ appimgvercheckfunc () { # Check version by getting the latest version from the b
             NEW_UPGRADE="FALSE"
         elif [[ "$NEW_APPIMAGE" != "$APPIMAGE" ]]; then
             NEW_UPGRADE="TRUE"
+            APPIMAGE_ERROR="FALSE"
         elif [ "$FORCE_UPGRADE" = "TRUE" ]; then
             NEW_UPGRADE="TRUE"
             FORCE_UPGRADE=""
+            APPIMAGE_ERROR="FALSE"
         else
             NEW_UPGRADE="FALSE"
+            APPIMAGE_ERROR="FALSE"
         fi
     elif [ "$GITHUB_IMG" = "TRUE" ]; then
         GITHUB_APP_URL="$(grep -wi "$INSTIMG" ~/.config/appimgman/AppImages-github.lst | cut -f2- -d" ")"
@@ -63,14 +66,24 @@ appimgvercheckfunc () { # Check version by getting the latest version from the b
             NEW_APPIMAGE="$(wget --quiet "$GITHUB_APP_URL" -O - | grep -i '.*.AppImage' | sed -n 2p | cut -f4- -d'"' | tr -d '"')"
         fi
         NEW_APPIMAGE="${NEW_APPIMAGE##*/}"
-        if [[ "$NEW_APPIMAGE" != "$APPIMAGE" ]]; then
+        if [ -z "$APPIMAGE" ]; then
+            NEW_UPGRADE="FALSE"
+        elif [[ "$NEW_APPIMAGE" != "$APPIMAGE" ]]; then
             NEW_UPGRADE="TRUE"
+            APPIMAGE_ERROR="FALSE"
         elif [ "$FORCE_UPGRADE" = "TRUE" ]; then
             NEW_UPGRADE="TRUE"
             FORCE_UPGRADE=""
+            APPIMAGE_ERROR="FALSE"
         else
             NEW_UPGRADE="FALSE"
+            APPIMAGE_ERROR="FALSE"
         fi
+    fi
+    if [ -z "$NEW_APPIMAGE" ]; then
+        echo "Error checking $INSTIMG version!"
+        NEW_UPGRADE="FALSE"
+        APPIMAGE_ERROR="TRUE"
     fi
 }
 
@@ -271,6 +284,9 @@ case $1 in
         fi
         appcheckfunc "$INSTIMG"
         appimgvercheckfunc
+        if [ "$APPIMAGE_ERROR" = "TRUE" ]; then
+            exit 1
+        fi
         if [ "$BINTRAY_IMG" = "FALSE" ] && [ "$GITHUB_IMG" = "FALSE" ];then
             echo "$INSTIMG is not in AppImages-bintray.lst or AppImages-github.lst; try running 'appimgman update'."
             exit 1
