@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.0.4"
+X="0.0.5"
 
 helpfunc () {
 printf '%s\n' "appimgman $X
@@ -41,10 +41,14 @@ installed applications to their maintainers."
 }
 
 appimgvercheckfunc () { # Check version by getting the latest version from the bintray website using wget, grep, cut, and head
-    . ~/.config/appimgman/installed/"$INSTIMG"
+    if [ -f ~/.config/appimgman/installed/"$INSTIMG" ]; then
+        . ~/.config/appimgman/installed/"$INSTIMG"
+    fi
     if [ "$BINTRAY_IMG" = "TRUE" ]; then
         NEW_APPIMAGE="$(wget -q "https://bintray.com/package/files/probono/AppImages/$APPIMG_NAME?order=desc&sort=fileLastModified&basePath=&tab=files" -O - | grep -e '64.AppImage">' | cut -d '"' -f 6 | head -n 1 | cut -f2 -d"=")"
-        if [[ "$NEW_APPIMAGE" != "$APPIMAGE" ]]; then
+        if [ -z "$APPIMAGE" ]; then
+            NEW_UPGRADE="FALSE"
+        elif [[ "$NEW_APPIMAGE" != "$APPIMAGE" ]]; then
             NEW_UPGRADE="TRUE"
         elif [ "$FORCE_UPGRADE" = "TRUE" ]; then
             NEW_UPGRADE="TRUE"
@@ -53,7 +57,7 @@ appimgvercheckfunc () { # Check version by getting the latest version from the b
             NEW_UPGRADE="FALSE"
         fi
     elif [ "$GITHUB_IMG" = "TRUE" ]; then
-        GITHUB_APP_URL="$(grep -i "$INSTIMG" ~/.config/appimgman/AppImages-github.lst | cut -f2- -d" ")"
+        GITHUB_APP_URL="$(grep -wi "$INSTIMG" ~/.config/appimgman/AppImages-github.lst | cut -f2- -d" ")"
         NEW_APPIMAGE="$(wget --quiet "$GITHUB_APP_URL" -O - | grep -i '.*64.AppImage' | sed -n 2p | cut -f4- -d'"' | tr -d '"')"
         NEW_APPIMAGE="${NEW_APPIMAGE##*/}"
         if [[ "$NEW_APPIMAGE" != "$APPIMAGE" ]]; then
@@ -68,12 +72,12 @@ appimgvercheckfunc () { # Check version by getting the latest version from the b
 }
 
 appcheckfunc () { # check user input against list of known apps here
-    if grep -qi "$1" ~/.config/appimgman/AppImages-bintray.lst; then
-        APPIMG_NAME="$(grep -i "$1" ~/.config/appimgman/AppImages-bintray.lst)"
+    if grep -qwi "$1" ~/.config/appimgman/AppImages-bintray.lst; then
+        APPIMG_NAME="$(grep -wi "$1" ~/.config/appimgman/AppImages-bintray.lst)"
         BINTRAY_IMG="TRUE"
         GITHUB_IMG="FALSE"
-    elif grep -qi "$1" ~/.config/appimgman/AppImages-github.lst; then
-        APPIMG_NAME="$(grep -i "$1" ~/.config/appimgman/AppImages-github.lst | cut -f1 -d" ")"
+    elif grep -qwi "$1" ~/.config/appimgman/AppImages-github.lst; then
+        APPIMG_NAME="$(grep -wi "$1" ~/.config/appimgman/AppImages-github.lst | cut -f1 -d" ")"
         BINTRAY_IMG="FALSE"
         GITHUB_IMG="TRUE"
     else
@@ -162,7 +166,7 @@ appimgdlfunc () { # wget latest url from bintray website and wget it
         APPIMAGE="$(wget -q "https://bintray.com/package/files/probono/AppImages/$APPIMG_NAME?order=desc&sort=fileLastModified&basePath=&tab=files" -O - | grep -e '64.AppImage">' | cut -d '"' -f 6 | head -n 1)"
         wget --show-progress --quiet "https://bintray.com/$APPIMAGE" -O ~/.config/appimgman/cache/"$INSTIMG" || { echo "wget $APPIMAGE failed; exiting..."; exit 1; }
     elif [ "$GITHUB_IMG" = "TRUE" ]; then
-        GITHUB_APP_URL="$(grep -i "$INSTIMG" ~/.config/appimgman/AppImages-github.lst | cut -f2- -d" ")"
+        GITHUB_APP_URL="$(grep -wi "$INSTIMG" ~/.config/appimgman/AppImages-github.lst | cut -f2- -d" ")"
         APPIMAGE_URL="$(wget --quiet "$GITHUB_APP_URL" -O - | grep -i '.*64.AppImage' | sed -n 2p | cut -f4- -d'"' | tr -d '"')"
         APPIMAGE="${APPIMAGE_URL##*/}"
         wget --show-progress --quiet "$APPIMAGE_URL" -O ~/.config/appimgman/cache/"$INSTIMG" || { echo "wget $APPIMAGE_URL failed; exiting..."; exit 1; }
@@ -176,7 +180,7 @@ appimginstallfunc () { # chmod and mv bintray AppImages to /usr/local/bin and cr
     APPIMAGE="$(echo "$APPIMAGE" | cut -f2 -d"=")"
     echo "BIN_PATH="\"/usr/local/bin/$INSTIMG\""" > ~/.config/appimgman/installed/"$INSTIMG"
     echo "APPIMAGE="\"$APPIMAGE\""" >> ~/.config/appimgman/installed/"$INSTIMG"
-    echo "$INSTIMG has been installed to /usr/local/bin/$INSTIMG !"
+    echo "$APPIMAGE has been installed to /usr/local/bin/$INSTIMG !"
     exit 0
 }
 
@@ -260,15 +264,16 @@ case $1 in
             exit 1
         fi
         appcheckfunc "$INSTIMG"
+        appimgvercheckfunc
         if [ "$BINTRAY_IMG" = "FALSE" ] && [ "$GITHUB_IMG" = "FALSE" ];then
             echo "$INSTIMG is not in AppImages-bintray.lst or AppImages-github.lst; try running 'appimgman update'."
             exit 1
         else
-            echo "$INSTIMG will be installed to /usr/local/bin/$INSTIMG"
+            echo "$NEW_APPIMAGE will be installed to /usr/local/bin/$INSTIMG"
             read -p "Continue? Y/N " INSTANSWER
             case $INSTANSWER in
                 N*|n*)
-                    echo "$INSTIMG was not installed."
+                    echo "$NEW_APPIMAGE was not installed."
                     rm -rf ~/.config/appimgman/cache/*
                     exit 0
                     ;;
@@ -409,7 +414,7 @@ case $1 in
                 echo "APPIMAGE=\"$(wget -q "https://bintray.com/package/files/probono/AppImages/$2?order=desc&sort=fileLastModified&basePath=&tab=files" -O - | grep -e '64.AppImage">' | cut -d '"' -f 6 | head -n 1)\""
                 echo "INSTALLED=\"NO\""
             elif grep -q "$2" ~/.config/appimgman/AppImages-github.lst; then
-                GITHUB_APP_URL="$(grep -i "$2" ~/.config/appimgman/AppImages-github.lst | cut -f2- -d" ")"
+                GITHUB_APP_URL="$(grep -wi "$2" ~/.config/appimgman/AppImages-github.lst | cut -f2- -d" ")"
                 APPIMAGE="$(wget --quiet "$GITHUB_APP_URL" -O - | grep -i '.*64.AppImage' | sed -n 2p | cut -f4- -d'"' | tr -d '"')"
                 echo "$2 AppImage information:"
                 echo "APPIMAGE=\"${APPIMAGE##*/}\""
