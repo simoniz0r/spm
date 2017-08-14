@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.0.9"
+X="0.1.0"
 
 helpfunc () {
 printf '%s\n' "appimgman $X
@@ -439,17 +439,19 @@ case $1 in
                 echo "INSTALLED=\"YES\""
             elif grep -qw "$2" ~/.config/appimgman/AppImages-bintray.lst; then
                 echo "$2 AppImage information:"
-                APPIMAGE="$(wget -q "https://bintray.com/package/files/probono/AppImages/$2?order=desc&sort=fileLastModified&basePath=&tab=files" -O - | grep -e '64.AppImage">' | cut -d '"' -f 6 | head -n 1)"
+                APPIMAGE="$(wget -q "https://bintray.com/package/files/probono/AppImages/$2?order=desc&sort=fileLastModified&basePath=&tab=files" -O - | grep -e '64.AppImage">' | cut -d '"' -f 6 | head -n 1 | cut -f2 -d"=")"
                 echo "APPIMAGE=\"${APPIMAGE##*/}\""
                 echo "INSTALLED=\"NO\""
             elif grep -qw "$2" ~/.config/appimgman/AppImages-github.lst; then
                 GITHUB_APP_URL="$(grep -w "$2" ~/.config/appimgman/AppImages-github.lst | cut -f2- -d" ")"
                 APPIMAGE="$(wget --quiet "$GITHUB_APP_URL" -O - | grep -i '.*/download/.*64.AppImage' | head -n 1 | cut -f2 -d'"')"
+                MAIN_GITHUB_URL="$(echo "$GITHUB_APP_URL" | cut -f-5 -d'/')"
                 if [ -z "$APPIMAGE" ]; then
                     APPIMAGE="$(wget --quiet "$GITHUB_APP_URL" -O - | grep -i '.*/download/.*.AppImage' | head -n 1 | cut -f2 -d'"')"
                 fi
                 echo "$2 AppImage information:"
                 echo "APPIMAGE=\"${APPIMAGE##*/}\""
+                echo "DESCRIPTION=\"$(wget --quiet "$MAIN_GITHUB_URL" -O - | grep -i '<meta name="description"' | cut -f4 -d'"')\""
                 echo "INSTALLED=\"NO\""
             else
                 echo "AppImage not found!"
