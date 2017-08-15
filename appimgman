@@ -6,7 +6,8 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.1.4" # Set appimgman version
+X="0.1.5"
+# Set appimgman version
 
 helpfunc () { # All unknown arguments come to this function; display help for appimgman
 printf '%s\n' "appimgman $X
