@@ -8,7 +8,7 @@
 
 X="0.1.2"
 
-helpfunc () {
+helpfunc () { # All unknown arguments come to this function; display help for appimgman
 printf '%s\n' "appimgman $X
 Usage: appimgman [option] [AppImage]
 
@@ -41,33 +41,34 @@ installed applications to their maintainers."
 }
 
 appimgvercheckfunc () { # Check version by getting the latest version from the bintray website or github releases page using wget, grep, cut, and head
-    if [ -f ~/.config/appimgman/installed/"$INSTIMG" ]; then
+    if [ -f ~/.config/appimgman/installed/"$INSTIMG" ]; then # Load installed information if AppImage is installed
         . ~/.config/appimgman/installed/"$INSTIMG"
     fi
-    if [ "$BINTRAY_IMG" = "TRUE" ]; then
+    if [ "$BINTRAY_IMG" = "TRUE" ]; then # If AppImage is from bintray, use method below to get new AppImage version
         NEW_APPIMAGE="$(wget -q "https://bintray.com/package/files/probono/AppImages/$APPIMG_NAME?order=desc&sort=fileLastModified&basePath=&tab=files" -O - | grep -e '64.AppImage">' | cut -d '"' -f 6 | head -n 1 | cut -f2 -d"=")"
-    elif [ "$GITHUB_IMG" = "TRUE" ]; then
+    elif [ "$GITHUB_IMG" = "TRUE" ]; then # If AppImage is from github, use method below to get new AppImage version
         GITHUB_APP_URL="$(grep -wi "$INSTIMG" ~/.config/appimgman/AppImages-github.lst | cut -f2- -d" ")"
         NEW_APPIMAGE="$(wget --quiet "$GITHUB_APP_URL" -O - | grep -i '.*/download/.*64.AppImage' | head -n 1 | cut -f2 -d'"')"
-        if [ -z "$NEW_APPIMAGE" ]; then
+        if [ -z "$NEW_APPIMAGE" ]; then # Try to find AppImages that do not specify architecture
             NEW_APPIMAGE="$(wget --quiet "$GITHUB_APP_URL" -O - | grep -i '.*/download/.*.AppImage' | head -n 1 | cut -f2 -d'"')"
         fi
         NEW_APPIMAGE="${NEW_APPIMAGE##*/}"
     fi
-    if [ -z "$APPIMAGE" ]; then
+    if [ -z "$APPIMAGE" ]; then # If no existing AppImage version was found, do not mark for upgrade
         NEW_UPGRADE="FALSE"
-    elif [[ "$NEW_APPIMAGE" != "$APPIMAGE" ]]; then
+        APPIMAGE_ERROR="FALSE"
+    elif [[ "$NEW_APPIMAGE" != "$APPIMAGE" ]]; then # If current AppImage version does not equal new AppImage version, mark for upgrade
         NEW_UPGRADE="TRUE"
         APPIMAGE_ERROR="FALSE"
-    elif [ "$FORCE_UPGRADE" = "TRUE" ]; then
+    elif [ "$FORCE_UPGRADE" = "TRUE" ]; then # This is used for the upgrade-force argument
         NEW_UPGRADE="TRUE"
         FORCE_UPGRADE=""
         APPIMAGE_ERROR="FALSE"
-    else
+    else # If current AppImage version equals new AppImage version, do not mark for ugprade
         NEW_UPGRADE="FALSE"
         APPIMAGE_ERROR="FALSE"
     fi
-    if [ -z "$NEW_APPIMAGE" ]; then
+    if [ -z "$NEW_APPIMAGE" ]; then # If no new AppImage version was found, output an error
         echo "$(tput setaf 1)Error checking $INSTIMG version!$(tput sgr0)"
         NEW_UPGRADE="FALSE"
         APPIMAGE_ERROR="TRUE"
@@ -75,12 +76,12 @@ appimgvercheckfunc () { # Check version by getting the latest version from the b
 }
 
 appcheckfunc () { # check user input against list of known apps here
-    if grep -qwi "$1" ~/.config/appimgman/AppImages-bintray.lst; then
-        APPIMG_NAME="$(grep -wi "$1" ~/.config/appimgman/AppImages-bintray.lst)"
+    if grep -qwi "$1" ~/.config/appimgman/AppImages-bintray.lst; then # Check AppImages-bintray.lst for AppImages from Bintray
+        APPIMG_NAME="$(grep -wi "$1" ~/.config/appimgman/AppImages-bintray.lst)" # Allow AppImages to be installed with whatever capitalization the user choses
         BINTRAY_IMG="TRUE"
         GITHUB_IMG="FALSE"
-    elif grep -qwi "$1" ~/.config/appimgman/AppImages-github.lst; then
-        APPIMG_NAME="$(grep -wi "$1" ~/.config/appimgman/AppImages-github.lst | cut -f1 -d" ")"
+    elif grep -qwi "$1" ~/.config/appimgman/AppImages-github.lst; then # Check AppImages-github.lst for AppImages from github
+        APPIMG_NAME="$(grep -wi "$1" ~/.config/appimgman/AppImages-github.lst | cut -f1 -d" ")" # Allow AppImages to be installed with whatever capitalization the user choses
         BINTRAY_IMG="FALSE"
         GITHUB_IMG="TRUE"
     else
@@ -90,49 +91,49 @@ appcheckfunc () { # check user input against list of known apps here
 }
 
 updatelistfunc () { # Regenerate AppImages-bintray.lst from bintray, download AppImages-github.lst from github, and check versions
-    VERTEST="$(wget -q "https://raw.githubusercontent.com/simoniz0r/appimgman/master/appimgman" -O - | sed -n '9p' | tr -d 'X="')"
-    if [[ "$VERTEST" != "$X" ]]; then
+    VERTEST="$(wget -q "https://raw.githubusercontent.com/simoniz0r/appimgman/master/appimgman" -O - | sed -n '9p' | tr -d 'X="')" # Use wget sed and tr to check current appimgman version from github
+    if [[ "$VERTEST" != "$X" ]]; then # If current version not equal to installed version, notify of new version
         echo "A new version of appimgman is available!"
         echo "Current version: $VERTEST -- Installed version: $X"
-        if type >/dev/null 2>&1 tar-pkg; then
+        if type >/dev/null 2>&1 tar-pkg; then # If tar-pkg is installed, suggest upgrading appimgman through tar-pkg
             echo "Use 'tar-pkg' to upgrade to the latest version!"
             echo
-        else
+        else # If not, output link to releases page
             echo "Download the latest version at https://github.com/simoniz0r/appimgman/releases/latest"
             echo
         fi
     fi
-    echo "Regenerating AppImages-bintray.lst from https://dl.bintray.com/probono/AppImages/ ..."
+    echo "Regenerating AppImages-bintray.lst from https://dl.bintray.com/probono/AppImages/ ..." # Generate list of AppImages from Bintray site using wget sed grep cut and sort
     cd ~/.config/appimgman
     wget --show-progress --quiet "https://dl.bintray.com/probono/AppImages/" -O - | sed 's/<\/*[^>]*>//g' | grep -o '.*AppImage' | cut -f1 -d"-" | sort -u > ~/.config/appimgman/AppImages-bintray.lst || { echo "wget failed; exiting..."; exit 1; }
     echo "AppImages-bintray.lst updated!"
-    echo "Downloading AppImages-github.lst from appimgman github repo..."
+    echo "Downloading AppImages-github.lst from appimgman github repo..." # Download existing list of github AppImages from appimgman github repo
     rm ~/.config/appimgman/AppImages-github.lst
-    wget --quiet --show-progress "https://raw.githubusercontent.com/simoniz0r/appimgman/master/AppImages-github.lst" || { echo "wget failed; exiting..."; rm /tmp/appimgman.lock; exit 1; }
+    wget --quiet --show-progress "https://raw.githubusercontent.com/simoniz0r/appimgman/master/AppImages-github.lst" || { echo "wget failed; exiting..."; rm /tmp/appimgman.lock # Remove /tmp/appimgman.lock after operations completed; exit 1; }
     echo "AppImages-github.lst updated!"
-    if [ ! -f ~/.config/appimgman/upgrade-list.lst ]; then
+    if [ ! -f ~/.config/appimgman/upgrade-list.lst ]; then # Create upgrade-list.lst file to avoid error outputs during update checks
         touch ~/.config/appimgman/upgrade-list.lst
     fi
-    if [ -z "$2" ]; then
+    if [ -z "$2" ]; then # If no AppImage specified by user, check all installed AppImage versions
         for AppImage in $(dir -C -w 1 ~/.config/appimgman/installed); do
             INSTIMG="$AppImage"
             echo "Checking $AppImage version..."
             appcheckfunc "$AppImage"
             appimgvercheckfunc
-            if grep -qw "$AppImage" ~/.config/appimgman/upgrade-list.lst; then
+            if grep -qw "$AppImage" ~/.config/appimgman/upgrade-list.lst; then # If AppImage is already on upgrade-list.lst, do not add it again
                 echo "$(tput setaf 2)New upgrade available for $AppImage -- $NEW_APPIMAGE !"
                 echo "$AppImage is already marked for upgrade!"
                 echo "Run 'appimgman upgrade' to upgrade $AppImage$(tput sgr0)"
-            elif [ "$NEW_UPGRADE" = "TRUE" ]; then
+            elif [ "$NEW_UPGRADE" = "TRUE" ]; then # Add AppImage to upgrade-list.lst if appimgvercheckfunc outputs NEW_UPGRADE="TRUE"
                 echo "$(tput setaf 2)New upgrade available for $AppImage -- $NEW_APPIMAGE !$(tput sgr0)"
                 echo "$AppImage" >> ~/.config/appimgman/upgrade-list.lst
             fi
         done
         echo
-        if [ "$(cat ~/.config/appimgman/upgrade-list.lst | wc -l)" = "0" ]; then
+        if [ "$(cat ~/.config/appimgman/upgrade-list.lst | wc -l)" = "0" ]; then # If no AppImages were added to upgrade-list.lst, remove file
             rm ~/.config/appimgman/upgrade-list.lst
         fi
-        if [ -f ~/.config/appimgman/upgrade-list.lst ]; then
+        if [ -f ~/.config/appimgman/upgrade-list.lst ]; then # If AppImages were added, list number of upgrades available
             if [ "$(cat ~/.config/appimgman/upgrade-list.lst | wc -l)" = "1" ]; then
                 echo "$(tput setaf 2)$(cat ~/.config/appimgman/upgrade-list.lst | wc -l) upgrade available.$(tput sgr0)"
             else
@@ -141,80 +142,80 @@ updatelistfunc () { # Regenerate AppImages-bintray.lst from bintray, download Ap
         else
             echo "No new AppImage upgrades."
         fi
-    else
-        if grep -qw "$2" ~/.config/appimgman/upgrade-list.lst; then
+    else # If user inputs AppImage, check that AppImage version
+        if grep -qw "$2" ~/.config/appimgman/upgrade-list.lst; then # If AppImage is already on upgrade-list.lst, do not add it again 
             echo "$(tput setaf 2)$2 is already marked for upgrade!"
             echo "Run 'appimgman upgrade $2' to upgrade $2$(tput sgr0)"
-            rm /tmp/appimgman.lock
+            rm /tmp/appimgman.lock # Remove /tmp/appimgman.lock after operations completed
             exit 0
         fi
         INSTIMG="$2"
         echo "Checking $INSTIMG version..."
-        appcheckfunc "$INSTIMG"
+        appcheckfunc "$INSTIMG" # Check whether AppImage is in lists and which list it is in
         appimgvercheckfunc
-        if [ "$NEW_UPGRADE" = "TRUE" ]; then
+        if [ "$NEW_UPGRADE" = "TRUE" ]; then # Add AppImage to upgrade-list.lst if appimgvercheckfunc outputs NEW_UPGRADE="TRUE"
             echo "$(tput setaf 2)New upgrade available for $INSTIMG!$(tput sgr0)"
             echo "$INSTIMG" >> ~/.config/appimgman/upgrade-list.lst
         else
             echo "No new upgrade for $INSTIMG"
         fi
-        if [ "$(cat ~/.config/appimgman/upgrade-list.lst | wc -l)" = "0" ]; then
+        if [ "$(cat ~/.config/appimgman/upgrade-list.lst | wc -l)" = "0" ]; then # If no AppImages were added to upgrade-list.lst, remove file
             rm ~/.config/appimgman/upgrade-list.lst
         fi
     fi
-    rm /tmp/appimgman.lock
+    rm /tmp/appimgman.lock # Remove /tmp/appimgman.lock after operations completed
 }
 
 appimgdlfunc () { # wget latest url from bintray website or github repo and wget it
-    if [ "$BINTRAY_IMG" = "TRUE" ]; then
+    if [ "$BINTRAY_IMG" = "TRUE" ]; then # If AppImage is from Bintray, use method below to download it
         APPIMAGE="$(wget -q "https://bintray.com/package/files/probono/AppImages/$APPIMG_NAME?order=desc&sort=fileLastModified&basePath=&tab=files" -O - | grep -e '64.AppImage">' | cut -d '"' -f 6 | head -n 1)"
-        wget --show-progress --quiet "https://bintray.com/$APPIMAGE" -O ~/.config/appimgman/cache/"$INSTIMG" || { echo "wget $APPIMAGE failed; exiting..."; rm /tmp/appimgman.lock; exit 1; }
+        wget --show-progress --quiet "https://bintray.com/$APPIMAGE" -O ~/.config/appimgman/cache/"$INSTIMG" || { echo "wget $APPIMAGE failed; exiting..."; rm /tmp/appimgman.lock # Remove /tmp/appimgman.lock after operations completed; exit 1; }
         APPIMAGE="$(echo "$APPIMAGE" | cut -f2 -d"=")"
-    elif [ "$GITHUB_IMG" = "TRUE" ]; then
+    elif [ "$GITHUB_IMG" = "TRUE" ]; then # If AppImage is from github, use method below to download it
         GITHUB_APP_URL="$(grep -wi "$INSTIMG" ~/.config/appimgman/AppImages-github.lst | cut -f2- -d" ")"
         APPIMAGE_URL="$(wget --quiet "$GITHUB_APP_URL" -O - | grep -i '.*/download/.*64.AppImage' | head -n 1 | cut -f2 -d'"')"
         if [ -z "$APPIMAGE_URL" ]; then
             APPIMAGE_URL="$(wget --quiet "$GITHUB_APP_URL" -O - | grep -i '.*/download/.*.AppImage' | head -n 1 | cut -f2 -d'"')"
         fi
         APPIMAGE="${APPIMAGE_URL##*/}"
-        wget --show-progress --quiet "https://github.com/$APPIMAGE_URL" -O ~/.config/appimgman/cache/"$INSTIMG" || { echo "wget $APPIMAGE_URL failed; exiting..."; rm /tmp/appimgman.lock; exit 1; }
+        wget --show-progress --quiet "https://github.com/$APPIMAGE_URL" -O ~/.config/appimgman/cache/"$INSTIMG" || { echo "wget $APPIMAGE_URL failed; exiting..."; rm /tmp/appimgman.lock # Remove /tmp/appimgman.lock after operations completed; exit 1; }
     fi
 }
 
 appimginstallfunc () { # chmod and mv AppImages to /usr/local/bin and create file containing install info in ~/.config/appimgman/installed
-    chmod a+x ~/.config/appimgman/cache/"$INSTIMG"
+    chmod a+x ~/.config/appimgman/cache/"$INSTIMG" # Make AppImage executable
     echo "Moving $INSTIMG to /usr/local/bin/$INSTIMG ..."
-    sudo mv ~/.config/appimgman/cache/"$INSTIMG" /usr/local/bin/"$INSTIMG"
-    echo "BIN_PATH="\"/usr/local/bin/$INSTIMG\""" > ~/.config/appimgman/installed/"$INSTIMG"
+    sudo mv ~/.config/appimgman/cache/"$INSTIMG" /usr/local/bin/"$INSTIMG" # Move AppImage to /usr/local/bin
+    echo "BIN_PATH="\"/usr/local/bin/$INSTIMG\""" > ~/.config/appimgman/installed/"$INSTIMG" # Create AppImage installed info file
     echo "APPIMAGE="\"$APPIMAGE\""" >> ~/.config/appimgman/installed/"$INSTIMG"
     echo "$APPIMAGE has been installed to /usr/local/bin/$INSTIMG !"
-    rm /tmp/appimgman.lock
+    rm /tmp/appimgman.lock # Remove /tmp/appimgman.lock after operations completed
     exit 0
 }
 
 appimgupgradefunc () { # rm old AppImage, chmod, and mv new AppImage to /usr/local/bin
     echo "Removing previous $INSTIMG version..."
-    sudo rm /usr/local/bin/"$INSTIMG"
-    chmod a+x ~/.config/appimgman/cache/"$INSTIMG"
+    sudo rm /usr/local/bin/"$INSTIMG" # Remove old AppImage before upgrading
+    chmod a+x ~/.config/appimgman/cache/"$INSTIMG" # Make new AppImage executable
     echo "Moving $INSTIMG to /usr/local/bin/$INSTIMG ..."
-    sudo mv ~/.config/appimgman/cache/"$INSTIMG" /usr/local/bin/"$INSTIMG"
-    echo "BIN_PATH="\"/usr/local/bin/$INSTIMG\""" > ~/.config/appimgman/installed/"$INSTIMG"
+    sudo mv ~/.config/appimgman/cache/"$INSTIMG" /usr/local/bin/"$INSTIMG" # Move new AppImage to /usr/local/bin
+    echo "BIN_PATH="\"/usr/local/bin/$INSTIMG\""" > ~/.config/appimgman/installed/"$INSTIMG" # Update AppImage installed info file with new info
     echo "APPIMAGE="\"$APPIMAGE\""" >> ~/.config/appimgman/installed/"$INSTIMG"
     echo "$INSTIMG has been upgraded to $APPIMAGE!"
 }
 
 appimgremovefunc () { # rm AppImage in /usr/local/bin and remove install info file
     . ~/.config/appimgman/installed/"$REMIMG"
-    echo "Removing $REMIMG..."
+    echo "Removing $REMIMG..." # Ask user if sure they want to remove AppImage
     read -p "Continue? Y/N " IMGREMANSWER
     case $IMGREMANSWER in
-        N*|n*)
+        N*|n*) # If user answers no, exit
             echo "$REMIMG was not removed."
-            rm /tmp/appimgman.lock
+            rm /tmp/appimgman.lock # Remove /tmp/appimgman.lock after operations completed
             exit 0
             ;;
     esac
-    if [ -f ~/.config/appimgman/upgrade-list.lst ]; then
+    if [ -f ~/.config/appimgman/upgrade-list.lst ]; then # If AppImage is on upgrade-list.lst, remove it from list to prevent future problems
         if grep -qw "$REMIMG" ~/.config/appimgman/upgrade-list.lst; then
             if [ "$(cat ~/.config/appimgman/upgrade-list.lst | wc -l)" = "1" ]; then
                 rm ~/.config/appimgman/upgrade-list.lst
@@ -225,19 +226,19 @@ appimgremovefunc () { # rm AppImage in /usr/local/bin and remove install info fi
         fi
     fi
     echo "Removing /usr/local/bin/$REMIMG ..."
-    sudo rm /usr/local/bin/"$REMIMG"
-    rm ~/.config/appimgman/installed/"$REMIMG"
+    sudo rm /usr/local/bin/"$REMIMG" # Remove AppImage from /usr/local/bin
+    rm ~/.config/appimgman/installed/"$REMIMG" # Remove installed info file for AppImage
     echo "$REMIMG has been removed!"
-    rm /tmp/appimgman.lock
+    rm /tmp/appimgman.lock # Remove /tmp/appimgman.lock after operations completed
     exit 0
 }
 
-if [ "$EUID" = "0" ]; then
+if [ "$EUID" = "0" ]; then # Prevent appimgman from being ran as root
     echo "Do not run appimgman as root!"
     exit 1
 fi
 
-if [ ! -f /tmp/appimgman.lock ]; then
+if [ ! -f /tmp/appimgman.lock ]; then # Create /tmp/appimgman.lock file and prevent multiple instances by checking if it exists before running
     touch /tmp/appimgman.lock
 else
     echo "appimgman is currently running or did not exit properly; exiting..."
@@ -259,75 +260,75 @@ fi
 
 case $1 in
     install|-i) # Check if app is already installed either by appimgman or otherwise then install app to /usr/local/bin if it is in known lists
-        if [ -z "$2" ]; then
+        if [ -z "$2" ]; then # Exit if no AppImage input
             echo "AppImage input required; exiting..."
-            rm /tmp/appimgman.lock
+            rm /tmp/appimgman.lock # Remove /tmp/appimgman.lock after operations completed
             exit 1
         fi
         INSTIMG="$2"
-        if [ -f ~/.config/appimgman/installed/"$INSTIMG" ]; then
+        if [ -f ~/.config/appimgman/installed/"$INSTIMG" ]; then # Exit if AppImage already installed by appimgman
             echo "$INSTIMG is already installed."
-            echo "Use 'appimgman upgrade' to install the latest version of $INSTIMG."
-            rm /tmp/appimgman.lock
+            echo "Use 'appimgman update' to check for a new version of $INSTIMG."
+            rm /tmp/appimgman.lock # Remove /tmp/appimgman.lock after operations completed
             exit 1
         fi
-        if type >/dev/null 2>&1 "$INSTIMG"; then
+        if type >/dev/null 2>&1 "$INSTIMG"; then # If a command by the same name as AppImage already exists on user's system, exit
             echo "$INSTIMG is already installed and not managed by appimgman; exiting..."
-            rm /tmp/appimgman.lock
+            rm /tmp/appimgman.lock # Remove /tmp/appimgman.lock after operations completed
             exit 1
         fi
-        if [ -f "/usr/local/bin/$INSTIMG" ]; then
+        if [ -f "/usr/local/bin/$INSTIMG" ]; then # If for some reason type does't pick up same file existing as AppImage name in /usr/local/bin, exit
             echo "/usr/local/bin/$INSTIMG exists; exiting..."
-            rm /tmp/appimgman.lock
+            rm /tmp/appimgman.lock # Remove /tmp/appimgman.lock after operations completed
             exit 1
         fi
-        appcheckfunc "$INSTIMG"
-        appimgvercheckfunc
-        if [ "$APPIMAGE_ERROR" = "TRUE" ]; then
-            rm /tmp/appimgman.lock
+        appcheckfunc "$INSTIMG" # Check whether AppImage is in lists and which list it is in
+        appimgvercheckfunc # Use vercheckfunc to get AppImage name for output before install
+        if [ "$APPIMAGE_ERROR" = "TRUE" ]; then # If error getting AppImage, exit
+            rm /tmp/appimgman.lock # Remove /tmp/appimgman.lock after operations completed
             exit 1
         fi
-        if [ "$BINTRAY_IMG" = "FALSE" ] && [ "$GITHUB_IMG" = "FALSE" ];then
+        if [ "$BINTRAY_IMG" = "FALSE" ] && [ "$GITHUB_IMG" = "FALSE" ];then # If AppImage not in either list, exit
             echo "$INSTIMG is not in AppImages-bintray.lst or AppImages-github.lst; try running 'appimgman update'."
-            rm /tmp/appimgman.lock
+            rm /tmp/appimgman.lock # Remove /tmp/appimgman.lock after operations completed
             exit 1
         else
-            echo "$NEW_APPIMAGE will be installed to /usr/local/bin/$INSTIMG"
+            echo "$NEW_APPIMAGE will be installed to /usr/local/bin/$INSTIMG" # Ask user if sure they want to install AppImage
             read -p "Continue? Y/N " INSTANSWER
             case $INSTANSWER in
-                N*|n*)
+                N*|n*) # If answer is no, exit
                     echo "$NEW_APPIMAGE was not installed."
-                    rm /tmp/appimgman.lock
+                    rm /tmp/appimgman.lock # Remove /tmp/appimgman.lock after operations completed
                     exit 0
                     ;;
             esac
         fi
-        appimgdlfunc "$INSTIMG"
-        appimginstallfunc
+        appimgdlfunc "$INSTIMG" # Download AppImage from Bintray or Github
+        appimginstallfunc # Install AppImage
         ;;
     update|-upd) # Update AppImage lists and check version from install info stored in ~/.config/appimgman/installed against latest url
         updatelistfunc "$@"
         ;;
     update-force|-updf) # Force specified AppImage to be upgraded by adding it to the upgrade-list.lst
         INSTIMG="$2"
-        if [ -f ~/.config/appimgman/installed/"$INSTIMG" ]; then
+        if [ -f ~/.config/appimgman/installed/"$INSTIMG" ]; then # Show AppImage info if installed, exit if not
             cat ~/.config/appimgman/installed/"$INSTIMG"
         else
             echo "AppImage not found!"
             exit 1
         fi
-        if [ -f ~/.config/appimgman/upgrade-list.lst ]; then
+        if [ -f ~/.config/appimgman/upgrade-list.lst ]; then # Exit if already on upgrade-list.lst
             if grep -qw "$INSTIMG" ~/.config/appimgman/upgrade-list.lst; then
                 echo "$(tput setaf 2)$INSTIMG is already marked for upgrade!"
                 echo "Run 'appimgman upgrade $INSTIMG' to upgrade $INSTIMG$(tput sgr0)"
-                rm /tmp/appimgman.lock
+                rm /tmp/appimgman.lock # Remove /tmp/appimgman.lock after operations completed
                 exit 0
             fi
         fi
         echo "Marking $INSTIMG for upgrade by force..."
-        FORCE_UPGRADE="TRUE"
-        appcheckfunc "$INSTIMG"
-        appimgvercheckfunc
+        FORCE_UPGRADE="TRUE" # Mark for upgrade by force without checking versions
+        appcheckfunc "$INSTIMG" # Check whether AppImage is in lists and which list it is in
+        appimgvercheckfunc # Run vercheckfunc anyway to add AppImage to upgrade-list.lst
         if [ "$NEW_UPGRADE" = "TRUE" ]; then
             echo "$(tput setaf 2)New upgrade available for $INSTIMG!$(tput sgr0)"
             echo "$INSTIMG" >> ~/.config/appimgman/upgrade-list.lst
@@ -337,94 +338,93 @@ case $1 in
         ;;
     upgrade|-upg) # upgrade AppImages to latest version if on upgrade-list.lst; update argument must be ran to put them on update-list.lst
         if [ ! -f ~/.config/appimgman/upgrade-list.lst ]; then
-            echo "No upgrades available; try running 'appimgman update'."
-            rm /tmp/appimgman.lock
+            echo "No upgrades available; try running 'appimgman update'." # If no AppImages in upgrade-list.lst, exit
+            rm /tmp/appimgman.lock # Remove /tmp/appimgman.lock after operations completed
             exit 0
         fi
-        if [ -z "$2" ]; then
-            if [ "$(cat ~/.config/appimgman/upgrade-list.lst | wc -l)" = "1" ]; then
+        if [ -z "$2" ]; then # If no AppImage specified, upgrade all AppImages in upgrade-list.lst
+            if [ "$(cat ~/.config/appimgman/upgrade-list.lst | wc -l)" = "1" ]; then # Output number of upgrades available
                 echo "$(tput setaf 2)1 upgrade available.$(tput sgr0)"
             else
                 echo "$(tput setaf 2)$(cat ~/.config/appimgman/upgrade-list.lst | wc -l) upgrades available.$(tput sgr0)"
             fi
-            cat ~/.config/appimgman/upgrade-list.lst | tr '\n' ' ' | tr -d '"'
+            cat ~/.config/appimgman/upgrade-list.lst | tr '\n' ' ' | tr -d '"' # Ouput AppImages available for upgrades
             echo
             if [ "$(cat ~/.config/appimgman/upgrade-list.lst | wc -l)" = "1" ]; then
                 echo "1 AppImage will be upgraded."
             else
                 echo "$(cat ~/.config/appimgman/upgrade-list.lst | wc -l) AppImages will be upgraded."
             fi
-            read -p "Continue? Y/N " UPGRADEALLANSWER
+            read -p "Continue? Y/N " UPGRADEALLANSWER # Ask user if they want to upgrade
             case $UPGRADEALLANSWER in
-                Y*|y*)
+                Y*|y*) # Do upgrade functions if yes
                     for UPGRADE_IMG in $(cat ~/.config/appimgman/upgrade-list.lst); do
-                        INSTIMG="$(echo "$UPGRADE_IMG" | tr -d '"')"
                         echo "Downloading $INSTIMG..."
-                        appcheckfunc "$INSTIMG"
-                        appimgdlfunc "$INSTIMG"
-                        appimgupgradefunc
+                        appcheckfunc "$INSTIMG" # Check whether AppImage is in lists and which list it is in
+                        appimgdlfunc "$INSTIMG" # Download AppImage from Bintray or Github
+                        appimgupgradefunc # Run upgrade function for AppImage
                         echo
                     done
-                    rm /tmp/appimgman.lock
+                    rm /tmp/appimgman.lock # Remove /tmp/appimgman.lock after operations completed
                     ;;
-                N*|n*)
+                N*|n*) # Exit if no
                     echo "No AppImages were upgraded; exiting..."
-                    rm /tmp/appimgman.lock
+                    rm /tmp/appimgman.lock # Remove /tmp/appimgman.lock after operations completed
                     exit 0
                     ;;
             esac
-            rm /tmp/appimgman.lock
-            rm -f ~/.config/appimgman/upgrade-list.lst
+            rm /tmp/appimgman.lock # Remove /tmp/appimgman.lock after operations completed
+            rm -f ~/.config/appimgman/upgrade-list.lst # Remove upgrade-list.lst after upgrades finish
             exit 0
-        elif grep -qw "$2" ~/.config/appimgman/upgrade-list.lst; then
+        elif grep -qw "$2" ~/.config/appimgman/upgrade-list.lst; then # If user specifies AppImage, upgrade that AppImage
             INSTIMG="$2"
-            echo "$INSTIMG will be upgraded to the latest version."
+            echo "$INSTIMG will be upgraded to the latest version." # Ask user if sure about upgrade
             read -p "Continue? Y/N " UPGRADEANSWER
             case $UPGRADEANSWER in
-                Y*|y*)
-                    appcheckfunc "$INSTIMG"
-                    appimgdlfunc "$INSTIMG"
-                    appimgupgradefunc
-                    if [ "$(cat ~/.config/appimgman/upgrade-list.lst | wc -l)" = "1" ]; then
+                Y*|y*) # Do upgrade functions if yes
+                    appcheckfunc "$INSTIMG" # Check whether AppImage is in lists and which list it is in
+                    appimgdlfunc "$INSTIMG" # Download AppImage from Bintray or Github
+                    appimgupgradefunc # Run upgrade function for AppImage
+                    if [ "$(cat ~/.config/appimgman/upgrade-list.lst | wc -l)" = "1" ]; then # Remove upgrade-list.lst if AppImage was only one in list
                         rm ~/.config/appimgman/upgrade-list.lst
-                    else
-                        sed -i "s:"$INSTIMG"::g" ~/.config/appimgman/upgrade-list.lst
-                        sed -i '/^$/d' ~/.config/appimgman/upgrade-list.lst
+                    else # Remove AppImage from upgrade-list.lst if more than one AppImage in list
+                        sed -i "s:"$INSTIMG"::g" ~/.config/appimgman/upgrade-list.lst # Use sed to remove AppImage name
+                        sed -i '/^$/d' ~/.config/appimgman/upgrade-list.lst # Use sed to remove blank space left from previous sed
                     fi
-                    rm /tmp/appimgman.lock
+                    rm /tmp/appimgman.lock # Remove /tmp/appimgman.lock after operations completed
                     exit 0
                     ;;
-                N*|n*)
+                N*|n*) # Exit if no
                     echo "$INSTIMG was not upgraded."
-                    rm /tmp/appimgman.lock
+                    rm /tmp/appimgman.lock # Remove /tmp/appimgman.lock after operations completed
                     exit 0
                     ;;
             esac
-        else
+        else # If upgrade-list.lst doesn't exist, suggest to run update function
             echo "No new upgrade for $2; try running 'appimgman update'."
-            rm /tmp/appimgman.lock
+            rm /tmp/appimgman.lock # Remove /tmp/appimgman.lock after operations completed
             exit 0
         fi
         ;;
     remove|-r) # rm AppImage from /usr/local/bin and rm install info in ~/.config/appimgman/installed
-        if [ -z "$2" ]; then
+        if [ -z "$2" ]; then # Exit if no AppImage input
             echo "AppImage input required; exiting..."
-            rm /tmp/appimgman.lock
+            rm /tmp/appimgman.lock # Remove /tmp/appimgman.lock after operations completed
             exit 1
         fi
         REMIMG="$2"
-        echo "Current installed $REMIMG information:"
+        echo "Current installed $REMIMG information:" # Output AppImage installed info if installed, exit if not
         if [ -f ~/.config/appimgman/installed/"$REMIMG" ]; then
             cat ~/.config/appimgman/installed/"$REMIMG"
         else
             echo "AppImage not found!"
-            rm /tmp/appimgman.lock
+            rm /tmp/appimgman.lock # Remove /tmp/appimgman.lock after operations completed
             exit 1
         fi
-        appimgremovefunc
+        appimgremovefunc # Run remove function for AppImage
         ;;
     list|-l) # List installed AppImages, AppImages-bintray.lst, and AppImages-github.lst or list info about specified AppImage
-        if [ -z "$2" ]; then
+        if [ -z "$2" ]; then # If no AppImage input, list all AppImages
             echo "$(dir -C -w 1 ~/.config/appimgman/installed | wc -l) AppImages installed:"
             dir -C -w 1 ~/.config/appimgman/installed | pr -tT --column=3 -w 125
             echo
@@ -433,17 +433,17 @@ case $1 in
             echo
             echo "$(cat ~/.config/appimgman/AppImages-github.lst | wc -l) Github AppImages available for install:"
             cat ./.config/appimgman/AppImages-github.lst | cut -f1 -d" " | pr -tT --column=3 -w 125
-        else
-            if [ -f ~/.config/appimgman/installed/"$2" ]; then
+        else # If AppImage input, list info for that AppImage
+            if [ -f ~/.config/appimgman/installed/"$2" ]; then # If installed, list installed info
                 echo "Current installed $2 information:"
                 cat ~/.config/appimgman/installed/"$2"
                 echo "INSTALLED=\"YES\""
-            elif grep -qw "$2" ~/.config/appimgman/AppImages-bintray.lst; then
+            elif grep -qw "$2" ~/.config/appimgman/AppImages-bintray.lst; then # If not installed and in Bintray list, list Bintray info
                 echo "$2 AppImage information:"
                 APPIMAGE="$(wget -q "https://bintray.com/package/files/probono/AppImages/$2?order=desc&sort=fileLastModified&basePath=&tab=files" -O - | grep -e '64.AppImage">' | cut -d '"' -f 6 | head -n 1 | cut -f2 -d"=")"
                 echo "APPIMAGE=\"${APPIMAGE##*/}\""
                 echo "INSTALLED=\"NO\""
-            elif grep -qw "$2" ~/.config/appimgman/AppImages-github.lst; then
+            elif grep -qw "$2" ~/.config/appimgman/AppImages-github.lst; then # If not installed and in Github list, list Github info
                 GITHUB_APP_URL="$(grep -w "$2" ~/.config/appimgman/AppImages-github.lst | cut -f2- -d" ")"
                 APPIMAGE="$(wget --quiet "$GITHUB_APP_URL" -O - | grep -i '.*/download/.*64.AppImage' | head -n 1 | cut -f2 -d'"')"
                 MAIN_GITHUB_URL="$(echo "$GITHUB_APP_URL" | cut -f-5 -d'/')"
@@ -455,13 +455,13 @@ case $1 in
                 echo "GITHUB=\"$MAIN_GITHUB_URL\""
                 echo "DESCRIPTION=\"$(wget --quiet "$MAIN_GITHUB_URL" -O - | grep -i '<meta name="description"' | cut -f4 -d'"')\""
                 echo "INSTALLED=\"NO\""
-            else
+            else # Exit if not in list or installed
                 echo "AppImage not found!"
-                rm /tmp/appimgman.lock
+                rm /tmp/appimgman.lock # Remove /tmp/appimgman.lock after operations completed
                 exit 1
             fi
         fi
-        rm /tmp/appimgman.lock
+        rm /tmp/appimgman.lock # Remove /tmp/appimgman.lock after operations completed
         ;;
     list-installed|-li) # List information about installed AppImages
         echo "$(dir -C -w 1 ~/.config/appimgman/installed | wc -l) AppImages installed:"
@@ -473,10 +473,10 @@ case $1 in
             echo "INSTALLED=\"YES\""
             echo
         done
-        rm /tmp/appimgman.lock
+        rm /tmp/appimgman.lock # Remove /tmp/appimgman.lock after operations completed
         ;;
     *) # Any unknown arguments go to help func
         helpfunc
-        rm /tmp/appimgman.lock
+        rm /tmp/appimgman.lock # Remove /tmp/appimgman.lock after operations completed
         ;;
 esac
