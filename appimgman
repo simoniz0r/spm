@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.1.3" # Set appimgman version
+X="0.1.4" # Set appimgman version
 
 helpfunc () { # All unknown arguments come to this function; display help for appimgman
 printf '%s\n' "appimgman $X
@@ -109,7 +109,7 @@ updatelistfunc () { # Regenerate AppImages-bintray.lst from bintray, download Ap
     echo "AppImages-bintray.lst updated!"
     echo "Downloading AppImages-github.lst from appimgman github repo..." # Download existing list of github AppImages from appimgman github repo
     rm ~/.config/appimgman/AppImages-github.lst
-    wget --quiet --show-progress "https://raw.githubusercontent.com/simoniz0r/appimgman/master/AppImages-github.lst" || { echo "wget failed; exiting..."; rm /tmp/appimgman.lock # Remove /tmp/appimgman.lock after operations completed; exit 1; }
+    wget --quiet --show-progress "https://raw.githubusercontent.com/simoniz0r/appimgman/master/AppImages-github.lst" || { echo "wget failed; exiting..."; rm /tmp/appimgman.lock; exit 1; }
     echo "AppImages-github.lst updated!"
     if [ ! -f ~/.config/appimgman/upgrade-list.lst ]; then # Create upgrade-list.lst file to avoid error outputs during update checks
         touch ~/.config/appimgman/upgrade-list.lst
@@ -169,7 +169,7 @@ updatelistfunc () { # Regenerate AppImages-bintray.lst from bintray, download Ap
 appimgdlfunc () { # wget latest url from bintray website or github repo and wget it
     if [ "$BINTRAY_IMG" = "TRUE" ]; then # If AppImage is from Bintray, use method below to download it
         APPIMAGE="$(wget -q "https://bintray.com/package/files/probono/AppImages/$APPIMG_NAME?order=desc&sort=fileLastModified&basePath=&tab=files" -O - | grep -e '64.AppImage">' | cut -d '"' -f 6 | head -n 1)"
-        wget --show-progress --quiet "https://bintray.com/$APPIMAGE" -O ~/.config/appimgman/cache/"$INSTIMG" || { echo "wget $APPIMAGE failed; exiting..."; rm /tmp/appimgman.lock # Remove /tmp/appimgman.lock after operations completed; exit 1; }
+        wget --show-progress --quiet "https://bintray.com/$APPIMAGE" -O ~/.config/appimgman/cache/"$INSTIMG" || { echo "wget $APPIMAGE failed; exiting..."; rm /tmp/appimgman.lock; exit 1; }
         APPIMAGE="$(echo "$APPIMAGE" | cut -f2 -d"=")"
     elif [ "$GITHUB_IMG" = "TRUE" ]; then # If AppImage is from github, use method below to download it
         GITHUB_APP_URL="$(grep -wi "$INSTIMG" ~/.config/appimgman/AppImages-github.lst | cut -f2- -d" ")"
@@ -178,7 +178,7 @@ appimgdlfunc () { # wget latest url from bintray website or github repo and wget
             APPIMAGE_URL="$(wget --quiet "$GITHUB_APP_URL" -O - | grep -i '.*/download/.*.AppImage' | head -n 1 | cut -f2 -d'"')"
         fi
         APPIMAGE="${APPIMAGE_URL##*/}"
-        wget --show-progress --quiet "https://github.com/$APPIMAGE_URL" -O ~/.config/appimgman/cache/"$INSTIMG" || { echo "wget $APPIMAGE_URL failed; exiting..."; rm /tmp/appimgman.lock # Remove /tmp/appimgman.lock after operations completed; exit 1; }
+        wget --show-progress --quiet "https://github.com/$APPIMAGE_URL" -O ~/.config/appimgman/cache/"$INSTIMG" || { echo "wget $APPIMAGE_URL failed; exiting..."; rm /tmp/appimgman.lock; exit 1; }
     fi
 }
 
