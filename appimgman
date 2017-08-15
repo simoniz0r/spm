@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.1.2"
+X="0.1.3" # Set appimgman version
 
 helpfunc () { # All unknown arguments come to this function; display help for appimgman
 printf '%s\n' "appimgman $X
@@ -315,6 +315,7 @@ case $1 in
             cat ~/.config/appimgman/installed/"$INSTIMG"
         else
             echo "AppImage not found!"
+            rm /tmp/appimgman.lock # Remove /tmp/appimgman.lock after operations completed
             exit 1
         fi
         if [ -f ~/.config/appimgman/upgrade-list.lst ]; then # Exit if already on upgrade-list.lst
@@ -335,6 +336,7 @@ case $1 in
         else
             echo "No new upgrade for $INSTIMG"
         fi
+        rm /tmp/appimgman.lock # Remove /tmp/appimgman.lock after operations completed
         ;;
     upgrade|-upg) # upgrade AppImages to latest version if on upgrade-list.lst; update argument must be ran to put them on update-list.lst
         if [ ! -f ~/.config/appimgman/upgrade-list.lst ]; then
