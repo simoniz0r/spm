@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.2.0"
+X="0.2.1"
 # Set appimgman version
 
 # Set variables
@@ -152,10 +152,10 @@ updatelistfunc () { # Regenerate AppImages-bintray.lst from bintray, download Ap
     cd ~/.config/appimgman
     wget --show-progress --quiet "https://dl.bintray.com/probono/AppImages/" -O - | sed 's/<\/*[^>]*>//g' | grep -o '.*AppImage' | cut -f1 -d"-" | sort -u > ~/.config/appimgman/AppImages-bintray.lst || { echo "wget failed; exiting..."; exit 1; }
     echo "AppImages-bintray.lst updated!"
-    # echo "Downloading AppImages-github.lst from appimgman github repo..." # Download existing list of github AppImages from appimgman github repo
-    # rm ~/.config/appimgman/AppImages-github.lst
-    # wget --quiet --show-progress "https://raw.githubusercontent.com/simoniz0r/appimgman/master/AppImages-github.lst" || { echo "wget failed; exiting..."; rm /tmp/appimgman.lock; exit 1; }
-    # echo "AppImages-github.lst updated!"
+    echo "Downloading AppImages-github.lst from appimgman github repo..." # Download existing list of github AppImages from appimgman github repo
+    rm ~/.config/appimgman/AppImages-github.lst
+    wget --quiet --show-progress "https://raw.githubusercontent.com/simoniz0r/appimgman/master/AppImages-github.lst" || { echo "wget failed; exiting..."; rm /tmp/appimgman.lock; exit 1; }
+    echo "AppImages-github.lst updated!"
     if [ ! -f ~/.config/appimgman/upgrade-list.lst ]; then # Create upgrade-list.lst file to avoid error outputs during update checks
         touch ~/.config/appimgman/upgrade-list.lst
     fi
