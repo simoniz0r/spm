@@ -40,6 +40,10 @@ Using the optional appimaged daemon, you can easily integrate AppImages with the
 
 If there is no [AppImage](https://github.com/AppImage) of your favorite application available, please request it from the author(s) of the application, e.g., as a feature request in the issue tracker of the application. For example, if you would like to see an [AppImage](https://github.com/AppImage) of Mozilla Firefox, then please leave a comment at https://bugzilla.mozilla.org/show_bug.cgi?id=1249971. The more people request an [AppImage](https://github.com/AppImage) from the upstream authors, the more likely is that an [AppImage](https://github.com/AppImage) will be provided.
 
+If there is an [AppImage](https://github.com/AppImage) available for an application that is not in appimgman's list, feel free to create an [issue here](https://github.com/simoniz0r/appimgman/issues/new) to request that application be added.
+
+Support for a list of custom [AppImages](https://github.com/AppImage) that the user can [AppImages](https://github.com/AppImage) manually is planned, but not yet implemented.  Also, please note that appimgman currently only supports 64-bit AppImages and AppImages that are not in `Pre-release` status.  Support for 32-bit and versions other than the latest stable release is also planned.
+
 # Where do I get support?
 
 Please visit http://discourse.appimage.org/. You can log in using your existing Google or GitHub account, no sign-up needed.
