@@ -34,7 +34,7 @@ An [AppImage](https://github.com/AppImage) is a downloadable file for Linux that
 
 # How can I integrate AppImages with the system?
 
-Using the optional appimaged daemon, you can easily integrate AppImages with the system. The daemon puts AppImages into the menus, registers MIME types, icons, all on the fly. You can download it from this repository. But it is entirely optional.
+Using the optional appimaged daemon, you can easily integrate AppImages with the system. The daemon puts AppImages into the menus, registers MIME types, icons, all on the fly. You can download it from the [AppImageKit](https://github.com/AppImage/AppImageKit) repository, but it is entirely optional.
 
 # Where can I request AppImages?
 
@@ -46,4 +46,4 @@ Please visit http://discourse.appimage.org/. You can log in using your existing 
 
 # How can I contribute?
 
-Curious about [AppImage](https://github.com/AppImage) development? Want to contribute? We welcome pull requests addressing any of the open issues and/or other bugfixes and/or feature additions. In the case of complex feature additions, it is best to contact us first, before you spend much time. See our list of issues and get in touch with us in #AppImage on irc.freenode.net.
+Curious about [AppImage](https://github.com/AppImage) development? Want to contribute? [AppImage](https://github.com/AppImage) welcome pull requests addressing any of the open issues and/or other bugfixes and/or feature additions. In the case of complex feature additions, it is best to contact us first, before you spend much time. See our list of issues and get in touch with us in #AppImage on irc.freenode.net.
