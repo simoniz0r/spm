@@ -6,6 +6,7 @@ bnb https://github.com/layerssss/bnb/releases/latest
 calculist-desktop https://github.com/calculist/calculist-desktop/releases/latest
 caprine https://github.com/sindresorhus/caprine/releases/latest
 cerebral-debugger https://github.com/cerebral/cerebral-debugger/releases/latest
+chigraph https://github.com/chigraph/chigraph/releases/tag/continuous
 crypter https://github.com/HR/Crypter/releases/latest
 cumulus-qt https://github.com/vadrian89/cumulus-qt/releases/latest
 dat-desktop https://github.com/datproject/dat-desktop/releases/latest
@@ -23,6 +24,8 @@ gvim https://github.com/vim/vim-appimage/releases/latest
 home_assistant https://github.com/matthinc/HomeAssistantElectron/releases/latest
 hyper https://github.com/zeit/hyper/releases/latest
 imagine https://github.com/meowtec/Imagine/releases/latest
+jumpfm https://github.com/Gilad-Kutiel-App/jumpfm/releases/latest
+kate_pdf_converter https://github.com/christian-mv/kate_pdf_converter/releases/latest
 labpowerqt https://github.com/crapp/labpowerqt/releases/latest
 langly https://github.com/christofferok/langly/releases/latest
 lepton https://github.com/hackjutsu/Lepton/releases/latest
@@ -37,6 +40,7 @@ neovim https://github.com/neovim/neovim/releases/latest
 nfeh https://github.com/fa7ad/nfeh/releases/latest
 openblok https://github.com/mmatyas/openblok/releases/latest
 pb-for-desktop https://github.com/sidneys/pb-for-desktop/releases/latest
+perrio-desktop https://github.com/PeerioTechnologies/peerio-desktop/releases/latest
 plxsrt https://github.com/thorpelawrence/pixsrt/releases/latest
 popcorn-time-desktop https://github.com/amilajack/popcorn-time-desktop/releases/latest
 qnapi https://github.com/QNapi/qnapi/releases/latest
@@ -53,6 +57,7 @@ stretchly https://github.com/hovancik/stretchly/releases/latest
 subvertise https://github.com/nullism/subvertise/releases/latest
 tc-linux https://github.com/mccxiv/tc/releases/latest
 tockler https://github.com/MayGo/tockler/releases/latest
+tumblr-downloader-client https://github.com/neuro-sys/tumblr-downloader-client/releases/latest
 unreel https://github.com/linux-man/unreel/releases/latest
 upterm https://github.com/railsware/upterm/releases/latest
 vidcutter https://github.com/ozmartian/vidcutter/releases/latest

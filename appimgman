@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.1.7"
+X="0.1.8"
 # Set appimgman version
 
 helpfunc () { # All unknown arguments come to this function; display help for appimgman
@@ -47,18 +47,23 @@ appimgvercheckfunc () { # Check version by getting the latest version from the b
     fi
     if [ "$BINTRAY_IMG" = "TRUE" ]; then # If AppImage is from bintray, use method below to get new AppImage version
         NEW_APPIMAGE="$(wget -q "https://bintray.com/package/files/probono/AppImages/$APPIMG_NAME?order=desc&sort=fileLastModified&basePath=&tab=files" -O - | grep -e '64.AppImage">' | cut -d '"' -f 6 | head -n 1 | cut -f2 -d"=")"
+        NEW_APPIMAGE_VERSION="$(echo "$NEW_APPIMAGE" | cut -f2 -d'-')"
+        APPIMAGE_NAME="$NEW_APPIMAGE"
     elif [ "$GITHUB_IMG" = "TRUE" ]; then # If AppImage is from github, use method below to get new AppImage version
         GITHUB_APP_URL="$(grep -wi "$INSTIMG" ~/.config/appimgman/AppImages-github.lst | cut -f2- -d" ")"
-        NEW_APPIMAGE="$(wget --quiet "$GITHUB_APP_URL" -O - | grep -i '.*/download/.*64.AppImage' | head -n 1 | cut -f2 -d'"')"
-        if [ -z "$NEW_APPIMAGE" ]; then # Try to find AppImages that do not specify architecture
-            NEW_APPIMAGE="$(wget --quiet "$GITHUB_APP_URL" -O - | grep -i '.*/download/.*.AppImage' | head -n 1 | cut -f2 -d'"')"
+        NEW_APPIMAGE="$(wget --quiet "$GITHUB_APP_URL" -O - | grep '<a href="/*..*/commit/*.' | cut -f5 -d"/" | cut -f1 -d'"')"
+        NEW_APPIMAGE_VERSION="$NEW_APPIMAGE"
+        APPIMAGE_NAME="$(wget --quiet "$GITHUB_APP_URL" -O - | grep -i '.*/download/.*64.AppImage' | head -n 1 | cut -f2 -d'"')"
+        APPIMAGE_NAME="${APPIMAGE_NAME##*/}"
+        if [ -z "$APPIMAGE_NAME" ]; then # Try to find AppImages that do not specify architecture
+            APPIMAGE_NAME="$(wget --quiet "$GITHUB_APP_URL" -O - | grep -i '.*/download/.*.AppImage' | head -n 1 | cut -f2 -d'"')"
+            APPIMAGE_NAME="${APPIMAGE_NAME##*/}"
         fi
-        NEW_APPIMAGE="${NEW_APPIMAGE##*/}"
     fi
     if [ -z "$APPIMAGE" ]; then # If no existing AppImage version was found, do not mark for upgrade
         NEW_UPGRADE="FALSE"
         APPIMAGE_ERROR="FALSE"
-    elif [[ "$NEW_APPIMAGE" != "$APPIMAGE" ]]; then # If current AppImage version does not equal new AppImage version, mark for upgrade
+    elif [[ "$NEW_APPIMAGE_VERSION" != "$APPIMAGE_VERSION" ]]; then # If current AppImage version does not equal new AppImage version, mark for upgrade
         NEW_UPGRADE="TRUE"
         APPIMAGE_ERROR="FALSE"
     elif [ "$FORCE_UPGRADE" = "TRUE" ]; then # This is used for the upgrade-force argument
@@ -69,7 +74,7 @@ appimgvercheckfunc () { # Check version by getting the latest version from the b
         NEW_UPGRADE="FALSE"
         APPIMAGE_ERROR="FALSE"
     fi
-    if [ -z "$NEW_APPIMAGE" ]; then # If no new AppImage version was found, output an error
+    if [ -z "$APPIMAGE_NAME" ]; then # If no new AppImage version was found, output an error
         echo "$(tput setaf 1)Error checking $INSTIMG version!$(tput sgr0)"
         NEW_UPGRADE="FALSE"
         APPIMAGE_ERROR="TRUE"
@@ -122,11 +127,11 @@ updatelistfunc () { # Regenerate AppImages-bintray.lst from bintray, download Ap
             appcheckfunc "$AppImage"
             appimgvercheckfunc
             if grep -qw "$AppImage" ~/.config/appimgman/upgrade-list.lst; then # If AppImage is already on upgrade-list.lst, do not add it again
-                echo "$(tput setaf 2)New upgrade available for $AppImage -- $NEW_APPIMAGE !"
+                echo "$(tput setaf 2)New upgrade available for $AppImage -- $NEW_APPIMAGE_VERSION !"
                 echo "$AppImage is already marked for upgrade!"
                 echo "Run 'appimgman upgrade' to upgrade $AppImage$(tput sgr0)"
             elif [ "$NEW_UPGRADE" = "TRUE" ]; then # Add AppImage to upgrade-list.lst if appimgvercheckfunc outputs NEW_UPGRADE="TRUE"
-                echo "$(tput setaf 2)New upgrade available for $AppImage -- $NEW_APPIMAGE !$(tput sgr0)"
+                echo "$(tput setaf 2)New upgrade available for $AppImage -- $NEW_APPIMAGE_VERSION !$(tput sgr0)"
                 echo "$AppImage" >> ~/.config/appimgman/upgrade-list.lst
             fi
         done
@@ -155,7 +160,7 @@ updatelistfunc () { # Regenerate AppImages-bintray.lst from bintray, download Ap
         appcheckfunc "$INSTIMG" # Check whether AppImage is in lists and which list it is in
         appimgvercheckfunc
         if [ "$NEW_UPGRADE" = "TRUE" ]; then # Add AppImage to upgrade-list.lst if appimgvercheckfunc outputs NEW_UPGRADE="TRUE"
-            echo "$(tput setaf 2)New upgrade available for $INSTIMG!$(tput sgr0)"
+            echo "$(tput setaf 2)New upgrade available for $INSTIMG -- $NEW_APPIMAGE !$(tput sgr0)"
             echo "$INSTIMG" >> ~/.config/appimgman/upgrade-list.lst
         else
             echo "No new upgrade for $INSTIMG"
@@ -183,12 +188,42 @@ appimgdlfunc () { # wget latest url from bintray website or github repo and wget
     fi
 }
 
+saveinfofunc () { # Save install info to ~/.config/appimgman/installed/AppImageName
+    INSTIMG="$1"
+    echo "BIN_PATH="\"/usr/local/bin/$INSTIMG\""" > ~/.config/appimgman/installed/"$INSTIMG" # Create AppImage installed info file
+    echo "APPIMAGE="\"$APPIMAGE\""" >> ~/.config/appimgman/installed/"$INSTIMG"
+    if [ "$GITHUB_IMG" = "TRUE" ]; then
+        if [ -z "$NEW_APPIMAGE" ]; then
+            APPIMAGE_VERSION="$(wget --quiet "$GITHUB_APP_URL" -O - | grep '<a href="/*..*/commit/*.' | cut -f5 -d"/" | cut -f1 -d'"')"
+        else
+            APPIMAGE_VERSION="$NEW_APPIMAGE"
+        fi
+    elif [ "$BINTRAY_IMG" = "TRUE" ]; then
+        if [ -z "$NEW_APPIMAGE" ]; then
+            APPIMAGE_VERSION="$(wget -q "https://bintray.com/package/files/probono/AppImages/$APPIMG_NAME?order=desc&sort=fileLastModified&basePath=&tab=files" -O - | grep -e '64.AppImage">' | cut -d '"' -f 6 | head -n 1 | cut -f2 -d"=")"
+        else
+            APPIMAGE_VERSION="$NEW_APPIMAGE"
+        fi
+        APPIMAGE_VERSION="$(echo "$APPIMAGE_VERSION" | cut -f2 -d'-')"
+    fi
+    echo "APPIMAGE_VERSION="\"$APPIMAGE_VERSION\""" >> ~/.config/appimgman/installed/"$INSTIMG"
+    if [ "$GITHUB_IMG" = "TRUE" ]; then
+        echo "WEBSITE="\"$(echo "$GITHUB_APP_URL" | cut -f-5 -d'/')\""" >> ~/.config/appimgman/installed/"$INSTIMG"
+    elif [ "$BINTRAY_IMG" = "TRUE" ]; then
+        echo "WEBSITE="\"https://bintray.com/probono/AppImages/$APPIMG_NAME\""" >> ~/.config/appimgman/installed/"$INSTIMG"
+    fi
+    if [ "$GITHUB_IMG" = "TRUE" ]; then
+        echo "DESCRIPTION="\"$(wget --quiet "$(echo "$GITHUB_APP_URL" | cut -f-5 -d'/')" -O - | grep -i '<meta name="description"' | cut -f4 -d'"')\""" >> ~/.config/appimgman/installed/"$INSTIMG"
+    elif [ "$BINTRAY_IMG" = "TRUE" ]; then
+        echo "DESCRIPTION="\"$(wget --quiet "https://bintray.com/probono/AppImages/$APPIMG_NAME/" -O - | grep '<div class="description-text">' | cut -f2 -d'>' | cut -f1 -d'<')\""" >> ~/.config/appimgman/installed/"$INSTIMG"
+    fi
+}
+
 appimginstallfunc () { # chmod and mv AppImages to /usr/local/bin and create file containing install info in ~/.config/appimgman/installed
     chmod a+x ~/.config/appimgman/cache/"$INSTIMG" # Make AppImage executable
     echo "Moving $INSTIMG to /usr/local/bin/$INSTIMG ..."
     sudo mv ~/.config/appimgman/cache/"$INSTIMG" /usr/local/bin/"$INSTIMG" # Move AppImage to /usr/local/bin
-    echo "BIN_PATH="\"/usr/local/bin/$INSTIMG\""" > ~/.config/appimgman/installed/"$INSTIMG" # Create AppImage installed info file
-    echo "APPIMAGE="\"$APPIMAGE\""" >> ~/.config/appimgman/installed/"$INSTIMG"
+    saveinfofunc "$INSTIMG"
     echo "$APPIMAGE has been installed to /usr/local/bin/$INSTIMG !"
     rm /tmp/appimgman.lock # Remove /tmp/appimgman.lock after operations completed
     exit 0
@@ -200,9 +235,8 @@ appimgupgradefunc () { # rm old AppImage, chmod, and mv new AppImage to /usr/loc
     chmod a+x ~/.config/appimgman/cache/"$INSTIMG" # Make new AppImage executable
     echo "Moving $INSTIMG to /usr/local/bin/$INSTIMG ..."
     sudo mv ~/.config/appimgman/cache/"$INSTIMG" /usr/local/bin/"$INSTIMG" # Move new AppImage to /usr/local/bin
-    echo "BIN_PATH="\"/usr/local/bin/$INSTIMG\""" > ~/.config/appimgman/installed/"$INSTIMG" # Update AppImage installed info file with new info
-    echo "APPIMAGE="\"$APPIMAGE\""" >> ~/.config/appimgman/installed/"$INSTIMG"
-    echo "$INSTIMG has been upgraded to $APPIMAGE!"
+    saveinfofunc "$INSTIMG"
+    echo "$INSTIMG has been upgraded to $APPIMAGE_VERSION !"
 }
 
 appimgremovefunc () { # rm AppImage in /usr/local/bin and remove install info file
@@ -294,11 +328,11 @@ case $1 in
             rm /tmp/appimgman.lock # Remove /tmp/appimgman.lock after operations completed
             exit 1
         else
-            echo "$NEW_APPIMAGE will be installed to /usr/local/bin/$INSTIMG" # Ask user if sure they want to install AppImage
+            echo "$APPIMAGE_NAME will be installed to /usr/local/bin/$INSTIMG" # Ask user if sure they want to install AppImage
             read -p "Continue? Y/N " INSTANSWER
             case $INSTANSWER in
                 N*|n*) # If answer is no, exit
-                    echo "$NEW_APPIMAGE was not installed."
+                    echo "$APPIMAGE_NAME was not installed."
                     rm /tmp/appimgman.lock # Remove /tmp/appimgman.lock after operations completed
                     exit 0
                     ;;
@@ -445,17 +479,22 @@ case $1 in
                 echo "$2 AppImage information:"
                 APPIMAGE="$(wget -q "https://bintray.com/package/files/probono/AppImages/$2?order=desc&sort=fileLastModified&basePath=&tab=files" -O - | grep -e '64.AppImage">' | cut -d '"' -f 6 | head -n 1 | cut -f2 -d"=")"
                 echo "APPIMAGE=\"${APPIMAGE##*/}\""
+                echo "APPIMAGE_VERSION=\"$(echo "$APPIMAGE" | cut -f2 -d'-')\""
+                echo "WEBSITE="\"https://bintray.com/probono/AppImages/$2\"""
+                echo "DESCRIPTION="\"$(wget --quiet "https://bintray.com/probono/AppImages/$2/" -O - | grep '<div class="description-text">' | cut -f2 -d'>' | cut -f1 -d'<')\"""
                 echo "INSTALLED=\"NO\""
             elif grep -qw "$2" ~/.config/appimgman/AppImages-github.lst; then # If not installed and in Github list, list Github info
                 GITHUB_APP_URL="$(grep -w "$2" ~/.config/appimgman/AppImages-github.lst | cut -f2- -d" ")"
                 APPIMAGE="$(wget --quiet "$GITHUB_APP_URL" -O - | grep -i '.*/download/.*64.AppImage' | head -n 1 | cut -f2 -d'"')"
                 MAIN_GITHUB_URL="$(echo "$GITHUB_APP_URL" | cut -f-5 -d'/')"
+                APPIMAGE_VERSION="$(wget --quiet "$GITHUB_APP_URL" -O - | grep '<a href="/*..*/commit/*.' | cut -f5 -d"/" | cut -f1 -d'"')"
                 if [ -z "$APPIMAGE" ]; then
                     APPIMAGE="$(wget --quiet "$GITHUB_APP_URL" -O - | grep -i '.*/download/.*.AppImage' | head -n 1 | cut -f2 -d'"')"
                 fi
                 echo "$2 AppImage information:"
                 echo "APPIMAGE=\"${APPIMAGE##*/}\""
-                echo "GITHUB=\"$MAIN_GITHUB_URL\""
+                echo "APPIMAGE_VERSION="\"$APPIMAGE_VERSION\"""
+                echo "WEBSITE=\"$MAIN_GITHUB_URL\""
                 echo "DESCRIPTION=\"$(wget --quiet "$MAIN_GITHUB_URL" -O - | grep -i '<meta name="description"' | cut -f4 -d'"')\""
                 echo "INSTALLED=\"NO\""
             else # Exit if not in list or installed
