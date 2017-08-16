@@ -46,4 +46,4 @@ Please visit http://discourse.appimage.org/. You can log in using your existing 
 
 # How can I contribute?
 
-Curious about [AppImage](https://github.com/AppImage) development? Want to contribute? [AppImage](https://github.com/AppImage) welcome pull requests addressing any of the open issues and/or other bugfixes and/or feature additions. In the case of complex feature additions, it is best to contact us first, before you spend much time. See our list of issues and get in touch with us in #AppImage on irc.freenode.net.
+Curious about [AppImage](https://github.com/AppImage) development? Want to contribute? [AppImage](https://github.com/AppImage) welcomes pull requests addressing any of the open issues and/or other bugfixes and/or feature additions. In the case of complex feature additions, it is best to contact [AppImage](https://github.com/AppImage) first, before you spend much time. See [AppImage's](https://github.com/AppImage) list of issues and get in touch with us in #AppImage on irc.freenode.net.
