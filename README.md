@@ -46,8 +46,12 @@ Support for a list of custom [AppImages](https://github.com/AppImage) that the u
 
 # Where do I get support?
 
-Please visit http://discourse.appimage.org/. You can log in using your existing Google or GitHub account, no sign-up needed.
+For issues related to appimgman, feel free to create an [issue here](https://github.com/simoniz0r/appimgman/issues/new) describing your problem and the distro you are running.
+
+For support related to [AppImages](https://github.com/AppImage), please visit http://discourse.appimage.org/. You can log in using your existing Google or GitHub account, no sign-up needed.
 
 # How can I contribute?
+
+If you would like to contribute to appimgman, feel free contact me by creating an [issue here](https://github.com/simoniz0r/appimgman/issues/new) describing how you would like to contribute or just go ahead and make a pull request!
 
 Curious about [AppImage](https://github.com/AppImage) development? Want to contribute? [AppImage](https://github.com/AppImage) welcomes pull requests addressing any of the open issues and/or other bugfixes and/or feature additions. In the case of complex feature additions, it is best to contact [AppImage](https://github.com/AppImage) first, before you spend much time. See [AppImage's](https://github.com/AppImage) list of issues and get in touch with [AppImage](https://github.com/AppImage) in #AppImage on irc.freenode.net.
