@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.2.1"
+X="0.2.2"
 # Set appimgman version
 
 # Set variables
@@ -100,7 +100,7 @@ appinfofunc () { # Set variables and temporarily store pages in ~/.config/appimg
             GITHUB_APPIMAGE_URL="$(grep -i '"browser_download_url":*..*.AppImage"' "$GITHUB_CURRENT_RELEASE" | head -n 1 | cut -f4 -d'"')"
         fi
         if [ "$UPGRADE_CHECK" = "FALSE" ]; then
-            wget --quiet "$GITHUB_APP_URL" -O ~/.config/appimgman/cache/"$INSTIMG"-github || { echo "wget $GITHUB_APP_URL failed; has the repo been renamed or deleted?"; rm /tmp/appimgman.lock; rm -rf ~/.config/appimgman/cache/*; exit 1; }
+            wget --quiet "$GITHUB_APP_URL" -O ~/.config/appimgman/cache/"$INSTIMG"-github || { echo "wget $GITHUB_APP_URL failed; has the repo been renamed or deleted?"; rm -rf ~/.config/appimgman/cache/*; exit 1; }
             GITHUB_INFO="$HOME/.config/appimgman/cache/"$INSTIMG"-github"
             APPIMAGE_DESCRIPTION="$(grep -i '<meta name="description"' "$GITHUB_INFO" | cut -f4 -d'"')"
         fi
@@ -154,7 +154,7 @@ updatelistfunc () { # Regenerate AppImages-bintray.lst from bintray, download Ap
     echo "AppImages-bintray.lst updated!"
     echo "Downloading AppImages-github.lst from appimgman github repo..." # Download existing list of github AppImages from appimgman github repo
     rm ~/.config/appimgman/AppImages-github.lst
-    wget --quiet --show-progress "https://raw.githubusercontent.com/simoniz0r/appimgman/master/AppImages-github.lst" || { echo "wget failed; exiting..."; rm /tmp/appimgman.lock; exit 1; }
+    wget --quiet --show-progress "https://raw.githubusercontent.com/simoniz0r/appimgman/master/AppImages-github.lst" || { echo "wget failed; exiting..."; rm -rf ~/.config/appimgman/cache/*; exit 1; }
     echo "AppImages-github.lst updated!"
     if [ ! -f ~/.config/appimgman/upgrade-list.lst ]; then # Create upgrade-list.lst file to avoid error outputs during update checks
         touch ~/.config/appimgman/upgrade-list.lst
@@ -191,12 +191,18 @@ updatelistfunc () { # Regenerate AppImages-bintray.lst from bintray, download Ap
             echo "No new AppImage upgrades."
         fi
     else # If user inputs AppImage, check that AppImage version
+        if [ ! -f ~/.config/appimgman/installed/"$2" ]; then
+            echo "$2 is not installed; exiting..."
+            rm -rf ~/.config/appimgman/cache/* # Remove any files in cache before exiting
+            exit 1
+        fi
         if grep -qw "$2" ~/.config/appimgman/upgrade-list.lst; then # If AppImage is already on upgrade-list.lst, do not add it again 
             echo "$(tput setaf 2)$2 is already marked for upgrade!"
             echo "Run 'appimgman upgrade $2' to upgrade $2$(tput sgr0)"
-            rm /tmp/appimgman.lock # Remove /tmp/appimgman.lock after operations completed
+            rm -rf ~/.config/appimgman/cache/* # Remove any files in cache before exiting
             exit 0
         fi
+        UPGRADE_CHECK="TRUE"
         INSTIMG="$2"
         echo "Checking $INSTIMG version..."
         appcheckfunc "$INSTIMG" # Check whether AppImage is in lists and which list it is in
@@ -211,18 +217,18 @@ updatelistfunc () { # Regenerate AppImages-bintray.lst from bintray, download Ap
         if [ "$(cat ~/.config/appimgman/upgrade-list.lst | wc -l)" = "0" ]; then # If no AppImages were added to upgrade-list.lst, remove file
             rm ~/.config/appimgman/upgrade-list.lst
         fi
+        UPGRADE_CHECK="FALSE"
     fi
-    rm /tmp/appimgman.lock # Remove /tmp/appimgman.lock after operations completed
     rm -rf ~/.config/appimgman/cache/* # Remove any files in cache before exiting
 }
 
 appimgdlfunc () { # wget latest url from bintray website or github repo and wget it
     if [ "$BINTRAY_IMG" = "TRUE" ]; then # If AppImage is from Bintray, use method below to download it
-        wget --show-progress --quiet "https://bintray.com/$BINTRAY_APPIMAGE_URL" -O ~/.config/appimgman/cache/"$INSTIMG" || { echo "wget $BINTRAY_APPIMAGE_URL failed; exiting..."; rm /tmp/appimgman.lock; rm -rf ~/.config/appimgman/cache/*; exit 1; }
+        wget --show-progress --quiet "https://bintray.com/$BINTRAY_APPIMAGE_URL" -O ~/.config/appimgman/cache/"$INSTIMG" || { echo "wget $BINTRAY_APPIMAGE_URL failed; exiting..."; rm -rf ~/.config/appimgman/cache/*; exit 1; }
         # APPIMAGE="$(echo "$BINTRAY_APPIMAGE_URL" | cut -f2 -d"=")"
     elif [ "$GITHUB_IMG" = "TRUE" ]; then # If AppImage is from github, use method below to download it
         # APPIMAGE="${GITHUB_APPIMAGE_URL##*/}"
-        wget --show-progress --quiet "$GITHUB_APPIMAGE_URL" -O ~/.config/appimgman/cache/"$INSTIMG" || { echo "wget $GITHUB_APPIMAGE_URL failed; exiting..."; rm /tmp/appimgman.lock; rm -rf ~/.config/appimgman/cache/*; exit 1; }
+        wget --show-progress --quiet "$GITHUB_APPIMAGE_URL" -O ~/.config/appimgman/cache/"$INSTIMG" || { echo "wget $GITHUB_APPIMAGE_URL failed; exiting..."; rm -rf ~/.config/appimgman/cache/*; exit 1; }
     fi
 }
 
@@ -251,7 +257,6 @@ appimginstallfunc () { # chmod and mv AppImages to /usr/local/bin and create fil
     sudo mv ~/.config/appimgman/cache/"$INSTIMG" /usr/local/bin/"$INSTIMG" # Move AppImage to /usr/local/bin
     saveinfofunc "$INSTIMG"
     echo "$APPIMAGE_NAME has been installed to /usr/local/bin/$INSTIMG !"
-    rm /tmp/appimgman.lock # Remove /tmp/appimgman.lock after operations completed
     rm -rf ~/.config/appimgman/cache/* # Remove any files in cache before exiting
     exit 0
 }
@@ -273,7 +278,6 @@ appimgremovefunc () { # rm AppImage in /usr/local/bin and remove install info fi
     case $IMGREMANSWER in
         N*|n*) # If user answers no, exit
             echo "$REMIMG was not removed."
-            rm /tmp/appimgman.lock # Remove /tmp/appimgman.lock after operations completed
             rm -rf ~/.config/appimgman/cache/* # Remove any files in cache before exiting
             exit 0
             ;;
@@ -292,7 +296,6 @@ appimgremovefunc () { # rm AppImage in /usr/local/bin and remove install info fi
     sudo rm /usr/local/bin/"$REMIMG" # Remove AppImage from /usr/local/bin
     rm ~/.config/appimgman/installed/"$REMIMG" # Remove installed info file for AppImage
     echo "$REMIMG has been removed!"
-    rm /tmp/appimgman.lock # Remove /tmp/appimgman.lock after operations completed
     rm -rf ~/.config/appimgman/cache/* # Remove any files in cache before exiting
     exit 0
 }
@@ -302,8 +305,8 @@ if [ "$EUID" = "0" ]; then # Prevent appimgman from being ran as root
     exit 1
 fi
 
-if [ ! -f /tmp/appimgman.lock ]; then # Create /tmp/appimgman.lock file and prevent multiple instances by checking if it exists before running
-    touch /tmp/appimgman.lock
+if [ ! -f ~/.config/appimgman/cache/appimgman.lock ]; then # Create ~/.config/appimgman/cache/appimgman.lock file and prevent multiple instances by checking if it exists before running
+    touch ~/.config/appimgman/cache/appimgman.lock
 else
     echo "appimgman is currently running or did not exit properly; exiting..."
     exit 1
@@ -328,7 +331,6 @@ case $1 in
     install|-i) # Check if app is already installed either by appimgman or otherwise then install app to /usr/local/bin if it is in known lists
         if [ -z "$2" ]; then # Exit if no AppImage input
             echo "AppImage input required; exiting..."
-            rm /tmp/appimgman.lock # Remove /tmp/appimgman.lock after operations completed
             rm -rf ~/.config/appimgman/cache/* # Remove any files in cache before exiting
             exit 1
         fi
@@ -336,19 +338,16 @@ case $1 in
         if [ -f ~/.config/appimgman/installed/"$INSTIMG" ]; then # Exit if AppImage already installed by appimgman
             echo "$INSTIMG is already installed."
             echo "Use 'appimgman update' to check for a new version of $INSTIMG."
-            rm /tmp/appimgman.lock # Remove /tmp/appimgman.lock after operations completed
             rm -rf ~/.config/appimgman/cache/* # Remove any files in cache before exiting
             exit 1
         fi
         if type >/dev/null 2>&1 "$INSTIMG"; then # If a command by the same name as AppImage already exists on user's system, exit
             echo "$INSTIMG is already installed and not managed by appimgman; exiting..."
-            rm /tmp/appimgman.lock # Remove /tmp/appimgman.lock after operations completed
             rm -rf ~/.config/appimgman/cache/* # Remove any files in cache before exiting
             exit 1
         fi
         if [ -f "/usr/local/bin/$INSTIMG" ]; then # If for some reason type does't pick up same file existing as AppImage name in /usr/local/bin, exit
             echo "/usr/local/bin/$INSTIMG exists; exiting..."
-            rm /tmp/appimgman.lock # Remove /tmp/appimgman.lock after operations completed
             rm -rf ~/.config/appimgman/cache/* # Remove any files in cache before exiting
             exit 1
         fi
@@ -357,12 +356,10 @@ case $1 in
         appimgvercheckfunc # Use vercheckfunc to get AppImage name for output before install
         if [ "$BINTRAY_IMG" = "FALSE" ] && [ "$GITHUB_IMG" = "FALSE" ];then # If AppImage not in either list, exit
             echo "$INSTIMG is not in AppImages-bintray.lst or AppImages-github.lst; try running 'appimgman update'."
-            rm /tmp/appimgman.lock # Remove /tmp/appimgman.lock after operations completed
             rm -rf ~/.config/appimgman/cache/* # Remove any files in cache before exiting
             exit 1
         else
             if [ "$APPIMAGE_ERROR" = "TRUE" ]; then # If error getting AppImage, exit
-                rm /tmp/appimgman.lock # Remove /tmp/appimgman.lock after operations completed
                 rm -rf ~/.config/appimgman/cache/* # Remove any files in cache before exiting
                 exit 1
             fi
@@ -371,7 +368,6 @@ case $1 in
             case $INSTANSWER in
                 N*|n*) # If answer is no, exit
                     echo "$APPIMAGE_NAME was not installed."
-                    rm /tmp/appimgman.lock # Remove /tmp/appimgman.lock after operations completed
                     rm -rf ~/.config/appimgman/cache/* # Remove any files in cache before exiting
                     exit 0
                     ;;
@@ -389,7 +385,6 @@ case $1 in
             cat ~/.config/appimgman/installed/"$INSTIMG"
         else
             echo "AppImage not found!"
-            rm /tmp/appimgman.lock # Remove /tmp/appimgman.lock after operations completed
             rm -rf ~/.config/appimgman/cache/* # Remove any files in cache before exiting
             exit 1
         fi
@@ -397,7 +392,6 @@ case $1 in
             if grep -qw "$INSTIMG" ~/.config/appimgman/upgrade-list.lst; then
                 echo "$(tput setaf 2)$INSTIMG is already marked for upgrade!"
                 echo "Run 'appimgman upgrade $INSTIMG' to upgrade $INSTIMG$(tput sgr0)"
-                rm /tmp/appimgman.lock # Remove /tmp/appimgman.lock after operations completed
                 rm -rf ~/.config/appimgman/cache/* # Remove any files in cache before exiting
                 exit 0
             fi
@@ -412,13 +406,11 @@ case $1 in
         else
             echo "No new upgrade for $INSTIMG"
         fi
-        rm /tmp/appimgman.lock # Remove /tmp/appimgman.lock after operations completed
         rm -rf ~/.config/appimgman/cache/* # Remove any files in cache before exiting
         ;;
     upgrade|-upg) # upgrade AppImages to latest version if on upgrade-list.lst; update argument must be ran to put them on update-list.lst
         if [ ! -f ~/.config/appimgman/upgrade-list.lst ]; then
             echo "No upgrades available; try running 'appimgman update'." # If no AppImages in upgrade-list.lst, exit
-            rm /tmp/appimgman.lock # Remove /tmp/appimgman.lock after operations completed
             rm -rf ~/.config/appimgman/cache/* # Remove any files in cache before exiting
             exit 0
         fi
@@ -450,12 +442,10 @@ case $1 in
                     ;;
                 N*|n*) # Exit if no
                     echo "No AppImages were upgraded; exiting..."
-                    rm /tmp/appimgman.lock # Remove /tmp/appimgman.lock after operations completed
                     rm -rf ~/.config/appimgman/cache/* # Remove any files in cache before exiting
                     exit 0
                     ;;
             esac
-            rm /tmp/appimgman.lock # Remove /tmp/appimgman.lock after operations completed
             rm -f ~/.config/appimgman/upgrade-list.lst # Remove upgrade-list.lst after upgrades finish
             rm -rf ~/.config/appimgman/cache/* # Remove any files in cache before exiting
             exit 0
@@ -475,20 +465,17 @@ case $1 in
                         sed -i "s:"$INSTIMG"::g" ~/.config/appimgman/upgrade-list.lst # Use sed to remove AppImage name
                         sed -i '/^$/d' ~/.config/appimgman/upgrade-list.lst # Use sed to remove blank space left from previous sed
                     fi
-                    rm /tmp/appimgman.lock # Remove /tmp/appimgman.lock after operations completed
                     rm -rf ~/.config/appimgman/cache/* # Remove any files in cache before exiting
                     exit 0
                     ;;
                 N*|n*) # Exit if no
                     echo "$INSTIMG was not upgraded."
-                    rm /tmp/appimgman.lock # Remove /tmp/appimgman.lock after operations completed
                     rm -rf ~/.config/appimgman/cache/* # Remove any files in cache before exiting
                     exit 0
                     ;;
             esac
         else # If upgrade-list.lst doesn't exist, suggest to run update function
             echo "No new upgrade for $2; try running 'appimgman update'."
-            rm /tmp/appimgman.lock # Remove /tmp/appimgman.lock after operations completed
             rm -rf ~/.config/appimgman/cache/* # Remove any files in cache before exiting
             exit 0
         fi
@@ -496,7 +483,6 @@ case $1 in
     remove|-r) # rm AppImage from /usr/local/bin and rm install info in ~/.config/appimgman/installed
         if [ -z "$2" ]; then # Exit if no AppImage input
             echo "AppImage input required; exiting..."
-            rm /tmp/appimgman.lock # Remove /tmp/appimgman.lock after operations completed
             rm -rf ~/.config/appimgman/cache/* # Remove any files in cache before exiting
             exit 1
         fi
@@ -506,7 +492,6 @@ case $1 in
             cat ~/.config/appimgman/installed/"$REMIMG"
         else
             echo "AppImage not found!"
-            rm /tmp/appimgman.lock # Remove /tmp/appimgman.lock after operations completed
             rm -rf ~/.config/appimgman/cache/* # Remove any files in cache before exiting
             exit 1
         fi
@@ -551,11 +536,11 @@ case $1 in
                 echo "INSTALLED=\"NO\""
             else # Exit if not in list or installed
                 echo "AppImage not found!"
-                rm /tmp/appimgman.lock # Remove /tmp/appimgman.lock after operations completed
+                rm -rf ~/.config/appimgman/cache/* # Remove any files in cache before exiting
                 exit 1
             fi
         fi
-        rm /tmp/appimgman.lock # Remove /tmp/appimgman.lock after operations completed
+        rm -rf ~/.config/appimgman/cache/* # Remove any files in cache before exiting
         ;;
     list-installed|-li) # List information about installed AppImages
         echo "$(dir -C -w 1 ~/.config/appimgman/installed | wc -l) AppImages installed:"
@@ -567,10 +552,10 @@ case $1 in
             echo "INSTALLED=\"YES\""
             echo
         done
-        rm /tmp/appimgman.lock # Remove /tmp/appimgman.lock after operations completed
+        rm -rf ~/.config/appimgman/cache/* # Remove any files in cache before exiting
         ;;
     *) # Any unknown arguments go to help func
         helpfunc
-        rm /tmp/appimgman.lock # Remove /tmp/appimgman.lock after operations completed
+        rm -rf ~/.config/appimgman/cache/* # Remove any files in cache before exiting
         ;;
 esac
