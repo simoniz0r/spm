@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.2.2"
+X="0.2.3"
 # Set appimgman version
 
 # Set variables
@@ -76,28 +76,22 @@ appinfofunc () { # Set variables and temporarily store pages in ~/.config/appimg
         APPIMAGE_INFO="$HOME/.config/appimgman/cache/$INSTIMG"-release
         if grep -q '"tag_name":*..*continuous"' "$APPIMAGE_INFO"; then # First try to find continuous builds
             GITHUB_CONTINUOUS="TRUE"
-            GITHUB_RELEASE_URL="$(grep -B 5 -i '"tag_name":*..*continuous"' "$APPIMAGE_INFO" | head -n 1 | cut -f4 -d'"')"
-            wget --quiet "$GITHUB_RELEASE_URL" -O ~/.config/appimgman/cache/"$INSTIMG"-current
-            GITHUB_CURRENT_RELEASE="$HOME/.config/appimgman/cache/$INSTIMG-current"
-            APPIMAGE_NAME="$(grep -i '"name":*..*64.AppImage"' "$GITHUB_CURRENT_RELEASE" | head -n 1 | cut -f4 -d'"')"
+            APPIMAGE_NAME="$(grep -im 1 '"name":*..*64.AppImage"' "$APPIMAGE_INFO" | cut -f4 -d'"')"
             if [ -z "$APPIMAGE_NAME" ]; then # Try to find AppImages that do not specify architecture
-                APPIMAGE_NAME="$(grep -i '"name":*..*.AppImage"' "$GITHUB_CURRENT_RELEASE" | head -n 1 | cut -f4 -d'"')"
+                APPIMAGE_NAME="$(grep -im 1 '"name":*..*.AppImage"' "$APPIMAGE_INFO" | cut -f4 -d'"')"
             fi
         fi
         if [ "$GITHUB_CONTINUOUS" = "FALSE" ] || [ -z "$APPIMAGE_NAME" ]; then # If no continuous build found, find regular release
-            APPIMAGE_NAME="$(grep -i '"name":*..*64.AppImage"' "$APPIMAGE_INFO" | head -n 1 | cut -f4 -d'"')"
-            GITHUB_RELEASE_URL="$(grep -B 2 -i '"name":*..*64.AppImage"' "$APPIMAGE_INFO" | head -n 1 | cut -f4 -d'"')"
+            APPIMAGE_NAME="$(grep -im 1 '"name":*..*64.AppImage"' "$APPIMAGE_INFO"  | cut -f4 -d'"')"
             if [ -z "$APPIMAGE_NAME" ]; then # Try to find AppImages that don't specify architecture
-                APPIMAGE_NAME="$(grep -i '"name":*..*.AppImage"' "$APPIMAGE_INFO" | head -n 1 | cut -f4 -d'"')"
-                GITHUB_RELEASE_URL="$(grep -B 2 -i '"name":*..*.AppImage"' "$APPIMAGE_INFO" | head -n 1 | cut -f4 -d'"')"
+                APPIMAGE_NAME="$(grep -im 1 '"name":*..*.AppImage"' "$APPIMAGE_INFO" | cut -f4 -d'"')"
             fi
-            wget --quiet "$GITHUB_RELEASE_URL" -O ~/.config/appimgman/cache/"$INSTIMG"-current
-            GITHUB_CURRENT_RELEASE="$HOME/.config/appimgman/cache/$INSTIMG-current"
         fi
-        NEW_APPIMAGE_VERSION="$(grep '"updated_at":*."' "$GITHUB_CURRENT_RELEASE" | head -n 1 | cut -f4 -d'"')"
-        GITHUB_APPIMAGE_URL="$(grep -i '"browser_download_url":*..*64.AppImage"' "$GITHUB_CURRENT_RELEASE" | head -n 1 | cut -f4 -d'"')"
+        NEW_APPIMAGE_VERSION="$(grep -B 1 -im 1 '"browser_download_url":*..*64.AppImage"' "$APPIMAGE_INFO" | head -n 1 | cut -f4 -d'"')"
+        GITHUB_APPIMAGE_URL="$(grep -im 1 '"browser_download_url":*..*64.AppImage"' "$APPIMAGE_INFO" | cut -f4 -d'"')"
         if [ -z "$GITHUB_APPIMAGE_URL" ]; then
-            GITHUB_APPIMAGE_URL="$(grep -i '"browser_download_url":*..*.AppImage"' "$GITHUB_CURRENT_RELEASE" | head -n 1 | cut -f4 -d'"')"
+            NEW_APPIMAGE_VERSION="$(grep -B 1 -im 1 '"browser_download_url":*..*.AppImage"' "$APPIMAGE_INFO" | head -n 1 | cut -f4 -d'"')"
+            GITHUB_APPIMAGE_URL="$(grep -im 1 '"browser_download_url":*..*.AppImage"' "$APPIMAGE_INFO" | cut -f4 -d'"')"
         fi
         if [ "$UPGRADE_CHECK" = "FALSE" ]; then
             wget --quiet "$GITHUB_APP_URL" -O ~/.config/appimgman/cache/"$INSTIMG"-github || { echo "wget $GITHUB_APP_URL failed; has the repo been renamed or deleted?"; rm -rf ~/.config/appimgman/cache/*; exit 1; }
