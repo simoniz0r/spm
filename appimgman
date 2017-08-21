@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.2.5"
+X="0.2.6"
 # Set appimgman version
 
 REALPATH="$(readlink -f $0)"
@@ -47,11 +47,16 @@ fi
 if [ ! -f ~/.config/appimgman/cache/appimgman.lock ]; then # Create ~/.config/appimgman/cache/appimgman.lock file and prevent multiple instances by checking if it exists before running
     touch ~/.config/appimgman/cache/appimgman.lock
 else
-    echo "appimgman is currently running or did not exit properly; exiting..."
-    exit 1
+    echo "appimgman.lock file is still present.  Are you sure appimgman isn't running?"
+    read -p "Remove appimgman.lock file and run appimgman? Y/N " LOCKANSWER
+    case $LOCKANSWER in
+        n*|N*)
+            echo "appimgman.lock file was not removed; make sure appimgman is finished before running appimgman again."
+            exit 1
+            ;;
+    esac
+    rm -rf ~/.config/appimgman/cache/* # Remove any files in cache and lock file
 fi
-
-rm -rf ~/.config/appimgman/cache/* # Remove any files in cache before running just in case
 
 if [ ! -d ~/.config/appimgman ]; then # Create dirs for configs if they don't exist
     echo "appimgman is being ran for the first time."
