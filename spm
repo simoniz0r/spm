@@ -104,6 +104,9 @@ AppImages are installed to '/usr/local/bin/AppImageName'. Information for instal
 '~/.config/spm/installed'.  Packages on your system should not conflict with AppImages installed through spm, but
 spm will not allow AppImages that have the same name as existing commands on your system to be installed.
 
+Precompiled tar archives are installed to '/opt/PackageName', and symlinks are created for the .desktop and executable
+files. Information for installed tar archives is stored in '~/.config/spm/tarinstalled/PackageName'.
+
 spm does not handle installing dependencies for tar packages that are installed through spm. A list of dependencies
 will be outputted on install and will also be saved to '~/.config/spm/tarinstalled/PackageName'. If you find that
 you are missing dependencies needed for a package installed through spm, you can look there for some help.
