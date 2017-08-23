@@ -147,8 +147,11 @@ case $1 in
             echo "No AppImage upgrades; skipping AppImage upgrade function..."
             echo
             APPIMGUPGRADES="FALSE"
+        else
+            APPIMGUPGRADES="TRUE"
         fi
         if [ "$(dir "$CONFDIR"/tarupgrades | wc -l)" = "1" ]; then
+            TARUPGRADES="TRUE"
             echo "$(tput setaf 2)$(dir -C -w 1 "$CONFDIR"/tarupgrades | wc -l) new tar package upgrade available.$(tput sgr0)"
         elif [ "$(dir "$CONFDIR"/tarupgrades | wc -l)" = "0" ]; then
             echo "No tar package upgrades; skipping tar upgrade function..."
@@ -161,11 +164,16 @@ case $1 in
             fi
         else
             echo "$(tput setaf 2)$(dir -C -w 1 "$CONFDIR"/tarupgrades | wc -l) new upgrades available.$(tput sgr0)"
+            TARUPGRADES="TRUE"
         fi
         if [ -z "$2" ]; then # If no AppImage specified, upgrade all AppImages in upgrade-list.lst
-            appimgupgradestartallfunc # Run a for loop that checks each installed AppImage for upgrades
+            if [ "$APPIMGUPGRADES" = "TRUE" ]; then
+                appimgupgradestartallfunc # Run a for loop that checks each installed AppImage for upgrades
+            fi
             echo
-            tarupgradestartallfunc
+            if [ "$TARUPGRADES" = "TRUE" ]; then
+                tarupgradestartallfunc
+            fi
             rm -f "$CONFDIR"/upgrade-list.lst # Remove upgrade-list.lst after upgrades finish
             rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
             exit 0
