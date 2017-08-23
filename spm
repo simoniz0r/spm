@@ -6,13 +6,33 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.0.1"
+X="0.0.2"
 # Set spm version
+USE_GIT="TRUE"
 
 if [ "$EUID" = "0" ]; then # Prevent spm from being ran as root
     echo "Do not run spm as root!"
     exit 1
 fi
+
+if ! type wget >/dev/null 2>&1; then
+    MISSING_DEPS="TRUE"
+    echo "wget is not installed!"
+fi
+# if ! type jq >/dev/null 2>&1; then # Not used yet
+#    MISSING_DEPS="TRUE"
+#     echo "jq is not installed!"
+# fi
+if [ "$MISSING_DEPS" = "TRUE" ]; then
+    echo "Missing one or more packages required to run; exiting..."
+    exit 1
+fi
+# if ! type git >/dev/null 2>&1; then # Not used yet
+#     USE_GIT="FALSE"
+#     echo "git is not installed; wget will be used instead."
+# fi
+
+
 
 REALPATH="$(readlink -f $0)"
 RUNNING_DIR="$(dirname "$REALPATH")" # Find directory script is running from
