@@ -17,6 +17,10 @@ spm does not handle installing dependencies for tar packages that are installed 
 will be outputted on install and will also be saved to '~/.config/spm/tarinstalled/PackageName'. If you find that
 you are missing dependencies needed for a package installed through spm, you can look there for some help.
 
+AppImages, on the other hand, contain all dependencies that are necessary for the app to run as long as
+those dependencies would not be on a normal Linux system.  This means that AppImages should "just work"
+without having to install any additional packages!
+
 Arguments:
 - list (-l) - list all installed AppImages and all AppImages known by spm or info about the specified AppImage
 - list-installed (-li) - list all installed AppImages and install info
