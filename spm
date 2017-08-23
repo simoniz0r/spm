@@ -192,13 +192,13 @@ case $1 in
         rm -rf ~/.config/spm/cache/* # Remove any files in cache before exiting
         exit 0
         ;;
-    appimg-update-force|-aupdf) # Force specified AppImage to be upgraded by adding it to the upgrade-list.lst
+    appimg-update-force|-auf) # Force specified AppImage to be upgraded by adding it to the upgrade-list.lst
         INSTIMG="$2"
         appimgupdateforcefunc # Force AppImage to be added to upgrade-list.lst regardless of version
         rm -rf ~/.config/spm/cache/* # Remove any files in cache before exiting
         exit 0
         ;;
-    tar-update-force|-tupdf) # Force specified AppImage to be upgraded by adding it to the upgrade-list.lst
+    tar-update-force|-tuf) # Force specified AppImage to be upgraded by adding it to the upgrade-list.lst
         TARPKG="$2"
         tarupdateforcefunc # Force AppImage to be added to upgrade-list.lst regardless of version
         rm -rf ~/.config/spm/cache/* # Remove any files in cache before exiting
