@@ -6,8 +6,13 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.2.6"
+X="0.2.7"
 # Set appimgman version
+
+if [ "$EUID" = "0" ]; then # Prevent appimgman from being ran as root
+    echo "Do not run appimgman as root!"
+    exit 1
+fi
 
 REALPATH="$(readlink -f $0)"
 RUNNING_DIR="$(dirname "$REALPATH")" # Find directory script is running from
@@ -37,11 +42,6 @@ else
     echo "appimgman will now exit."
     rm -rf ~/.config/appimgman/cache/* # Remove any files in cache before exiting
     exit 0
-fi
-
-if [ "$EUID" = "0" ]; then # Prevent appimgman from being ran as root
-    echo "Do not run appimgman as root!"
-    exit 1
 fi
 
 if [ ! -f ~/.config/appimgman/cache/appimgman.lock ]; then # Create ~/.config/appimgman/cache/appimgman.lock file and prevent multiple instances by checking if it exists before running
