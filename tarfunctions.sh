@@ -7,6 +7,7 @@
 # License: GPL v2.0 only
 
 X="0.0.2"
+# Set spm version
 
 tarlistfunc () {
     if [ -z "$LISTPKG" ]; then
