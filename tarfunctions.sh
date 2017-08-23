@@ -53,7 +53,7 @@ tarsaveconffunc () {
     echo "INSTDIR="\"$INSTDIR\""" > ~/.config/spm/"$SAVEDIR"
     if [ "$TAR_DOWNLOAD_SOURCE" != "LOCAL" ]; then
         echo "TAR_DOWNLOAD_SOURCE="\"$TAR_DOWNLOAD_SOURCE\""" >> ~/.config/spm/"$SAVEDIR"
-        if [ "$TAR_DOWNLOAD_SOURCE" = "GITHUB" ] && [ ! -z "$GITHUB_COMMIT" ] || [ "$TAR_DOWNLOAD_SOURCE" = "DIRECT" ]; then
+        if [ "$TAR_DOWNLOAD_SOURCE" = "GITHUB" ] && [ ! -z "$TAR_GITHUB_COMMIT" ] || [ "$TAR_DOWNLOAD_SOURCE" = "DIRECT" ]; then
             echo "TARURI="\"$TARURI\""" >> ~/.config/spm/"$SAVEDIR"
             echo "TARFILE="\"$NEW_TARFILE\""" >> ~/.config/spm/"$SAVEDIR"
         fi
@@ -262,18 +262,18 @@ checktarversionfunc () {
     . ~/.config/spm/tarinstalled/"$TARPKG"
     if [ -f ~/.config/spm/cache/"$TARPKG".conf ]; then
         . ~/.config/spm/cache/"$TARPKG".conf
-        if [ "$TAR_DOWNLOAD_SOURCE" = "GITHUB" ] && [ -z "$GITHUB_COMMIT" ]; then
+        if [ "$TAR_DOWNLOAD_SOURCE" = "GITHUB" ] && [ -z "$TAR_GITHUB_COMMIT" ]; then
             . ~/.config/spm/tarinstalled/"$TARPKG"
         fi
     fi
-    if [ "$TAR_DOWNLOAD_SOURCE" = "GITHUB" ] && [ ! -z "$GITHUB_COMMIT" ]; then
+    if [ "$TAR_DOWNLOAD_SOURCE" = "GITHUB" ] && [ ! -z "$TAR_GITHUB_COMMIT" ]; then
         if [ "$GITHUB_DOWNLOAD_ERROR" = "TRUE" ]; then
             TAR_NEW_UPGRADE="FALSE"
             GITHUB_DOWNLOAD_ERROR="FALSE"
         elif [ "$TAR_FORCE_UPGRADE" = "TRUE" ]; then
             TAR_NEW_UPGRADE="TRUE"
             TAR_FORCE_UPGRADE=""
-        elif [ $GITHUB_COMMIT != $TAR_GITHUB_NEW_COMMIT ]; then
+        elif [ $TAR_GITHUB_COMMIT != $TAR_GITHUB_NEW_COMMIT ]; then
             TAR_NEW_UPGRADE="TRUE"
         else
             TAR_NEW_UPGRADE="FALSE"
@@ -282,7 +282,7 @@ checktarversionfunc () {
         wget -S --read-timeout=30 --spider "$TARURI" -o ~/.config/spm/cache/"$TARPKG".latest
         NEW_TARURI="$(grep -o "Location:.*" ~/.config/spm/cache/"$TARPKG".latest | cut -f2 -d" ")"
         NEW_TARFILE="${NEW_TARURI##*/}"
-        if [ "$TAR_DOWNLOAD_SOURCE" = "GITHUB" ] && [ -z "$GITHUB_COMMIT" ]; then
+        if [ "$TAR_DOWNLOAD_SOURCE" = "GITHUB" ] && [ -z "$TAR_GITHUB_COMMIT" ]; then
             echo "$(tput setaf 2)Configuration update required for $TARPKG; marking for upgrade..."
             TAR_NEW_UPGRADE="TRUE"
         elif [ "$TAR_FORCE_UPGRADE" = "TRUE" ]; then
@@ -611,7 +611,7 @@ tarupgradestartallfunc () {
                     tarappcheckfunc "$TARPKG"
                     . ~/.config/spm/cache/"$TARPKG".conf
                     . ~/.config/spm/tarupgrades/"$TARPKG"
-                    if [ "$TAR_DOWNLOAD_SOURCE" = "GITHUB" ] && [ -z "$GITHUB_COMMIT" ]; then
+                    if [ "$TAR_DOWNLOAD_SOURCE" = "GITHUB" ] && [ -z "$TAR_GITHUB_COMMIT" ]; then
                         targithubinfofunc
                     fi
                     tardlfunc "$TARPKG"
@@ -639,7 +639,7 @@ tarupgradestartfunc () {
             tarappcheckfunc "$TARPKG"
             . ~/.config/spm/cache/"$TARPKG".conf
             . ~/.config/spm/tarupgrades/"$TARPKG"
-            if [ "$TAR_DOWNLOAD_SOURCE" = "GITHUB" ] && [ -z "$GITHUB_COMMIT" ]; then
+            if [ "$TAR_DOWNLOAD_SOURCE" = "GITHUB" ] && [ -z "$TAR_GITHUB_COMMIT" ]; then
                 targithubinfofunc
             fi
             tardlfunc "$TARPKG"
