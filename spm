@@ -1,0 +1,322 @@
+#!/bin/bash
+# Title: spm
+# Description: Downloads AppImages and moves them to /usr/local/bin/.  Can also upgrade and remove installed AppImages.
+# Dependencies: GNU coreutils, wget
+# Author: simonizor
+# Website: http://www.simonizor.gq
+# License: GPL v2.0 only
+
+X="0.0.1"
+# Set spm version
+
+if [ "$EUID" = "0" ]; then # Prevent spm from being ran as root
+    echo "Do not run spm as root!"
+    exit 1
+fi
+
+REALPATH="$(readlink -f $0)"
+RUNNING_DIR="$(dirname "$REALPATH")" # Find directory script is running from
+if [ -f $RUNNING_DIR/appimgfunctions.sh ]; then
+    FUNCTIONS_VER="$(cat "$RUNNING_DIR"/appimgfunctions.sh | sed -n 9p | cut -f2 -d'"')"
+    if [ "$X" != "$FUNCTIONS_VER" ]; then
+        echo "appimgfunctions.sh $FUNCTIONS_VER version does not match $X; removing and updating..."
+        rm "$RUNNING_DIR"/appimgfunctions.sh || { echo "rm $RUNNING_DIR/appimgfunctions.sh failed; trying with sudo..."; sudo rm "$RUNNING_DIR"/appimgfunctions.sh; }
+        echo "$RUNNING_DIR/appimgfunctions.sh has been removed."
+        echo "Downloading appimgfunctions.sh from spm github repo..."
+        wget --quiet --show-progress "https://github.com/simoniz0r/appimgman/raw/spm/appimgfunctions.sh" -O ~/.config/spm/cache/appimgfunctions.sh
+        chmod +x ~/.config/spm/cache/appimgfunctions.sh
+        mv ~/.config/spm/cache/appimgfunctions.sh "$RUNNING_DIR"/appimgfunctions.sh || { echo "mv to $RUNNING_DIR failed; trying as sudo..."; sudo mv ~/.config/spm/cache/appimgfunctions.sh "$RUNNING_DIR"/appimgfunctions.sh; }
+        echo "appimgfunctions.sh saved to $RUNNING_DIR/appimgfunctions.sh"
+    fi
+else
+    echo "Missing required file $RUNNING_DIR/appimgfunctions.sh !"
+    echo "Downloading appimgfunctions.sh from spm github repo..."
+    wget --quiet --show-progress "https://github.com/simoniz0r/appimgman/raw/spm/appimgfunctions.sh" -O ~/.config/spm/cache/appimgfunctions.sh
+    chmod +x ~/.config/spm/cache/appimgfunctions.sh
+    mv ~/.config/spm/cache/appimgfunctions.sh "$RUNNING_DIR"/appimgfunctions.sh || { echo "mv to $RUNNING_DIR failed; trying as sudo..."; sudo mv ~/.config/spm/cache/appimgfunctions.sh "$RUNNING_DIR"/appimgfunctions.sh; }
+    echo "appimgfunctions.sh saved to $RUNNING_DIR/appimgfunctions.sh"
+fi
+source "$RUNNING_DIR"/appimgfunctions.sh # import functions from appimgfunctions.sh
+if [ -f $RUNNING_DIR/tarfunctions.sh ]; then
+    FUNCTIONS_VER="$(cat "$RUNNING_DIR"/tarfunctions.sh | sed -n 9p | cut -f2 -d'"')"
+    if [ "$X" != "$FUNCTIONS_VER" ]; then
+        echo "tarfunctions.sh $FUNCTIONS_VER version does not match $X; removing and updating..."
+        rm "$RUNNING_DIR"/tarfunctions.sh || { echo "rm $RUNNING_DIR/tarfunctions.sh failed; trying with sudo..."; sudo rm "$RUNNING_DIR"/tarfunctions.sh; }
+        echo "$RUNNING_DIR/tarfunctions.sh has been removed."
+        echo "Downloading tarfunctions.sh from spm github repo..."
+        wget --quiet --show-progress "https://github.com/simoniz0r/appimgman/raw/spm/tarfunctions.sh" -O ~/.config/spm/cache/tarfunctions.sh
+        chmod +x ~/.config/spm/cache/tarfunctions.sh
+        mv ~/.config/spm/cache/tarfunctions.sh "$RUNNING_DIR"/tarfunctions.sh || { echo "mv to $RUNNING_DIR failed; trying as sudo..."; sudo mv ~/.config/spm/cache/tarfunctions.sh "$RUNNING_DIR"/tarfunctions.sh; }
+        echo "tarfunctions.sh saved to $RUNNING_DIR/tarfunctions.sh"
+    fi
+else
+    echo "Missing required file $RUNNING_DIR/tarfunctions.sh !"
+    echo "Downloading tarfunctions.sh from spm github repo..."
+    wget --quiet --show-progress "https://github.com/simoniz0r/appimgman/raw/spm/tarfunctions.sh" -O ~/.config/spm/cache/tarfunctions.sh
+    chmod +x ~/.config/spm/cache/tarfunctions.sh
+    mv ~/.config/spm/cache/tarfunctions.sh "$RUNNING_DIR"/tarfunctions.sh || { echo "mv to $RUNNING_DIR failed; trying as sudo..."; sudo mv ~/.config/spm/cache/tarfunctions.sh "$RUNNING_DIR"/tarfunctions.sh; }
+    echo "tarfunctions.sh saved to $RUNNING_DIR/tarfunctions.sh"
+fi
+source "$RUNNING_DIR"/tarfunctions.sh # import functions from tarfunctions.sh
+
+if [ ! -f ~/.config/spm/cache/spm.lock ]; then # Create ~/.config/spm/cache/spm.lock file and prevent multiple instances by checking if it exists before running
+    touch ~/.config/spm/cache/spm.lock
+else
+    echo "spm.lock file is still present.  Are you sure spm isn't running?"
+    read -p "Remove spm.lock file and run spm? Y/N " LOCKANSWER
+    case $LOCKANSWER in
+        n*|N*)
+            echo "spm.lock file was not removed; make sure spm is finished before running spm again."
+            exit 1
+            ;;
+    esac
+    rm -rf ~/.config/spm/cache/* # Remove any files in cache and lock file
+fi
+
+if [ ! -d ~/.config/spm ]; then # Create dirs for configs if they don't exist
+    echo "spm is being ran for the first time."
+    echo "Creating config directories..."
+    mkdir ~/.config/spm
+    mkdir ~/.config/spm/tarinstalled
+    mkdir ~/.config/spm/appimginstalled
+    mkdir ~/.config/spm/tarupgrades
+    mkdir ~/.config/spm/appimgupgrades
+    mkdir ~/.config/spm/cache
+    echo "Generating AppImages-bintray.lst from https://dl.bintray.com/probono/AppImages/ ..."
+    wget --show-progress --quiet "https://dl.bintray.com/probono/AppImages/" -O - | sed 's/<\/*[^>]*>//g' | grep -o '.*AppImage' | cut -f1 -d"-" | sort -u > ~/.config/spm/AppImages-bintray.lst
+    echo "Downloading AppImages-github.lst from spm github..."
+    wget --quiet --show-progress "https://raw.githubusercontent.com/simoniz0r/appimgman/spm/AppImages-github.lst" -qO ~/.config/spm/AppImages-github.lst
+    echo "Downloading tar-pkgs.lst from tar-pkg github repo..."
+    wget "https://raw.githubusercontent.com/simoniz0r/tar-pkg/master/apps/known-pkgs.lst" -qO ~/.config/spm/tar-pkgs.lst
+    echo "First run operations complete!"
+fi
+
+helpfunc () { # All unknown arguments come to this function; display help for spm
+printf '%s\n' "spm $X
+Usage: spm [option] [AppImage]
+
+spm is a commandline AppImage manager that installs AppImages to /usr/local/bin. AppImages are
+downloaded from the URI provided from https://dl.bintray.com/probono/AppImages/ or from the latest
+release on the app's github page.  This allows spm to easily provide a list of AppImages to
+install, and it also allows spm to check for AppImage upgrades just by checking the version of
+the AppImage from bintray and latest github releases.
+
+AppImages are installed to '/usr/local/bin/AppImageName'. Information for installed AppImages is stored in
+'~/.config/spm/installed'.
+
+Packages on your system should not conflict with AppImages installed through spm, but spm will not
+allow AppImages that have the same name as existing commands on your system to be installed.
+
+Arguments:
+    list (-l) - list all installed AppImages and all AppImages known by spm or info about the specified AppImage
+    list-installed (-li) - list all installed AppImages and install info
+    install (-i) - install an AppImage
+    remove (-r) - remove an installed AppImage
+    update (-upd) - update AppImages-bintray.lst from spm's github repo and check for AppImage upgrades
+    update-force (-updf) - add specified AppImage to upgrade-list without checking versions
+    upgrade (-upg) - upgrade AppImages with available upgrades or upgrade the specified AppImage to the latest version
+
+See https://github.com/simoniz0r/appimgman for more help or to report issues.
+
+spm is not responsible for bugs within applications that have been
+installed using spm.  Please report any bugs that are specific to
+installed applications to their maintainers."
+}
+
+scriptvercheckfunc () {
+    # VERTEST="$(wget -q "https://raw.githubusercontent.com/simoniz0r/appimgman/spm/spm" -O - | sed -n '9p' | tr -d 'X="')" # Use wget sed and tr to check current spm version from github
+    VERTEST="0.0.1"
+    if [[ "$VERTEST" != "$X" ]]; then # If current version not equal to installed version, notify of new version
+        echo "A new version of spm is available!"
+        echo "Current version: $VERTEST -- Installed version: $X"
+        if type >/dev/null 2>&1 spm; then # If spm is installed, suggest upgrading spm through spm
+            echo "Use 'spm' to upgrade to the latest version!"
+            echo
+        else # If not, output link to releases page
+            echo "Download the latest version at https://github.com/simoniz0r/appimgman/releases/latest"
+            echo
+        fi
+    fi
+}
+
+case $1 in
+    appimg-install|-ai) # Check if app is already installed either by spm or otherwise then install app to /usr/local/bin if it is in known lists
+        INSTIMG="$2"
+        appimginstallstartfunc # Check for valid inputs and start gathering info for install
+        appimgdlfunc "$INSTIMG" # Download AppImage from Bintray or Github
+        appimginstallfunc # Install AppImage
+        rm -rf ~/.config/spm/cache/* # Remove any files in cache before exiting
+        exit 0
+        ;;
+    tarinstall|-ti) # Check if app is already installed either by spm or otherwise then install app to /usr/local/bin if it is in known lists
+        if [ -z "$2" ]; then
+            echo "Package input required; exiting..."
+            rm -rf ~/.config/spm/cache/*
+            exit 1
+        fi
+        TARPKG="$2"
+        tarinstallstartfunc
+        tardlfunc "$TARPKG"
+        tarcheckfunc
+        tarinstallfunc
+        rm -rf ~/.config/spm/cache/* # Remove any files in cache before exiting
+        exit 0
+        ;;
+    tar-custom|-tc)
+        if [ -z "$2" ]; then
+            echo "Package input required; exiting..."
+            rm -rf ~/.config/spm/cache/*
+            exit 1
+        fi
+        TARPKG="$2"
+        tarcustomstartfunc
+        tarcustomdlfunc "$TARPKG"
+        tarcheckfunc
+        tarcustominfofunc
+        tarcustomappfunc
+        rm -rf ~/.config/spm/cache/*
+        exit 0
+        ;;
+    update|-upd) # Update AppImage lists and check version from install info stored in ~/.config/spm/installed against latest url
+        scriptvercheckfunc
+        appimgupdatelistfunc "$@"
+        tarupdatelistfunc "$@"
+        rm -rf ~/.config/spm/cache/* # Remove any files in cache before exiting
+        exit 0
+        ;;
+    appimg-update-force|-aupdf) # Force specified AppImage to be upgraded by adding it to the upgrade-list.lst
+        INSTIMG="$2"
+        appimgupdateforcefunc # Force AppImage to be added to upgrade-list.lst regardless of version
+        rm -rf ~/.config/spm/cache/* # Remove any files in cache before exiting
+        exit 0
+        ;;
+    tar-update-force|-tupdf) # Force specified AppImage to be upgraded by adding it to the upgrade-list.lst
+        TARPKG="$2"
+        tarupdateforcefunc # Force AppImage to be added to upgrade-list.lst regardless of version
+        rm -rf ~/.config/spm/cache/* # Remove any files in cache before exiting
+        exit 0
+        ;;
+    upgrade|-upg) # upgrade AppImages to latest version if on upgrade-list.lst; update argument must be ran to put them on update-list.lst
+        if [ ! -f ~/.config/spm/upgrade-list.lst ]; then
+            echo "No upgrades available; try running 'spm update'." # If no AppImages in upgrade-list.lst, exit
+            APPIMGUPGRADES="FALSE"
+        fi
+        if [ "$(dir ~/.config/spm/upgrades | wc -l)" = "1" ]; then
+            echo "$(tput setaf 2)$(dir -C -w 1 ~/.config/spm/upgrades | wc -l) new upgrade available.$(tput sgr0)"
+        elif [ "$(dir ~/.config/spm/upgrades | wc -l)" = "0" ]; then
+            echo "No new upgrades available; try running 'spm update'."
+            if [ "$APPIMGUPGRADES" = "FALSE" ]; then
+                rm -rf ~/.config/spm/cache/*
+                exit 0
+            fi
+        else
+            echo "$(tput setaf 2)$(dir -C -w 1 ~/.config/spm/upgrades | wc -l) new upgrades available.$(tput sgr0)"
+        fi
+        if [ -z "$2" ]; then # If no AppImage specified, upgrade all AppImages in upgrade-list.lst
+            appimgupgradestartallfunc # Run a for loop that checks each installed AppImage for upgrades
+            tarupgradestartallfunc
+            rm -f ~/.config/spm/upgrade-list.lst # Remove upgrade-list.lst after upgrades finish
+            rm -rf ~/.config/spm/cache/* # Remove any files in cache before exiting
+            exit 0
+        elif grep -qw "$2" ~/.config/spm/upgrade-list.lst; then # If user specifies AppImage, upgrade that AppImage
+            INSTIMG="$2"
+            appimgupgradestartfunc # Check specified AppImage for upgrade
+            tarupgradestartfunc
+        else # If upgrade-list.lst doesn't exist, suggest to run update function
+            echo "No new upgrade for $2; try running 'spm update'."
+            rm -rf ~/.config/spm/cache/* # Remove any files in cache before exiting
+            exit 0
+        fi
+        rm -rf ~/.config/spm/cache/* # Remove any files in cache before exiting
+        exit 0
+        ;;
+    appimg-remove|-ar) # rm AppImage from /usr/local/bin and rm install info in ~/.config/spm/installed
+        if [ -z "$2" ]; then # Exit if no AppImage input
+            echo "AppImage input required; exiting..."
+            rm -rf ~/.config/spm/cache/* # Remove any files in cache before exiting
+            exit 1
+        fi
+        REMIMG="$2"
+        echo "Current installed $REMIMG information:" # Output AppImage installed info if installed, exit if not
+        if [ -f ~/.config/spm/appimginstalled/"$REMIMG" ]; then
+            cat ~/.config/spm/appimginstalled/"$REMIMG"
+        else
+            echo "AppImage not found!"
+            rm -rf ~/.config/spm/cache/* # Remove any files in cache before exiting
+            exit 1
+        fi
+        appimgremovefunc # Run remove function for AppImage
+        rm -rf ~/.config/spm/cache/* # Remove any files in cache before exiting
+        exit 0
+        ;;
+    remove|-r) # Remove: remove pkg while leaving pkg's config files
+        if [ -z "$2" ]; then
+            echo "Package input required; exiting..."
+            rm -rf ~/.config/spm/cache/*
+            exit 1
+        fi
+        REMPKG="$2"
+        echo "Current installed $REMPKG information:"
+        if [ -f ~/.config/spm/tarinstalled/"$REMPKG" ]; then
+            cat ~/.config/spm/tarinstalled/"$REMPKG"
+        else
+            echo "Package not found!"
+            rm -rf ~/.config/spm/cache/*
+            exit 1
+        fi
+        tarappcheckfunc "$REMPKG"
+        tarremovefunc
+        rm -rf ~/.config/spm/cache/*
+        exit 0
+        ;;
+    tar-remove-purge|-trp) # Remove Purge: remove pkg and also remove pkg's config files
+        if [ -z "$2" ]; then
+            echo "Package input required; exiting..."
+            rm -rf ~/.config/spm/cache/*
+            exit 1
+        fi
+        PURGEPKG="$2"
+        echo "Current installed $PURGEPKG information:"
+        if [ -f ~/.config/spm/tarinstalled/"$PURGEPKG" ]; then
+            cat ~/.config/spm/tarinstalled/"$PURGEPKG"
+        else
+            echo "Package not found!"
+            rm -rf ~/.config/spm/cache/*
+            exit 1
+        fi
+        tarappcheckfunc "$PURGEPKG"
+        tarremovepurgefunc
+        rm -rf ~/.config/spm/cache/*
+        exit 0
+        ;;
+    list|-l) # List installed AppImages, AppImages-bintray.lst, and AppImages-github.lst or list info about specified AppImage
+        LISTIMG="$2"
+        LISTPKG="$2"
+        if [ -z "$LISTIMG" ]; then # If no AppImage input, list all AppImages
+            echo "AppImages:"
+            appimglistallfunc # List all installed and all available AppImages
+            echo
+            echo "tar packages:"
+            tarlistfunc
+        else # If AppImage input, list info for that AppImage
+            appimglistfunc # List information about specified AppImage
+            tarlistfunc
+        fi
+        rm -rf ~/.config/spm/cache/* # Remove any files in cache before exiting
+        exit 0
+        ;;
+    list-installed|-li) # List information about installed AppImages
+        echo "AppImages:"
+        appimglistinstalledfunc # List all installed AppImages and info
+        echo
+        echo "tar packages:"
+        tarlistinstalledfunc
+        rm -rf ~/.config/spm/cache/* # Remove any files in cache before exiting
+        exit 0
+        ;;
+    *) # Any unknown arguments go to help func
+        helpfunc
+        rm -rf ~/.config/spm/cache/* # Remove any files in cache before exiting
+        exit 0
+        ;;
+esac
