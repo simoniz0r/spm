@@ -40,6 +40,12 @@ spm is not responsible for bugs within applications that have been
 installed using spm.  Please report any bugs that are specific to
 installed applications to their maintainers."
 
+# Goals
+
+The main goal is for spm to be a distro agnostic package manager that distributes AppImages which should run on any Linux distro and precompiled tar archives with dependencies that are available for install on most Linux distros.  spm aims to fill the gap that is left by many Linux distro's package managers by providing software not available in their repos and/or providing packages that may be more up to date than those in the distro's repos.
+
+spm will only provide optional packages that are not needed for a distro to run; spm has no intention of becoming a full replacement for traditional package managers.  spm also has no plans of installing dependencies for package types other than AppImages (AppImages include dependencies).  spm will always be **simple package manager** that provides optional packages that either need no dependencies to run or have a small amount dependencies that are widely available.
+
 # What is an [AppImage](https://github.com/AppImage)?
 
 An [AppImage](https://github.com/AppImage) is a downloadable file for Linux that contains an application and everything the application needs to run (e.g., libraries, icons, fonts, translations, etc.) that cannot be reasonably expected to be part of each target system.
