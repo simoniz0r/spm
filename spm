@@ -95,26 +95,30 @@ helpfunc () { # All unknown arguments come to this function; display help for sp
 printf '%s\n' "spm $X
 Usage: spm [option] [AppImage]
 
-spm is a commandline AppImage manager that installs AppImages to /usr/local/bin. AppImages are
-downloaded from the URI provided from https://dl.bintray.com/probono/AppImages/ or from the latest
-release on the app's github page.  This allows spm to easily provide a list of AppImages to
-install, and it also allows spm to check for AppImage upgrades just by checking the version of
-the AppImage from bintray and latest github releases.
+spm is a simple commandline package manager that can installs AppImages and precompiled tar archives.
+AppImage information is gotten from https://github.com/AppImage/appimage.github.io and tar archive information
+is stored in spm's github repo.  spm keeps track of installed packages and their versions, so spm can be used
+to upgrade and remove packages installed by spm.
 
 AppImages are installed to '/usr/local/bin/AppImageName'. Information for installed AppImages is stored in
-'~/.config/spm/installed'.
+'~/.config/spm/installed'.  Packages on your system should not conflict with AppImages installed through spm, but
+spm will not allow AppImages that have the same name as existing commands on your system to be installed.
 
-Packages on your system should not conflict with AppImages installed through spm, but spm will not
-allow AppImages that have the same name as existing commands on your system to be installed.
+spm does not handle installing dependencies for tar packages that are installed through spm. A list of dependencies
+will be outputted on install and will also be saved to '~/.config/spm/tarinstalled/PackageName'. If you find that
+you are missing dependencies needed for a package installed through spm, you can look there for some help.
 
 Arguments:
     list (-l) - list all installed AppImages and all AppImages known by spm or info about the specified AppImage
     list-installed (-li) - list all installed AppImages and install info
-    install (-i) - install an AppImage
-    remove (-r) - remove an installed AppImage
-    update (-upd) - update AppImages-bintray.lst from spm's github repo and check for AppImage upgrades
-    update-force (-updf) - add specified AppImage to upgrade-list without checking versions
-    upgrade (-upg) - upgrade AppImages with available upgrades or upgrade the specified AppImage to the latest version
+    appimg-install (-ai) - install an AppImage
+    tar-install (-ti - install a precompiled tar archive
+    appimg-remove (-ar) - remove an installed AppImage
+    tar-remove (-tr) remove an installed precompiled tar archive
+    update (-upd) - update package lists and check for new AppImage and precompiled tar archive versions
+    appimg-update-force (-auf) - add specified AppImage to upgrade-list without checking versions
+    tar-upgrade-force (-tuf) - add specified precompiled tar archive to list of upgrades without checking versions
+    upgrade (-upg) - upgrade all installed packages that are marked for upgrade or just the specified package
 
 See https://github.com/simoniz0r/appimgman for more help or to report issues.
 
