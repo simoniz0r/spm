@@ -180,6 +180,7 @@ case $1 in
     update|-upd) # Update AppImage lists and check version from install info stored in ~/.config/spm/installed against latest url
         scriptvercheckfunc
         appimgupdatelistfunc "$@"
+        echo
         tarupdatelistfunc "$@"
         rm -rf ~/.config/spm/cache/* # Remove any files in cache before exiting
         exit 0
@@ -214,6 +215,7 @@ case $1 in
         fi
         if [ -z "$2" ]; then # If no AppImage specified, upgrade all AppImages in upgrade-list.lst
             appimgupgradestartallfunc # Run a for loop that checks each installed AppImage for upgrades
+            echo
             tarupgradestartallfunc
             rm -f ~/.config/spm/upgrade-list.lst # Remove upgrade-list.lst after upgrades finish
             rm -rf ~/.config/spm/cache/* # Remove any files in cache before exiting
@@ -221,6 +223,7 @@ case $1 in
         elif grep -qw "$2" ~/.config/spm/upgrade-list.lst; then # If user specifies AppImage, upgrade that AppImage
             INSTIMG="$2"
             appimgupgradestartfunc # Check specified AppImage for upgrade
+            echo
             tarupgradestartfunc
         else # If upgrade-list.lst doesn't exist, suggest to run update function
             echo "No new upgrade for $2; try running 'spm update'."
@@ -249,7 +252,7 @@ case $1 in
         rm -rf ~/.config/spm/cache/* # Remove any files in cache before exiting
         exit 0
         ;;
-    remove|-r) # Remove: remove pkg while leaving pkg's config files
+    tar-remove|-tr) # Remove: remove pkg while leaving pkg's config files
         if [ -z "$2" ]; then
             echo "Package input required; exiting..."
             rm -rf ~/.config/spm/cache/*
@@ -299,7 +302,10 @@ case $1 in
             echo "tar packages:"
             tarlistfunc
         else # If AppImage input, list info for that AppImage
+            echo "AppImages:"
             appimglistfunc # List information about specified AppImage
+            echo
+            echo "tar packages:"
             tarlistfunc
         fi
         rm -rf ~/.config/spm/cache/* # Remove any files in cache before exiting
