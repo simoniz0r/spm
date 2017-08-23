@@ -35,13 +35,13 @@ source "$RUNNING_DIR"/spmfunctions.sh || { echo "Could not load $RUNNING_DIR/spm
 
 spmdepchecksfunc # Check for deps, exit if they don't
 
-appimgfunctioncheckfucn # Check if appimgfunctions.sh exists, check version if it does, download if out of date or doesn't
+appimgfunctioncheckfunc # Check if appimgfunctions.sh exists, check version if it does, download if out of date or doesn't
 source "$RUNNING_DIR"/appimgfunctions.sh || { echo "Could not load $RUNNING_DIR/appimgfunctions.sh; exiting..."; exit 1; } # import functions from appimgfunctions.sh
 
 tarfunctioncheckfunc # Check if tarfunctions.sh exists, check version if it does, download if out of date or doesn't
 source "$RUNNING_DIR"/tarfunctions.sh || { echo "Could not load $RUNNING_DIR/tarfunctions.sh; exiting..."; exit 1; } # import functions from tarfunctions.sh
 
-spmlockfucn # Create ~/.config/spm/cache/spm.lock file and prevent multiple instances by checking if it exists before running
+spmlockfunc # Create ~/.config/spm/cache/spm.lock file and prevent multiple instances by checking if it exists before running
 
 spmfirstrunfunc # Create dirs for configs if they don't exist
 
