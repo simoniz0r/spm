@@ -8,10 +8,43 @@
 
 X="0.0.2"
 # Set spm version
+CONFDIR="$HOME/.config/spm"
 
 if [ "$EUID" = "0" ]; then # Prevent spm from being ran as root
     echo "Do not run spm as root!"
     exit 1
+fi
+
+if [ -f ~/.config/simplepackagemanager/spm.conf ]; then
+    . ~/.config/simplepackagemanager/spm.conf
+elif [ -f ~/.config/spm/spm.conf ]; then
+    . ~/.config/spm/spm.conf
+fi
+
+if [ ! -d "$CONFDIR" ]; then # Create dirs for configs if they don't exist
+    echo "spm is being ran for the first time."
+    echo "Creating config directories..."
+    mkdir "$CONFDIR"
+    case $? in
+        1)
+            echo "Failed to create $HOME/.config/spm; falling back to $HOME/.config/simplepackagemanager ..."
+            CONFDIR="$HOME/.config/simplepackagemanager"
+            mkdir "$CONFDIR" || { echo "Why are we still failing here? Something wrong with $HOME/.config ?"; exit 1; }
+            ;;
+    esac
+    mkdir "$CONFDIR"/tarinstalled
+    mkdir "$CONFDIR"/appimginstalled
+    mkdir "$CONFDIR"/tarupgrades
+    mkdir "$CONFDIR"/appimgupgrades
+    mkdir "$CONFDIR"/cache
+    echo "CONFDIR="\"$CONFDIR\""" > "$CONFDIR"/spm.conf
+    echo "Generating AppImages-bintray.lst from https://dl.bintray.com/probono/AppImages/ ..."
+    wget --show-progress --quiet "https://dl.bintray.com/probono/AppImages/" -O - | sed 's/<\/*[^>]*>//g' | grep -o '.*AppImage' | cut -f1 -d"-" | sort -u > "$CONFDIR"/AppImages-bintray.lst
+    echo "Downloading AppImages-github.lst from spm github..."
+    wget --quiet --show-progress "https://raw.githubusercontent.com/simoniz0r/appimgman/spm/AppImages-github.lst" -qO "$CONFDIR"/AppImages-github.lst
+    echo "Downloading tar-pkgs.lst from tar-pkg github repo..."
+    wget "https://raw.githubusercontent.com/simoniz0r/tar-pkg/master/apps/known-pkgs.lst" -qO "$CONFDIR"/tar-pkgs.lst
+    echo "First run operations complete!"
 fi
 
 REALPATH="$(readlink -f $0)"
@@ -23,17 +56,17 @@ if [ -f $RUNNING_DIR/spmfunctions.sh ]; then
         rm "$RUNNING_DIR"/spmfunctions.sh || { echo "rm $RUNNING_DIR/spmfunctions.sh failed; trying with sudo..."; sudo rm "$RUNNING_DIR"/spmfunctions.sh; }
         echo "$RUNNING_DIR/spmfunctions.sh has been removed."
         echo "Downloading spmfunctions.sh from spm github repo..."
-        wget --quiet --show-progress "https://github.com/simoniz0r/appimgman/raw/spm/spmfunctions.sh" -O ~/.config/spm/cache/spmfunctions.sh
-        chmod +x ~/.config/spm/cache/spmfunctions.sh
-        mv ~/.config/spm/cache/spmfunctions.sh "$RUNNING_DIR"/spmfunctions.sh || { echo "mv to $RUNNING_DIR failed; trying as sudo..."; sudo mv ~/.config/spm/cache/spmfunctions.sh "$RUNNING_DIR"/spmfunctions.sh; }
+        wget --quiet --show-progress "https://github.com/simoniz0r/appimgman/raw/spm/spmfunctions.sh" -O "$CONFDIR"/cache/spmfunctions.sh
+        chmod +x "$CONFDIR"/cache/spmfunctions.sh
+        mv "$CONFDIR"/cache/spmfunctions.sh "$RUNNING_DIR"/spmfunctions.sh || { echo "mv to $RUNNING_DIR failed; trying as sudo..."; sudo mv "$CONFDIR"/cache/spmfunctions.sh "$RUNNING_DIR"/spmfunctions.sh; }
         echo "spmfunctions.sh saved to $RUNNING_DIR/spmfunctions.sh"
     fi
 else
     echo "Missing required file $RUNNING_DIR/spmfunctions.sh !"
     echo "Downloading spmfunctions.sh from spm github repo..."
-    wget --quiet --show-progress "https://github.com/simoniz0r/appimgman/raw/spm/spmfunctions.sh" -O ~/.config/spm/cache/spmfunctions.sh
-    chmod +x ~/.config/spm/cache/spmfunctions.sh
-    mv ~/.config/spm/cache/spmfunctions.sh "$RUNNING_DIR"/spmfunctions.sh || { echo "mv to $RUNNING_DIR failed; trying as sudo..."; sudo mv ~/.config/spm/cache/spmfunctions.sh "$RUNNING_DIR"/spmfunctions.sh; }
+    wget --quiet --show-progress "https://github.com/simoniz0r/appimgman/raw/spm/spmfunctions.sh" -O "$CONFDIR"/cache/spmfunctions.sh
+    chmod +x "$CONFDIR"/cache/spmfunctions.sh
+    mv "$CONFDIR"/cache/spmfunctions.sh "$RUNNING_DIR"/spmfunctions.sh || { echo "mv to $RUNNING_DIR failed; trying as sudo..."; sudo mv "$CONFDIR"/cache/spmfunctions.sh "$RUNNING_DIR"/spmfunctions.sh; }
     echo "spmfunctions.sh saved to $RUNNING_DIR/spmfunctions.sh"
 fi
 source "$RUNNING_DIR"/spmfunctions.sh # import functions from spmfunctions.sh
@@ -48,9 +81,7 @@ tarfunctioncheckfunc # Check if tarfunctions.sh exists, check version if it does
 source "$RUNNING_DIR"/tarfunctions.sh # import functions from tarfunctions.sh
 tarfunctionsexistfunc || { echo "Could not load $RUNNING_DIR/tarfunctions.sh; exiting..."; exit 1; }
 
-spmlockfunc # Create ~/.config/spm/cache/spm.lock file and prevent multiple instances by checking if it exists before running
-
-spmfirstrunfunc # Create dirs for configs if they don't exist
+spmlockfunc # Create "$CONFDIR"/cache/spm.lock file and prevent multiple instances by checking if it exists before running
 
 case $1 in
     appimg-install|-ai) # Check if app is already installed either by spm or otherwise then install app to /usr/local/bin if it is in known lists
@@ -58,13 +89,13 @@ case $1 in
         appimginstallstartfunc # Check for valid inputs and start gathering info for install
         appimgdlfunc "$INSTIMG" # Download AppImage from Bintray or Github
         appimginstallfunc # Install AppImage
-        rm -rf ~/.config/spm/cache/* # Remove any files in cache before exiting
+        rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
         exit 0
         ;;
     tarinstall|-ti) # Check if app is already installed either by spm or otherwise then install app to /usr/local/bin if it is in known lists
         if [ -z "$2" ]; then
             echo "Package input required; exiting..."
-            rm -rf ~/.config/spm/cache/*
+            rm -rf "$CONFDIR"/cache/*
             exit 1
         fi
         TARPKG="$2"
@@ -72,13 +103,13 @@ case $1 in
         tardlfunc "$TARPKG"
         tarcheckfunc
         tarinstallfunc
-        rm -rf ~/.config/spm/cache/* # Remove any files in cache before exiting
+        rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
         exit 0
         ;;
     tar-custom|-tc)
         if [ -z "$2" ]; then
             echo "Package input required; exiting..."
-            rm -rf ~/.config/spm/cache/*
+            rm -rf "$CONFDIR"/cache/*
             exit 1
         fi
         TARPKG="$2"
@@ -87,127 +118,127 @@ case $1 in
         tarcheckfunc
         tarcustominfofunc
         tarcustomappfunc
-        rm -rf ~/.config/spm/cache/*
+        rm -rf "$CONFDIR"/cache/*
         exit 0
         ;;
-    update|-upd) # Update AppImage lists and check version from install info stored in ~/.config/spm/installed against latest url
-        spmvercheckfunc # Uncomment update check code in spmfunctions.sh !
+    update|-upd) # Update AppImage lists and check version from install info stored in "$CONFDIR"/installed against latest url
+        spmvercheckfunc
         # Need to fix this so package input checks only go to relevant function
         appimgupdatelistfunc "$@"
         echo
         tarupdatelistfunc "$@"
-        rm -rf ~/.config/spm/cache/* # Remove any files in cache before exiting
+        rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
         exit 0
         ;;
     appimg-update-force|-auf) # Force specified AppImage to be upgraded by adding it to the upgrade-list.lst
         INSTIMG="$2"
         appimgupdateforcefunc # Force AppImage to be added to upgrade-list.lst regardless of version
-        rm -rf ~/.config/spm/cache/* # Remove any files in cache before exiting
+        rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
         exit 0
         ;;
     tar-update-force|-tuf) # Force specified AppImage to be upgraded by adding it to the upgrade-list.lst
         TARPKG="$2"
         tarupdateforcefunc # Force AppImage to be added to upgrade-list.lst regardless of version
-        rm -rf ~/.config/spm/cache/* # Remove any files in cache before exiting
+        rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
         exit 0
         ;;
     upgrade|-upg) # upgrade AppImages to latest version if on upgrade-list.lst; update argument must be ran to put them on update-list.lst
-        if [ ! -f ~/.config/spm/upgrade-list.lst ]; then
+        if [ ! -f "$CONFDIR"/upgrade-list.lst ]; then
             echo "No AppImage upgrades; skipping AppImage upgrade function..."
             echo
             APPIMGUPGRADES="FALSE"
         fi
-        if [ "$(dir ~/.config/spm/tarupgrades | wc -l)" = "1" ]; then
-            echo "$(tput setaf 2)$(dir -C -w 1 ~/.config/spm/tarupgrades | wc -l) new tar package upgrade available.$(tput sgr0)"
-        elif [ "$(dir ~/.config/spm/tarupgrades | wc -l)" = "0" ]; then
+        if [ "$(dir "$CONFDIR"/tarupgrades | wc -l)" = "1" ]; then
+            echo "$(tput setaf 2)$(dir -C -w 1 "$CONFDIR"/tarupgrades | wc -l) new tar package upgrade available.$(tput sgr0)"
+        elif [ "$(dir "$CONFDIR"/tarupgrades | wc -l)" = "0" ]; then
             echo "No tar package upgrades; skipping tar upgrade function..."
             echo
             TARUPGRADES="FALSE"
             if [ "$APPIMGUPGRADES" = "FALSE" ]; then
                 echo "No new upgrades available; try running 'spm update'."
-                rm -rf ~/.config/spm/cache/*
+                rm -rf "$CONFDIR"/cache/*
                 exit 0
             fi
         else
-            echo "$(tput setaf 2)$(dir -C -w 1 ~/.config/spm/tarupgrades | wc -l) new upgrades available.$(tput sgr0)"
+            echo "$(tput setaf 2)$(dir -C -w 1 "$CONFDIR"/tarupgrades | wc -l) new upgrades available.$(tput sgr0)"
         fi
         if [ -z "$2" ]; then # If no AppImage specified, upgrade all AppImages in upgrade-list.lst
             appimgupgradestartallfunc # Run a for loop that checks each installed AppImage for upgrades
             echo
             tarupgradestartallfunc
-            rm -f ~/.config/spm/upgrade-list.lst # Remove upgrade-list.lst after upgrades finish
-            rm -rf ~/.config/spm/cache/* # Remove any files in cache before exiting
+            rm -f "$CONFDIR"/upgrade-list.lst # Remove upgrade-list.lst after upgrades finish
+            rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
             exit 0
-        elif grep -qw "$2" ~/.config/spm/upgrade-list.lst; then # If user specifies AppImage, upgrade that AppImage
+        elif grep -qw "$2" "$CONFDIR"/upgrade-list.lst; then # If user specifies AppImage, upgrade that AppImage
             INSTIMG="$2"
             appimgupgradestartfunc # Check specified AppImage for upgrade
             echo
             tarupgradestartfunc
         else # If upgrade-list.lst doesn't exist, suggest to run update function
             echo "No new upgrade for $2; try running 'spm update'."
-            rm -rf ~/.config/spm/cache/* # Remove any files in cache before exiting
+            rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
             exit 0
         fi
-        rm -rf ~/.config/spm/cache/* # Remove any files in cache before exiting
+        rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
         exit 0
         ;;
-    appimg-remove|-ar) # rm AppImage from /usr/local/bin and rm install info in ~/.config/spm/installed
+    appimg-remove|-ar) # rm AppImage from /usr/local/bin and rm install info in "$CONFDIR"/installed
         if [ -z "$2" ]; then # Exit if no AppImage input
             echo "AppImage input required; exiting..."
-            rm -rf ~/.config/spm/cache/* # Remove any files in cache before exiting
+            rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
             exit 1
         fi
         REMIMG="$2"
         echo "Current installed $REMIMG information:" # Output AppImage installed info if installed, exit if not
-        if [ -f ~/.config/spm/appimginstalled/"$REMIMG" ]; then
-            cat ~/.config/spm/appimginstalled/"$REMIMG"
+        if [ -f "$CONFDIR"/appimginstalled/"$REMIMG" ]; then
+            cat "$CONFDIR"/appimginstalled/"$REMIMG"
         else
             echo "AppImage not found!"
-            rm -rf ~/.config/spm/cache/* # Remove any files in cache before exiting
+            rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
             exit 1
         fi
         appimgremovefunc # Run remove function for AppImage
-        rm -rf ~/.config/spm/cache/* # Remove any files in cache before exiting
+        rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
         exit 0
         ;;
     tar-remove|-tr) # Remove: remove pkg while leaving pkg's config files
         if [ -z "$2" ]; then
             echo "Package input required; exiting..."
-            rm -rf ~/.config/spm/cache/*
+            rm -rf "$CONFDIR"/cache/*
             exit 1
         fi
         REMPKG="$2"
         echo "Current installed $REMPKG information:"
-        if [ -f ~/.config/spm/tarinstalled/"$REMPKG" ]; then
-            cat ~/.config/spm/tarinstalled/"$REMPKG"
+        if [ -f "$CONFDIR"/tarinstalled/"$REMPKG" ]; then
+            cat "$CONFDIR"/tarinstalled/"$REMPKG"
         else
             echo "Package not found!"
-            rm -rf ~/.config/spm/cache/*
+            rm -rf "$CONFDIR"/cache/*
             exit 1
         fi
         tarappcheckfunc "$REMPKG"
         tarremovefunc
-        rm -rf ~/.config/spm/cache/*
+        rm -rf "$CONFDIR"/cache/*
         exit 0
         ;;
     tar-remove-purge|-trp) # Remove Purge: remove pkg and also remove pkg's config files
         if [ -z "$2" ]; then
             echo "Package input required; exiting..."
-            rm -rf ~/.config/spm/cache/*
+            rm -rf "$CONFDIR"/cache/*
             exit 1
         fi
         PURGEPKG="$2"
         echo "Current installed $PURGEPKG information:"
-        if [ -f ~/.config/spm/tarinstalled/"$PURGEPKG" ]; then
-            cat ~/.config/spm/tarinstalled/"$PURGEPKG"
+        if [ -f "$CONFDIR"/tarinstalled/"$PURGEPKG" ]; then
+            cat "$CONFDIR"/tarinstalled/"$PURGEPKG"
         else
             echo "Package not found!"
-            rm -rf ~/.config/spm/cache/*
+            rm -rf "$CONFDIR"/cache/*
             exit 1
         fi
         tarappcheckfunc "$PURGEPKG"
         tarremovepurgefunc
-        rm -rf ~/.config/spm/cache/*
+        rm -rf "$CONFDIR"/cache/*
         exit 0
         ;;
     list|-l) # List installed AppImages, AppImages-bintray.lst, and AppImages-github.lst or list info about specified AppImage
@@ -227,7 +258,7 @@ case $1 in
             echo "tar packages:"
             tarlistfunc
         fi
-        rm -rf ~/.config/spm/cache/* # Remove any files in cache before exiting
+        rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
         exit 0
         ;;
     list-installed|-li) # List information about installed AppImages
@@ -236,12 +267,12 @@ case $1 in
         echo
         echo "tar packages:"
         tarlistinstalledfunc
-        rm -rf ~/.config/spm/cache/* # Remove any files in cache before exiting
+        rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
         exit 0
         ;;
     *) # Any unknown arguments go to help func
         helpfunc
-        rm -rf ~/.config/spm/cache/* # Remove any files in cache before exiting
+        rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
         exit 0
         ;;
 esac

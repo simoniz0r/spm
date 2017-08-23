@@ -19,15 +19,15 @@ is downloaded from spm's github repo.  spm keeps track of installed packages and
 used to upgrade and remove packages installed by spm.
 
 AppImages are installed to '/usr/local/bin/AppImageName'. Information for installed AppImages is stored in
-'~/.config/spm/appimginstalled/AppImageName'.  Packages on your system should not conflict with AppImages
+'"$CONFDIR"/appimginstalled/AppImageName'.  Packages on your system should not conflict with AppImages
 installed through spm, but spm will not allow AppImages that have the same name as existing commands on
 your system to be installed.
 
 Precompiled tar archives are installed to '/opt/PackageName', and symlinks are created for the .desktop and executable
-files. Information for installed tar archives is stored in '~/.config/spm/tarinstalled/PackageName'.
+files. Information for installed tar archives is stored in '"$CONFDIR"/tarinstalled/PackageName'.
 
 spm does not handle installing dependencies for tar packages that are installed through spm. A list of dependencies
-will be outputted on install and will also be saved to '~/.config/spm/tarinstalled/PackageName'. If you find that
+will be outputted on install and will also be saved to '"$CONFDIR"/tarinstalled/PackageName'. If you find that
 you are missing dependencies needed for a package installed through spm, you can look there for some help.
 
 AppImages, on the other hand, contain all dependencies that are necessary for the app to run as long as
@@ -84,17 +84,17 @@ appimgfunctioncheckfunc () {
             rm "$RUNNING_DIR"/appimgfunctions.sh || { echo "rm $RUNNING_DIR/appimgfunctions.sh failed; trying with sudo..."; sudo rm "$RUNNING_DIR"/appimgfunctions.sh; }
             echo "$RUNNING_DIR/appimgfunctions.sh has been removed."
             echo "Downloading appimgfunctions.sh from spm github repo..."
-            wget --quiet --show-progress "https://github.com/simoniz0r/appimgman/raw/spm/appimgfunctions.sh" -O ~/.config/spm/cache/appimgfunctions.sh
-            chmod +x ~/.config/spm/cache/appimgfunctions.sh
-            mv ~/.config/spm/cache/appimgfunctions.sh "$RUNNING_DIR"/appimgfunctions.sh || { echo "mv to $RUNNING_DIR failed; trying as sudo..."; sudo mv ~/.config/spm/cache/appimgfunctions.sh "$RUNNING_DIR"/appimgfunctions.sh; }
+            wget --quiet --show-progress "https://github.com/simoniz0r/appimgman/raw/spm/appimgfunctions.sh" -O "$CONFDIR"/cache/appimgfunctions.sh
+            chmod +x "$CONFDIR"/cache/appimgfunctions.sh
+            mv "$CONFDIR"/cache/appimgfunctions.sh "$RUNNING_DIR"/appimgfunctions.sh || { echo "mv to $RUNNING_DIR failed; trying as sudo..."; sudo mv "$CONFDIR"/cache/appimgfunctions.sh "$RUNNING_DIR"/appimgfunctions.sh; }
             echo "appimgfunctions.sh saved to $RUNNING_DIR/appimgfunctions.sh"
         fi
     else
         echo "Missing required file $RUNNING_DIR/appimgfunctions.sh !"
         echo "Downloading appimgfunctions.sh from spm github repo..."
-        wget --quiet --show-progress "https://github.com/simoniz0r/appimgman/raw/spm/appimgfunctions.sh" -O ~/.config/spm/cache/appimgfunctions.sh
-        chmod +x ~/.config/spm/cache/appimgfunctions.sh
-        mv ~/.config/spm/cache/appimgfunctions.sh "$RUNNING_DIR"/appimgfunctions.sh || { echo "mv to $RUNNING_DIR failed; trying as sudo..."; sudo mv ~/.config/spm/cache/appimgfunctions.sh "$RUNNING_DIR"/appimgfunctions.sh; }
+        wget --quiet --show-progress "https://github.com/simoniz0r/appimgman/raw/spm/appimgfunctions.sh" -O "$CONFDIR"/cache/appimgfunctions.sh
+        chmod +x "$CONFDIR"/cache/appimgfunctions.sh
+        mv "$CONFDIR"/cache/appimgfunctions.sh "$RUNNING_DIR"/appimgfunctions.sh || { echo "mv to $RUNNING_DIR failed; trying as sudo..."; sudo mv "$CONFDIR"/cache/appimgfunctions.sh "$RUNNING_DIR"/appimgfunctions.sh; }
         echo "appimgfunctions.sh saved to $RUNNING_DIR/appimgfunctions.sh"
     fi
 }
@@ -107,24 +107,24 @@ tarfunctioncheckfunc () {
             rm "$RUNNING_DIR"/tarfunctions.sh || { echo "rm $RUNNING_DIR/tarfunctions.sh failed; trying with sudo..."; sudo rm "$RUNNING_DIR"/tarfunctions.sh; }
             echo "$RUNNING_DIR/tarfunctions.sh has been removed."
             echo "Downloading tarfunctions.sh from spm github repo..."
-            wget --quiet --show-progress "https://github.com/simoniz0r/appimgman/raw/spm/tarfunctions.sh" -O ~/.config/spm/cache/tarfunctions.sh
-            chmod +x ~/.config/spm/cache/tarfunctions.sh
-            mv ~/.config/spm/cache/tarfunctions.sh "$RUNNING_DIR"/tarfunctions.sh || { echo "mv to $RUNNING_DIR failed; trying as sudo..."; sudo mv ~/.config/spm/cache/tarfunctions.sh "$RUNNING_DIR"/tarfunctions.sh; }
+            wget --quiet --show-progress "https://github.com/simoniz0r/appimgman/raw/spm/tarfunctions.sh" -O "$CONFDIR"/cache/tarfunctions.sh
+            chmod +x "$CONFDIR"/cache/tarfunctions.sh
+            mv "$CONFDIR"/cache/tarfunctions.sh "$RUNNING_DIR"/tarfunctions.sh || { echo "mv to $RUNNING_DIR failed; trying as sudo..."; sudo mv "$CONFDIR"/cache/tarfunctions.sh "$RUNNING_DIR"/tarfunctions.sh; }
             echo "tarfunctions.sh saved to $RUNNING_DIR/tarfunctions.sh"
         fi
     else
         echo "Missing required file $RUNNING_DIR/tarfunctions.sh !"
         echo "Downloading tarfunctions.sh from spm github repo..."
-        wget --quiet --show-progress "https://github.com/simoniz0r/appimgman/raw/spm/tarfunctions.sh" -O ~/.config/spm/cache/tarfunctions.sh
-        chmod +x ~/.config/spm/cache/tarfunctions.sh
-        mv ~/.config/spm/cache/tarfunctions.sh "$RUNNING_DIR"/tarfunctions.sh || { echo "mv to $RUNNING_DIR failed; trying as sudo..."; sudo mv ~/.config/spm/cache/tarfunctions.sh "$RUNNING_DIR"/tarfunctions.sh; }
+        wget --quiet --show-progress "https://github.com/simoniz0r/appimgman/raw/spm/tarfunctions.sh" -O "$CONFDIR"/cache/tarfunctions.sh
+        chmod +x "$CONFDIR"/cache/tarfunctions.sh
+        mv "$CONFDIR"/cache/tarfunctions.sh "$RUNNING_DIR"/tarfunctions.sh || { echo "mv to $RUNNING_DIR failed; trying as sudo..."; sudo mv "$CONFDIR"/cache/tarfunctions.sh "$RUNNING_DIR"/tarfunctions.sh; }
         echo "tarfunctions.sh saved to $RUNNING_DIR/tarfunctions.sh"
     fi
 }
 
 spmlockfunc () {
-    if [ ! -f ~/.config/spm/cache/spm.lock ]; then # Create ~/.config/spm/cache/spm.lock file and prevent multiple instances by checking if it exists before running
-        touch ~/.config/spm/cache/spm.lock
+    if [ ! -f "$CONFDIR"/cache/spm.lock ]; then # Create "$CONFDIR"/cache/spm.lock file and prevent multiple instances by checking if it exists before running
+        touch "$CONFDIR"/cache/spm.lock
     else
         echo "spm.lock file is still present.  Are you sure spm isn't running?"
         read -p "Remove spm.lock file and run spm? Y/N " LOCKANSWER
@@ -134,33 +134,12 @@ spmlockfunc () {
                 exit 1
                 ;;
         esac
-        rm -rf ~/.config/spm/cache/* # Remove any files in cache and lock file
-    fi
-}
-
-spmfirstrunfunc () {
-    if [ ! -d ~/.config/spm ]; then # Create dirs for configs if they don't exist
-        echo "spm is being ran for the first time."
-        echo "Creating config directories..."
-        mkdir ~/.config/spm
-        mkdir ~/.config/spm/tarinstalled
-        mkdir ~/.config/spm/appimginstalled
-        mkdir ~/.config/spm/tarupgrades
-        mkdir ~/.config/spm/appimgupgrades
-        mkdir ~/.config/spm/cache
-        echo "Generating AppImages-bintray.lst from https://dl.bintray.com/probono/AppImages/ ..."
-        wget --show-progress --quiet "https://dl.bintray.com/probono/AppImages/" -O - | sed 's/<\/*[^>]*>//g' | grep -o '.*AppImage' | cut -f1 -d"-" | sort -u > ~/.config/spm/AppImages-bintray.lst
-        echo "Downloading AppImages-github.lst from spm github..."
-        wget --quiet --show-progress "https://raw.githubusercontent.com/simoniz0r/appimgman/spm/AppImages-github.lst" -qO ~/.config/spm/AppImages-github.lst
-        echo "Downloading tar-pkgs.lst from tar-pkg github repo..."
-        wget "https://raw.githubusercontent.com/simoniz0r/tar-pkg/master/apps/known-pkgs.lst" -qO ~/.config/spm/tar-pkgs.lst
-        echo "First run operations complete!"
+        rm -rf "$CONFDIR"/cache/* # Remove any files in cache and lock file
     fi
 }
 
 spmvercheckfunc () {
-    # VERTEST="$(wget -q "https://raw.githubusercontent.com/simoniz0r/appimgman/spm/spm" -O - | sed -n '9p' | tr -d 'X="')" # Use wget sed and tr to check current spm version from github
-    VERTEST="0.0.1"
+    VERTEST="$(wget -q "https://raw.githubusercontent.com/simoniz0r/appimgman/spm/spm" -O - | sed -n '9p' | tr -d 'X="')" # Use wget sed and tr to check current spm version from github
     if [[ "$VERTEST" != "$X" ]]; then # If current version not equal to installed version, notify of new version
         echo "A new version of spm is available!"
         echo "Current version: $VERTEST -- Installed version: $X"
