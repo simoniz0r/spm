@@ -1,7 +1,7 @@
 # spm
 Usage: spm [option] [AppImage]
 
-spm is a simple commandline package manager that can installs AppImages and precompiled tar archives.
+spm is a simple commandline package manager that installs AppImages and precompiled tar archives.
 AppImage information is gotten from https://github.com/AppImage/appimage.github.io and tar archive information
 is stored in spm's github repo.  spm keeps track of installed packages and their versions, so spm can be used
 to upgrade and remove packages installed by spm.
