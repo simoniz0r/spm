@@ -56,11 +56,6 @@ installed applications to their maintainers."
 spmdepchecksfunc () {
     USE_GIT="TRUE"
 
-    if [ "$EUID" = "0" ]; then # Prevent spm from being ran as root
-        echo "Do not run spm as root!"
-        exit 1
-    fi
-
     if ! type wget >/dev/null 2>&1; then
         MISSING_DEPS="TRUE"
         echo "wget is not installed!"

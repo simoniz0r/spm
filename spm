@@ -9,6 +9,11 @@
 X="0.0.2"
 # Set spm version
 
+if [ "$EUID" = "0" ]; then # Prevent spm from being ran as root
+    echo "Do not run spm as root!"
+    exit 1
+fi
+
 REALPATH="$(readlink -f $0)"
 RUNNING_DIR="$(dirname "$REALPATH")" # Find directory script is running from
 if [ -f $RUNNING_DIR/spmfunctions.sh ]; then
@@ -33,7 +38,7 @@ else
 fi
 source "$RUNNING_DIR"/spmfunctions.sh # import functions from spmfunctions.sh
 
-spmdepchecksfunc || { echo "Could not load $RUNNING_DIR/spmfunctions.sh; exiting..."; exit 1; } # Check for deps, exit if they don't
+spmdepchecksfunc || { echo "Could not load $RUNNING_DIR/spmfunctions.sh; exiting..."; exit 1; } # Check for deps, exit if not present
 
 appimgfunctioncheckfunc # Check if appimgfunctions.sh exists, check version if it does, download if out of date or doesn't
 source "$RUNNING_DIR"/appimgfunctions.sh # import functions from appimgfunctions.sh
