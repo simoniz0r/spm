@@ -31,7 +31,7 @@ Arguments:
 - tar-remove (-tr) remove an installed precompiled tar archive
 - update (-upd) - update package lists and check for new AppImage and precompiled tar archive versions
 - appimg-update-force (-auf) - add specified AppImage to upgrade-list without checking versions
-- tar-upgrade-force (-tuf) - add specified precompiled tar archive to list of upgrades without checking versions
+- tar-update-force (-tuf) - add specified precompiled tar archive to list of upgrades without checking versions
 - upgrade (-upg) - upgrade all installed packages that are marked for upgrade or just the specified package
 
 See https://github.com/simoniz0r/appimgman for more help or to report issues.
