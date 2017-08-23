@@ -362,37 +362,41 @@ appimgupgradefunc () { # rm old AppImage, chmod, and mv new AppImage to /usr/loc
 }
 
 appimgupgradestartallfunc () {
-    if [ "$(cat ~/.config/spm/upgrade-list.lst | wc -l)" = "1" ]; then # Output number of upgrades available
-        echo "$(tput setaf 2)1 upgrade available.$(tput sgr0)"
+    if [ "$APPIMGUPGRADES" = "FALSE" ]; then
+        sleep 0
     else
-        echo "$(tput setaf 2)$(cat ~/.config/spm/upgrade-list.lst | wc -l) upgrades available.$(tput sgr0)"
+        if [ "$(cat ~/.config/spm/upgrade-list.lst | wc -l)" = "1" ]; then # Output number of upgrades available
+            echo "$(tput setaf 2)1 AppImage upgrade available.$(tput sgr0)"
+        else
+            echo "$(tput setaf 2)$(cat ~/.config/spm/upgrade-list.lst | wc -l) AppImage upgrades available.$(tput sgr0)"
+        fi
+        cat ~/.config/spm/upgrade-list.lst | tr '\n' ' ' | tr -d '"' # Ouput AppImages available for upgrades
+        echo
+        if [ "$(cat ~/.config/spm/upgrade-list.lst | wc -l)" = "1" ]; then
+            echo "1 AppImage will be upgraded."
+        else
+            echo "$(cat ~/.config/spm/upgrade-list.lst | wc -l) AppImages will be upgraded."
+        fi
+        read -p "Continue? Y/N " UPGRADEALLANSWER # Ask user if they want to upgrade
+        case $UPGRADEALLANSWER in
+            Y*|y*) # Do upgrade functions if yes
+                for UPGRADE_IMG in $(cat ~/.config/spm/upgrade-list.lst); do
+                    INSTIMG="$UPGRADE_IMG"
+                    echo "Downloading $INSTIMG..."
+                    appimgcheckfunc "$INSTIMG" # Check whether AppImage is in lists and which list it is in
+                    appimginfofunc
+                    appimgdlfunc "$INSTIMG" # Download AppImage from Bintray or Github
+                    appimgupgradefunc # Run upgrade function for AppImage
+                    echo
+                done
+                ;;
+            N*|n*) # Exit if no
+                echo "No AppImages were upgraded; exiting..."
+                rm -rf ~/.config/spm/cache/* # Remove any files in cache before exiting
+                exit 0
+                ;;
+        esac
     fi
-    cat ~/.config/spm/upgrade-list.lst | tr '\n' ' ' | tr -d '"' # Ouput AppImages available for upgrades
-    echo
-    if [ "$(cat ~/.config/spm/upgrade-list.lst | wc -l)" = "1" ]; then
-        echo "1 AppImage will be upgraded."
-    else
-        echo "$(cat ~/.config/spm/upgrade-list.lst | wc -l) AppImages will be upgraded."
-    fi
-    read -p "Continue? Y/N " UPGRADEALLANSWER # Ask user if they want to upgrade
-    case $UPGRADEALLANSWER in
-        Y*|y*) # Do upgrade functions if yes
-            for UPGRADE_IMG in $(cat ~/.config/spm/upgrade-list.lst); do
-                INSTIMG="$UPGRADE_IMG"
-                echo "Downloading $INSTIMG..."
-                appimgcheckfunc "$INSTIMG" # Check whether AppImage is in lists and which list it is in
-                appimginfofunc
-                appimgdlfunc "$INSTIMG" # Download AppImage from Bintray or Github
-                appimgupgradefunc # Run upgrade function for AppImage
-                echo
-            done
-            ;;
-        N*|n*) # Exit if no
-            echo "No AppImages were upgraded; exiting..."
-            rm -rf ~/.config/spm/cache/* # Remove any files in cache before exiting
-            exit 0
-            ;;
-    esac
 }
 
 appimgupgradestartfunc () {

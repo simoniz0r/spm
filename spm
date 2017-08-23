@@ -199,19 +199,23 @@ case $1 in
         ;;
     upgrade|-upg) # upgrade AppImages to latest version if on upgrade-list.lst; update argument must be ran to put them on update-list.lst
         if [ ! -f ~/.config/spm/upgrade-list.lst ]; then
-            echo "No upgrades available; try running 'spm update'." # If no AppImages in upgrade-list.lst, exit
+            echo "No AppImage upgrades; skipping AppImage upgrade function..."
+            echo
             APPIMGUPGRADES="FALSE"
         fi
-        if [ "$(dir ~/.config/spm/upgrades | wc -l)" = "1" ]; then
-            echo "$(tput setaf 2)$(dir -C -w 1 ~/.config/spm/upgrades | wc -l) new upgrade available.$(tput sgr0)"
-        elif [ "$(dir ~/.config/spm/upgrades | wc -l)" = "0" ]; then
-            echo "No new upgrades available; try running 'spm update'."
+        if [ "$(dir ~/.config/spm/tarupgrades | wc -l)" = "1" ]; then
+            echo "$(tput setaf 2)$(dir -C -w 1 ~/.config/spm/tarupgrades | wc -l) new tar package upgrade available.$(tput sgr0)"
+        elif [ "$(dir ~/.config/spm/tarupgrades | wc -l)" = "0" ]; then
+            echo "No tar package upgrades; skipping tar upgrade function..."
+            echo
+            TARUPGRADES="FALSE"
             if [ "$APPIMGUPGRADES" = "FALSE" ]; then
+                echo "No new upgrades available; try running 'spm update'."
                 rm -rf ~/.config/spm/cache/*
                 exit 0
             fi
         else
-            echo "$(tput setaf 2)$(dir -C -w 1 ~/.config/spm/upgrades | wc -l) new upgrades available.$(tput sgr0)"
+            echo "$(tput setaf 2)$(dir -C -w 1 ~/.config/spm/tarupgrades | wc -l) new upgrades available.$(tput sgr0)"
         fi
         if [ -z "$2" ]; then # If no AppImage specified, upgrade all AppImages in upgrade-list.lst
             appimgupgradestartallfunc # Run a for loop that checks each installed AppImage for upgrades

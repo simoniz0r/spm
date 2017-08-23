@@ -342,11 +342,11 @@ tarupgradecheckallfunc () {
     done
     echo
     if [ "$(dir ~/.config/spm/tarupgrades | wc -l)" = "1" ]; then
-        echo "$(tput setaf 2)$(dir -C -w 1 ~/.config/spm/tarupgrades | wc -l) new upgrade available.$(tput sgr0)"
+        echo "$(tput setaf 2)$(dir -C -w 1 ~/.config/spm/tarupgrades | wc -l) new tar package upgrade available.$(tput sgr0)"
     elif [ "$(dir ~/.config/spm/tarupgrades | wc -l)" = "0" ]; then
-        echo "No new upgrades available."
+        echo "No new tar package upgrades available."
     else
-        echo "$(tput setaf 2)$(dir -C -w 1 ~/.config/spm/tarupgrades | wc -l) new upgrades available.$(tput sgr0)"
+        echo "$(tput setaf 2)$(dir -C -w 1 ~/.config/spm/tarupgrades | wc -l) new tar package upgrades available.$(tput sgr0)"
     fi
 }
 
@@ -429,7 +429,7 @@ tarcustomappfunc () {
             ;;
     esac
     echo "Creating config file for $TARPKG..."
-    tarsaveconffunc "installed/$TARPKG"
+    tarsaveconffunc "tarinstalled/$TARPKG"
     echo "$TARPKG has been installed to $INSTDIR !"
     rm -rf ~/.config/spm/cache/*
     tarcustomappsubmitfunc
@@ -511,7 +511,7 @@ tarinstallfunc () {
             ;;
     esac
     echo "Creating config file for $TARPKG..."
-    tarsaveconffunc "installed/$TARPKG"
+    tarsaveconffunc "tarinstalled/$TARPKG"
     echo "$TARPKG has been installed to $INSTDIR !"
 }
 
@@ -592,39 +592,43 @@ tarupgradefunc () {
             ;;
     esac
     echo "Creating config file for $TARPKG..."
-    tarsaveconffunc "installed/$TARPKG"
+    tarsaveconffunc "tarinstalled/$TARPKG"
     echo "$TARPKG has been upgraded to $TARFILE!"
 }
 
 tarupgradestartallfunc () {
-    dir -C -w 1 ~/.config/spm/tarupgrades | pr -tT --column=3 -w 125
-    echo
-    read -p "Continue? Y/N " UPGRADEALLANSWER
-    case $UPGRADEALLANSWER in
-        Y*|y*)
-            for UPGRADE_PKG in $(dir -C -w 1 ~/.config/spm/tarupgrades); do
-                TARPKG="$UPGRADE_PKG"
-                echo "Downloading $TARPKG..."
-                tarappcheckfunc "$TARPKG"
-                . ~/.config/spm/cache/"$TARPKG".conf
-                . ~/.config/spm/tarupgrades/"$TARPKG"
-                if [ "$TAR_DOWNLOAD_SOURCE" = "GITHUB" ] && [ -z "$GITHUB_COMMIT" ]; then
-                    targithubinfofunc
-                fi
-                tardlfunc "$TARPKG"
-                tarcheckfunc
-                tarupgradefunc
+    if [ "$TARUPGRADE" = "FALSE" ]; then
+        sleep 0
+    else
+        dir -C -w 1 ~/.config/spm/tarupgrades | pr -tT --column=3 -w 125
+        echo
+        read -p "Continue? Y/N " UPGRADEALLANSWER
+        case $UPGRADEALLANSWER in
+            Y*|y*)
+                for UPGRADE_PKG in $(dir -C -w 1 ~/.config/spm/tarupgrades); do
+                    TARPKG="$UPGRADE_PKG"
+                    echo "Downloading $TARPKG..."
+                    tarappcheckfunc "$TARPKG"
+                    . ~/.config/spm/cache/"$TARPKG".conf
+                    . ~/.config/spm/tarupgrades/"$TARPKG"
+                    if [ "$TAR_DOWNLOAD_SOURCE" = "GITHUB" ] && [ -z "$GITHUB_COMMIT" ]; then
+                        targithubinfofunc
+                    fi
+                    tardlfunc "$TARPKG"
+                    tarcheckfunc
+                    tarupgradefunc
+                    rm -rf ~/.config/spm/cache/*
+                    echo
+                done
+                rm -f ~/.config/spm/tarupgrades/*
+                ;;
+            N*|n*)
+                echo "No packages were upgraded; exiting..."
                 rm -rf ~/.config/spm/cache/*
-                echo
-            done
-            rm -f ~/.config/spm/tarupgrades/*
-            ;;
-        N*|n*)
-            echo "No packages were upgraded; exiting..."
-            rm -rf ~/.config/spm/cache/*
-            exit 0
-            ;;
-    esac
+                exit 0
+                ;;
+        esac
+    fi
 }
 
 tarupgradestartfunc () {
