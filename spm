@@ -31,15 +31,17 @@ else
     mv ~/.config/spm/cache/spmfunctions.sh "$RUNNING_DIR"/spmfunctions.sh || { echo "mv to $RUNNING_DIR failed; trying as sudo..."; sudo mv ~/.config/spm/cache/spmfunctions.sh "$RUNNING_DIR"/spmfunctions.sh; }
     echo "spmfunctions.sh saved to $RUNNING_DIR/spmfunctions.sh"
 fi
-source "$RUNNING_DIR"/spmfunctions.sh || { echo "Could not load $RUNNING_DIR/spmfunctions.sh; exiting..."; exit 1; } # import functions from spmfunctions.sh
+source "$RUNNING_DIR"/spmfunctions.sh # import functions from spmfunctions.sh
 
-spmdepchecksfunc # Check for deps, exit if they don't
+spmdepchecksfunc || { echo "Could not load $RUNNING_DIR/spmfunctions.sh; exiting..."; exit 1; } # Check for deps, exit if they don't
 
 appimgfunctioncheckfunc # Check if appimgfunctions.sh exists, check version if it does, download if out of date or doesn't
-source "$RUNNING_DIR"/appimgfunctions.sh || { echo "Could not load $RUNNING_DIR/appimgfunctions.sh; exiting..."; exit 1; } # import functions from appimgfunctions.sh
+source "$RUNNING_DIR"/appimgfunctions.sh # import functions from appimgfunctions.sh
+appimgfunctionsexistsfunc  || { echo "Could not load $RUNNING_DIR/appimgfunctions.sh; exiting..."; exit 1; }
 
 tarfunctioncheckfunc # Check if tarfunctions.sh exists, check version if it does, download if out of date or doesn't
-source "$RUNNING_DIR"/tarfunctions.sh || { echo "Could not load $RUNNING_DIR/tarfunctions.sh; exiting..."; exit 1; } # import functions from tarfunctions.sh
+source "$RUNNING_DIR"/tarfunctions.sh # import functions from tarfunctions.sh
+tarfunctionsexistfunc || { echo "Could not load $RUNNING_DIR/tarfunctions.sh; exiting..."; exit 1; }
 
 spmlockfunc # Create ~/.config/spm/cache/spm.lock file and prevent multiple instances by checking if it exists before running
 

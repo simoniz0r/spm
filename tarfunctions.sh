@@ -9,6 +9,10 @@
 X="0.0.2"
 # Set spm version
 
+tarfunctionsexistfunc () {
+    sleep 0
+}
+
 tarlistfunc () {
     if [ -z "$LISTPKG" ]; then
         echo "$(dir ~/.config/spm/tarinstalled | wc -w) installed tar packages:"

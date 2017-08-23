@@ -14,6 +14,10 @@ APPIMG_UPGRADE_CHECK="FALSE"
 APPIMG_FORCE_UPGRADE="FALSE"
 GITHUB_CONTINUOUS="FALSE"
 
+appimgfunctionsexistsfunc () {
+    sleep 0
+}
+
 appimglistallfunc () {
     echo "$(dir -C -w 1 ~/.config/spm/appimginstalled | wc -l) AppImages installed:"
     dir -C -w 1 ~/.config/spm/appimginstalled | pr -tT --column=3 -w 125
