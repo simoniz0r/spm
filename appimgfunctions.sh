@@ -393,6 +393,7 @@ appimgupgradestartallfunc () {
                     appimgupgradefunc # Run upgrade function for AppImage
                     echo
                 done
+                rm "$CONFDIR"/upgrade-list.lst
                 ;;
             N*|n*) # Exit if no
                 echo "No AppImages were upgraded; exiting..."
