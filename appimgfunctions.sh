@@ -239,10 +239,10 @@ appimgupdatelistfunc () { # Regenerate AppImages-bintray.lst from bintray, downl
     if [ ! -f "$CONFDIR"/upgrade-list.lst ]; then # Create upgrade-list.lst file to avoid error outputs during update checks
         touch "$CONFDIR"/upgrade-list.lst
     fi
-    if [ -z "$2" ]; then # If no AppImage specified by user, check all installed AppImage versions
+    if [ -z "$1" ]; then # If no AppImage specified by user, check all installed AppImage versions
         appimgupgradecheckallfunc
     else # If user inputs AppImage, check that AppImage version
-        INSTIMG="$2"
+        INSTIMG="$1"
         appimgupgradecheckfunc
     fi
     APPIMG_UPGRADE_CHECK="FALSE"

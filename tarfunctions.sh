@@ -378,10 +378,10 @@ tarupdatelistfunc () {
     rm "$CONFDIR"/tar-pkgs.lst
     wget "https://raw.githubusercontent.com/simoniz0r/tar-pkg/master/apps/known-pkgs.lst" -qO "$CONFDIR"/tar-pkgs.lst
     echo "tar-pkgs.lst updated!"
-    if [ -z "$2" ]; then
+    if [ -z "$1" ]; then
         tarupgradecheckallfunc
     else
-        tarupgradecheckfunc "$2"
+        tarupgradecheckfunc "$1"
     fi
 }
 
