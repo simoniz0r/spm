@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.0.2"
+X="0.0.3"
 # Set spm version
 
 tarfunctionsexistfunc () {
@@ -602,7 +602,7 @@ tarupgradefunc () {
 }
 
 tarupgradestartallfunc () {
-    if [ "$TARUPGRADE" = "FALSE" ]; then
+    if [ "$TARUPGRADES" = "FALSE" ]; then
         sleep 0
     else
         dir -C -w 1 "$CONFDIR"/tarupgrades | pr -tT --column=3 -w 125

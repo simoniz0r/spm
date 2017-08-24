@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.0.2"
+X="0.0.3"
 # Set spm version
 CONFDIR="$HOME/.config/spm"
 
@@ -174,14 +174,17 @@ case $1 in
             if [ "$TARUPGRADES" = "TRUE" ]; then
                 tarupgradestartallfunc
             fi
-            rm -f "$CONFDIR"/upgrade-list.lst # Remove upgrade-list.lst after upgrades finish
             rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
             exit 0
-        elif grep -qw "$2" "$CONFDIR"/upgrade-list.lst; then # If user specifies AppImage, upgrade that AppImage
+        elif [ "$TARUPGRADES" = "TRUE" ] || [ "$APPIMGUPGRADES" = "TRUE" ]; then # If user specifies package, upgrade that package
             INSTIMG="$2"
-            appimgupgradestartfunc # Check specified AppImage for upgrade
+            if [ "$APPIMGUPGRADES" = "TRUE" ]; then
+                appimgupgradestartfunc # Check specified AppImage for upgrade
+            fi
             echo
-            tarupgradestartfunc
+            if [ "$TARUPGRADES" = "TRUE" ]; then
+                tarupgradestartfunc
+            fi
         else # If upgrade-list.lst doesn't exist, suggest to run update function
             echo "No new upgrade for $2; try running 'spm update'."
             rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
@@ -260,11 +263,12 @@ case $1 in
             echo "tar packages:"
             tarlistfunc
         else # If AppImage input, list info for that AppImage
-            echo "AppImages:"
-            appimglistfunc # List information about specified AppImage
-            echo
-            echo "tar packages:"
-            tarlistfunc
+            if grep -q "$LISTIMG" "$CONFDIR"/AppImages-bintray.lst ||grep -q "$LISTIMG" "$CONFDIR"/AppImages-github.lst; then
+                appimglistfunc # List information about specified AppImage
+            fi
+            if [ -f "$CONFDIR"/tarinstalled/"$LISTPKG" ]; then
+                tarlistfunc
+            fi
         fi
         rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
         exit 0
