@@ -124,10 +124,16 @@ case $1 in
     update|-upd) # Update AppImage lists and check version from install info stored in "$CONFDIR"/installed against latest url
         spmvercheckfunc
         # Need to fix this so package input checks only go to relevant function
-        if grep -q "$2" "$CONFDIR"/AppImages-bintray.lst ||grep -q "$2" "$CONFDIR"/AppImages-github.lst; then
-            appimgupdatelistfunc "$2"
-        elif [ -f "$CONFDIR"/tarinstalled/"$2" ]; then
-            tarupdatelistfunc "$2"
+        if [ ! -z "$2" ]; then
+            if grep -qiw "$2" "$CONFDIR"/AppImages-bintray.lst ||grep -qiw "$2" "$CONFDIR"/AppImages-github.lst; then
+                appimgupdatelistfunc "$2"
+            elif [ -f "$CONFDIR"/tarinstalled/"$2" ]; then
+                tarupdatelistfunc "$2"
+            else
+                echo "Package not found!"
+                rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
+                exit 1
+            fi
         else
             appimgupdatelistfunc
             echo
