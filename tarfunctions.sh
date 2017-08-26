@@ -14,42 +14,6 @@ tarfunctionsexistfunc () {
     sleep 0
 }
 
-tarlistfunc () {
-    if [ -z "$LISTPKG" ]; then
-        echo "$(dir "$CONFDIR"/tarinstalled | wc -w) installed tar packages:"
-        dir -C -w 1 "$CONFDIR"/tarinstalled | pr -tT --column=3 -w 125
-        echo
-        echo "$(echo "$TAR_LIST" | wc -l) tar packages for install:"
-        echo "$TAR_LIST" | pr -tTw 125 -3
-    else
-        if [ -f "$CONFDIR"/tarinstalled/"$LISTPKG" ]; then
-            echo "Current installed $LISTPKG information:"
-            cat "$CONFDIR"/tarinstalled/"$LISTPKG"
-            echo "INSTALLED=\"YES\""
-            echo "BIN_PATH=\"/usr/local/bin/$LISTPKG\""
-        elif echo "$TAR_LIST" | grep -qiw "$LISTPKG"; then
-            echo "$LISTPKG tar package information:"
-            echo "$(wget "https://raw.githubusercontent.com/simoniz0r/tar-pkg/master/apps/$LISTPKG/$LISTPKG.conf" -qO -)"
-            echo "INSTALLED=\"NO\""
-        else
-            echo "Package not found!"
-            rm -rf "$CONFDIR"/cache/*
-        fi
-    fi
-}
-
-tarlistinstalledfunc () {
-    echo "$(dir -C -w 1 "$CONFDIR"/tarinstalled | wc -l) tar packages installed:"
-    dir -C -w 1 "$CONFDIR"/tarinstalled | pr -tT --column=3 -w 125
-    echo
-    for tarpkg in $(dir -C -w 1 "$CONFDIR"/tarinstalled); do
-        echo "$tarpkg installed information:"
-        cat "$CONFDIR"/tarinstalled/"$tarpkg"
-        echo "INSTALLED=\"YES\""
-        echo
-    done
-}
-
 tarsaveconffunc () {
     if [ -z "$NEW_TARFILE" ]; then
         NEW_TARFILE="$TARFILE"
@@ -177,6 +141,44 @@ tarappcheckfunc () { # check user input against list of known apps here
             KNOWN_TAR="FALSE"
             ;;
     esac
+}
+
+tarlistfunc () {
+    if [ -z "$LISTPKG" ]; then
+        echo "$(dir "$CONFDIR"/tarinstalled | wc -w) installed tar packages:"
+        dir -C -w 1 "$CONFDIR"/tarinstalled | pr -tT --column=3 -w 125
+        echo
+        echo "$(echo "$TAR_LIST" | wc -l) tar packages for install:"
+        echo "$TAR_LIST" | pr -tTw 125 -3
+    else
+        if [ -f "$CONFDIR"/tarinstalled/"$LISTPKG" ]; then
+            echo "Current installed $LISTPKG information:"
+            cat "$CONFDIR"/tarinstalled/"$LISTPKG"
+            echo "INSTALLED=\"YES\""
+            echo "BIN_PATH=\"/usr/local/bin/$LISTPKG\""
+        elif echo "$TAR_LIST" | grep -qiw "$LISTPKG"; then
+            echo "$LISTPKG tar package information:"
+            tarappcheckfunc "$LISTPKG"
+            tarsaveconffunc "cache/$LISTPKG.conf"
+            cat "$CONFDIR"/cache/"$LISTPKG".conf
+            echo "INSTALLED=\"NO\""
+        else
+            echo "Package not found!"
+            rm -rf "$CONFDIR"/cache/*
+        fi
+    fi
+}
+
+tarlistinstalledfunc () {
+    echo "$(dir -C -w 1 "$CONFDIR"/tarinstalled | wc -l) tar packages installed:"
+    dir -C -w 1 "$CONFDIR"/tarinstalled | pr -tT --column=3 -w 125
+    echo
+    for tarpkg in $(dir -C -w 1 "$CONFDIR"/tarinstalled); do
+        echo "$tarpkg installed information:"
+        cat "$CONFDIR"/tarinstalled/"$tarpkg"
+        echo "INSTALLED=\"YES\""
+        echo
+    done
 }
 
 tarcustomdlfunc () {
