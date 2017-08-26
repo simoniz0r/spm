@@ -2,7 +2,7 @@
     "available" : "atom\ndiscord-canary\ndiscord-ptb\ndiscord-toolbox\ndiscord\nfirefox-beta\nfirefox-dev\nfirefox-nightly\nfirefox\ngpgpassman\nkaku\nnvim\nopenrct2\nrambox\nvscode\nwavebox\nxdgfetch\nyad-mpv\nyad-twitch-streamlink",
     "atom": {
         "instdir": "/opt/atom",
-        "download_sorce": "GITHUB",
+        "download_source": "GITHUB",
         "taruri": "https://github.com/atom/atom/releases",
         "desktop_file_path": "DOWNLOAD",
         "icon_file_path": "/opt/atom/atom.png",
@@ -14,8 +14,8 @@
     },
     "discord-canary": {
         "instdir": "/opt/discord-canary",
-        "download_sorce": "DIRECT",
-        "taruri": "https://discordapp.com/api/download/canary?platform=linux&format=tar.g",
+        "download_source": "DIRECT",
+        "taruri": "https://discordapp.com/api/download/canary?platform=linux&format=tar.gz",
         "desktop_file_path": "/opt/discord-canary/discord-canary.desktop",
         "icon_file_path": "/opt/discord-canary/discord.png",
         "executable_file_path": "/opt/discord-canary/DiscordCanary",
@@ -26,8 +26,8 @@
     },
     "discord-ptb": {
         "instdir": "/opt/discord-ptb",
-        "download_sorce": "DIRECT",
-        "taruri": "https://discordapp.com/api/download/canary?platform=linux&format=tar.g",
+        "download_source": "DIRECT",
+        "taruri": "https://discordapp.com/api/download/ptb?platform=linux&format=tar.gz",
         "desktop_file_path": "/opt/discord-ptb/discord-ptb.desktop",
         "icon_file_path": "/opt/discord-ptb/discord.png",
         "executable_file_path": "/opt/discord-ptb/DiscordPTB",
@@ -38,7 +38,7 @@
     },
     "discord-toolbox": {
         "instdir": "/opt/discord-toolbox",
-        "download_sorce": "GITHUB",
+        "download_source": "GITHUB",
         "taruri": "https://github.com/simoniz0r/DiscordToolbox/releases",
         "desktop_file_path": "NONE",
         "icon_file_path": "NONE",
@@ -50,8 +50,8 @@
     },
     "discord": {
         "instdir": "/opt/discord",
-        "download_sorce": "DIRECT",
-        "taruri": "https://discordapp.com/api/download/canary?platform=linux&format=tar.g",
+        "download_source": "DIRECT",
+        "taruri": "https://discordapp.com/api/download?platform=linux&format=tar.gz",
         "desktop_file_path": "/opt/discord/discord.desktop",
         "icon_file_path": "/opt/discord/discord.png",
         "executable_file_path": "/opt/discord/Discord",
@@ -62,7 +62,7 @@
     },
     "firefox-beta": {
         "instdir": "/opt/firefox-beta",
-        "download_sorce": "DIRECT",
+        "download_source": "DIRECT",
         "taruri": "https://download.mozilla.org/?product=firefox-55.0b13-SSL&os=linux64&lang=en-US",
         "desktop_file_path": "DOWNLOAD",
         "icon_file_path": "/opt/firefox-beta/browser/icons/mozicon128.png",
@@ -74,7 +74,7 @@
     },
     "firefox-dev": {
         "instdir": "/opt/firefox-dev",
-        "download_sorce": "DIRECT",
+        "download_source": "DIRECT",
         "taruri": "https://download.mozilla.org/?product=firefox-devedition-latest-ssl&os=linux64&lang=en-US",
         "desktop_file_path": "DOWNLOAD",
         "icon_file_path": "/opt/firefox-dev/browser/icons/mozicon128.png",
@@ -86,7 +86,7 @@
     },
     "firefox-nightly": {
         "instdir": "/opt/firefox-nightly",
-        "download_sorce": "DIRECT",
+        "download_source": "DIRECT",
         "taruri": "https://download.mozilla.org/?product=firefox-nightly-latest-ssl&os=linux64&lang=en-US",
         "desktop_file_path": "DOWNLOAD",
         "icon_file_path": "/opt/firefox-nightly/browser/icons/mozicon128.png",
@@ -98,7 +98,7 @@
     },
     "firefox": {
         "instdir": "/opt/firefox",
-        "download_sorce": "DIRECT",
+        "download_source": "DIRECT",
         "taruri": "https://download.mozilla.org/?product=firefox-55.0-SSL&os=linux64&lang=en-US",
         "desktop_file_path": "DOWNLOAD",
         "icon_file_path": "/opt/firefox/browser/icons/mozicon128.png",
@@ -110,7 +110,7 @@
     },
     "gpgpassman": {
         "instdir": "/opt/gpgpassman",
-        "download_sorce": "GITHUB",
+        "download_source": "GITHUB",
         "taruri": "https://github.com/simoniz0r/gpgpassman/releases",
         "desktop_file_path": "/opt/gpgpassman/gpgpassman.desktop",
         "icon_file_path": "/opt/gpgpassman/gpgpassman.png",
@@ -122,7 +122,7 @@
     },
     "kaku": {
         "instdir": "/opt/kaku",
-        "download_sorce": "GITHUB",
+        "download_source": "GITHUB",
         "taruri": "https://github.com/EragonJ/Kaku/releases",
         "desktop_file_path": "/opt/kaku/misc/linux/kaku.desktop",
         "icon_file_path": "/opt/kaku/logo.png",
@@ -134,7 +134,7 @@
     },
     "nvim": {
         "instdir": "/opt/nvim",
-        "download_sorce": "GITHUB",
+        "download_source": "GITHUB",
         "taruri": "https://github.com/neovim/neovim/releases",
         "desktop_file_path": "/opt/nvim/share/applications/nvim.desktop",
         "icon_file_path": "/opt/nvim/share/pixmaps/nvim.png",
@@ -146,7 +146,7 @@
     },
     "openrct2": {
         "instdir": "/opt/openrct2",
-        "download_sorce": "GITHUB",
+        "download_source": "GITHUB",
         "taruri": "https://github.com/OpenRCT2/OpenRCT2/releases",
         "desktop_file_path": "DOWNLOAD",
         "icon_file_path": "applications-games",
@@ -158,7 +158,7 @@
     },
     "rambox": {
         "instdir": "/opt/rambox",
-        "download_sorce": "GITHUB",
+        "download_source": "GITHUB",
         "taruri": "https://github.com/saenzramiro/rambox/releases",
         "desktop_file_path": "DOWNLOAD",
         "icon_file_path": "internet-mail",
@@ -170,7 +170,7 @@
     },
     "vscode": {
         "instdir": "/opt/vscode",
-        "download_sorce": "DIRECT",
+        "download_source": "DIRECT",
         "taruri": "https://go.microsoft.com/fwlink/?LinkID=620884",
         "desktop_file_path": "DOWNLOAD",
         "icon_file_path": "/opt/vscode/resources/app/resources/linux/code.png",
@@ -182,7 +182,7 @@
     },
     "wavebox": {
         "instdir": "/opt/wavebox",
-        "download_sorce": "GITHUB",
+        "download_source": "GITHUB",
         "taruri": "https://github.com/wavebox/waveboxapp/releases",
         "desktop_file_path": "/opt/wavebox/wavebox.desktop",
         "icon_file_path": "/opt/wavebox/icon.png",
@@ -194,7 +194,7 @@
     },
     "xdgfetch": {
         "instdir": "/opt/xdgfetch",
-        "download_sorce": "GITHUB",
+        "download_source": "GITHUB",
         "taruri": "https://github.com/simoniz0r/xdgfetch/releases",
         "desktop_file_path": "NONE",
         "icon_file_path": "NONE",
@@ -206,7 +206,7 @@
     },
     "yad-mpv": {
         "instdir": "/opt/yad-mpv",
-        "download_sorce": "GITHUB",
+        "download_source": "GITHUB",
         "taruri": "https://github.com/simoniz0r/yad-mpv/releases",
         "desktop_file_path": "/opt/yad-mpv/yad-mpv.desktop",
         "icon_file_path": "/opt/yad-mpv/yad-mpv.png",
@@ -218,7 +218,7 @@
     },
     "yad-twitch-streamlink": {
         "instdir": "/opt/yad-twitch-streamlink",
-        "download_sorce": "GITHUB",
+        "download_source": "GITHUB",
         "taruri": "https://github.com/simoniz0r/yad-twitch-streamlink/releases",
         "desktop_file_path": "/opt/yad-twitch-streamlink/yad-twitch-streamlink.desktop",
         "icon_file_path": "/opt/yad-twitch-streamlink/yad-twitch-streamlink.png",
