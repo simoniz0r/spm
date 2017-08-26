@@ -6,13 +6,12 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.0.3"
+X="0.0.4"
 # Set spm version
 
 # Set variables
 APPIMG_UPGRADE_CHECK="FALSE"
 APPIMG_FORCE_UPGRADE="FALSE"
-GITHUB_CONTINUOUS="FALSE"
 
 appimgfunctionsexistsfunc () {
     sleep 0
@@ -22,9 +21,9 @@ appimglistallfunc () {
     echo "$(dir -C -w 1 "$CONFDIR"/appimginstalled | wc -l) AppImages installed:"
     dir -C -w 1 "$CONFDIR"/appimginstalled | pr -tT --column=3 -w 125
     echo
-    echo "$(cat "$CONFDIR"/AppImages-bintray.lst | wc -l) Bintray AppImages available for install:"
-    cat "$CONFDIR"/AppImages-bintray.lst | pr -tT --column=3 -w 125
-    echo
+    # echo "$(cat "$CONFDIR"/AppImages-bintray.lst | wc -l) Bintray AppImages available for install:"
+    # cat "$CONFDIR"/AppImages-bintray.lst | pr -tT --column=3 -w 125
+    # echo
     echo "$(cat "$CONFDIR"/AppImages-github.lst | wc -l) Github AppImages available for install:"
     cat "$CONFDIR"/AppImages-github.lst | cut -f1 -d" " | pr -tT --column=3 -w 125
 }
@@ -34,21 +33,21 @@ appimglistfunc () {
         echo "Current installed $LISTIMG information:"
         cat "$CONFDIR"/appimginstalled/"$LISTIMG"
         echo "INSTALLED=\"YES\""
-    elif grep -qw "$LISTIMG" "$CONFDIR"/AppImages-bintray.lst; then # If not installed and in Bintray list, list Bintray info
-        echo "$LISTIMG AppImage information:"
-        APPIMAGE="$(wget -q "https://bintray.com/package/files/probono/AppImages/$LISTIMG?order=desc&sort=fileLastModified&basePath=&tab=files" -O - | grep -e '64.AppImage">' | cut -d '"' -f 6 | head -n 1 | cut -f2 -d"=")"
-        echo "APPIMAGE=\"${APPIMAGE##*/}\""
-        # echo "APPIMAGE_VERSION=\"$(echo "$APPIMAGE" | cut -f2 -d'-')\""
-        echo "WEBSITE="\"https://bintray.com/probono/AppImages/$LISTIMG\"""
-        echo "APPIMG_DESCRIPTION="\"$(wget --quiet "https://bintray.com/probono/AppImages/$LISTIMG/" -O - | grep '<div class="description-text">' | cut -f2 -d'>' | cut -f1 -d'<')\"""
-        echo "INSTALLED=\"NO\""
+    # elif grep -qw "$LISTIMG" "$CONFDIR"/AppImages-bintray.lst; then # If not installed and in Bintray list, list Bintray info
+    #     echo "$LISTIMG AppImage information:"
+    #     APPIMAGE="$(wget -q "https://bintray.com/package/files/probono/AppImages/$LISTIMG?order=desc&sort=fileLastModified&basePath=&tab=files" -O - | grep -e '64.AppImage">' | cut -d '"' -f 6 | head -n 1 | cut -f2 -d"=")"
+    #     echo "APPIMAGE=\"${APPIMAGE##*/}\""
+    #     # echo "APPIMAGE_VERSION=\"$(echo "$APPIMAGE" | cut -f2 -d'-')\""
+    #     echo "WEBSITE="\"https://bintray.com/probono/AppImages/$LISTIMG\"""
+    #     echo "APPIMG_DESCRIPTION="\"$(wget --quiet "https://bintray.com/probono/AppImages/$LISTIMG/" -O - | grep '<div class="description-text">' | cut -f2 -d'>' | cut -f1 -d'<')\"""
+    #     echo "INSTALLED=\"NO\""
     elif grep -qw "$LISTIMG" "$CONFDIR"/AppImages-github.lst; then # If not installed and in Github list, list Github info
         GITHUB_APP_URL="$(grep -w "$LISTIMG" "$CONFDIR"/AppImages-github.lst | cut -f2 -d" ")"
-        APPIMAGE="$(wget --quiet "$GITHUB_APP_URL/releases" -O - | grep -i '.*/download/.*64.AppImage' | head -n 1 | cut -f2 -d'"')"
+        APPIMAGE="$(wget --quiet "$GITHUB_APP_URL" -O - | grep -iv '.*ia32*.\|.*i686*.' | grep "$LISTIMG" | grep -i '.*/download/*..*AppImage' | head -n 1 | cut -f2 -d'"')"
         MAIN_GITHUB_URL="$(echo "$GITHUB_APP_URL" | cut -f-5 -d'/')"
         # APPIMAGE_VERSION="$(wget --quiet "$GITHUB_APP_URL" -O - | grep '<a href="/*..*/commit/*.' | cut -f5 -d"/" | cut -f1 -d'"' | head -n 1)"
         if [ -z "$APPIMAGE" ]; then
-            APPIMAGE="$(wget --quiet "$GITHUB_APP_URL/releases" -O - | grep -i '.*/download/.*.AppImage' | head -n 1 | cut -f2 -d'"')"
+            APPIMAGE="$(wget --quiet "$GITHUB_APP_URL" -O - | grep -i '.*/download/.*.AppImage' | head -n 1 | cut -f2 -d'"')"
         fi
         echo "$LISTIMG AppImage information:"
         echo "APPIMAGE=\"${APPIMAGE##*/}\""
@@ -59,7 +58,6 @@ appimglistfunc () {
     else # Exit if not in list or installed
         echo "AppImage not found!"
         rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
-        exit 1
     fi
 }
 
@@ -76,11 +74,11 @@ appimglistinstalledfunc () {
 }
 
 appimgcheckfunc () { # check user input against list of known apps here
-    if grep -qwi "$1" "$CONFDIR"/AppImages-bintray.lst; then # Check AppImages-bintray.lst for AppImages from Bintray
-        APPIMG_NAME="$(grep -wi "$1" "$CONFDIR"/AppImages-bintray.lst)"
-        BINTRAY_IMG="TRUE"
-        GITHUB_IMG="FALSE"
-    elif grep -qwi "$1" "$CONFDIR"/AppImages-github.lst; then # Check AppImages-github.lst for AppImages from github
+    # if grep -qwi "$1" "$CONFDIR"/AppImages-bintray.lst; then # Check AppImages-bintray.lst for AppImages from Bintray
+    #     APPIMG_NAME="$(grep -wi "$1" "$CONFDIR"/AppImages-bintray.lst)"
+    #     BINTRAY_IMG="TRUE"
+    #     GITHUB_IMG="FALSE"
+    if grep -qwi "$1" "$CONFDIR"/AppImages-github.lst; then # Check AppImages-github.lst for AppImages from github
         APPIMG_NAME="$(grep -wi "$1" "$CONFDIR"/AppImages-github.lst | cut -f1 -d" ")"
         BINTRAY_IMG="FALSE"
         GITHUB_IMG="TRUE"
@@ -95,41 +93,24 @@ appimggithubinfofunc () {
     APPIMG_GITHUB_API_URL="$(grep -wi "$INSTIMG" "$CONFDIR"/AppImages-github.lst | cut -f3- -d" ")"
     wget --quiet "$APPIMG_GITHUB_API_URL" -O "$CONFDIR"/cache/"$INSTIMG"-release || { echo "wget $APPIMG_GITHUB_API_URL failed; has the repo been renamed or deleted?"; exit 1; }
     APPIMAGE_INFO="$HOME/.config/spm/cache/$INSTIMG"-release
-    if grep -q '"tag_name":*..*continuous"' "$APPIMAGE_INFO"; then # First try to find continuous builds
-        GITHUB_CONTINUOUS="TRUE"
-        APPIMAGE_NAME="$(grep -im 1 '"name":*..*64.AppImage"' "$APPIMAGE_INFO" | cut -f4 -d'"')"
-        if [ -z "$APPIMAGE_NAME" ]; then # Try to find AppImages that do not specify architecture
-            APPIMAGE_NAME="$(grep -im 1 '"name":*..*.AppImage"' "$APPIMAGE_INFO" | cut -f4 -d'"')"
-        fi
-    fi
-    if [ "$GITHUB_CONTINUOUS" = "FALSE" ] || [ -z "$APPIMAGE_NAME" ]; then # If no continuous build found, find regular release
-        APPIMAGE_NAME="$(grep -im 1 '"name":*..*64.AppImage"' "$APPIMAGE_INFO"  | cut -f4 -d'"')"
-        if [ -z "$APPIMAGE_NAME" ]; then # Try to find AppImages that don't specify architecture
-            APPIMAGE_NAME="$(grep -im 1 '"name":*..*.AppImage"' "$APPIMAGE_INFO" | cut -f4 -d'"')"
-        fi
-    fi
-    NEW_APPIMAGE_VERSION="$(grep -B 1 -im 1 '"browser_download_url":*..*64.AppImage"' "$APPIMAGE_INFO" | head -n 1 | cut -f4 -d'"')"
-    GITHUB_APPIMAGE_URL="$(grep -im 1 '"browser_download_url":*..*64.AppImage"' "$APPIMAGE_INFO" | cut -f4 -d'"')"
-    if [ -z "$GITHUB_APPIMAGE_URL" ]; then
-        NEW_APPIMAGE_VERSION="$(grep -B 1 -im 1 '"browser_download_url":*..*.AppImage"' "$APPIMAGE_INFO" | head -n 1 | cut -f4 -d'"')"
-        GITHUB_APPIMAGE_URL="$(grep -im 1 '"browser_download_url":*..*.AppImage"' "$APPIMAGE_INFO" | cut -f4 -d'"')"
-    fi
+    APPIMAGE_NAME="$(grep -iv '.*ia32*.\|.*i686*.' "$APPIMAGE_INFO" | grep "$INSTIMG" | grep -im 1 '"name":*..*AppImage"' | cut -f4 -d'"')"
+    NEW_APPIMAGE_VERSION="$(grep -iv '.*ia32*.\|.*i686*.' "$APPIMAGE_INFO" | grep -B 1 -im 1 '"browser_download_url":*..*AppImage"' | head -n 1 | cut -f4 -d'"')"
+    GITHUB_APPIMAGE_URL="$(grep -iv '.*ia32*.\|.*i686*.' "$APPIMAGE_INFO" | grep "$INSTIMG" | grep -im 1 '"browser_download_url":*..*AppImage"' | cut -f4 -d'"')"
     if [ "$APPIMG_UPGRADE_CHECK" = "FALSE" ]; then
         wget --quiet "$GITHUB_APP_URL" -O "$CONFDIR"/cache/"$INSTIMG"-github || { echo "wget $GITHUB_APP_URL failed; has the repo been renamed or deleted?"; rm -rf "$CONFDIR"/cache/*; exit 1; }
         APPIMG_GITHUB_INFO="$HOME/.config/spm/cache/"$INSTIMG"-github"
         APPIMG_DESCRIPTION="$(grep -i '<meta name="description"' "$APPIMG_GITHUB_INFO" | cut -f4 -d'"')"
     fi
-    GITHUB_CONTINUOUS="FALSE"
 }
 
-bintrayinfofunc () {
-    BINTRAY_APPIMAGE_URL="$(wget -q "https://bintray.com/package/files/probono/AppImages/$APPIMG_NAME?order=desc&sort=fileLastModified&basePath=&tab=files" -O - | grep -e '64.AppImage">' | cut -d '"' -f 6 | head -n 1)"
-    APPIMAGE_NAME="$(wget -q "https://bintray.com/package/files/probono/AppImages/$APPIMG_NAME?order=desc&sort=fileLastModified&basePath=&tab=files" -O - | grep -e '64.AppImage">' | cut -d '"' -f 6 | head -n 1 | cut -f2 -d"=")"
-    NEW_APPIMAGE_VERSION="$(echo "$APPIMAGE_NAME" | cut -f2 -d'-')"
-    if [ "$APPIMG_UPGRADE_CHECK" = "FALSE" ]; then
-        APPIMG_DESCRIPTION="$(wget --quiet "https://bintray.com/probono/AppImages/$APPIMG_NAME/" -O - | grep '<div class="description-text">' | cut -f2 -d'>' | cut -f1 -d'<')"
-    fi
-}
+# bintrayinfofunc () {
+#     BINTRAY_APPIMAGE_URL="$(wget -q "https://bintray.com/package/files/probono/AppImages/$APPIMG_NAME?order=desc&sort=fileLastModified&basePath=&tab=files" -O - | grep -e '64.AppImage">' | cut -d '"' -f 6 | head -n 1)"
+#     APPIMAGE_NAME="$(wget -q "https://bintray.com/package/files/probono/AppImages/$APPIMG_NAME?order=desc&sort=fileLastModified&basePath=&tab=files" -O - | grep -e '64.AppImage">' | cut -d '"' -f 6 | head -n 1 | cut -f2 -d"=")"
+#     NEW_APPIMAGE_VERSION="$(echo "$APPIMAGE_NAME" | cut -f2 -d'-')"
+#     if [ "$APPIMG_UPGRADE_CHECK" = "FALSE" ]; then
+#         APPIMG_DESCRIPTION="$(wget --quiet "https://bintray.com/probono/AppImages/$APPIMG_NAME/" -O - | grep '<div class="description-text">' | cut -f2 -d'>' | cut -f1 -d'<')"
+#     fi
+# }
 
 appimginfofunc () { # Set variables and temporarily store pages in "$CONFDIR"/cache to get info from them
     if [ "$BINTRAY_IMG" = "TRUE" ]; then
@@ -228,10 +209,11 @@ appimgupgradecheckfunc () {
 }
 
 appimgupdatelistfunc () { # Regenerate AppImages-bintray.lst from bintray, download AppImages-github.lst from github, and check versions
-    echo "Regenerating AppImages-bintray.lst from https://dl.bintray.com/probono/AppImages/ ..." # Generate list of AppImages from Bintray site using wget sed grep cut and sort
+    APPIMG_UPGRADE_CHECK="TRUE"
+    # echo "Regenerating AppImages-bintray.lst from https://dl.bintray.com/probono/AppImages/ ..." # Generate list of AppImages from Bintray site using wget sed grep cut and sort
     cd "$CONFDIR"
-    wget --quiet "https://dl.bintray.com/probono/AppImages/" -O - | sed 's/<\/*[^>]*>//g' | grep -o '.*AppImage' | cut -f1 -d"-" | sort -u > "$CONFDIR"/AppImages-bintray.lst || { echo "wget failed; exiting..."; exit 1; }
-    echo "AppImages-bintray.lst updated!"
+    # wget --quiet "https://dl.bintray.com/probono/AppImages/" -O - | sed 's/<\/*[^>]*>//g' | grep -o '.*AppImage' | cut -f1 -d"-" | sort -u > "$CONFDIR"/AppImages-bintray.lst || { echo "wget failed; exiting..."; exit 1; }
+    # echo "AppImages-bintray.lst updated!"
     echo "Downloading AppImages-github.lst from spm github repo..." # Download existing list of github AppImages from spm github repo
     rm "$CONFDIR"/AppImages-github.lst
     wget --quiet "https://raw.githubusercontent.com/simoniz0r/appimgman/spm/AppImages-github.lst" || { echo "wget failed; exiting..."; rm -rf "$CONFDIR"/cache/*; exit 1; }
@@ -335,7 +317,7 @@ appimginstallstartfunc () {
     appimginfofunc # Download web pages containing app info and set variables from them
     appimgvercheckfunc # Use vercheckfunc to get AppImage name for output before install
     if [ "$BINTRAY_IMG" = "FALSE" ] && [ "$GITHUB_IMG" = "FALSE" ];then # If AppImage not in either list, exit
-        echo "$INSTIMG is not in AppImages-bintray.lst or AppImages-github.lst; try running 'spm update'."
+        echo "$INSTIMG is not in AppImages-direct.lst or AppImages-github.lst; try running 'spm update'."
         rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
         exit 1
     else
@@ -376,11 +358,6 @@ appimgupgradestartallfunc () {
         fi
         cat "$CONFDIR"/upgrade-list.lst | tr '\n' ' ' | tr -d '"' # Ouput AppImages available for upgrades
         echo
-        if [ "$(cat "$CONFDIR"/upgrade-list.lst | wc -l)" = "1" ]; then
-            echo "1 AppImage will be upgraded."
-        else
-            echo "$(cat "$CONFDIR"/upgrade-list.lst | wc -l) AppImages will be upgraded."
-        fi
         read -p "Continue? Y/N " UPGRADEALLANSWER # Ask user if they want to upgrade
         case $UPGRADEALLANSWER in
             Y*|y*) # Do upgrade functions if yes

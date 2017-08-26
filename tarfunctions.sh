@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.0.3"
+X="0.0.4"
 # Set spm version
 
 tarfunctionsexistfunc () {
@@ -33,7 +33,6 @@ tarlistfunc () {
         else
             echo "Package not found!"
             rm -rf "$CONFDIR"/cache/*
-            exit 1
         fi
     fi
 }

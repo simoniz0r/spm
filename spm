@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.0.3"
+X="0.0.4"
 # Set spm version
 CONFDIR="$HOME/.config/spm"
 
@@ -38,8 +38,8 @@ if [ ! -d "$CONFDIR" ]; then # Create dirs for configs if they don't exist
     mkdir "$CONFDIR"/appimgupgrades
     mkdir "$CONFDIR"/cache
     echo "CONFDIR="\"$CONFDIR\""" > "$CONFDIR"/spm.conf
-    echo "Generating AppImages-bintray.lst from https://dl.bintray.com/probono/AppImages/ ..."
-    wget --show-progress --quiet "https://dl.bintray.com/probono/AppImages/" -O - | sed 's/<\/*[^>]*>//g' | grep -o '.*AppImage' | cut -f1 -d"-" | sort -u > "$CONFDIR"/AppImages-bintray.lst
+    # echo "Generating AppImages-bintray.lst from https://dl.bintray.com/probono/AppImages/ ..."
+    # wget --show-progress --quiet "https://dl.bintray.com/probono/AppImages/" -O - | sed 's/<\/*[^>]*>//g' | grep -o '.*AppImage' | cut -f1 -d"-" | sort -u > "$CONFDIR"/AppImages-bintray.lst
     echo "Downloading AppImages-github.lst from spm github..."
     wget --quiet --show-progress "https://raw.githubusercontent.com/simoniz0r/appimgman/spm/AppImages-github.lst" -qO "$CONFDIR"/AppImages-github.lst
     echo "Downloading tar-pkgs.lst from tar-pkg github repo..."
@@ -125,7 +125,8 @@ case $1 in
         spmvercheckfunc
         # Need to fix this so package input checks only go to relevant function
         if [ ! -z "$2" ]; then
-            if grep -qiw "$2" "$CONFDIR"/AppImages-bintray.lst ||grep -qiw "$2" "$CONFDIR"/AppImages-github.lst; then
+            # if grep -qiw "$2" "$CONFDIR"/AppImages-bintray.lst ||grep -qiw "$2" "$CONFDIR"/AppImages-github.lst; then
+            if grep -qiw "$2" "$CONFDIR"/AppImages-github.lst; then
                 appimgupdatelistfunc "$2"
             elif [ -f "$CONFDIR"/tarinstalled/"$2" ]; then
                 tarupdatelistfunc "$2"
@@ -275,11 +276,18 @@ case $1 in
             echo "tar packages:"
             tarlistfunc
         else # If AppImage input, list info for that AppImage
-            if grep -q "$LISTIMG" "$CONFDIR"/AppImages-bintray.lst ||grep -q "$LISTIMG" "$CONFDIR"/AppImages-github.lst; then
+            if grep -q "$LISTIMG" "$CONFDIR"/AppImages-github.lst; then
                 appimglistfunc # List information about specified AppImage
+                ISAPPIMG="TRUE"
             fi
-            if [ -f "$CONFDIR"/tarinstalled/"$LISTPKG" ]; then
+            if grep -q "$LISTPKG" "$CONFDIR"/tar-pkgs.lst; then
                 tarlistfunc
+                ISTAR="TRUE"
+            fi
+            if [ -z "$ISAPPIMG" ] && [ -z "$ISTAR" ]; then
+                echo "$2 not found!"
+                rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
+                exit 1
             fi
         fi
         rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
