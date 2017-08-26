@@ -1,12 +1,12 @@
 #!/bin/bash
 # Title: spm
 # Description: Downloads AppImages and moves them to /usr/local/bin/.  Can also upgrade and remove installed AppImages.
-# Dependencies: GNU coreutils, wget
+# Dependencies: GNU coreutils, tar, wget, python3.x
 # Author: simonizor
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.0.4"
+X="0.0.5"
 # Set spm version
 
 # Set variables
@@ -187,29 +187,25 @@ appimgupgradecheckallfunc () {
 
 appimgupgradecheckfunc () {
     if [ ! -f "$CONFDIR"/appimginstalled/"$INSTIMG" ]; then
-        echo "$INSTIMG is not installed; exiting..."
-        rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
-        exit 1
-    fi
-    if grep -qw "$INSTIMG" "$CONFDIR"/upgrade-list.lst; then # If AppImage is already on upgrade-list.lst, do not add it again 
+        echo "$INSTIMG is not installed..."
+    elif grep -qw "$INSTIMG" "$CONFDIR"/upgrade-list.lst; then # If AppImage is already on upgrade-list.lst, do not add it again 
         echo "$(tput setaf 2)$INSTIMG is already marked for upgrade!"
         echo "Run 'spm upgrade $INSTIMG' to upgrade $INSTIMG$(tput sgr0)"
-        rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
-        exit 0
-    fi
-    APPIMG_UPGRADE_CHECK="TRUE"
-    echo "Checking $INSTIMG version..."
-    appimgcheckfunc "$INSTIMG" # Check whether AppImage is in lists and which list it is in
-    appimginfofunc # Download web pages containing app info and set variables from them
-    appimgvercheckfunc
-    if [ "$APPIMG_NEW_UPGRADE" = "TRUE" ]; then # Add AppImage to upgrade-list.lst if appimgvercheckfunc outputs APPIMG_NEW_UPGRADE="TRUE"
-        echo "$(tput setaf 2)New upgrade available for $INSTIMG -- $NEW_APPIMAGE_VERSION !$(tput sgr0)"
-        echo "$INSTIMG" >> "$CONFDIR"/upgrade-list.lst
     else
-        echo "No new upgrade for $INSTIMG"
-    fi
-    if [ "$(cat "$CONFDIR"/upgrade-list.lst | wc -l)" = "0" ]; then # If no AppImages were added to upgrade-list.lst, remove file
-        rm "$CONFDIR"/upgrade-list.lst
+        APPIMG_UPGRADE_CHECK="TRUE"
+        echo "Checking $INSTIMG version..."
+        appimgcheckfunc "$INSTIMG" # Check whether AppImage is in lists and which list it is in
+        appimginfofunc # Download web pages containing app info and set variables from them
+        appimgvercheckfunc
+        if [ "$APPIMG_NEW_UPGRADE" = "TRUE" ]; then # Add AppImage to upgrade-list.lst if appimgvercheckfunc outputs APPIMG_NEW_UPGRADE="TRUE"
+            echo "$(tput setaf 2)New upgrade available for $INSTIMG -- $NEW_APPIMAGE_VERSION !$(tput sgr0)"
+            echo "$INSTIMG" >> "$CONFDIR"/upgrade-list.lst
+        else
+            echo "No new upgrade for $INSTIMG"
+        fi
+        if [ "$(cat "$CONFDIR"/upgrade-list.lst | wc -l)" = "0" ]; then # If no AppImages were added to upgrade-list.lst, remove file
+            rm "$CONFDIR"/upgrade-list.lst
+        fi
     fi
 }
 

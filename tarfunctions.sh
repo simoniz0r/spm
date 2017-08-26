@@ -1,13 +1,14 @@
 #!/bin/bash
 # Title: spm
 # Description: Excracts and moves tar archives to /opt/ and creates symlinks for their .desktop files.  Can also upgrade and remove installed tar packages.
-# Dependencies: GNU coreutils, tar, wget
+# Dependencies: GNU coreutils, tar, wget, python3.x
 # Author: simonizor
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.0.4"
+X="0.0.5"
 # Set spm version
+TAR_LIST="$(cat $CONFDIR/tar-pkgs.json | python3 -c "import sys, json; data = json.load(sys.stdin); print (data['available'])")" #  | pr -tTw 125 -3
 
 tarfunctionsexistfunc () {
     sleep 0
@@ -18,15 +19,15 @@ tarlistfunc () {
         echo "$(dir "$CONFDIR"/tarinstalled | wc -w) installed tar packages:"
         dir -C -w 1 "$CONFDIR"/tarinstalled | pr -tT --column=3 -w 125
         echo
-        echo "$(cat "$CONFDIR"/tar-pkgs.lst | wc -l) tar packages for install:"
-        cat "$CONFDIR"/tar-pkgs.lst | tr -d '"' | pr -tT --column=3 -w 125
+        echo "$(echo "$TAR_LIST" | wc -l) tar packages for install:"
+        echo "$TAR_LIST" | pr -tTw 125 -3
     else
         if [ -f "$CONFDIR"/tarinstalled/"$LISTPKG" ]; then
             echo "Current installed $LISTPKG information:"
             cat "$CONFDIR"/tarinstalled/"$LISTPKG"
             echo "INSTALLED=\"YES\""
             echo "BIN_PATH=\"/usr/local/bin/$LISTPKG\""
-        elif grep -q \"$LISTPKG\" "$CONFDIR"/tar-pkgs.lst; then
+        elif echo "$TAR_LIST" | grep -qiw "$LISTPKG"; then
             echo "$LISTPKG tar package information:"
             echo "$(wget "https://raw.githubusercontent.com/simoniz0r/tar-pkg/master/apps/$LISTPKG/$LISTPKG.conf" -qO -)"
             echo "INSTALLED=\"NO\""
@@ -57,10 +58,8 @@ tarsaveconffunc () {
     echo "INSTDIR="\"$INSTDIR\""" > "$CONFDIR"/"$SAVEDIR"
     if [ "$TAR_DOWNLOAD_SOURCE" != "LOCAL" ]; then
         echo "TAR_DOWNLOAD_SOURCE="\"$TAR_DOWNLOAD_SOURCE\""" >> "$CONFDIR"/"$SAVEDIR"
-        if [ "$TAR_DOWNLOAD_SOURCE" = "GITHUB" ] && [ ! -z "$TAR_GITHUB_COMMIT" ] || [ "$TAR_DOWNLOAD_SOURCE" = "DIRECT" ]; then
-            echo "TARURI="\"$TARURI\""" >> "$CONFDIR"/"$SAVEDIR"
-            echo "TARFILE="\"$NEW_TARFILE\""" >> "$CONFDIR"/"$SAVEDIR"
-        fi
+        echo "TARURI="\"$TARURI\""" >> "$CONFDIR"/"$SAVEDIR"
+        echo "TARFILE="\"$NEW_TARFILE\""" >> "$CONFDIR"/"$SAVEDIR"
     fi
     if [ "$TAR_DOWNLOAD_SOURCE" = "GITHUB" ]; then
         echo "TAR_GITHUB_COMMIT="\"$TAR_GITHUB_NEW_COMMIT\""" >> "$CONFDIR"/"$SAVEDIR"
@@ -151,20 +150,33 @@ tarcustominfofunc () {
 }
 
 tarappcheckfunc () { # check user input against list of known apps here
-    if grep -q \"$1\" "$CONFDIR"/tar-pkgs.lst; then
-        KNOWN_TAR="TRUE"
-        wget "https://raw.githubusercontent.com/simoniz0r/tar-pkg/master/apps/$1/$1.conf" -qO "$CONFDIR"/cache/$1.conf
-        . "$CONFDIR"/cache/$1.conf
-        TAR_DOWNLOAD_SOURCE="$DOWNLOAD_SOURCE"
-        if [ "$TAR_DOWNLOAD_SOURCE" = "GITHUB" ]; then
-            targithubinfofunc
-        fi
-    else
-        if [ -f "$CONFDIR"/tarinstalled/$1 ]; then
-            . "$CONFDIR"/tarinstalled/$1
-        fi
-        KNOWN_TAR="FALSE"
-    fi
+    echo "$TAR_LIST" | grep -qiw "$1"
+    TAR_STATUS="$?"
+    case $TAR_STATUS in
+        0)
+            KNOWN_TAR="TRUE"
+            TARPKG_NAME="$1"
+            INSTDIR="$(cat $CONFDIR/tar-pkgs.json | $RUNNING_DIR/jsonparse.py $1 instdir)"
+            TAR_DOWNLOAD_SOURCE="$(cat $CONFDIR/tar-pkgs.json | $RUNNING_DIR/jsonparse.py $1 download_source)"
+            TARURI="$(cat $CONFDIR/tar-pkgs.json | $RUNNING_DIR/jsonparse.py $1 taruri)"
+            DESKTOP_FILE_PATH="$(cat $CONFDIR/tar-pkgs.json | $RUNNING_DIR/jsonparse.py $1 desktop_file_path)"
+            ICON_FILE_PATH="$(cat $CONFDIR/tar-pkgs.json | $RUNNING_DIR/jsonparse.py $1 icon_file_path)"
+            EXECUTABLE_FILE_PATH="$(cat $CONFDIR/tar-pkgs.json | $RUNNING_DIR/jsonparse.py $1 executable_file_path)"
+            BIN_PATH="$(cat $CONFDIR/tar-pkgs.json | $RUNNING_DIR/jsonparse.py $1 instdir)"
+            CONFIG_PATH="$(cat $CONFDIR/tar-pkgs.json | $RUNNING_DIR/jsonparse.py $1 config_path)"
+            TAR_DESCRIPTION="$(cat $CONFDIR/tar-pkgs.json | $RUNNING_DIR/jsonparse.py $1 description)"
+            DEPENDENCIES="$(cat $CONFDIR/tar-pkgs.json | $RUNNING_DIR/jsonparse.py $1 dependencies)"
+            if [ "$TAR_DOWNLOAD_SOURCE" = "GITHUB" ]; then
+                targithubinfofunc
+            fi
+            ;;
+        *)
+            if [ -f "$CONFDIR"/tarinstalled/$1 ]; then
+                . "$CONFDIR"/tarinstalled/$1
+            fi
+            KNOWN_TAR="FALSE"
+            ;;
+    esac
 }
 
 tarcustomdlfunc () {
@@ -262,21 +274,17 @@ tarcheckfunc () {
 }
 
 checktarversionfunc () {
-    GITHUB_COMMIT=""
     . "$CONFDIR"/tarinstalled/"$TARPKG"
     if [ -f "$CONFDIR"/cache/"$TARPKG".conf ]; then
         . "$CONFDIR"/cache/"$TARPKG".conf
-        if [ "$TAR_DOWNLOAD_SOURCE" = "GITHUB" ] && [ -z "$TAR_GITHUB_COMMIT" ]; then
-            . "$CONFDIR"/tarinstalled/"$TARPKG"
-        fi
     fi
-    if [ "$TAR_DOWNLOAD_SOURCE" = "GITHUB" ] && [ ! -z "$TAR_GITHUB_COMMIT" ]; then
+    if [ "$TAR_DOWNLOAD_SOURCE" = "GITHUB" ]; then
         if [ "$GITHUB_DOWNLOAD_ERROR" = "TRUE" ]; then
             TAR_NEW_UPGRADE="FALSE"
             GITHUB_DOWNLOAD_ERROR="FALSE"
         elif [ "$TAR_FORCE_UPGRADE" = "TRUE" ]; then
             TAR_NEW_UPGRADE="TRUE"
-            TAR_FORCE_UPGRADE=""
+            TAR_FORCE_UPGRADE="FALSE"
         elif [ $TAR_GITHUB_COMMIT != $TAR_GITHUB_NEW_COMMIT ]; then
             TAR_NEW_UPGRADE="TRUE"
         else
@@ -286,12 +294,9 @@ checktarversionfunc () {
         wget -S --read-timeout=30 --spider "$TARURI" -o "$CONFDIR"/cache/"$TARPKG".latest
         NEW_TARURI="$(grep -o "Location:.*" "$CONFDIR"/cache/"$TARPKG".latest | cut -f2 -d" ")"
         NEW_TARFILE="${NEW_TARURI##*/}"
-        if [ "$TAR_DOWNLOAD_SOURCE" = "GITHUB" ] && [ -z "$TAR_GITHUB_COMMIT" ]; then
-            echo "$(tput setaf 2)Configuration update required for $TARPKG; marking for upgrade..."
+        if [ "$TAR_FORCE_UPGRADE" = "TRUE" ]; then
             TAR_NEW_UPGRADE="TRUE"
-        elif [ "$TAR_FORCE_UPGRADE" = "TRUE" ]; then
-            TAR_NEW_UPGRADE="TRUE"
-            TAR_FORCE_UPGRADE=""
+            TAR_FORCE_UPGRADE="FALSE"
         elif [[ "$NEW_TARFILE" != "$TARFILE" ]]; then
             TAR_NEW_UPGRADE="TRUE"
         elif [ "$RENAMED" = "TRUE" ] && [ -d /opt/"$OLD_NAME" ]; then
@@ -355,28 +360,27 @@ tarupgradecheckallfunc () {
 }
 
 tarupgradecheckfunc () {
-    if ! grep -q \"$1\" "$CONFDIR"/tar-pkgs.lst; then
-        echo "$1 is not in tar-pkgs.lst; try running 'spm update'."
-        rm -rf "$CONFDIR"/cache/*
-        exit 1
-    fi
-    TARPKG="$1"
-    echo "Checking $TARPKG version..."
-    tarappcheckfunc "$TARPKG"
-    checktarversionfunc
-    if [ "$TAR_NEW_UPGRADE" = "TRUE" ]; then
-        echo "$(tput setaf 2)New upgrade available for $TARPKG -- $NEW_TARFILE !$(tput sgr0)"
-        tarsaveconffunc "tarupgrades/$TARPKG"
+    if ! echo "$TAR_LIST" | grep -qiw "$LISTPKG"; then
+        echo "$1 is not in tar-pkgs.json; try running 'spm update'."
     else
-        echo "No new upgrade for $TARPKG"
+        TARPKG="$1"
+        echo "Checking $TARPKG version..."
+        tarappcheckfunc "$TARPKG"
+        checktarversionfunc
+        if [ "$TAR_NEW_UPGRADE" = "TRUE" ]; then
+            echo "$(tput setaf 2)New upgrade available for $TARPKG -- $NEW_TARFILE !$(tput sgr0)"
+            tarsaveconffunc "tarupgrades/$TARPKG"
+        else
+            echo "No new upgrade for $TARPKG"
+        fi
     fi
 }
 
 tarupdatelistfunc () {
-    echo "Downloading tar-pkgs.lst from spm github repo..."
-    rm "$CONFDIR"/tar-pkgs.lst
-    wget "https://raw.githubusercontent.com/simoniz0r/tar-pkg/master/apps/known-pkgs.lst" -qO "$CONFDIR"/tar-pkgs.lst
-    echo "tar-pkgs.lst updated!"
+    echo "Downloading tar-pkgs.json from spm github repo..."
+    rm "$CONFDIR"/tar-pkgs.json
+    wget "https://raw.githubusercontent.com/simoniz0r/appimgman/spm/tar-pkgs.json" -qO "$CONFDIR"/tar-pkgs.json
+    echo "tar-pkgs.json updated!"
     if [ -z "$1" ]; then
         tarupgradecheckallfunc
     else
@@ -473,18 +477,18 @@ tarcustomstartfunc () {
     fi
     tarappcheckfunc "$TARPKG"
     if [ "$KNOWN_TAR" = "FALSE" ];then
-        echo "$TARPKG is not in tar-pkgs.lst; You can try updating tar-pkgs.lst or you can be guided through the custom install."
+        echo "$TARPKG is not in tar-pkgs.json; You can try updating tar-pkgs.json or you can be guided through the custom install."
         read -p "Continue with custom install? Y/N " APPCHKINSTANSWER
         case $APPCHKINSTANSWER in
             N*|n*)
                 echo "Exiting..."
-                echo "Try running 'spm update' to update the tar-pkgs.lst."
+                echo "Try running 'spm update' to update the tar-pkgs.json."
                 rm -rf "$CONFDIR"/cache/*
                 exit 0
                 ;;
         esac
     else
-        echo "$TARPKG is in tar-pkgs.lst; use 'spm install $TARPKG'."
+        echo "$TARPKG is in tar-pkgs.json; use 'spm install $TARPKG'."
         rm -rf "$CONFDIR"/cache/*
         exit 1
     fi
@@ -538,7 +542,7 @@ tarinstallstartfunc () {
     fi
     tarappcheckfunc "$TARPKG"
     if [ "$KNOWN_TAR" = "FALSE" ];then
-        echo "$TARPKG is not in tar-pkgs.lst; You can try updating tar-pkgs.lst or run 'spm tar-custom'."
+        echo "$TARPKG is not in tar-pkgs.json; You can try updating tar-pkgs.json or run 'spm tar-custom'."
         rm -rf "$CONFDIR"/cache/*
         exit 1
     else
@@ -615,7 +619,7 @@ tarupgradestartallfunc () {
                     tarappcheckfunc "$TARPKG"
                     . "$CONFDIR"/cache/"$TARPKG".conf
                     . "$CONFDIR"/tarupgrades/"$TARPKG"
-                    if [ "$TAR_DOWNLOAD_SOURCE" = "GITHUB" ] && [ -z "$TAR_GITHUB_COMMIT" ]; then
+                    if [ "$TAR_DOWNLOAD_SOURCE" = "GITHUB" ]; then
                         targithubinfofunc
                     fi
                     tardlfunc "$TARPKG"
@@ -643,7 +647,7 @@ tarupgradestartfunc () {
             tarappcheckfunc "$TARPKG"
             . "$CONFDIR"/cache/"$TARPKG".conf
             . "$CONFDIR"/tarupgrades/"$TARPKG"
-            if [ "$TAR_DOWNLOAD_SOURCE" = "GITHUB" ] && [ -z "$TAR_GITHUB_COMMIT" ]; then
+            if [ "$TAR_DOWNLOAD_SOURCE" = "GITHUB" ]; then
                 targithubinfofunc
             fi
             tardlfunc "$TARPKG"

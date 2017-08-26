@@ -1,12 +1,12 @@
 #!/bin/bash
 # Title: spm
 # Description: Downloads AppImages and moves them to /usr/local/bin/.  Can also upgrade and remove installed AppImages.
-# Dependencies: GNU coreutils, wget
+# Dependencies: GNU coreutils, tar, wget, python3.x
 # Author: simonizor
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.0.4"
+X="0.0.5"
 # Set spm version
 CONFDIR="$HOME/.config/spm"
 
@@ -41,9 +41,9 @@ if [ ! -d "$CONFDIR" ]; then # Create dirs for configs if they don't exist
     # echo "Generating AppImages-bintray.lst from https://dl.bintray.com/probono/AppImages/ ..."
     # wget --show-progress --quiet "https://dl.bintray.com/probono/AppImages/" -O - | sed 's/<\/*[^>]*>//g' | grep -o '.*AppImage' | cut -f1 -d"-" | sort -u > "$CONFDIR"/AppImages-bintray.lst
     echo "Downloading AppImages-github.lst from spm github..."
-    wget --quiet --show-progress "https://raw.githubusercontent.com/simoniz0r/appimgman/spm/AppImages-github.lst" -qO "$CONFDIR"/AppImages-github.lst
-    echo "Downloading tar-pkgs.lst from tar-pkg github repo..."
-    wget "https://raw.githubusercontent.com/simoniz0r/tar-pkg/master/apps/known-pkgs.lst" -qO "$CONFDIR"/tar-pkgs.lst
+    wget --quiet --show-progress "https://raw.githubusercontent.com/simoniz0r/appimgman/spm/AppImages-github.lst" -O "$CONFDIR"/AppImages-github.lst
+    echo "Downloading tar-pkgs.json from spm github repo..."
+    wget --quiet --show-progress "https://raw.githubusercontent.com/simoniz0r/appimgman/spm/tar-pkgs.json" -O "$CONFDIR"/tar-pkgs.json
     echo "First run operations complete!"
 fi
 
@@ -80,6 +80,8 @@ appimgfunctionsexistsfunc  || { echo "Could not load $RUNNING_DIR/appimgfunction
 tarfunctioncheckfunc # Check if tarfunctions.sh exists, check version if it does, download if out of date or doesn't
 source "$RUNNING_DIR"/tarfunctions.sh # import functions from tarfunctions.sh
 tarfunctionsexistfunc || { echo "Could not load $RUNNING_DIR/tarfunctions.sh; exiting..."; exit 1; }
+
+jsonparsecheck
 
 spmlockfunc # Create "$CONFDIR"/cache/spm.lock file and prevent multiple instances by checking if it exists before running
 
