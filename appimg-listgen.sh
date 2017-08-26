@@ -16,6 +16,7 @@ for image in $(dir -C -w 1 /home/simonizor/TestScripts/appimage.github.io/data);
 done > /home/simonizor/TestScripts/AppImages-github.lst
 # Add any AppImages that appimagehub misses
 echo "tc-linux https://github.com/mccxiv/tc https://api.github.com/repos/mccxiv/tc/releases" >> /home/simonizor/TestScripts/AppImages-github.lst
+echo "upterm https://github.com/railsware/upterm https://api.github.com/repos/railsware/upterm/releases" >> /home/simonizor/TestScripts/AppImages-github.lst
 # Generate a list of AppImages from sites other than github with versions that cannot be managed
 for image in $(dir -C -w 1 /home/simonizor/TestScripts/appimage.github.io/data); do
     URL="$(grep -v '#' /home/simonizor/TestScripts/appimage.github.io/data/"$image" | grep -v '.*/github*.')"
