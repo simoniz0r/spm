@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.0.7"
+X="0.0.8"
 # Set spm version
 CONFDIR="$HOME/.config/spm"
 
@@ -287,7 +287,7 @@ case $1 in
                 appimglistfunc # List information about specified AppImage
                 ISAPPIMG="TRUE"
             fi
-            if grep -q "$LISTPKG" "$CONFDIR"/tar-pkgs.lst; then
+            if echo "$TAR_LIST" | grep -qiw "$LISTPKG"; then
                 tarlistfunc
                 ISTAR="TRUE"
             fi
