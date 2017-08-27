@@ -287,7 +287,7 @@ case $1 in
             echo "tar packages:"
             tarlistfunc
         else # If AppImage input, list info for that AppImage
-            if grep -q "$LISTIMG" "$CONFDIR"/AppImages-github.lst; then
+            if grep -qiw "$LISTIMG" "$CONFDIR"/AppImages-github.lst; then
                 appimglistfunc # List information about specified AppImage
                 ISAPPIMG="TRUE"
             fi

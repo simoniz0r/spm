@@ -41,7 +41,8 @@ appimglistfunc () {
     #     echo "WEBSITE="\"https://bintray.com/probono/AppImages/$LISTIMG\"""
     #     echo "APPIMG_DESCRIPTION="\"$(wget --quiet "https://bintray.com/probono/AppImages/$LISTIMG/" -O - | grep '<div class="description-text">' | cut -f2 -d'>' | cut -f1 -d'<')\"""
     #     echo "INSTALLED=\"NO\""
-    elif grep -qw "$LISTIMG" "$CONFDIR"/AppImages-github.lst; then # If not installed and in Github list, list Github info
+    elif grep -qiw "$LISTIMG" "$CONFDIR"/AppImages-github.lst; then # If not installed and in Github list, list Github info
+        LISTIMG="$(grep -wi "$LISTIMG" "$CONFDIR"/AppImages-github.lst | cut -f1 -d" ")"
         GITHUB_APP_URL="$(grep -w "$LISTIMG" "$CONFDIR"/AppImages-github.lst | cut -f2 -d" ")"
         APPIMAGE="$(wget --quiet "$GITHUB_APP_URL" -O - | grep -iv '.*ia32*.\|.*i686*.\|.*i386*.' | grep "$LISTIMG" | grep -i '.*/download/*..*AppImage' | head -n 1 | cut -f2 -d'"')"
         MAIN_GITHUB_URL="$(echo "$GITHUB_APP_URL" | cut -f-5 -d'/')"
