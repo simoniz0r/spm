@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.1.3"
+X="0.1.4"
 # Set spm version
 CONFDIR="$HOME/.config/spm"
 
@@ -38,6 +38,7 @@ if [ ! -d "$CONFDIR" ]; then # Create dirs for configs if they don't exist
     mkdir "$CONFDIR"/appimgupgrades
     mkdir "$CONFDIR"/cache
     echo "CONFDIR="\"$CONFDIR\""" > "$CONFDIR"/spm.conf
+    echo "GITHUB_TOKEN="\"\""" >> "$CONFDIR"/spm.conf
     # echo "Generating AppImages-bintray.lst from https://dl.bintray.com/probono/AppImages/ ..."
     # wget --show-progress --quiet "https://dl.bintray.com/probono/AppImages/" -O - | sed 's/<\/*[^>]*>//g' | grep -o '.*AppImage' | cut -f1 -d"-" | sort -u > "$CONFDIR"/AppImages-bintray.lst
     echo "Downloading AppImages-github.lst from spm github..."

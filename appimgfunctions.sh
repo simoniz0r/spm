@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.1.3"
+X="0.1.4"
 # Set spm version
 
 # Set variables
@@ -90,7 +90,11 @@ appimgcheckfunc () { # check user input against list of known apps here
 appimggithubinfofunc () {
     GITHUB_APP_URL="$(grep -wi "$INSTIMG" "$CONFDIR"/AppImages-github.lst | cut -f2 -d" ")"
     APPIMG_GITHUB_API_URL="$(grep -wi "$INSTIMG" "$CONFDIR"/AppImages-github.lst | cut -f3- -d" ")"
-    wget --quiet "$APPIMG_GITHUB_API_URL" -O "$CONFDIR"/cache/"$INSTIMG"-release || { echo "wget $APPIMG_GITHUB_API_URL failed; has the repo been renamed or deleted?"; exit 1; }
+    if [ -z "$GITHUB_TOKEN" ]; then
+        wget --quiet "$APPIMG_GITHUB_API_URL" -O "$CONFDIR"/cache/"$INSTIMG"-release || { echo "wget $APPIMG_GITHUB_API_URL failed; has the repo been renamed or deleted?"; exit 1; }
+    else
+        wget --quiet --auth-no-challenge --header="Authorization: token "$GITHUB_TOKEN"" "$APPIMG_GITHUB_API_URL" -O "$CONFDIR"/cache/"$INSTIMG"-release || { echo "wget $APPIMG_GITHUB_API_URL failed; is your token valid?"; exit 1; }
+    fi
     APPIMAGE_INFO="$HOME/.config/spm/cache/$INSTIMG"-release
     APPIMAGE_NAME="$(grep -iv '.*ia32*.\|.*i686*.\|.*i386*.' "$APPIMAGE_INFO" | grep "$INSTIMG" | grep -im 1 '"name":*..*AppImage"' | cut -f4 -d'"')"
     NEW_APPIMAGE_VERSION="$(grep -iv '.*ia32*.\|.*i686*.\|.*i386*.' "$APPIMAGE_INFO" | grep -B 1 -im 1 '"browser_download_url":*..*AppImage"' | head -n 1 | cut -f4 -d'"')"
