@@ -150,7 +150,7 @@ spmlockfunc () {
 }
 
 spmvercheckfunc () {
-    VERTEST="$(wget -q "https://raw.githubusercontent.com/simoniz0r/appimgman/spm/spm" -O - | sed -n '9p' | tr -d 'X="')" # Use wget sed and tr to check current spm version from github
+    VERTEST="$(wget -q "https://raw.githubusercontent.com/simoniz0r/spm/master/spm" -O - | sed -n '9p' | tr -d 'X="')" # Use wget sed and tr to check current spm version from github
     if [[ "$VERTEST" != "$X" ]]; then # If current version not equal to installed version, notify of new version
         echo "A new version of spm is available!"
         echo "Current version: $VERTEST -- Installed version: $X"

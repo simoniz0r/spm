@@ -41,9 +41,9 @@ if [ ! -d "$CONFDIR" ]; then # Create dirs for configs if they don't exist
     # echo "Generating AppImages-bintray.lst from https://dl.bintray.com/probono/AppImages/ ..."
     # wget --show-progress --quiet "https://dl.bintray.com/probono/AppImages/" -O - | sed 's/<\/*[^>]*>//g' | grep -o '.*AppImage' | cut -f1 -d"-" | sort -u > "$CONFDIR"/AppImages-bintray.lst
     echo "Downloading AppImages-github.lst from spm github..."
-    wget --quiet --show-progress "https://raw.githubusercontent.com/simoniz0r/appimgman/spm/AppImages-github.lst" -O "$CONFDIR"/AppImages-github.lst
+    wget --quiet --show-progress "https://raw.githubusercontent.com/simoniz0r/spm/master/AppImages-github.lst" -O "$CONFDIR"/AppImages-github.lst
     echo "Downloading tar-pkgs.json from spm github repo..."
-    wget --quiet --show-progress "https://raw.githubusercontent.com/simoniz0r/appimgman/spm/tar-pkgs.json" -O "$CONFDIR"/tar-pkgs.json
+    wget --quiet --show-progress "https://raw.githubusercontent.com/simoniz0r/spm/master/tar-pkgs.json" -O "$CONFDIR"/tar-pkgs.json
     echo "First run operations complete!"
 fi
 

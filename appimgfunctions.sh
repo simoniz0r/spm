@@ -217,7 +217,7 @@ appimgupdatelistfunc () { # Regenerate AppImages-bintray.lst from bintray, downl
     # echo "AppImages-bintray.lst updated!"
     echo "Downloading AppImages-github.lst from spm github repo..." # Download existing list of github AppImages from spm github repo
     rm "$CONFDIR"/AppImages-github.lst
-    wget --quiet "https://raw.githubusercontent.com/simoniz0r/appimgman/spm/AppImages-github.lst" || { echo "wget failed; exiting..."; rm -rf "$CONFDIR"/cache/*; exit 1; }
+    wget --quiet "https://raw.githubusercontent.com/simoniz0r/spm/master/AppImages-github.lst" || { echo "wget failed; exiting..."; rm -rf "$CONFDIR"/cache/*; exit 1; }
     echo "AppImages-github.lst updated!"
     if [ ! -f "$CONFDIR"/upgrade-list.lst ]; then # Create upgrade-list.lst file to avoid error outputs during update checks
         touch "$CONFDIR"/upgrade-list.lst

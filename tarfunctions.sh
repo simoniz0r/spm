@@ -381,7 +381,7 @@ tarupgradecheckfunc () {
 tarupdatelistfunc () {
     echo "Downloading tar-pkgs.json from spm github repo..."
     rm "$CONFDIR"/tar-pkgs.json
-    wget "https://raw.githubusercontent.com/simoniz0r/appimgman/spm/tar-pkgs.json" -qO "$CONFDIR"/tar-pkgs.json
+    wget "https://raw.githubusercontent.com/simoniz0r/spm/master/tar-pkgs.json" -qO "$CONFDIR"/tar-pkgs.json
     echo "tar-pkgs.json updated!"
     if [ -z "$1" ]; then
         tarupgradecheckallfunc
