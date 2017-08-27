@@ -1,5 +1,5 @@
 {
-    "available" : "atom\ndiscord-canary\ndiscord-ptb\ndiscord-stable\ndiscord-toolbox\nfirefox-beta\nfirefox-dev\nfirefox-nightly\nfirefox\ngpgpassman\nkaku\nnvim\nopenrct2\nopenttd\nrambox\nspm\nvscode\nwavebox\nxdgfetch\nyad-mpv\nyad-twitch-streamlink",
+    "available" : "atom\ndiscord-canary\ndiscord-ptb\ndiscord\ndiscord-toolbox\nfirefox-beta\nfirefox-dev\nfirefox-nightly\nfirefox\ngpgpassman\nkaku\nnvim\nopenrct2\nopenttd\nrambox\nspm\nvscode\nwavebox\nxdgfetch\nyad-mpv\nyad-twitch-streamlink",
     "atom": {
         "instdir": "/opt/atom",
         "download_source": "GITHUB",
@@ -36,14 +36,14 @@
         "description": "All-in-one voice and text chat for gamers that's free, secure, and works on both your desktop and phone.",
         "dependencies": "alsa-lib gconf glibc gtk2 libc++ libnotify libxss nspr nss libpulse (optional – for pulseaudio support) noto-fonts-emoji (optional – Google font for emoji support.) ttf-symbola (optional – font for emoji support.)"
     },
-    "discord-stable": {
+    "discord": {
         "instdir": "/opt/discord",
         "download_source": "DIRECT",
         "taruri": "https://discordapp.com/api/download?platform=linux&format=tar.gz",
         "desktop_file_path": "/opt/discord/discord.desktop",
         "icon_file_path": "/opt/discord/discord.png",
         "executable_file_path": "/opt/discord/Discord",
-        "bin_path": "/usr/local/bin/discord-stable",
+        "bin_path": "/usr/local/bin/discord",
         "config_path": "$HOME/.config/discord",
         "description": "All-in-one voice and text chat for gamers that's free, secure, and works on both your desktop and phone.",
         "dependencies": "alsa-lib gconf glibc gtk2 libc++ libnotify libxss nspr nss libpulse (optional – for pulseaudio support) noto-fonts-emoji (optional – Google font for emoji support.) ttf-symbola (optional – font for emoji support.)"

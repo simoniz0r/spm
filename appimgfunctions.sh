@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.1.8"
+X="0.1.9"
 # Set spm version
 
 # Set variables
@@ -46,11 +46,11 @@ appimglistallfunc () {
 
 appimgcheckfunc () { # check user input against list of known apps here
     if grep -qwi "$1" "$CONFDIR"/AppImages-direct.lst; then # Check AppImages-direct.lst for AppImages from Direct
-        APPIMG_NAME="$(grep -wi "$1" "$CONFDIR"/AppImages-direct.lst)"
+        APPIMG_NAME="$(grep -woi "$1" "$CONFDIR"/AppImages-direct.lst  | cut -f1 -d" ")"
         DIRECT_IMG="TRUE"
         GITHUB_IMG="FALSE"
     elif grep -qwi "$1" "$CONFDIR"/AppImages-github.lst; then # Check AppImages-github.lst for AppImages from github
-        APPIMG_NAME="$(grep -wi "$1" "$CONFDIR"/AppImages-github.lst | cut -f1 -d" ")"
+        APPIMG_NAME="$(grep -woi "$1" "$CONFDIR"/AppImages-github.lst | cut -f1 -d" ")"
         DIRECT_IMG="FALSE"
         GITHUB_IMG="TRUE"
     else

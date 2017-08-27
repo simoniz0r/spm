@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.1.8"
+X="0.1.9"
 # Set spm version
 
 helpfunc () { # All unknown arguments come to this function; display help for spm
@@ -141,6 +141,96 @@ spmvercheckfunc () {
         else # If not, output link to releases page
             echo "Download the latest version at https://github.com/simoniz0r/appimgman/releases/latest"
             echo
+        fi
+    fi
+}
+
+updatestartfunc () {
+    if [ ! -z "$2" ]; then
+        if [ -f "$CONFDIR"/appimginstalled/"$2" ]; then
+            INSTIMG="$2"
+            appimgupdatelistfunc "$INSTIMG"
+        elif [ -f "$CONFDIR"/tarinstalled/"$2" ]; then
+            TARPKG="$2"
+            tarupdatelistfunc "$TARPKG"
+        else
+            echo "Package not found!"
+            rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
+            exit 1
+        fi
+    else
+        appimgupdatelistfunc
+        echo
+        tarupdatelistfunc
+    fi
+}
+
+upgradestartfunc () {
+    if [ "$(dir "$CONFDIR"/appimgupgrades | wc -l)" = "0" ]; then
+        echo "No new AppImage upgrades; skipping AppImage upgrade function..."
+        echo
+        APPIMGUPGRADES="FALSE"
+    else
+        APPIMGUPGRADES="TRUE"
+    fi
+    if [ "$(dir "$CONFDIR"/tarupgrades | wc -l)" = "0" ]; then
+        echo "No tar package upgrades; skipping tar upgrade function..."
+        echo
+        TARUPGRADES="FALSE"
+        if [ "$APPIMGUPGRADES" = "FALSE" ]; then
+            echo "No new upgrades available; try running 'spm update'."
+            rm -rf "$CONFDIR"/cache/*
+            exit 0
+        fi
+    else
+        TARUPGRADES="TRUE"
+    fi
+    if [ -z "$2" ]; then # If no AppImage specified, upgrade all AppImages in upgrade-list.lst
+        if [ "$APPIMGUPGRADES" = "TRUE" ]; then
+            appimgupgradestartallfunc # Run a for loop that checks each installed AppImage for upgrades
+        fi
+        echo
+        if [ "$TARUPGRADES" = "TRUE" ]; then
+            tarupgradestartallfunc
+        fi
+        rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
+        exit 0
+    elif [ "$TARUPGRADES" = "TRUE" ] || [ "$APPIMGUPGRADES" = "TRUE" ]; then # If user specifies package, upgrade that package
+        INSTIMG="$2"
+        if [ "$APPIMGUPGRADES" = "TRUE" ]; then
+            appimgupgradestartfunc # Check specified AppImage for upgrade
+        fi
+        echo
+        if [ "$TARUPGRADES" = "TRUE" ]; then
+            tarupgradestartfunc
+        fi
+    else # If upgrade-list.lst doesn't exist, suggest to run update function
+        echo "No new upgrade for $2; try running 'spm update'."
+        rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
+        exit 0
+    fi
+}
+
+liststartfunc () {
+    if [ -z "$LISTIMG" ]; then # If no AppImage input, list all AppImages
+        echo "AppImages:"
+        appimglistallfunc # List all installed and all available AppImages
+        echo
+        echo "tar packages:"
+        tarlistfunc
+    else # If AppImage input, list info for that AppImage
+        if grep -qiow "$LISTIMG" "$CONFDIR"/AppImages-github.lst || grep -qiow "$LISTIMG" "$CONFDIR"/AppImages-direct.lst; then
+            appimglistfunc # List information about specified AppImage
+            ISAPPIMG="TRUE"
+        fi
+        if echo "$TAR_LIST" | grep -qiow "$LISTPKG"; then
+            tarlistfunc
+            ISTAR="TRUE"
+        fi
+        if [ -z "$ISAPPIMG" ] && [ -z "$ISTAR" ]; then
+            echo "$2 not found!"
+            rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
+            exit 1
         fi
     fi
 }

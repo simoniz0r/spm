@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.1.8"
+X="0.1.9"
 # Set spm version
 TAR_LIST="$(cat $CONFDIR/tar-pkgs.json | python3 -c "import sys, json; data = json.load(sys.stdin); print (data['available'])")"
 
@@ -27,7 +27,6 @@ tarsaveconffunc () {
     fi
     if [ "$TAR_DOWNLOAD_SOURCE" = "GITHUB" ]; then
         echo "TAR_GITHUB_COMMIT="\"$TAR_GITHUB_NEW_COMMIT\""" >> "$CONFDIR"/"$SAVEDIR"
-        echo "TAR_GITHUB_DOWNLOAD="\"$TAR_GITHUB_NEW_DOWNLOAD\""" >> "$CONFDIR"/"$SAVEDIR"
         echo "TAR_GITHUB_VERSION="\"$TAR_GITHUB_NEW_VERSION\""" >> "$CONFDIR"/"$SAVEDIR"
     fi
     echo "DESKTOP_FILE_PATH="\"$DESKTOP_FILE_PATH\""" >> "$CONFDIR"/"$SAVEDIR"
@@ -80,11 +79,11 @@ targithubinfofunc () {
 }
 
 tarappcheckfunc () { # check user input against list of known apps here
-    echo "$TAR_LIST" | grep -qiw "$1"
+    echo "$TAR_LIST" | grep -qiow "$1"
     TAR_STATUS="$?"
     case $TAR_STATUS in
         0)
-            TARPKG_NAME="$(cat $CONFDIR/tar-pkgs.json | tr '\\' '\n' | grep -iwm 1 "$1" | cut -f2 -d'"')"
+            TARPKG_NAME="$(cat $CONFDIR/tar-pkgs.json | tr '\\' '\n' | grep -iowm 1 "$1" | cut -f2 -d'"')"
             if [ ! -z "$DOWNLOAD_SOURCE" ]; then
                 TAR_DOWNLOAD_SOURCE="$DOWNLOAD_SOURCE"
             fi
@@ -126,8 +125,7 @@ tarlistfunc () {
             echo "Current installed $LISTPKG information:"
             cat "$CONFDIR"/tarinstalled/"$LISTPKG"
             echo "INSTALLED=\"YES\""
-            echo "BIN_PATH=\"/usr/local/bin/$LISTPKG\""
-        elif echo "$TAR_LIST" | grep -qiw "$LISTPKG"; then
+        elif echo "$TAR_LIST" | grep -qiow "$LISTPKG"; then
             echo "$LISTPKG tar package information:"
             tarappcheckfunc "$LISTPKG"
             tarsaveconffunc "cache/$LISTPKG.conf"
@@ -155,9 +153,9 @@ tarlistinstalledfunc () {
 tardlfunc () {
     case $TAR_DOWNLOAD_SOURCE in
         GITHUB)
-            TARURI="https://github.com/$TAR_GITHUB_NEW_DOWNLOAD"
+            TARURI_DL="https://github.com/$TAR_GITHUB_NEW_DOWNLOAD"
             cd "$CONFDIR"/cache
-            wget --quiet --read-timeout=30 --show-progress "$TARURI" || { echo "wget $TARURI failed; exiting..."; rm -rf "$CONFDIR"/cache/*; exit 1; }
+            wget --quiet --read-timeout=30 --show-progress "$TARURI_DL" || { echo "wget $TARURI_DL failed; exiting..."; rm -rf "$CONFDIR"/cache/*; exit 1; }
             ;;
         DIRECT)
             cd "$CONFDIR"/cache
@@ -264,7 +262,7 @@ tarupgradecheckallfunc () {
 }
 
 tarupgradecheckfunc () {
-    if ! echo "$TAR_LIST" | grep -qiw "$1"; then
+    if ! echo "$TAR_LIST" | grep -qiow "$1"; then
         echo "$1 is not in tar-pkgs.json; try running 'spm update'."
     else
         TARPKG="$1"

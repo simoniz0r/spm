@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.1.8"
+X="0.1.9"
 # Set spm version
 CONFDIR="$HOME/.config/spm"
 
@@ -105,20 +105,20 @@ fi
 echo
 
 case $1 in
-    appimg-install|-ai) # Check if app is already installed either by spm or otherwise then install app to /usr/local/bin if it is in known lists
+    appimg-install|-ai) # Check if package is already installed either by spm or otherwise then install package
         if [ -z "$2" ]; then
             echo "Package input required; exiting..."
             rm -rf "$CONFDIR"/cache/*
             exit 1
         fi
         INSTIMG="$2"
-        appimginstallstartfunc # Check for valid inputs and start gathering info for install
-        appimgdlfunc "$INSTIMG" # Download AppImage from Bintray or Github
-        appimginstallfunc # Install AppImage
+        appimginstallstartfunc
+        appimgdlfunc "$INSTIMG"
+        appimginstallfunc
         rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
         exit 0
         ;;
-    tarinstall|-ti) # Check if app is already installed either by spm or otherwise then install app to /usr/local/bin if it is in known lists
+    tarinstall|-ti) # Check if package is already installed either by spm or otherwise then install package
         if [ -z "$2" ]; then
             echo "Package input required; exiting..."
             rm -rf "$CONFDIR"/cache/*
@@ -132,105 +132,45 @@ case $1 in
         rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
         exit 0
         ;;
-    update|-upd) # Update AppImage lists and check version from install info stored in "$CONFDIR"/installed against latest url
+    update|-upd) # Update package lists and check for package upgrades
         spmvercheckfunc
-        # Need to fix this so package input checks only go to relevant function
-        if [ ! -z "$2" ]; then
-            # if grep -qiw "$2" "$CONFDIR"/AppImages-bintray.lst ||grep -qiw "$2" "$CONFDIR"/AppImages-github.lst; then
-            if grep -qiw "$2" "$CONFDIR"/AppImages-github.lst || grep -qiw "$2" "$CONFDIR"/AppImages-direct.lst; then
-                INSTIMG="$2"
-                appimgupdatelistfunc "$INSTIMG"
-            elif [ -f "$CONFDIR"/tarinstalled/"$2" ]; then
-                TARPKG="$2"
-                tarupdatelistfunc "$TARPKG"
-            else
-                echo "Package not found!"
-                rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
-                exit 1
-            fi
-        else
-            appimgupdatelistfunc
-            echo
-            tarupdatelistfunc
-        fi
+        updatestartfunc # Send input to relevant update function or run both if no input
         rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
         exit 0
         ;;
-    appimg-update-force|-auf) # Force specified AppImage to be upgraded by adding it to the upgrade-list.lst
+    appimg-update-force|-auf) # Force AppImage to be marked for upgrade
         INSTIMG="$2"
-        appimgupdateforcefunc # Force AppImage to be added to upgrade-list.lst regardless of version
+        appimgupdateforcefunc
         rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
         exit 0
         ;;
-    tar-update-force|-tuf) # Force specified AppImage to be upgraded by adding it to the upgrade-list.lst
+    tar-update-force|-tuf) # Force tar package to be marked for upgrade
         TARPKG="$2"
-        tarupdateforcefunc # Force AppImage to be added to upgrade-list.lst regardless of version
+        tarupdateforcefunc
         rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
         exit 0
         ;;
     upgrade|-upg) # upgrade packages to latest version if marked for upgrade
-        if [ "$(dir "$CONFDIR"/appimgupgrades | wc -l)" = "0" ]; then
-            echo "No new AppImage upgrades; skipping AppImage upgrade function..."
-            echo
-            APPIMGUPGRADES="FALSE"
-        else
-            APPIMGUPGRADES="TRUE"
-        fi
-        if [ "$(dir "$CONFDIR"/tarupgrades | wc -l)" = "0" ]; then
-            echo "No tar package upgrades; skipping tar upgrade function..."
-            echo
-            TARUPGRADES="FALSE"
-            if [ "$APPIMGUPGRADES" = "FALSE" ]; then
-                echo "No new upgrades available; try running 'spm update'."
-                rm -rf "$CONFDIR"/cache/*
-                exit 0
-            fi
-        else
-            TARUPGRADES="TRUE"
-        fi
-        if [ -z "$2" ]; then # If no AppImage specified, upgrade all AppImages in upgrade-list.lst
-            if [ "$APPIMGUPGRADES" = "TRUE" ]; then
-                appimgupgradestartallfunc # Run a for loop that checks each installed AppImage for upgrades
-            fi
-            echo
-            if [ "$TARUPGRADES" = "TRUE" ]; then
-                tarupgradestartallfunc
-            fi
-            rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
-            exit 0
-        elif [ "$TARUPGRADES" = "TRUE" ] || [ "$APPIMGUPGRADES" = "TRUE" ]; then # If user specifies package, upgrade that package
-            INSTIMG="$2"
-            if [ "$APPIMGUPGRADES" = "TRUE" ]; then
-                appimgupgradestartfunc # Check specified AppImage for upgrade
-            fi
-            echo
-            if [ "$TARUPGRADES" = "TRUE" ]; then
-                tarupgradestartfunc
-            fi
-        else # If upgrade-list.lst doesn't exist, suggest to run update function
-            echo "No new upgrade for $2; try running 'spm update'."
-            rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
-            exit 0
-        fi
+        upgradestartfunc # Check which (if any) package types have upgrades and run relevant functions
         rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
         exit 0
         ;;
     appimg-remove|-ar) # rm AppImage from /usr/local/bin and rm install info in "$CONFDIR"/installed
-        if [ -z "$2" ]; then # Exit if no AppImage input
+        if [ -z "$2" ]; then
             echo "AppImage input required; exiting..."
             rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
             exit 1
         fi
         REMIMG="$2"
-        echo "Current installed $REMIMG information:" # Output AppImage installed info if installed, exit if not
         if [ -f "$CONFDIR"/appimginstalled/"$REMIMG" ]; then
+            echo "Current installed $REMIMG information:"
             cat "$CONFDIR"/appimginstalled/"$REMIMG"
         else
             echo "AppImage not found!"
             rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
             exit 1
         fi
-        appimgremovefunc # Run remove function for AppImage
+        appimgremovefunc
         rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
         exit 0
         ;;
@@ -241,8 +181,8 @@ case $1 in
             exit 1
         fi
         REMPKG="$2"
-        echo "Current installed $REMPKG information:"
         if [ -f "$CONFDIR"/tarinstalled/"$REMPKG" ]; then
+            echo "Current installed $REMPKG information:"
             cat "$CONFDIR"/tarinstalled/"$REMPKG"
         else
             echo "Package not found!"
@@ -274,37 +214,16 @@ case $1 in
         rm -rf "$CONFDIR"/cache/*
         exit 0
         ;;
-    list|-l) # List installed AppImages, AppImages-bintray.lst, and AppImages-github.lst or list info about specified AppImage
-        # Need to fix this so package input checks only go to relevant function
+    list|-l) # List installed packages or info about specified package
         LISTIMG="$2"
         LISTPKG="$2"
-        if [ -z "$LISTIMG" ]; then # If no AppImage input, list all AppImages
-            echo "AppImages:"
-            appimglistallfunc # List all installed and all available AppImages
-            echo
-            echo "tar packages:"
-            tarlistfunc
-        else # If AppImage input, list info for that AppImage
-            if grep -qiw "$LISTIMG" "$CONFDIR"/AppImages-github.lst || grep -qiw "$LISTIMG" "$CONFDIR"/AppImages-direct.lst; then
-                appimglistfunc # List information about specified AppImage
-                ISAPPIMG="TRUE"
-            fi
-            if echo "$TAR_LIST" | grep -qiw "$LISTPKG"; then
-                tarlistfunc
-                ISTAR="TRUE"
-            fi
-            if [ -z "$ISAPPIMG" ] && [ -z "$ISTAR" ]; then
-                echo "$2 not found!"
-                rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
-                exit 1
-            fi
-        fi
+        liststartfunc # Send package input to relevant list function or run both if no input
         rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
         exit 0
         ;;
-    list-installed|-li) # List information about installed AppImages
+    list-installed|-li) # List information about installed packages
         echo "AppImages:"
-        appimglistinstalledfunc # List all installed AppImages and info
+        appimglistinstalledfunc
         echo
         echo "tar packages:"
         tarlistinstalledfunc
