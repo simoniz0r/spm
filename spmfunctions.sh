@@ -18,32 +18,16 @@ AppImage information is downloaded from https://github.com/AppImage/appimage.git
 is downloaded from spm's github repo.  spm keeps track of installed packages and their versions, so spm can also be
 used to upgrade and remove packages installed by spm.
 
-AppImages are installed to '/usr/local/bin/AppImageName'. Information for installed AppImages is stored in
-'"$CONFDIR"/appimginstalled/AppImageName'.  Packages on your system should not conflict with AppImages
-installed through spm, but spm will not allow AppImages that have the same name as existing commands on
-your system to be installed.
-
-Precompiled tar archives are installed to '/opt/PackageName', and symlinks are created for the .desktop and executable
-files. Information for installed tar archives is stored in '"$CONFDIR"/tarinstalled/PackageName'.
-
-spm does not handle installing dependencies for tar packages that are installed through spm. A list of dependencies
-will be outputted on install and will also be saved to '"$CONFDIR"/tarinstalled/PackageName'. If you find that
-you are missing dependencies needed for a package installed through spm, you can look there for some help.
-
-AppImages, on the other hand, contain all dependencies that are necessary for the app to run as long as
-those dependencies would not be on a normal Linux system.  This means that AppImages should \"just work\"
-without having to install any additional packages!
-
 Arguments:
-    list (-l) - list all installed AppImages and all AppImages known by spm or info about the specified AppImage
+    list (-l) - list all installed packages and all packages known by spm or info about the specified package
     list-installed (-li) - list all installed packages and install info
     appimg-install (-ai) - install an AppImage
-    tar-install (-ti - install a precompiled tar archive
+    tar-install (-ti) - install a precompiled tar archive
     appimg-remove (-ar) - remove an installed AppImage
     tar-remove (-tr) remove an installed precompiled tar archive
-    update (-upd) - update package lists and check for new AppImage and precompiled tar archive versions
-    appimg-update-force (-auf) - add specified AppImage to upgrade-list without checking versions
-    tar-update-force (-tuf) - add specified precompiled tar archive to list of upgrades without checking versions
+    update (-upd) - update package lists and check for package upgrades
+    appimg-update-force (-auf) - mark specified AppImage for upgrade without checking version
+    tar-update-force (-tuf) - mark specified precompiled tar archive for upgrade without checking version
     upgrade (-upg) - upgrade all installed packages that are marked for upgrade or just the specified package
 
 See https://github.com/simoniz0r/spm for more help or to report issues.

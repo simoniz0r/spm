@@ -1,0 +1,80 @@
+.\"Modified from man(1) of FreeBSD, the NetBSD mdoc.template, and mdoc.samples.
+.\"See Also:
+.\"man mdoc.samples for a complete listing of options
+.\"man mdoc for the short list of editing options
+.\"/usr/share/misc/mdoc.template
+.Dd 8/26/17               
+.Dt spm 1                
+.Os Darwin
+.Sh NAME                 
+.Nm spm
+.Nm (simple package manager)
+.Sh SYNOPSIS             
+.Nm
+.Op Fl l,li,ai,ti,ar,tr,upd,auf,tuf,upg              
+.Op Fl ai Ar package     
+.Sh DESCRIPTION          
+.Nm
+is a simple commandline package manager that installs AppImages and precompiled tar archives.
+AppImage information is downloaded from https://github.com/AppImage/appimage.github.io and tar archive information
+is downloaded from spm's github repo.  
+.Nm
+keeps track of installed packages and their versions, so
+.Nm
+can also be
+used to upgrade and remove packages installed by spm.
+
+.Sh spm Arguments
+.Bl -tag -width -indent  \
+.It list (-l)       
+list all installed packages and all packages known by spm or info about the specified package
+.It list-installed (-li)
+list all installed packages and install info
+.It appimg-install (-ai)
+install an AppImage
+.It tar-install (-ti)
+install a precompiled tar archive
+.It appimg-remove (-ar)
+remove an installed AppImage
+.It tar-remove (-tr)
+remove an installed precompiled tar archive
+.It update (-upd)
+update package lists and check for package upgrades
+.It appimg-update-force (-auf)
+mark specified AppImage for upgrade without checking version
+.It tar-update-force (-tuf)
+mark specified precompiled tar archive for upgrade without checking version
+.It upgrade (-upg)
+upgrade all installed packages that are marked for upgrade or the specified package
+.El                      \" Ends the list
+
+.Sh APPIMAGES                
+AppImages are installed to '/usr/local/bin/AppImageName'. Information for installed AppImages is stored in
+'/home/simonizor/.config/spm/appimginstalled/AppImageName'.  Packages on your system should not conflict with AppImages
+installed through
+.Nm
+, but
+.Nm
+will not allow AppImages that have the same name as existing commands on
+your system to be installed.
+
+
+AppImages, on the other hand, contain all dependencies that are necessary for the app to run as long as
+those dependencies would not be on a normal Linux system.  This means that AppImages should "just work"
+without having to install any additional packages!
+
+.Sh TAR ARCHIVES
+Precompiled tar archives are installed to '/opt/PackageName', and symlinks are created for the .desktop and executable
+files. Information for installed tar archives is stored in '/home/simonizor/.config/spm/tarinstalled/PackageName'.
+
+
+.Nm
+does not handle installing dependencies for tar packages that are installed through spm. A list of dependencies
+will be outputted on install and will also be saved to '/home/simonizor/.config/spm/tarinstalled/PackageName'. If you find that
+you are missing dependencies needed for a package installed through
+.Nm
+, you can look there for some help.
+
+
+
+.Ar spm man page version 0.1.1
