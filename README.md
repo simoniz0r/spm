@@ -1,4 +1,7 @@
 # spm
+
+[![asciicast](https://asciinema.org/a/rsOApFwz0AEMoBYvepGZtCRcF.png)](https://asciinema.org/a/rsOApFwz0AEMoBYvepGZtCRcF)
+
 Usage: spm [option] [package]
 
 spm is a simple commandline package manager that installs AppImages and precompiled tar archives.
