@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # Title: spm
 # Description: Downloads AppImages and moves them to /usr/local/bin/.  Can also upgrade and remove installed AppImages.
 # Dependencies: GNU coreutils, tar, wget, python3.x

@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.0.5"
+X="0.0.6"
 # Set spm version
 TAR_LIST="$(cat $CONFDIR/tar-pkgs.json | python3 -c "import sys, json; data = json.load(sys.stdin); print (data['available'])")" #  | pr -tTw 125 -3
 
@@ -120,16 +120,16 @@ tarappcheckfunc () { # check user input against list of known apps here
         0)
             KNOWN_TAR="TRUE"
             TARPKG_NAME="$1"
-            INSTDIR="$(cat $CONFDIR/tar-pkgs.json | $RUNNING_DIR/jsonparse.py $1 instdir)"
-            TAR_DOWNLOAD_SOURCE="$(cat $CONFDIR/tar-pkgs.json | $RUNNING_DIR/jsonparse.py $1 download_source)"
-            TARURI="$(cat $CONFDIR/tar-pkgs.json | $RUNNING_DIR/jsonparse.py $1 taruri)"
-            DESKTOP_FILE_PATH="$(cat $CONFDIR/tar-pkgs.json | $RUNNING_DIR/jsonparse.py $1 desktop_file_path)"
-            ICON_FILE_PATH="$(cat $CONFDIR/tar-pkgs.json | $RUNNING_DIR/jsonparse.py $1 icon_file_path)"
-            EXECUTABLE_FILE_PATH="$(cat $CONFDIR/tar-pkgs.json | $RUNNING_DIR/jsonparse.py $1 executable_file_path)"
-            BIN_PATH="$(cat $CONFDIR/tar-pkgs.json | $RUNNING_DIR/jsonparse.py $1 instdir)"
-            CONFIG_PATH="$(cat $CONFDIR/tar-pkgs.json | $RUNNING_DIR/jsonparse.py $1 config_path)"
-            TAR_DESCRIPTION="$(cat $CONFDIR/tar-pkgs.json | $RUNNING_DIR/jsonparse.py $1 description)"
-            DEPENDENCIES="$(cat $CONFDIR/tar-pkgs.json | $RUNNING_DIR/jsonparse.py $1 dependencies)"
+            INSTDIR="$(cat $CONFDIR/tar-pkgs.json | python3 $RUNNING_DIR/jsonparse.py $1 instdir)"
+            TAR_DOWNLOAD_SOURCE="$(cat $CONFDIR/tar-pkgs.json | python3 $RUNNING_DIR/jsonparse.py $1 download_source)"
+            TARURI="$(cat $CONFDIR/tar-pkgs.json | python3 $RUNNING_DIR/jsonparse.py $1 taruri)"
+            DESKTOP_FILE_PATH="$(cat $CONFDIR/tar-pkgs.json | python3 $RUNNING_DIR/jsonparse.py $1 desktop_file_path)"
+            ICON_FILE_PATH="$(cat $CONFDIR/tar-pkgs.json | python3 $RUNNING_DIR/jsonparse.py $1 icon_file_path)"
+            EXECUTABLE_FILE_PATH="$(cat $CONFDIR/tar-pkgs.json | python3 $RUNNING_DIR/jsonparse.py $1 executable_file_path)"
+            BIN_PATH="$(cat $CONFDIR/tar-pkgs.json | python3 $RUNNING_DIR/jsonparse.py $1 instdir)"
+            CONFIG_PATH="$(cat $CONFDIR/tar-pkgs.json | python3 $RUNNING_DIR/jsonparse.py $1 config_path)"
+            TAR_DESCRIPTION="$(cat $CONFDIR/tar-pkgs.json | python3 $RUNNING_DIR/jsonparse.py $1 description)"
+            DEPENDENCIES="$(cat $CONFDIR/tar-pkgs.json | python3 $RUNNING_DIR/jsonparse.py $1 dependencies)"
             if [ "$TAR_DOWNLOAD_SOURCE" = "GITHUB" ]; then
                 targithubinfofunc
             fi
