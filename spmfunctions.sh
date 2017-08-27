@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.1.9"
+X="0.2.0"
 # Set spm version
 
 helpfunc () { # All unknown arguments come to this function; display help for spm
@@ -146,12 +146,12 @@ spmvercheckfunc () {
 }
 
 updatestartfunc () {
-    if [ ! -z "$2" ]; then
-        if [ -f "$CONFDIR"/appimginstalled/"$2" ]; then
-            INSTIMG="$2"
+    if [ ! -z "$1" ]; then
+        if [ -f "$CONFDIR"/appimginstalled/"$1" ]; then
+            INSTIMG="$1"
             appimgupdatelistfunc "$INSTIMG"
-        elif [ -f "$CONFDIR"/tarinstalled/"$2" ]; then
-            TARPKG="$2"
+        elif [ -f "$CONFDIR"/tarinstalled/"$1" ]; then
+            TARPKG="$1"
             tarupdatelistfunc "$TARPKG"
         else
             echo "Package not found!"
@@ -185,7 +185,7 @@ upgradestartfunc () {
     else
         TARUPGRADES="TRUE"
     fi
-    if [ -z "$2" ]; then # If no AppImage specified, upgrade all AppImages in upgrade-list.lst
+    if [ -z "$1" ]; then # If no AppImage specified, upgrade all AppImages in upgrade-list.lst
         if [ "$APPIMGUPGRADES" = "TRUE" ]; then
             appimgupgradestartallfunc # Run a for loop that checks each installed AppImage for upgrades
         fi
@@ -196,16 +196,17 @@ upgradestartfunc () {
         rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
         exit 0
     elif [ "$TARUPGRADES" = "TRUE" ] || [ "$APPIMGUPGRADES" = "TRUE" ]; then # If user specifies package, upgrade that package
-        INSTIMG="$2"
         if [ "$APPIMGUPGRADES" = "TRUE" ]; then
+            INSTIMG="$1"
             appimgupgradestartfunc # Check specified AppImage for upgrade
         fi
         echo
         if [ "$TARUPGRADES" = "TRUE" ]; then
+            TARPKG="$1"
             tarupgradestartfunc
         fi
     else # If upgrade-list.lst doesn't exist, suggest to run update function
-        echo "No new upgrade for $2; try running 'spm update'."
+        echo "No new upgrade for $1; try running 'spm update'."
         rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
         exit 0
     fi
@@ -228,7 +229,7 @@ liststartfunc () {
             ISTAR="TRUE"
         fi
         if [ -z "$ISAPPIMG" ] && [ -z "$ISTAR" ]; then
-            echo "$2 not found!"
+            echo "$1 not found!"
             rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
             exit 1
         fi

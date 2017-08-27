@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.1.9"
+X="0.2.0"
 # Set spm version
 TAR_LIST="$(cat $CONFDIR/tar-pkgs.json | python3 -c "import sys, json; data = json.load(sys.stdin); print (data['available'])")"
 
@@ -453,8 +453,6 @@ tarupgradestartfunc () {
     case $UPGRADEANSWER in
         Y*|y*)
             tarappcheckfunc "$TARPKG"
-            . "$CONFDIR"/cache/"$TARPKG".conf
-            . "$CONFDIR"/tarupgrades/"$TARPKG"
             if [ "$TAR_DOWNLOAD_SOURCE" = "GITHUB" ]; then
                 targithubinfofunc
             fi

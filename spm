@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.1.9"
+X="0.2.0"
 # Set spm version
 CONFDIR="$HOME/.config/spm"
 
@@ -134,7 +134,7 @@ case $1 in
         ;;
     update|-upd) # Update package lists and check for package upgrades
         spmvercheckfunc
-        updatestartfunc # Send input to relevant update function or run both if no input
+        updatestartfunc "$2" # Send input to relevant update function or run both if no input
         rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
         exit 0
         ;;
@@ -151,7 +151,7 @@ case $1 in
         exit 0
         ;;
     upgrade|-upg) # upgrade packages to latest version if marked for upgrade
-        upgradestartfunc # Check which (if any) package types have upgrades and run relevant functions
+        upgradestartfunc "$2" # Check which (if any) package types have upgrades and run relevant functions
         rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
         exit 0
         ;;
