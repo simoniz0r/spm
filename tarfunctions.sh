@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.1.1"
+X="0.1.2"
 # Set spm version
 TAR_LIST="$(cat $CONFDIR/tar-pkgs.json | python3 -c "import sys, json; data = json.load(sys.stdin); print (data['available'])")" #  | pr -tTw 125 -3
 
@@ -408,7 +408,7 @@ tardesktopfilefunc () {
             ;;
         *)
             echo "Downloading $TARPKG.desktop from spm github repo..."
-            wget "https://raw.githubusercontent.com/simoniz0r/tar-pkg/master/apps/$TARPKG/$TARPKG.desktop" --show-progress -qO "$CONFDIR"/cache/"$TARPKG".desktop  || { echo "wget $TARURI failed; exiting..."; rm -rf "$CONFDIR"/cache/*; exit 1; }
+            wget "https://raw.githubusercontent.com/simoniz0r/spm/master/apps/$TARPKG/$TARPKG.desktop" --show-progress -qO "$CONFDIR"/cache/"$TARPKG".desktop  || { echo "wget $TARURI failed; exiting..."; rm -rf "$CONFDIR"/cache/*; exit 1; }
             echo "Moving $TARPKG.desktop to $INSTDIR ..."
             sudo mv "$CONFDIR"/cache/"$TARPKG".desktop "$INSTDIR"/"$TARPKG".desktop
             DESKTOP_FILE_PATH="$INSTDIR/$TARPKG.desktop"

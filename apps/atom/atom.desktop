@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=atom
+Comment=The hackable text editor
+GenericName=Text Editor
+Exec=/opt/atom/atom %F
+Icon=/opt/atom/atom.png
+Type=Application
+StartupNotify=true
+Categories=GNOME;GTK;Utility;TextEditor;Development;
+MimeType=text/plain;

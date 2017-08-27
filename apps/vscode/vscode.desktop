@@ -1,0 +1,29 @@
+[Desktop Entry]
+Name=Visual Studio Code
+Comment=Code Editing. Redefined.
+GenericName=Text Editor
+Exec=/usr/local/bin/vscode %U
+Icon=/opt/vscode/resources/app/resources/linux/code.png
+Type=Application
+StartupNotify=true
+StartupWMClass=Code
+Categories=Utility;TextEditor;Development;IDE;
+MimeType=text/plain;inode/directory;
+Actions=new-window;
+Keywords=vscode;
+
+X-Desktop-File-Install-Version=0.22
+
+[Desktop Action new-window]
+Name=New Window
+Name[de]=Neues Fenster
+Name[es]=Nueva ventana
+Name[fr]=Nouvelle fenêtre
+Name[it]=Nuova finestra
+Name[ja]=新規ウインドウ
+Name[ko]=새 창
+Name[ru]=Новое окно
+Name[zh_CN]=新建窗口
+Name[zh_TW]=開新視窗
+Exec=/usr/share/code/code --new-window %U
+Icon=code
