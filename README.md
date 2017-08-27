@@ -1,32 +1,50 @@
-# appimgman
-![appimgman](/Screenshot.png)
+# spm
+Usage: spm [option] [package]
 
-Usage: appimgman [option] [AppImage]
-
-appimgman is a commandline [AppImage](https://github.com/AppImage) manager that installs AppImages to /usr/local/bin. AppImages are
-downloaded from the URI provided from https://dl.bintray.com/probono/AppImages/ or from the latest
-release on the app's github page.  This allows appimgman to easily provide a list of AppImages to
-install, and it also allows appimgman to check for [AppImage](https://github.com/AppImage) upgrades just by checking the version of
-the [AppImage](https://github.com/AppImage) from [Bintray](https://bintray.com/probono/AppImages) and latest github releases.
+spm is a simple commandline package manager that installs AppImages and precompiled tar archives.
+AppImage information is gotten from https://github.com/AppImage/appimage.github.io and tar archive information
+is stored in spm's github repo.  spm keeps track of installed packages and their versions, so spm can also be
+used to upgrade and remove packages installed by spm.
 
 AppImages are installed to '/usr/local/bin/AppImageName'. Information for installed AppImages is stored in
-'~/.config/appimgman/installed'.
+'~/.config/spm/appimginstalled/AppImageName'.  Packages on your system should not conflict with AppImages
+installed through spm, but spm will not allow AppImages that have the same name as existing commands on
+your system to be installed.
 
-Packages on your system should not conflict with AppImages installed through appimgman, but appimgman will not
-allow AppImages that have the same name as existing commands on your system to be installed.
+Precompiled tar archives are installed to '/opt/PackageName', and symlinks are created for the .desktop and executable
+files. Information for installed tar archives is stored in '~/.config/spm/tarinstalled/PackageName'.
+
+spm does not handle installing dependencies for tar packages that are installed through spm. A list of dependencies
+will be outputted on install and will also be saved to '~/.config/spm/tarinstalled/PackageName'. If you find that
+you are missing dependencies needed for a package installed through spm, you can look there for some help.
+
+AppImages, on the other hand, contain all dependencies that are necessary for the app to run as long as
+those dependencies would not be on a normal Linux system.  This means that AppImages should "just work"
+without having to install any additional packages!
 
 Arguments:
-- list (-l) - list all installed AppImages and all AppImages known by appimgman or info about the specified AppImage
+- list (-l) - list all installed AppImages and all AppImages known by spm or info about the specified AppImage
 - list-installed (-li) - list all installed AppImages and install info
-- install (-i) - install an AppImage
-- remove (-r) - remove an installed AppImage
-- update (-upd) - update AppImages-bintray.lst from appimgman's github repo and check for AppImage upgrades
-- update-force (-updf) - add specified AppImage to upgrade-list without checking versions
-- upgrade (-upg) - upgrade AppImages with available upgrades or upgrade the specified AppImage to the latest version
+- appimg-install (-ai) - install an AppImage
+- tar-install (-ti - install a precompiled tar archive
+- appimg-remove (-ar) - remove an installed AppImage
+- tar-remove (-tr) remove an installed precompiled tar archive
+- update (-upd) - update package lists and check for new AppImage and precompiled tar archive versions
+- appimg-update-force (-auf) - add specified AppImage to upgrade-list without checking versions
+- tar-update-force (-tuf) - add specified precompiled tar archive to list of upgrades without checking versions
+- upgrade (-upg) - upgrade all installed packages that are marked for upgrade or just the specified package
 
-appimgman is not responsible for bugs within applications that have been
-installed using appimgman.  Please report any bugs that are specific to
-installed applications to their maintainers.
+See https://github.com/simoniz0r/appimgman for more help or to report issues.
+
+spm is not responsible for bugs within applications that have been
+installed using spm.  Please report any bugs that are specific to
+installed applications to their maintainers."
+
+# Goals
+
+The main goal is for spm to be a distro agnostic package manager that distributes AppImages which should run on any Linux distro and precompiled tar archives with dependencies that are available for install on most Linux distros.  spm aims to fill the gap that is left by many Linux distro's package managers by providing software not available in their repos and/or providing packages that may be more up to date than those in the distro's repos.
+
+spm will only provide optional packages that are not needed for a distro to run; spm has no intention of becoming a full replacement for traditional package managers.  spm also has no plans of installing dependencies for package types other than AppImages (AppImages include dependencies).  spm will always be **simple package manager** that provides optional packages that either need no dependencies to run or have a small amount dependencies that are widely available.
 
 # What is an [AppImage](https://github.com/AppImage)?
 
