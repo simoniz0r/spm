@@ -1,12 +1,12 @@
 #!/bin/bash
 # Title: spm
-# Description: Downloads AppImages and moves them to /usr/local/bin/.  Can also upgrade and remove installed AppImages.
+# Description: Downloads and installs AppImages and precompiled tar archives.  Can also upgrade and remove installed packages.
 # Dependencies: GNU coreutils, tar, wget, python3.x
 # Author: simonizor
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.1.4"
+X="0.1.5"
 # Set spm version
 
 helpfunc () { # All unknown arguments come to this function; display help for spm
@@ -45,18 +45,14 @@ spmdepchecksfunc () {
         MISSING_DEPS="TRUE"
         echo "wget is not installed!"
     fi
-    # if ! type jq >/dev/null 2>&1; then # Not used yet
-    #    MISSING_DEPS="TRUE"
-    #     echo "jq is not installed!"
-    # fi
+    if ! type python3 >/dev/null 2>&1; then # Not used yet
+        MISSING_DEPS="TRUE"
+        echo "python3 is not installed!"
+    fi
     if [ "$MISSING_DEPS" = "TRUE" ]; then
         echo "Missing one or more packages required to run; exiting..."
         exit 1
     fi
-    # if ! type git >/dev/null 2>&1; then # Not used yet
-    #     USE_GIT="FALSE"
-    #     echo "git is not installed; wget will be used instead."
-    # fi
 }
 
 appimgfunctioncheckfunc () {

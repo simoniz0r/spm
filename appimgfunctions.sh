@@ -1,12 +1,12 @@
 #!/bin/bash
 # Title: spm
-# Description: Downloads AppImages and moves them to /usr/local/bin/.  Can also upgrade and remove installed AppImages.
+# Description: Downloads and installs AppImages and precompiled tar archives.  Can also upgrade and remove installed packages.
 # Dependencies: GNU coreutils, tar, wget, python3.x
 # Author: simonizor
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.1.4"
+X="0.1.5"
 # Set spm version
 
 # Set variables
@@ -21,8 +21,8 @@ appimglistallfunc () {
     echo "$(dir -C -w 1 "$CONFDIR"/appimginstalled | wc -l) AppImages installed:"
     dir -C -w 1 "$CONFDIR"/appimginstalled | pr -tT --column=3 -w 125
     echo
-    # echo "$(cat "$CONFDIR"/AppImages-bintray.lst | wc -l) Bintray AppImages available for install:"
-    # cat "$CONFDIR"/AppImages-bintray.lst | pr -tT --column=3 -w 125
+    # echo "$(cat "$CONFDIR"/AppImages-direct.lst | wc -l) Bintray AppImages available for install:"
+    # cat "$CONFDIR"/AppImages-direct.lst | pr -tT --column=3 -w 125
     # echo
     echo "$(cat "$CONFDIR"/AppImages-github.lst | wc -l) Github AppImages available for install:"
     cat "$CONFDIR"/AppImages-github.lst | cut -f1 -d" " | pr -tT --column=3 -w 125
@@ -33,7 +33,7 @@ appimglistfunc () {
         echo "Current installed $LISTIMG information:"
         cat "$CONFDIR"/appimginstalled/"$LISTIMG"
         echo "INSTALLED=\"YES\""
-    # elif grep -qw "$LISTIMG" "$CONFDIR"/AppImages-bintray.lst; then # If not installed and in Bintray list, list Bintray info
+    # elif grep -qw "$LISTIMG" "$CONFDIR"/AppImages-direct.lst; then # If not installed and in Bintray list, list Bintray info
     #     echo "$LISTIMG AppImage information:"
     #     APPIMAGE="$(wget -q "https://bintray.com/package/files/probono/AppImages/$LISTIMG?order=desc&sort=fileLastModified&basePath=&tab=files" -O - | grep -e '64.AppImage">' | cut -d '"' -f 6 | head -n 1 | cut -f2 -d"=")"
     #     echo "APPIMAGE=\"${APPIMAGE##*/}\""
@@ -73,16 +73,16 @@ appimglistinstalledfunc () {
 }
 
 appimgcheckfunc () { # check user input against list of known apps here
-    # if grep -qwi "$1" "$CONFDIR"/AppImages-bintray.lst; then # Check AppImages-bintray.lst for AppImages from Bintray
-    #     APPIMG_NAME="$(grep -wi "$1" "$CONFDIR"/AppImages-bintray.lst)"
-    #     BINTRAY_IMG="TRUE"
+    # if grep -qwi "$1" "$CONFDIR"/AppImages-direct.lst; then # Check AppImages-direct.lst for AppImages from Bintray
+    #     APPIMG_NAME="$(grep -wi "$1" "$CONFDIR"/AppImages-direct.lst)"
+    #     DIRECT_IMG="TRUE"
     #     GITHUB_IMG="FALSE"
     if grep -qwi "$1" "$CONFDIR"/AppImages-github.lst; then # Check AppImages-github.lst for AppImages from github
         APPIMG_NAME="$(grep -wi "$1" "$CONFDIR"/AppImages-github.lst | cut -f1 -d" ")"
-        BINTRAY_IMG="FALSE"
+        DIRECT_IMG="FALSE"
         GITHUB_IMG="TRUE"
     else
-        BINTRAY_IMG="FALSE"
+        _IMG="FALSE"
         GITHUB_IMG="FALSE"
     fi
 }
@@ -111,8 +111,8 @@ appimggithubinfofunc () {
     fi
 }
 
-# bintrayinfofunc () {
-#     BINTRAY_APPIMAGE_URL="$(wget -q "https://bintray.com/package/files/probono/AppImages/$APPIMG_NAME?order=desc&sort=fileLastModified&basePath=&tab=files" -O - | grep -e '64.AppImage">' | cut -d '"' -f 6 | head -n 1)"
+# appimgdirectinfofunc () {
+#     DIRECT_APPIMAGE_URL="$(wget -q "https://bintray.com/package/files/probono/AppImages/$APPIMG_NAME?order=desc&sort=fileLastModified&basePath=&tab=files" -O - | grep -e '64.AppImage">' | cut -d '"' -f 6 | head -n 1)"
 #     APPIMAGE_NAME="$(wget -q "https://bintray.com/package/files/probono/AppImages/$APPIMG_NAME?order=desc&sort=fileLastModified&basePath=&tab=files" -O - | grep -e '64.AppImage">' | cut -d '"' -f 6 | head -n 1 | cut -f2 -d"=")"
 #     NEW_APPIMAGE_VERSION="$(echo "$APPIMAGE_NAME" | cut -f2 -d'-')"
 #     if [ "$APPIMG_UPGRADE_CHECK" = "FALSE" ]; then
@@ -121,8 +121,8 @@ appimggithubinfofunc () {
 # }
 
 appimginfofunc () { # Set variables and temporarily store pages in "$CONFDIR"/cache to get info from them
-    if [ "$BINTRAY_IMG" = "TRUE" ]; then
-        bintrayinfofunc
+    if [ "$DIRECT_IMG" = "TRUE" ]; then
+        appimgdirectinfofunc
     elif [ "$GITHUB_IMG" = "TRUE" ]; then # If AppImage is from github, use method below to get new AppImage version
         appimggithubinfofunc
     fi
@@ -212,12 +212,12 @@ appimgupgradecheckfunc () {
     fi
 }
 
-appimgupdatelistfunc () { # Regenerate AppImages-bintray.lst from bintray, download AppImages-github.lst from github, and check versions
+appimgupdatelistfunc () { # Regenerate AppImages-direct.lst from github, download AppImages-github.lst from github, and check versions
     APPIMG_UPGRADE_CHECK="TRUE"
-    # echo "Regenerating AppImages-bintray.lst from https://dl.bintray.com/probono/AppImages/ ..." # Generate list of AppImages from Bintray site using wget sed grep cut and sort
+    # echo "Regenerating AppImages-direct.lst from https://dl.bintray.com/probono/AppImages/ ..." # Generate list of AppImages from Bintray site using wget sed grep cut and sort
     cd "$CONFDIR"
-    # wget --quiet "https://dl.bintray.com/probono/AppImages/" -O - | sed 's/<\/*[^>]*>//g' | grep -o '.*AppImage' | cut -f1 -d"-" | sort -u > "$CONFDIR"/AppImages-bintray.lst || { echo "wget failed; exiting..."; exit 1; }
-    # echo "AppImages-bintray.lst updated!"
+    # wget --quiet "https://dl.bintray.com/probono/AppImages/" -O - | sed 's/<\/*[^>]*>//g' | grep -o '.*AppImage' | cut -f1 -d"-" | sort -u > "$CONFDIR"/AppImages-direct.lst || { echo "wget failed; exiting..."; exit 1; }
+    # echo "AppImages-direct.lst updated!"
     echo "Downloading AppImages-github.lst from spm github repo..." # Download existing list of github AppImages from spm github repo
     rm "$CONFDIR"/AppImages-github.lst
     wget --quiet "https://raw.githubusercontent.com/simoniz0r/spm/master/AppImages-github.lst" || { echo "wget failed; exiting..."; rm -rf "$CONFDIR"/cache/*; exit 1; }
@@ -262,10 +262,10 @@ appimgupdateforcefunc () {
     fi
 }
 
-appimgdlfunc () { # wget latest url from bintray website or github repo and wget it
-    if [ "$BINTRAY_IMG" = "TRUE" ]; then # If AppImage is from Bintray, use method below to download it
-        wget --show-progress --quiet "https://bintray.com/$BINTRAY_APPIMAGE_URL" -O "$CONFDIR"/cache/"$INSTIMG" || { echo "wget $BINTRAY_APPIMAGE_URL failed; exiting..."; rm -rf "$CONFDIR"/cache/*; exit 1; }
-        # APPIMAGE="$(echo "$BINTRAY_APPIMAGE_URL" | cut -f2 -d"=")"
+appimgdlfunc () { # wget latest url from direct website or github repo and wget it
+    if [ "$DIRECT_IMG" = "TRUE" ]; then # If AppImage is from Bintray, use method below to download it
+        wget --show-progress --quiet "https://bintray.com/$DIRECT_APPIMAGE_URL" -O "$CONFDIR"/cache/"$INSTIMG" || { echo "wget $DIRECT_APPIMAGE_URL failed; exiting..."; rm -rf "$CONFDIR"/cache/*; exit 1; }
+        # APPIMAGE="$(echo "$DIRECT_APPIMAGE_URL" | cut -f2 -d"=")"
     elif [ "$GITHUB_IMG" = "TRUE" ]; then # If AppImage is from github, use method below to download it
         # APPIMAGE="${GITHUB_APPIMAGE_URL##*/}"
         wget --show-progress --quiet "$GITHUB_APPIMAGE_URL" -O "$CONFDIR"/cache/"$INSTIMG" || { echo "wget $GITHUB_APPIMAGE_URL failed; exiting..."; rm -rf "$CONFDIR"/cache/*; exit 1; }
@@ -278,14 +278,14 @@ appimgsaveinfofunc () { # Save install info to "$CONFDIR"/appimginstalled/AppIma
     echo "APPIMAGE="\"$APPIMAGE_NAME\""" >> "$CONFDIR"/appimginstalled/"$INSTIMG"
     if [ "$GITHUB_IMG" = "TRUE" ]; then
         APPIMAGE_VERSION="$NEW_APPIMAGE_VERSION"
-    elif [ "$BINTRAY_IMG" = "TRUE" ]; then
+    elif [ "$DIRECT_IMG" = "TRUE" ]; then
         APPIMAGE_VERSION="$NEW_APPIMAGE_VERSION"
         APPIMAGE_VERSION="$(echo "$APPIMAGE_VERSION" | cut -f2 -d'-')"
     fi
     echo "APPIMAGE_VERSION="\"$APPIMAGE_VERSION\""" >> "$CONFDIR"/appimginstalled/"$INSTIMG"
     if [ "$GITHUB_IMG" = "TRUE" ]; then
         echo "WEBSITE="\"$(echo "$GITHUB_APP_URL" | cut -f-5 -d'/')\""" >> "$CONFDIR"/appimginstalled/"$INSTIMG"
-    elif [ "$BINTRAY_IMG" = "TRUE" ]; then
+    elif [ "$DIRECT_IMG" = "TRUE" ]; then
         echo "WEBSITE="\"https://bintray.com/probono/AppImages/$APPIMG_NAME\""" >> "$CONFDIR"/appimginstalled/"$INSTIMG"
     fi
     echo "APPIMG_DESCRIPTION="\"$APPIMG_DESCRIPTION\""" >> "$CONFDIR"/appimginstalled/"$INSTIMG"
@@ -319,7 +319,7 @@ appimginstallstartfunc () {
     appimgcheckfunc "$INSTIMG" # Check whether AppImage is in lists and which list it is in
     appimginfofunc # Download web pages containing app info and set variables from them
     appimgvercheckfunc # Use vercheckfunc to get AppImage name for output before install
-    if [ "$BINTRAY_IMG" = "FALSE" ] && [ "$GITHUB_IMG" = "FALSE" ];then # If AppImage not in either list, exit
+    if [ "$DIRECT_IMG" = "FALSE" ] && [ "$GITHUB_IMG" = "FALSE" ];then # If AppImage not in either list, exit
         echo "$INSTIMG is not in AppImages-direct.lst or AppImages-github.lst; try running 'spm update'."
         rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
         exit 1

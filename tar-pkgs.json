@@ -1,5 +1,5 @@
 {
-    "available" : "atom\ndiscord-canary\ndiscord-ptb\ndiscord-toolbox\ndiscord\nfirefox-beta\nfirefox-dev\nfirefox-nightly\nfirefox\ngpgpassman\nkaku\nnvim\nopenrct2\nrambox\nspm\nvscode\nwavebox\nxdgfetch\nyad-mpv\nyad-twitch-streamlink",
+    "available" : "atom\ndiscord-canary\ndiscord-ptb\ndiscord-toolbox\ndiscord\nfirefox-beta\nfirefox-dev\nfirefox-nightly\nfirefox\ngpgpassman\nkaku\nnvim\nopenrct2\nopenttd\nrambox\nspm\nvscode\nwavebox\nxdgfetch\nyad-mpv\nyad-twitch-streamlink",
     "atom": {
         "instdir": "/opt/atom",
         "download_source": "GITHUB",

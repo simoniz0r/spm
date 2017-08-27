@@ -1,12 +1,12 @@
 #!/bin/bash
 # Title: spm
-# Description: Excracts and moves tar archives to /opt/ and creates symlinks for their .desktop files.  Can also upgrade and remove installed tar packages.
+# Description: Downloads and installs AppImages and precompiled tar archives.  Can also upgrade and remove installed packages.
 # Dependencies: GNU coreutils, tar, wget, python3.x
 # Author: simonizor
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.1.4"
+X="0.1.5"
 # Set spm version
 TAR_LIST="$(cat $CONFDIR/tar-pkgs.json | python3 -c "import sys, json; data = json.load(sys.stdin); print (data['available'])")" #  | pr -tTw 125 -3
 
@@ -78,47 +78,14 @@ targithubinfofunc () {
     fi
 }
 
-tarcustominfofunc () {
-    INSTDIR="/opt/$TARPKG"
-    echo "Input the path to the desktop file."
-    echo "If you do not want an entry added to your menu, enter 'NONE'"
-    echo "If the tar archive does not include a .desktop file, enter 'create' to have spm generate a .desktop file."
-    read -p "$INSTDIR/" DESKTOP_FILE_PATH
-    if [ "${DESKTOP_FILE_PATH:-1}" = "/" ]; then
-        DESKTOP_FILE_PATH="${DESKTOP_FILE_PATH::-1}"
-    fi
-    echo
-    DESKTOP_FILE_PATH="$INSTDIR/$DESKTOP_FILE_PATH"
-    DESKTOP_FILE_NAME="$(basename "$DESKTOP_FILE_PATH")"
-    read -p "Input the path to the icon file: $INSTDIR/" ICON_FILE_PATH
-    if [ "${ICON_FILE_PATH:-1}" = "/" ]; then
-        ICON_FILE_PATH="${ICON_FILE_PATH::-1}"
-    fi
-    echo
-    ICON_FILE_PATH="$INSTDIR/$ICON_FILE_PATH"
-    ICON_FILE_NAME="$(basename "$ICON_FILE_PATH")"
-    read -p "Input the path to the executable file: $INSTDIR/" EXECUTABLE_FILE_PATH
-    if [ "${EXECUTABLE_FILE_PATH:-1}" = "/" ]; then
-        EXECUTABLE_FILE_PATH="${EXECUTABLE_FILE_PATH::-1}"
-    fi
-    echo
-    EXECUTABLE_FILE_PATH="$INSTDIR/$EXECUTABLE_FILE_PATH"
-    EXECUTABLE_FILE_NAME="$(basename "$EXECUTABLE_FILE_PATH")"
-    echo
-    echo "Input the config directory for $TARPKG. If you don't know the path, you can leave this field blank."
-    read -p "Ex: ~/.config/$TARPKG " CONFIG_PATH
-    if [ "${CONFIG_PATH:-1}" = "/" ]; then
-        CONFIG_PATH="${CONFIG_PATH::-1}"
-    fi
-    echo
-}
-
 tarappcheckfunc () { # check user input against list of known apps here
     echo "$TAR_LIST" | grep -qiw "$1"
     TAR_STATUS="$?"
     case $TAR_STATUS in
         0)
-            TAR_DOWNLOAD_SOURCE="$DOWNLOAD_SOURCE"
+            if [ ! -z "$DOWNLOAD_SOURCE" ]; then
+                TAR_DOWNLOAD_SOURCE="$DOWNLOAD_SOURCE"
+            fi
             KNOWN_TAR="TRUE"
             TARPKG_NAME="$1"
             INSTDIR="$(cat $CONFDIR/tar-pkgs.json | python3 $RUNNING_DIR/jsonparse.py $1 instdir)"
@@ -184,82 +151,21 @@ tarlistinstalledfunc () {
     done
 }
 
-tarcustomdlfunc () {
-    if [ -f "$CONFDIR"/tarinstalled/$1 ]; then
-        . "$CONFDIR"/tarinstalled/$1
-        cd "$CONFDIR"/cache
-        wget --quiet --read-timeout=30 --show-progress --trust-server-names "$TARURI" || { echo "wget $TARURI failed; exiting..."; rm -rf "$CONFDIR"/cache/*; exit 1; }
-        TARFILE="$(dir "$CONFDIR"/cache/*.tar*)"
-        TARFILE="${TARFILE##*/}"
-    else
-        read -p "Input the source type for the download GITHUB/DIRECT/LOCAL " TAR_DOWNLOAD_SOURCE
-        case $TAR_DOWNLOAD_SOURCE in
-            github|Github|GITHUB)
-                TAR_DOWNLOAD_SOURCE="GITHUB"
-                ;;
-            direct|Direct|DIRECT)
-                TAR_DOWNLOAD_SOURCE="DIRECT"
-                ;;
-            local|Local|LOCAL)
-                TAR_DOWNLOAD_SOURCE="LOCAL"
-                ;;
-        esac
-        if [ "$TAR_DOWNLOAD_SOURCE" = "GITHUB" ]; then
-            echo "Input the link to the latest releases page for $1"
-            read -p "Ex: https://github.com/simoniz0r/spm/releases " TARURI
-        else
-            read -p "Input uri to tar archive : " TARURI
-        fi
-        echo
-        case $TAR_DOWNLOAD_SOURCE in
-            LOCAL)
-                read -p "Input the path to the tar archive (Ex: /home/$USER/Downloads/archive.tar.gz): " TARFILE
-                if [[ "$TARFILE" != /* ]]; then
-                    echo "The path to the tar archive must be the full path; exiting..."
-                    rm -rf "$CONFDIR"/cache/*
-                    exit 1
-                fi
-                if [ "${TARFILE:-1}" = "/" ]; then
-                    TARFILE="${TARFILE::-1}"
-                fi
-                ;;
-            GITHUB)
-                targithubinfofunc
-                TARURI="https://github.com/$TAR_GITHUB_NEW_DOWNLOAD"
-                cd "$CONFDIR"/cache
-                wget --read-timeout=30 --quiet --show-progress "$TARURI" || { echo "wget $TARURI failed; exiting..."; rm -rf "$CONFDIR"/cache/*; exit 1; }
-                TARFILE="$(dir "$CONFDIR"/cache/*.tar*)"
-                TARFILE="${TARFILE##*/}"
-                ;;
-            DIRECT)
-                cd "$CONFDIR"/cache
-                wget --read-timeout=30 --quiet --show-progress "$TARURI" || { echo "wget $TARURI failed; exiting..."; rm -rf "$CONFDIR"/cache/*; exit 1; }
-                TARFILE="$(dir "$CONFDIR"/cache/*.tar*)"
-                TARFILE="${TARFILE##*/}"
-                ;;
-        esac
-    fi
-}
-
 tardlfunc () {
-    if [[ "$KNOWN_TAR" != "FALSE" ]]; then
-        case $TAR_DOWNLOAD_SOURCE in
-            GITHUB)
-                TARURI="https://github.com/$TAR_GITHUB_NEW_DOWNLOAD"
-                cd "$CONFDIR"/cache
-                wget --quiet --read-timeout=30 --show-progress "$TARURI" || { echo "wget $TARURI failed; exiting..."; rm -rf "$CONFDIR"/cache/*; exit 1; }
-                ;;
-            DIRECT)
-                cd "$CONFDIR"/cache
-                wget --quiet --read-timeout=30 --show-progress --trust-server-names "$TARURI" || { echo "wget $TARURI failed; exiting..."; rm -rf "$CONFDIR"/cache/*; exit 1; }
-                ;;
-        esac
-        TARFILE="$(dir "$CONFDIR"/cache/*.tar*)"
-        TARFILE="${TARFILE##*/}"
-        NEW_TARFILE="$TARFILE"
-    else
-        tarcustomdlfunc
-    fi
+    case $TAR_DOWNLOAD_SOURCE in
+        GITHUB)
+            TARURI="https://github.com/$TAR_GITHUB_NEW_DOWNLOAD"
+            cd "$CONFDIR"/cache
+            wget --quiet --read-timeout=30 --show-progress "$TARURI" || { echo "wget $TARURI failed; exiting..."; rm -rf "$CONFDIR"/cache/*; exit 1; }
+            ;;
+        DIRECT)
+            cd "$CONFDIR"/cache
+            wget --quiet --read-timeout=30 --show-progress --trust-server-names "$TARURI" || { echo "wget $TARURI failed; exiting..."; rm -rf "$CONFDIR"/cache/*; exit 1; }
+            ;;
+    esac
+    TARFILE="$(dir "$CONFDIR"/cache/*.tar*)"
+    TARFILE="${TARFILE##*/}"
+    NEW_TARFILE="$TARFILE"
 }
 
 tarcheckfunc () {
@@ -355,7 +261,7 @@ tarupgradecheckallfunc () {
     if [ "$(dir "$CONFDIR"/tarupgrades | wc -l)" = "1" ]; then
         echo "$(tput setaf 2)$(dir -C -w 1 "$CONFDIR"/tarupgrades | wc -l) new tar package upgrade available.$(tput sgr0)"
     elif [ "$(dir "$CONFDIR"/tarupgrades | wc -l)" = "0" ]; then
-        echo "No new tar package upgrades available."
+        echo "No new tar package upgrades."
     else
         echo "$(tput setaf 2)$(dir -C -w 1 "$CONFDIR"/tarupgrades | wc -l) new tar package upgrades available.$(tput sgr0)"
     fi
@@ -391,109 +297,12 @@ tarupdatelistfunc () {
 }
 
 tardesktopfilefunc () {
-    case $1 in
-        create)
-            echo "Creating .desktop file for $TARPKG ..."
-            echo "[Desktop Entry]" > /tmp/"$TARPKG".desktop
-            echo "Name=$TARPKG" >> /tmp/"$TARPKG".desktop
-            echo "Comment="$TAR_DESCRIPTION"" >> /tmp/"$TARPKG".desktop
-            echo "Exec=/usr/local/bin/$TARPKG" >> /tmp/"$TARPKG".desktop
-            echo "Terminal=false" >> /tmp/"$TARPKG".desktop
-            echo "Type=Application" >> /tmp/"$TARPKG".desktop
-            echo "Icon=$ICON_FILE_PATH" >> /tmp/"$TARPKG".desktop
-            echo "Categories=Utility;" >> /tmp/"$TARPKG".desktop
-            sudo mv /tmp/"$TARPKG".desktop "$INSTDIR"/"$TARPKG".desktop
-            DESKTOP_FILE_PATH="$INSTDIR/$TARPKG.desktop"
-            DESKTOP_FILE_NAME="$TARPKG.desktop"
-            ;;
-        *)
-            echo "Downloading $TARPKG.desktop from spm github repo..."
-            wget "https://raw.githubusercontent.com/simoniz0r/spm/master/apps/$TARPKG/$TARPKG.desktop" --show-progress -qO "$CONFDIR"/cache/"$TARPKG".desktop  || { echo "wget $TARURI failed; exiting..."; rm -rf "$CONFDIR"/cache/*; exit 1; }
-            echo "Moving $TARPKG.desktop to $INSTDIR ..."
-            sudo mv "$CONFDIR"/cache/"$TARPKG".desktop "$INSTDIR"/"$TARPKG".desktop
-            DESKTOP_FILE_PATH="$INSTDIR/$TARPKG.desktop"
-            DESKTOP_FILE_NAME="$TARPKG.desktop"
-            ;;
-    esac
-}
-
-tarcustomappfunc () {
-    echo "Moving files to $INSTDIR..."
-    EXTRACTED_DIR_NAME="$(ls -d "$CONFDIR"/cache/*/)"
-    sudo mv "$EXTRACTED_DIR_NAME" "$INSTDIR"
-    echo "Creating symlink for $EXECUTABLE_FILE_PATH to /usr/local/bin/$TARPKG ..."
-    sudo ln -s "$EXECUTABLE_FILE_PATH" /usr/local/bin/"$TARPKG"
-    echo "Creating symlink for $TARPKG.desktop to /usr/share/applications/ ..."
-    case $DESKTOP_FILE_NAME in
-        *create|*Create)
-            tardesktopfilefunc "create"
-            sudo ln -s "$DESKTOP_FILE_PATH" /usr/share/applications/"$DESKTOP_FILE_NAME"
-            ;;
-        *NONE*)
-            echo "Skipping .desktop file..."
-            ;;
-        *)
-            sudo sed -i "s:Exec=.*:Exec=/usr/local/bin/$TARPKG:g" "$DESKTOP_FILE_PATH"
-            sudo sed -i "s:Icon=.*:Icon="$ICON_FILE_PATH":g" "$DESKTOP_FILE_PATH"
-            sudo ln -s "$DESKTOP_FILE_PATH" /usr/share/applications/"$DESKTOP_FILE_NAME"
-            ;;
-    esac
-    echo "Creating config file for $TARPKG..."
-    tarsaveconffunc "tarinstalled/$TARPKG"
-    echo "$TARPKG has been installed to $INSTDIR !"
-    rm -rf "$CONFDIR"/cache/*
-    tarcustomappsubmitfunc
-}
-
-tarcustomappsubmitfunc () {
-    read -p "Would you like to submit the config file for this app to the github repo for others to use (no personal data will be shared)? Y/N " CUSTOMAPPANSWER
-    case $CUSTOMAPPANSWER in
-        Y|y)
-            cat "$CONFDIR"/tarinstalled/"$TARPKG"
-            echo "Copy the file above and submit it as an issue to spm's github page"
-            echo "https://github.com/simoniz0r/spm/issues/new"
-            echo "Thanks for taking the time to contribute!"
-            ;;
-        *)
-            echo "Install finished!"
-            ;;
-    esac
-}
-
-tarcustomstartfunc () {
-    if [ -f "$CONFDIR"/tarinstalled/"$TARPKG" ]; then
-        echo "$TARPKG is already installed."
-        echo "Use 'spm upgrade' to install the latest version of $TARPKG."
-        rm -rf "$CONFDIR"/cache/*
-        exit 1
-    fi
-    if type >/dev/null 2>&1 "$TARPKG"; then
-        echo "$TARPKG is already installed and not managed by spm; exiting..."
-        rm -rf "$CONFDIR"/cache/*
-        exit 1
-    fi
-    if [ -d "/opt/$TARPKG" ]; then
-        echo "/opt/$TARPKG exists; spm cannot install to existing directories!"
-        rm -rf "$CONFDIR"/cache/*
-        exit 1
-    fi
-    tarappcheckfunc "$TARPKG"
-    if [ "$KNOWN_TAR" = "FALSE" ];then
-        echo "$TARPKG is not in tar-pkgs.json; You can try updating tar-pkgs.json or you can be guided through the custom install."
-        read -p "Continue with custom install? Y/N " APPCHKINSTANSWER
-        case $APPCHKINSTANSWER in
-            N*|n*)
-                echo "Exiting..."
-                echo "Try running 'spm update' to update the tar-pkgs.json."
-                rm -rf "$CONFDIR"/cache/*
-                exit 0
-                ;;
-        esac
-    else
-        echo "$TARPKG is in tar-pkgs.json; use 'spm install $TARPKG'."
-        rm -rf "$CONFDIR"/cache/*
-        exit 1
-    fi
+    echo "Downloading $TARPKG.desktop from spm github repo..."
+    wget "https://raw.githubusercontent.com/simoniz0r/spm/master/apps/$TARPKG/$TARPKG.desktop" --show-progress -qO "$CONFDIR"/cache/"$TARPKG".desktop  || { echo "wget $TARURI failed; exiting..."; rm -rf "$CONFDIR"/cache/*; exit 1; }
+    echo "Moving $TARPKG.desktop to $INSTDIR ..."
+    sudo mv "$CONFDIR"/cache/"$TARPKG".desktop "$INSTDIR"/"$TARPKG".desktop
+    DESKTOP_FILE_PATH="$INSTDIR/$TARPKG.desktop"
+    DESKTOP_FILE_NAME="$TARPKG.desktop"
 }
 
 tarinstallfunc () {
@@ -515,7 +324,7 @@ tarinstallfunc () {
             echo "Skipping .desktop file..."
             ;;
         *)
-            sudo sed -i "s:Exec=.*:Exec=/usr/local/bin/$TARPKG:g" "$DESKTOP_FILE_PATH"
+            sudo sed -i "s:Exec=.*:Exec="$EXECUTABLE_FILE_PATH":g" "$DESKTOP_FILE_PATH"
             sudo sed -i "s:Icon=.*:Icon="$ICON_FILE_PATH":g" "$DESKTOP_FILE_PATH"
             sudo ln -s "$DESKTOP_FILE_PATH" /usr/share/applications/"$DESKTOP_FILE_NAME"
             ;;
@@ -596,7 +405,7 @@ tarupgradefunc () {
             echo "Skipping .desktop file..."
             ;;
         *)
-            sudo sed -i "s:Exec=.*:Exec=/usr/local/bin/$TARPKG:g" "$DESKTOP_FILE_PATH"
+            sudo sed -i "s:Exec=.*:Exec="$EXECUTABLE_FILE_PATH":g" "$DESKTOP_FILE_PATH"
             sudo sed -i "s:Icon=.*:Icon="$ICON_FILE_PATH":g" "$DESKTOP_FILE_PATH"
             sudo ln -sf "$DESKTOP_FILE_PATH" /usr/share/applications/"$DESKTOP_FILE_NAME"
             ;;

@@ -1,12 +1,12 @@
 #!/bin/bash
 # Title: spm
-# Description: Downloads AppImages and moves them to /usr/local/bin/.  Can also upgrade and remove installed AppImages.
+# Description: Downloads and installs AppImages and precompiled tar archives.  Can also upgrade and remove installed packages.
 # Dependencies: GNU coreutils, tar, wget, python3.x
 # Author: simonizor
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.1.4"
+X="0.1.5"
 # Set spm version
 CONFDIR="$HOME/.config/spm"
 
@@ -112,21 +112,6 @@ case $1 in
         tarcheckfunc
         tarinstallfunc
         rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
-        exit 0
-        ;;
-    tar-custom|-tc)
-        if [ -z "$2" ]; then
-            echo "Package input required; exiting..."
-            rm -rf "$CONFDIR"/cache/*
-            exit 1
-        fi
-        TARPKG="$2"
-        tarcustomstartfunc
-        tarcustomdlfunc "$TARPKG"
-        tarcheckfunc
-        tarcustominfofunc
-        tarcustomappfunc
-        rm -rf "$CONFDIR"/cache/*
         exit 0
         ;;
     update|-upd) # Update AppImage lists and check version from install info stored in "$CONFDIR"/installed against latest url
