@@ -95,7 +95,7 @@ tarappcheckfunc () { # check user input against list of known apps here
             DESKTOP_FILE_PATH="$(cat $CONFDIR/tar-pkgs.json | python3 $RUNNING_DIR/jsonparse.py $TARPKG_NAME desktop_file_path)"
             ICON_FILE_PATH="$(cat $CONFDIR/tar-pkgs.json | python3 $RUNNING_DIR/jsonparse.py $TARPKG_NAME icon_file_path)"
             EXECUTABLE_FILE_PATH="$(cat $CONFDIR/tar-pkgs.json | python3 $RUNNING_DIR/jsonparse.py $TARPKG_NAME executable_file_path)"
-            BIN_PATH="$(cat $CONFDIR/tar-pkgs.json | python3 $RUNNING_DIR/jsonparse.py $TARPKG_NAME instdir)"
+            BIN_PATH="$(cat $CONFDIR/tar-pkgs.json | python3 $RUNNING_DIR/jsonparse.py $TARPKG_NAME bin_path)"
             CONFIG_PATH="$(cat $CONFDIR/tar-pkgs.json | python3 $RUNNING_DIR/jsonparse.py $TARPKG_NAME config_path)"
             TAR_DESCRIPTION="$(cat $CONFDIR/tar-pkgs.json | python3 $RUNNING_DIR/jsonparse.py $TARPKG_NAME description)"
             DEPENDENCIES="$(cat $CONFDIR/tar-pkgs.json | python3 $RUNNING_DIR/jsonparse.py $TARPKG_NAME dependencies)"
