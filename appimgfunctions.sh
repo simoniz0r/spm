@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.1.2"
+X="0.1.3"
 # Set spm version
 
 # Set variables
@@ -43,7 +43,7 @@ appimglistfunc () {
     #     echo "INSTALLED=\"NO\""
     elif grep -qw "$LISTIMG" "$CONFDIR"/AppImages-github.lst; then # If not installed and in Github list, list Github info
         GITHUB_APP_URL="$(grep -w "$LISTIMG" "$CONFDIR"/AppImages-github.lst | cut -f2 -d" ")"
-        APPIMAGE="$(wget --quiet "$GITHUB_APP_URL" -O - | grep -iv '.*ia32*.\|.*i686*.' | grep "$LISTIMG" | grep -i '.*/download/*..*AppImage' | head -n 1 | cut -f2 -d'"')"
+        APPIMAGE="$(wget --quiet "$GITHUB_APP_URL" -O - | grep -iv '.*ia32*.\|.*i686*.\|.*i386*.' | grep "$LISTIMG" | grep -i '.*/download/*..*AppImage' | head -n 1 | cut -f2 -d'"')"
         MAIN_GITHUB_URL="$(echo "$GITHUB_APP_URL" | cut -f-5 -d'/')"
         # APPIMAGE_VERSION="$(wget --quiet "$GITHUB_APP_URL" -O - | grep '<a href="/*..*/commit/*.' | cut -f5 -d"/" | cut -f1 -d'"' | head -n 1)"
         if [ -z "$APPIMAGE" ]; then
@@ -92,13 +92,13 @@ appimggithubinfofunc () {
     APPIMG_GITHUB_API_URL="$(grep -wi "$INSTIMG" "$CONFDIR"/AppImages-github.lst | cut -f3- -d" ")"
     wget --quiet "$APPIMG_GITHUB_API_URL" -O "$CONFDIR"/cache/"$INSTIMG"-release || { echo "wget $APPIMG_GITHUB_API_URL failed; has the repo been renamed or deleted?"; exit 1; }
     APPIMAGE_INFO="$HOME/.config/spm/cache/$INSTIMG"-release
-    APPIMAGE_NAME="$(grep -iv '.*ia32*.\|.*i686*.' "$APPIMAGE_INFO" | grep "$INSTIMG" | grep -im 1 '"name":*..*AppImage"' | cut -f4 -d'"')"
-    NEW_APPIMAGE_VERSION="$(grep -iv '.*ia32*.\|.*i686*.' "$APPIMAGE_INFO" | grep -B 1 -im 1 '"browser_download_url":*..*AppImage"' | head -n 1 | cut -f4 -d'"')"
-    GITHUB_APPIMAGE_URL="$(grep -iv '.*ia32*.\|.*i686*.' "$APPIMAGE_INFO" | grep "$INSTIMG" | grep -im 1 '"browser_download_url":*..*AppImage"' | cut -f4 -d'"')"
+    APPIMAGE_NAME="$(grep -iv '.*ia32*.\|.*i686*.\|.*i386*.' "$APPIMAGE_INFO" | grep "$INSTIMG" | grep -im 1 '"name":*..*AppImage"' | cut -f4 -d'"')"
+    NEW_APPIMAGE_VERSION="$(grep -iv '.*ia32*.\|.*i686*.\|.*i386*.' "$APPIMAGE_INFO" | grep -B 1 -im 1 '"browser_download_url":*..*AppImage"' | head -n 1 | cut -f4 -d'"')"
+    GITHUB_APPIMAGE_URL="$(grep -iv '.*ia32*.\|.*i686*.\|.*i386*.' "$APPIMAGE_INFO" | grep "$INSTIMG" | grep -im 1 '"browser_download_url":*..*AppImage"' | cut -f4 -d'"')"
     if [ -z "$APPIMAGE_NAME" ]; then
-        APPIMAGE_NAME="$(grep -iv '.*ia32*.\|.*i686*.' "$APPIMAGE_INFO" | grep -im 1 '"name":*..*AppImage"' | cut -f4 -d'"')"
-        NEW_APPIMAGE_VERSION="$(grep -iv '.*ia32*.\|.*i686*.' "$APPIMAGE_INFO" | grep -B 1 -im 1 '"browser_download_url":*..*AppImage"' | head -n 1 | cut -f4 -d'"')"
-        GITHUB_APPIMAGE_URL="$(grep -iv '.*ia32*.\|.*i686*.' "$APPIMAGE_INFO" | grep -im 1 '"browser_download_url":*..*AppImage"' | cut -f4 -d'"')"
+        APPIMAGE_NAME="$(grep -iv '.*ia32*.\|.*i686*.\|.*i386*.' "$APPIMAGE_INFO" | grep -im 1 '"name":*..*AppImage"' | cut -f4 -d'"')"
+        NEW_APPIMAGE_VERSION="$(grep -iv '.*ia32*.\|.*i686*.\|.*i386*.' "$APPIMAGE_INFO" | grep -B 1 -im 1 '"browser_download_url":*..*AppImage"' | head -n 1 | cut -f4 -d'"')"
+        GITHUB_APPIMAGE_URL="$(grep -iv '.*ia32*.\|.*i686*.\|.*i386*.' "$APPIMAGE_INFO" | grep -im 1 '"browser_download_url":*..*AppImage"' | cut -f4 -d'"')"
     fi
     if [ "$APPIMG_UPGRADE_CHECK" = "FALSE" ]; then
         wget --quiet "$GITHUB_APP_URL" -O "$CONFDIR"/cache/"$INSTIMG"-github || { echo "wget $GITHUB_APP_URL failed; has the repo been renamed or deleted?"; rm -rf "$CONFDIR"/cache/*; exit 1; }
