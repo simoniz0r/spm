@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.0.9"
+X="0.1.0"
 # Set spm version
 
 # Set variables
@@ -57,7 +57,6 @@ appimglistfunc () {
         echo "INSTALLED=\"NO\""
     else # Exit if not in list or installed
         echo "AppImage not found!"
-        rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
     fi
 }
 
@@ -229,7 +228,6 @@ appimgupdatelistfunc () { # Regenerate AppImages-bintray.lst from bintray, downl
         appimgupgradecheckfunc
     fi
     APPIMG_UPGRADE_CHECK="FALSE"
-    rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
 }
 
 appimgupdateforcefunc () {

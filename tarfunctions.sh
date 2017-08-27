@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.0.9"
+X="0.1.0"
 # Set spm version
 TAR_LIST="$(cat $CONFDIR/tar-pkgs.json | python3 -c "import sys, json; data = json.load(sys.stdin); print (data['available'])")" #  | pr -tTw 125 -3
 
@@ -118,7 +118,7 @@ tarappcheckfunc () { # check user input against list of known apps here
     TAR_STATUS="$?"
     case $TAR_STATUS in
         0)
-            TAR_DOWNLOAD_SOURC="$DOWNLOAD_SOURCE"
+            TAR_DOWNLOAD_SOURCE="$DOWNLOAD_SOURCE"
             KNOWN_TAR="TRUE"
             TARPKG_NAME="$1"
             INSTDIR="$(cat $CONFDIR/tar-pkgs.json | python3 $RUNNING_DIR/jsonparse.py $1 instdir)"
@@ -328,7 +328,7 @@ tarupdateforcefunc () {
     fi
     echo "Marking $TARPKG for upgrade by force..."
     TAR_FORCE_UPGRADE="TRUE"
-    # tarappcheckfunc "$TARPKG"
+    tarappcheckfunc "$TARPKG"
     checktarversionfunc
     if [ "$TAR_NEW_UPGRADE" = "TRUE" ]; then
         echo "$(tput setaf 2)New upgrade available for $TARPKG!$(tput sgr0)"
@@ -617,8 +617,6 @@ tarupgradestartallfunc () {
                     TARPKG="$UPGRADE_PKG"
                     echo "Downloading $TARPKG..."
                     tarappcheckfunc "$TARPKG"
-                    . "$CONFDIR"/cache/"$TARPKG".conf
-                    . "$CONFDIR"/tarupgrades/"$TARPKG"
                     if [ "$TAR_DOWNLOAD_SOURCE" = "GITHUB" ]; then
                         targithubinfofunc
                     fi
