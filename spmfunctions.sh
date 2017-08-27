@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.1.6"
+X="0.1.7"
 # Set spm version
 
 helpfunc () { # All unknown arguments come to this function; display help for spm
@@ -65,7 +65,7 @@ appimgfunctioncheckfunc () {
             rm "$RUNNING_DIR"/appimgfunctions.sh || { echo "rm $RUNNING_DIR/appimgfunctions.sh failed; trying with sudo..."; sudo rm "$RUNNING_DIR"/appimgfunctions.sh; }
             echo "$RUNNING_DIR/appimgfunctions.sh has been removed."
             echo "Downloading appimgfunctions.sh from spm github repo..."
-            wget --quiet --show-progress "https://github.com/simoniz0r/appimgman/raw/spm/appimgfunctions.sh" -O "$CONFDIR"/cache/appimgfunctions.sh
+            wget --quiet --show-progress "https://github.com/simoniz0r/spm/raw/master/appimgfunctions.sh" -O "$CONFDIR"/cache/appimgfunctions.sh
             chmod +x "$CONFDIR"/cache/appimgfunctions.sh
             mv "$CONFDIR"/cache/appimgfunctions.sh "$RUNNING_DIR"/appimgfunctions.sh || { echo "mv to $RUNNING_DIR failed; trying as sudo..."; sudo mv "$CONFDIR"/cache/appimgfunctions.sh "$RUNNING_DIR"/appimgfunctions.sh; }
             echo "appimgfunctions.sh saved to $RUNNING_DIR/appimgfunctions.sh"
@@ -73,7 +73,7 @@ appimgfunctioncheckfunc () {
     else
         echo "Missing required file $RUNNING_DIR/appimgfunctions.sh !"
         echo "Downloading appimgfunctions.sh from spm github repo..."
-        wget --quiet --show-progress "https://github.com/simoniz0r/appimgman/raw/spm/appimgfunctions.sh" -O "$CONFDIR"/cache/appimgfunctions.sh
+        wget --quiet --show-progress "https://github.com/simoniz0r/spm/raw/master/appimgfunctions.sh" -O "$CONFDIR"/cache/appimgfunctions.sh
         chmod +x "$CONFDIR"/cache/appimgfunctions.sh
         mv "$CONFDIR"/cache/appimgfunctions.sh "$RUNNING_DIR"/appimgfunctions.sh || { echo "mv to $RUNNING_DIR failed; trying as sudo..."; sudo mv "$CONFDIR"/cache/appimgfunctions.sh "$RUNNING_DIR"/appimgfunctions.sh; }
         echo "appimgfunctions.sh saved to $RUNNING_DIR/appimgfunctions.sh"
@@ -88,7 +88,7 @@ tarfunctioncheckfunc () {
             rm "$RUNNING_DIR"/tarfunctions.sh || { echo "rm $RUNNING_DIR/tarfunctions.sh failed; trying with sudo..."; sudo rm "$RUNNING_DIR"/tarfunctions.sh; }
             echo "$RUNNING_DIR/tarfunctions.sh has been removed."
             echo "Downloading tarfunctions.sh from spm github repo..."
-            wget --quiet --show-progress "https://github.com/simoniz0r/appimgman/raw/spm/tarfunctions.sh" -O "$CONFDIR"/cache/tarfunctions.sh
+            wget --quiet --show-progress "https://github.com/simoniz0r/spm/raw/master/tarfunctions.sh" -O "$CONFDIR"/cache/tarfunctions.sh
             chmod +x "$CONFDIR"/cache/tarfunctions.sh
             mv "$CONFDIR"/cache/tarfunctions.sh "$RUNNING_DIR"/tarfunctions.sh || { echo "mv to $RUNNING_DIR failed; trying as sudo..."; sudo mv "$CONFDIR"/cache/tarfunctions.sh "$RUNNING_DIR"/tarfunctions.sh; }
             echo "tarfunctions.sh saved to $RUNNING_DIR/tarfunctions.sh"
@@ -96,7 +96,7 @@ tarfunctioncheckfunc () {
     else
         echo "Missing required file $RUNNING_DIR/tarfunctions.sh !"
         echo "Downloading tarfunctions.sh from spm github repo..."
-        wget --quiet --show-progress "https://github.com/simoniz0r/appimgman/raw/spm/tarfunctions.sh" -O "$CONFDIR"/cache/tarfunctions.sh
+        wget --quiet --show-progress "https://github.com/simoniz0r/spm/raw/master/tarfunctions.sh" -O "$CONFDIR"/cache/tarfunctions.sh
         chmod +x "$CONFDIR"/cache/tarfunctions.sh
         mv "$CONFDIR"/cache/tarfunctions.sh "$RUNNING_DIR"/tarfunctions.sh || { echo "mv to $RUNNING_DIR failed; trying as sudo..."; sudo mv "$CONFDIR"/cache/tarfunctions.sh "$RUNNING_DIR"/tarfunctions.sh; }
         echo "tarfunctions.sh saved to $RUNNING_DIR/tarfunctions.sh"
@@ -107,7 +107,7 @@ jsonparsecheck () {
     if [ ! -f $RUNNING_DIR/jsonparse.py ]; then
         echo "Missing required file $RUNNING_DIR/jsonparse.py !"
         echo "Downloading jsonparse.py from spm github repo..."
-        wget --quiet --show-progress "https://github.com/simoniz0r/appimgman/raw/spm/jsonparse.py" -O "$CONFDIR"/cache/jsonparse.py
+        wget --quiet --show-progress "https://github.com/simoniz0r/spm/raw/master/jsonparse.py" -O "$CONFDIR"/cache/jsonparse.py
         chmod +x "$CONFDIR"/cache/jsonparse.py
         mv "$CONFDIR"/cache/jsonparse.py "$RUNNING_DIR"/jsonparse.py || { echo "mv to $RUNNING_DIR failed; trying as sudo..."; sudo mv "$CONFDIR"/cache/jsonparse.py "$RUNNING_DIR"/jsonparse.py; }
         echo "jsonparse.py saved to $RUNNING_DIR/jsonparse.py"
