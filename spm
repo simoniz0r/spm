@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.1.5"
+X="0.1.6"
 # Set spm version
 CONFDIR="$HOME/.config/spm"
 
@@ -85,6 +85,22 @@ tarfunctionsexistfunc || { echo "Could not load $RUNNING_DIR/tarfunctions.sh; ex
 jsonparsecheck
 
 spmlockfunc # Create "$CONFDIR"/cache/spm.lock file and prevent multiple instances by checking if it exists before running
+
+if [ -z "$GITHUB_TOKEN" ]; then
+    wget -S --spider "https://api.github.com/rate_limit" -o "$CONFDIR"/cache/rate.limit
+    echo "$(grep -m 1 '.*X-RateLimit-Remaining:*.' "$CONFDIR"/cache/rate.limit | cut -f4 -d" ") Github API checks remaining out of 60."
+else
+    wget -S --spider --quiet --auth-no-challenge --header="Authorization: token "$GITHUB_TOKEN"" "https://api.github.com/rate_limit" -o "$CONFDIR"/cache/rate.limit
+    echo "$(grep -m 1 '.*X-RateLimit-Remaining:*.' "$CONFDIR"/cache/rate.limit | cut -f4 -d" ") Github API checks remaining out of 5000."
+fi
+if [ "$(grep -m 1 '.*X-RateLimit-Remaining:*.' "$CONFDIR"/cache/rate.limit | cut -f4 -d" ")" = "0" ]; then
+    echo "Github API rate limit reached! Try again at $(date -d@$(grep -m 1 '.*X-RateLimit-Reset:*.' "$CONFDIR"/cache/rate.limit | cut -f4 -d" "))."
+    echo "If you haven't already, you can add your token to $CONFDIR/spm.conf"
+    echo "to avoid hitting the rate limit."
+    rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
+    exit 1
+fi
+echo
 
 case $1 in
     appimg-install|-ai) # Check if app is already installed either by spm or otherwise then install app to /usr/local/bin if it is in known lists

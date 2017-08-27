@@ -6,9 +6,9 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.1.5"
+X="0.1.6"
 # Set spm version
-TAR_LIST="$(cat $CONFDIR/tar-pkgs.json | python3 -c "import sys, json; data = json.load(sys.stdin); print (data['available'])")" #  | pr -tTw 125 -3
+TAR_LIST="$(cat $CONFDIR/tar-pkgs.json | python3 -c "import sys, json; data = json.load(sys.stdin); print (data['available'])")"
 
 tarfunctionsexistfunc () {
     sleep 0
