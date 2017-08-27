@@ -27,7 +27,7 @@ without having to install any additional packages!
 
 Arguments:
 - list (-l) - list all installed AppImages and all AppImages known by spm or info about the specified AppImage
-- list-installed (-li) - list all installed AppImages and install info
+- list-installed (-li) - list all installed packages and install info
 - appimg-install (-ai) - install an AppImage
 - tar-install (-ti - install a precompiled tar archive
 - appimg-remove (-ar) - remove an installed AppImage
