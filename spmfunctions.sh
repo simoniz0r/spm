@@ -29,6 +29,7 @@ Arguments:
     appimg-update-force (-auf) - mark specified AppImage for upgrade without checking version
     tar-update-force (-tuf) - mark specified precompiled tar archive for upgrade without checking version
     upgrade (-upg) - upgrade all installed packages that are marked for upgrade or just the specified package
+    man - show spm man page
 
 See https://github.com/simoniz0r/spm for more help or to report issues.
 
