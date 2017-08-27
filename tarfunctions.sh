@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.0.6"
+X="0.0.7"
 # Set spm version
 TAR_LIST="$(cat $CONFDIR/tar-pkgs.json | python3 -c "import sys, json; data = json.load(sys.stdin); print (data['available'])")" #  | pr -tTw 125 -3
 
@@ -45,31 +45,31 @@ targithubinfofunc () {
     TAR_GITHUB_NEW_COMMIT="$(grep '.*/commit//*.' "$CONFDIR"/cache/"$TARPKG".latest | cut -f5 -d"/" | tr -d '>"')"
     TAR_GITHUB_NEW_VERSION="$(grep -i -m 1 '.*/download/*..*linux*..*64*..*tar*.' "$CONFDIR"/cache/"$TARPKG".latest | cut -f2 -d'"' | cut -f6 -d"/")"
     TAR_DOWNLOAD_SOURCE="GITHUB"
-    tarsaveconffunc "cache/$TARPKG.github"
-    . "$CONFDIR"/cache/"$TARPKG".github
+    tarsaveconffunc "cache/$TARPKG.conf"
+    . "$CONFDIR"/cache/"$TARPKG".conf
     if [ -z "$TAR_GITHUB_NEW_DOWNLOAD" ]; then
         TAR_GITHUB_NEW_DOWNLOAD="$(grep -i -m 1 '.*/download/*..*linux*..*tar*.' "$CONFDIR"/cache/"$TARPKG".latest | cut -f2 -d'"')"
         TAR_GITHUB_NEW_COMMIT="$(grep '.*/commit//*.' "$CONFDIR"/cache/"$TARPKG".latest | cut -f5 -d"/" | tr -d '>"')"
         TAR_GITHUB_NEW_VERSION="$(grep -i -m 1 '.*/download/*..*linux*..*tar*.' "$CONFDIR"/cache/"$TARPKG".latest | cut -f2 -d'"' | cut -f6 -d"/")"
         TAR_DOWNLOAD_SOURCE="GITHUB"
-        tarsaveconffunc "cache/$TARPKG.github"
-        . "$CONFDIR"/cache/"$TARPKG".github
+        tarsaveconffunc "cache/$TARPKG.conf"
+        . "$CONFDIR"/cache/"$TARPKG".conf
     fi
     if [ -z "$TAR_GITHUB_NEW_DOWNLOAD" ]; then
         TAR_GITHUB_NEW_DOWNLOAD="$(grep -i -m 1 '.*/download/*..*64*..*tar*.' "$CONFDIR"/cache/"$TARPKG".latest | cut -f2 -d'"')"
         TAR_GITHUB_NEW_COMMIT="$(grep '.*/commit//*.' "$CONFDIR"/cache/"$TARPKG".latest | cut -f5 -d"/" | tr -d '>"')"
         TAR_GITHUB_NEW_VERSION="$(grep -i -m 1 '.*/download/*..*64*..*tar*.' "$CONFDIR"/cache/"$TARPKG".latest | cut -f2 -d'"' | cut -f6 -d"/")"
         TAR_DOWNLOAD_SOURCE="GITHUB"
-        tarsaveconffunc "cache/$TARPKG.github"
-        . "$CONFDIR"/cache/"$TARPKG".github
+        tarsaveconffunc "cache/$TARPKG.conf"
+        . "$CONFDIR"/cache/"$TARPKG".conf
     fi
     if [ -z "$TAR_GITHUB_NEW_DOWNLOAD" ]; then
         TAR_GITHUB_NEW_DOWNLOAD="$(grep -v '.*ia32*.'  "$CONFDIR"/cache/"$TARPKG".latest | grep -i -m 1 '.*/download/*..*.tar*.' | cut -f2 -d'"')"
         TAR_GITHUB_NEW_COMMIT="$(grep -v '.*ia32*.'  "$CONFDIR"/cache/"$TARPKG".latest | grep '.*/commit//*.' | cut -f5 -d"/" | tr -d '>"')"
         TAR_GITHUB_NEW_VERSION="$(grep -v '.*ia32*.'  "$CONFDIR"/cache/"$TARPKG".latest | grep -i -m 1 '.*/download/*..*.tar*.' | cut -f2 -d'"' | cut -f6 -d"/")"
         TAR_DOWNLOAD_SOURCE="GITHUB"
-        tarsaveconffunc "cache/$TARPKG.github"
-        . "$CONFDIR"/cache/"$TARPKG".github
+        tarsaveconffunc "cache/$TARPKG.conf"
+        . "$CONFDIR"/cache/"$TARPKG".conf
     fi
     NEW_TARFILE="${TAR_GITHUB_NEW_DOWNLOAD##*/}"
     if [ -z "$TAR_GITHUB_NEW_DOWNLOAD" ]; then
@@ -548,7 +548,7 @@ tarinstallstartfunc () {
         rm -rf "$CONFDIR"/cache/*
         exit 1
     else
-        cat "$CONFDIR"/cache/$TARPKG.conf
+        cat "$CONFDIR"/cache/"$TARPKG".conf
         echo
         echo "$TARPKG will be installed to /opt/$TARPKG"
         read -p "Continue? Y/N " INSTANSWER

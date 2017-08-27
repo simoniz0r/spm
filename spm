@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.0.6"
+X="0.0.7"
 # Set spm version
 CONFDIR="$HOME/.config/spm"
 
@@ -87,6 +87,11 @@ spmlockfunc # Create "$CONFDIR"/cache/spm.lock file and prevent multiple instanc
 
 case $1 in
     appimg-install|-ai) # Check if app is already installed either by spm or otherwise then install app to /usr/local/bin if it is in known lists
+        if [ -z "$2" ]; then
+            echo "Package input required; exiting..."
+            rm -rf "$CONFDIR"/cache/*
+            exit 1
+        fi
         INSTIMG="$2"
         appimginstallstartfunc # Check for valid inputs and start gathering info for install
         appimgdlfunc "$INSTIMG" # Download AppImage from Bintray or Github
