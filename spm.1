@@ -58,10 +58,11 @@ installed through
 will not allow AppImages that have the same name as existing commands on
 your system to be installed.
 
-
 AppImages contain all dependencies that are necessary for the app to run as long as
 those dependencies would not be on a normal Linux system.  This means that AppImages should "just work"
 without having to install any additional packages!
+
+Upgrades for AppImages that are downloaded from direct sources rather than Github will not be reliable.  There is no reliable way to check versions for AppImages from direct sources.  If you find an AppImage from a direct source to be out of date even after running the update argument, try running the force upgrade argument.  If the AppImage is still out of date, please report an issue on spm's github repo.
 
 .Sh TAR ARCHIVES
 Precompiled tar archives are installed to '/opt/PackageName', and symlinks are created for the .desktop and executable

@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.1.7"
+X="0.1.8"
 # Set spm version
 TAR_LIST="$(cat $CONFDIR/tar-pkgs.json | python3 -c "import sys, json; data = json.load(sys.stdin); print (data['available'])")"
 
@@ -33,6 +33,7 @@ tarsaveconffunc () {
     echo "DESKTOP_FILE_PATH="\"$DESKTOP_FILE_PATH\""" >> "$CONFDIR"/"$SAVEDIR"
     echo "ICON_FILE_PATH="\"$ICON_FILE_PATH\""" >> "$CONFDIR"/"$SAVEDIR"
     echo "EXECUTABLE_FILE_PATH="\"$EXECUTABLE_FILE_PATH\""" >> "$CONFDIR"/"$SAVEDIR"
+    echo "BIN_PATH="\"$BIN_PATH\""" >> "$CONFDIR"/"$SAVEDIR"
     echo "CONFIG_PATH="\"$CONFIG_PATH\""" >> "$CONFDIR"/"$SAVEDIR"
     echo "TAR_DESCRIPTION="\"$TAR_DESCRIPTION\""" >> "$CONFDIR"/"$SAVEDIR"
     echo "DEPENDENCIES="\"$DEPENDENCIES\""" >> "$CONFDIR"/"$SAVEDIR"
@@ -228,22 +229,17 @@ tarupdateforcefunc () {
         rm -rf "$CONFDIR"/cache/*
         exit 1
     fi
-    if [ -f "$CONFDIR"/tarupgrades/$TARPKG ]; then
-        echo "$(tput setaf 2)$TARPKG is already marked for upgrade!"
-        echo "Run 'spm upgrade $TARPKG' to upgrade $TARPKG$(tput sgr0)"
-        rm -rf "$CONFDIR"/cache/*
-        exit 0
+    . "$CONFDIR"/tarinstalled/"$TARPKG"
+    if [ ! -z "$DOWNLOAD_SOURCE" ]; then
+        TAR_DOWNLOAD_SOURCE="$DOWNLOAD_SOURCE"
     fi
+    NEW_TARFILE="$TARFILE"
+    TAR_GITHUB_NEW_COMMIT="$TAR_GITHUB_COMMIT"
+    TAR_GITHUB_NEW_DOWNLOAD="$TAR_GITHUB_DOWNLOAD"
+    TAR_GITHUB_NEW_VERSION="$TAR_GITHUB_VERSION"
     echo "Marking $TARPKG for upgrade by force..."
-    TAR_FORCE_UPGRADE="TRUE"
-    tarappcheckfunc "$TARPKG"
-    checktarversionfunc
-    if [ "$TAR_NEW_UPGRADE" = "TRUE" ]; then
-        echo "$(tput setaf 2)New upgrade available for $TARPKG!$(tput sgr0)"
-        tarsaveconffunc "tarupgrades/$TARPKG"
-    else
-        echo "No new upgrade for $TARPKG"
-    fi
+    echo "$(tput setaf 2)New upgrade available for $TARPKG!$(tput sgr0)"
+    tarsaveconffunc "tarupgrades/$TARPKG"
 }
 
 tarupgradecheckallfunc () {
@@ -419,6 +415,11 @@ tarupgradestartallfunc () {
     if [ "$TARUPGRADES" = "FALSE" ]; then
         sleep 0
     else
+        if [ "$(dir "$CONFDIR"/tarupgrades | wc -l)" = "1" ]; then
+            echo "$(tput setaf 2)$(dir -C -w 1 "$CONFDIR"/tarupgrades | wc -l) new tar package upgrade available.$(tput sgr0)"
+        else
+            echo "$(tput setaf 2)$(dir -C -w 1 "$CONFDIR"/tarupgrades | wc -l) new tar package upgrades available.$(tput sgr0)"
+        fi
         dir -C -w 1 "$CONFDIR"/tarupgrades | pr -tT --column=3 -w 125
         echo
         read -p "Continue? Y/N " UPGRADEALLANSWER
@@ -434,10 +435,10 @@ tarupgradestartallfunc () {
                     tardlfunc "$TARPKG"
                     tarcheckfunc
                     tarupgradefunc
+                    rm "$CONFDIR"/tarupgrades/"$TARPKG"
                     rm -rf "$CONFDIR"/cache/*
                     echo
                 done
-                rm -f "$CONFDIR"/tarupgrades/*
                 ;;
             N*|n*)
                 echo "No packages were upgraded; exiting..."

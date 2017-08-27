@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.1.7"
+X="0.1.8"
 # Set spm version
 CONFDIR="$HOME/.config/spm"
 
@@ -43,6 +43,8 @@ if [ ! -d "$CONFDIR" ]; then # Create dirs for configs if they don't exist
     # wget --show-progress --quiet "https://dl.bintray.com/probono/AppImages/" -O - | sed 's/<\/*[^>]*>//g' | grep -o '.*AppImage' | cut -f1 -d"-" | sort -u > "$CONFDIR"/AppImages-bintray.lst
     echo "Downloading AppImages-github.lst from spm github..."
     wget --quiet --show-progress "https://raw.githubusercontent.com/simoniz0r/spm/master/AppImages-github.lst" -O "$CONFDIR"/AppImages-github.lst
+    echo "Downloading AppImages-direct.lst from spm github..."
+    wget --quiet --show-progress "https://raw.githubusercontent.com/simoniz0r/spm/master/AppImages-direct.lst" -O "$CONFDIR"/AppImages-direct.lst
     echo "Downloading tar-pkgs.json from spm github repo..."
     wget --quiet --show-progress "https://raw.githubusercontent.com/simoniz0r/spm/master/tar-pkgs.json" -O "$CONFDIR"/tar-pkgs.json
     echo "First run operations complete!"
@@ -135,7 +137,7 @@ case $1 in
         # Need to fix this so package input checks only go to relevant function
         if [ ! -z "$2" ]; then
             # if grep -qiw "$2" "$CONFDIR"/AppImages-bintray.lst ||grep -qiw "$2" "$CONFDIR"/AppImages-github.lst; then
-            if grep -qiw "$2" "$CONFDIR"/AppImages-github.lst; then
+            if grep -qiw "$2" "$CONFDIR"/AppImages-github.lst || grep -qiw "$2" "$CONFDIR"/AppImages-direct.lst; then
                 INSTIMG="$2"
                 appimgupdatelistfunc "$INSTIMG"
             elif [ -f "$CONFDIR"/tarinstalled/"$2" ]; then
@@ -166,18 +168,15 @@ case $1 in
         rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
         exit 0
         ;;
-    upgrade|-upg) # upgrade AppImages to latest version if on upgrade-list.lst; update argument must be ran to put them on update-list.lst
-        if [ ! -f "$CONFDIR"/upgrade-list.lst ]; then
-            echo "No AppImage upgrades; skipping AppImage upgrade function..."
+    upgrade|-upg) # upgrade packages to latest version if marked for upgrade
+        if [ "$(dir "$CONFDIR"/appimgupgrades | wc -l)" = "0" ]; then
+            echo "No new AppImage upgrades; skipping AppImage upgrade function..."
             echo
             APPIMGUPGRADES="FALSE"
         else
             APPIMGUPGRADES="TRUE"
         fi
-        if [ "$(dir "$CONFDIR"/tarupgrades | wc -l)" = "1" ]; then
-            TARUPGRADES="TRUE"
-            echo "$(tput setaf 2)$(dir -C -w 1 "$CONFDIR"/tarupgrades | wc -l) new tar package upgrade available.$(tput sgr0)"
-        elif [ "$(dir "$CONFDIR"/tarupgrades | wc -l)" = "0" ]; then
+        if [ "$(dir "$CONFDIR"/tarupgrades | wc -l)" = "0" ]; then
             echo "No tar package upgrades; skipping tar upgrade function..."
             echo
             TARUPGRADES="FALSE"
@@ -187,7 +186,6 @@ case $1 in
                 exit 0
             fi
         else
-            echo "$(tput setaf 2)$(dir -C -w 1 "$CONFDIR"/tarupgrades | wc -l) new upgrades available.$(tput sgr0)"
             TARUPGRADES="TRUE"
         fi
         if [ -z "$2" ]; then # If no AppImage specified, upgrade all AppImages in upgrade-list.lst
@@ -287,7 +285,7 @@ case $1 in
             echo "tar packages:"
             tarlistfunc
         else # If AppImage input, list info for that AppImage
-            if grep -qiw "$LISTIMG" "$CONFDIR"/AppImages-github.lst; then
+            if grep -qiw "$LISTIMG" "$CONFDIR"/AppImages-github.lst || grep -qiw "$LISTIMG" "$CONFDIR"/AppImages-direct.lst; then
                 appimglistfunc # List information about specified AppImage
                 ISAPPIMG="TRUE"
             fi

@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.1.7"
+X="0.1.8"
 # Set spm version
 
 # Set variables
@@ -17,73 +17,44 @@ appimgfunctionsexistsfunc () {
     sleep 0
 }
 
+appimgsaveinfofunc () { # Save install info to "$CONFDIR"/appimginstalled/AppImageName
+    SAVEDIR="$1"
+    echo "BIN_PATH="\"/usr/local/bin/$INSTIMG\""" > "$CONFDIR"/"$SAVEDIR" # Create AppImage installed info file
+    echo "APPIMAGE="\"$APPIMAGE_NAME\""" >> "$CONFDIR"/"$SAVEDIR"
+    APPIMAGE_VERSION="$NEW_APPIMAGE_VERSION"
+    echo "APPIMAGE_VERSION="\"$APPIMAGE_VERSION\""" >> "$CONFDIR"/"$SAVEDIR"
+    if [ "$GITHUB_IMG" = "TRUE" ]; then
+        echo "WEBSITE="\"$(echo "$GITHUB_APP_URL" | cut -f-5 -d'/')\""" >> "$CONFDIR"/"$SAVEDIR"
+    elif [ "$DIRECT_IMG" = "TRUE" ]; then
+        echo "WEBSITE="\"$(echo "$DIRECT_APPIMAGE_URL" | cut -f-3 -d'/')\""" >> "$CONFDIR"/"$SAVEDIR"
+    fi
+    if [ "$GITHUB_IMG" = "TRUE" ]; then
+        echo "APPIMG_DESCRIPTION="\"$APPIMG_DESCRIPTION\""" >> "$CONFDIR"/"$SAVEDIR"
+    fi
+}
+
 appimglistallfunc () {
     echo "$(dir -C -w 1 "$CONFDIR"/appimginstalled | wc -l) AppImages installed:"
     dir -C -w 1 "$CONFDIR"/appimginstalled | pr -tT --column=3 -w 125
     echo
-    # echo "$(cat "$CONFDIR"/AppImages-direct.lst | wc -l) Bintray AppImages available for install:"
-    # cat "$CONFDIR"/AppImages-direct.lst | pr -tT --column=3 -w 125
-    # echo
     echo "$(cat "$CONFDIR"/AppImages-github.lst | wc -l) Github AppImages available for install:"
     cat "$CONFDIR"/AppImages-github.lst | cut -f1 -d" " | pr -tT --column=3 -w 125
-}
-
-appimglistfunc () {
-    if [ -f "$CONFDIR"/appimginstalled/"$LISTIMG" ]; then # If installed, list installed info
-        echo "Current installed $LISTIMG information:"
-        cat "$CONFDIR"/appimginstalled/"$LISTIMG"
-        echo "INSTALLED=\"YES\""
-    # elif grep -qw "$LISTIMG" "$CONFDIR"/AppImages-direct.lst; then # If not installed and in Bintray list, list Bintray info
-    #     echo "$LISTIMG AppImage information:"
-    #     APPIMAGE="$(wget -q "https://bintray.com/package/files/probono/AppImages/$LISTIMG?order=desc&sort=fileLastModified&basePath=&tab=files" -O - | grep -e '64.AppImage">' | cut -d '"' -f 6 | head -n 1 | cut -f2 -d"=")"
-    #     echo "APPIMAGE=\"${APPIMAGE##*/}\""
-    #     # echo "APPIMAGE_VERSION=\"$(echo "$APPIMAGE" | cut -f2 -d'-')\""
-    #     echo "WEBSITE="\"https://bintray.com/probono/AppImages/$LISTIMG\"""
-    #     echo "APPIMG_DESCRIPTION="\"$(wget --quiet "https://bintray.com/probono/AppImages/$LISTIMG/" -O - | grep '<div class="description-text">' | cut -f2 -d'>' | cut -f1 -d'<')\"""
-    #     echo "INSTALLED=\"NO\""
-    elif grep -qiw "$LISTIMG" "$CONFDIR"/AppImages-github.lst; then # If not installed and in Github list, list Github info
-        LISTIMG="$(grep -wi "$LISTIMG" "$CONFDIR"/AppImages-github.lst | cut -f1 -d" ")"
-        GITHUB_APP_URL="$(grep -w "$LISTIMG" "$CONFDIR"/AppImages-github.lst | cut -f2 -d" ")"
-        APPIMAGE="$(wget --quiet "$GITHUB_APP_URL" -O - | grep -iv '.*ia32*.\|.*i686*.\|.*i386*.' | grep "$LISTIMG" | grep -i '.*/download/*..*AppImage' | head -n 1 | cut -f2 -d'"')"
-        MAIN_GITHUB_URL="$(echo "$GITHUB_APP_URL" | cut -f-5 -d'/')"
-        # APPIMAGE_VERSION="$(wget --quiet "$GITHUB_APP_URL" -O - | grep '<a href="/*..*/commit/*.' | cut -f5 -d"/" | cut -f1 -d'"' | head -n 1)"
-        if [ -z "$APPIMAGE" ]; then
-            APPIMAGE="$(wget --quiet "$GITHUB_APP_URL" -O - | grep -i '.*/download/.*.AppImage' | head -n 1 | cut -f2 -d'"')"
-        fi
-        echo "$LISTIMG AppImage information:"
-        echo "APPIMAGE=\"${APPIMAGE##*/}\""
-        # echo "APPIMAGE_VERSION="\"$APPIMAGE_VERSION\"""
-        echo "WEBSITE=\"$MAIN_GITHUB_URL\""
-        echo "APPIMG_DESCRIPTION=\"$(wget --quiet "$MAIN_GITHUB_URL" -O - | grep -i '<meta name="description"' | cut -f4 -d'"')\""
-        echo "INSTALLED=\"NO\""
-    else # Exit if not in list or installed
-        echo "AppImage not found!"
-    fi
-}
-
-appimglistinstalledfunc () {
-    echo "$(dir -C -w 1 "$CONFDIR"/appimginstalled | wc -l) AppImages installed:"
-    dir -C -w 1 "$CONFDIR"/appimginstalled | pr -tT --column=3 -w 125
     echo
-    for AppImage in $(dir -C -w 1 "$CONFDIR"/appimginstalled); do
-        echo "$AppImage installed information:"
-        cat "$CONFDIR"/appimginstalled/"$AppImage"
-        echo "INSTALLED=\"YES\""
-        echo
-    done
+    echo "$(cat "$CONFDIR"/AppImages-direct.lst | wc -l) Direct AppImages available for install:"
+    cat "$CONFDIR"/AppImages-direct.lst | cut -f1 -d" " | pr -tT --column=3 -w 125
 }
 
 appimgcheckfunc () { # check user input against list of known apps here
-    # if grep -qwi "$1" "$CONFDIR"/AppImages-direct.lst; then # Check AppImages-direct.lst for AppImages from Bintray
-    #     APPIMG_NAME="$(grep -wi "$1" "$CONFDIR"/AppImages-direct.lst)"
-    #     DIRECT_IMG="TRUE"
-    #     GITHUB_IMG="FALSE"
-    if grep -qwi "$1" "$CONFDIR"/AppImages-github.lst; then # Check AppImages-github.lst for AppImages from github
+    if grep -qwi "$1" "$CONFDIR"/AppImages-direct.lst; then # Check AppImages-direct.lst for AppImages from Direct
+        APPIMG_NAME="$(grep -wi "$1" "$CONFDIR"/AppImages-direct.lst)"
+        DIRECT_IMG="TRUE"
+        GITHUB_IMG="FALSE"
+    elif grep -qwi "$1" "$CONFDIR"/AppImages-github.lst; then # Check AppImages-github.lst for AppImages from github
         APPIMG_NAME="$(grep -wi "$1" "$CONFDIR"/AppImages-github.lst | cut -f1 -d" ")"
         DIRECT_IMG="FALSE"
         GITHUB_IMG="TRUE"
     else
-        _IMG="FALSE"
+        DIRECT_IMG="FALSE"
         GITHUB_IMG="FALSE"
     fi
 }
@@ -112,14 +83,18 @@ appimggithubinfofunc () {
     fi
 }
 
-# appimgdirectinfofunc () {
-#     DIRECT_APPIMAGE_URL="$(wget -q "https://bintray.com/package/files/probono/AppImages/$APPIMG_NAME?order=desc&sort=fileLastModified&basePath=&tab=files" -O - | grep -e '64.AppImage">' | cut -d '"' -f 6 | head -n 1)"
-#     APPIMAGE_NAME="$(wget -q "https://bintray.com/package/files/probono/AppImages/$APPIMG_NAME?order=desc&sort=fileLastModified&basePath=&tab=files" -O - | grep -e '64.AppImage">' | cut -d '"' -f 6 | head -n 1 | cut -f2 -d"=")"
-#     NEW_APPIMAGE_VERSION="$(echo "$APPIMAGE_NAME" | cut -f2 -d'-')"
-#     if [ "$APPIMG_UPGRADE_CHECK" = "FALSE" ]; then
-#         APPIMG_DESCRIPTION="$(wget --quiet "https://bintray.com/probono/AppImages/$APPIMG_NAME/" -O - | grep '<div class="description-text">' | cut -f2 -d'>' | cut -f1 -d'<')"
-#     fi
-# }
+appimgdirectinfofunc () {
+    DIRECT_APPIMAGE_URL="$(grep -wi "$INSTIMG" "$CONFDIR"/AppImages-direct.lst | cut -f2 -d" ")"
+    echo "$INSTIMG version cannot be tracked reliably (direct download)."
+    if [ -f "$CONFDIR"/appimginstalled/"$INSTIMG" ]; then
+        . "$CONFDIR"/appimginstalled/"$INSTIMG"
+        APPIMAGE_NAME="$APPIMAGE"
+        NEW_APPIMAGE_VERSION="$APPIMAGE_VERSION"
+    else
+        APPIMAGE_NAME="${DIRECT_APPIMAGE_URL##*/}"
+        NEW_APPIMAGE_VERSION="$APPIMAGE_NAME"
+    fi
+}
 
 appimginfofunc () { # Set variables and temporarily store pages in "$CONFDIR"/cache to get info from them
     if [ "$DIRECT_IMG" = "TRUE" ]; then
@@ -127,6 +102,37 @@ appimginfofunc () { # Set variables and temporarily store pages in "$CONFDIR"/ca
     elif [ "$GITHUB_IMG" = "TRUE" ]; then # If AppImage is from github, use method below to get new AppImage version
         appimggithubinfofunc
     fi
+}
+
+appimglistfunc () {
+    if [ -f "$CONFDIR"/appimginstalled/"$LISTIMG" ]; then # If installed, list installed info
+        echo "Current installed $LISTIMG information:"
+        cat "$CONFDIR"/appimginstalled/"$LISTIMG"
+        echo "INSTALLED=\"YES\""
+    else
+        INSTIMG="$LISTIMG"
+        appimgcheckfunc "$LISTIMG"
+        appimginfofunc
+        appimgsaveinfofunc "cache/$LISTIMG.conf"
+        if [ -f "$CONFDIR"/cache/"$LISTIMG".conf ]; then
+            echo "$LISTIMG information:"
+            cat "$CONFDIR"/cache/"$LISTIMG".conf
+        else # Exit if not in list or installed
+            echo "AppImage not found!"
+        fi
+    fi
+}
+
+appimglistinstalledfunc () {
+    echo "$(dir -C -w 1 "$CONFDIR"/appimginstalled | wc -l) AppImages installed:"
+    dir -C -w 1 "$CONFDIR"/appimginstalled | pr -tT --column=3 -w 125
+    echo
+    for AppImage in $(dir -C -w 1 "$CONFDIR"/appimginstalled); do
+        echo "$AppImage installed information:"
+        cat "$CONFDIR"/appimginstalled/"$AppImage"
+        echo "INSTALLED=\"YES\""
+        echo
+    done
 }
 
 appimgvercheckfunc () { # Check version by getting the latest version from the bintray website or github releases page using wget, grep, cut, and head
@@ -164,68 +170,53 @@ appimgupgradecheckallfunc () {
         appimgcheckfunc "$AppImage"
         appimginfofunc # Download web pages containing app info and set variables from them
         appimgvercheckfunc
-        if grep -qw "$AppImage" "$CONFDIR"/upgrade-list.lst; then # If AppImage is already on upgrade-list.lst, do not add it again
-            echo "$(tput setaf 2)New upgrade available for $AppImage -- $NEW_APPIMAGE_VERSION !"
-            echo "$AppImage is already marked for upgrade!"
-            echo "Run 'spm upgrade' to upgrade $AppImage$(tput sgr0)"
-        elif [ "$APPIMG_NEW_UPGRADE" = "TRUE" ]; then # Add AppImage to upgrade-list.lst if appimgvercheckfunc outputs APPIMG_NEW_UPGRADE="TRUE"
+        if [ "$APPIMG_NEW_UPGRADE" = "TRUE" ]; then # Mark AppImage for upgrade if appimgvercheckfunc outputs APPIMG_NEW_UPGRADE="TRUE"
             echo "$(tput setaf 2)New upgrade available for $AppImage -- $NEW_APPIMAGE_VERSION !$(tput sgr0)"
-            echo "$AppImage" >> "$CONFDIR"/upgrade-list.lst
+            appimgsaveinfofunc "appimgupgrades/$AppImage"
+            # echo "$AppImage" >> "$CONFDIR"/upgrade-list.lst
         fi
     done
     APPIMG_UPGRADE_CHECK="FALSE"
     echo
-    if [ "$(cat "$CONFDIR"/upgrade-list.lst | wc -l)" = "0" ]; then # If no AppImages were added to upgrade-list.lst, remove file
-        rm "$CONFDIR"/upgrade-list.lst
-    fi
-    if [ -f "$CONFDIR"/upgrade-list.lst ]; then # If AppImages were added, list number of upgrades available
-        if [ "$(cat "$CONFDIR"/upgrade-list.lst | wc -l)" = "1" ]; then
-            echo "$(tput setaf 2)$(cat "$CONFDIR"/upgrade-list.lst | wc -l) upgrade available.$(tput sgr0)"
-        else
-            echo "$(tput setaf 2)$(cat "$CONFDIR"/upgrade-list.lst | wc -l) upgrades available.$(tput sgr0)"
-        fi
-    else
+    if [ "$(dir "$CONFDIR"/appimgupgrades | wc -l)" = "1" ]; then
+        echo "$(tput setaf 2)$(dir -C -w 1 "$CONFDIR"/appimgupgrades | wc -l) new AppImage upgrade available.$(tput sgr0)"
+    elif [ "$(dir "$CONFDIR"/appimgupgrades | wc -l)" = "0" ]; then
         echo "No new AppImage upgrades."
+    else
+        echo "$(tput setaf 2)$(dir -C -w 1 "$CONFDIR"/appimgupgrades | wc -l) new AppImage upgrades available.$(tput sgr0)"
     fi
 }
 
 appimgupgradecheckfunc () {
     if [ ! -f "$CONFDIR"/appimginstalled/"$INSTIMG" ]; then
         echo "$INSTIMG is not installed..."
-    elif grep -qw "$INSTIMG" "$CONFDIR"/upgrade-list.lst; then # If AppImage is already on upgrade-list.lst, do not add it again 
-        echo "$(tput setaf 2)$INSTIMG is already marked for upgrade!"
-        echo "Run 'spm upgrade $INSTIMG' to upgrade $INSTIMG$(tput sgr0)"
     else
         APPIMG_UPGRADE_CHECK="TRUE"
         echo "Checking $INSTIMG version..."
         appimgcheckfunc "$INSTIMG" # Check whether AppImage is in lists and which list it is in
         appimginfofunc # Download web pages containing app info and set variables from them
         appimgvercheckfunc
-        if [ "$APPIMG_NEW_UPGRADE" = "TRUE" ]; then # Add AppImage to upgrade-list.lst if appimgvercheckfunc outputs APPIMG_NEW_UPGRADE="TRUE"
+        if [ "$APPIMG_NEW_UPGRADE" = "TRUE" ]; then # Mark AppImage for upgrade if appimgvercheckfunc outputs APPIMG_NEW_UPGRADE="TRUE"
             echo "$(tput setaf 2)New upgrade available for $INSTIMG -- $NEW_APPIMAGE_VERSION !$(tput sgr0)"
-            echo "$INSTIMG" >> "$CONFDIR"/upgrade-list.lst
+            appimgsaveinfofunc "appimgupgrades/$INSTIMG"
+            # echo "$INSTIMG" >> "$CONFDIR"/upgrade-list.lst
         else
             echo "No new upgrade for $INSTIMG"
-        fi
-        if [ "$(cat "$CONFDIR"/upgrade-list.lst | wc -l)" = "0" ]; then # If no AppImages were added to upgrade-list.lst, remove file
-            rm "$CONFDIR"/upgrade-list.lst
         fi
     fi
 }
 
 appimgupdatelistfunc () { # Regenerate AppImages-direct.lst from github, download AppImages-github.lst from github, and check versions
     APPIMG_UPGRADE_CHECK="TRUE"
-    # echo "Regenerating AppImages-direct.lst from https://dl.bintray.com/probono/AppImages/ ..." # Generate list of AppImages from Bintray site using wget sed grep cut and sort
+    echo "Downloading AppImages-direct.lst from spm github repo..." # Download existing list of direct AppImages from spm github repo
     cd "$CONFDIR"
-    # wget --quiet "https://dl.bintray.com/probono/AppImages/" -O - | sed 's/<\/*[^>]*>//g' | grep -o '.*AppImage' | cut -f1 -d"-" | sort -u > "$CONFDIR"/AppImages-direct.lst || { echo "wget failed; exiting..."; exit 1; }
-    # echo "AppImages-direct.lst updated!"
+    rm "$CONFDIR"/AppImages-direct.lst
+    wget --quiet "https://raw.githubusercontent.com/simoniz0r/spm/master/AppImages-direct.lst" || { echo "wget failed; exiting..."; rm -rf "$CONFDIR"/cache/*; exit 1; }
+    echo "AppImages-direct.lst updated!"
     echo "Downloading AppImages-github.lst from spm github repo..." # Download existing list of github AppImages from spm github repo
     rm "$CONFDIR"/AppImages-github.lst
     wget --quiet "https://raw.githubusercontent.com/simoniz0r/spm/master/AppImages-github.lst" || { echo "wget failed; exiting..."; rm -rf "$CONFDIR"/cache/*; exit 1; }
     echo "AppImages-github.lst updated!"
-    if [ ! -f "$CONFDIR"/upgrade-list.lst ]; then # Create upgrade-list.lst file to avoid error outputs during update checks
-        touch "$CONFDIR"/upgrade-list.lst
-    fi
     if [ -z "$1" ]; then # If no AppImage specified by user, check all installed AppImage versions
         appimgupgradecheckallfunc
     else # If user inputs AppImage, check that AppImage version
@@ -243,60 +234,33 @@ appimgupdateforcefunc () {
         rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
         exit 1
     fi
-    if [ -f "$CONFDIR"/upgrade-list.lst ]; then # Exit if already on upgrade-list.lst
-        if grep -qw "$INSTIMG" "$CONFDIR"/upgrade-list.lst; then
-            echo "$(tput setaf 2)$INSTIMG is already marked for upgrade!"
-            echo "Run 'spm upgrade $INSTIMG' to upgrade $INSTIMG$(tput sgr0)"
-            rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
-            exit 0
-        fi
-    fi
     echo "Marking $INSTIMG for upgrade by force..."
-    APPIMG_FORCE_UPGRADE="TRUE" # Mark for upgrade by force without checking versions
-    appimgcheckfunc "$INSTIMG" # Check whether AppImage is in lists and which list it is in
-    appimgvercheckfunc # Run vercheckfunc anyway to add AppImage to upgrade-list.lst
-    if [ "$APPIMG_NEW_UPGRADE" = "TRUE" ]; then
-        echo "$(tput setaf 2)New upgrade available for $INSTIMG!$(tput sgr0)"
-        echo "$INSTIMG" >> "$CONFDIR"/upgrade-list.lst
-    else
-        echo "No new upgrade for $INSTIMG"
-    fi
+    . "$CONFDIR"/appimginstalled/"$INSTIMG"
+    APPIMAGE_NAME="$APPIMAGE"
+    NEW_APPIMAGE_VERSION="$APPIMAGE_VERSION"
+    GITHUB_APP_URL="$WEBSITE"
+    echo "$(tput setaf 2)New upgrade available for $INSTIMG!$(tput sgr0)"
+    appimgsaveinfofunc "appimgupgrades/$INSTIMG"
 }
 
 appimgdlfunc () { # wget latest url from direct website or github repo and wget it
-    if [ "$DIRECT_IMG" = "TRUE" ]; then # If AppImage is from Bintray, use method below to download it
-        wget --show-progress --quiet "https://bintray.com/$DIRECT_APPIMAGE_URL" -O "$CONFDIR"/cache/"$INSTIMG" || { echo "wget $DIRECT_APPIMAGE_URL failed; exiting..."; rm -rf "$CONFDIR"/cache/*; exit 1; }
-        # APPIMAGE="$(echo "$DIRECT_APPIMAGE_URL" | cut -f2 -d"=")"
+    if [ "$DIRECT_IMG" = "TRUE" ]; then # If AppImage is DIRECT, use method below to download it
+        cd "$CONFDIR"/cache
+        wget --quiet --read-timeout=30 --show-progress --trust-server-names "$DIRECT_APPIMAGE_URL" || { echo "wget $DIRECT_APPIMAGE_URL failed; exiting..."; rm -rf "$CONFDIR"/cache/*; exit 1; }
+        APPIMAGE_NAME="$(dir -C -w 1 "$CONFDIR"/cache/ | grep -iw '.*AppImage')"
+        NEW_APPIMAGE_VERSION="$APPIMAGE_NAME"
+        mv "$CONFDIR"/cache/"$APPIMAGE_NAME" "$CONFDIR"/cache/"$INSTIMG"
     elif [ "$GITHUB_IMG" = "TRUE" ]; then # If AppImage is from github, use method below to download it
         # APPIMAGE="${GITHUB_APPIMAGE_URL##*/}"
         wget --show-progress --quiet "$GITHUB_APPIMAGE_URL" -O "$CONFDIR"/cache/"$INSTIMG" || { echo "wget $GITHUB_APPIMAGE_URL failed; exiting..."; rm -rf "$CONFDIR"/cache/*; exit 1; }
     fi
 }
 
-appimgsaveinfofunc () { # Save install info to "$CONFDIR"/appimginstalled/AppImageName
-    INSTIMG="$1"
-    echo "BIN_PATH="\"/usr/local/bin/$INSTIMG\""" > "$CONFDIR"/appimginstalled/"$INSTIMG" # Create AppImage installed info file
-    echo "APPIMAGE="\"$APPIMAGE_NAME\""" >> "$CONFDIR"/appimginstalled/"$INSTIMG"
-    if [ "$GITHUB_IMG" = "TRUE" ]; then
-        APPIMAGE_VERSION="$NEW_APPIMAGE_VERSION"
-    elif [ "$DIRECT_IMG" = "TRUE" ]; then
-        APPIMAGE_VERSION="$NEW_APPIMAGE_VERSION"
-        APPIMAGE_VERSION="$(echo "$APPIMAGE_VERSION" | cut -f2 -d'-')"
-    fi
-    echo "APPIMAGE_VERSION="\"$APPIMAGE_VERSION\""" >> "$CONFDIR"/appimginstalled/"$INSTIMG"
-    if [ "$GITHUB_IMG" = "TRUE" ]; then
-        echo "WEBSITE="\"$(echo "$GITHUB_APP_URL" | cut -f-5 -d'/')\""" >> "$CONFDIR"/appimginstalled/"$INSTIMG"
-    elif [ "$DIRECT_IMG" = "TRUE" ]; then
-        echo "WEBSITE="\"https://bintray.com/probono/AppImages/$APPIMG_NAME\""" >> "$CONFDIR"/appimginstalled/"$INSTIMG"
-    fi
-    echo "APPIMG_DESCRIPTION="\"$APPIMG_DESCRIPTION\""" >> "$CONFDIR"/appimginstalled/"$INSTIMG"
-}
-
 appimginstallfunc () { # chmod and mv AppImages to /usr/local/bin and create file containing install info in "$CONFDIR"/appimginstalled
     chmod a+x "$CONFDIR"/cache/"$INSTIMG" # Make AppImage executable
     echo "Moving $INSTIMG to /usr/local/bin/$INSTIMG ..."
     sudo mv "$CONFDIR"/cache/"$INSTIMG" /usr/local/bin/"$INSTIMG" # Move AppImage to /usr/local/bin
-    appimgsaveinfofunc "$INSTIMG"
+    appimgsaveinfofunc "appimginstalled/$INSTIMG"
     echo "$APPIMAGE_NAME has been installed to /usr/local/bin/$INSTIMG !"
 }
 
@@ -347,7 +311,7 @@ appimgupgradefunc () { # rm old AppImage, chmod, and mv new AppImage to /usr/loc
     chmod a+x "$CONFDIR"/cache/"$INSTIMG" # Make new AppImage executable
     echo "Moving $INSTIMG to /usr/local/bin/$INSTIMG ..."
     sudo mv "$CONFDIR"/cache/"$INSTIMG" /usr/local/bin/"$INSTIMG" # Move new AppImage to /usr/local/bin
-    appimgsaveinfofunc "$INSTIMG"
+    appimgsaveinfofunc "appimginstalled/$INSTIMG"
     echo "$INSTIMG has been upgraded to $INSTIMG version $APPIMAGE_VERSION !"
 }
 
@@ -355,26 +319,28 @@ appimgupgradestartallfunc () {
     if [ "$APPIMGUPGRADES" = "FALSE" ]; then
         sleep 0
     else
-        if [ "$(cat "$CONFDIR"/upgrade-list.lst | wc -l)" = "1" ]; then # Output number of upgrades available
-            echo "$(tput setaf 2)1 AppImage upgrade available.$(tput sgr0)"
+        if [ "$(dir "$CONFDIR"/appimgupgrades | wc -l)" = "1" ]; then
+            echo "$(tput setaf 2)$(dir -C -w 1 "$CONFDIR"/appimgupgrades | wc -l) new AppImage upgrade available.$(tput sgr0)"
+        elif [ "$(dir "$CONFDIR"/appimgupgrades | wc -l)" = "0" ]; then
+            echo "No new AppImage upgrades."
         else
-            echo "$(tput setaf 2)$(cat "$CONFDIR"/upgrade-list.lst | wc -l) AppImage upgrades available.$(tput sgr0)"
+            echo "$(tput setaf 2)$(dir -C -w 1 "$CONFDIR"/appimgupgrades | wc -l) new AppImage upgrades available.$(tput sgr0)"
         fi
-        cat "$CONFDIR"/upgrade-list.lst | tr '\n' ' ' | tr -d '"' # Ouput AppImages available for upgrades
+        dir -C -w 1 "$CONFDIR"/appimgupgrades | pr -tTw 125 -3 # Ouput AppImages available for upgrades
         echo
         read -p "Continue? Y/N " UPGRADEALLANSWER # Ask user if they want to upgrade
         case $UPGRADEALLANSWER in
             Y*|y*) # Do upgrade functions if yes
-                for UPGRADE_IMG in $(cat "$CONFDIR"/upgrade-list.lst); do
+                for UPGRADE_IMG in $(dir -C -w 1 "$CONFDIR"/appimgupgrades); do
                     INSTIMG="$UPGRADE_IMG"
                     echo "Downloading $INSTIMG..."
                     appimgcheckfunc "$INSTIMG" # Check whether AppImage is in lists and which list it is in
                     appimginfofunc
-                    appimgdlfunc "$INSTIMG" # Download AppImage from Bintray or Github
+                    appimgdlfunc "$INSTIMG" # Download AppImage from Direct or Github
                     appimgupgradefunc # Run upgrade function for AppImage
+                    rm "$CONFDIR"/appimgupgrades/"$INSTIMG"
                     echo
                 done
-                rm "$CONFDIR"/upgrade-list.lst
                 ;;
             N*|n*) # Exit if no
                 echo "No AppImages were upgraded; exiting..."
@@ -392,14 +358,9 @@ appimgupgradestartfunc () {
         Y*|y*) # Do upgrade functions if yes
             appimgcheckfunc "$INSTIMG" # Check whether AppImage is in lists and which list it is in
             appimginfofunc
-            appimgdlfunc "$INSTIMG" # Download AppImage from Bintray or Github
+            appimgdlfunc "$INSTIMG" # Download AppImage from Direct or Github
             appimgupgradefunc # Run upgrade function for AppImage
-            if [ "$(cat "$CONFDIR"/upgrade-list.lst | wc -l)" = "1" ]; then # Remove upgrade-list.lst if AppImage was only one in list
-                rm "$CONFDIR"/upgrade-list.lst
-            else # Remove AppImage from upgrade-list.lst if more than one AppImage in list
-                sed -i "s:"$INSTIMG"::g" "$CONFDIR"/upgrade-list.lst # Use sed to remove AppImage name
-                sed -i '/^$/d' "$CONFDIR"/upgrade-list.lst # Use sed to remove blank space left from previous sed
-            fi
+            rm "$CONFDIR"/appimgupgrades/"$INSTIMG"
             rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
             exit 0
             ;;
@@ -422,15 +383,8 @@ appimgremovefunc () { # rm AppImage in /usr/local/bin and remove install info fi
             exit 0
             ;;
     esac
-    if [ -f "$CONFDIR"/upgrade-list.lst ]; then # If AppImage is on upgrade-list.lst, remove it from list to prevent future problems
-        if grep -qw "$REMIMG" "$CONFDIR"/upgrade-list.lst; then
-            if [ "$(cat "$CONFDIR"/upgrade-list.lst | wc -l)" = "1" ]; then
-                rm "$CONFDIR"/upgrade-list.lst
-            else
-                sed -i "s:"$REMIMG"::g" "$CONFDIR"/upgrade-list.lst
-                sed -i '/^$/d' "$CONFDIR"/upgrade-list.lst
-            fi
-        fi
+    if [ -f "$CONFDIR"/appimgupgrades/"$REMIMG" ]; then # If AppImage is marked for upgrade, remove it from list to prevent future problems
+        rm "$CONFDIR"/appimgupgrades/"$REMIMG"
     fi
     echo "Removing /usr/local/bin/$REMIMG ..."
     sudo rm /usr/local/bin/"$REMIMG" # Remove AppImage from /usr/local/bin
