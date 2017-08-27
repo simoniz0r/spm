@@ -233,7 +233,7 @@
         "download_source": "GITHUB",
         "taruri": "https://github.com/simoniz0r/yad-twitch-streamlink/releases",
         "desktop_file_path": "/opt/yad-twitch-streamlink/yad-twitch-streamlink.desktop",
-        "icon_file_path": "/opt/yad-twitch-streamlink/yad-twitch-streamlink.png",
+        "icon_file_path": "/opt/yad-twitch-streamlink/ytsicon.png",
         "executable_file_path": "/opt/yad-twitch-streamlink/yad-twitch-streamlink",
         "bin_path": "/usr/local/bin/yad-twitch-streamlink",
         "config_path": "$HOME/.config/yad-twitch-streamlink",
