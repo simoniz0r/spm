@@ -1,5 +1,5 @@
 {
-    "available" : "atom\ndiscord-canary\ndiscord-ptb\ndiscord-toolbox\ndiscord\nfirefox-beta\nfirefox-dev\nfirefox-nightly\nfirefox\ngpgpassman\nkaku\nnvim\nopenrct2\nopenttd\nrambox\nspm\nvscode\nwavebox\nxdgfetch\nyad-mpv\nyad-twitch-streamlink",
+    "available" : "atom\ndiscord-canary\ndiscord-ptb\ndiscord-stable\ndiscord-toolbox\nfirefox-beta\nfirefox-dev\nfirefox-nightly\nfirefox\ngpgpassman\nkaku\nnvim\nopenrct2\nopenttd\nrambox\nspm\nvscode\nwavebox\nxdgfetch\nyad-mpv\nyad-twitch-streamlink",
     "atom": {
         "instdir": "/opt/atom",
         "download_source": "GITHUB",
@@ -36,6 +36,18 @@
         "description": "All-in-one voice and text chat for gamers that's free, secure, and works on both your desktop and phone.",
         "dependencies": "alsa-lib gconf glibc gtk2 libc++ libnotify libxss nspr nss libpulse (optional – for pulseaudio support) noto-fonts-emoji (optional – Google font for emoji support.) ttf-symbola (optional – font for emoji support.)"
     },
+    "discord-stable": {
+        "instdir": "/opt/discord",
+        "download_source": "DIRECT",
+        "taruri": "https://discordapp.com/api/download?platform=linux&format=tar.gz",
+        "desktop_file_path": "/opt/discord/discord.desktop",
+        "icon_file_path": "/opt/discord/discord.png",
+        "executable_file_path": "/opt/discord/Discord",
+        "bin_path": "/usr/local/bin/discord-stable",
+        "config_path": "$HOME/.config/discord",
+        "description": "All-in-one voice and text chat for gamers that's free, secure, and works on both your desktop and phone.",
+        "dependencies": "alsa-lib gconf glibc gtk2 libc++ libnotify libxss nspr nss libpulse (optional – for pulseaudio support) noto-fonts-emoji (optional – Google font for emoji support.) ttf-symbola (optional – font for emoji support.)"
+    },
     "discord-toolbox": {
         "instdir": "/opt/discord-toolbox",
         "download_source": "GITHUB",
@@ -47,18 +59,6 @@
         "config_path": "$HOME/.config/DiscordToolbox",
         "description": "A bash script that installs mods for Discord. Mods that can be installed are BeautifulDiscord, mydiscord, and BetterDiscord.",
         "dependencies": "coreutils wget dialog (optional - for discord-toolbox GUI) nodejs (optional - required for BetterDiscord) npm (optional - required for BetterDiscord) python3 (optional - required for BeautifulDiscord and mydiscord) python3-pip (optional - required for BeautifulDiscord and mydiscord)"
-    },
-    "discord": {
-        "instdir": "/opt/discord",
-        "download_source": "DIRECT",
-        "taruri": "https://discordapp.com/api/download?platform=linux&format=tar.gz",
-        "desktop_file_path": "/opt/discord/discord.desktop",
-        "icon_file_path": "/opt/discord/discord.png",
-        "executable_file_path": "/opt/discord/Discord",
-        "bin_path": "/usr/local/bin/discord",
-        "config_path": "$HOME/.config/discord",
-        "description": "All-in-one voice and text chat for gamers that's free, secure, and works on both your desktop and phone.",
-        "dependencies": "alsa-lib gconf glibc gtk2 libc++ libnotify libxss nspr nss libpulse (optional – for pulseaudio support) noto-fonts-emoji (optional – Google font for emoji support.) ttf-symbola (optional – font for emoji support.)"
     },
     "firefox-beta": {
         "instdir": "/opt/firefox-beta",
