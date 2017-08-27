@@ -46,7 +46,7 @@ Arguments:
     tar-update-force (-tuf) - add specified precompiled tar archive to list of upgrades without checking versions
     upgrade (-upg) - upgrade all installed packages that are marked for upgrade or just the specified package
 
-See https://github.com/simoniz0r/appimgman for more help or to report issues.
+See https://github.com/simoniz0r/spm for more help or to report issues.
 
 spm is not responsible for bugs within applications that have been
 installed using spm.  Please report any bugs that are specific to
