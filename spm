@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.0.8"
+X="0.0.9"
 # Set spm version
 CONFDIR="$HOME/.config/spm"
 
@@ -134,9 +134,11 @@ case $1 in
         if [ ! -z "$2" ]; then
             # if grep -qiw "$2" "$CONFDIR"/AppImages-bintray.lst ||grep -qiw "$2" "$CONFDIR"/AppImages-github.lst; then
             if grep -qiw "$2" "$CONFDIR"/AppImages-github.lst; then
-                appimgupdatelistfunc "$2"
+                INSTIMG="$2"
+                appimgupdatelistfunc "$INSTIMG"
             elif [ -f "$CONFDIR"/tarinstalled/"$2" ]; then
-                tarupdatelistfunc "$2"
+                TARPKG="$2"
+                tarupdatelistfunc "$TARPKG"
             else
                 echo "Package not found!"
                 rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting

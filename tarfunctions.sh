@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.0.8"
+X="0.0.9"
 # Set spm version
 TAR_LIST="$(cat $CONFDIR/tar-pkgs.json | python3 -c "import sys, json; data = json.load(sys.stdin); print (data['available'])")" #  | pr -tTw 125 -3
 
@@ -118,6 +118,7 @@ tarappcheckfunc () { # check user input against list of known apps here
     TAR_STATUS="$?"
     case $TAR_STATUS in
         0)
+            TAR_DOWNLOAD_SOURC="$DOWNLOAD_SOURCE"
             KNOWN_TAR="TRUE"
             TARPKG_NAME="$1"
             INSTDIR="$(cat $CONFDIR/tar-pkgs.json | python3 $RUNNING_DIR/jsonparse.py $1 instdir)"
@@ -277,9 +278,6 @@ tarcheckfunc () {
 
 checktarversionfunc () {
     . "$CONFDIR"/tarinstalled/"$TARPKG"
-    if [ -f "$CONFDIR"/cache/"$TARPKG".conf ]; then
-        . "$CONFDIR"/cache/"$TARPKG".conf
-    fi
     if [ "$TAR_DOWNLOAD_SOURCE" = "GITHUB" ]; then
         if [ "$GITHUB_DOWNLOAD_ERROR" = "TRUE" ]; then
             TAR_NEW_UPGRADE="FALSE"
@@ -362,7 +360,7 @@ tarupgradecheckallfunc () {
 }
 
 tarupgradecheckfunc () {
-    if ! echo "$TAR_LIST" | grep -qiw "$LISTPKG"; then
+    if ! echo "$TAR_LIST" | grep -qiw "$1"; then
         echo "$1 is not in tar-pkgs.json; try running 'spm update'."
     else
         TARPKG="$1"
