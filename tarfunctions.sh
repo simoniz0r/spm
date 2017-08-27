@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.1.0"
+X="0.1.1"
 # Set spm version
 TAR_LIST="$(cat $CONFDIR/tar-pkgs.json | python3 -c "import sys, json; data = json.load(sys.stdin); print (data['available'])")" #  | pr -tTw 125 -3
 
@@ -133,6 +133,8 @@ tarappcheckfunc () { # check user input against list of known apps here
             DEPENDENCIES="$(cat $CONFDIR/tar-pkgs.json | python3 $RUNNING_DIR/jsonparse.py $1 dependencies)"
             if [ "$TAR_DOWNLOAD_SOURCE" = "GITHUB" ]; then
                 targithubinfofunc
+            else
+                tarsaveconffunc "cache/$1.conf"
             fi
             ;;
         *)
