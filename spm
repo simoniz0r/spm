@@ -311,6 +311,11 @@ case $1 in
         rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
         exit 0
         ;;
+    man)
+        man $RUNNING_DIR/spm.1
+        rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
+        exit 0
+        ;;
     *) # Any unknown arguments go to help func
         helpfunc
         rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
