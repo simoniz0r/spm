@@ -52,7 +52,7 @@ appimgcheckfunc () { # check user input against list of known apps here
         APPIMG_NAME="$(grep -wo "$1" "$CONFDIR"/AppImages-direct.lst  | cut -f2 -d" ")"
         DIRECT_IMG="TRUE"
         GITHUB_IMG="FALSE"
-    elif grep -qw "$1" "$CONFDIR"/AppImages-github.lst; then # Check AppImages-github.lst for AppImages from github
+    elif grep -qow "$1" "$CONFDIR"/AppImages-github.lst; then # Check AppImages-github.lst for AppImages from github
         APPIMG_NAME="$(grep -wo "$1" "$CONFDIR"/AppImages-github.lst | cut -f2 -d" ")"
         DIRECT_IMG="FALSE"
         GITHUB_IMG="TRUE"
