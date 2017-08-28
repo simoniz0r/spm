@@ -31,7 +31,7 @@ sed -i 's%vlc VLC https://github.com/darealshinji/releases https://api.github.co
 sed -i '/^$/d' /home/$USER/github/spm/AppImages-github.lst # Remove blank lines
 echo "discord discord https://github.com/simoniz0r/AppImages/releases/tag/discord https://api.github.com/repos/simoniz0r/AppImages/releases" >> /home/$USER/github/spm/AppImages-github.lst
 echo "tc-linux tc-linux https://github.com/mccxiv/tc https://api.github.com/repos/mccxiv/tc/releases" >> /home/$USER/github/spm/AppImages-github.lst
-echo "$(sort -u /home/$USER/github/spm/AppImages-github.lst)" > /home/$USER/github/spm/AppImages-github.lst
+echo "$(sort /home/$USER/github/spm/AppImages-github.lst)" > /home/$USER/github/spm/AppImages-github.lst
 # Generate a list of AppImages from sites other than github with versions that cannot be managed
 for image in $(dir -C -w 1 /home/$USER/github/appimage.github.io/data); do
     URL="$(grep -v '#' /home/$USER/github/appimage.github.io/data/"$image" | grep -v '.*github*.')"
