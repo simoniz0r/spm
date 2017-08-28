@@ -37,6 +37,7 @@ DeviceInterface https://github.com/free-easy/DeviceInterface/releases https://ap
 devination https://github.com/devination-docs/devination/releases https://api.github.com/repos/devination-docs/devination/releases
 devRantron https://github.com/tahnik/devRantron/releases https://api.github.com/repos/tahnik/devRantron/releases
 dexter_dev_env https://github.com/cfry/dde/releases https://api.github.com/repos/cfry/dde/releases
+discord https://github.com/simoniz0r/AppImages/releases/tag/discord https://api.github.com/repos/simoniz0r/AppImages/releases/assets/4681987
 donut https://github.com/harshjv/donut/releases https://api.github.com/repos/harshjv/donut/releases
 electron-webpack-dashboard https://github.com/FormidableLabs/electron-webpack-dashboard/releases https://api.github.com/repos/FormidableLabs/electron-webpack-dashboard/releases
 Emacs https://github.com/probonopd/Emacs.AppImage/releases https://api.github.com/repos/probonopd/Emacs.AppImage/releases
@@ -152,6 +153,7 @@ stretchly https://github.com/hovancik/stretchly/releases https://api.github.com/
 Subvertise https://github.com/nullism/subvertise/releases https://api.github.com/repos/nullism/subvertise/releases
 Summoners.War.Exporter https://github.com/Xzandro/sw-exporter/releases https://api.github.com/repos/Xzandro/sw-exporter/releases
 TagTime-desktop https://github.com/mykter/TagTime-desktop/releases https://api.github.com/repos/mykter/TagTime-desktop/releases
+tc-linux https://github.com/mccxiv/tc https://api.github.com/repos/mccxiv/tc/releases
 Teleprompter https://github.com/ImaginarySense/Teleprompter-Electron/releases https://api.github.com/repos/ImaginarySense/Teleprompter-Electron/releases
 Tiled https://github.com/bjorn/tiled/releases https://api.github.com/repos/bjorn/tiled/releases
 Tockler https://github.com/MayGo/tockler/releases https://api.github.com/repos/MayGo/tockler/releases
@@ -182,4 +184,3 @@ Wire https://github.com/wireapp/wire-desktop/releases https://api.github.com/rep
 WorkFlowy https://github.com/workflowy/desktop/releases https://api.github.com/repos/workflowy/desktop/releases
 xde https://github.com/expo/xde/releases https://api.github.com/repos/expo/xde/releases
 zulip-electron https://github.com/zulip/zulip-electron/releases https://api.github.com/repos/zulip/zulip-electron/releases
-tc-linux https://github.com/mccxiv/tc https://api.github.com/repos/mccxiv/tc/releases
