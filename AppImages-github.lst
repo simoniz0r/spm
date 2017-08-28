@@ -37,7 +37,7 @@ deviceinterface DeviceInterface https://github.com/free-easy/DeviceInterface/rel
 devination devination https://github.com/devination-docs/devination/releases https://api.github.com/repos/devination-docs/devination/releases
 devrantron devRantron https://github.com/tahnik/devRantron/releases https://api.github.com/repos/tahnik/devRantron/releases
 dexter_dev_env dexter_dev_env https://github.com/cfry/dde/releases https://api.github.com/repos/cfry/dde/releases
-discord https://github.com/simoniz0r/AppImages/releases/tag/discord https://api.github.com/repos/simoniz0r/AppImages/releases
+discord discord https://github.com/simoniz0r/AppImages/releases/tag/discord https://api.github.com/repos/simoniz0r/AppImages/releases
 donut donut https://github.com/harshjv/donut/releases https://api.github.com/repos/harshjv/donut/releases
 electron-webpack-dashboard electron-webpack-dashboard https://github.com/FormidableLabs/electron-webpack-dashboard/releases https://api.github.com/repos/FormidableLabs/electron-webpack-dashboard/releases
 emacs Emacs https://github.com/probonopd/Emacs.AppImage/releases https://api.github.com/repos/probonopd/Emacs.AppImage/releases
@@ -152,7 +152,7 @@ stretchly stretchly https://github.com/hovancik/stretchly/releases https://api.g
 subvertise Subvertise https://github.com/nullism/subvertise/releases https://api.github.com/repos/nullism/subvertise/releases
 summoners.war.exporter Summoners.War.Exporter https://github.com/Xzandro/sw-exporter/releases https://api.github.com/repos/Xzandro/sw-exporter/releases
 tagtime-desktop TagTime-desktop https://github.com/mykter/TagTime-desktop/releases https://api.github.com/repos/mykter/TagTime-desktop/releases
-tc-linux https://github.com/mccxiv/tc https://api.github.com/repos/mccxiv/tc/releases
+tc-linux tc-linux https://github.com/mccxiv/tc https://api.github.com/repos/mccxiv/tc/releases
 teleprompter Teleprompter https://github.com/ImaginarySense/Teleprompter-Electron/releases https://api.github.com/repos/ImaginarySense/Teleprompter-Electron/releases
 tiled Tiled https://github.com/bjorn/tiled/releases https://api.github.com/repos/bjorn/tiled/releases
 tockler Tockler https://github.com/MayGo/tockler/releases https://api.github.com/repos/MayGo/tockler/releases

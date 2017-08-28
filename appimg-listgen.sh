@@ -23,8 +23,8 @@ sed -i 's%sharexin ShareXin https://github.com/ShareXin/ShareXin/releases https:
 sed -i 's%nteract nteract https://github.com/nteract/releases https://api.github.com/repos/nteract/releases%nteract nteract https://github.com/nteract/nteract/releases https://api.github.com/repos/nteract/nteract/releases%g' /home/simonizor/github/spm/AppImages-github.lst # Fix broken link
 sed -i 's%vlc VLC https://github.com/darealshinji/releases https://api.github.com/repos/darealshinji/releases%%g' /home/simonizor/github/spm/AppImages-github.lst # Remove broken link
 sed -i '/^$/d' /home/simonizor/github/spm/AppImages-github.lst # Remove blank lines
-echo "discord https://github.com/simoniz0r/AppImages/releases/tag/discord https://api.github.com/repos/simoniz0r/AppImages/releases" >> /home/simonizor/github/spm/AppImages-github.lst
-echo "tc-linux https://github.com/mccxiv/tc https://api.github.com/repos/mccxiv/tc/releases" >> /home/simonizor/github/spm/AppImages-github.lst
+echo "discord discord https://github.com/simoniz0r/AppImages/releases/tag/discord https://api.github.com/repos/simoniz0r/AppImages/releases" >> /home/simonizor/github/spm/AppImages-github.lst
+echo "tc-linux tc-linux https://github.com/mccxiv/tc https://api.github.com/repos/mccxiv/tc/releases" >> /home/simonizor/github/spm/AppImages-github.lst
 echo "$(sort -u /home/simonizor/github/spm/AppImages-github.lst)" > /home/simonizor/github/spm/AppImages-github.lst
 # Generate a list of AppImages from sites other than github with versions that cannot be managed
 for image in $(dir -C -w 1 /home/simonizor/TestScripts/appimage.github.io/data); do
