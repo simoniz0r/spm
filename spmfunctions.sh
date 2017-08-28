@@ -230,7 +230,7 @@ liststartfunc () {
             ISTAR="TRUE"
         fi
         if [ -z "$ISAPPIMG" ] && [ -z "$ISTAR" ]; then
-            echo "$1 not found!"
+            echo "$LISTIMG not found!"
             rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
             exit 1
         fi
