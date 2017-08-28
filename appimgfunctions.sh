@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.2.4"
+X="0.2.5"
 # Set spm version
 
 # Set variables
@@ -286,27 +286,26 @@ appimginstallstartfunc () {
         exit 1
     fi
     appimgcheckfunc "$INSTIMG" # Check whether AppImage is in lists and which list it is in
-    appimginfofunc # Download web pages containing app info and set variables from them
-    appimgvercheckfunc # Use vercheckfunc to get AppImage name for output before install
     if [ "$DIRECT_IMG" = "FALSE" ] && [ "$GITHUB_IMG" = "FALSE" ];then # If AppImage not in either list, exit
         echo "$INSTIMG is not in AppImages-direct.lst or AppImages-github.lst; try running 'spm update'."
         rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
         exit 1
-    else
-        if [ "$APPIMAGE_ERROR" = "TRUE" ]; then # If error getting AppImage, exit
-            rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
-            exit 1
-        fi
-        echo "$APPIMAGE_NAME will be installed to /usr/local/bin/$INSTIMG" # Ask user if sure they want to install AppImage
-        read -p "Continue? Y/N " INSTANSWER
-        case $INSTANSWER in
-            N*|n*) # If answer is no, exit
-                echo "$APPIMAGE_NAME was not installed."
-                rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
-                exit 0
-                ;;
-        esac
     fi
+    appimginfofunc # Download web pages containing app info and set variables from them
+    appimgvercheckfunc # Use vercheckfunc to get AppImage name for output before install
+    if [ "$APPIMAGE_ERROR" = "TRUE" ]; then # If error getting AppImage, exit
+        rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
+        exit 1
+    fi
+    echo "$APPIMAGE_NAME will be installed to /usr/local/bin/$INSTIMG" # Ask user if sure they want to install AppImage
+    read -p "Continue? Y/N " INSTANSWER
+    case $INSTANSWER in
+        N*|n*) # If answer is no, exit
+            echo "$APPIMAGE_NAME was not installed."
+            rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
+            exit 0
+            ;;
+    esac
 }
 
 appimgupgradefunc () { # rm old AppImage, chmod, and mv new AppImage to /usr/local/bin

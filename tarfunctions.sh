@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.2.4"
+X="0.2.5"
 # Set spm version
 TAR_LIST="$(cat $CONFDIR/tar-pkgs.json | python3 -c "import sys, json; data = json.load(sys.stdin); print (data['available'])")"
 
@@ -342,7 +342,7 @@ tarinstallstartfunc () {
     fi
     tarappcheckfunc "$TARPKG"
     if [ "$KNOWN_TAR" = "FALSE" ];then
-        echo "$TARPKG is not in tar-pkgs.json; You can try updating tar-pkgs.json or run 'spm tar-custom'."
+        echo "$TARPKG is not in tar-pkgs.json; Try running 'spm update' to update tar-pkgs.json."
         rm -rf "$CONFDIR"/cache/*
         exit 1
     else
