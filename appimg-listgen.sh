@@ -24,7 +24,7 @@ for image in $(dir -C -w 1 /home/$USER/github/appimage.github.io/data); do
         echo "$lower_image $image $URL/releases https://api.github.com/repos/$REPO/releases"
     fi
 done > /home/$USER/github/spm/AppImages-github.lst
-# Add any AppImages that appimagehub misses
+# Fix/remove broken links and add any AppImages that appimagehub misses
 sed -i 's%sharexin ShareXin https://github.com/ShareXin/ShareXin/releases https://api.github.com/repos/ShareXin/ShareXin/releases%%g' /home/$USER/github/spm/AppImages-github.lst # Remove duplicate
 sed -i 's%nteract nteract https://github.com/nteract/releases https://api.github.com/repos/nteract/releases%nteract nteract https://github.com/nteract/nteract/releases https://api.github.com/repos/nteract/nteract/releases%g' /home/$USER/github/spm/AppImages-github.lst # Fix broken link
 sed -i 's%vlc VLC https://github.com/darealshinji/releases https://api.github.com/repos/darealshinji/releases%%g' /home/$USER/github/spm/AppImages-github.lst # Remove broken link
