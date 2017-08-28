@@ -43,7 +43,7 @@ appimglistallfunc () {
     echo "$(cat "$CONFDIR"/AppImages-github.lst | wc -l) Github AppImages available for install:"
     cat "$CONFDIR"/AppImages-github.lst | cut -f1 -d" " | pr -tT --column=3 -w 125
     echo
-    echo "$(cat "$CONFDIR"/AppImages-direct.lst | wc -l) Direct AppImages available for install:"
+    echo "$(cat "$CONFDIR"/AppImages-direct.lst | wc -l) Direct AppImages available for install (may have issues finding new upgrades after install):"
     cat "$CONFDIR"/AppImages-direct.lst | cut -f1 -d" " | pr -tT --column=3 -w 125
 }
 
