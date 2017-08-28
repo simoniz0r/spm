@@ -1,4 +1,10 @@
 #!/bin/bash
+# Title: spm
+# Description: Downloads and installs AppImages and precompiled tar archives.  Can also upgrade and remove installed packages.
+# Dependencies: GNU coreutils, tar, wget, python3.x
+# Author: simonizor
+# Website: http://www.simonizor.gq
+# License: GPL v2.0 only
 # Generate two separate lists from cloned appimagehub github repo's data folder
 
 # Generate list of github AppImages with versions that can be managed
