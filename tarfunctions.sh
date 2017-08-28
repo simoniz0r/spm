@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.2.2"
+X="0.2.3"
 # Set spm version
 TAR_LIST="$(cat $CONFDIR/tar-pkgs.json | python3 -c "import sys, json; data = json.load(sys.stdin); print (data['available'])")"
 
@@ -297,7 +297,7 @@ tardesktopfilefunc () {
 tarinstallfunc () {
     echo "Moving files to $INSTDIR..."
     EXTRACTED_DIR_NAME="$(ls -d "$CONFDIR"/cache/*/)"
-    sudo mv "$EXTRACTED_DIR_NAME" "$INSTDIR"
+    sudo mv "$EXTRACTED_DIR_NAME" "$INSTDIR" || { echo "Failed!"; rm -rf "$CONFDIR"/cache/*; exit 1; }
     DESKTOP_FILE_NAME="$(basename "$DESKTOP_FILE_PATH")"
     ICON_FILE_NAME="$(basename "$ICON_FILE_PATH")"
     EXECUTABLE_FILE_NAME="$(basename "$EXECUTABLE_FILE_PATH")"
@@ -368,7 +368,7 @@ tarupgradefunc () {
         Clean|clean)
             echo "$TARPKG will be upgraded to $TARFILE."
             echo "Removing files in $INSTDIR..."
-            sudo rm -rf "$INSTDIR"
+            sudo rm -rf "$INSTDIR" || { echo "Failed!"; rm -rf "$CONFDIR"/cache/*; exit 1; }
             echo "Moving files to $INSTDIR..."
             EXTRACTED_DIR_NAME="$(ls -d "$CONFDIR"/cache/*/)"
             sudo mv "$EXTRACTED_DIR_NAME" "$INSTDIR"
@@ -377,7 +377,7 @@ tarupgradefunc () {
             echo "$TARPKG will be upgraded to $TARFILE."
             echo "Copying files to $INSTDIR..."
             EXTRACTED_DIR_NAME="$(ls -d "$CONFDIR"/cache/*/)"
-            sudo cp -r "$EXTRACTED_DIR_NAME"/* "$INSTDIR"/
+            sudo cp -r "$EXTRACTED_DIR_NAME"/* "$INSTDIR"/ || { echo "Failed!"; rm -rf "$CONFDIR"/cache/*; exit 1; }
             ;;
         *)
             echo "Invalid choice; $TARPKG was not upgraded."
@@ -481,7 +481,7 @@ tarremovefunc () {
     ICON_FILE_NAME="$(basename "$ICON_FILE_PATH")"
     EXECUTABLE_FILE_NAME="$(basename "$EXECUTABLE_FILE_PATH")"
     echo "Removing $INSTDIR..."
-    sudo rm -rf "$INSTDIR"
+    sudo rm -rf "$INSTDIR" || { echo "Failed!"; rm -rf "$CONFDIR"/cache/*; exit 1; }
     echo "Removing symlinks..."
     case $DESKTOP_FILE_PATH in
         NONE)
@@ -515,7 +515,7 @@ tarremovepurgefunc () {
     ICON_FILE_NAME="$(basename "$ICON_FILE_PATH")"
     EXECUTABLE_FILE_NAME="$(basename "$EXECUTABLE_FILE_PATH")"
     echo "Removing $INSTDIR..."
-    sudo rm -rf "$INSTDIR"
+    sudo rm -rf "$INSTDIR" || { echo "Failed!"; rm -rf "$CONFDIR"/cache/*; exit 1; }
     echo "Removing symlinks..."
     case $DESKTOP_FILE_PATH in
         NONE)

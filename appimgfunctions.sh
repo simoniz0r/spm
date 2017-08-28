@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.2.2"
+X="0.2.3"
 # Set spm version
 
 # Set variables
@@ -263,7 +263,7 @@ appimgdlfunc () { # wget latest url from direct website or github repo and wget 
 appimginstallfunc () { # chmod and mv AppImages to /usr/local/bin and create file containing install info in "$CONFDIR"/appimginstalled
     chmod a+x "$CONFDIR"/cache/"$INSTIMG" # Make AppImage executable
     echo "Moving $INSTIMG to /usr/local/bin/$INSTIMG ..."
-    sudo mv "$CONFDIR"/cache/"$INSTIMG" /usr/local/bin/"$INSTIMG" # Move AppImage to /usr/local/bin
+    sudo mv "$CONFDIR"/cache/"$INSTIMG" /usr/local/bin/"$INSTIMG" || { echo "Failed!"; rm -rf "$CONFDIR"/cache/*; exit 1; } # Move AppImage to /usr/local/bin
     appimgsaveinfofunc "appimginstalled/$INSTIMG"
     echo "$APPIMAGE_NAME has been installed to /usr/local/bin/$INSTIMG !"
 }
@@ -313,7 +313,7 @@ appimgupgradefunc () { # rm old AppImage, chmod, and mv new AppImage to /usr/loc
     echo "Removing previous $INSTIMG version..."
     sudo rm /usr/local/bin/"$INSTIMG" # Remove old AppImage before upgrading
     chmod a+x "$CONFDIR"/cache/"$INSTIMG" # Make new AppImage executable
-    echo "Moving $INSTIMG to /usr/local/bin/$INSTIMG ..."
+    echo "Moving $INSTIMG to /usr/local/bin/$INSTIMG ..." || { echo "Failed!"; rm -rf "$CONFDIR"/cache/*; exit 1; }
     sudo mv "$CONFDIR"/cache/"$INSTIMG" /usr/local/bin/"$INSTIMG" # Move new AppImage to /usr/local/bin
     appimgsaveinfofunc "appimginstalled/$INSTIMG"
     echo "$INSTIMG has been upgraded to $INSTIMG version $APPIMAGE_VERSION !"
@@ -391,7 +391,7 @@ appimgremovefunc () { # rm AppImage in /usr/local/bin and remove install info fi
         rm "$CONFDIR"/appimgupgrades/"$REMIMG"
     fi
     echo "Removing /usr/local/bin/$REMIMG ..."
-    sudo rm /usr/local/bin/"$REMIMG" # Remove AppImage from /usr/local/bin
+    sudo rm /usr/local/bin/"$REMIMG" || { echo "Failed!"; rm -rf "$CONFDIR"/cache/*; exit 1; } # Remove AppImage from /usr/local/bin
     rm "$CONFDIR"/appimginstalled/"$REMIMG" # Remove installed info file for AppImage
     echo "$REMIMG has been removed!"
 }
