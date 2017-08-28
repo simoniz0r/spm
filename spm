@@ -88,10 +88,10 @@ spmlockfunc # Create "$CONFDIR"/cache/spm.lock file and prevent multiple instanc
 
 if [ -z "$GITHUB_TOKEN" ]; then
     wget -S --spider "https://api.github.com/rate_limit" -o "$CONFDIR"/cache/rate.limit
-    echo "Github API rate limit: $(grep -m 1 '.*X-RateLimit-Remaining:*.' "$CONFDIR"/cache/rate.limit | cut -f4 -d" ")/60 until $(date -d@$(grep -m 1 '.*X-RateLimit-Reset:*.' "$CONFDIR"/cache/rate.limit | cut -f4 -d" "))."
+    echo "Github API rate limit: $(grep -m 1 '.*X-RateLimit-Remaining:*.' "$CONFDIR"/cache/rate.limit | cut -f4 -d" ")/60 until $(date -d@$(grep -m 1 '.*X-RateLimit-Reset:*.' "$CONFDIR"/cache/rate.limit | cut -f4 -d" ") +"%T, %F")."
 else
     wget -S --spider --quiet --auth-no-challenge --header="Authorization: token "$GITHUB_TOKEN"" "https://api.github.com/rate_limit" -o "$CONFDIR"/cache/rate.limit
-    echo "Github API rate limit : $(grep -m 1 '.*X-RateLimit-Remaining:*.' "$CONFDIR"/cache/rate.limit | cut -f4 -d" ")/5000 until $(date -d@$(grep -m 1 '.*X-RateLimit-Reset:*.' "$CONFDIR"/cache/rate.limit | cut -f4 -d" "))."
+    echo "Github API rate limit : $(grep -m 1 '.*X-RateLimit-Remaining:*.' "$CONFDIR"/cache/rate.limit | cut -f4 -d" ")/5000 until $(date -d@$(grep -m 1 '.*X-RateLimit-Reset:*.' "$CONFDIR"/cache/rate.limit | cut -f4 -d" ") +"%T, %F")."
 fi
 if [ "$(grep -m 1 '.*X-RateLimit-Remaining:*.' "$CONFDIR"/cache/rate.limit | cut -f4 -d" ")" = "0" ]; then
     echo "Github API rate limit reached! Try again at $(date -d@$(grep -m 1 '.*X-RateLimit-Reset:*.' "$CONFDIR"/cache/rate.limit | cut -f4 -d" "))."
