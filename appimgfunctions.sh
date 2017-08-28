@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.2.3"
+X="0.2.4"
 # Set spm version
 
 # Set variables
@@ -48,12 +48,12 @@ appimglistallfunc () {
 }
 
 appimgcheckfunc () { # check user input against list of known apps here
-    if grep -qwi "$1" "$CONFDIR"/AppImages-direct.lst; then # Check AppImages-direct.lst for AppImages from Direct
-        APPIMG_NAME="$(grep -woi "$1" "$CONFDIR"/AppImages-direct.lst  | cut -f1 -d" ")"
+    if grep -qow "$1" "$CONFDIR"/AppImages-direct.lst; then # Check AppImages-direct.lst for AppImages from Direct
+        APPIMG_NAME="$(grep -wo "$1" "$CONFDIR"/AppImages-direct.lst  | cut -f2 -d" ")"
         DIRECT_IMG="TRUE"
         GITHUB_IMG="FALSE"
-    elif grep -qwi "$1" "$CONFDIR"/AppImages-github.lst; then # Check AppImages-github.lst for AppImages from github
-        APPIMG_NAME="$(grep -woi "$1" "$CONFDIR"/AppImages-github.lst | cut -f1 -d" ")"
+    elif grep -qw "$1" "$CONFDIR"/AppImages-github.lst; then # Check AppImages-github.lst for AppImages from github
+        APPIMG_NAME="$(grep -wo "$1" "$CONFDIR"/AppImages-github.lst | cut -f2 -d" ")"
         DIRECT_IMG="FALSE"
         GITHUB_IMG="TRUE"
     else
@@ -63,8 +63,8 @@ appimgcheckfunc () { # check user input against list of known apps here
 }
 
 appimggithubinfofunc () {
-    GITHUB_APP_URL="$(grep -wi "$INSTIMG" "$CONFDIR"/AppImages-github.lst | cut -f2 -d" ")"
-    APPIMG_GITHUB_API_URL="$(grep -wi "$INSTIMG" "$CONFDIR"/AppImages-github.lst | cut -f3- -d" ")"
+    GITHUB_APP_URL="$(grep -w "$INSTIMG" "$CONFDIR"/AppImages-github.lst | cut -f3 -d" ")"
+    APPIMG_GITHUB_API_URL="$(grep -w "$INSTIMG" "$CONFDIR"/AppImages-github.lst | cut -f4- -d" ")"
     if [ -z "$GITHUB_TOKEN" ]; then
         wget --quiet "$APPIMG_GITHUB_API_URL" -O "$CONFDIR"/cache/"$INSTIMG"-release || { echo "wget $APPIMG_GITHUB_API_URL failed; has the repo been renamed or deleted?"; rm -rf "$CONFDIR"/cache/*; exit 1; }
     else
@@ -88,7 +88,7 @@ appimggithubinfofunc () {
 }
 
 appimgdirectinfofunc () {
-    DIRECT_APPIMAGE_URL="$(grep -wi "$INSTIMG" "$CONFDIR"/AppImages-direct.lst | cut -f2 -d" ")"
+    DIRECT_APPIMAGE_URL="$(grep -w "$INSTIMG" "$CONFDIR"/AppImages-direct.lst | cut -f3- -d" ")"
     echo "$INSTIMG version cannot be tracked reliably (direct download)."
     if [ -f "$CONFDIR"/appimginstalled/"$INSTIMG" ]; then
         . "$CONFDIR"/appimginstalled/"$INSTIMG"

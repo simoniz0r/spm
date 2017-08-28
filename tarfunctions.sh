@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.2.3"
+X="0.2.4"
 # Set spm version
 TAR_LIST="$(cat $CONFDIR/tar-pkgs.json | python3 -c "import sys, json; data = json.load(sys.stdin); print (data['available'])")"
 
@@ -74,7 +74,7 @@ targithubinfofunc () {
 }
 
 tarappcheckfunc () { # check user input against list of known apps here
-    echo "$TAR_LIST" | grep -qiow "$1"
+    echo "$TAR_LIST" | grep -qow "$1"
     TAR_STATUS="$?"
     case $TAR_STATUS in
         0)
@@ -121,7 +121,7 @@ tarlistfunc () {
             echo "Current installed $TARPKG information:"
             cat "$CONFDIR"/tarinstalled/"$TARPKG"
             echo "INSTALLED=\"YES\""
-        elif echo "$TAR_LIST" | grep -qiow "$TARPKG"; then
+        elif echo "$TAR_LIST" | grep -qow "$TARPKG"; then
             echo "$TARPKG tar package information:"
             tarappcheckfunc "$TARPKG"
             tarsaveconffunc "cache/$TARPKG.conf"
@@ -257,7 +257,7 @@ tarupgradecheckallfunc () {
 }
 
 tarupgradecheckfunc () {
-    if ! echo "$TAR_LIST" | grep -qiow "$1"; then
+    if ! echo "$TAR_LIST" | grep -qow "$1"; then
         echo "$1 is not in tar-pkgs.json; try running 'spm update'."
     else
         TARPKG="$1"

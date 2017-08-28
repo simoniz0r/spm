@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.2.3"
+X="0.2.4"
 # Set spm version
 
 helpfunc () { # All unknown arguments come to this function; display help for spm
@@ -39,7 +39,7 @@ installed applications to their maintainers."
 }
 
 spmdepchecksfunc () { # Check for packages needed by spm, exit if they aren't installed
-    if [ "$SKIP_DEP_CHECKS" = "FALSE" ]; then
+    if [ "$SKIP_DEP_CHECKS" = "FALSE" ]; then # Run dependency checks if SKIP_DEP_CHECKS has not been set to something other than "FALSE" in spm.conf
         if ! type wget >/dev/null 2>&1; then
             MISSING_DEPS="TRUE"
             echo "wget is not installed!"
@@ -220,12 +220,12 @@ liststartfunc () {
         echo "tar packages:"
         tarlistfunc
     else # If AppImage input, list info for that AppImage
-        if grep -qiow "$LISTIMG" "$CONFDIR"/AppImages-github.lst || grep -qiow "$LISTIMG" "$CONFDIR"/AppImages-direct.lst; then
+        if grep -qow "$LISTIMG" "$CONFDIR"/AppImages-github.lst || grep -qow "$LISTIMG" "$CONFDIR"/AppImages-direct.lst; then
             appimglistfunc # List information about specified AppImage
             echo
             ISAPPIMG="TRUE"
         fi
-        if echo "$TAR_LIST" | grep -qiow "$TARPKG"; then
+        if echo "$TAR_LIST" | grep -qow "$TARPKG"; then
             tarlistfunc
             ISTAR="TRUE"
         fi
