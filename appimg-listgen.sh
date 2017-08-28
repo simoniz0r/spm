@@ -4,11 +4,14 @@
 # Generate list of github AppImages with versions that can be managed
 for image in $(dir -C -w 1 /home/simonizor/TestScripts/appimage.github.io/data); do
     URL="$(grep -v '#' /home/simonizor/TestScripts/appimage.github.io/data/"$image" | grep '.*github*.' | cut -f-5 -d"/")"
-    REPO="$(echo $URL | cut -f4,5 -d"/")"
     if [ ! -z "$URL" ]; then
         case $URL in
             *api.github*)
+                REPO="$(echo $URL | cut -f5,6 -d"/")"
                 URL="https://github.com/$REPO"
+                ;;
+            *)
+                REPO="$(echo $URL | cut -f4,5 -d"/")"
                 ;;
         esac
         echo "$image $URL/releases https://api.github.com/repos/$REPO/releases"
