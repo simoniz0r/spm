@@ -13,10 +13,10 @@ helpfunc () { # All unknown arguments come to this function; display help for sp
 printf '%s\n' "spm $X
 Usage: spm [option] [package]
 
-spm is a simple commandline package manager that installs AppImages and precompiled tar archives.
-AppImage information is downloaded from https://github.com/AppImage/appimage.github.io and tar archive information
-is downloaded from spm's github repo.  spm keeps track of installed packages and their versions, so spm can also be
-used to upgrade and remove packages installed by spm.
+spm is a simple commandline package manager that installs AppImages and precompiled tar archives. spm
+integrates with appimagehub to get a list of AppImages for install. Precompiled tar archive information
+is stored in spm's github repo.   spm keeps track of installed packages and their versions, so spm can
+also be used to upgrade and remove packages installed by spm.
 
 Arguments:
     list (-l) - list all installed packages and all packages known by spm or info about the specified package
