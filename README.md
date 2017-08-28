@@ -1,6 +1,6 @@
 # spm
 
-[![asciicast](https://asciinema.org/a/o3RI7dRSwg2roKrOfvZ00ZTm3.png)](https://asciinema.org/a/o3RI7dRSwg2roKrOfvZ00ZTm3)
+[![asciicast](https://asciinema.org/a/bH6EwI0SXEpvcSHQ0BRxOzafm.png)](https://asciinema.org/a/bH6EwI0SXEpvcSHQ0BRxOzafm)
 
 Usage: spm [option] [package]
 
