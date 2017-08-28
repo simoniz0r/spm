@@ -222,9 +222,10 @@ liststartfunc () {
     else # If AppImage input, list info for that AppImage
         if grep -qiow "$LISTIMG" "$CONFDIR"/AppImages-github.lst || grep -qiow "$LISTIMG" "$CONFDIR"/AppImages-direct.lst; then
             appimglistfunc # List information about specified AppImage
+            echo
             ISAPPIMG="TRUE"
         fi
-        if echo "$TAR_LIST" | grep -qiow "$LISTPKG"; then
+        if echo "$TAR_LIST" | grep -qiow "$TARPKG"; then
             tarlistfunc
             ISTAR="TRUE"
         fi

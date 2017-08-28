@@ -39,8 +39,6 @@ if [ ! -d "$CONFDIR" ]; then # Create dirs for configs if they don't exist
     mkdir "$CONFDIR"/cache
     echo "CONFDIR="\"$CONFDIR\""" > "$CONFDIR"/spm.conf
     echo "GITHUB_TOKEN="\"\""" >> "$CONFDIR"/spm.conf
-    # echo "Generating AppImages-bintray.lst from https://dl.bintray.com/probono/AppImages/ ..."
-    # wget --show-progress --quiet "https://dl.bintray.com/probono/AppImages/" -O - | sed 's/<\/*[^>]*>//g' | grep -o '.*AppImage' | cut -f1 -d"-" | sort -u > "$CONFDIR"/AppImages-bintray.lst
     echo "Downloading AppImages-github.lst from spm github..."
     wget --quiet --show-progress "https://raw.githubusercontent.com/simoniz0r/spm/master/AppImages-github.lst" -O "$CONFDIR"/AppImages-github.lst
     echo "Downloading AppImages-direct.lst from spm github..."
@@ -216,7 +214,7 @@ case $1 in
         ;;
     list|-l) # List installed packages or info about specified package
         LISTIMG="$2"
-        LISTPKG="$2"
+        TARPKG="$2"
         liststartfunc # Send package input to relevant list function or run both if no input
         rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
         exit 0

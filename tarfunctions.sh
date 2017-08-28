@@ -39,40 +39,35 @@ tarsaveconffunc () {
 }
 
 targithubinfofunc () {
-    TAR_LATEST_RELEASE="$(wget --quiet "$TARURI" -O - | grep -i -m 1 '.*/download/*..*.tar*.' | cut -f2 -d'"' | sed 's:download:tag:g;' | cut -f-6 -d"/")"
-    wget --quiet "https://www.github.com/$TAR_LATEST_RELEASE" -O "$CONFDIR"/cache/"$TARPKG".latest
-    TAR_GITHUB_NEW_DOWNLOAD="$(grep -i -m 1 '.*/download/*..*linux*..*64*..*tar*.' "$CONFDIR"/cache/"$TARPKG".latest | cut -f2 -d'"')"
-    TAR_GITHUB_NEW_COMMIT="$(grep '.*/commit//*.' "$CONFDIR"/cache/"$TARPKG".latest | cut -f5 -d"/" | tr -d '>"')"
-    TAR_GITHUB_NEW_VERSION="$(grep -i -m 1 '.*/download/*..*linux*..*64*..*tar*.' "$CONFDIR"/cache/"$TARPKG".latest | cut -f2 -d'"' | cut -f6 -d"/")"
+    if [ -z "$GITHUB_TOKEN" ]; then
+        wget --quiet "$TAR_API_URI" -O "$CONFDIR"/cache/"$TARPKG"-release || { echo "wget $TAR_API_URI failed; has the repo been renamed or deleted?"; exit 1; }
+    else
+        wget --quiet --auth-no-challenge --header="Authorization: token "$GITHUB_TOKEN"" "$TAR_API_URI" -O "$CONFDIR"/cache/"$TARPKG"-release || { echo "wget $TAR_API_URI failed; is your token valid?"; exit 1; }
+    fi
+    # TARPKG_INFO="$CONFDIR/cache/$TARPKG-release"
+    NEW_TARFILE="$(grep -iv '.*ia32*.\|.*i686*.\|.*i386*.' $CONFDIR/cache/$TARPKG-release | grep -i "$TARPKG" | grep -im 1 '"name":*..*linux*..*tar*.' | cut -f4 -d'"')"
+    TAR_GITHUB_NEW_COMMIT="$(grep -iv '.*ia32*.\|.*i686*.\|.*i386*.' $CONFDIR/cache/$TARPKG-release  | grep -B 1 -im 1 '"browser_download_url":*..*linux*..*tar*.' | cut -f4 -d'"' | head -n 1)"
+    TAR_GITHUB_NEW_DOWNLOAD="$(grep -iv '.*ia32*.\|.*i686*.\|.*i386*.' $CONFDIR/cache/$TARPKG-release | grep -i "$TARPKG" | grep -im 1 '"browser_download_url":*..*linux*..*tar*.' | cut -f4 -d'"')"
+    if [ -z "$NEW_TARFILE" ]; then
+        NEW_TARFILE="$(grep -iv '.*ia32*.\|.*i686*.\|.*i386*.' $CONFDIR/cache/$TARPKG-release  | grep -im 1 '"name":*..*linux*..*tar*.' | cut -f4 -d'"')"
+        TAR_GITHUB_NEW_COMMIT="$(grep -iv '.*ia32*.\|.*i686*.\|.*i386*.' $CONFDIR/cache/$TARPKG-release | grep -B 1 -im 1 '"browser_download_url":*..*linux*..*tar*.' | cut -f4 -d'"' | head -n 1)"
+        TAR_GITHUB_NEW_DOWNLOAD="$(grep -iv '.*ia32*.\|.*i686*.\|.*i386*.' $CONFDIR/cache/$TARPKG-release | grep -im 1 '"browser_download_url":*..*linux*..*tar*."' | cut -f4 -d'"')"
+    fi
+    if [ -z "$NEW_TARFILE" ]; then
+        NEW_TARFILE="$(grep -iv '.*ia32*.\|.*i686*.\|.*i386*.' $CONFDIR/cache/$TARPKG-release | grep -i "$TARPKG" | grep -im 1 '"name":*..*tar*.' | cut -f4 -d'"')"
+        TAR_GITHUB_NEW_COMMIT="$(grep -iv '.*ia32*.\|.*i686*.\|.*i386*.' $CONFDIR/cache/$TARPKG-release  | grep -B 1 -im 1 '"browser_download_url":*..*tar*.' | cut -f4 -d'"' | head -n 1)"
+        TAR_GITHUB_NEW_DOWNLOAD="$(grep -iv '.*ia32*.\|.*i686*.\|.*i386*.' $CONFDIR/cache/$TARPKG-release | grep -i "$TARPKG" | grep -im 1 '"browser_download_url":*..*tar*.' | cut -f4 -d'"')"
+    fi
+    if [ -z "$NEW_TARFILE" ]; then
+        NEW_TARFILE="$(grep -iv '.*ia32*.\|.*i686*.\|.*i386*.' $CONFDIR/cache/$TARPKG-release | grep -im 1 '"name":*..*tar*.' | cut -f4 -d'"')"
+        TAR_GITHUB_NEW_COMMIT="$(grep -iv '.*ia32*.\|.*i686*.\|.*i386*.' $CONFDIR/cache/$TARPKG-release | grep -B 1 -im 1 '"browser_download_url":*..*tar*.' | cut -f4 -d'"' | head -n 1)"
+        TAR_GITHUB_NEW_DOWNLOAD="$(grep -iv '.*ia32*.\|.*i686*.\|.*i386*.' $CONFDIR/cache/$TARPKG-release | grep -im 1 '"browser_download_url":*..*tar*.' | cut -f4 -d'"')"
+    fi
     TAR_DOWNLOAD_SOURCE="GITHUB"
+    TAR_GITHUB_NEW_VERSION="$(echo "$TAR_GITHUB_NEW_DOWNLOAD" | cut -f8 -d"/")"
     tarsaveconffunc "cache/$TARPKG.conf"
     . "$CONFDIR"/cache/"$TARPKG".conf
-    if [ -z "$TAR_GITHUB_NEW_DOWNLOAD" ]; then
-        TAR_GITHUB_NEW_DOWNLOAD="$(grep -i -m 1 '.*/download/*..*linux*..*tar*.' "$CONFDIR"/cache/"$TARPKG".latest | cut -f2 -d'"')"
-        TAR_GITHUB_NEW_COMMIT="$(grep '.*/commit//*.' "$CONFDIR"/cache/"$TARPKG".latest | cut -f5 -d"/" | tr -d '>"')"
-        TAR_GITHUB_NEW_VERSION="$(grep -i -m 1 '.*/download/*..*linux*..*tar*.' "$CONFDIR"/cache/"$TARPKG".latest | cut -f2 -d'"' | cut -f6 -d"/")"
-        TAR_DOWNLOAD_SOURCE="GITHUB"
-        tarsaveconffunc "cache/$TARPKG.conf"
-        . "$CONFDIR"/cache/"$TARPKG".conf
-    fi
-    if [ -z "$TAR_GITHUB_NEW_DOWNLOAD" ]; then
-        TAR_GITHUB_NEW_DOWNLOAD="$(grep -i -m 1 '.*/download/*..*64*..*tar*.' "$CONFDIR"/cache/"$TARPKG".latest | cut -f2 -d'"')"
-        TAR_GITHUB_NEW_COMMIT="$(grep '.*/commit//*.' "$CONFDIR"/cache/"$TARPKG".latest | cut -f5 -d"/" | tr -d '>"')"
-        TAR_GITHUB_NEW_VERSION="$(grep -i -m 1 '.*/download/*..*64*..*tar*.' "$CONFDIR"/cache/"$TARPKG".latest | cut -f2 -d'"' | cut -f6 -d"/")"
-        TAR_DOWNLOAD_SOURCE="GITHUB"
-        tarsaveconffunc "cache/$TARPKG.conf"
-        . "$CONFDIR"/cache/"$TARPKG".conf
-    fi
-    if [ -z "$TAR_GITHUB_NEW_DOWNLOAD" ]; then
-        TAR_GITHUB_NEW_DOWNLOAD="$(grep -v '.*ia32*.'  "$CONFDIR"/cache/"$TARPKG".latest | grep -i -m 1 '.*/download/*..*.tar*.' | cut -f2 -d'"')"
-        TAR_GITHUB_NEW_COMMIT="$(grep -v '.*ia32*.'  "$CONFDIR"/cache/"$TARPKG".latest | grep '.*/commit//*.' | cut -f5 -d"/" | tr -d '>"')"
-        TAR_GITHUB_NEW_VERSION="$(grep -v '.*ia32*.'  "$CONFDIR"/cache/"$TARPKG".latest | grep -i -m 1 '.*/download/*..*.tar*.' | cut -f2 -d'"' | cut -f6 -d"/")"
-        TAR_DOWNLOAD_SOURCE="GITHUB"
-        tarsaveconffunc "cache/$TARPKG.conf"
-        . "$CONFDIR"/cache/"$TARPKG".conf
-    fi
-    NEW_TARFILE="${TAR_GITHUB_NEW_DOWNLOAD##*/}"
-    if [ -z "$TAR_GITHUB_NEW_DOWNLOAD" ]; then
+    if [ -z "$NEW_TARFILE" ]; then
         echo "$(tput setaf 1)Error finding latest tar for $TARPKG!$(tput sgr0)"
         GITHUB_DOWNLOAD_ERROR="TRUE"
     fi
@@ -91,6 +86,7 @@ tarappcheckfunc () { # check user input against list of known apps here
             INSTDIR="$(cat $CONFDIR/tar-pkgs.json | python3 $RUNNING_DIR/jsonparse.py $TARPKG_NAME instdir)"
             TAR_DOWNLOAD_SOURCE="$(cat $CONFDIR/tar-pkgs.json | python3 $RUNNING_DIR/jsonparse.py $TARPKG_NAME download_source)"
             TARURI="$(cat $CONFDIR/tar-pkgs.json | python3 $RUNNING_DIR/jsonparse.py $TARPKG_NAME taruri)"
+            TAR_API_URI="$(cat $CONFDIR/tar-pkgs.json | python3 $RUNNING_DIR/jsonparse.py $TARPKG_NAME apiuri)"
             DESKTOP_FILE_PATH="$(cat $CONFDIR/tar-pkgs.json | python3 $RUNNING_DIR/jsonparse.py $TARPKG_NAME desktop_file_path)"
             ICON_FILE_PATH="$(cat $CONFDIR/tar-pkgs.json | python3 $RUNNING_DIR/jsonparse.py $TARPKG_NAME icon_file_path)"
             EXECUTABLE_FILE_PATH="$(cat $CONFDIR/tar-pkgs.json | python3 $RUNNING_DIR/jsonparse.py $TARPKG_NAME executable_file_path)"
@@ -114,22 +110,22 @@ tarappcheckfunc () { # check user input against list of known apps here
 }
 
 tarlistfunc () {
-    if [ -z "$LISTPKG" ]; then
+    if [ -z "$TARPKG" ]; then
         echo "$(dir "$CONFDIR"/tarinstalled | wc -w) installed tar packages:"
         dir -C -w 1 "$CONFDIR"/tarinstalled | pr -tT --column=3 -w 125
         echo
         echo "$(echo "$TAR_LIST" | wc -l) tar packages for install:"
         echo "$TAR_LIST" | pr -tTw 125 -3
     else
-        if [ -f "$CONFDIR"/tarinstalled/"$LISTPKG" ]; then
-            echo "Current installed $LISTPKG information:"
-            cat "$CONFDIR"/tarinstalled/"$LISTPKG"
+        if [ -f "$CONFDIR"/tarinstalled/"$TARPKG" ]; then
+            echo "Current installed $TARPKG information:"
+            cat "$CONFDIR"/tarinstalled/"$TARPKG"
             echo "INSTALLED=\"YES\""
-        elif echo "$TAR_LIST" | grep -qiow "$LISTPKG"; then
-            echo "$LISTPKG tar package information:"
-            tarappcheckfunc "$LISTPKG"
-            tarsaveconffunc "cache/$LISTPKG.conf"
-            cat "$CONFDIR"/cache/"$LISTPKG".conf
+        elif echo "$TAR_LIST" | grep -qiow "$TARPKG"; then
+            echo "$TARPKG tar package information:"
+            tarappcheckfunc "$TARPKG"
+            tarsaveconffunc "cache/$TARPKG.conf"
+            cat "$CONFDIR"/cache/"$TARPKG".conf
             echo "INSTALLED=\"NO\""
         else
             echo "Package not found!"
@@ -153,9 +149,8 @@ tarlistinstalledfunc () {
 tardlfunc () {
     case $TAR_DOWNLOAD_SOURCE in
         GITHUB)
-            TARURI_DL="https://github.com/$TAR_GITHUB_NEW_DOWNLOAD"
             cd "$CONFDIR"/cache
-            wget --quiet --read-timeout=30 --show-progress "$TARURI_DL" || { echo "wget $TARURI_DL failed; exiting..."; rm -rf "$CONFDIR"/cache/*; exit 1; }
+            wget --quiet --read-timeout=30 --show-progress "$TAR_GITHUB_NEW_DOWNLOAD" || { echo "wget $TARURI_DL failed; exiting..."; rm -rf "$CONFDIR"/cache/*; exit 1; }
             ;;
         DIRECT)
             cd "$CONFDIR"/cache

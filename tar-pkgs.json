@@ -127,7 +127,7 @@
         "instdir": "/opt/kaku",
         "download_source": "GITHUB",
         "taruri": "https://github.com/EragonJ/Kaku/releases",
-        "apiuri": "https://api.github.com/repos/releases/EragonJ/Kaku/releases",
+        "apiuri": "https://api.github.com/repos/EragonJ/Kaku/releases",
         "desktop_file_path": "/opt/kaku/misc/linux/kaku.desktop",
         "icon_file_path": "/opt/kaku/logo.png",
         "executable_file_path": "/opt/kaku/kaku",
