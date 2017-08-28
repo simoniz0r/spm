@@ -59,7 +59,7 @@ If there is no [AppImage](https://github.com/AppImage) of your favorite applicat
 
 If there is an [AppImage](https://github.com/AppImage) available for an application that is not in spm's list, feel free to create an [issue here](https://github.com/simoniz0r/spm/issues/new) to request that application be added.
 
-Support for a list of custom [AppImages](https://github.com/AppImage) that the user can [AppImages](https://github.com/AppImage) manually is planned, but not yet implemented.  Also, please note that spm currently only supports 64-bit AppImages and AppImages that are not in `Pre-release` status.  Support for 32-bit and versions other than the latest stable release is also planned.
+Support for a list of custom [AppImages](https://github.com/AppImage) that the user can [AppImages](https://github.com/AppImage) manually is planned, but not yet implemented.  Also, please note that spm currently only supports 64-bit AppImages and AppImages.
 
 # Where do I get support?
 
