@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.2.1"
+X="0.2.2"
 # Set spm version
 TAR_LIST="$(cat $CONFDIR/tar-pkgs.json | python3 -c "import sys, json; data = json.load(sys.stdin); print (data['available'])")"
 
@@ -40,28 +40,28 @@ tarsaveconffunc () {
 
 targithubinfofunc () {
     if [ -z "$GITHUB_TOKEN" ]; then
-        wget --quiet "$TAR_API_URI" -O "$CONFDIR"/cache/"$TARPKG"-release || { echo "wget $TAR_API_URI failed; has the repo been renamed or deleted?"; exit 1; }
+        wget --quiet "$TAR_API_URI" -O "$CONFDIR"/cache/"$TARPKG"-release || { echo "wget $TAR_API_URI failed; has the repo been renamed or deleted?"; rm -rf "$CONFDIR"/cache/*; exit 1; }
     else
-        wget --quiet --auth-no-challenge --header="Authorization: token "$GITHUB_TOKEN"" "$TAR_API_URI" -O "$CONFDIR"/cache/"$TARPKG"-release || { echo "wget $TAR_API_URI failed; is your token valid?"; exit 1; }
+        wget --quiet --auth-no-challenge --header="Authorization: token "$GITHUB_TOKEN"" "$TAR_API_URI" -O "$CONFDIR"/cache/"$TARPKG"-release || { echo "wget $TAR_API_URI failed; is your token valid?"; rm -rf "$CONFDIR"/cache/*; exit 1; }
     fi
     # TARPKG_INFO="$CONFDIR/cache/$TARPKG-release"
-    NEW_TARFILE="$(grep -iv '.*ia32*.\|.*i686*.\|.*i386*.' $CONFDIR/cache/$TARPKG-release | grep -i "$TARPKG" | grep -im 1 '"name":*..*linux*..*tar*.' | cut -f4 -d'"')"
-    TAR_GITHUB_NEW_COMMIT="$(grep -iv '.*ia32*.\|.*i686*.\|.*i386*.' $CONFDIR/cache/$TARPKG-release  | grep -B 1 -im 1 '"browser_download_url":*..*linux*..*tar*.' | cut -f4 -d'"' | head -n 1)"
-    TAR_GITHUB_NEW_DOWNLOAD="$(grep -iv '.*ia32*.\|.*i686*.\|.*i386*.' $CONFDIR/cache/$TARPKG-release | grep -i "$TARPKG" | grep -im 1 '"browser_download_url":*..*linux*..*tar*.' | cut -f4 -d'"')"
+    NEW_TARFILE="$(grep -iv '.*ia32*.\|.*i686*.\|.*i386*.' $CONFDIR/cache/$TARPKG-release | grep -i "$TARPKG" | grep -im 1 '"name":*..*linux*..*.tar.*.' | cut -f4 -d'"')"
+    TAR_GITHUB_NEW_COMMIT="$(grep -iv '.*ia32*.\|.*i686*.\|.*i386*.' $CONFDIR/cache/$TARPKG-release  | grep -B 1 -im 1 '"browser_download_url":*..*linux*..*.tar.*.' | cut -f4 -d'"' | head -n 1)"
+    TAR_GITHUB_NEW_DOWNLOAD="$(grep -iv '.*ia32*.\|.*i686*.\|.*i386*.' $CONFDIR/cache/$TARPKG-release | grep -i "$TARPKG" | grep -im 1 '"browser_download_url":*..*linux*..*.tar.*.' | cut -f4 -d'"')"
     if [ -z "$NEW_TARFILE" ]; then
-        NEW_TARFILE="$(grep -iv '.*ia32*.\|.*i686*.\|.*i386*.' $CONFDIR/cache/$TARPKG-release  | grep -im 1 '"name":*..*linux*..*tar*.' | cut -f4 -d'"')"
-        TAR_GITHUB_NEW_COMMIT="$(grep -iv '.*ia32*.\|.*i686*.\|.*i386*.' $CONFDIR/cache/$TARPKG-release | grep -B 1 -im 1 '"browser_download_url":*..*linux*..*tar*.' | cut -f4 -d'"' | head -n 1)"
-        TAR_GITHUB_NEW_DOWNLOAD="$(grep -iv '.*ia32*.\|.*i686*.\|.*i386*.' $CONFDIR/cache/$TARPKG-release | grep -im 1 '"browser_download_url":*..*linux*..*tar*."' | cut -f4 -d'"')"
+        NEW_TARFILE="$(grep -iv '.*ia32*.\|.*i686*.\|.*i386*.' $CONFDIR/cache/$TARPKG-release  | grep -im 1 '"name":*..*linux*..*.tar.*.' | cut -f4 -d'"')"
+        TAR_GITHUB_NEW_COMMIT="$(grep -iv '.*ia32*.\|.*i686*.\|.*i386*.' $CONFDIR/cache/$TARPKG-release | grep -B 1 -im 1 '"browser_download_url":*..*linux*..*.tar.*.' | cut -f4 -d'"' | head -n 1)"
+        TAR_GITHUB_NEW_DOWNLOAD="$(grep -iv '.*ia32*.\|.*i686*.\|.*i386*.' $CONFDIR/cache/$TARPKG-release | grep -im 1 '"browser_download_url":*..*linux*..*.tar.*."' | cut -f4 -d'"')"
     fi
     if [ -z "$NEW_TARFILE" ]; then
-        NEW_TARFILE="$(grep -iv '.*ia32*.\|.*i686*.\|.*i386*.' $CONFDIR/cache/$TARPKG-release | grep -i "$TARPKG" | grep -im 1 '"name":*..*tar*.' | cut -f4 -d'"')"
-        TAR_GITHUB_NEW_COMMIT="$(grep -iv '.*ia32*.\|.*i686*.\|.*i386*.' $CONFDIR/cache/$TARPKG-release  | grep -B 1 -im 1 '"browser_download_url":*..*tar*.' | cut -f4 -d'"' | head -n 1)"
-        TAR_GITHUB_NEW_DOWNLOAD="$(grep -iv '.*ia32*.\|.*i686*.\|.*i386*.' $CONFDIR/cache/$TARPKG-release | grep -i "$TARPKG" | grep -im 1 '"browser_download_url":*..*tar*.' | cut -f4 -d'"')"
+        NEW_TARFILE="$(grep -iv '.*ia32*.\|.*i686*.\|.*i386*.' $CONFDIR/cache/$TARPKG-release | grep -i "$TARPKG" | grep -im 1 '"name":*..*.tar.*.' | cut -f4 -d'"')"
+        TAR_GITHUB_NEW_COMMIT="$(grep -iv '.*ia32*.\|.*i686*.\|.*i386*.' $CONFDIR/cache/$TARPKG-release  | grep -B 1 -im 1 '"browser_download_url":*..*.tar.*.' | cut -f4 -d'"' | head -n 1)"
+        TAR_GITHUB_NEW_DOWNLOAD="$(grep -iv '.*ia32*.\|.*i686*.\|.*i386*.' $CONFDIR/cache/$TARPKG-release | grep -i "$TARPKG" | grep -im 1 '"browser_download_url":*..*.tar.*.' | cut -f4 -d'"')"
     fi
     if [ -z "$NEW_TARFILE" ]; then
-        NEW_TARFILE="$(grep -iv '.*ia32*.\|.*i686*.\|.*i386*.' $CONFDIR/cache/$TARPKG-release | grep -im 1 '"name":*..*tar*.' | cut -f4 -d'"')"
-        TAR_GITHUB_NEW_COMMIT="$(grep -iv '.*ia32*.\|.*i686*.\|.*i386*.' $CONFDIR/cache/$TARPKG-release | grep -B 1 -im 1 '"browser_download_url":*..*tar*.' | cut -f4 -d'"' | head -n 1)"
-        TAR_GITHUB_NEW_DOWNLOAD="$(grep -iv '.*ia32*.\|.*i686*.\|.*i386*.' $CONFDIR/cache/$TARPKG-release | grep -im 1 '"browser_download_url":*..*tar*.' | cut -f4 -d'"')"
+        NEW_TARFILE="$(grep -iv '.*ia32*.\|.*i686*.\|.*i386*.' $CONFDIR/cache/$TARPKG-release | grep -im 1 '"name":*..*.tar.*.' | cut -f4 -d'"')"
+        TAR_GITHUB_NEW_COMMIT="$(grep -iv '.*ia32*.\|.*i686*.\|.*i386*.' $CONFDIR/cache/$TARPKG-release | grep -B 1 -im 1 '"browser_download_url":*..*.tar.*.' | cut -f4 -d'"' | head -n 1)"
+        TAR_GITHUB_NEW_DOWNLOAD="$(grep -iv '.*ia32*.\|.*i686*.\|.*i386*.' $CONFDIR/cache/$TARPKG-release | grep -im 1 '"browser_download_url":*..*.tar.*.' | cut -f4 -d'"')"
     fi
     TAR_DOWNLOAD_SOURCE="GITHUB"
     TAR_GITHUB_NEW_VERSION="$(echo "$TAR_GITHUB_NEW_DOWNLOAD" | cut -f8 -d"/")"

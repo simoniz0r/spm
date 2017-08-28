@@ -160,7 +160,7 @@
         "instdir": "/opt/openrct2",
         "download_source": "GITHUB",
         "taruri": "https://github.com/OpenRCT2/OpenRCT2/releases",
-        "apiuri": "https://github.com/repos/OpenRCT2/OpenRCT2/releases",
+        "apiuri": "https://api.github.com/repos/OpenRCT2/OpenRCT2/releases",
         "desktop_file_path": "DOWNLOAD",
         "icon_file_path": "applications-games",
         "executable_file_path": "/opt/openrct2/openrct2",

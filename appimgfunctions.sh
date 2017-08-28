@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.2.1"
+X="0.2.2"
 # Set spm version
 
 # Set variables
@@ -19,17 +19,20 @@ appimgfunctionsexistsfunc () {
 
 appimgsaveinfofunc () { # Save install info to "$CONFDIR"/appimginstalled/AppImageName
     SAVEDIR="$1"
-    echo "BIN_PATH="\"/usr/local/bin/$INSTIMG\""" > "$CONFDIR"/"$SAVEDIR" # Create AppImage installed info file
-    echo "APPIMAGE="\"$APPIMAGE_NAME\""" >> "$CONFDIR"/"$SAVEDIR"
-    APPIMAGE_VERSION="$NEW_APPIMAGE_VERSION"
+    echo "APPIMAGE="\"$APPIMAGE_NAME\""" > "$CONFDIR"/"$SAVEDIR"
+    if [ ! -z "$NEW_APPIMAGE_VERSION" ]; then
+        APPIMAGE_VERSION="$NEW_APPIMAGE_VERSION"
+    fi
     echo "APPIMAGE_VERSION="\"$APPIMAGE_VERSION\""" >> "$CONFDIR"/"$SAVEDIR"
     if [ "$GITHUB_IMG" = "TRUE" ]; then
+        echo "APPIMAGE_GITHUB_VERSION="\"$APPIMAGE_GITHUB_NEW_VERSION\""" >> "$CONFDIR"/"$SAVEDIR"
         echo "WEBSITE="\"$(echo "$GITHUB_APP_URL" | cut -f-5 -d'/')\""" >> "$CONFDIR"/"$SAVEDIR"
     elif [ "$DIRECT_IMG" = "TRUE" ]; then
         echo "WEBSITE="\"$(echo "$DIRECT_APPIMAGE_URL" | cut -f-3 -d'/')\""" >> "$CONFDIR"/"$SAVEDIR"
     fi
+    echo "BIN_PATH="\"/usr/local/bin/$INSTIMG\""" >> "$CONFDIR"/"$SAVEDIR"
     if [ "$GITHUB_IMG" = "TRUE" ]; then
-        echo "APPIMG_DESCRIPTION="\"$APPIMG_DESCRIPTION\""" >> "$CONFDIR"/"$SAVEDIR"
+        echo "APPIMAGE_DESCRIPTION="\"$APPIMAGE_DESCRIPTION\""" >> "$CONFDIR"/"$SAVEDIR"
     fi
 }
 
@@ -63,9 +66,9 @@ appimggithubinfofunc () {
     GITHUB_APP_URL="$(grep -wi "$INSTIMG" "$CONFDIR"/AppImages-github.lst | cut -f2 -d" ")"
     APPIMG_GITHUB_API_URL="$(grep -wi "$INSTIMG" "$CONFDIR"/AppImages-github.lst | cut -f3- -d" ")"
     if [ -z "$GITHUB_TOKEN" ]; then
-        wget --quiet "$APPIMG_GITHUB_API_URL" -O "$CONFDIR"/cache/"$INSTIMG"-release || { echo "wget $APPIMG_GITHUB_API_URL failed; has the repo been renamed or deleted?"; exit 1; }
+        wget --quiet "$APPIMG_GITHUB_API_URL" -O "$CONFDIR"/cache/"$INSTIMG"-release || { echo "wget $APPIMG_GITHUB_API_URL failed; has the repo been renamed or deleted?"; rm -rf "$CONFDIR"/cache/*; exit 1; }
     else
-        wget --quiet --auth-no-challenge --header="Authorization: token "$GITHUB_TOKEN"" "$APPIMG_GITHUB_API_URL" -O "$CONFDIR"/cache/"$INSTIMG"-release || { echo "wget $APPIMG_GITHUB_API_URL failed; is your token valid?"; exit 1; }
+        wget --quiet --auth-no-challenge --header="Authorization: token "$GITHUB_TOKEN"" "$APPIMG_GITHUB_API_URL" -O "$CONFDIR"/cache/"$INSTIMG"-release || { echo "wget $APPIMG_GITHUB_API_URL failed; is your token valid?"; rm -rf "$CONFDIR"/cache/*; exit 1; }
     fi
     APPIMAGE_INFO="$CONFDIR/cache/$INSTIMG"-release
     APPIMAGE_NAME="$(grep -iv '.*ia32*.\|.*i686*.\|.*i386*.' "$APPIMAGE_INFO" | grep "$INSTIMG" | grep -im 1 '"name":*..*AppImage"' | cut -f4 -d'"')"
@@ -79,8 +82,9 @@ appimggithubinfofunc () {
     if [ "$APPIMG_UPGRADE_CHECK" = "FALSE" ]; then
         wget --quiet "$GITHUB_APP_URL" -O "$CONFDIR"/cache/"$INSTIMG"-github || { echo "wget $GITHUB_APP_URL failed; has the repo been renamed or deleted?"; rm -rf "$CONFDIR"/cache/*; exit 1; }
         APPIMG_GITHUB_INFO="$HOME/.config/spm/cache/"$INSTIMG"-github"
-        APPIMG_DESCRIPTION="$(grep -i '<meta name="description"' "$APPIMG_GITHUB_INFO" | cut -f4 -d'"')"
+        APPIMAGE_DESCRIPTION="$(grep -i '<meta name="description"' "$APPIMG_GITHUB_INFO" | cut -f4 -d'"')"
     fi
+    APPIMAGE_GITHUB_NEW_VERSION="$(echo "$GITHUB_APPIMAGE_URL" | cut -f8 -d"/")"
 }
 
 appimgdirectinfofunc () {
