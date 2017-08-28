@@ -9,6 +9,7 @@
 X="0.2.3"
 # Set spm version
 CONFDIR="$HOME/.config/spm"
+SKIP_DEP_CHECKS="FALSE"
 
 if [ "$EUID" = "0" ]; then # Prevent spm from being ran as root
     echo "Do not run spm as root!"
@@ -39,6 +40,7 @@ if [ ! -d "$CONFDIR" ]; then # Create dirs for configs if they don't exist
     mkdir "$CONFDIR"/cache
     echo "CONFDIR="\"$CONFDIR\""" > "$CONFDIR"/spm.conf
     echo "GITHUB_TOKEN="\"\""" >> "$CONFDIR"/spm.conf
+    echo "SKIP_DEP_CHECKS="\"FALSE\""" >> "$CONFDIR"/spm.conf
     echo "Downloading AppImages-github.lst from spm github..."
     wget --quiet --show-progress "https://raw.githubusercontent.com/simoniz0r/spm/master/AppImages-github.lst" -O "$CONFDIR"/AppImages-github.lst
     echo "Downloading AppImages-direct.lst from spm github..."

@@ -38,20 +38,20 @@ installed using spm.  Please report any bugs that are specific to
 installed applications to their maintainers."
 }
 
-spmdepchecksfunc () {
-    USE_GIT="TRUE"
-
-    if ! type wget >/dev/null 2>&1; then
-        MISSING_DEPS="TRUE"
-        echo "wget is not installed!"
-    fi
-    if ! type python3 >/dev/null 2>&1; then # Not used yet
-        MISSING_DEPS="TRUE"
-        echo "python3 is not installed!"
-    fi
-    if [ "$MISSING_DEPS" = "TRUE" ]; then
-        echo "Missing one or more packages required to run; exiting..."
-        exit 1
+spmdepchecksfunc () { # Check for packages needed by spm, exit if they aren't installed
+    if [ "$SKIP_DEP_CHECKS" = "FALSE" ]; then
+        if ! type wget >/dev/null 2>&1; then
+            MISSING_DEPS="TRUE"
+            echo "wget is not installed!"
+        fi
+        if ! type python3 >/dev/null 2>&1; then
+            MISSING_DEPS="TRUE"
+            echo "python3 is not installed!"
+        fi
+        if [ "$MISSING_DEPS" = "TRUE" ]; then
+            echo "Missing one or more packages required to run; exiting..."
+            exit 1
+        fi
     fi
 }
 
