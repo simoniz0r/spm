@@ -74,8 +74,6 @@ TagFlow http://www.tagflow.io/download/linux/appimage/64
 taisei http://download.opensuse.org/repositories/home:/lachs0r:/taisei/AppImage/taisei-latest-x86_64.AppImage
 TeXstudio https://dl.bintray.com/unruhschuh/AppImages/TeXstudio-2.10.8-x86_64.AppImage
 tubCloud https://updates.tubcloud.tu-berlin.de/clients/linux/64/tubCloud-latest.x86_64.AppImage
-VidCutter https://api.github.com/repos/ozmartian/vidcutter/releases/latest
-VLC https://api.github.com/repos/darealshinji/vlc-AppImage/releases/tags/continuous
 wastesedge http://download.savannah.gnu.org/releases/adonthell/wastesedge-0.3.6-x86_64-linux.tar.gz
 xlights https://www.adebenham.com/wp-content/uploads/xlights/xLights-2017.23.glibc2.17-x86_64.AppImage
 XnViewMP http://download.xnview.com/XnViewMP.glibc2.14-x86_64.AppImage

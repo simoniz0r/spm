@@ -18,7 +18,7 @@ done > /home/simonizor/TestScripts/AppImages-github.lst
 echo "tc-linux https://github.com/mccxiv/tc https://api.github.com/repos/mccxiv/tc/releases" >> /home/simonizor/TestScripts/AppImages-github.lst
 # Generate a list of AppImages from sites other than github with versions that cannot be managed
 for image in $(dir -C -w 1 /home/simonizor/TestScripts/appimage.github.io/data); do
-    URL="$(grep -v '#' /home/simonizor/TestScripts/appimage.github.io/data/"$image" | grep -v '.*/github*.')"
+    URL="$(grep -v '#' /home/simonizor/TestScripts/appimage.github.io/data/"$image" | grep -v '.*github*.')"
     if [ ! -z "$URL" ]; then
         echo "$image $URL"
     fi
