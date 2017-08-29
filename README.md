@@ -45,7 +45,7 @@ installed applications to their maintainers."
 
 # Github Rate Limit
 
-By default, Github's rate limit for API checks is 60 per hour.  When authenticated, the rate limit is increased to 5000 per hour.  To take advantage of the increased rate limit, it is suggested that you add your token to `spm.conf`.
+By default, Github's rate limit for API checks is 60 per hour.  When authenticated, the rate limit is increased to 5000 per hour.  To take advantage of the increased rate limit, it is suggested that you add [your token](https://github.com/settings/tokens) to `spm.conf`.
 
 It is recommended that you do not give this token access to ***any*** scopes as it will be stored in plain text in your config file.  It may even be a good idea to create a throwaway account for use with this.
 
