@@ -43,6 +43,17 @@ spm is not responsible for bugs within applications that have been
 installed using spm.  Please report any bugs that are specific to
 installed applications to their maintainers."
 
+# Github Rate Limit
+
+By default, Github's rate limit for API checks is 60 per hour.  When authenticated, the rate limit is increased to 5000 per hour.  To take advantage of the increased rate limit, it is suggested that you add your token to `spm.conf`.
+
+It is recommended that you do not give this token access to ***any*** scopes as it will be stored in plain text in your config file.  It may even be a good idea to create a throwaway account for use with this.
+
+To use authenticated Github API checks with spm, add the following line to `~/.config/spm/spm.conf` :
+```
+GITHUB_TOKEN="YOURTOKEN"
+```
+
 # Goals
 
 The main goal is for spm to be a distro agnostic package manager that distributes AppImages which should run on any Linux distro and precompiled tar archives with dependencies that are available for install on most Linux distros.  spm aims to fill the gap that is left by many Linux distro's package managers by providing software not available in their repos and/or providing packages that may be more up to date than those in the distro's repos.
