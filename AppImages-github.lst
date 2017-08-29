@@ -95,6 +95,7 @@ mki3dgame mki3dgame https://github.com/mki1967/mki3dgame/releases https://api.gi
 multidir MultiDir https://github.com/OneMoreGres/multidir/releases https://api.github.com/repos/OneMoreGres/multidir/releases
 mycard mycard https://github.com/moecube/moecube/releases https://api.github.com/repos/moecube/moecube/releases
 ncsa_mosaic NCSA_Mosaic https://github.com/AppImage/NCSA-Mosaic-AppImage/releases https://api.github.com/repos/AppImage/NCSA-Mosaic-AppImage/releases
+neofetch neofetch https://github.com/simoniz0r/AppImages/releases/tag/neofetch https://api.github.com/repos/simoniz0r/AppImages/releases
 neon Neon https://github.com/CityOfZion/neon-wallet/releases https://api.github.com/repos/CityOfZion/neon-wallet/releases
 neovim neovim https://github.com/neovim/neovim/releases https://api.github.com/repos/neovim/neovim/releases
 nfeh nfeh https://github.com/fa7ad/nfeh/releases https://api.github.com/repos/fa7ad/nfeh/releases
