@@ -125,7 +125,6 @@ tarlistfunc () {
             tarappcheckfunc "$TARPKG"
             tarsaveconffunc "cache/$TARPKG.conf"
             cat "$CONFDIR"/cache/"$TARPKG".conf
-            echo "INSTALLED=\"NO\""
         else
             echo "Package not found!"
             rm -rf "$CONFDIR"/cache/*
