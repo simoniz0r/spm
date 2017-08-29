@@ -258,7 +258,6 @@ appimgdlfunc () { # wget latest url from direct website or github repo and wget 
         NEW_APPIMAGE_VERSION="$APPIMAGE_NAME"
         mv "$CONFDIR"/cache/"$APPIMAGE_NAME" "$CONFDIR"/cache/"$INSTIMG"
     elif [ "$GITHUB_IMG" = "TRUE" ]; then # If AppImage is from github, use method below to download it
-        # APPIMAGE="${GITHUB_APPIMAGE_URL##*/}"
         wget --show-progress --quiet "$GITHUB_APPIMAGE_URL" -O "$CONFDIR"/cache/"$INSTIMG" || { echo "wget $GITHUB_APPIMAGE_URL failed; exiting..."; rm -rf "$CONFDIR"/cache/*; exit 1; }
     fi
 }

@@ -50,6 +50,8 @@ spmdepchecksfunc () { # Check for packages needed by spm, exit if they aren't in
         fi
         if [ "$MISSING_DEPS" = "TRUE" ]; then
             echo "Missing one or more packages required to run; exiting..."
+            echo "If you are sure you have the required dependencies, but spm does not detect them"
+            echo "change `SKIP_DEP_CHECKS` to `TRUE` in `$CONFDIR/spm.conf`"
             exit 1
         fi
     fi
