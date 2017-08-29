@@ -120,7 +120,6 @@ tarlistfunc () {
         if [ -f "$CONFDIR"/tarinstalled/"$TARPKG" ]; then
             echo "Current installed $TARPKG information:"
             cat "$CONFDIR"/tarinstalled/"$TARPKG"
-            echo "INSTALLED=\"YES\""
         elif echo "$TAR_LIST" | grep -qow "$TARPKG"; then
             echo "$TARPKG tar package information:"
             tarappcheckfunc "$TARPKG"
@@ -141,7 +140,6 @@ tarlistinstalledfunc () {
     for tarpkg in $(dir -C -w 1 "$CONFDIR"/tarinstalled); do
         echo "$tarpkg installed information:"
         cat "$CONFDIR"/tarinstalled/"$tarpkg"
-        echo "INSTALLED=\"YES\""
         echo
     done
 }

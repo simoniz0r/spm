@@ -112,7 +112,6 @@ appimglistfunc () {
     if [ -f "$CONFDIR"/appimginstalled/"$LISTIMG" ]; then # If installed, list installed info
         echo "Current installed $LISTIMG information:"
         cat "$CONFDIR"/appimginstalled/"$LISTIMG"
-        echo "INSTALLED=\"YES\""
     else
         INSTIMG="$LISTIMG"
         appimgcheckfunc "$LISTIMG"
@@ -134,7 +133,6 @@ appimglistinstalledfunc () {
     for AppImage in $(dir -C -w 1 "$CONFDIR"/appimginstalled); do
         echo "$AppImage installed information:"
         cat "$CONFDIR"/appimginstalled/"$AppImage"
-        echo "INSTALLED=\"YES\""
         echo
     done
 }
