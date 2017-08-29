@@ -2,6 +2,9 @@
 
 [![asciicast](https://asciinema.org/a/bH6EwI0SXEpvcSHQ0BRxOzafm.png)](https://asciinema.org/a/bH6EwI0SXEpvcSHQ0BRxOzafm)
 
+Dependencies: coreutils, python3.x, tar, wget
+If you have python3.x installed, but spm will exits with the output that python3.x is not installed, change `SKIP_DEP_CHECKS` to `TRUE` in ~/.config/spm/spm.conf.
+
 Usage: spm [option] [package]
 
 spm is a simple commandline package manager that installs AppImages and precompiled tar archives. spm integrates with [appimagehub](https://github.com/AppImage/appimage.github.io) to get a list of AppImages for install. Precompiled tar archive information is stored in spm's github repo.  spm keeps track of installed packages and their versions, so spm can also
