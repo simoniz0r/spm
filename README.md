@@ -4,7 +4,7 @@
 
 Dependencies: coreutils, python3.x, tar, wget
 
-If you have python3.x installed, but spm will exits with the output that python3.x is not installed, change `SKIP_DEP_CHECKS` to `TRUE` in ~/.config/spm/spm.conf.
+If you have python3.x installed, but spm still exits with the output that python3.x is not installed, change `SKIP_DEP_CHECKS` to `TRUE` in ~/.config/spm/spm.conf.
 
 Usage: spm [option] [package]
 
