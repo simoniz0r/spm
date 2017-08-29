@@ -40,3 +40,5 @@ for image in $(dir -C -w 1 /home/$USER/github/appimage.github.io/data); do
         echo "$lower_image $image $URL"
     fi
 done > /home/$USER/github/spm/AppImages-direct.lst
+sed -i 's%wastesedge wastesedge http://download.savannah.gnu.org/releases/adonthell/wastesedge-0.3.6-x86_64-linux.tar.gz%%g' /home/$USER/github/spm/AppImages-direct.lst # Remove this; not going to support AppImages in tar archives
+sed -i '/^$/d' /home/$USER/github/spm/AppImages-direct.lst # Remove blank lines
