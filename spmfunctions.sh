@@ -229,6 +229,7 @@ liststartfunc () {
         fi
         if echo "$TAR_LIST" | grep -qow "$TARPKG"; then
             tarlistfunc
+            echo
             ISTAR="TRUE"
         fi
         if [ -z "$ISAPPIMG" ] && [ -z "$ISTAR" ]; then
