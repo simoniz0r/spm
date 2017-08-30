@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.2.6"
+X="0.2.7"
 # Set spm version
 
 # Set variables
@@ -72,7 +72,7 @@ appimggithubinfofunc () {
     fi
     APPIMAGE_INFO="$CONFDIR/cache/$INSTIMG"-release
     APPIMAGE_NAME="$(grep -iv '.*ia32*.\|.*i686*.\|.*i386*.' "$APPIMAGE_INFO" | grep -i "$INSTIMG" | grep -im 1 '"name":*..*AppImage"' | cut -f4 -d'"')"
-    NEW_APPIMAGE_VERSION="$(grep -iv '.*ia32*.\|.*i686*.\|.*i386*.' "$APPIMAGE_INFO" | grep -B 1 -im 1 '"browser_download_url":*..*AppImage"' | head -n 1 | cut -f4 -d'"')"
+    NEW_APPIMAGE_VERSION="$(grep -iv '.*ia32*.\|.*i686*.\|.*i386*.' "$APPIMAGE_INFO" | grep -B 1 -i "$INSTIMG" | grep -B 1 -im 1 '"browser_download_url":*..*AppImage"' | head -n 1 | cut -f4 -d'"')"
     GITHUB_APPIMAGE_URL="$(grep -iv '.*ia32*.\|.*i686*.\|.*i386*.' "$APPIMAGE_INFO" | grep -i "$INSTIMG" | grep -im 1 '"browser_download_url":*..*AppImage"' | cut -f4 -d'"')"
     if [ -z "$APPIMAGE_NAME" ]; then
         APPIMAGE_NAME="$(grep -iv '.*ia32*.\|.*i686*.\|.*i386*.' "$APPIMAGE_INFO" | grep -im 1 '"name":*..*AppImage"' | cut -f4 -d'"')"
