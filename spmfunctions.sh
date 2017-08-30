@@ -39,6 +39,10 @@ installed applications to their maintainers."
 }
 
 spmdepchecksfunc () { # Check for packages needed by spm, exit if they aren't installed
+    if [ -f ././/bin/jq ]; then # This more than likely will not get set to TRUE unless using the AppImage version of spm which includes 'jq'.
+        USE_JQ="TRUE"
+        SKIP_DEP_CHECKS="TRUE"
+    fi
     if [ "$SKIP_DEP_CHECKS" = "FALSE" ]; then # Run dependency checks if SKIP_DEP_CHECKS has not been set to something other than "FALSE" in spm.conf
         if ! type wget >/dev/null 2>&1; then
             MISSING_DEPS="TRUE"
@@ -54,9 +58,6 @@ spmdepchecksfunc () { # Check for packages needed by spm, exit if they aren't in
             echo "change `SKIP_DEP_CHECKS` to `TRUE` in `$CONFDIR/spm.conf`"
             exit 1
         fi
-    fi
-    if [ -f ././/bin/jq ]; then
-        USE_JQ="TRUE"
     fi
 }
 
