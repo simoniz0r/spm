@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.2.5"
+X="0.2.6"
 # Set spm version
 CONFDIR="$HOME/.config/spm"
 SKIP_DEP_CHECKS="FALSE"
@@ -55,22 +55,14 @@ RUNNING_DIR="$(dirname "$REALPATH")" # Find directory script is running from
 if [ -f $RUNNING_DIR/spmfunctions.sh ]; then
     FUNCTIONS_VER="$(cat "$RUNNING_DIR"/spmfunctions.sh | sed -n 9p | cut -f2 -d'"')"
     if [ "$X" != "$FUNCTIONS_VER" ]; then
-        echo "spmfunctions.sh $FUNCTIONS_VER version does not match $X; removing and updating..."
-        rm "$RUNNING_DIR"/spmfunctions.sh || { echo "rm $RUNNING_DIR/spmfunctions.sh failed; trying with sudo..."; sudo rm "$RUNNING_DIR"/spmfunctions.sh; }
-        echo "$RUNNING_DIR/spmfunctions.sh has been removed."
-        echo "Downloading spmfunctions.sh from spm github repo..."
-        wget --quiet --show-progress "https://github.com/simoniz0r/appimgman/raw/spm/spmfunctions.sh" -O "$CONFDIR"/cache/spmfunctions.sh
-        chmod +x "$CONFDIR"/cache/spmfunctions.sh
-        mv "$CONFDIR"/cache/spmfunctions.sh "$RUNNING_DIR"/spmfunctions.sh || { echo "mv to $RUNNING_DIR failed; trying as sudo..."; sudo mv "$CONFDIR"/cache/spmfunctions.sh "$RUNNING_DIR"/spmfunctions.sh; }
-        echo "spmfunctions.sh saved to $RUNNING_DIR/spmfunctions.sh"
+        echo "spmfunctions.sh $FUNCTIONS_VER version does not match $X !"
+        echo "spmfunctions.sh is out of date! Please download the full release of spm from https://github.com/simoniz0r/spm/releases !"
+        exit 1
     fi
 else
     echo "Missing required file $RUNNING_DIR/spmfunctions.sh !"
-    echo "Downloading spmfunctions.sh from spm github repo..."
-    wget --quiet --show-progress "https://github.com/simoniz0r/appimgman/raw/spm/spmfunctions.sh" -O "$CONFDIR"/cache/spmfunctions.sh
-    chmod +x "$CONFDIR"/cache/spmfunctions.sh
-    mv "$CONFDIR"/cache/spmfunctions.sh "$RUNNING_DIR"/spmfunctions.sh || { echo "mv to $RUNNING_DIR failed; trying as sudo..."; sudo mv "$CONFDIR"/cache/spmfunctions.sh "$RUNNING_DIR"/spmfunctions.sh; }
-    echo "spmfunctions.sh saved to $RUNNING_DIR/spmfunctions.sh"
+        echo "spmfunctions.sh is missing! Please download the full release of spm from https://github.com/simoniz0r/spm/releases !"
+        exit 1
 fi
 source "$RUNNING_DIR"/spmfunctions.sh # import functions from spmfunctions.sh
 

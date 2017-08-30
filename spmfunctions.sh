@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.2.5"
+X="0.2.6"
 # Set spm version
 
 helpfunc () { # All unknown arguments come to this function; display help for spm
@@ -63,22 +63,14 @@ appimgfunctioncheckfunc () {
     if [ -f $RUNNING_DIR/appimgfunctions.sh ]; then
         FUNCTIONS_VER="$(cat "$RUNNING_DIR"/appimgfunctions.sh | sed -n 9p | cut -f2 -d'"')"
         if [ "$X" != "$FUNCTIONS_VER" ]; then
-            echo "appimgfunctions.sh $FUNCTIONS_VER version does not match $X; removing and updating..."
-            rm "$RUNNING_DIR"/appimgfunctions.sh || { echo "rm $RUNNING_DIR/appimgfunctions.sh failed; trying with sudo..."; sudo rm "$RUNNING_DIR"/appimgfunctions.sh; }
-            echo "$RUNNING_DIR/appimgfunctions.sh has been removed."
-            echo "Downloading appimgfunctions.sh from spm github repo..."
-            wget --quiet --show-progress "https://github.com/simoniz0r/spm/raw/master/appimgfunctions.sh" -O "$CONFDIR"/cache/appimgfunctions.sh
-            chmod +x "$CONFDIR"/cache/appimgfunctions.sh
-            mv "$CONFDIR"/cache/appimgfunctions.sh "$RUNNING_DIR"/appimgfunctions.sh || { echo "mv to $RUNNING_DIR failed; trying as sudo..."; sudo mv "$CONFDIR"/cache/appimgfunctions.sh "$RUNNING_DIR"/appimgfunctions.sh; }
-            echo "appimgfunctions.sh saved to $RUNNING_DIR/appimgfunctions.sh"
+            echo "appimgfunctions.sh $FUNCTIONS_VER version does not match $X !"
+            echo "appimgfunctions.sh is out of date! Please download the full release of spm from https://github.com/simoniz0r/spm/releases !"
+            exit 1
         fi
     else
         echo "Missing required file $RUNNING_DIR/appimgfunctions.sh !"
-        echo "Downloading appimgfunctions.sh from spm github repo..."
-        wget --quiet --show-progress "https://github.com/simoniz0r/spm/raw/master/appimgfunctions.sh" -O "$CONFDIR"/cache/appimgfunctions.sh
-        chmod +x "$CONFDIR"/cache/appimgfunctions.sh
-        mv "$CONFDIR"/cache/appimgfunctions.sh "$RUNNING_DIR"/appimgfunctions.sh || { echo "mv to $RUNNING_DIR failed; trying as sudo..."; sudo mv "$CONFDIR"/cache/appimgfunctions.sh "$RUNNING_DIR"/appimgfunctions.sh; }
-        echo "appimgfunctions.sh saved to $RUNNING_DIR/appimgfunctions.sh"
+        echo "appimgfunctions.sh is missing! Please download the full release of spm from https://github.com/simoniz0r/spm/releases !"
+        exit 1
     fi
 }
 
@@ -86,33 +78,22 @@ tarfunctioncheckfunc () {
     if [ -f $RUNNING_DIR/tarfunctions.sh ]; then
         FUNCTIONS_VER="$(cat "$RUNNING_DIR"/tarfunctions.sh | sed -n 9p | cut -f2 -d'"')"
         if [ "$X" != "$FUNCTIONS_VER" ]; then
-            echo "tarfunctions.sh $FUNCTIONS_VER version does not match $X; removing and updating..."
-            rm "$RUNNING_DIR"/tarfunctions.sh || { echo "rm $RUNNING_DIR/tarfunctions.sh failed; trying with sudo..."; sudo rm "$RUNNING_DIR"/tarfunctions.sh; }
-            echo "$RUNNING_DIR/tarfunctions.sh has been removed."
-            echo "Downloading tarfunctions.sh from spm github repo..."
-            wget --quiet --show-progress "https://github.com/simoniz0r/spm/raw/master/tarfunctions.sh" -O "$CONFDIR"/cache/tarfunctions.sh
-            chmod +x "$CONFDIR"/cache/tarfunctions.sh
-            mv "$CONFDIR"/cache/tarfunctions.sh "$RUNNING_DIR"/tarfunctions.sh || { echo "mv to $RUNNING_DIR failed; trying as sudo..."; sudo mv "$CONFDIR"/cache/tarfunctions.sh "$RUNNING_DIR"/tarfunctions.sh; }
-            echo "tarfunctions.sh saved to $RUNNING_DIR/tarfunctions.sh"
+            echo "tarfunctions.sh $FUNCTIONS_VER version does not match $X !"
+            echo "tarfunctions.sh is out of date! Please download the full release of spm from https://github.com/simoniz0r/spm/releases !"
+            exit 1
         fi
     else
         echo "Missing required file $RUNNING_DIR/tarfunctions.sh !"
-        echo "Downloading tarfunctions.sh from spm github repo..."
-        wget --quiet --show-progress "https://github.com/simoniz0r/spm/raw/master/tarfunctions.sh" -O "$CONFDIR"/cache/tarfunctions.sh
-        chmod +x "$CONFDIR"/cache/tarfunctions.sh
-        mv "$CONFDIR"/cache/tarfunctions.sh "$RUNNING_DIR"/tarfunctions.sh || { echo "mv to $RUNNING_DIR failed; trying as sudo..."; sudo mv "$CONFDIR"/cache/tarfunctions.sh "$RUNNING_DIR"/tarfunctions.sh; }
-        echo "tarfunctions.sh saved to $RUNNING_DIR/tarfunctions.sh"
+        echo "tarfunctions.sh is missing! Please download the full release of spm from https://github.com/simoniz0r/spm/releases !"
+        exit 1
     fi
 }
 
 jsonparsecheck () {
     if [ ! -f $RUNNING_DIR/jsonparse.py ]; then
         echo "Missing required file $RUNNING_DIR/jsonparse.py !"
-        echo "Downloading jsonparse.py from spm github repo..."
-        wget --quiet --show-progress "https://github.com/simoniz0r/spm/raw/master/jsonparse.py" -O "$CONFDIR"/cache/jsonparse.py
-        chmod +x "$CONFDIR"/cache/jsonparse.py
-        mv "$CONFDIR"/cache/jsonparse.py "$RUNNING_DIR"/jsonparse.py || { echo "mv to $RUNNING_DIR failed; trying as sudo..."; sudo mv "$CONFDIR"/cache/jsonparse.py "$RUNNING_DIR"/jsonparse.py; }
-        echo "jsonparse.py saved to $RUNNING_DIR/jsonparse.py"
+        echo "jsonparse.py is missing! Please download the full release of spm from https://github.com/simoniz0r/spm/releases !"
+        exit 1
     fi
 }
 
