@@ -2,7 +2,10 @@
 
 [![asciicast](https://asciinema.org/a/bH6EwI0SXEpvcSHQ0BRxOzafm.png)](https://asciinema.org/a/bH6EwI0SXEpvcSHQ0BRxOzafm)
 
-Dependencies: coreutils, python3.x, tar, wget
+
+spm now has an AppImage release! To use the AppImage for spm, simply download it, `chmod a+x /path/to/spm-VERSION-x86_64.AppImage`, and execute `/path/to/spm-VERSION-x86_64.AppImage`. The AppImage release for spm contains all necessary dependencies, so it should work without needing to install anything!
+
+Dependencies (without using AppImage): coreutils, python3.x, tar, wget
 
 If you have python3.x installed, but spm still exits with the output that python3.x is not installed, change `SKIP_DEP_CHECKS` to `TRUE` in ~/.config/spm/spm.conf.
 
