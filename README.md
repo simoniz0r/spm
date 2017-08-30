@@ -28,16 +28,17 @@ those dependencies would not be on a normal Linux system.  This means that AppIm
 without having to install any additional packages!
 
 Arguments:
-- list (-l) - list all installed AppImages and all AppImages known by spm or info about the specified AppImage
+- list (-l) - list all installed packages and all packages known by spm or info about the specified package
 - list-installed (-li) - list all installed packages and install info
 - appimg-install (-ai) - install an AppImage
-- tar-install (-ti - install a precompiled tar archive
+- tar-install (-ti) - install a precompiled tar archive
 - appimg-remove (-ar) - remove an installed AppImage
 - tar-remove (-tr) remove an installed precompiled tar archive
-- update (-upd) - update package lists and check for new AppImage and precompiled tar archive versions
-- appimg-update-force (-auf) - add specified AppImage to upgrade-list without checking versions
-- tar-update-force (-tuf) - add specified precompiled tar archive to list of upgrades without checking versions
+- update (-upd) - update package lists and check for package upgrades
+- appimg-update-force (-auf) - mark specified AppImage for upgrade without checking version
+- tar-update-force (-tuf) - mark specified precompiled tar archive for upgrade without checking version
 - upgrade (-upg) - upgrade all installed packages that are marked for upgrade or just the specified package
+- man - show spm man page
 
 spm is not responsible for bugs within applications that have been
 installed using spm.  Please report any bugs that are specific to
