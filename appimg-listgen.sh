@@ -29,7 +29,8 @@ sed -i 's%sharexin ShareXin https://github.com/ShareXin/ShareXin/releases https:
 sed -i 's%nteract nteract https://github.com/nteract/releases https://api.github.com/repos/nteract/releases%nteract nteract https://github.com/nteract/nteract/releases https://api.github.com/repos/nteract/nteract/releases%g' /home/$USER/github/spm/AppImages-github.lst # Fix broken link
 sed -i 's%vlc VLC https://github.com/darealshinji/releases https://api.github.com/repos/darealshinji/releases%%g' /home/$USER/github/spm/AppImages-github.lst # Remove broken link
 sed -i '/^$/d' /home/$USER/github/spm/AppImages-github.lst # Remove blank lines
-echo "discord discord https://github.com/simoniz0r/AppImages/releases/tag/discord https://api.github.com/repos/simoniz0r/AppImages/releases" >> /home/$USER/github/spm/AppImages-github.lst
+echo "discord discord https://github.com/simoniz0r/AppImages/releases https://api.github.com/repos/simoniz0r/AppImages/releases" >> /home/$USER/github/spm/AppImages-github.lst
+echo "inxi inxi https://github.com/simoniz0r/AppImages/releases https://api.github.com/repos/simoniz0r/AppImages/releases" >> /home/$USER/github/spm/AppImages-github.lst
 echo "neofetch neofetch https://github.com/simoniz0r/AppImages/releases https://api.github.com/repos/simoniz0r/AppImages/releases" >> /home/$USER/github/spm/AppImages-github.lst
 echo "tc-linux tc-linux https://github.com/mccxiv/tc https://api.github.com/repos/mccxiv/tc/releases" >> /home/$USER/github/spm/AppImages-github.lst
 echo "vterm vterm https://github.com/vterm/vterm/releases https://api.github.com/repos/vterm/vterm/releases" >> /home/$USER/github/spm/AppImages-github.lst
