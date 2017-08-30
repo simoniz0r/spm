@@ -141,6 +141,7 @@ simple-updater-example simple-updater-example https://github.com/megahertz/elect
 skrifa Skrifa https://github.com/Skrifa/Skrifa/releases https://api.github.com/repos/Skrifa/Skrifa/releases
 slic3r_pe Slic3r_PE https://github.com/prusa3d/Slic3r/releases https://api.github.com/repos/prusa3d/Slic3r/releases
 spectrum-editor spectrum-editor https://github.com/thorpelawrence/spectrum-editor/releases https://api.github.com/repos/thorpelawrence/spectrum-editor/releases
+spm spm https://github.com/simoniz0r/spm/releases https://api.github.com/repos/simoniz0r/spm/releases
 spotifywebplayer spotifywebplayer https://github.com/Quacky2200/Spotify-Web-Player-for-Linux/releases https://api.github.com/repos/Quacky2200/Spotify-Web-Player-for-Linux/releases
 stacer Stacer https://github.com/oguzhaninan/Stacer/releases https://api.github.com/repos/oguzhaninan/Stacer/releases
 standard_notes Standard_Notes https://github.com/standardnotes/desktop/releases https://api.github.com/repos/standardnotes/desktop/releases

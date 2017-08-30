@@ -32,6 +32,7 @@ sed -i '/^$/d' /home/$USER/github/spm/AppImages-github.lst # Remove blank lines
 echo "discord discord https://github.com/simoniz0r/AppImages/releases https://api.github.com/repos/simoniz0r/AppImages/releases" >> /home/$USER/github/spm/AppImages-github.lst
 echo "inxi inxi https://github.com/simoniz0r/AppImages/releases https://api.github.com/repos/simoniz0r/AppImages/releases" >> /home/$USER/github/spm/AppImages-github.lst
 echo "neofetch neofetch https://github.com/simoniz0r/AppImages/releases https://api.github.com/repos/simoniz0r/AppImages/releases" >> /home/$USER/github/spm/AppImages-github.lst
+echo "spm spm https://github.com/simoniz0r/spm/releases https://api.github.com/repos/simoniz0r/spm/releases" >> /home/$USER/github/spm/AppImages-github.lst
 echo "tc-linux tc-linux https://github.com/mccxiv/tc https://api.github.com/repos/mccxiv/tc/releases" >> /home/$USER/github/spm/AppImages-github.lst
 echo "vterm vterm https://github.com/vterm/vterm/releases https://api.github.com/repos/vterm/vterm/releases" >> /home/$USER/github/spm/AppImages-github.lst
 echo "$(sort /home/$USER/github/spm/AppImages-github.lst)" > /home/$USER/github/spm/AppImages-github.lst
