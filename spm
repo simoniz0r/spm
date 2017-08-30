@@ -6,10 +6,11 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.2.7"
+X="0.2.8"
 # Set spm version
 CONFDIR="$HOME/.config/spm"
 SKIP_DEP_CHECKS="FALSE"
+USE_JQ="FALSE"
 
 if [ "$EUID" = "0" ]; then # Prevent spm from being ran as root
     echo "Do not run spm as root!"

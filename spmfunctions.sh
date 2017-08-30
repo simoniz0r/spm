@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.2.7"
+X="0.2.8"
 # Set spm version
 
 helpfunc () { # All unknown arguments come to this function; display help for spm
@@ -55,6 +55,9 @@ spmdepchecksfunc () { # Check for packages needed by spm, exit if they aren't in
             exit 1
         fi
     fi
+    if [ -f ././/bin/jq ]; then
+        USE_JQ="TRUE"
+    fi
 }
 
 appimgfunctioncheckfunc () {
@@ -90,7 +93,7 @@ tarfunctioncheckfunc () {
 }
 
 jsonparsecheck () {
-    if [ ! -f $RUNNING_DIR/jsonparse.py ]; then
+    if [ ! -f $RUNNING_DIR/jsonparse.py ] && [ ! -f ././/bin/jq ]; then
         echo "Missing required file $RUNNING_DIR/jsonparse.py !"
         echo "jsonparse.py is missing! Please download the full release of spm from https://github.com/simoniz0r/spm/releases !"
         exit 1

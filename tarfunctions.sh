@@ -6,9 +6,13 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.2.7"
+X="0.2.8"
 # Set spm version
-TAR_LIST="$(cat $CONFDIR/tar-pkgs.json | python3 -c "import sys, json; data = json.load(sys.stdin); print (data['available'])")"
+if [ "$USE_JQ" = "TRUE" ]; then
+    TAR_LIST="$(jq --raw-output ".available" "$CONFDIR"/tar-pkgs.json)"
+else
+    TAR_LIST="$(cat $CONFDIR/tar-pkgs.json | python3 -c "import sys, json; data = json.load(sys.stdin); print (data['available'])")"
+fi
 
 tarfunctionsexistfunc () {
     sleep 0
@@ -73,6 +77,26 @@ targithubinfofunc () {
     fi
 }
 
+tarjqappcheckfunc () {
+    KNOWN_TAR="TRUE"
+    INSTDIR="$(jq --raw-output .\"$TARPKG_NAME\".instdir $CONFDIR/tar-pkgs.json)"
+    TAR_DOWNLOAD_SOURCE="$(jq --raw-output .\"$TARPKG_NAME\".download_source $CONFDIR/tar-pkgs.json)"
+    TARURI="$(jq --raw-output .\"$TARPKG_NAME\".taruri $CONFDIR/tar-pkgs.json)"
+    TAR_API_URI="$(jq --raw-output .\"$TARPKG_NAME\".apiuri $CONFDIR/tar-pkgs.json)"
+    DESKTOP_FILE_PATH="$(jq --raw-output .\"$TARPKG_NAME\".desktop_file_path $CONFDIR/tar-pkgs.json)"
+    ICON_FILE_PATH="$(jq --raw-output .\"$TARPKG_NAME\".icon_file_path $CONFDIR/tar-pkgs.json)"
+    EXECUTABLE_FILE_PATH="$(jq --raw-output .\"$TARPKG_NAME\".executable_file_path $CONFDIR/tar-pkgs.json)"
+    BIN_PATH="$(jq --raw-output .\"$TARPKG_NAME\".bin_path $CONFDIR/tar-pkgs.json)"
+    CONFIG_PATH="$(jq --raw-output .\"$TARPKG_NAME\".config_path $CONFDIR/tar-pkgs.json)"
+    TAR_DESCRIPTION="$(jq --raw-output .\"$TARPKG_NAME\".description $CONFDIR/tar-pkgs.json)"
+    DEPENDENCIES="$(jq --raw-output .\"$TARPKG_NAME\".dependencies $CONFDIR/tar-pkgs.json)"
+    if [ "$TAR_DOWNLOAD_SOURCE" = "GITHUB" ]; then
+        targithubinfofunc
+    else
+        tarsaveconffunc "cache/$1.conf"
+    fi
+}
+
 tarappcheckfunc () { # check user input against list of known apps here
     echo "$TAR_LIST" | grep -qow "$1"
     TAR_STATUS="$?"
@@ -82,22 +106,26 @@ tarappcheckfunc () { # check user input against list of known apps here
             if [ ! -z "$DOWNLOAD_SOURCE" ]; then
                 TAR_DOWNLOAD_SOURCE="$DOWNLOAD_SOURCE"
             fi
-            KNOWN_TAR="TRUE"
-            INSTDIR="$(cat $CONFDIR/tar-pkgs.json | python3 $RUNNING_DIR/jsonparse.py $TARPKG_NAME instdir)"
-            TAR_DOWNLOAD_SOURCE="$(cat $CONFDIR/tar-pkgs.json | python3 $RUNNING_DIR/jsonparse.py $TARPKG_NAME download_source)"
-            TARURI="$(cat $CONFDIR/tar-pkgs.json | python3 $RUNNING_DIR/jsonparse.py $TARPKG_NAME taruri)"
-            TAR_API_URI="$(cat $CONFDIR/tar-pkgs.json | python3 $RUNNING_DIR/jsonparse.py $TARPKG_NAME apiuri)"
-            DESKTOP_FILE_PATH="$(cat $CONFDIR/tar-pkgs.json | python3 $RUNNING_DIR/jsonparse.py $TARPKG_NAME desktop_file_path)"
-            ICON_FILE_PATH="$(cat $CONFDIR/tar-pkgs.json | python3 $RUNNING_DIR/jsonparse.py $TARPKG_NAME icon_file_path)"
-            EXECUTABLE_FILE_PATH="$(cat $CONFDIR/tar-pkgs.json | python3 $RUNNING_DIR/jsonparse.py $TARPKG_NAME executable_file_path)"
-            BIN_PATH="$(cat $CONFDIR/tar-pkgs.json | python3 $RUNNING_DIR/jsonparse.py $TARPKG_NAME bin_path)"
-            CONFIG_PATH="$(cat $CONFDIR/tar-pkgs.json | python3 $RUNNING_DIR/jsonparse.py $TARPKG_NAME config_path)"
-            TAR_DESCRIPTION="$(cat $CONFDIR/tar-pkgs.json | python3 $RUNNING_DIR/jsonparse.py $TARPKG_NAME description)"
-            DEPENDENCIES="$(cat $CONFDIR/tar-pkgs.json | python3 $RUNNING_DIR/jsonparse.py $TARPKG_NAME dependencies)"
-            if [ "$TAR_DOWNLOAD_SOURCE" = "GITHUB" ]; then
-                targithubinfofunc
+            if [ "$USE_JQ" = "TRUE" ]; then
+                tarjqappcheckfunc
             else
-                tarsaveconffunc "cache/$1.conf"
+                KNOWN_TAR="TRUE"
+                INSTDIR="$(cat $CONFDIR/tar-pkgs.json | python3 $RUNNING_DIR/jsonparse.py $TARPKG_NAME instdir)"
+                TAR_DOWNLOAD_SOURCE="$(cat $CONFDIR/tar-pkgs.json | python3 $RUNNING_DIR/jsonparse.py $TARPKG_NAME download_source)"
+                TARURI="$(cat $CONFDIR/tar-pkgs.json | python3 $RUNNING_DIR/jsonparse.py $TARPKG_NAME taruri)"
+                TAR_API_URI="$(cat $CONFDIR/tar-pkgs.json | python3 $RUNNING_DIR/jsonparse.py $TARPKG_NAME apiuri)"
+                DESKTOP_FILE_PATH="$(cat $CONFDIR/tar-pkgs.json | python3 $RUNNING_DIR/jsonparse.py $TARPKG_NAME desktop_file_path)"
+                ICON_FILE_PATH="$(cat $CONFDIR/tar-pkgs.json | python3 $RUNNING_DIR/jsonparse.py $TARPKG_NAME icon_file_path)"
+                EXECUTABLE_FILE_PATH="$(cat $CONFDIR/tar-pkgs.json | python3 $RUNNING_DIR/jsonparse.py $TARPKG_NAME executable_file_path)"
+                BIN_PATH="$(cat $CONFDIR/tar-pkgs.json | python3 $RUNNING_DIR/jsonparse.py $TARPKG_NAME bin_path)"
+                CONFIG_PATH="$(cat $CONFDIR/tar-pkgs.json | python3 $RUNNING_DIR/jsonparse.py $TARPKG_NAME config_path)"
+                TAR_DESCRIPTION="$(cat $CONFDIR/tar-pkgs.json | python3 $RUNNING_DIR/jsonparse.py $TARPKG_NAME description)"
+                DEPENDENCIES="$(cat $CONFDIR/tar-pkgs.json | python3 $RUNNING_DIR/jsonparse.py $TARPKG_NAME dependencies)"
+                if [ "$TAR_DOWNLOAD_SOURCE" = "GITHUB" ]; then
+                    targithubinfofunc
+                else
+                    tarsaveconffunc "cache/$1.conf"
+                fi
             fi
             ;;
         *)
