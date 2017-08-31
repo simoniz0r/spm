@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.2.9"
+X="0.3.0"
 # Set spm version
 if [ "$USE_JQ" = "TRUE" ]; then
     TAR_LIST="$(jq --raw-output ".available" "$CONFDIR"/tar-pkgs.json)"
@@ -175,11 +175,11 @@ tardlfunc () {
     case $TAR_DOWNLOAD_SOURCE in
         GITHUB)
             cd "$CONFDIR"/cache
-            wget --quiet --read-timeout=30 --show-progress "$TAR_GITHUB_NEW_DOWNLOAD" || { echo "wget $TARURI_DL failed; exiting..."; rm -rf "$CONFDIR"/cache/*; exit 1; }
+            wget --read-timeout=30 "$TAR_GITHUB_NEW_DOWNLOAD" || { echo "wget $TARURI_DL failed; exiting..."; rm -rf "$CONFDIR"/cache/*; exit 1; }
             ;;
         DIRECT)
             cd "$CONFDIR"/cache
-            wget --quiet --read-timeout=30 --show-progress --trust-server-names "$TARURI" || { echo "wget $TARURI failed; exiting..."; rm -rf "$CONFDIR"/cache/*; exit 1; }
+            wget --read-timeout=30 --trust-server-names "$TARURI" || { echo "wget $TARURI failed; exiting..."; rm -rf "$CONFDIR"/cache/*; exit 1; }
             ;;
     esac
     TARFILE="$(dir "$CONFDIR"/cache/*.tar*)"
@@ -312,7 +312,7 @@ tarupdatelistfunc () {
 
 tardesktopfilefunc () {
     echo "Downloading $TARPKG.desktop from spm github repo..."
-    wget "https://raw.githubusercontent.com/simoniz0r/spm/master/apps/$TARPKG/$TARPKG.desktop" --show-progress -qO "$CONFDIR"/cache/"$TARPKG".desktop  || { echo "wget $TARURI failed; exiting..."; rm -rf "$CONFDIR"/cache/*; exit 1; }
+    wget --quiet "https://raw.githubusercontent.com/simoniz0r/spm/master/apps/$TARPKG/$TARPKG.desktop" -O "$CONFDIR"/cache/"$TARPKG".desktop  || { echo "wget $TARURI failed; exiting..."; rm -rf "$CONFDIR"/cache/*; exit 1; }
     echo "Moving $TARPKG.desktop to $INSTDIR ..."
     sudo mv "$CONFDIR"/cache/"$TARPKG".desktop "$INSTDIR"/"$TARPKG".desktop
     DESKTOP_FILE_PATH="$INSTDIR/$TARPKG.desktop"

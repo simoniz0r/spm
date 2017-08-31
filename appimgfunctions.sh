@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.2.9"
+X="0.3.0"
 # Set spm version
 
 # Set variables
@@ -248,7 +248,7 @@ appimgupdateforcefunc () {
 appimgdlfunc () { # wget latest url from direct website or github repo and wget it
     if [ "$DIRECT_IMG" = "TRUE" ]; then # If AppImage is DIRECT, use method below to download it
         cd "$CONFDIR"/cache
-        wget --quiet --read-timeout=30 --show-progress --trust-server-names "$DIRECT_APPIMAGE_URL" || { echo "wget $DIRECT_APPIMAGE_URL failed; exiting..."; rm -rf "$CONFDIR"/cache/*; exit 1; }
+        wget --read-timeout=30 --trust-server-names "$DIRECT_APPIMAGE_URL" || { echo "wget $DIRECT_APPIMAGE_URL failed; exiting..."; rm -rf "$CONFDIR"/cache/*; exit 1; }
         APPIMAGE_NAME="$(dir -C -w 1 "$CONFDIR"/cache/ | grep -iw '.*AppImage')"
         if [ -z "$APPIMAGE_NAME" ]; then
             APPIMAGE_NAME="$(dir -C -w 1 "$CONFDIR"/cache/ | grep -iw '.*App')"
@@ -256,7 +256,7 @@ appimgdlfunc () { # wget latest url from direct website or github repo and wget 
         NEW_APPIMAGE_VERSION="$APPIMAGE_NAME"
         mv "$CONFDIR"/cache/"$APPIMAGE_NAME" "$CONFDIR"/cache/"$INSTIMG"
     elif [ "$GITHUB_IMG" = "TRUE" ]; then # If AppImage is from github, use method below to download it
-        wget --show-progress --quiet "$GITHUB_APPIMAGE_URL" -O "$CONFDIR"/cache/"$INSTIMG" || { echo "wget $GITHUB_APPIMAGE_URL failed; exiting..."; rm -rf "$CONFDIR"/cache/*; exit 1; }
+        wget --read-timeout=30 "$GITHUB_APPIMAGE_URL" -O "$CONFDIR"/cache/"$INSTIMG" || { echo "wget $GITHUB_APPIMAGE_URL failed; exiting..."; rm -rf "$CONFDIR"/cache/*; exit 1; }
     fi
 }
 

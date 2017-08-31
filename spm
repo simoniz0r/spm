@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.2.9"
+X="0.3.0"
 # Set spm version
 CONFDIR="$HOME/.config/spm"
 SKIP_DEP_CHECKS="FALSE"
@@ -43,11 +43,11 @@ if [ ! -d "$CONFDIR" ]; then # Create dirs for configs if they don't exist
     echo "GITHUB_TOKEN="\"\""" >> "$CONFDIR"/spm.conf
     echo "SKIP_DEP_CHECKS="\"FALSE\""" >> "$CONFDIR"/spm.conf
     echo "Downloading AppImages-github.lst from spm github..."
-    wget --quiet --show-progress "https://raw.githubusercontent.com/simoniz0r/spm/master/AppImages-github.lst" -O "$CONFDIR"/AppImages-github.lst
+    wget --quiet "https://raw.githubusercontent.com/simoniz0r/spm/master/AppImages-github.lst" -O "$CONFDIR"/AppImages-github.lst
     echo "Downloading AppImages-direct.lst from spm github..."
-    wget --quiet --show-progress "https://raw.githubusercontent.com/simoniz0r/spm/master/AppImages-direct.lst" -O "$CONFDIR"/AppImages-direct.lst
+    wget --quiet "https://raw.githubusercontent.com/simoniz0r/spm/master/AppImages-direct.lst" -O "$CONFDIR"/AppImages-direct.lst
     echo "Downloading tar-pkgs.json from spm github repo..."
-    wget --quiet --show-progress "https://raw.githubusercontent.com/simoniz0r/spm/master/tar-pkgs.json" -O "$CONFDIR"/tar-pkgs.json
+    wget --quiet "https://raw.githubusercontent.com/simoniz0r/spm/master/tar-pkgs.json" -O "$CONFDIR"/tar-pkgs.json
     echo "First run operations complete!"
 fi
 
