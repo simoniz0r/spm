@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.2.8"
+X="0.2.9"
 # Set spm version
 if [ "$USE_JQ" = "TRUE" ]; then
     TAR_LIST="$(jq --raw-output ".available" "$CONFDIR"/tar-pkgs.json)"
@@ -93,7 +93,7 @@ tarjqappcheckfunc () {
     if [ "$TAR_DOWNLOAD_SOURCE" = "GITHUB" ]; then
         targithubinfofunc
     else
-        tarsaveconffunc "cache/$1.conf"
+        tarsaveconffunc "cache/$TARPKG_NAME.conf"
     fi
 }
 
@@ -124,7 +124,7 @@ tarappcheckfunc () { # check user input against list of known apps here
                 if [ "$TAR_DOWNLOAD_SOURCE" = "GITHUB" ]; then
                     targithubinfofunc
                 else
-                    tarsaveconffunc "cache/$1.conf"
+                    tarsaveconffunc "cache/$TARPKG_NAME.conf"
                 fi
             fi
             ;;
