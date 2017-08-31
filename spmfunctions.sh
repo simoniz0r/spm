@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.2.9"
+X="0.2.8"
 # Set spm version
 
 helpfunc () { # All unknown arguments come to this function; display help for spm
@@ -48,9 +48,9 @@ spmdepchecksfunc () { # Check for packages needed by spm, exit if they aren't in
             MISSING_DEPS="TRUE"
             echo "wget is not installed!"
         fi
-        if ! type python >/dev/null 2>&1; then
+        if ! type python3 >/dev/null 2>&1; then
             MISSING_DEPS="TRUE"
-            echo "python is not installed!"
+            echo "python3 is not installed!"
         fi
         if [ "$MISSING_DEPS" = "TRUE" ]; then
             echo "Missing one or more packages required to run; exiting..."
