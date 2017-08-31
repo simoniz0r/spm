@@ -3,11 +3,11 @@
 [![asciicast](https://asciinema.org/a/bH6EwI0SXEpvcSHQ0BRxOzafm.png)](https://asciinema.org/a/bH6EwI0SXEpvcSHQ0BRxOzafm)
 
 
-spm now has an AppImage release! To use the AppImage for spm, simply download it, `chmod a+x /path/to/spm-VERSION-x86_64.AppImage`, and execute `/path/to/spm-VERSION-x86_64.AppImage`. The AppImage release for spm contains all necessary dependencies, so it should work without needing to install anything!
+spm now has an AppImage release! To use the AppImage for spm, simply download it, `chmod a+x /path/to/spm-VERSION-x86_64.AppImage`, and execute `/path/to/spm-VERSION-x86_64.AppImage`. The AppImage release for spm contains all necessary dependencies, so it should work without needing to install anything!  The AppImage is currently built on Ubuntu 16.04 and will probably not work on older distros.  I am working on making an AppImage that will work everywhere soon.
 
 Dependencies (without using AppImage): coreutils, python3.x, tar, wget
 
-It is recommended that you use spm to install the AppImage or tar version of spm by executing `/path/to/spm -ai spm` for the AppImage or `/path/to/spm -ti spm` for the tar version.  This will allow spm to upgrade itself when a new version is released.  The AppImage is currently built on Ubuntu 16.04 and will probably not work on older distros.  I am working on making an AppImage that will work everywhere soon.
+It is recommended that you use spm to install the AppImage or tar version of spm by executing `/path/to/spm -ai spm` for the AppImage or `/path/to/spm -ti spm` for the tar version.  This will allow spm to upgrade itself when a new version is released.
 
 If you have python3.x installed, but spm still exits with the output that python3.x is not installed, change `SKIP_DEP_CHECKS` to `TRUE` in ~/.config/spm/spm.conf.
 
