@@ -1,12 +1,12 @@
 #!/bin/bash
 # Title: spm
 # Description: Downloads and installs AppImages and precompiled tar archives.  Can also upgrade and remove installed packages.
-# Dependencies: GNU coreutils, tar, wget, python3.x
+# Dependencies: GNU coreutils, tar, wget, python2.x
 # Author: simonizor
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.2.8"
+X="0.2.9"
 # Set spm version
 CONFDIR="$HOME/.config/spm"
 SKIP_DEP_CHECKS="FALSE"
