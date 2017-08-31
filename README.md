@@ -3,7 +3,7 @@
 [![asciicast](https://asciinema.org/a/bH6EwI0SXEpvcSHQ0BRxOzafm.png)](https://asciinema.org/a/bH6EwI0SXEpvcSHQ0BRxOzafm)
 
 
-spm now has an AppImage release! To use the AppImage for spm, simply download it, `chmod a+x /path/to/spm-VERSION-x86_64.AppImage`, and execute `/path/to/spm-VERSION-x86_64.AppImage`. The AppImage release for spm contains all necessary dependencies, so it should work without needing to install anything!.
+spm now has an AppImage release! To use the AppImage for spm, simply download it, `chmod a+x /path/to/spm-VERSION-x86_64.AppImage`, and execute `/path/to/spm-VERSION-x86_64.AppImage`. The AppImage release for spm contains all necessary dependencies, so it should work without needing to install anything!  The AppImage release is currently being built on Ubuntu 16.04, so it may not run on older systems.  An AppImage built using older dependencies will be released soon.
 
 Dependencies (without using AppImage): coreutils, python3.x, tar, wget
 
