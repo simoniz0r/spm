@@ -83,7 +83,7 @@ Support for a list of custom [AppImages](https://github.com/AppImage) that the u
 
 # Where do I get support?
 
-For issues related to spm, feel free to create an [issue here](https://github.com/simoniz0r/spm/issues/new) describing your problem and the distro you are running.
+For issues related to spm, you can either [join the Discord server](https://discord.gg/FFWVWPA) and ask for help in #spm or create an [issue here](https://github.com/simoniz0r/spm/issues/new) describing your problem and the distro you are running.
 
 For support related to [AppImages](https://github.com/AppImage), please visit http://discourse.appimage.org/. You can log in using your existing Google or GitHub account, no sign-up needed.
 
