@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.3.1"
+X="0.3.2"
 # Set spm version
 
 helpfunc () { # All unknown arguments come to this function; display help for spm
@@ -39,7 +39,7 @@ installed applications to their maintainers."
 }
 
 spmdepchecksfunc () { # Check for packages needed by spm, exit if they aren't installed
-    if [ -f ././/bin/jq ]; then # This more than likely will not get set to TRUE unless using the AppImage version of spm which includes 'jq'.
+    if [ -f ././/bin/jq ] || type wget >/dev/null 2>&1 && type jq >/dev/null 2>&1; then # If using AppImage or if jq and wget are installed, skip dep checks and use jq
         USE_JQ="TRUE"
         SKIP_DEP_CHECKS="TRUE"
     fi
@@ -55,7 +55,7 @@ spmdepchecksfunc () { # Check for packages needed by spm, exit if they aren't in
         if [ "$MISSING_DEPS" = "TRUE" ]; then
             echo "Missing one or more packages required to run; exiting..."
             echo "If you are sure you have the required dependencies, but spm does not detect them"
-            echo "change `SKIP_DEP_CHECKS` to `TRUE` in `$CONFDIR/spm.conf`"
+            echo "change SKIP_DEP_CHECKS to TRUE in `$CONFDIR/spm.conf`"
             exit 1
         fi
     fi

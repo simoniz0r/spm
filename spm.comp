@@ -7,6 +7,11 @@
 # License: GPL v2.0 only
 
 _spm () {
+    if type jq >/dev/null 2>&1; then
+        TICOMP="$(jq --raw-output '.available' ~/.config/spm/tar-pkgs.json)"
+    else
+        TICOMP="$(cat ~/.config/spm/tar-pkgs.json | python3 -c "import sys, json; data = json.load(sys.stdin); print (data['available'])")"
+    fi
     local curcontext="$curcontext" state line
     typeset -A opt_args
  
@@ -27,7 +32,7 @@ _spm () {
             compadd "$@" $(cat ~/.config/spm/AppImages-github.lst | cut -f1 -d" " | tr '\n' ' ')
             ;;
         -ti)
-            compadd "$@" $(cat ~/.config/spm/tar-pkgs.json | python3 -c "import sys, json; data = json.load(sys.stdin); print (data['available'])")
+            compadd "$@" $TICOMP
             ;;
         -ar)
             compadd "$@" $(dir ~/.config/spm/appimginstalled)
