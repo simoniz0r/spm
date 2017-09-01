@@ -39,7 +39,7 @@ installed applications to their maintainers."
 }
 
 spmdepchecksfunc () { # Check for packages needed by spm, exit if they aren't installed
-    if [ -f ././/bin/jq ] || type wget >/dev/null 2>&1 && type jq >/dev/null 2>&1; then # If using AppImage or if jq and wget are installed, skip dep checks and use jq
+    if [ -f ././/bin/jq ] || type swget >/dev/null 2>&1 && type jq >/dev/null 2>&1; then # If using AppImage or if jq and wget are installed, skip dep checks and use jq
         USE_JQ="TRUE"
         SKIP_DEP_CHECKS="TRUE"
     fi
@@ -48,14 +48,14 @@ spmdepchecksfunc () { # Check for packages needed by spm, exit if they aren't in
             MISSING_DEPS="TRUE"
             echo "wget is not installed!"
         fi
-        if ! type python3 >/dev/null 2>&1; then
+        if ! type spython3 >/dev/null 2>&1; then
             MISSING_DEPS="TRUE"
             echo "python3 is not installed!"
         fi
         if [ "$MISSING_DEPS" = "TRUE" ]; then
             echo "Missing one or more packages required to run; exiting..."
             echo "If you are sure you have the required dependencies, but spm does not detect them"
-            echo "change SKIP_DEP_CHECKS to TRUE in `$CONFDIR/spm.conf`"
+            echo "change SKIP_DEP_CHECKS to TRUE in $CONFDIR/spm.conf"
             exit 1
         fi
     fi
