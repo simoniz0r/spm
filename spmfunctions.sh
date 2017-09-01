@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.3.0"
+X="0.3.1"
 # Set spm version
 
 helpfunc () { # All unknown arguments come to this function; display help for spm
@@ -29,7 +29,7 @@ Arguments:
     appimg-update-force (-auf) - mark specified AppImage for upgrade without checking version
     tar-update-force (-tuf) - mark specified precompiled tar archive for upgrade without checking version
     upgrade (-upg) - upgrade all installed packages that are marked for upgrade or just the specified package
-    man - show spm man page
+    man (-m) - show spm man page
 
 See https://github.com/simoniz0r/spm for more help or to report issues.
 

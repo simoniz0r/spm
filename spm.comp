@@ -1,0 +1,46 @@
+#!/bin/bash
+# Title: spm
+# Description: Downloads and installs AppImages and precompiled tar archives.  Can also upgrade and remove installed packages.
+# Dependencies: GNU coreutils, tar, wget, python3.x
+# Author: simonizor
+# Website: http://www.simonizor.gq
+# License: GPL v2.0 only
+
+_spm () {
+    local curcontext="$curcontext" state line
+    typeset -A opt_args
+ 
+    _arguments \
+        '1: :->args'\
+        '2: :->input'
+ 
+    case $state in
+    args)
+        _arguments '1:arguments:(-h -l -li -ai -ar -ti -tr -upd -upg -m)'
+        ;;
+    *)
+        case $words[2] in
+        -l)
+            compadd "$@"  $(cat ~/.config/spm/AppImages-github.lst | cut -f1 -d" " | tr '\n' ' ') $(cat ~/.config/spm/tar-pkgs.json | python3 -c "import sys, json; data = json.load(sys.stdin); print (data['available'])")
+            ;;
+        -ai)
+            compadd "$@" $(cat ~/.config/spm/AppImages-github.lst | cut -f1 -d" " | tr '\n' ' ')
+            ;;
+        -ti)
+            compadd "$@" $(cat ~/.config/spm/tar-pkgs.json | python3 -c "import sys, json; data = json.load(sys.stdin); print (data['available'])")
+            ;;
+        -ar)
+            compadd "$@" $(dir ~/.config/spm/appimginstalled)
+            ;;
+        -tr)
+            compadd "$@" $(dir ~/.config/spm/tarinstalled)
+            ;;
+        -upd)
+            compadd "$@" $(dir ~/.config/spm/appimginstalled) $(dir ~/.config/spm/tarinstalled)
+            ;;
+        -upg)
+            compadd "$@" $(dir ~/.config/spm/appimgupgrades) $(dir ~/.config/spm/tarupgrades)
+            ;;
+        esac
+    esac
+}

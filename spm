@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.3.0"
+X="0.3.1"
 # Set spm version
 CONFDIR="$HOME/.config/spm"
 SKIP_DEP_CHECKS="FALSE"
@@ -68,6 +68,16 @@ fi
 source "$RUNNING_DIR"/spmfunctions.sh # import functions from spmfunctions.sh
 
 spmdepchecksfunc || { echo "Could not load $RUNNING_DIR/spmfunctions.sh; exiting..."; exit 1; } # Check for deps, exit if not present
+
+if type spm >/dev/null 2>&1 && [ -f ~/.zshrc ] && ! grep -q 'spm.comp' ~/.zshrc; then # If using zsh and spm is installed, add tab completions for spm
+    wget --quiet "https://raw.githubusercontent.com/simoniz0r/spm/master/spm.comp" -O "$CONFDIR"/spm.comp
+    echo "" >> ~/.zshrc
+    echo "if [ -f "$CONFDIR"/spm.comp ]; then" >> ~/.zshrc
+    echo "    source "$CONFDIR"/spm.comp" >> ~/.zshrc
+    echo "    compdef _spm spm" >> ~/.zshrc
+    echo "fi" >> ~/.zshrc
+    echo "" >> ~/.zshrc
+fi
 
 appimgfunctioncheckfunc # Check if appimgfunctions.sh exists, check version if it does, download if out of date or doesn't
 source "$RUNNING_DIR"/appimgfunctions.sh # import functions from appimgfunctions.sh
@@ -223,7 +233,7 @@ case $1 in
         rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
         exit 0
         ;;
-    man)
+    man|-m)
         man $RUNNING_DIR/spm.1
         rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
         exit 0
