@@ -5,11 +5,9 @@
 
 spm now has an AppImage release! To use the AppImage for spm, simply download it, `chmod a+x /path/to/spm-VERSION-x86_64.AppImage`, and execute `/path/to/spm-VERSION-x86_64.AppImage`. The AppImage release for spm contains all necessary dependencies, so it should work without needing to install anything!  The AppImage release is currently being built on Ubuntu 16.04, so it may not run on older systems.  An AppImage built using older dependencies will be released soon.
 
-Dependencies (without using AppImage): coreutils, python3.x, tar, wget
+Dependencies (without using AppImage): coreutils, tar, wget
 
 It is recommended that you use spm to install the AppImage or tar version of spm by executing `/path/to/spm -ai spm` for the AppImage or `/path/to/spm -ti spm` for the tar version.  This will allow spm to upgrade itself when a new version is released.
-
-If you have python3.x installed, but spm still exits with the output that python3.x is not installed, change `SKIP_DEP_CHECKS` to `TRUE` in ~/.config/spm/spm.conf.
 
 Usage: spm [option] [package]
 

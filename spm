@@ -1,16 +1,15 @@
 #!/bin/bash
 # Title: spm
 # Description: Downloads and installs AppImages and precompiled tar archives.  Can also upgrade and remove installed packages.
-# Dependencies: GNU coreutils, tar, wget, python3.x
+# Dependencies: GNU coreutils, tar, wget
 # Author: simonizor
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.3.2"
+X="0.3.3"
 # Set spm version
 CONFDIR="$HOME/.config/spm"
 SKIP_DEP_CHECKS="FALSE"
-USE_JQ="FALSE"
 
 if [ "$EUID" = "0" ]; then # Prevent spm from being ran as root
     echo "Do not run spm as root!"
@@ -86,8 +85,6 @@ appimgfunctionsexistsfunc  || { echo "Could not load $RUNNING_DIR/appimgfunction
 tarfunctioncheckfunc # Check if tarfunctions.sh exists, check version if it does, download if out of date or doesn't
 source "$RUNNING_DIR"/tarfunctions.sh # import functions from tarfunctions.sh
 tarfunctionsexistfunc || { echo "Could not load $RUNNING_DIR/tarfunctions.sh; exiting..."; exit 1; }
-
-jsonparsecheck
 
 spmlockfunc # Create "$CONFDIR"/cache/spm.lock file and prevent multiple instances by checking if it exists before running
 

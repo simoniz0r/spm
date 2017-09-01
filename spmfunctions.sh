@@ -1,12 +1,12 @@
 #!/bin/bash
 # Title: spm
 # Description: Downloads and installs AppImages and precompiled tar archives.  Can also upgrade and remove installed packages.
-# Dependencies: GNU coreutils, tar, wget, python2.x
+# Dependencies: GNU coreutils, tar, wget
 # Author: simonizor
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.3.2"
+X="0.3.3"
 # Set spm version
 
 helpfunc () { # All unknown arguments come to this function; display help for spm
@@ -39,18 +39,10 @@ installed applications to their maintainers."
 }
 
 spmdepchecksfunc () { # Check for packages needed by spm, exit if they aren't installed
-    if [ -f ././/bin/jq ] || type wget >/dev/null 2>&1 && type jq >/dev/null 2>&1; then # If using AppImage or if jq and wget are installed, skip dep checks and use jq
-        USE_JQ="TRUE"
-        SKIP_DEP_CHECKS="TRUE"
-    fi
     if [ "$SKIP_DEP_CHECKS" = "FALSE" ]; then # Run dependency checks if SKIP_DEP_CHECKS has not been set to something other than "FALSE" in spm.conf
         if ! type wget >/dev/null 2>&1; then
             MISSING_DEPS="TRUE"
             echo "wget is not installed!"
-        fi
-        if ! type python3 >/dev/null 2>&1; then
-            MISSING_DEPS="TRUE"
-            echo "python3 is not installed!"
         fi
         if [ "$MISSING_DEPS" = "TRUE" ]; then
             echo "Missing one or more packages required to run; exiting..."
@@ -89,14 +81,6 @@ tarfunctioncheckfunc () {
     else
         echo "Missing required file $RUNNING_DIR/tarfunctions.sh !"
         echo "tarfunctions.sh is missing! Please download the full release of spm from https://github.com/simoniz0r/spm/releases !"
-        exit 1
-    fi
-}
-
-jsonparsecheck () {
-    if [ ! -f $RUNNING_DIR/jsonparse.py ] && [ ! -f ././/bin/jq ]; then
-        echo "Missing required file $RUNNING_DIR/jsonparse.py !"
-        echo "jsonparse.py is missing! Please download the full release of spm from https://github.com/simoniz0r/spm/releases !"
         exit 1
     fi
 }
