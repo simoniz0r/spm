@@ -1,5 +1,5 @@
 {
-    "available" : "atom\ndiscord-canary\ndiscord-ptb\ndiscord\ndiscord-toolbox\nfirefox-beta\nfirefox-dev\nfirefox-nightly\nfirefox\ngpgpassman\nkaku\nnvim\nopenrct2\nopenttd\nrambox\nspm\nvscode\nwavebox\nxdgfetch\nyad-mpv\nyad-twitch-streamlink",
+    "available" : "atom\ndiscord-canary\ndiscord-ptb\ndiscord\ndiscord-toolbox\nfirefox-beta\nfirefox-dev\nfirefox-nightly\nfirefox\ngpgpassman\nkaku\nnvim\nopenrct2\nopenttd\nrambox\nspm\nvscode\nwavebox\nxdgfetch\nyad-mpv\nyad-twitch-streamlink\nyadshot",
     "atom": {
         "instdir": "/opt/atom",
         "download_source": "GITHUB",
@@ -272,5 +272,18 @@
         "config_path": "$HOME/.config/yad-twitch-streamlink",
         "description": "yad-twitch-streamlink provides a list of live followed streams for playback using either streamlink or mpv. It also provides notifications for new live streams.",
         "dependencies": "coreutils yad wget streamlink (optional - for better stream playback) mpv (optional - if streamlink is not used for stream playback)"
+    },
+    "yadshot": {
+        "instdir": "/opt/yadshot",
+        "download_source": "GITHUB",
+        "taruri": "https://github.com/simoniz0r/yadshot/releases",
+        "apiuri": "https://api.github.com/repos/simoniz0r/yadshot/releases",
+        "desktop_file_path": "/opt/yadshot/yadshot.desktop",
+        "icon_file_path": "/opt/yadshot/yadshot.png",
+        "executable_file_path": "/opt/yadshot/yadshot.sh",
+        "bin_path": "/usr/local/bin/yadshot",
+        "config_path": "$HOME/.config/yadshot",
+        "description": "A bash script that uses yad to provide a GUI front end for maim/slop. Images can be copied to clipboard, uploaded to imgur, or saved.",
+        "dependencies": "coreutils yad maim slop xclip curl"
     }
 }
