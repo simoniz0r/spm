@@ -244,7 +244,7 @@
         "executable_file_path": "/opt/xdgfetch/xdgfetch",
         "bin_path": "/usr/local/bin/xdgfetch",
         "config_path": "",
-        "description": "A bash script that uses 'xdg-mime' and 'xdg-settings' to fetch default applications and directories on the system. xdgfetch also gets system info from '/proc/'.",
+        "description": "A bash script that uses 'xdg-mime' and 'xdg-settings' to fetch default applications and directories on the system. xdgfetch also gets system info from '/proc/' and lspci.",
         "dependencies": "coreutils xdg-mime xdg-settings"
     },
     "yad-mpv": {
