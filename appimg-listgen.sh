@@ -36,7 +36,6 @@ echo "inxi inxi https://github.com/simoniz0r/AppImages/releases https://api.gith
 echo "neofetch neofetch https://github.com/simoniz0r/AppImages/releases https://api.github.com/repos/simoniz0r/AppImages/releases" >> /home/$USER/github/spm/AppImages-github.lst
 echo "spm spm https://github.com/simoniz0r/spm/releases https://api.github.com/repos/simoniz0r/spm/releases" >> /home/$USER/github/spm/AppImages-github.lst
 echo "tc-linux tc-linux https://github.com/mccxiv/tc https://api.github.com/repos/mccxiv/tc/releases" >> /home/$USER/github/spm/AppImages-github.lst
-echo "vscode vscode https://github.com/simoniz0r/AppImages/releases https://api.github.com/repos/simoniz0r/AppImages/releases" >> /home/$USER/github/spm/AppImages-github.lst
 echo "vterm vterm https://github.com/vterm/vterm/releases https://api.github.com/repos/vterm/vterm/releases" >> /home/$USER/github/spm/AppImages-github.lst
 echo "$(sort /home/$USER/github/spm/AppImages-github.lst)" > /home/$USER/github/spm/AppImages-github.lst
 # Generate a list of AppImages from sites other than github with versions that cannot be managed
