@@ -187,4 +187,5 @@ whatsdesktop WhatsDesktop https://github.com/mawie81/whatsdesktop/releases https
 wire Wire https://github.com/wireapp/wire-desktop/releases https://api.github.com/repos/wireapp/wire-desktop/releases
 workflowy WorkFlowy https://github.com/workflowy/desktop/releases https://api.github.com/repos/workflowy/desktop/releases
 xde xde https://github.com/expo/xde/releases https://api.github.com/repos/expo/xde/releases
+xdgfetch xdgfetch https://github.com/simoniz0r/xdgfetch/releases https://api.github.com/repos/simoniz0r/xdgfetch/releases
 zulip-electron zulip-electron https://github.com/zulip/zulip-electron/releases https://api.github.com/repos/zulip/zulip-electron/releases
