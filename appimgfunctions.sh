@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.3.3"
+X="0.3.4"
 # Set spm version
 
 # Set variables
@@ -37,25 +37,34 @@ appimgsaveinfofunc () { # Save install info to "$CONFDIR"/appimginstalled/AppIma
 }
 
 appimglistallfunc () {
-    echo "$(dir -C -w 1 "$CONFDIR"/appimginstalled | wc -l) AppImages installed:"
-    dir -C -w 1 "$CONFDIR"/appimginstalled | pr -tT --column=3 -w 125
+    echo "$(tput bold)$(cat "$CONFDIR"/AppImages-github.lst | wc -l) Github AppImages available for install$(tput sgr0):"
     echo
-    echo "$(cat "$CONFDIR"/AppImages-github.lst | wc -l) Github AppImages available for install:"
     cat "$CONFDIR"/AppImages-github.lst | cut -f1 -d" " | pr -tT --column=3 -w 125
     echo
-    echo "$(cat "$CONFDIR"/AppImages-direct.lst | wc -l) Direct AppImages available for install (may have issues finding new upgrades after install):"
+    echo "$(tput bold)$(cat "$CONFDIR"/AppImages-direct.lst | wc -l) Direct AppImages available for install (may have issues finding new upgrades after install)$(tput sgr0):"
+    echo
     cat "$CONFDIR"/AppImages-direct.lst | cut -f1 -d" " | pr -tT --column=3 -w 125
 }
 
 appimgcheckfunc () { # check user input against list of known apps here
     if grep -qow "$1" "$CONFDIR"/AppImages-direct.lst; then # Check AppImages-direct.lst for AppImages from Direct
-        APPIMG_NAME="$(grep -wo "$1" "$CONFDIR"/AppImages-direct.lst  | cut -f2 -d" ")"
-        DIRECT_IMG="TRUE"
-        GITHUB_IMG="FALSE"
+        if [ "$(grep -wm 1 "$1" "$CONFDIR"/AppImages-direct.lst | cut -f2 -d" ")" != "$1" ]; then
+            GITHUB_IMG="FALSE"
+            DIRECT_IMG="FALSE"
+        else
+            APPIMG_NAME="$(grep -wm 1 "$1" "$CONFDIR"/AppImages-direct.lst  | cut -f2 -d" ")"
+            DIRECT_IMG="TRUE"
+            GITHUB_IMG="FALSE"
+        fi
     elif grep -qow "$1" "$CONFDIR"/AppImages-github.lst; then # Check AppImages-github.lst for AppImages from github
-        APPIMG_NAME="$(grep -wo "$1" "$CONFDIR"/AppImages-github.lst | cut -f2 -d" ")"
-        DIRECT_IMG="FALSE"
-        GITHUB_IMG="TRUE"
+        if [ "$(grep -wm 1 "$1" "$CONFDIR"/AppImages-github.lst | cut -f2 -d" ")" != "$1" ]; then
+            GITHUB_IMG="FALSE"
+            DIRECT_IMG="FALSE"
+        else
+            APPIMG_NAME="$(grep -wm 1 "$1" "$CONFDIR"/AppImages-github.lst | cut -f2 -d" ")"
+            DIRECT_IMG="FALSE"
+            GITHUB_IMG="TRUE"
+        fi
     else
         DIRECT_IMG="FALSE"
         GITHUB_IMG="FALSE"
@@ -63,8 +72,8 @@ appimgcheckfunc () { # check user input against list of known apps here
 }
 
 appimggithubinfofunc () {
-    GITHUB_APP_URL="$(grep -w "$INSTIMG" "$CONFDIR"/AppImages-github.lst | cut -f3 -d" ")"
-    APPIMG_GITHUB_API_URL="$(grep -w "$INSTIMG" "$CONFDIR"/AppImages-github.lst | cut -f4- -d" ")"
+    GITHUB_APP_URL="$(grep -wm 1 "$INSTIMG" "$CONFDIR"/AppImages-github.lst | cut -f3 -d" ")"
+    APPIMG_GITHUB_API_URL="$(grep -wm 1 "$INSTIMG" "$CONFDIR"/AppImages-github.lst | cut -f4- -d" ")"
     if [ -z "$GITHUB_TOKEN" ]; then
         wget --quiet "$APPIMG_GITHUB_API_URL" -O "$CONFDIR"/cache/"$INSTIMG"-release || { echo "wget $APPIMG_GITHUB_API_URL failed; has the repo been renamed or deleted?"; rm -rf "$CONFDIR"/cache/*; exit 1; }
     else
@@ -110,29 +119,38 @@ appimginfofunc () { # Set variables and temporarily store pages in "$CONFDIR"/ca
 
 appimglistfunc () {
     if [ -f "$CONFDIR"/appimginstalled/"$LISTIMG" ]; then # If installed, list installed info
-        echo "Current installed $LISTIMG information:"
-        cat "$CONFDIR"/appimginstalled/"$LISTIMG"
+        echo "$LISTIMG AppImage installed information:"
+        . "$CONFDIR"/appimginstalled/"$LISTIMG"
+        echo "$(tput bold)Info$(tput sgr0):  $APPIMAGE_DESCRIPTION"
+        echo "$(tput bold)Version$(tput sgr0):  $APPIMAGE_VERSION"
+        echo "$(tput bold)URL$(tput sgr0):  $WEBSITE"
+        echo "$(tput bold)Install dir$(tput sgr0): $BIN_PATH"
+        echo
     else
         INSTIMG="$LISTIMG"
         appimgcheckfunc "$LISTIMG"
         appimginfofunc
-        appimgsaveinfofunc "cache/$LISTIMG.conf"
-        if [ -f "$CONFDIR"/cache/"$LISTIMG".conf ]; then
-            echo "$LISTIMG AppImage information:"
-            cat "$CONFDIR"/cache/"$LISTIMG".conf
-        else # Exit if not in list or installed
-            echo "AppImage not found!"
+        if [ "$GITHUB_IMG" = "TRUE" ] || [ "$DIRECT_IMG" = "TRUE" ]; then
+            appimgsaveinfofunc "cache/$LISTIMG.conf"
+            echo "$(tput bold)$LISTIMG AppImage information$(tput sgr0):"
+            . "$CONFDIR"/cache/"$LISTIMG".conf
+            echo "$(tput bold)Info$(tput sgr0):  $APPIMAGE_DESCRIPTION"
+            echo "$(tput bold)Version$(tput sgr0):  $APPIMAGE_VERSION"
+            echo "$(tput bold)URL$(tput sgr0):  $WEBSITE"
+            echo "$(tput bold)Install dir$(tput sgr0): $BIN_PATH"
+            echo
         fi
     fi
 }
 
 appimglistinstalledfunc () {
-    echo "$(dir -C -w 1 "$CONFDIR"/appimginstalled | wc -l) AppImages installed:"
-    dir -C -w 1 "$CONFDIR"/appimginstalled | pr -tT --column=3 -w 125
-    echo
     for AppImage in $(dir -C -w 1 "$CONFDIR"/appimginstalled); do
-        echo "$AppImage installed information:"
-        cat "$CONFDIR"/appimginstalled/"$AppImage"
+        echo "$(tput bold)$AppImage installed information$(tput sgr0):"
+        . "$CONFDIR"/appimginstalled/"$AppImage"
+        echo "$(tput bold)Info$(tput sgr0):  $APPIMAGE_DESCRIPTION"
+        echo "$(tput bold)Version$(tput sgr0):  $APPIMAGE_VERSION"
+        echo "$(tput bold)URL$(tput sgr0):  $WEBSITE"
+        echo "$(tput bold)Install dir$(tput sgr0): $BIN_PATH"
         echo
     done
 }
@@ -230,7 +248,12 @@ appimgupdatelistfunc () { # Regenerate AppImages-direct.lst from github, downloa
 
 appimgupdateforcefunc () {
     if [ -f "$CONFDIR"/appimginstalled/"$INSTIMG" ]; then # Show AppImage info if installed, exit if not
-        cat "$CONFDIR"/appimginstalled/"$INSTIMG"
+        . "$CONFDIR"/appimginstalled/"$INSTIMG"
+        echo "$(tput bold)Info$(tput sgr0):  $APPIMAGE_DESCRIPTION"
+        echo "$(tput bold)Version$(tput sgr0):  $APPIMAGE_VERSION"
+        echo "$(tput bold)URL$(tput sgr0):  $WEBSITE"
+        echo "$(tput bold)Install dir$(tput sgr0): $BIN_PATH"
+        echo
     else
         echo "AppImage not found!"
         rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
@@ -297,7 +320,7 @@ appimginstallstartfunc () {
         rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
         exit 1
     fi
-    echo "$APPIMAGE_NAME will be installed to /usr/local/bin/$INSTIMG" # Ask user if sure they want to install AppImage
+    echo "AppImage for $APPIMAGE_NAME will be installed." # Ask user if sure they want to install AppImage
     read -p "Continue? Y/N " INSTANSWER
     case $INSTANSWER in
         N*|n*) # If answer is no, exit

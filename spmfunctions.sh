@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.3.3"
+X="0.3.4"
 # Set spm version
 
 helpfunc () { # All unknown arguments come to this function; display help for spm
@@ -185,26 +185,17 @@ upgradestartfunc () {
 
 liststartfunc () {
     if [ -z "$LISTIMG" ]; then # If no AppImage input, list all AppImages
-        echo "AppImages:"
         appimglistallfunc # List all installed and all available AppImages
         echo
-        echo "tar packages:"
         tarlistfunc
     else # If AppImage input, list info for that AppImage
-        if grep -qow "$LISTIMG" "$CONFDIR"/AppImages-github.lst || grep -qow "$LISTIMG" "$CONFDIR"/AppImages-direct.lst; then
-            appimglistfunc # List information about specified AppImage
-            echo
-            ISAPPIMG="TRUE"
+        appimglistfunc
+        echo
+        tarlistfunc
+        if [ "$GITHUB_IMG" != "TRUE" ] && [ "$DIRECT_IMG" != "TRUE" ] && [ "$KNOWN_PKG" != "TRUE" ]; then
+            echo "$LISTIMG not found in package lists!"
         fi
-        if echo "$TAR_LIST" | grep -qow "$TARPKG"; then
-            tarlistfunc
-            echo
-            ISTAR="TRUE"
-        fi
-        if [ -z "$ISAPPIMG" ] && [ -z "$ISTAR" ]; then
-            echo "$LISTIMG not found!"
-            rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
-            exit 1
-        fi
+        rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
+        exit 0
     fi
 }

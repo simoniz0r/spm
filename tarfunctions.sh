@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.3.3"
+X="0.3.4"
 # Set spm version
 TAR_LIST="$(echo -e $(grep '"available"' "$CONFDIR"/tar-pkgs.json | cut -f7 -d" " | tr -d ',"'))"
 
@@ -44,7 +44,6 @@ targithubinfofunc () {
     else
         wget --quiet --auth-no-challenge --header="Authorization: token "$GITHUB_TOKEN"" "$TAR_API_URI" -O "$CONFDIR"/cache/"$TARPKG"-release || { echo "wget $TAR_API_URI failed; is your token valid?"; rm -rf "$CONFDIR"/cache/*; exit 1; }
     fi
-    # TARPKG_INFO="$CONFDIR/cache/$TARPKG-release"
     NEW_TARFILE="$(grep -iv '.*ia32*.\|.*i686*.\|.*i386*.' $CONFDIR/cache/$TARPKG-release | grep -i "$TARPKG" | grep -im 1 '"name":*..*linux*..*.tar.*.' | cut -f4 -d'"')"
     TAR_GITHUB_NEW_COMMIT="$(grep -iv '.*ia32*.\|.*i686*.\|.*i386*.' $CONFDIR/cache/$TARPKG-release  | grep -B 1 -im 1 '"browser_download_url":*..*linux*..*.tar.*.' | cut -f4 -d'"' | head -n 1)"
     TAR_GITHUB_NEW_DOWNLOAD="$(grep -iv '.*ia32*.\|.*i686*.\|.*i386*.' $CONFDIR/cache/$TARPKG-release | grep -i "$TARPKG" | grep -im 1 '"browser_download_url":*..*linux*..*.tar.*.' | cut -f4 -d'"')"
@@ -74,8 +73,11 @@ targithubinfofunc () {
 }
 
 tarappcheckfunc () { # check user input against list of known apps here
-    echo "$TAR_LIST" | grep -qow "$1"
+    echo "$TAR_LIST" | grep -qwm 1 "$1"
     TAR_STATUS="$?"
+    if [ "$(echo "$TAR_LIST" | grep -wm 1 "$1")" != "$1" ]; then
+        TAR_STATUS="1"
+    fi
     case $TAR_STATUS in
         0)
             TARPKG_NAME="$(cat $CONFDIR/tar-pkgs.json | tr '\\' '\n' | grep -iowm 1 "$1" | cut -f2 -d'"')"
@@ -111,34 +113,63 @@ tarappcheckfunc () { # check user input against list of known apps here
 
 tarlistfunc () {
     if [ -z "$TARPKG" ]; then
-        echo "$(dir "$CONFDIR"/tarinstalled | wc -w) installed tar packages:"
-        dir -C -w 1 "$CONFDIR"/tarinstalled | pr -tT --column=3 -w 125
+        echo "$(tput bold)$(echo "$TAR_LIST" | wc -l) tar packages for install$(tput sgr0):"
         echo
-        echo "$(echo "$TAR_LIST" | wc -l) tar packages for install:"
         echo "$TAR_LIST" | pr -tTw 125 -3
     else
         if [ -f "$CONFDIR"/tarinstalled/"$TARPKG" ]; then
-            echo "Current installed $TARPKG information:"
-            cat "$CONFDIR"/tarinstalled/"$TARPKG"
-        elif echo "$TAR_LIST" | grep -qow "$TARPKG"; then
-            echo "$TARPKG tar package information:"
-            tarappcheckfunc "$TARPKG"
-            tarsaveconffunc "cache/$TARPKG.conf"
-            cat "$CONFDIR"/cache/"$TARPKG".conf
+            echo "$(tput bold)$TARPKG tar installed information$(tput sgr0):"
+            . "$CONFDIR"/tarinstalled/"$TARPKG"
+            echo "$(tput bold)Info$(tput sgr0):  $TAR_DESCRIPTION"
+            echo "$(tput bold)Deps$(tput sgr0):  $DEPENDENCIES"
+            if [ -z "$TAR_GITHUB_COMMIT" ]; then
+                echo "$(tput bold)Version$(tput sgr0):  $TARFILE"
+            else
+                echo "$(tput bold)Version$(tput sgr0):  $TAR_GITHUB_COMMIT"
+            fi
+            echo "$(tput bold)Source$(tput sgr0):  $TAR_DOWNLOAD_SOURCE"
+            echo "$(tput bold)URL$(tput sgr0):  $TARURI"
+            echo "$(tput bold)Install dir$(tput sgr0):  $INSTDIR"
+            echo "$(tput bold)Bin path$(tput sgr0):  $BIN_PATH"
+            echo
         else
-            echo "Package not found!"
-            rm -rf "$CONFDIR"/cache/*
+            tarappcheckfunc "$TARPKG"
+            if [ "$KNOWN_TAR" = "TRUE" ]; then
+                echo "$(tput bold)$TARPKG tar package information$(tput sgr0):"
+                tarsaveconffunc "cache/$TARPKG.conf"
+                . "$CONFDIR"/cache/"$TARPKG".conf
+                echo "$(tput bold)Info$(tput sgr0):  $TAR_DESCRIPTION"
+                echo "$(tput bold)Deps$(tput sgr0):  $DEPENDENCIES"
+                if [ -z "$TAR_GITHUB_COMMIT" ]; then
+                    echo "$(tput bold)Version$(tput sgr0):  $TARFILE"
+                else
+                    echo "$(tput bold)Version$(tput sgr0):  $TAR_GITHUB_COMMIT"
+                fi
+                echo "$(tput bold)Source$(tput sgr0):  $TAR_DOWNLOAD_SOURCE"
+                echo "$(tput bold)URL$(tput sgr0):  $TARURI"
+                echo "$(tput bold)Install dir$(tput sgr0):  $INSTDIR"
+                echo "$(tput bold)Bin path$(tput sgr0):  $BIN_PATH"
+                echo
+            fi
         fi
     fi
 }
 
 tarlistinstalledfunc () {
-    echo "$(dir -C -w 1 "$CONFDIR"/tarinstalled | wc -l) tar packages installed:"
-    dir -C -w 1 "$CONFDIR"/tarinstalled | pr -tT --column=3 -w 125
-    echo
     for tarpkg in $(dir -C -w 1 "$CONFDIR"/tarinstalled); do
-        echo "$tarpkg installed information:"
-        cat "$CONFDIR"/tarinstalled/"$tarpkg"
+        echo "$(tput bold)$tarpkg installed information$(tput sgr0):"
+        . "$CONFDIR"/tarinstalled/"$tarpkg"
+        echo "$(tput bold)Info$(tput sgr0):  $TAR_DESCRIPTION"
+        echo "$(tput bold)Deps$(tput sgr0):  $DEPENDENCIES"
+        if [ -z "$TAR_GITHUB_COMMIT" ]; then
+            echo "$(tput bold)Version$(tput sgr0):  $TARFILE"
+        else
+            echo "$(tput bold)Version$(tput sgr0):  $TAR_GITHUB_COMMIT"
+        fi
+        echo "$(tput bold)Source$(tput sgr0):  $TAR_DOWNLOAD_SOURCE"
+        echo "$(tput bold)URL$(tput sgr0):  $TARURI"
+        echo "$(tput bold)Install dir$(tput sgr0):  $INSTDIR"
+        echo "$(tput bold)Bin path$(tput sgr0):  $BIN_PATH"
         echo
     done
 }
@@ -213,7 +244,19 @@ checktarversionfunc () {
 
 tarupdateforcefunc () {
     if [ -f "$CONFDIR"/tarinstalled/"$TARPKG" ]; then
-        cat "$CONFDIR"/tarinstalled/"$TARPKG"
+        . "$CONFDIR"/tarinstalled/"$TARPKG"
+        echo "$(tput bold)Info$(tput sgr0):  $TAR_DESCRIPTION"
+        echo "$(tput bold)Deps$(tput sgr0):  $DEPENDENCIES"
+        if [ -z "$TAR_GITHUB_COMMIT" ]; then
+            echo "$(tput bold)Version$(tput sgr0):  $TARFILE"
+        else
+            echo "$(tput bold)Version$(tput sgr0):  $TAR_GITHUB_COMMIT"
+        fi
+        echo "$(tput bold)Source$(tput sgr0):  $TAR_DOWNLOAD_SOURCE"
+        echo "$(tput bold)URL$(tput sgr0):  $TARURI"
+        echo "$(tput bold)Install dir$(tput sgr0):  $INSTDIR"
+        echo "$(tput bold)Bin path$(tput sgr0):  $BIN_PATH"
+        echo
     else
         echo "Package not found!"
         rm -rf "$CONFDIR"/cache/*
@@ -343,9 +386,7 @@ tarinstallstartfunc () {
         rm -rf "$CONFDIR"/cache/*
         exit 1
     else
-        cat "$CONFDIR"/cache/"$TARPKG".conf
-        echo
-        echo "$TARPKG will be installed to /opt/$TARPKG"
+        echo "Tar for $TARPKG will be installed."
         read -p "Continue? Y/N " INSTANSWER
         case $INSTANSWER in
             N*|n*)
