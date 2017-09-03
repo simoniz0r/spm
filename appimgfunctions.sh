@@ -123,9 +123,10 @@ appimglistfunc () {
         . "$CONFDIR"/appimginstalled/"$LISTIMG"
         echo "$(tput bold)Info$(tput sgr0):  $APPIMAGE_DESCRIPTION"
         if [ -z "$APPIMAGE_NAME" ]; then
-            APPIMAGE_NAME="$APPIMAGE"
+            echo "$(tput bold)Name$(tput sgr0):  $APPIMAGE"
+        else
+            echo "$(tput bold)Name$(tput sgr0):  $APPIMAGE_NAME"
         fi
-        echo "$(tput bold)Name$(tput sgr0):  $APPIMAGE_NAME"
         echo "$(tput bold)Version$(tput sgr0):  $APPIMAGE_VERSION"
         echo "$(tput bold)URL$(tput sgr0):  $WEBSITE"
         echo "$(tput bold)Install dir$(tput sgr0): $BIN_PATH"
@@ -140,9 +141,10 @@ appimglistfunc () {
             . "$CONFDIR"/cache/"$LISTIMG".conf
             echo "$(tput bold)Info$(tput sgr0):  $APPIMAGE_DESCRIPTION"
             if [ -z "$APPIMAGE_NAME" ]; then
-                APPIMAGE_NAME="$APPIMAGE"
+                echo "$(tput bold)Name$(tput sgr0):  $APPIMAGE"
+            else
+                echo "$(tput bold)Name$(tput sgr0):  $APPIMAGE_NAME"
             fi
-            echo "$(tput bold)Name$(tput sgr0):  $APPIMAGE_NAME"
             echo "$(tput bold)Version$(tput sgr0):  $APPIMAGE_VERSION"
             echo "$(tput bold)URL$(tput sgr0):  $WEBSITE"
             echo "$(tput bold)Install dir$(tput sgr0): $BIN_PATH"
@@ -157,9 +159,10 @@ appimglistinstalledfunc () {
         . "$CONFDIR"/appimginstalled/"$AppImage"
         echo "$(tput bold)Info$(tput sgr0):  $APPIMAGE_DESCRIPTION"
         if [ -z "$APPIMAGE_NAME" ]; then
-            APPIMAGE_NAME="$APPIMAGE"
+            echo "$(tput bold)Name$(tput sgr0):  $APPIMAGE"
+        else
+            echo "$(tput bold)Name$(tput sgr0):  $APPIMAGE_NAME"
         fi
-        echo "$(tput bold)Name$(tput sgr0):  $APPIMAGE_NAME"
         echo "$(tput bold)Version$(tput sgr0):  $APPIMAGE_VERSION"
         echo "$(tput bold)URL$(tput sgr0):  $WEBSITE"
         echo "$(tput bold)Install dir$(tput sgr0): $BIN_PATH"
@@ -263,9 +266,10 @@ appimgupdateforcefunc () {
         . "$CONFDIR"/appimginstalled/"$INSTIMG"
         echo "$(tput bold)Info$(tput sgr0):  $APPIMAGE_DESCRIPTION"
         if [ -z "$APPIMAGE_NAME" ]; then
-            APPIMAGE_NAME="$APPIMAGE"
+            echo "$(tput bold)Name$(tput sgr0):  $APPIMAGE"
+        else
+            echo "$(tput bold)Name$(tput sgr0):  $APPIMAGE_NAME"
         fi
-        echo "$(tput bold)Name$(tput sgr0):  $APPIMAGE_NAME"
         echo "$(tput bold)Version$(tput sgr0):  $APPIMAGE_VERSION"
         echo "$(tput bold)URL$(tput sgr0):  $WEBSITE"
         echo "$(tput bold)Install dir$(tput sgr0): $BIN_PATH"
