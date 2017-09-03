@@ -122,6 +122,7 @@ appimglistfunc () {
         echo "$LISTIMG AppImage installed information:"
         . "$CONFDIR"/appimginstalled/"$LISTIMG"
         echo "$(tput bold)Info$(tput sgr0):  $APPIMAGE_DESCRIPTION"
+        echo "$(tput bold)Name$(tput sgr0):  $APPIMAGE_NAME"
         echo "$(tput bold)Version$(tput sgr0):  $APPIMAGE_VERSION"
         echo "$(tput bold)URL$(tput sgr0):  $WEBSITE"
         echo "$(tput bold)Install dir$(tput sgr0): $BIN_PATH"
@@ -135,6 +136,7 @@ appimglistfunc () {
             echo "$(tput bold)$LISTIMG AppImage information$(tput sgr0):"
             . "$CONFDIR"/cache/"$LISTIMG".conf
             echo "$(tput bold)Info$(tput sgr0):  $APPIMAGE_DESCRIPTION"
+            echo "$(tput bold)Name$(tput sgr0):  $APPIMAGE_NAME"
             echo "$(tput bold)Version$(tput sgr0):  $APPIMAGE_VERSION"
             echo "$(tput bold)URL$(tput sgr0):  $WEBSITE"
             echo "$(tput bold)Install dir$(tput sgr0): $BIN_PATH"
@@ -148,6 +150,7 @@ appimglistinstalledfunc () {
         echo "$(tput bold)$AppImage installed information$(tput sgr0):"
         . "$CONFDIR"/appimginstalled/"$AppImage"
         echo "$(tput bold)Info$(tput sgr0):  $APPIMAGE_DESCRIPTION"
+        echo "$(tput bold)Name$(tput sgr0):  $APPIMAGE_NAME"
         echo "$(tput bold)Version$(tput sgr0):  $APPIMAGE_VERSION"
         echo "$(tput bold)URL$(tput sgr0):  $WEBSITE"
         echo "$(tput bold)Install dir$(tput sgr0): $BIN_PATH"
@@ -250,6 +253,7 @@ appimgupdateforcefunc () {
     if [ -f "$CONFDIR"/appimginstalled/"$INSTIMG" ]; then # Show AppImage info if installed, exit if not
         . "$CONFDIR"/appimginstalled/"$INSTIMG"
         echo "$(tput bold)Info$(tput sgr0):  $APPIMAGE_DESCRIPTION"
+        echo "$(tput bold)Name$(tput sgr0):  $APPIMAGE_NAME"
         echo "$(tput bold)Version$(tput sgr0):  $APPIMAGE_VERSION"
         echo "$(tput bold)URL$(tput sgr0):  $WEBSITE"
         echo "$(tput bold)Install dir$(tput sgr0): $BIN_PATH"
