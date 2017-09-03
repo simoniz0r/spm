@@ -49,7 +49,7 @@ sed -i 's%sharexin ShareXin https://github.com/ShareXin/ShareXin/releases https:
 sed -i 's%nteract nteract https://github.com/nteract/releases https://api.github.com/repos/nteract/releases%nteract nteract https://github.com/nteract/nteract/releases https://api.github.com/repos/nteract/nteract/releases%g' /home/$USER/github/spm/AppImages-github.lst # Fix broken link
 sed -i 's%vlc VLC https://github.com/darealshinji/releases https://api.github.com/repos/darealshinji/releases%%g' /home/$USER/github/spm/AppImages-github.lst # Remove broken link
 sed -i '/^$/d' /home/$USER/github/spm/AppImages-github.lst # Remove blank lines
-echo "discord discord https://github.com/simoniz0r/AppImages/releases https://api.github.com/repos/simoniz0r/AppImages/releases" >> /home/$USER/github/spm/AppImages-github.lst
+echo "discord-stable discord-stable https://github.com/simoniz0r/AppImages/releases https://api.github.com/repos/simoniz0r/AppImages/releases" >> /home/$USER/github/spm/AppImages-github.lst
 echo "discord-ptb discord-ptb https://github.com/simoniz0r/AppImages/releases https://api.github.com/repos/simoniz0r/AppImages/releases" >> /home/$USER/github/spm/AppImages-github.lst
 echo "discord-canary discord-canary https://github.com/simoniz0r/AppImages/releases https://api.github.com/repos/simoniz0r/AppImages/releases" >> /home/$USER/github/spm/AppImages-github.lst
 echo "discord-toolbox discord-toolbox https://github.com/simoniz0r/DiscordToolbox/releases https://api.github.com/repos/simoniz0r/DiscordToolbox/releases" >> /home/$USER/github/spm/AppImages-github.lst
