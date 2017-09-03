@@ -124,7 +124,7 @@
         "apiuri": "https://api.github.com/repos/simoniz0r/gpgpassman/releases",
         "desktop_file_path": "/opt/gpgpassman/gpgpassman.desktop",
         "icon_file_path": "/opt/gpgpassman/gpgpassman.png",
-        "executable_file_path": "/opt/gpgpassman/gpgpassman",
+        "executable_file_path": "/opt/gpgpassman/gpgpassman.sh",
         "bin_path": "/usr/local/bin/gpgpassman",
         "config_path": "$HOME/.config/gpgpassman",
         "description": "A password manager that uses gpg to encrypt and decrypt passwords. Can be ran in CLI mode or in GUI mode using zenity.",
