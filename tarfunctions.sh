@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.3.4"
+X="0.3.5"
 # Set spm version
 TAR_LIST="$(echo -e $(grep '"available"' "$CONFDIR"/tar-pkgs.json | cut -f7 -d" " | tr -d ',"'))"
 
@@ -150,6 +150,8 @@ tarlistfunc () {
                 echo "$(tput bold)Install dir$(tput sgr0):  $INSTDIR"
                 echo "$(tput bold)Bin path$(tput sgr0):  $BIN_PATH"
                 echo
+            else
+                TARPKG_NOT_FOUND="TRUE"
             fi
         fi
     fi

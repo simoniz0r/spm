@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.3.4"
+X="0.3.5"
 # Set spm version
 
 helpfunc () { # All unknown arguments come to this function; display help for spm
@@ -192,7 +192,7 @@ liststartfunc () {
         appimglistfunc
         echo
         tarlistfunc
-        if [ "$GITHUB_IMG" != "TRUE" ] && [ "$DIRECT_IMG" != "TRUE" ] && [ "$KNOWN_PKG" != "TRUE" ]; then
+        if [ "$APPIMG_NOT_FOUND" = "TRUE" ] && [ "$TARPKG_NOT_FOUND" = "TRUE" ]; then
             echo "$LISTIMG not found in package lists!"
         fi
         rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting

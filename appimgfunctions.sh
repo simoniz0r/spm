@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.3.4"
+X="0.3.5"
 # Set spm version
 
 # Set variables
@@ -149,6 +149,8 @@ appimglistfunc () {
             echo "$(tput bold)URL$(tput sgr0):  $WEBSITE"
             echo "$(tput bold)Install dir$(tput sgr0): $BIN_PATH"
             echo
+        else
+            APPIMG_NOT_FOUND="TRUE"
         fi
     fi
 }
@@ -318,7 +320,7 @@ appimginstallstartfunc () {
         rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
         exit 1
     fi
-    if type >/dev/null 2>&1 "$INSTIMG"; then # If a command by the same name as AppImage already exists on user's system, exit
+    if type >/dev/null 2>&1 "$INSTIMG" && [ "$INSTIMG" != "spm" ]; then # If a command by the same name as AppImage already exists on user's system, exit
         echo "$INSTIMG is already installed and not managed by spm; exiting..."
         rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
         exit 1
