@@ -48,7 +48,7 @@ appimglistallfunc () {
 
 appimgcheckfunc () { # check user input against list of known apps here
     if grep -qow "$1" "$CONFDIR"/AppImages-direct.lst; then # Check AppImages-direct.lst for AppImages from Direct
-        if [ "$(grep -wm 1 "$1" "$CONFDIR"/AppImages-direct.lst | cut -f2 -d" ")" != "$1" ]; then
+        if [ "$(grep -wm 1 "$1" "$CONFDIR"/AppImages-direct.lst | cut -f1 -d" ")" != "$1" ]; then
             GITHUB_IMG="FALSE"
             DIRECT_IMG="FALSE"
         else
@@ -57,7 +57,7 @@ appimgcheckfunc () { # check user input against list of known apps here
             GITHUB_IMG="FALSE"
         fi
     elif grep -qow "$1" "$CONFDIR"/AppImages-github.lst; then # Check AppImages-github.lst for AppImages from github
-        if [ "$(grep -wm 1 "$1" "$CONFDIR"/AppImages-github.lst | cut -f2 -d" ")" != "$1" ]; then
+        if [ "$(grep -wm 1 "$1" "$CONFDIR"/AppImages-github.lst | cut -f1 -d" ")" != "$1" ]; then
             GITHUB_IMG="FALSE"
             DIRECT_IMG="FALSE"
         else
