@@ -38,8 +38,8 @@ devination devination https://github.com/devination-docs/devination/releases htt
 devrantron devRantron https://github.com/tahnik/devRantron/releases https://api.github.com/repos/tahnik/devRantron/releases
 dexter_dev_env dexter_dev_env https://github.com/cfry/dde/releases https://api.github.com/repos/cfry/dde/releases
 discord-canary discord-canary https://github.com/simoniz0r/AppImages/releases https://api.github.com/repos/simoniz0r/AppImages/releases
-discord discord https://github.com/simoniz0r/AppImages/releases https://api.github.com/repos/simoniz0r/AppImages/releases
 discord-ptb discord-ptb https://github.com/simoniz0r/AppImages/releases https://api.github.com/repos/simoniz0r/AppImages/releases
+discord-stable discord-stable https://github.com/simoniz0r/AppImages/releases https://api.github.com/repos/simoniz0r/AppImages/releases
 discord-toolbox discord-toolbox https://github.com/simoniz0r/DiscordToolbox/releases https://api.github.com/repos/simoniz0r/DiscordToolbox/releases
 donut donut https://github.com/harshjv/donut/releases https://api.github.com/repos/harshjv/donut/releases
 electron-webpack-dashboard electron-webpack-dashboard https://github.com/FormidableLabs/electron-webpack-dashboard/releases https://api.github.com/repos/FormidableLabs/electron-webpack-dashboard/releases
