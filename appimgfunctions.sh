@@ -122,6 +122,9 @@ appimglistfunc () {
         echo "$LISTIMG AppImage installed information:"
         . "$CONFDIR"/appimginstalled/"$LISTIMG"
         echo "$(tput bold)Info$(tput sgr0):  $APPIMAGE_DESCRIPTION"
+        if [ -z "$APPIMAGE_NAME" ]; then
+            APPIMAGE_NAME="$APPIMAGE"
+        fi
         echo "$(tput bold)Name$(tput sgr0):  $APPIMAGE_NAME"
         echo "$(tput bold)Version$(tput sgr0):  $APPIMAGE_VERSION"
         echo "$(tput bold)URL$(tput sgr0):  $WEBSITE"
@@ -136,6 +139,9 @@ appimglistfunc () {
             echo "$(tput bold)$LISTIMG AppImage information$(tput sgr0):"
             . "$CONFDIR"/cache/"$LISTIMG".conf
             echo "$(tput bold)Info$(tput sgr0):  $APPIMAGE_DESCRIPTION"
+            if [ -z "$APPIMAGE_NAME" ]; then
+                APPIMAGE_NAME="$APPIMAGE"
+            fi
             echo "$(tput bold)Name$(tput sgr0):  $APPIMAGE_NAME"
             echo "$(tput bold)Version$(tput sgr0):  $APPIMAGE_VERSION"
             echo "$(tput bold)URL$(tput sgr0):  $WEBSITE"
@@ -150,6 +156,9 @@ appimglistinstalledfunc () {
         echo "$(tput bold)$AppImage installed information$(tput sgr0):"
         . "$CONFDIR"/appimginstalled/"$AppImage"
         echo "$(tput bold)Info$(tput sgr0):  $APPIMAGE_DESCRIPTION"
+        if [ -z "$APPIMAGE_NAME" ]; then
+            APPIMAGE_NAME="$APPIMAGE"
+        fi
         echo "$(tput bold)Name$(tput sgr0):  $APPIMAGE_NAME"
         echo "$(tput bold)Version$(tput sgr0):  $APPIMAGE_VERSION"
         echo "$(tput bold)URL$(tput sgr0):  $WEBSITE"
@@ -253,6 +262,9 @@ appimgupdateforcefunc () {
     if [ -f "$CONFDIR"/appimginstalled/"$INSTIMG" ]; then # Show AppImage info if installed, exit if not
         . "$CONFDIR"/appimginstalled/"$INSTIMG"
         echo "$(tput bold)Info$(tput sgr0):  $APPIMAGE_DESCRIPTION"
+        if [ -z "$APPIMAGE_NAME" ]; then
+            APPIMAGE_NAME="$APPIMAGE"
+        fi
         echo "$(tput bold)Name$(tput sgr0):  $APPIMAGE_NAME"
         echo "$(tput bold)Version$(tput sgr0):  $APPIMAGE_VERSION"
         echo "$(tput bold)URL$(tput sgr0):  $WEBSITE"
