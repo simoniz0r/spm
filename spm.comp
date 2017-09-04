@@ -21,10 +21,10 @@ _spm () {
     *)
         case $words[2] in
         -l)
-            compadd "$@"  $(cat ~/.config/spm/AppImages-github.lst | cut -f1 -d" " | tr '\n' ' ') $(echo -e $(grep '"available"' ~/.config/spm/tar-pkgs.json | cut -f7 -d" " | tr -d ',"'))
+            compadd "$@"  $(cat ~/.config/spm/AppImages-github.lst | cut -f1 -d" " | tr '\n' ' ') $(cat ~/.config/spm/AppImages-direct.lst | cut -f1 -d" " | tr '\n' ' ') $(echo -e $(grep '"available"' ~/.config/spm/tar-pkgs.json | cut -f7 -d" " | tr -d ',"'))
             ;;
         -ai)
-            compadd "$@" $(cat ~/.config/spm/AppImages-github.lst | cut -f1 -d" " | tr '\n' ' ')
+            compadd "$@" $(cat ~/.config/spm/AppImages-github.lst | cut -f1 -d" " | tr '\n' ' ') $(cat ~/.config/spm/AppImages-direct.lst | cut -f1 -d" " | tr '\n' ' ')
             ;;
         -ti)
             compadd "$@" $(echo -e $(grep '"available"' ~/.config/spm/tar-pkgs.json | cut -f7 -d" " | tr -d ',"'))
