@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.3.5"
+X="0.3.6"
 # Set spm version
 
 # Set variables
@@ -98,14 +98,16 @@ appimggithubinfofunc () {
 
 appimgdirectinfofunc () {
     DIRECT_APPIMAGE_URL="$(grep -w "$INSTIMG" "$CONFDIR"/AppImages-direct.lst | cut -f3- -d" ")"
-    echo "$INSTIMG version cannot be tracked reliably (direct download)."
+    wget -S --read-timeout=30 --spider "$DIRECT_APPIMAGE_URL" -o "$CONFDIR"/cache/"$INSTIMG".latest
+    NEW_APPIMAGE_VERSION="$(grep -o "Location:.*" "$CONFDIR"/cache/"$INSTIMG".latest | cut -f2 -d" ")"
+    NEW_APPIMAGE_VERSION="${NEW_APPIMAGE_VERSION##*/}"
+    APPIMAGE_DESCRIPTION="$DIRECT_APPIMAGE_URL"
+    if [ -z "$NEW_APPIMAGE_VERSION" ]; then
+        NEW_APPIMAGE_VERSION="Cannot check version; upgrades will have to be forced"
+    fi
+    APPIMAGE_NAME="$NEW_APPIMAGE_VERSION"
     if [ -f "$CONFDIR"/appimginstalled/"$INSTIMG" ]; then
         . "$CONFDIR"/appimginstalled/"$INSTIMG"
-        APPIMAGE_NAME="$APPIMAGE"
-        NEW_APPIMAGE_VERSION="$APPIMAGE_VERSION"
-    else
-        APPIMAGE_NAME="${DIRECT_APPIMAGE_URL##*/}"
-        NEW_APPIMAGE_VERSION="$APPIMAGE_NAME"
     fi
 }
 
