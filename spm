@@ -164,8 +164,18 @@ case $1 in
         REMIMG="$2"
         if [ -f "$CONFDIR"/appimginstalled/"$REMIMG" ]; then
             echo "Current installed $REMIMG information:"
-            cat "$CONFDIR"/appimginstalled/"$REMIMG"
-        else
+            . "$CONFDIR"/appimginstalled/"$REMIMG"
+            echo "$(tput bold)Info$(tput sgr0):  $APPIMAGE_DESCRIPTION"
+            if [ -z "$APPIMAGE_NAME" ]; then
+                echo "$(tput bold)Name$(tput sgr0):  $APPIMAGE"
+            else
+                echo "$(tput bold)Name$(tput sgr0):  $APPIMAGE_NAME"
+            fi
+            echo "$(tput bold)Version$(tput sgr0):  $APPIMAGE_VERSION"
+            echo "$(tput bold)URL$(tput sgr0):  $WEBSITE"
+            echo "$(tput bold)Install dir$(tput sgr0): $BIN_PATH"
+            echo
+            else
             echo "AppImage not found!"
             rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
             exit 1
@@ -183,7 +193,19 @@ case $1 in
         REMPKG="$2"
         if [ -f "$CONFDIR"/tarinstalled/"$REMPKG" ]; then
             echo "Current installed $REMPKG information:"
-            cat "$CONFDIR"/tarinstalled/"$REMPKG"
+            . "$CONFDIR"/tarinstalled/"$REMPKG"
+            echo "$(tput bold)Info$(tput sgr0):  $TAR_DESCRIPTION"
+            echo "$(tput bold)Deps$(tput sgr0):  $DEPENDENCIES"
+            if [ -z "$TAR_GITHUB_COMMIT" ]; then
+                echo "$(tput bold)Version$(tput sgr0):  $TARFILE"
+            else
+                echo "$(tput bold)Version$(tput sgr0):  $TAR_GITHUB_COMMIT"
+            fi
+            echo "$(tput bold)Source$(tput sgr0):  $TAR_DOWNLOAD_SOURCE"
+            echo "$(tput bold)URL$(tput sgr0):  $TARURI"
+            echo "$(tput bold)Install dir$(tput sgr0):  $INSTDIR"
+            echo "$(tput bold)Bin path$(tput sgr0):  $BIN_PATH"
+            echo
         else
             echo "Package not found!"
             rm -rf "$CONFDIR"/cache/*
@@ -203,7 +225,19 @@ case $1 in
         PURGEPKG="$2"
         echo "Current installed $PURGEPKG information:"
         if [ -f "$CONFDIR"/tarinstalled/"$PURGEPKG" ]; then
-            cat "$CONFDIR"/tarinstalled/"$PURGEPKG"
+            . "$CONFDIR"/tarinstalled/"$PURGEPKG"
+            echo "$(tput bold)Info$(tput sgr0):  $TAR_DESCRIPTION"
+            echo "$(tput bold)Deps$(tput sgr0):  $DEPENDENCIES"
+            if [ -z "$TAR_GITHUB_COMMIT" ]; then
+                echo "$(tput bold)Version$(tput sgr0):  $TARFILE"
+            else
+                echo "$(tput bold)Version$(tput sgr0):  $TAR_GITHUB_COMMIT"
+            fi
+            echo "$(tput bold)Source$(tput sgr0):  $TAR_DOWNLOAD_SOURCE"
+            echo "$(tput bold)URL$(tput sgr0):  $TARURI"
+            echo "$(tput bold)Install dir$(tput sgr0):  $INSTDIR"
+            echo "$(tput bold)Bin path$(tput sgr0):  $BIN_PATH"
+            echo
         else
             echo "Package not found!"
             rm -rf "$CONFDIR"/cache/*
