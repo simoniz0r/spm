@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.3.6"
+X="0.3.7"
 # Set spm version
 
 helpfunc () { # All unknown arguments come to this function; display help for spm
@@ -21,6 +21,7 @@ also be used to upgrade and remove packages installed by spm.
 Arguments:
     list (-l) - list all installed packages and all packages known by spm or info about the specified package
     list-installed (-li) - list all installed packages and install info
+    search (-s) - search package lists for packages matching input
     appimg-install (-ai) - install an AppImage
     tar-install (-ti) - install a precompiled tar archive
     appimg-remove (-ar) - remove an installed AppImage

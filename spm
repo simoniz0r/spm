@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.3.6"
+X="0.3.7"
 # Set spm version
 CONFDIR="$HOME/.config/spm"
 SKIP_DEP_CHECKS="FALSE"
@@ -269,6 +269,25 @@ case $1 in
         echo "$(tput bold)$(dir -C -w 1 "$CONFDIR"/tarinstalled | wc -l) tar packages installed$(tput sgr0):"
         dir -C -w 1 "$CONFDIR"/tarinstalled | pr -tT --column=3 -w 125
         echo
+        rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
+        exit 0
+        ;;
+    search|-s)
+        if cat "$CONFDIR"/AppImages-github.lst | cut -f1 -d" " | grep -q "$2"; then
+            echo "Github AppImage(s):"
+            cat "$CONFDIR"/AppImages-github.lst | cut -f1 -d" " | grep "$2"
+            echo
+        fi
+        if cat "$CONFDIR"/AppImages-direct.lst | cut -f1 -d" " | grep -q "$2"; then
+            echo "Direct AppImage(s):"
+            cat "$CONFDIR"/AppImages-direct.lst | cut -f1 -d" " | grep "$2"
+            echo
+        fi
+        if echo "$TAR_LIST" | grep -q "$2"; then
+            echo "tar package(s):"
+            echo "$TAR_LIST" | grep "$2"
+            echo
+        fi
         rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
         exit 0
         ;;
