@@ -316,7 +316,7 @@ appimginstallfunc () { # chmod and mv AppImages to /usr/local/bin and create fil
 }
 
 appimginstallstartfunc () {
-    if [ -f "$CONFDIR"/tarinstalled/"$TARPKG" ] || [ -f "$CONFDIR"/appimginstalled/"$TARPKG" ]; then # Exit if already installed by spm
+    if [ -f "$CONFDIR"/tarinstalled/"$INSTIMG" ] || [ -f "$CONFDIR"/appimginstalled/"$INSTIMG" ]; then # Exit if already installed by spm
         echo "$INSTIMG is already installed."
         echo "Use 'spm update' to check for a new version of $INSTIMG."
         rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
