@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.3.7"
+X="0.3.8"
 # Set spm version
 
 # Set variables
@@ -344,11 +344,12 @@ appimginstallstartfunc () {
         rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
         exit 1
     fi
-    echo "AppImage for $APPIMAGE_NAME will be installed." # Ask user if sure they want to install AppImage
+    echo "AppImage: $APPIMAGE_NAME"
+    echo "AppImage for $INSTIMG will be installed." # Ask user if sure they want to install AppImage
     read -p "Continue? Y/N " INSTANSWER
     case $INSTANSWER in
         N*|n*) # If answer is no, exit
-            echo "$APPIMAGE_NAME was not installed."
+            echo "$INSTIMG was not installed."
             rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
             exit 0
             ;;
