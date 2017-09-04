@@ -11,7 +11,7 @@
 .Nm (simple package manager)
 .Sh SYNOPSIS             
 .Nm
-.Op Fl l,li,ai,ti,ar,tr,upd,auf,tuf,upg              
+.Op Fl l,li,s,ai,ti,ar,tr,upd,auf,tuf,upg              
 .Op Ar package     
 .Sh DESCRIPTION          
 .Nm
@@ -31,6 +31,8 @@ used to upgrade and remove packages installed by spm.
 list all installed packages and all packages known by spm or info about the specified package
 .It list-installed (-li)
 list all installed packages and install info
+.It search (-s)
+search package lists for packages matching input
 .It appimg-install (-ai)
 install an AppImage
 .It tar-install (-ti)
