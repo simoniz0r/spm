@@ -74,5 +74,6 @@ tagflow TagFlow http://www.tagflow.io/download/linux/appimage/64
 taisei taisei http://download.opensuse.org/repositories/home:/lachs0r:/taisei/AppImage/taisei-latest-x86_64.AppImage
 texstudio TeXstudio https://dl.bintray.com/unruhschuh/AppImages/TeXstudio-2.10.8-x86_64.AppImage
 tubcloud tubCloud https://updates.tubcloud.tu-berlin.de/clients/linux/64/tubCloud-latest.x86_64.AppImage
+voltra Voltra https://s3.amazonaws.com/download.voltra.co/Voltra-3.1.4-x86_64.AppImage
 xlights xlights https://www.adebenham.com/wp-content/uploads/xlights/xLights-2017.23.glibc2.17-x86_64.AppImage
 xnviewmp XnViewMP http://download.xnview.com/XnViewMP.glibc2.14-x86_64.AppImage
