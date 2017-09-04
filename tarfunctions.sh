@@ -366,7 +366,7 @@ tarinstallfunc () {
 }
 
 tarinstallstartfunc () {
-    if [ -f "$CONFDIR"/tarinstalled/"$TARPKG" ]; then
+    if [ -f "$CONFDIR"/tarinstalled/"$TARPKG" ] || [ -f "$CONFDIR"/appimginstalled/"$TARPKG" ]; then # Exit if already installed by spm
         echo "$TARPKG is already installed."
         echo "Use 'spm upgrade' to install the latest version of $TARPKG."
         rm -rf "$CONFDIR"/cache/*
@@ -384,7 +384,7 @@ tarinstallstartfunc () {
     fi
     tarappcheckfunc "$TARPKG"
     if [ "$KNOWN_TAR" = "FALSE" ];then
-        echo "$TARPKG is not in tar-pkgs.json; Try running 'spm update' to update tar-pkgs.json."
+        echo "$TARPKG is not in tar-pkgs.json; try running 'spm update' to update tar-pkgs.json."
         rm -rf "$CONFDIR"/cache/*
         exit 1
     else
