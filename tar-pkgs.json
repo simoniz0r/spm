@@ -1,5 +1,5 @@
 {
-    "available" : "atom\ndiscord-canary\ndiscord-ptb\ndiscord-stable\ndiscord-toolbox\nfirefox-beta\nfirefox-dev\nfirefox-nightly\nfirefox\ngpgpassman\nkaku\nnvim\nopenrct2\nopenttd\nrambox\nspm\nvscode\nwavebox\nxdgfetch\nyad-mpv\nyad-twitch-streamlink\nyadshot",
+    "available" : "atom\ndiscord-canary\ndiscord-ptb\ndiscord-stable\ndiscord-toolbox\nfirefox-beta\nfirefox-dev\nfirefox-nightly\nfirefox\ngpgpassman\nkaku\nnvim\nopenrct2\nopenttd\nrambox\nspm\ntodo\nvscode\nwavebox\nxdgfetch\nyad-mpv\nyad-twitch-streamlink\nyadshot",
     "atom": {
         "instdir": "/opt/atom",
         "download_source": "GITHUB",
@@ -207,6 +207,19 @@
         "config_path": "$HOME/.config/spm",
         "description": "spm is a simple commandline package manager that installs AppImages and precompiled tar archives.  Install this tar to be able to use spm as a command and to allow spm to upgrade itself.",
         "dependencies": "coreutils tar wget python3.x"
+    },
+    "todo": {
+        "instdir": "/opt/todo",
+        "download_source": "GITHUB",
+        "taruri": "https://github.com/simoniz0r/todo/releases",
+        "apiuri": "https://api.github.com/repos/simoniz0r/todo/releases",
+        "desktop_file_path": "NONE",
+        "icon_file_path": "NONE",
+        "executable_file_path": "/opt/todo/todo.sh",
+        "bin_path": "/usr/local/bin/todo",
+        "config_path": "",
+        "description": "todo manages todo lists in an easy to use manner. Lists are stored in ~/.todo/ListName with each item in the list stored as a separate file in that directory.",
+        "dependencies": "coreutils"
     },
     "vscode": {
         "instdir": "/opt/vscode",
