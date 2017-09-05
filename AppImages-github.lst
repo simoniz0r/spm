@@ -109,6 +109,7 @@ onshape Onshape https://github.com/develar/onshape-desktop-shell/releases https:
 openblok OpenBlok https://github.com/mmatyas/openblok/releases https://api.github.com/repos/mmatyas/openblok/releases
 openshot OpenShot http://github.com/OpenShot/openshot-qt/releases https://api.github.com/repos/OpenShot/openshot-qt/releases
 otpmanager OTPManager https://github.com/Adpa18/OTPManager-build/releases https://api.github.com/repos/Adpa18/OTPManager-build/releases
+p2p-chat p2p-chat https://github.com/dgeibi/p2p-chat/releases https://api.github.com/repos/dgeibi/p2p-chat/releases
 packetsender PacketSender https://github.com/dannagle/PacketSender/releases https://api.github.com/repos/dannagle/PacketSender/releases
 patternpaint PatternPaint https://github.com/Blinkinlabs/PatternPaint/releases https://api.github.com/repos/Blinkinlabs/PatternPaint/releases
 pb-for-desktop pb-for-desktop https://github.com/sidneys/pb-for-desktop/releases https://api.github.com/repos/sidneys/pb-for-desktop/releases
@@ -189,6 +190,7 @@ whatsdesktop WhatsDesktop https://github.com/mawie81/whatsdesktop/releases https
 whiteboard whiteboard https://github.com/michaelpb/whiteboard/releases https://api.github.com/repos/michaelpb/whiteboard/releases
 wire Wire https://github.com/wireapp/wire-desktop/releases https://api.github.com/repos/wireapp/wire-desktop/releases
 workflowy WorkFlowy https://github.com/workflowy/desktop/releases https://api.github.com/repos/workflowy/desktop/releases
+x32-mute-matrix x32-mute-matrix https://github.com/Lange/x32-mute-matrix/releases https://api.github.com/repos/Lange/x32-mute-matrix/releases
 xde xde https://github.com/expo/xde/releases https://api.github.com/repos/expo/xde/releases
 xdgfetch xdgfetch https://github.com/simoniz0r/xdgfetch/releases https://api.github.com/repos/simoniz0r/xdgfetch/releases
 zulip-electron zulip-electron https://github.com/zulip/zulip-electron/releases https://api.github.com/repos/zulip/zulip-electron/releases
