@@ -73,18 +73,19 @@ targithubinfofunc () {
 }
 
 tarappcheckfunc () { # check user input against list of known apps here
-    echo "$TAR_LIST" | grep -qwm 1 "$1"
-    TAR_STATUS="$?"
-    if [ "$(echo "$TAR_LIST" | grep -wm 1 "$1")" != "$1" ]; then
-        TAR_STATUS="1"
+    # echo "$TAR_LIST" | grep -qwm 1 "$1"
+    # TAR_STATUS="$?"
+    if [ "$(echo "$TAR_LIST" | grep -wm 1 "$1")" = "$1" ]; then
+        KNOWN_TAR="TRUE"
+    else
+        KNOWN_TAR="FALSE"
     fi
-    case $TAR_STATUS in
-        0)
+    case $KNOWN_TAR in
+        TRUE)
             TARPKG_NAME="$(cat $CONFDIR/tar-pkgs.json | tr '\\' '\n' | grep -iowm 1 "$1" | cut -f2 -d'"')"
             if [ ! -z "$DOWNLOAD_SOURCE" ]; then
                 TAR_DOWNLOAD_SOURCE="$DOWNLOAD_SOURCE"
             fi
-            KNOWN_TAR="TRUE"
             INSTDIR="$(grep -w -A 11 "\"$TARPKG_NAME\"" "$CONFDIR"/tar-pkgs.json | grep -w '"instdir"' | cut -f4 -d'"')"
             TAR_DOWNLOAD_SOURCE="$(grep -w -A 11 "\"$TARPKG_NAME\"" "$CONFDIR"/tar-pkgs.json | grep -w '"download_source"' | cut -f4 -d'"')"
             TARURI="$(grep -w -A 11 "\"$TARPKG_NAME\"" "$CONFDIR"/tar-pkgs.json | grep -w '"taruri"' | cut -f4 -d'"')"
@@ -101,12 +102,6 @@ tarappcheckfunc () { # check user input against list of known apps here
             else
                 tarsaveconffunc "cache/$TARPKG_NAME.conf"
             fi
-            ;;
-        *)
-            if [ -f "$CONFDIR"/tarinstalled/$1 ]; then
-                . "$CONFDIR"/tarinstalled/$1
-            fi
-            KNOWN_TAR="FALSE"
             ;;
     esac
 }

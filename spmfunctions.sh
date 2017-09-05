@@ -90,7 +90,7 @@ spmlockfunc () {
     if [ ! -f "$CONFDIR"/cache/spm.lock ]; then # Create "$CONFDIR"/cache/spm.lock file and prevent multiple instances by checking if it exists before running
         touch "$CONFDIR"/cache/spm.lock
     else
-        echo "spm.lock file is still present.  Are you sure spm isn't running?"
+        echo "spm.lock file is still present.  Did spm exit correctly?  Are you sure spm isn't running?"
         read -p "Remove spm.lock file and run spm? Y/N " LOCKANSWER
         case $LOCKANSWER in
             n*|N*)

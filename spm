@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -e
 # Title: spm
 # Description: Downloads and installs AppImages and precompiled tar archives.  Can also upgrade and remove installed packages.
 # Dependencies: GNU coreutils, tar, wget
@@ -163,7 +163,7 @@ case $1 in
         fi
         REMIMG="$2"
         if [ -f "$CONFDIR"/appimginstalled/"$REMIMG" ]; then
-            echo "Current installed $REMIMG information:"
+            echo "$(tput bold)Current installed $REMIMG information$(tput sgr0):"
             . "$CONFDIR"/appimginstalled/"$REMIMG"
             echo "$(tput bold)Info$(tput sgr0):  $APPIMAGE_DESCRIPTION"
             if [ -z "$APPIMAGE_NAME" ]; then
@@ -192,7 +192,7 @@ case $1 in
         fi
         REMPKG="$2"
         if [ -f "$CONFDIR"/tarinstalled/"$REMPKG" ]; then
-            echo "Current installed $REMPKG information:"
+            echo "$(tput bold)Current installed $REMPKG information$(tput sgr0):"
             . "$CONFDIR"/tarinstalled/"$REMPKG"
             echo "$(tput bold)Info$(tput sgr0):  $TAR_DESCRIPTION"
             echo "$(tput bold)Deps$(tput sgr0):  $DEPENDENCIES"
@@ -223,7 +223,7 @@ case $1 in
             exit 1
         fi
         PURGEPKG="$2"
-        echo "Current installed $PURGEPKG information:"
+        echo "$(tput bold)Current installed $PURGEPKG information$(tput sgr0):"
         if [ -f "$CONFDIR"/tarinstalled/"$PURGEPKG" ]; then
             . "$CONFDIR"/tarinstalled/"$PURGEPKG"
             echo "$(tput bold)Info$(tput sgr0):  $TAR_DESCRIPTION"
@@ -274,17 +274,17 @@ case $1 in
         ;;
     search|-s)
         if cat "$CONFDIR"/AppImages-github.lst | cut -f1 -d" " | grep -q "$2"; then
-            echo "Github AppImage(s):"
+            echo "$(tput bold)Github AppImage(s)$(tput sgr0):"
             cat "$CONFDIR"/AppImages-github.lst | cut -f1 -d" " | grep "$2"
             echo
         fi
         if cat "$CONFDIR"/AppImages-direct.lst | cut -f1 -d" " | grep -q "$2"; then
-            echo "Direct AppImage(s):"
+            echo "$(tput bold)Direct AppImage(s)$(tput sgr0):"
             cat "$CONFDIR"/AppImages-direct.lst | cut -f1 -d" " | grep "$2"
             echo
         fi
         if echo "$TAR_LIST" | grep -q "$2"; then
-            echo "tar package(s):"
+            echo "$(tput bold)tar package(s)$(tput sgr0):"
             echo "$TAR_LIST" | grep "$2"
             echo
         fi
