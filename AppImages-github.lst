@@ -42,6 +42,7 @@ discord-ptb discord-ptb https://github.com/simoniz0r/AppImages/releases https://
 discord-stable discord-stable https://github.com/simoniz0r/AppImages/releases https://api.github.com/repos/simoniz0r/AppImages/releases
 discord-toolbox discord-toolbox https://github.com/simoniz0r/DiscordToolbox/releases https://api.github.com/repos/simoniz0r/DiscordToolbox/releases
 donut donut https://github.com/harshjv/donut/releases https://api.github.com/repos/harshjv/donut/releases
+electorrent Electorrent https://github.com/Tympanix/Electorrent/releases https://api.github.com/repos/Tympanix/Electorrent/releases
 electron-webpack-dashboard electron-webpack-dashboard https://github.com/FormidableLabs/electron-webpack-dashboard/releases https://api.github.com/repos/FormidableLabs/electron-webpack-dashboard/releases
 emacs Emacs https://github.com/probonopd/Emacs.AppImage/releases https://api.github.com/repos/probonopd/Emacs.AppImage/releases
 embedded-ide embedded-ide https://github.com/martinribelotta/embedded-ide/releases https://api.github.com/repos/martinribelotta/embedded-ide/releases
