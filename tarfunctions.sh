@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.3.8"
+X="0.3.9"
 # Set spm version
 TAR_LIST="$(echo -e $(grep '"available"' "$CONFDIR"/tar-pkgs.json | cut -f7 -d" " | tr -d ',"'))"
 
@@ -158,7 +158,7 @@ tarlistinstalledfunc () { # List info about installed tar packages
         . "$CONFDIR"/tarinstalled/"$tarpkg"
         echo "$(tput bold)Info$(tput sgr0):  $TAR_DESCRIPTION"
         echo "$(tput bold)Deps$(tput sgr0):  $DEPENDENCIES"
-        if [ -z "$TAR_GITHUB_COMMIT" ]; then
+        if [ "$TAR_DOWNLOAD_SOURCE" = "DIRECT" ]; then
             echo "$(tput bold)Version$(tput sgr0):  $TARFILE"
         else
             echo "$(tput bold)Version$(tput sgr0):  $TAR_GITHUB_COMMIT"
