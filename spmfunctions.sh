@@ -15,11 +15,11 @@ Usage: spm [option] [package]
 
 spm is a simple commandline package manager that installs AppImages and precompiled tar archives. spm
 integrates with appimagehub to get a list of AppImages for install. Precompiled tar archive information
-is stored in spm's github repo.   spm keeps track of installed packages and their versions, so spm can
+is stored in spm's github repo.  spm keeps track of installed packages and their versions, so spm can
 also be used to upgrade and remove packages installed by spm.
 
 Arguments:
-    list (-l) - list all installed packages and all packages known by spm or info about the specified package
+    list (-l) - list all packages known by spm or info about the specified package
     list-installed (-li) - list all installed packages and install info
     search (-s) - search package lists for packages matching input
     appimg-install (-ai) - install an AppImage

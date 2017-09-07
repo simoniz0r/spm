@@ -30,7 +30,7 @@ those dependencies would not be on a normal Linux system.  This means that AppIm
 without having to install any additional packages!
 
 Arguments:
-- list (-l) - list all installed packages and all packages known by spm or info about the specified package
+- list (-l) - list all packages known by spm or info about the specified package
 - list-installed (-li) - list all installed packages and install info
 - search (-s) - search package lists for packages matching input
 - appimg-install (-ai) - install an AppImage
