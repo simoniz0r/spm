@@ -14,7 +14,7 @@ tarfunctionsexistfunc () {
     sleep 0
 }
 
-tarsaveconffunc () {
+tarsaveconffunc () { # Saves file containing tar package info in specified directory for use later
     if [ -z "$NEW_TARFILE" ]; then
         NEW_TARFILE="$TARFILE"
     fi
@@ -38,7 +38,7 @@ tarsaveconffunc () {
     echo "DEPENDENCIES="\"$DEPENDENCIES\""" >> "$CONFDIR"/"$SAVEDIR"
 }
 
-targithubinfofunc () {
+targithubinfofunc () { # Gets updated_at, tar url, and description for specified package for use with listing, installing, and upgrading
     if [ -z "$GITHUB_TOKEN" ]; then
         wget --quiet "$TAR_API_URI" -O "$CONFDIR"/cache/"$TARPKG"-release || { echo "wget $TAR_API_URI failed; has the repo been renamed or deleted?"; rm -rf "$CONFDIR"/cache/*; exit 1; }
     else
@@ -106,7 +106,7 @@ tarappcheckfunc () { # check user input against list of known apps here
     esac
 }
 
-tarlistfunc () {
+tarlistfunc () { # List info about specified package or list all packages
     if [ -z "$TARPKG" ]; then
         echo "$(tput bold)$(echo "$TAR_LIST" | wc -l) tar packages for install$(tput sgr0):"
         echo
@@ -152,7 +152,7 @@ tarlistfunc () {
     fi
 }
 
-tarlistinstalledfunc () {
+tarlistinstalledfunc () { # List info about installed tar packages
     for tarpkg in $(dir -C -w 1 "$CONFDIR"/tarinstalled); do
         echo "$(tput bold)$tarpkg installed information$(tput sgr0):"
         . "$CONFDIR"/tarinstalled/"$tarpkg"
@@ -171,7 +171,7 @@ tarlistinstalledfunc () {
     done
 }
 
-tardlfunc () {
+tardlfunc () { # Download tar from specified source.  If not from github, use --trust-server-names to make sure the tar file is saved with the proper file name
     case $TAR_DOWNLOAD_SOURCE in
         GITHUB)
             cd "$CONFDIR"/cache
@@ -187,7 +187,7 @@ tardlfunc () {
     NEW_TARFILE="$TARFILE"
 }
 
-tarcheckfunc () {
+tarcheckfunc () { # Check to make sure downloaded file is a tar and run relevant tar arguments for type of tar
     case $TARFILE in
         *tar.gz)
             tar -xvzf "$CONFDIR"/cache/"$TARFILE" || { echo "tar $TARFILE failed; exiting..."; rm -rf "$CONFDIR"/cache/*; exit 1; }
@@ -203,7 +203,7 @@ tarcheckfunc () {
     esac
 }
 
-checktarversionfunc () {
+checktarversionfunc () { # Use info from githubinfo function or using wget -S --spider for redirecting links
     . "$CONFDIR"/tarinstalled/"$TARPKG"
     if [ "$TAR_DOWNLOAD_SOURCE" = "GITHUB" ]; then
         if [ "$GITHUB_DOWNLOAD_ERROR" = "TRUE" ]; then
@@ -239,7 +239,7 @@ checktarversionfunc () {
     fi
 }
 
-tarupdateforcefunc () {
+tarupdateforcefunc () { # Mark specified tar package for upgrade without checking version
     if [ -f "$CONFDIR"/tarinstalled/"$TARPKG" ]; then
         . "$CONFDIR"/tarinstalled/"$TARPKG"
         echo "$(tput bold)Info$(tput sgr0):  $TAR_DESCRIPTION"
@@ -272,7 +272,7 @@ tarupdateforcefunc () {
     tarsaveconffunc "tarupgrades/$TARPKG"
 }
 
-tarupgradecheckallfunc () {
+tarupgradecheckallfunc () { # Run a for loop to check all installed tar packages for upgrades
     for package in $(dir -C -w 1 "$CONFDIR"/tarinstalled); do
         TARPKG="$package"
         echo "Checking $package version..."
@@ -283,17 +283,9 @@ tarupgradecheckallfunc () {
             tarsaveconffunc "tarupgrades/$package"
         fi
     done
-    echo
-    if [ "$(dir "$CONFDIR"/tarupgrades | wc -l)" = "1" ]; then
-        echo "$(tput setaf 2)$(dir -C -w 1 "$CONFDIR"/tarupgrades | wc -l) new tar package upgrade available.$(tput sgr0)"
-    elif [ "$(dir "$CONFDIR"/tarupgrades | wc -l)" = "0" ]; then
-        echo "No new tar package upgrades."
-    else
-        echo "$(tput setaf 2)$(dir -C -w 1 "$CONFDIR"/tarupgrades | wc -l) new tar package upgrades available.$(tput sgr0)"
-    fi
 }
 
-tarupgradecheckfunc () {
+tarupgradecheckfunc () { # Check specified tar package for upgrade
     if ! echo "$TAR_LIST" | grep -qow "$1"; then
         echo "$1 is not in tar-pkgs.json; try running 'spm update'."
     else
@@ -310,7 +302,7 @@ tarupgradecheckfunc () {
     fi
 }
 
-tarupdatelistfunc () {
+tarupdatelistfunc () { # Download tar-pkgs.json from github repo and run relevant upgradecheck function based on input
     echo "Downloading tar-pkgs.json from spm github repo..."
     rm "$CONFDIR"/tar-pkgs.json
     wget "https://raw.githubusercontent.com/simoniz0r/spm/master/tar-pkgs.json" -qO "$CONFDIR"/tar-pkgs.json
@@ -322,7 +314,7 @@ tarupdatelistfunc () {
     fi
 }
 
-tardesktopfilefunc () {
+tardesktopfilefunc () { # Download .desktop files for tar packages that do not include them from spm's github repo
     echo "Downloading $TARPKG.desktop from spm github repo..."
     wget --quiet "https://raw.githubusercontent.com/simoniz0r/spm/master/apps/$TARPKG/$TARPKG.desktop" -O "$CONFDIR"/cache/"$TARPKG".desktop  || { echo "wget $TARURI failed; exiting..."; rm -rf "$CONFDIR"/cache/*; exit 1; }
     echo "Moving $TARPKG.desktop to $INSTDIR ..."
@@ -331,7 +323,7 @@ tardesktopfilefunc () {
     DESKTOP_FILE_NAME="$TARPKG.desktop"
 }
 
-tarinstallfunc () {
+tarinstallfunc () { # Move extracted tar from $CONFDIR/cache to /opt/PackageName, create symlinks for .desktop and bin files, and save config file for spm to keep track of it
     echo "Moving files to $INSTDIR..."
     EXTRACTED_DIR_NAME="$(ls -d "$CONFDIR"/cache/*/)"
     sudo mv "$EXTRACTED_DIR_NAME" "$INSTDIR" || { echo "Failed!"; rm -rf "$CONFDIR"/cache/*; exit 1; }
@@ -360,7 +352,7 @@ tarinstallfunc () {
     echo "$TARPKG has been installed to $INSTDIR !"
 }
 
-tarinstallstartfunc () {
+tarinstallstartfunc () { # Check to make sure another command by the same name is not on the system, tar package is in tar-pkgs.list, and tar package is not already installed
     if [ -f "$CONFDIR"/tarinstalled/"$TARPKG" ] || [ -f "$CONFDIR"/appimginstalled/"$TARPKG" ]; then # Exit if already installed by spm
         echo "$TARPKG is already installed."
         echo "Use 'spm upgrade' to install the latest version of $TARPKG."
@@ -395,7 +387,7 @@ tarinstallstartfunc () {
     fi
 }
 
-tarupgradefunc () {
+tarupgradefunc () { # Move new extracted tar from $CONFDIR/cache to /opt/PackageName and save new config file for it
     echo "Would you like to do a clean upgrade (remove all files in /opt/$TARPKG before installing) or an overwrite upgrade?"
     echo "Note: If you are using Discord with client modifications, it is recommended that you do a clean upgrade."
     read -p "Choice? Clean/Overwrite " PKGUPGDMETHODANSWER
@@ -439,7 +431,7 @@ tarupgradefunc () {
     echo "$TARPKG has been upgraded to $TARFILE!"
 }
 
-tarupgradestartallfunc () {
+tarupgradestartallfunc () { # Run upgrades on all available tar packages
     if [ "$TARUPGRADES" = "FALSE" ]; then
         sleep 0
     else
@@ -477,7 +469,7 @@ tarupgradestartallfunc () {
     fi
 }
 
-tarupgradestartfunc () {
+tarupgradestartfunc () { # Run upgrade on specified tar package
     echo "$TARPKG will be upgraded to the latest version."
     read -p "Continue? Y/N " UPGRADEANSWER
     case $UPGRADEANSWER in
@@ -497,7 +489,7 @@ tarupgradestartfunc () {
     esac
 }
 
-tarremovefunc () {
+tarremovefunc () { # Remove tar package, .desktop and bin files, and remove config file spm used to keep track of it
     . "$CONFDIR"/tarinstalled/"$REMPKG"
     echo "Removing $REMPKG..."
     echo "All files in $INSTDIR will be removed!"
@@ -531,7 +523,7 @@ tarremovefunc () {
     echo "$REMPKG has been removed!"
 }
 
-tarremovepurgefunc () {
+tarremovepurgefunc () { # Remove tar package, .desktop and bin files, package's config dir if listed in tar-pkgs.json, and remove config file spm used to keep track of it
     . "$CONFDIR"/tarinstalled/"$PURGEPKG"
     echo "Removing $PURGEPKG..."
     echo "All files in $INSTDIR and $CONFIG_PATH will be removed!"

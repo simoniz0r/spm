@@ -39,8 +39,8 @@ installed using spm.  Please report any bugs that are specific to
 installed applications to their maintainers."
 }
 
-spmdepchecksfunc () { # Check for packages needed by spm, exit if they aren't installed
-    if [ "$SKIP_DEP_CHECKS" = "FALSE" ]; then # Run dependency checks if SKIP_DEP_CHECKS has not been set to something other than "FALSE" in spm.conf
+spmdepchecksfunc () { # Run dep checks, exit if deps not present. If SKIP_DEP_CHECKS has not been set to something other than "FALSE" in spm.conf, skip this function
+    if [ "$SKIP_DEP_CHECKS" = "FALSE" ]; then
         if ! type wget >/dev/null 2>&1; then
             MISSING_DEPS="TRUE"
             echo "wget is not installed!"
@@ -54,7 +54,7 @@ spmdepchecksfunc () { # Check for packages needed by spm, exit if they aren't in
     fi
 }
 
-appimgfunctioncheckfunc () {
+appimgfunctioncheckfunc () { # Checks to make sure that appimgfunctions.sh exists and is up to date
     REALPATH="$(readlink -f $0)"
     RUNNING_DIR="$(dirname "$REALPATH")" # Find directory script is running from
     if [ -f $RUNNING_DIR/appimgfunctions.sh ]; then
@@ -71,7 +71,7 @@ appimgfunctioncheckfunc () {
     fi
 }
 
-tarfunctioncheckfunc () {
+tarfunctioncheckfunc () { # Checks to make sure that tarfunctions.sh exists and is up to date
     if [ -f $RUNNING_DIR/tarfunctions.sh ]; then
         FUNCTIONS_VER="$(cat "$RUNNING_DIR"/tarfunctions.sh | sed -n 9p | cut -f2 -d'"')"
         if [ "$X" != "$FUNCTIONS_VER" ]; then
@@ -86,8 +86,8 @@ tarfunctioncheckfunc () {
     fi
 }
 
-spmlockfunc () {
-    if [ ! -f "$CONFDIR"/cache/spm.lock ]; then # Create "$CONFDIR"/cache/spm.lock file and prevent multiple instances by checking if it exists before running
+spmlockfunc () { # Create "$CONFDIR"/cache/spm.lock file and prevent multiple instances by checking if it exists before running
+    if [ ! -f "$CONFDIR"/cache/spm.lock ]; then
         touch "$CONFDIR"/cache/spm.lock
     else
         echo "spm.lock file is still present.  Did spm exit correctly?  Are you sure spm isn't running?"
@@ -102,7 +102,7 @@ spmlockfunc () {
     fi
 }
 
-spmvercheckfunc () {
+spmvercheckfunc () { # Check spm version when running update argument and notify of new version if available
     VERTEST="$(wget -q "https://raw.githubusercontent.com/simoniz0r/spm/master/spm" -O - | sed -n '9p' | tr -d 'X="')" # Use wget sed and tr to check current spm version from github
     if [[ "$VERTEST" != "$X" ]]; then # If current version not equal to installed version, notify of new version
         echo "A new version of spm is available!"
@@ -117,37 +117,39 @@ spmvercheckfunc () {
     fi
 }
 
-updatestartfunc () {
+updatestartfunc () { # Run relevant update argument based on user input
     if [ ! -z "$1" ]; then
         if [ -f "$CONFDIR"/appimginstalled/"$1" ]; then
             INSTIMG="$1"
-            appimgupdatelistfunc "$INSTIMG"
+            appimgupdatelistfunc "$INSTIMG" # Check specified AppImage for upgrade
         elif [ -f "$CONFDIR"/tarinstalled/"$1" ]; then
             TARPKG="$1"
-            tarupdatelistfunc "$TARPKG"
+            tarupdatelistfunc "$TARPKG" # Check specified tar package for upgrade
         else
             echo "Package not found!"
             rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
             exit 1
         fi
     else
-        appimgupdatelistfunc
+        appimgupdatelistfunc # Check all installed AppImages for upgrades
         echo
-        tarupdatelistfunc
+        tarupdatelistfunc # Check all installed tar packages for upgrades
+        echo
+        if [ "$(dir "$CONFDIR"/tarupgrades | wc -w)" = "0" ] && [ "$(dir "$CONFDIR"/appimgupgrades | wc -w)" = "0" ]; then
+            echo "No new AppImage or tar package upgrades available."
+        else
+            echo "$(tput setaf 2)$(dir "$CONFDIR"/appimgupgrades | wc -w) new AppImage and $(dir "$CONFDIR"/tarupgrades | wc -w) new tar package upgrade(s) available!$(tput sgr0)"
+        fi
     fi
 }
 
-upgradestartfunc () {
-    if [ "$(dir "$CONFDIR"/appimgupgrades | wc -l)" = "0" ]; then
-        echo "No new AppImage upgrades; skipping AppImage upgrade function..."
-        echo
+upgradestartfunc () { # Run relevant upgrade argument based on packages marked for upgrades or user input
+    if [ "$(dir "$CONFDIR"/appimgupgrades | wc -l)" = "0" ]; then # Check if AppImage upgrades are available. If not, set APPIMGUPGRADES to FALSE so AppImage upgrade function does not run
         APPIMGUPGRADES="FALSE"
     else
         APPIMGUPGRADES="TRUE"
     fi
-    if [ "$(dir "$CONFDIR"/tarupgrades | wc -l)" = "0" ]; then
-        echo "No tar package upgrades; skipping tar upgrade function..."
-        echo
+    if [ "$(dir "$CONFDIR"/tarupgrades | wc -l)" = "0" ]; then # Check if tar package upgrades are available. If not, set TARUPGRADES to FALSE so tar upgrade function does not run
         TARUPGRADES="FALSE"
         if [ "$APPIMGUPGRADES" = "FALSE" ]; then
             echo "No new upgrades available; try running 'spm update'."
@@ -157,43 +159,43 @@ upgradestartfunc () {
     else
         TARUPGRADES="TRUE"
     fi
-    if [ -z "$1" ]; then # If no AppImage specified, upgrade all AppImages in upgrade-list.lst
+    if [ -z "$1" ]; then
         if [ "$APPIMGUPGRADES" = "TRUE" ]; then
-            appimgupgradestartallfunc # Run a for loop that checks each installed AppImage for upgrades
+            appimgupgradestartallfunc # Run a for loop that upgrades each installed AppImage for upgrade
         fi
         echo
         if [ "$TARUPGRADES" = "TRUE" ]; then
-            tarupgradestartallfunc
+            tarupgradestartallfunc # Run a for loop that upgrades each tar package marked for upgrade
         fi
         rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
         exit 0
     elif [ "$TARUPGRADES" = "TRUE" ] || [ "$APPIMGUPGRADES" = "TRUE" ]; then # If user specifies package, upgrade that package
         if [ "$APPIMGUPGRADES" = "TRUE" ]; then
             INSTIMG="$1"
-            appimgupgradestartfunc # Check specified AppImage for upgrade
+            appimgupgradestartfunc # Upgrade specified AppImage if available
         fi
         echo
         if [ "$TARUPGRADES" = "TRUE" ]; then
             TARPKG="$1"
-            tarupgradestartfunc
+            tarupgradestartfunc # Upgrade specified tar package if available
         fi
-    else # If upgrade-list.lst doesn't exist, suggest to run update function
+    else
         echo "No new upgrade for $1; try running 'spm update'."
         rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
         exit 0
     fi
 }
 
-liststartfunc () {
-    if [ -z "$LISTIMG" ]; then # If no AppImage input, list all AppImages
-        appimglistallfunc # List all installed and all available AppImages
+liststartfunc () { # Run relevant list function based on user input
+    if [ -z "$LISTIMG" ]; then
+        appimglistallfunc # List all AppImages available for install
         echo
-        tarlistfunc
-    else # If AppImage input, list info for that AppImage
-        appimglistfunc
+        tarlistfunc # List all tar packages available for install
+    else
+        appimglistfunc # List info for specified AppImage if available
         echo
-        tarlistfunc
-        if [ "$APPIMG_NOT_FOUND" = "TRUE" ] && [ "$TARPKG_NOT_FOUND" = "TRUE" ]; then
+        tarlistfunc # List info for specified tar package if available
+        if [ "$APPIMG_NOT_FOUND" = "TRUE" ] && [ "$TARPKG_NOT_FOUND" = "TRUE" ]; then # If both tarfunctions.sh and appimgfunctions.sh output no packages found, tell user package not found
             echo "$LISTIMG not found in package lists!"
         fi
         rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting

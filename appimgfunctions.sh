@@ -216,14 +216,6 @@ appimgupgradecheckallfunc () {
         fi
     done
     APPIMG_UPGRADE_CHECK="FALSE"
-    echo
-    if [ "$(dir "$CONFDIR"/appimgupgrades | wc -l)" = "1" ]; then
-        echo "$(tput setaf 2)$(dir -C -w 1 "$CONFDIR"/appimgupgrades | wc -l) new AppImage upgrade available.$(tput sgr0)"
-    elif [ "$(dir "$CONFDIR"/appimgupgrades | wc -l)" = "0" ]; then
-        echo "No new AppImage upgrades."
-    else
-        echo "$(tput setaf 2)$(dir -C -w 1 "$CONFDIR"/appimgupgrades | wc -l) new AppImage upgrades available.$(tput sgr0)"
-    fi
 }
 
 appimgupgradecheckfunc () {

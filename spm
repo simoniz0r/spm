@@ -16,13 +16,13 @@ if [ "$EUID" = "0" ]; then # Prevent spm from being ran as root
     exit 1
 fi
 
-if [ -f ~/.config/simplepackagemanager/spm.conf ]; then
+if [ -f ~/.config/simplepackagemanager/spm.conf ]; then # Load config file from the config dir spm is using to set $CONFDIR variable and $SKIP_DEP_CHECKS if they are different than default
     . ~/.config/simplepackagemanager/spm.conf
 elif [ -f ~/.config/spm/spm.conf ]; then
     . ~/.config/spm/spm.conf
 fi
 
-if [ ! -d "$CONFDIR" ]; then # Create dirs for configs if they don't exist
+if [ ! -d "$CONFDIR" ]; then # Create dirs for configs, config files, and download package lists if they don't exist
     echo "spm is being ran for the first time."
     echo "Creating config directories..."
     mkdir "$CONFDIR"
@@ -52,7 +52,7 @@ fi
 
 REALPATH="$(readlink -f $0)"
 RUNNING_DIR="$(dirname "$REALPATH")" # Find directory script is running from
-if [ -f $RUNNING_DIR/spmfunctions.sh ]; then
+if [ -f $RUNNING_DIR/spmfunctions.sh ]; then # Check to make sure spmfunctions.sh exists and is up to date
     FUNCTIONS_VER="$(cat "$RUNNING_DIR"/spmfunctions.sh | sed -n 9p | cut -f2 -d'"')"
     if [ "$X" != "$FUNCTIONS_VER" ]; then
         echo "spmfunctions.sh $FUNCTIONS_VER version does not match $X !"
@@ -78,24 +78,24 @@ if type spm >/dev/null 2>&1 && [ -f ~/.zshrc ] && ! grep -q 'spm.comp' ~/.zshrc;
     echo "" >> ~/.zshrc
 fi
 
-appimgfunctioncheckfunc # Check if appimgfunctions.sh exists, check version if it does, download if out of date or doesn't
+appimgfunctioncheckfunc # Check to make sure appimgfunctions.sh exists and is up to date
 source "$RUNNING_DIR"/appimgfunctions.sh # import functions from appimgfunctions.sh
 appimgfunctionsexistsfunc  || { echo "Could not load $RUNNING_DIR/appimgfunctions.sh; exiting..."; exit 1; }
 
-tarfunctioncheckfunc # Check if tarfunctions.sh exists, check version if it does, download if out of date or doesn't
+tarfunctioncheckfunc # Check to make sure tarfunctions.sh exists and is up to date
 source "$RUNNING_DIR"/tarfunctions.sh # import functions from tarfunctions.sh
 tarfunctionsexistfunc || { echo "Could not load $RUNNING_DIR/tarfunctions.sh; exiting..."; exit 1; }
 
 spmlockfunc # Create "$CONFDIR"/cache/spm.lock file and prevent multiple instances by checking if it exists before running
 
-if [ -z "$GITHUB_TOKEN" ]; then
+if [ -z "$GITHUB_TOKEN" ]; then # Display github rate limit by using wget to show https://api.github.com/rate_limit
     wget -S --spider "https://api.github.com/rate_limit" -o "$CONFDIR"/cache/rate.limit
     echo "Github API rate limit: $(grep -m 1 '.*X-RateLimit-Remaining:*.' "$CONFDIR"/cache/rate.limit | cut -f4 -d" ")/60 until $(date -d@$(grep -m 1 '.*X-RateLimit-Reset:*.' "$CONFDIR"/cache/rate.limit | cut -f4 -d" ") +"%T, %F")."
 else
     wget -S --spider --quiet --auth-no-challenge --header="Authorization: token "$GITHUB_TOKEN"" "https://api.github.com/rate_limit" -o "$CONFDIR"/cache/rate.limit
     echo "Github API rate limit : $(grep -m 1 '.*X-RateLimit-Remaining:*.' "$CONFDIR"/cache/rate.limit | cut -f4 -d" ")/5000 until $(date -d@$(grep -m 1 '.*X-RateLimit-Reset:*.' "$CONFDIR"/cache/rate.limit | cut -f4 -d" ") +"%T, %F")."
 fi
-if [ "$(grep -m 1 '.*X-RateLimit-Remaining:*.' "$CONFDIR"/cache/rate.limit | cut -f4 -d" ")" = "0" ]; then
+if [ "$(grep -m 1 '.*X-RateLimit-Remaining:*.' "$CONFDIR"/cache/rate.limit | cut -f4 -d" ")" = "0" ]; then # Attempt to exit to prevent errors if user's github rate limit has been used up
     echo "Github API rate limit reached! Try again at $(date -d@$(grep -m 1 '.*X-RateLimit-Reset:*.' "$CONFDIR"/cache/rate.limit | cut -f4 -d" "))."
     echo "If you haven't already, you can add your token to $CONFDIR/spm.conf"
     echo "to avoid hitting the rate limit."
@@ -112,9 +112,9 @@ case $1 in
             exit 1
         fi
         INSTIMG="$2"
-        appimginstallstartfunc
-        appimgdlfunc "$INSTIMG"
-        appimginstallfunc
+        appimginstallstartfunc # Check if specified AppImage is in list, get info for it
+        appimgdlfunc "$INSTIMG" # Download AppImage using info from above
+        appimginstallfunc # Move downloaded AppImage from $CONFDIR/cache to /usr/local/bin and save config file for spm to keep track of it
         rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
         exit 0
         ;;
@@ -125,28 +125,28 @@ case $1 in
             exit 1
         fi
         TARPKG="$2"
-        tarinstallstartfunc
-        tardlfunc "$TARPKG"
-        tarcheckfunc
-        tarinstallfunc
+        tarinstallstartfunc # Check if specified tar package is in list, get info for it
+        tardlfunc "$TARPKG" # Download tar package using info from above
+        tarcheckfunc # Check to make sure file downloaded is a tar and run relevant tar arguments for file type
+        tarinstallfunc # Move extracted tar from $CONFDIR/cache to /opt/PackageName, create symlinks for .desktop and bin file, and save config file for spm to keep track of it
         rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
         exit 0
         ;;
     update|-upd) # Update package lists and check for package upgrades
-        spmvercheckfunc
+        spmvercheckfunc # Check spm version and let user know if it is out of date
         updatestartfunc "$2" # Send input to relevant update function or run both if no input
         rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
         exit 0
         ;;
     appimg-update-force|-auf) # Force AppImage to be marked for upgrade
         INSTIMG="$2"
-        appimgupdateforcefunc
+        appimgupdateforcefunc # Place a file containing AppImage info in $CONFDIR/appimgupgrades/PackageName for upgrade function to get info from without checking version
         rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
         exit 0
         ;;
     tar-update-force|-tuf) # Force tar package to be marked for upgrade
         TARPKG="$2"
-        tarupdateforcefunc
+        tarupdateforcefunc # Place a file containing tar package info in $CONFDIR/tarupgrades/PackageName for upgrade function to get info from without checking version
         rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
         exit 0
         ;;
@@ -162,7 +162,7 @@ case $1 in
             exit 1
         fi
         REMIMG="$2"
-        if [ -f "$CONFDIR"/appimginstalled/"$REMIMG" ]; then
+        if [ -f "$CONFDIR"/appimginstalled/"$REMIMG" ]; then # Output info about AppImage before removing, exit if not installed
             echo "$(tput bold)Current installed $REMIMG information$(tput sgr0):"
             . "$CONFDIR"/appimginstalled/"$REMIMG"
             echo "$(tput bold)Info$(tput sgr0):  $APPIMAGE_DESCRIPTION"
@@ -180,7 +180,7 @@ case $1 in
             rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
             exit 1
         fi
-        appimgremovefunc
+        appimgremovefunc # Remove AppImage from /usr/local/bin and remove conf file in $CONFDIR/appimginstalled/PackageName
         rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
         exit 0
         ;;
@@ -191,7 +191,7 @@ case $1 in
             exit 1
         fi
         REMPKG="$2"
-        if [ -f "$CONFDIR"/tarinstalled/"$REMPKG" ]; then
+        if [ -f "$CONFDIR"/tarinstalled/"$REMPKG" ]; then # Output info about tar package before removing, exit if not installed
             echo "$(tput bold)Current installed $REMPKG information$(tput sgr0):"
             . "$CONFDIR"/tarinstalled/"$REMPKG"
             echo "$(tput bold)Info$(tput sgr0):  $TAR_DESCRIPTION"
@@ -211,8 +211,8 @@ case $1 in
             rm -rf "$CONFDIR"/cache/*
             exit 1
         fi
-        tarappcheckfunc "$REMPKG"
-        tarremovefunc
+        tarappcheckfunc "$REMPKG" # Load info about tar package using this function so tarremovefunc knows where it is
+        tarremovefunc # Use info from above to remove /opt/PackageName and symlinks for .desktop and bin file
         rm -rf "$CONFDIR"/cache/*
         exit 0
         ;;
@@ -223,8 +223,8 @@ case $1 in
             exit 1
         fi
         PURGEPKG="$2"
-        echo "$(tput bold)Current installed $PURGEPKG information$(tput sgr0):"
-        if [ -f "$CONFDIR"/tarinstalled/"$PURGEPKG" ]; then
+        if [ -f "$CONFDIR"/tarinstalled/"$PURGEPKG" ]; then # Show info about package before purging, exit if not installed
+            echo "$(tput bold)Current installed $PURGEPKG information$(tput sgr0):"
             . "$CONFDIR"/tarinstalled/"$PURGEPKG"
             echo "$(tput bold)Info$(tput sgr0):  $TAR_DESCRIPTION"
             echo "$(tput bold)Deps$(tput sgr0):  $DEPENDENCIES"
@@ -243,8 +243,8 @@ case $1 in
             rm -rf "$CONFDIR"/cache/*
             exit 1
         fi
-        tarappcheckfunc "$PURGEPKG"
-        tarremovepurgefunc
+        tarappcheckfunc "$PURGEPKG" # Load info about tar package using this function so tarremovefunc knows where it is
+        tarremovepurgefunc # Use info from above to remove /opt/PackageName, config dir if listed in tar-pkgs.json, and symlinks for .desktop and bin file
         rm -rf "$CONFDIR"/cache/*
         exit 0
         ;;
@@ -258,21 +258,21 @@ case $1 in
     list-installed|-li) # List information about installed packages
         echo "$(tput bold)AppImages$(tput sgr0):"
         echo
-        appimglistinstalledfunc
+        appimglistinstalledfunc # List info about all installed AppImages
         echo
         echo "$(tput bold)tar packages$(tput sgr0):"
         echo
-        tarlistinstalledfunc
-        echo "$(tput bold)$(dir -C -w 1 "$CONFDIR"/appimginstalled | wc -l) AppImages installed$(tput sgr0):"
+        tarlistinstalledfunc # List info about all installed tar packages
+        echo "$(tput bold)$(dir -C -w 1 "$CONFDIR"/appimginstalled | wc -l) AppImages installed$(tput sgr0):" # Output number of and names of installed AppImages
         dir -C -w 1 "$CONFDIR"/appimginstalled | pr -tT --column=3 -w 125
         echo
-        echo "$(tput bold)$(dir -C -w 1 "$CONFDIR"/tarinstalled | wc -l) tar packages installed$(tput sgr0):"
+        echo "$(tput bold)$(dir -C -w 1 "$CONFDIR"/tarinstalled | wc -l) tar packages installed$(tput sgr0):" # Output number of and names of installed tar packages
         dir -C -w 1 "$CONFDIR"/tarinstalled | pr -tT --column=3 -w 125
         echo
         rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
         exit 0
         ;;
-    search|-s)
+    search|-s) # Use grep to search package lists based on user input and output matching packages and which list they are in
         if cat "$CONFDIR"/AppImages-github.lst | cut -f1 -d" " | grep -q "$2"; then
             echo "$(tput bold)Github AppImage(s)$(tput sgr0):"
             cat "$CONFDIR"/AppImages-github.lst | cut -f1 -d" " | grep "$2"
@@ -291,7 +291,7 @@ case $1 in
         rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
         exit 0
         ;;
-    man|-m)
+    man|-m) # run man $RUNNING_DIR/spm.1 to show spm's man file
         man $RUNNING_DIR/spm.1
         rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
         exit 0
