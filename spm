@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.3.9"
+X="0.4.0"
 # Set spm version
 CONFDIR="$HOME/.config/spm"
 SKIP_DEP_CHECKS="FALSE"
@@ -55,18 +55,18 @@ RUNNING_DIR="$(dirname "$REALPATH")" # Find directory script is running from
 if [ -f $RUNNING_DIR/spmfunctions.sh ]; then # Check to make sure spmfunctions.sh exists and is up to date
     FUNCTIONS_VER="$(cat "$RUNNING_DIR"/spmfunctions.sh | sed -n 9p | cut -f2 -d'"')"
     if [ "$X" != "$FUNCTIONS_VER" ]; then
-        echo "spmfunctions.sh $FUNCTIONS_VER version does not match $X !"
-        echo "spmfunctions.sh is out of date! Please download the full release of spm from https://github.com/simoniz0r/spm/releases !"
+        echo "$$(tput setaf 1)spmfunctions.sh $FUNCTIONS_VER version does not match $X !"
+        echo "spmfunctions.sh is out of date! Please download the full release of spm from https://github.com/simoniz0r/spm/releases !$(tput sgr0)"
         exit 1
     fi
 else
-    echo "Missing required file $RUNNING_DIR/spmfunctions.sh !"
-        echo "spmfunctions.sh is missing! Please download the full release of spm from https://github.com/simoniz0r/spm/releases !"
+    echo "$(tput setaf 1)Missing required file $RUNNING_DIR/spmfunctions.sh !"
+        echo "spmfunctions.sh is missing! Please download the full release of spm from https://github.com/simoniz0r/spm/releases !$(tput sgr0)"
         exit 1
 fi
 source "$RUNNING_DIR"/spmfunctions.sh # import functions from spmfunctions.sh
 
-spmdepchecksfunc || { echo "Could not load $RUNNING_DIR/spmfunctions.sh; exiting..."; exit 1; } # Check for deps, exit if not present
+spmdepchecksfunc || { echo "$(tput setaf 1)Could not load $RUNNING_DIR/spmfunctions.sh; exiting...$(tput sgr0)"; exit 1; } # Check for deps, exit if not present
 
 if type spm >/dev/null 2>&1 && [ -f ~/.zshrc ] && ! grep -q 'spm.comp' ~/.zshrc; then # If using zsh and spm is installed, add tab completions for spm
     wget --quiet "https://raw.githubusercontent.com/simoniz0r/spm/master/spm.comp" -O "$CONFDIR"/spm.comp
@@ -80,11 +80,11 @@ fi
 
 appimgfunctioncheckfunc # Check to make sure appimgfunctions.sh exists and is up to date
 source "$RUNNING_DIR"/appimgfunctions.sh # import functions from appimgfunctions.sh
-appimgfunctionsexistsfunc  || { echo "Could not load $RUNNING_DIR/appimgfunctions.sh; exiting..."; exit 1; }
+appimgfunctionsexistsfunc  || { echo "$(tput setaf 1)Could not load $RUNNING_DIR/appimgfunctions.sh; exiting...$(tput sgr0)"; exit 1; }
 
 tarfunctioncheckfunc # Check to make sure tarfunctions.sh exists and is up to date
 source "$RUNNING_DIR"/tarfunctions.sh # import functions from tarfunctions.sh
-tarfunctionsexistfunc || { echo "Could not load $RUNNING_DIR/tarfunctions.sh; exiting..."; exit 1; }
+tarfunctionsexistfunc || { echo "$(tput setaf 1)Could not load $RUNNING_DIR/tarfunctions.sh; exiting...$(tput sgr0)"; exit 1; }
 
 spmlockfunc # Create "$CONFDIR"/cache/spm.lock file and prevent multiple instances by checking if it exists before running
 
@@ -96,9 +96,9 @@ else
     echo "Github API rate limit : $(grep -m 1 '.*X-RateLimit-Remaining:*.' "$CONFDIR"/cache/rate.limit | cut -f4 -d" ")/5000 until $(date -d@$(grep -m 1 '.*X-RateLimit-Reset:*.' "$CONFDIR"/cache/rate.limit | cut -f4 -d" ") +"%T, %F")."
 fi
 if [ "$(grep -m 1 '.*X-RateLimit-Remaining:*.' "$CONFDIR"/cache/rate.limit | cut -f4 -d" ")" = "0" ]; then # Attempt to exit to prevent errors if user's github rate limit has been used up
-    echo "Github API rate limit reached! Try again at $(date -d@$(grep -m 1 '.*X-RateLimit-Reset:*.' "$CONFDIR"/cache/rate.limit | cut -f4 -d" "))."
+    echo "$(tput setaf 1)Github API rate limit reached! Try again at $(date -d@$(grep -m 1 '.*X-RateLimit-Reset:*.' "$CONFDIR"/cache/rate.limit | cut -f4 -d" "))."
     echo "If you haven't already, you can add your token to $CONFDIR/spm.conf"
-    echo "to avoid hitting the rate limit."
+    echo "to avoid hitting the rate limit.$(tput sgr0)"
     rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
     exit 1
 fi
@@ -107,7 +107,7 @@ echo
 case $1 in
     appimg-install|-ai) # Check if package is already installed either by spm or otherwise then install package
         if [ -z "$2" ]; then
-            echo "Package input required; exiting..."
+            echo "$(tput setaf 1)Package input required; exiting...$(tput sgr0)"
             rm -rf "$CONFDIR"/cache/*
             exit 1
         fi
@@ -120,7 +120,7 @@ case $1 in
         ;;
     tarinstall|-ti) # Check if package is already installed either by spm or otherwise then install package
         if [ -z "$2" ]; then
-            echo "Package input required; exiting..."
+            echo "$(tput setaf 1)Package input required; exiting...$(tput sgr0)"
             rm -rf "$CONFDIR"/cache/*
             exit 1
         fi
@@ -157,26 +157,26 @@ case $1 in
         ;;
     appimg-remove|-ar) # rm AppImage from /usr/local/bin and rm install info in "$CONFDIR"/installed
         if [ -z "$2" ]; then
-            echo "AppImage input required; exiting..."
+            echo "$(tput setaf 1)AppImage input required; exiting...$(tput sgr0)"
             rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
             exit 1
         fi
         REMIMG="$2"
         if [ -f "$CONFDIR"/appimginstalled/"$REMIMG" ]; then # Output info about AppImage before removing, exit if not installed
-            echo "$(tput bold)Current installed $REMIMG information$(tput sgr0):"
+            echo "$(tput bold)$(tput setaf 2)Current installed $REMIMG information$(tput sgr0):"
             . "$CONFDIR"/appimginstalled/"$REMIMG"
-            echo "$(tput bold)Info$(tput sgr0):  $APPIMAGE_DESCRIPTION"
+            echo "$(tput bold)$(tput setaf 2)Info$(tput sgr0):  $APPIMAGE_DESCRIPTION"
             if [ -z "$APPIMAGE_NAME" ]; then
-                echo "$(tput bold)Name$(tput sgr0):  $APPIMAGE"
+                echo "$(tput bold)$(tput setaf 2)Name$(tput sgr0):  $APPIMAGE"
             else
-                echo "$(tput bold)Name$(tput sgr0):  $APPIMAGE_NAME"
+                echo "$(tput bold)$(tput setaf 2)Name$(tput sgr0):  $APPIMAGE_NAME"
             fi
-            echo "$(tput bold)Version$(tput sgr0):  $APPIMAGE_VERSION"
-            echo "$(tput bold)URL$(tput sgr0):  $WEBSITE"
-            echo "$(tput bold)Install dir$(tput sgr0): $BIN_PATH"
+            echo "$(tput bold)$(tput setaf 2)Version$(tput sgr0):  $APPIMAGE_VERSION"
+            echo "$(tput bold)$(tput setaf 2)URL$(tput sgr0):  $WEBSITE"
+            echo "$(tput bold)$(tput setaf 2)Install dir$(tput sgr0): $BIN_PATH"
             echo
             else
-            echo "AppImage not found!"
+            echo "$(tput setaf 1)AppImage not found!$(tput sgr0)"
             rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
             exit 1
         fi
@@ -186,28 +186,28 @@ case $1 in
         ;;
     tar-remove|-tr) # Remove: remove pkg while leaving pkg's config files
         if [ -z "$2" ]; then
-            echo "Package input required; exiting..."
+            echo "$(tput setaf 1)Package input required; exiting...$(tput sgr0)"
             rm -rf "$CONFDIR"/cache/*
             exit 1
         fi
         REMPKG="$2"
         if [ -f "$CONFDIR"/tarinstalled/"$REMPKG" ]; then # Output info about tar package before removing, exit if not installed
-            echo "$(tput bold)Current installed $REMPKG information$(tput sgr0):"
+            echo "$(tput bold)$(tput setaf 6)Current installed $REMPKG information$(tput sgr0):"
             . "$CONFDIR"/tarinstalled/"$REMPKG"
-            echo "$(tput bold)Info$(tput sgr0):  $TAR_DESCRIPTION"
-            echo "$(tput bold)Deps$(tput sgr0):  $DEPENDENCIES"
+            echo "$(tput bold)$(tput setaf 6)Info$(tput sgr0):  $TAR_DESCRIPTION"
+            echo "$(tput bold)$(tput setaf 6)Deps$(tput sgr0):  $DEPENDENCIES"
             if [ -z "$TAR_GITHUB_COMMIT" ]; then
-                echo "$(tput bold)Version$(tput sgr0):  $TARFILE"
+                echo "$(tput bold)$(tput setaf 6)Version$(tput sgr0):  $TARFILE"
             else
-                echo "$(tput bold)Version$(tput sgr0):  $TAR_GITHUB_COMMIT"
+                echo "$(tput bold)$(tput setaf 6)Version$(tput sgr0):  $TAR_GITHUB_COMMIT"
             fi
-            echo "$(tput bold)Source$(tput sgr0):  $TAR_DOWNLOAD_SOURCE"
-            echo "$(tput bold)URL$(tput sgr0):  $TARURI"
-            echo "$(tput bold)Install dir$(tput sgr0):  $INSTDIR"
-            echo "$(tput bold)Bin path$(tput sgr0):  $BIN_PATH"
+            echo "$(tput bold)$(tput setaf 6)Source$(tput sgr0):  $TAR_DOWNLOAD_SOURCE"
+            echo "$(tput bold)$(tput setaf 6)URL$(tput sgr0):  $TARURI"
+            echo "$(tput bold)$(tput setaf 6)Install dir$(tput sgr0):  $INSTDIR"
+            echo "$(tput bold)$(tput setaf 6)Bin path$(tput sgr0):  $BIN_PATH"
             echo
         else
-            echo "Package not found!"
+            echo "$(tput setaf 1)Package not found!$(tput sgr0)"
             rm -rf "$CONFDIR"/cache/*
             exit 1
         fi
@@ -218,28 +218,28 @@ case $1 in
         ;;
     tar-remove-purge|-trp) # Remove Purge: remove pkg and also remove pkg's config files
         if [ -z "$2" ]; then
-            echo "Package input required; exiting..."
+            echo "$(tput setaf 1)Package input required; exiting...$(tput sgr0)"
             rm -rf "$CONFDIR"/cache/*
             exit 1
         fi
         PURGEPKG="$2"
         if [ -f "$CONFDIR"/tarinstalled/"$PURGEPKG" ]; then # Show info about package before purging, exit if not installed
-            echo "$(tput bold)Current installed $PURGEPKG information$(tput sgr0):"
+            echo "$(tput bold)$(tput setaf 6)Current installed $PURGEPKG information$(tput sgr0):"
             . "$CONFDIR"/tarinstalled/"$PURGEPKG"
-            echo "$(tput bold)Info$(tput sgr0):  $TAR_DESCRIPTION"
-            echo "$(tput bold)Deps$(tput sgr0):  $DEPENDENCIES"
+            echo "$(tput bold)$(tput setaf 6)Info$(tput sgr0):  $TAR_DESCRIPTION"
+            echo "$(tput bold)$(tput setaf 6)Deps$(tput sgr0):  $DEPENDENCIES"
             if [ -z "$TAR_GITHUB_COMMIT" ]; then
-                echo "$(tput bold)Version$(tput sgr0):  $TARFILE"
+                echo "$(tput bold)$(tput setaf 6)Version$(tput sgr0):  $TARFILE"
             else
-                echo "$(tput bold)Version$(tput sgr0):  $TAR_GITHUB_COMMIT"
+                echo "$(tput bold)$(tput setaf 6)Version$(tput sgr0):  $TAR_GITHUB_COMMIT"
             fi
-            echo "$(tput bold)Source$(tput sgr0):  $TAR_DOWNLOAD_SOURCE"
-            echo "$(tput bold)URL$(tput sgr0):  $TARURI"
-            echo "$(tput bold)Install dir$(tput sgr0):  $INSTDIR"
-            echo "$(tput bold)Bin path$(tput sgr0):  $BIN_PATH"
+            echo "$(tput bold)$(tput setaf 6)Source$(tput sgr0):  $TAR_DOWNLOAD_SOURCE"
+            echo "$(tput bold)$(tput setaf 6)URL$(tput sgr0):  $TARURI"
+            echo "$(tput bold)$(tput setaf 6)Install dir$(tput sgr0):  $INSTDIR"
+            echo "$(tput bold)$(tput setaf 6)Bin path$(tput sgr0):  $BIN_PATH"
             echo
         else
-            echo "Package not found!"
+            echo "$(tput setaf 1)Package not found!$(tput sgr0)"
             rm -rf "$CONFDIR"/cache/*
             exit 1
         fi
@@ -256,17 +256,17 @@ case $1 in
         exit 0
         ;;
     list-installed|-li) # List information about installed packages
-        echo "$(tput bold)AppImages$(tput sgr0):"
+        echo "$(tput bold)$(tput setaf 2)AppImages$(tput sgr0):"
         echo
         appimglistinstalledfunc # List info about all installed AppImages
         echo
-        echo "$(tput bold)tar packages$(tput sgr0):"
+        echo "$(tput bold)$(tput setaf 6)tar packages$(tput sgr0):"
         echo
         tarlistinstalledfunc # List info about all installed tar packages
-        echo "$(tput bold)$(dir -C -w 1 "$CONFDIR"/appimginstalled | wc -l) AppImages installed$(tput sgr0):" # Output number of and names of installed AppImages
+        echo "$(tput bold)$(tput setaf 2)$(dir -C -w 1 "$CONFDIR"/appimginstalled | wc -l) AppImages installed$(tput sgr0):" # Output number of and names of installed AppImages
         dir -C -w 1 "$CONFDIR"/appimginstalled | pr -tT --column=3 -w 125
         echo
-        echo "$(tput bold)$(dir -C -w 1 "$CONFDIR"/tarinstalled | wc -l) tar packages installed$(tput sgr0):" # Output number of and names of installed tar packages
+        echo "$(tput bold)$(tput setaf 6)$(dir -C -w 1 "$CONFDIR"/tarinstalled | wc -l) tar packages installed$(tput sgr0):" # Output number of and names of installed tar packages
         dir -C -w 1 "$CONFDIR"/tarinstalled | pr -tT --column=3 -w 125
         echo
         rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
@@ -274,17 +274,17 @@ case $1 in
         ;;
     search|-s) # Use grep to search package lists based on user input and output matching packages and which list they are in
         if cat "$CONFDIR"/AppImages-github.lst | cut -f1 -d" " | grep -q "$2"; then
-            echo "$(tput bold)Github AppImage(s)$(tput sgr0):"
+            echo "$(tput bold)$(tput setaf 2)Github AppImage(s)$(tput sgr0):"
             cat "$CONFDIR"/AppImages-github.lst | cut -f1 -d" " | grep "$2"
             echo
         fi
         if cat "$CONFDIR"/AppImages-direct.lst | cut -f1 -d" " | grep -q "$2"; then
-            echo "$(tput bold)Direct AppImage(s)$(tput sgr0):"
+            echo "$(tput bold)$(tput setaf 2)Direct AppImage(s)$(tput sgr0):"
             cat "$CONFDIR"/AppImages-direct.lst | cut -f1 -d" " | grep "$2"
             echo
         fi
         if echo "$TAR_LIST" | grep -q "$2"; then
-            echo "$(tput bold)tar package(s)$(tput sgr0):"
+            echo "$(tput bold)$(tput setaf 6)tar package(s)$(tput sgr0):"
             echo "$TAR_LIST" | grep "$2"
             echo
         fi

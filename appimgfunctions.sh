@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.3.9"
+X="0.4.0"
 # Set spm version
 
 # Set variables
@@ -31,17 +31,15 @@ appimgsaveinfofunc () { # Save install info to "$CONFDIR"/appimginstalled/AppIma
         echo "WEBSITE="\"$(echo "$DIRECT_APPIMAGE_URL" | cut -f-3 -d'/')\""" >> "$CONFDIR"/"$SAVEDIR"
     fi
     echo "BIN_PATH="\"/usr/local/bin/$INSTIMG\""" >> "$CONFDIR"/"$SAVEDIR"
-    if [ "$GITHUB_IMG" = "TRUE" ]; then
-        echo "APPIMAGE_DESCRIPTION="\"$APPIMAGE_DESCRIPTION\""" >> "$CONFDIR"/"$SAVEDIR"
-    fi
+    echo "APPIMAGE_DESCRIPTION="\"$APPIMAGE_DESCRIPTION\""" >> "$CONFDIR"/"$SAVEDIR"
 }
 
 appimglistallfunc () {
-    echo "$(tput bold)$(cat "$CONFDIR"/AppImages-github.lst | wc -l) Github AppImages available for install$(tput sgr0):"
+    echo "$(tput bold)$(tput setaf 2)$(cat "$CONFDIR"/AppImages-github.lst | wc -l) Github AppImages available for install$(tput sgr0):"
     echo
     cat "$CONFDIR"/AppImages-github.lst | cut -f1 -d" " | pr -tT --column=3 -w 125
     echo
-    echo "$(tput bold)$(cat "$CONFDIR"/AppImages-direct.lst | wc -l) Direct AppImages available for install (may have issues finding new upgrades after install)$(tput sgr0):"
+    echo "$(tput bold)$(tput setaf 2)$(cat "$CONFDIR"/AppImages-direct.lst | wc -l) Direct AppImages available for install $(tput setaf 3)(may have issues finding new upgrades after install)$(tput sgr0):"
     echo
     cat "$CONFDIR"/AppImages-direct.lst | cut -f1 -d" " | pr -tT --column=3 -w 125
 }
@@ -75,9 +73,9 @@ appimggithubinfofunc () {
     GITHUB_APP_URL="$(grep -wm 1 "$INSTIMG" "$CONFDIR"/AppImages-github.lst | cut -f3 -d" ")"
     APPIMG_GITHUB_API_URL="$(grep -wm 1 "$INSTIMG" "$CONFDIR"/AppImages-github.lst | cut -f4- -d" ")"
     if [ -z "$GITHUB_TOKEN" ]; then
-        wget --quiet "$APPIMG_GITHUB_API_URL" -O "$CONFDIR"/cache/"$INSTIMG"-release || { echo "wget $APPIMG_GITHUB_API_URL failed; has the repo been renamed or deleted?"; rm -rf "$CONFDIR"/cache/*; exit 1; }
+        wget --quiet "$APPIMG_GITHUB_API_URL" -O "$CONFDIR"/cache/"$INSTIMG"-release || { echo "$(tput setaf 1)wget $APPIMG_GITHUB_API_URL failed; has the repo been renamed or deleted?$(tput sgr0)"; rm -rf "$CONFDIR"/cache/*; exit 1; }
     else
-        wget --quiet --auth-no-challenge --header="Authorization: token "$GITHUB_TOKEN"" "$APPIMG_GITHUB_API_URL" -O "$CONFDIR"/cache/"$INSTIMG"-release || { echo "wget $APPIMG_GITHUB_API_URL failed; is your token valid?"; rm -rf "$CONFDIR"/cache/*; exit 1; }
+        wget --quiet --auth-no-challenge --header="Authorization: token "$GITHUB_TOKEN"" "$APPIMG_GITHUB_API_URL" -O "$CONFDIR"/cache/"$INSTIMG"-release || { echo "$(tput setaf 1)wget $APPIMG_GITHUB_API_URL failed; is your token valid?"$(tput sgr0); rm -rf "$CONFDIR"/cache/*; exit 1; }
     fi
     APPIMAGE_INFO="$CONFDIR/cache/$INSTIMG"-release
     APPIMAGE_NAME="$(grep -iv '.*ia32*.\|.*i686*.\|.*i386*.' "$APPIMAGE_INFO" | grep -i "$INSTIMG" | grep -im 1 '"name":*..*AppImage"' | cut -f4 -d'"')"
@@ -89,7 +87,7 @@ appimggithubinfofunc () {
         GITHUB_APPIMAGE_URL="$(grep -iv '.*ia32*.\|.*i686*.\|.*i386*.' "$APPIMAGE_INFO" | grep -im 1 '"browser_download_url":*..*AppImage"' | cut -f4 -d'"')"
     fi
     if [ "$APPIMG_UPGRADE_CHECK" = "FALSE" ]; then
-        wget --quiet "$GITHUB_APP_URL" -O "$CONFDIR"/cache/"$INSTIMG"-github || { echo "wget $GITHUB_APP_URL failed; has the repo been renamed or deleted?"; rm -rf "$CONFDIR"/cache/*; exit 1; }
+        wget --quiet "$GITHUB_APP_URL" -O "$CONFDIR"/cache/"$INSTIMG"-github || { echo "$(tput setaf 1)wget $GITHUB_APP_URL failed; has the repo been renamed or deleted?$(tput sgr0)"; rm -rf "$CONFDIR"/cache/*; exit 1; }
         APPIMG_GITHUB_INFO="$HOME/.config/spm/cache/"$INSTIMG"-github"
         APPIMAGE_DESCRIPTION="$(grep -i '<meta name="description"' "$APPIMG_GITHUB_INFO" | cut -f4 -d'"')"
     fi
@@ -103,7 +101,7 @@ appimgdirectinfofunc () {
     NEW_APPIMAGE_VERSION="${NEW_APPIMAGE_VERSION##*/}"
     APPIMAGE_DESCRIPTION="$DIRECT_APPIMAGE_URL"
     if [ -z "$NEW_APPIMAGE_VERSION" ]; then
-        NEW_APPIMAGE_VERSION="Cannot check version; upgrades will have to be forced"
+        NEW_APPIMAGE_VERSION="$(tput setaf 1)Cannot check version; upgrades will have to be forced$(tput sgr0)"
     fi
     APPIMAGE_NAME="$NEW_APPIMAGE_VERSION"
     if [ -f "$CONFDIR"/appimginstalled/"$INSTIMG" ]; then
@@ -121,17 +119,17 @@ appimginfofunc () { # Set variables and temporarily store pages in "$CONFDIR"/ca
 
 appimglistfunc () {
     if [ -f "$CONFDIR"/appimginstalled/"$LISTIMG" ]; then # If installed, list installed info
-        echo "$(tput bold)$LISTIMG AppImage installed information$(tput sgr0):"
+        echo "$(tput bold)$(tput setaf 2)$LISTIMG AppImage installed information$(tput sgr0):"
         . "$CONFDIR"/appimginstalled/"$LISTIMG"
-        echo "$(tput bold)Info$(tput sgr0):  $APPIMAGE_DESCRIPTION"
+        echo "$(tput bold)$(tput setaf 2)Info$(tput sgr0):  $APPIMAGE_DESCRIPTION"
         if [ -z "$APPIMAGE_NAME" ]; then
-            echo "$(tput bold)Name$(tput sgr0):  $APPIMAGE"
+            echo "$(tput bold)$(tput setaf 2)Name$(tput sgr0):  $APPIMAGE"
         else
-            echo "$(tput bold)Name$(tput sgr0):  $APPIMAGE_NAME"
+            echo "$(tput bold)$(tput setaf 2)Name$(tput sgr0):  $APPIMAGE_NAME"
         fi
-        echo "$(tput bold)Version$(tput sgr0):  $APPIMAGE_VERSION"
-        echo "$(tput bold)URL$(tput sgr0):  $WEBSITE"
-        echo "$(tput bold)Install dir$(tput sgr0): $BIN_PATH"
+        echo "$(tput bold)$(tput setaf 2)Version$(tput sgr0):  $APPIMAGE_VERSION"
+        echo "$(tput bold)$(tput setaf 2)URL$(tput sgr0):  $WEBSITE"
+        echo "$(tput bold)$(tput setaf 2)Install dir$(tput sgr0): $BIN_PATH"
         echo
     else
         INSTIMG="$LISTIMG"
@@ -139,17 +137,17 @@ appimglistfunc () {
         appimginfofunc
         if [ "$GITHUB_IMG" = "TRUE" ] || [ "$DIRECT_IMG" = "TRUE" ]; then
             appimgsaveinfofunc "cache/$LISTIMG.conf"
-            echo "$(tput bold)$LISTIMG AppImage information$(tput sgr0):"
+            echo "$(tput bold)$(tput setaf 2)$LISTIMG AppImage information$(tput sgr0):"
             . "$CONFDIR"/cache/"$LISTIMG".conf
-            echo "$(tput bold)Info$(tput sgr0):  $APPIMAGE_DESCRIPTION"
+            echo "$(tput bold)$(tput setaf 2)Info$(tput sgr0):  $APPIMAGE_DESCRIPTION"
             if [ -z "$APPIMAGE_NAME" ]; then
-                echo "$(tput bold)Name$(tput sgr0):  $APPIMAGE"
+                echo "$(tput bold$(tput setaf 2))Name$(tput sgr0):  $APPIMAGE"
             else
-                echo "$(tput bold)Name$(tput sgr0):  $APPIMAGE_NAME"
+                echo "$(tput bold)$(tput setaf 2)Name$(tput sgr0):  $APPIMAGE_NAME"
             fi
-            echo "$(tput bold)Version$(tput sgr0):  $APPIMAGE_VERSION"
-            echo "$(tput bold)URL$(tput sgr0):  $WEBSITE"
-            echo "$(tput bold)Install dir$(tput sgr0): $BIN_PATH"
+            echo "$(tput bold)$(tput setaf 2)Version$(tput sgr0):  $APPIMAGE_VERSION"
+            echo "$(tput bold)$(tput setaf 2)URL$(tput sgr0):  $WEBSITE"
+            echo "$(tput bold)$(tput setaf 2)Install dir$(tput sgr0): $BIN_PATH"
             echo
         else
             APPIMG_NOT_FOUND="TRUE"
@@ -159,17 +157,17 @@ appimglistfunc () {
 
 appimglistinstalledfunc () {
     for AppImage in $(dir -C -w 1 "$CONFDIR"/appimginstalled); do
-        echo "$(tput bold)$AppImage installed information$(tput sgr0):"
+        echo "$(tput bold)$(tput setaf 2)$AppImage installed information$(tput sgr0):"
         . "$CONFDIR"/appimginstalled/"$AppImage"
-        echo "$(tput bold)Info$(tput sgr0):  $APPIMAGE_DESCRIPTION"
+        echo "$(tput bold)$(tput setaf 2)Info$(tput sgr0):  $APPIMAGE_DESCRIPTION"
         if [ -z "$APPIMAGE_NAME" ]; then
-            echo "$(tput bold)Name$(tput sgr0):  $APPIMAGE"
+            echo "$(tput bold)$(tput setaf 2)Name$(tput sgr0):  $APPIMAGE"
         else
-            echo "$(tput bold)Name$(tput sgr0):  $APPIMAGE_NAME"
+            echo "$(tput bold)$(tput setaf 2)Name$(tput sgr0):  $APPIMAGE_NAME"
         fi
-        echo "$(tput bold)Version$(tput sgr0):  $APPIMAGE_VERSION"
-        echo "$(tput bold)URL$(tput sgr0):  $WEBSITE"
-        echo "$(tput bold)Install dir$(tput sgr0): $BIN_PATH"
+        echo "$(tput bold)$(tput setaf 2)Version$(tput sgr0):  $APPIMAGE_VERSION"
+        echo "$(tput bold)$(tput setaf 2)URL$(tput sgr0):  $WEBSITE"
+        echo "$(tput bold)$(tput setaf 2)Install dir$(tput sgr0): $BIN_PATH"
         echo
     done
 }
@@ -205,14 +203,13 @@ appimgupgradecheckallfunc () {
     APPIMG_UPGRADE_CHECK="TRUE" # Set this variable to avoid downloading unnecessary webpages in appimginfofunc
     for AppImage in $(dir -C -w 1 "$CONFDIR"/appimginstalled); do
         INSTIMG="$AppImage"
-        echo "Checking $AppImage version..."
+        echo "Checking $(tput setaf 2)$AppImage$(tput sgr0) version..."
         appimgcheckfunc "$AppImage"
         appimginfofunc # Download web pages containing app info and set variables from them
         appimgvercheckfunc
         if [ "$APPIMG_NEW_UPGRADE" = "TRUE" ]; then # Mark AppImage for upgrade if appimgvercheckfunc outputs APPIMG_NEW_UPGRADE="TRUE"
-            echo "$(tput setaf 2)New upgrade available for $AppImage -- $NEW_APPIMAGE_VERSION !$(tput sgr0)"
+            echo "$(tput setaf 2)$(tput bold)New upgrade available for $AppImage -- $NEW_APPIMAGE_VERSION !$(tput sgr0)"
             appimgsaveinfofunc "appimgupgrades/$AppImage"
-            # echo "$AppImage" >> "$CONFDIR"/upgrade-list.lst
         fi
     done
     APPIMG_UPGRADE_CHECK="FALSE"
@@ -220,19 +217,19 @@ appimgupgradecheckallfunc () {
 
 appimgupgradecheckfunc () {
     if [ ! -f "$CONFDIR"/appimginstalled/"$INSTIMG" ]; then
-        echo "$INSTIMG is not installed..."
+        echo "$(tput setaf 1)$INSTIMG is not installed...$(tput sgr0)"
     else
         APPIMG_UPGRADE_CHECK="TRUE"
-        echo "Checking $INSTIMG version..."
+        echo "Checking $(tput setaf 2)$INSTIMG$(tput sgr0) version..."
         appimgcheckfunc "$INSTIMG" # Check whether AppImage is in lists and which list it is in
         appimginfofunc # Download web pages containing app info and set variables from them
         appimgvercheckfunc
         if [ "$APPIMG_NEW_UPGRADE" = "TRUE" ]; then # Mark AppImage for upgrade if appimgvercheckfunc outputs APPIMG_NEW_UPGRADE="TRUE"
-            echo "$(tput setaf 2)New upgrade available for $INSTIMG -- $NEW_APPIMAGE_VERSION !$(tput sgr0)"
+            echo "$(tput setaf 2)$(tput bold)New upgrade available for $INSTIMG -- $NEW_APPIMAGE_VERSION !$(tput sgr0)"
             appimgsaveinfofunc "appimgupgrades/$INSTIMG"
             # echo "$INSTIMG" >> "$CONFDIR"/upgrade-list.lst
         else
-            echo "No new upgrade for $INSTIMG"
+            echo "No new upgrade for $(tput setaf 2)$INSTIMG$(tput sgr0)"
         fi
     fi
 }
@@ -242,11 +239,11 @@ appimgupdatelistfunc () { # Regenerate AppImages-direct.lst from github, downloa
     echo "Downloading AppImages-direct.lst from spm github repo..." # Download existing list of direct AppImages from spm github repo
     cd "$CONFDIR"
     rm "$CONFDIR"/AppImages-direct.lst
-    wget --quiet "https://raw.githubusercontent.com/simoniz0r/spm/master/AppImages-direct.lst" || { echo "wget failed; exiting..."; rm -rf "$CONFDIR"/cache/*; exit 1; }
+    wget --quiet "https://raw.githubusercontent.com/simoniz0r/spm/master/AppImages-direct.lst" || { echo "$(tput setaf 1)wget failed; exiting...$(tput sgr0)"; rm -rf "$CONFDIR"/cache/*; exit 1; }
     echo "AppImages-direct.lst updated!"
     echo "Downloading AppImages-github.lst from spm github repo..." # Download existing list of github AppImages from spm github repo
     rm "$CONFDIR"/AppImages-github.lst
-    wget --quiet "https://raw.githubusercontent.com/simoniz0r/spm/master/AppImages-github.lst" || { echo "wget failed; exiting..."; rm -rf "$CONFDIR"/cache/*; exit 1; }
+    wget --quiet "https://raw.githubusercontent.com/simoniz0r/spm/master/AppImages-github.lst" || { echo "$(tput setaf 1)wget failed; exiting...$(tput sgr0)"; rm -rf "$CONFDIR"/cache/*; exit 1; }
     echo "AppImages-github.lst updated!"
     if [ -z "$1" ]; then # If no AppImage specified by user, check all installed AppImage versions
         appimgupgradecheckallfunc
@@ -260,22 +257,22 @@ appimgupdatelistfunc () { # Regenerate AppImages-direct.lst from github, downloa
 appimgupdateforcefunc () {
     if [ -f "$CONFDIR"/appimginstalled/"$INSTIMG" ]; then # Show AppImage info if installed, exit if not
         . "$CONFDIR"/appimginstalled/"$INSTIMG"
-        echo "$(tput bold)Info$(tput sgr0):  $APPIMAGE_DESCRIPTION"
+        echo "$(tput bold)$(tput setaf 2)Info$(tput sgr0):  $APPIMAGE_DESCRIPTION"
         if [ -z "$APPIMAGE_NAME" ]; then
-            echo "$(tput bold)Name$(tput sgr0):  $APPIMAGE"
+            echo "$(tput bold)$(tput setaf 2)Name$(tput sgr0):  $APPIMAGE"
         else
-            echo "$(tput bold)Name$(tput sgr0):  $APPIMAGE_NAME"
+            echo "$(tput bold)$(tput setaf 2)Name$(tput sgr0):  $APPIMAGE_NAME"
         fi
-        echo "$(tput bold)Version$(tput sgr0):  $APPIMAGE_VERSION"
-        echo "$(tput bold)URL$(tput sgr0):  $WEBSITE"
-        echo "$(tput bold)Install dir$(tput sgr0): $BIN_PATH"
+        echo "$(tput bold)$(tput setaf 2)Version$(tput sgr0):  $APPIMAGE_VERSION"
+        echo "$(tput bold)$(tput setaf 2)URL$(tput sgr0):  $WEBSITE"
+        echo "$(tput bold)$(tput setaf 2)Install dir$(tput sgr0): $BIN_PATH"
         echo
     else
-        echo "AppImage not found!"
+        echo "$(tput setaf 1)AppImage not found!$(tput sgr0)"
         rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
         exit 1
     fi
-    echo "Marking $INSTIMG for upgrade by force..."
+    echo "Marking $(tput setaf 2)$INSTIMG$(tput sgr0) for upgrade by force..."
     . "$CONFDIR"/appimginstalled/"$INSTIMG"
     APPIMAGE_NAME="$APPIMAGE"
     NEW_APPIMAGE_VERSION="$APPIMAGE_VERSION"
@@ -287,7 +284,7 @@ appimgupdateforcefunc () {
 appimgdlfunc () { # wget latest url from direct website or github repo and wget it
     if [ "$DIRECT_IMG" = "TRUE" ]; then # If AppImage is DIRECT, use method below to download it
         cd "$CONFDIR"/cache
-        wget --read-timeout=30 --trust-server-names "$DIRECT_APPIMAGE_URL" || { echo "wget $DIRECT_APPIMAGE_URL failed; exiting..."; rm -rf "$CONFDIR"/cache/*; exit 1; }
+        wget --read-timeout=30 --trust-server-names "$DIRECT_APPIMAGE_URL" || { echo "$(tput setaf 1)wget $DIRECT_APPIMAGE_URL failed; exiting...$(tput sgr0)"; rm -rf "$CONFDIR"/cache/*; exit 1; }
         APPIMAGE_NAME="$(dir -C -w 1 "$CONFDIR"/cache/ | grep -iw '.*AppImage')"
         if [ -z "$APPIMAGE_NAME" ]; then
             APPIMAGE_NAME="$(dir -C -w 1 "$CONFDIR"/cache/ | grep -iw '.*App')"
@@ -295,38 +292,38 @@ appimgdlfunc () { # wget latest url from direct website or github repo and wget 
         NEW_APPIMAGE_VERSION="$APPIMAGE_NAME"
         mv "$CONFDIR"/cache/"$APPIMAGE_NAME" "$CONFDIR"/cache/"$INSTIMG"
     elif [ "$GITHUB_IMG" = "TRUE" ]; then # If AppImage is from github, use method below to download it
-        wget --read-timeout=30 "$GITHUB_APPIMAGE_URL" -O "$CONFDIR"/cache/"$INSTIMG" || { echo "wget $GITHUB_APPIMAGE_URL failed; exiting..."; rm -rf "$CONFDIR"/cache/*; exit 1; }
+        wget --read-timeout=30 "$GITHUB_APPIMAGE_URL" -O "$CONFDIR"/cache/"$INSTIMG" || { echo "$(tput setaf 1)wget $GITHUB_APPIMAGE_URL failed; exiting...$(tput sgr0)"; rm -rf "$CONFDIR"/cache/*; exit 1; }
     fi
 }
 
 appimginstallfunc () { # chmod and mv AppImages to /usr/local/bin and create file containing install info in "$CONFDIR"/appimginstalled
     chmod a+x "$CONFDIR"/cache/"$INSTIMG" # Make AppImage executable
-    echo "Moving $INSTIMG to /usr/local/bin/$INSTIMG ..."
+    echo "Moving $(tput setaf 2)$INSTIMG$(tput sgr0) to /usr/local/bin/$INSTIMG ..."
     sudo mv "$CONFDIR"/cache/"$INSTIMG" /usr/local/bin/"$INSTIMG" || { echo "Failed!"; rm -rf "$CONFDIR"/cache/*; exit 1; } # Move AppImage to /usr/local/bin
     appimgsaveinfofunc "appimginstalled/$INSTIMG"
-    echo "$APPIMAGE_NAME has been installed to /usr/local/bin/$INSTIMG !"
+    echo "$(tput setaf 2)$APPIMAGE_NAME$(tput sgr0) has been installed to /usr/local/bin/$INSTIMG !"
 }
 
 appimginstallstartfunc () {
     if [ -f "$CONFDIR"/tarinstalled/"$INSTIMG" ] || [ -f "$CONFDIR"/appimginstalled/"$INSTIMG" ]; then # Exit if already installed by spm
-        echo "$INSTIMG is already installed."
-        echo "Use 'spm update' to check for a new version of $INSTIMG."
+        echo "$(tput setaf 1)$INSTIMG is already installed."
+        echo "Use 'spm update' to check for a new version of $INSTIMG.$(tput sgr0)"
         rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
         exit 1
     fi
     if type >/dev/null 2>&1 "$INSTIMG" && [ "$INSTIMG" != "spm" ]; then # If a command by the same name as AppImage already exists on user's system, exit
-        echo "$INSTIMG is already installed and not managed by spm; exiting..."
+        echo "$(tput setaf 1)$INSTIMG is already installed and not managed by spm; exiting...$(tput sgr0)"
         rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
         exit 1
     fi
     if [ -f "/usr/local/bin/$INSTIMG" ]; then # If for some reason type does't pick up same file existing as AppImage name in /usr/local/bin, exit
-        echo "/usr/local/bin/$INSTIMG exists; exiting..."
+        echo "$(tput setaf 1)/usr/local/bin/$INSTIMG exists; exiting...$(tput sgr0)"
         rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
         exit 1
     fi
     appimgcheckfunc "$INSTIMG" # Check whether AppImage is in lists and which list it is in
     if [ "$DIRECT_IMG" = "FALSE" ] && [ "$GITHUB_IMG" = "FALSE" ];then # If AppImage not in either list, exit
-        echo "$INSTIMG is not in AppImages-direct.lst or AppImages-github.lst; try running 'spm update'."
+        echo "$(tput setaf 1)$INSTIMG is not in AppImages-direct.lst or AppImages-github.lst; try running 'spm update'.$(tput sgr0)"
         rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
         exit 1
     fi
@@ -337,11 +334,11 @@ appimginstallstartfunc () {
         exit 1
     fi
     echo "AppImage: $APPIMAGE_NAME"
-    echo "AppImage for $INSTIMG will be installed." # Ask user if sure they want to install AppImage
+    echo "AppImage for $(tput setaf 2)$INSTIMG$(tput sgr0) will be installed." # Ask user if sure they want to install AppImage
     read -p "Continue? Y/N " INSTANSWER
     case $INSTANSWER in
         N*|n*) # If answer is no, exit
-            echo "$INSTIMG was not installed."
+            echo "$(tput setaf 1)$INSTIMG was not installed.$(tput sgr0)"
             rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
             exit 0
             ;;
@@ -349,13 +346,13 @@ appimginstallstartfunc () {
 }
 
 appimgupgradefunc () { # rm old AppImage, chmod, and mv new AppImage to /usr/local/bin
-    echo "Removing previous $INSTIMG version..."
+    echo "Removing previous $(tput setaf 2)$INSTIMG$(tput sgr0) version..."
     sudo rm /usr/local/bin/"$INSTIMG" # Remove old AppImage before upgrading
     chmod a+x "$CONFDIR"/cache/"$INSTIMG" # Make new AppImage executable
-    echo "Moving $INSTIMG to /usr/local/bin/$INSTIMG ..." || { echo "Failed!"; rm -rf "$CONFDIR"/cache/*; exit 1; }
+    echo "Moving $(tput setaf 2)$INSTIMG$(tput sgr0) to /usr/local/bin/$INSTIMG ..." || { echo "$(tput setaf 1)Failed!$(tput sgr0)"; rm -rf "$CONFDIR"/cache/*; exit 1; }
     sudo mv "$CONFDIR"/cache/"$INSTIMG" /usr/local/bin/"$INSTIMG" # Move new AppImage to /usr/local/bin
     appimgsaveinfofunc "appimginstalled/$INSTIMG"
-    echo "$INSTIMG has been upgraded to $INSTIMG version $APPIMAGE_VERSION !"
+    echo "$(tput setaf 2)$INSTIMG$(tput sgr0) has been upgraded to version $APPIMAGE_VERSION !"
 }
 
 appimgupgradestartallfunc () {
@@ -376,7 +373,7 @@ appimgupgradestartallfunc () {
             Y*|y*) # Do upgrade functions if yes
                 for UPGRADE_IMG in $(dir -C -w 1 "$CONFDIR"/appimgupgrades); do
                     INSTIMG="$UPGRADE_IMG"
-                    echo "Downloading $INSTIMG..."
+                    echo "Downloading $(tput setaf 2)$INSTIMG$(tput sgr0)..."
                     appimgcheckfunc "$INSTIMG" # Check whether AppImage is in lists and which list it is in
                     appimginfofunc
                     appimgdlfunc "$INSTIMG" # Download AppImage from Direct or Github
@@ -386,7 +383,7 @@ appimgupgradestartallfunc () {
                 done
                 ;;
             N*|n*) # Exit if no
-                echo "No AppImages were upgraded; exiting..."
+                echo "$(tput setaf 1)No AppImages were upgraded; exiting...$(tput sgr0)"
                 rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
                 exit 0
                 ;;
@@ -395,7 +392,7 @@ appimgupgradestartallfunc () {
 }
 
 appimgupgradestartfunc () {
-    echo "$INSTIMG will be upgraded to the latest version." # Ask user if sure about upgrade
+    echo "$(tput setaf 2)$INSTIMG$(tput sgr0) will be upgraded to the latest version." # Ask user if sure about upgrade
     read -p "Continue? Y/N " UPGRADEANSWER
     case $UPGRADEANSWER in
         Y*|y*) # Do upgrade functions if yes
@@ -408,7 +405,7 @@ appimgupgradestartfunc () {
             exit 0
             ;;
         N*|n*) # Exit if no
-            echo "$INSTIMG was not upgraded."
+            echo "$(tput setaf 1)$INSTIMG was not upgraded.$(tput sgr0)"
             rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
             exit 0
             ;;
@@ -417,11 +414,11 @@ appimgupgradestartfunc () {
 
 appimgremovefunc () { # rm AppImage in /usr/local/bin and remove install info file
     . "$CONFDIR"/appimginstalled/"$REMIMG"
-    echo "Removing $REMIMG..." # Ask user if sure they want to remove AppImage
+    echo "Removing $(tput setaf 2)$REMIMG$(tput sgr0)..." # Ask user if sure they want to remove AppImage
     read -p "Continue? Y/N " IMGREMANSWER
     case $IMGREMANSWER in
         N*|n*) # If user answers no, exit
-            echo "$REMIMG was not removed."
+            echo "$(tput setaf 1)$REMIMG was not removed.$(tput sgr0)"
             rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
             exit 0
             ;;
@@ -432,5 +429,5 @@ appimgremovefunc () { # rm AppImage in /usr/local/bin and remove install info fi
     echo "Removing /usr/local/bin/$REMIMG ..."
     sudo rm /usr/local/bin/"$REMIMG" || { echo "Failed!"; rm -rf "$CONFDIR"/cache/*; exit 1; } # Remove AppImage from /usr/local/bin
     rm "$CONFDIR"/appimginstalled/"$REMIMG" # Remove installed info file for AppImage
-    echo "$REMIMG has been removed!"
+    echo "$(tput setaf 2)$REMIMG$(tput sgr0) has been removed!"
 }

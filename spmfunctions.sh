@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.3.9"
+X="0.4.0"
 # Set spm version
 
 helpfunc () { # All unknown arguments come to this function; display help for spm
@@ -43,12 +43,12 @@ spmdepchecksfunc () { # Run dep checks, exit if deps not present. If SKIP_DEP_CH
     if [ "$SKIP_DEP_CHECKS" = "FALSE" ]; then
         if ! type wget >/dev/null 2>&1; then
             MISSING_DEPS="TRUE"
-            echo "wget is not installed!"
+            echo "$(tput setaf 1)wget is not installed!$(tput sgr0)"
         fi
         if [ "$MISSING_DEPS" = "TRUE" ]; then
-            echo "Missing one or more packages required to run; exiting..."
+            echo "$(tput setaf 1)Missing one or more packages required to run; exiting..."
             echo "If you are sure you have the required dependencies, but spm does not detect them"
-            echo "change SKIP_DEP_CHECKS to TRUE in $CONFDIR/spm.conf"
+            echo "change SKIP_DEP_CHECKS to TRUE in $CONFDIR/spm.conf$(tput sgr0)"
             exit 1
         fi
     fi
@@ -60,13 +60,13 @@ appimgfunctioncheckfunc () { # Checks to make sure that appimgfunctions.sh exist
     if [ -f $RUNNING_DIR/appimgfunctions.sh ]; then
         FUNCTIONS_VER="$(cat "$RUNNING_DIR"/appimgfunctions.sh | sed -n 9p | cut -f2 -d'"')"
         if [ "$X" != "$FUNCTIONS_VER" ]; then
-            echo "appimgfunctions.sh $FUNCTIONS_VER version does not match $X !"
-            echo "appimgfunctions.sh is out of date! Please download the full release of spm from https://github.com/simoniz0r/spm/releases !"
+            echo "$(tput setaf 1)appimgfunctions.sh $FUNCTIONS_VER version does not match $X !"
+            echo "appimgfunctions.sh is out of date! Please download the full release of spm from https://github.com/simoniz0r/spm/releases !$(tput sgr0)"
             exit 1
         fi
     else
-        echo "Missing required file $RUNNING_DIR/appimgfunctions.sh !"
-        echo "appimgfunctions.sh is missing! Please download the full release of spm from https://github.com/simoniz0r/spm/releases !"
+        echo "$(tput setaf 1)Missing required file $RUNNING_DIR/appimgfunctions.sh !"
+        echo "appimgfunctions.sh is missing! Please download the full release of spm from https://github.com/simoniz0r/spm/releases !$(tput sgr0)"
         exit 1
     fi
 }
@@ -75,13 +75,13 @@ tarfunctioncheckfunc () { # Checks to make sure that tarfunctions.sh exists and 
     if [ -f $RUNNING_DIR/tarfunctions.sh ]; then
         FUNCTIONS_VER="$(cat "$RUNNING_DIR"/tarfunctions.sh | sed -n 9p | cut -f2 -d'"')"
         if [ "$X" != "$FUNCTIONS_VER" ]; then
-            echo "tarfunctions.sh $FUNCTIONS_VER version does not match $X !"
-            echo "tarfunctions.sh is out of date! Please download the full release of spm from https://github.com/simoniz0r/spm/releases !"
+            echo "$(tput setaf 1)tarfunctions.sh $FUNCTIONS_VER version does not match $X !"
+            echo "tarfunctions.sh is out of date! Please download the full release of spm from https://github.com/simoniz0r/spm/releases !$(tput sgr0)"
             exit 1
         fi
     else
-        echo "Missing required file $RUNNING_DIR/tarfunctions.sh !"
-        echo "tarfunctions.sh is missing! Please download the full release of spm from https://github.com/simoniz0r/spm/releases !"
+        echo "$(tput setaf 1)Missing required file $RUNNING_DIR/tarfunctions.sh !"
+        echo "tarfunctions.sh is missing! Please download the full release of spm from https://github.com/simoniz0r/spm/releases !$(tput sgr0)"
         exit 1
     fi
 }
@@ -90,11 +90,11 @@ spmlockfunc () { # Create "$CONFDIR"/cache/spm.lock file and prevent multiple in
     if [ ! -f "$CONFDIR"/cache/spm.lock ]; then
         touch "$CONFDIR"/cache/spm.lock
     else
-        echo "spm.lock file is still present.  Did spm exit correctly?  Are you sure spm isn't running?"
-        read -p "Remove spm.lock file and run spm? Y/N " LOCKANSWER
+        echo "$(tput setaf 1)spm.lock file is still present.  Did spm exit correctly?  Are you sure spm isn't running?"
+        read -p "Remove spm.lock file and run spm? Y/N $(tput sgr0)" LOCKANSWER
         case $LOCKANSWER in
             n*|N*)
-                echo "spm.lock file was not removed; make sure spm is finished before running spm again."
+                echo "$(tput setaf 1)spm.lock file was not removed; make sure spm is finished before running spm again.$(tput sgr0)"
                 exit 1
                 ;;
         esac
@@ -105,13 +105,13 @@ spmlockfunc () { # Create "$CONFDIR"/cache/spm.lock file and prevent multiple in
 spmvercheckfunc () { # Check spm version when running update argument and notify of new version if available
     VERTEST="$(wget -q "https://raw.githubusercontent.com/simoniz0r/spm/master/spm" -O - | sed -n '9p' | tr -d 'X="')" # Use wget sed and tr to check current spm version from github
     if [[ "$VERTEST" != "$X" ]]; then # If current version not equal to installed version, notify of new version
-        echo "A new version of spm is available!"
+        echo "$(tput setaf 2)A new version of spm is available!"
         echo "Current version: $VERTEST -- Installed version: $X"
         if type >/dev/null 2>&1 spm; then # If spm is installed, suggest upgrading spm through spm
-            echo "Use 'spm' to upgrade to the latest version!"
+            echo "Use 'spm' to upgrade to the latest version!$(tput sgr0)"
             echo
         else # If not, output link to releases page
-            echo "Download the latest version at https://github.com/simoniz0r/appimgman/releases/latest"
+            echo "Download the latest version at https://github.com/simoniz0r/appimgman/releases/latest$(tput sgr0)"
             echo
         fi
     fi
@@ -126,7 +126,7 @@ updatestartfunc () { # Run relevant update argument based on user input
             TARPKG="$1"
             tarupdatelistfunc "$TARPKG" # Check specified tar package for upgrade
         else
-            echo "Package not found!"
+            echo "$(tput setaf 1)Package not found!$(tput sgr0)"
             rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
             exit 1
         fi
@@ -196,7 +196,7 @@ liststartfunc () { # Run relevant list function based on user input
         echo
         tarlistfunc # List info for specified tar package if available
         if [ "$APPIMG_NOT_FOUND" = "TRUE" ] && [ "$TARPKG_NOT_FOUND" = "TRUE" ]; then # If both tarfunctions.sh and appimgfunctions.sh output no packages found, tell user package not found
-            echo "$LISTIMG not found in package lists!"
+            echo "$(tput setaf 1)$LISTIMG not found in package lists!$(tput sgr0)"
         fi
         rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
         exit 0
