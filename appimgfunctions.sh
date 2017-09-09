@@ -121,7 +121,7 @@ appimginfofunc () { # Set variables and temporarily store pages in "$CONFDIR"/ca
 
 appimglistfunc () {
     if [ -f "$CONFDIR"/appimginstalled/"$LISTIMG" ]; then # If installed, list installed info
-        echo "$LISTIMG AppImage installed information:"
+        echo "$(tput bold)$LISTIMG AppImage installed information$(tput sgr0):"
         . "$CONFDIR"/appimginstalled/"$LISTIMG"
         echo "$(tput bold)Info$(tput sgr0):  $APPIMAGE_DESCRIPTION"
         if [ -z "$APPIMAGE_NAME" ]; then
