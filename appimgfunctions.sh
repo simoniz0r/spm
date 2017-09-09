@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.4.0"
+X="0.4.1"
 # Set spm version
 
 # Set variables
@@ -180,8 +180,16 @@ appimgvercheckfunc () { # Check version by getting the latest version from the b
         APPIMG_NEW_UPGRADE="FALSE"
         APPIMAGE_ERROR="FALSE"
     elif [[ "$NEW_APPIMAGE_VERSION" != "$APPIMAGE_VERSION" ]]; then # If current AppImage version does not equal new AppImage version, mark for upgrade
-        APPIMG_NEW_UPGRADE="TRUE"
-        APPIMAGE_ERROR="FALSE"
+        case $NEW_APPIMAGE_VERSION in
+            *Cannot*)
+                APPIMG_NEW_UPGRADE="FALSE"
+                APPIMAGE_ERROR="FALSE"
+                ;;
+            *)
+                APPIMG_NEW_UPGRADE="TRUE"
+                APPIMAGE_ERROR="FALSE"
+                ;;
+        esac
     elif [ "$APPIMG_FORCE_UPGRADE" = "TRUE" ]; then # This is used for the upgrade-force argument
         APPIMG_NEW_UPGRADE="TRUE"
         APPIMG_FORCE_UPGRADE=""
