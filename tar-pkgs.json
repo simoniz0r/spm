@@ -154,7 +154,7 @@
         "bin_path": "/usr/local/bin/kpassman",
         "config_path": "",
         "description": "A password manager that uses gpg to encrypt and decrypt stored passwords and uses kdialog to provide a GUI.",
-        "dependencies": "gpg xclip kdialog"
+        "dependencies": "gpg xclip kdialog apg (optional - used for generating passwords)"
     },
     "nvim": {
         "instdir": "/opt/nvim",
