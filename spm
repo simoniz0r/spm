@@ -16,9 +16,7 @@ if [ "$EUID" = "0" ]; then # Prevent spm from being ran as root
     exit 1
 fi
 
-if [ -f ~/.config/simplepackagemanager/spm.conf ]; then # Load config file from the config dir spm is using to set $CONFDIR variable and $SKIP_DEP_CHECKS if they are different than default
-    . ~/.config/simplepackagemanager/spm.conf
-elif [ -f ~/.config/spm/spm.conf ]; then
+if [ -f ~/.config/spm/spm.conf ]; then
     . ~/.config/spm/spm.conf
 fi
 
@@ -26,13 +24,6 @@ if [ ! -d "$CONFDIR" ]; then # Create dirs for configs, config files, and downlo
     echo "spm is being ran for the first time."
     echo "Creating config directories..."
     mkdir "$CONFDIR"
-    case $? in
-        1)
-            echo "Failed to create $HOME/.config/spm; falling back to $HOME/.config/simplepackagemanager ..."
-            CONFDIR="$HOME/.config/simplepackagemanager"
-            mkdir "$CONFDIR" || { echo "Why are we still failing here? Something wrong with $HOME/.config ?"; exit 1; }
-            ;;
-    esac
     mkdir "$CONFDIR"/tarinstalled
     mkdir "$CONFDIR"/appimginstalled
     mkdir "$CONFDIR"/tarupgrades
