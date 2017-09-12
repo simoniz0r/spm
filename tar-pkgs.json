@@ -219,7 +219,7 @@
         "bin_path": "/usr/local/bin/spm",
         "config_path": "$HOME/.config/spm",
         "description": "spm is a simple commandline package manager that installs AppImages and precompiled tar archives.  Install this tar to be able to use spm as a command and to allow spm to upgrade itself.",
-        "dependencies": "coreutils tar wget python3.x"
+        "dependencies": "coreutils tar wget"
     },
     "todo": {
         "instdir": "/opt/todo",
