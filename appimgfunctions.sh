@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.4.1"
+X="0.4.2"
 # Set spm version
 
 # Set variables
@@ -35,43 +35,39 @@ appimgsaveinfofunc () { # Save install info to "$CONFDIR"/appimginstalled/AppIma
 }
 
 appimglistallfunc () {
-    echo "$(tput bold)$(tput setaf 2)$(cat "$CONFDIR"/AppImages-github.lst | wc -l) Github AppImages available for install$(tput sgr0):"
+    echo "$(tput bold)$(tput setaf 2)$(cat "$CONFDIR"/AppImages-github.yaml | cut -f1 -d' ' | cut -f1 -d':' | sed '/^$/d' | wc -l) Github AppImages available for install$(tput sgr0):"
     echo
-    cat "$CONFDIR"/AppImages-github.lst | cut -f1 -d" " | pr -tT --column=3 -w 125
+    cat "$CONFDIR"/AppImages-github.yaml | cut -f1 -d' ' | cut -f1 -d':' | sed '/^$/d' | sort | pr -tTw 125 -3
     echo
-    echo "$(tput bold)$(tput setaf 2)$(cat "$CONFDIR"/AppImages-direct.lst | wc -l) Direct AppImages available for install $(tput setaf 3)(may have issues finding new upgrades after install)$(tput sgr0):"
+    echo "$(tput bold)$(tput setaf 2)$(cat "$CONFDIR"/AppImages-direct.yaml | cut -f1 -d' ' | cut -f1 -d':' | sed '/^$/d' | wc -l) Direct AppImages available for install $(tput setaf 3)(may have issues finding new upgrades after install)$(tput sgr0):"
     echo
-    cat "$CONFDIR"/AppImages-direct.lst | cut -f1 -d" " | pr -tT --column=3 -w 125
+    cat "$CONFDIR"/AppImages-direct.yaml | cut -f1 -d' ' | cut -f1 -d':' | sed '/^$/d' | sort | pr -tTw 125 -3
 }
 
 appimgcheckfunc () { # check user input against list of known apps here
-    if grep -qow "$1" "$CONFDIR"/AppImages-direct.lst; then # Check AppImages-direct.lst for AppImages from Direct
-        if [ "$(grep -wm 1 "$1" "$CONFDIR"/AppImages-direct.lst | cut -f1 -d" ")" != "$1" ]; then
-            GITHUB_IMG="FALSE"
+    case $(cat "$CONFDIR"/AppImages-direct.yaml | "$RUNNING_DIR"/yaml r - "$1") in
+        null)
             DIRECT_IMG="FALSE"
-        else
-            APPIMG_NAME="$(grep -wm 1 "$1" "$CONFDIR"/AppImages-direct.lst  | cut -f2 -d" ")"
+            ;;
+        *)
+            APPIMG_NAME="$(cat "$CONFDIR"/AppImages-direct.yaml | "$RUNNING_DIR"/yaml r - "$1".name)"
             DIRECT_IMG="TRUE"
+            ;;
+    esac
+    case $(cat "$CONFDIR"/AppImages-github.yaml | "$RUNNING_DIR"/yaml r - "$1") in
+        null)
             GITHUB_IMG="FALSE"
-        fi
-    elif grep -qow "$1" "$CONFDIR"/AppImages-github.lst; then # Check AppImages-github.lst for AppImages from github
-        if [ "$(grep -wm 1 "$1" "$CONFDIR"/AppImages-github.lst | cut -f1 -d" ")" != "$1" ]; then
-            GITHUB_IMG="FALSE"
-            DIRECT_IMG="FALSE"
-        else
-            APPIMG_NAME="$(grep -wm 1 "$1" "$CONFDIR"/AppImages-github.lst | cut -f2 -d" ")"
-            DIRECT_IMG="FALSE"
+            ;;
+        *)
+            APPIMG_NAME="$(cat "$CONFDIR"/AppImages-github.yaml | "$RUNNING_DIR"/yaml r - "$1".name)"
             GITHUB_IMG="TRUE"
-        fi
-    else
-        DIRECT_IMG="FALSE"
-        GITHUB_IMG="FALSE"
-    fi
+            ;;
+    esac
 }
 
 appimggithubinfofunc () {
-    GITHUB_APP_URL="$(grep -wm 1 "$INSTIMG" "$CONFDIR"/AppImages-github.lst | cut -f3 -d" ")"
-    APPIMG_GITHUB_API_URL="$(grep -wm 1 "$INSTIMG" "$CONFDIR"/AppImages-github.lst | cut -f4- -d" ")"
+    GITHUB_APP_URL="$("$RUNNING_DIR"/yaml r "$CONFDIR"/AppImages-github.yaml "$INSTIMG".url)"
+    APPIMG_GITHUB_API_URL="$("$RUNNING_DIR"/yaml r "$CONFDIR"/AppImages-github.yaml "$INSTIMG".apiurl)"
     if [ -z "$GITHUB_TOKEN" ]; then
         wget --quiet "$APPIMG_GITHUB_API_URL" -O "$CONFDIR"/cache/"$INSTIMG"-release || { echo "$(tput setaf 1)wget $APPIMG_GITHUB_API_URL failed; has the repo been renamed or deleted?$(tput sgr0)"; rm -rf "$CONFDIR"/cache/*; exit 1; }
     else
@@ -95,7 +91,7 @@ appimggithubinfofunc () {
 }
 
 appimgdirectinfofunc () {
-    DIRECT_APPIMAGE_URL="$(grep -w "$INSTIMG" "$CONFDIR"/AppImages-direct.lst | cut -f3- -d" ")"
+    DIRECT_APPIMAGE_URL="$("$RUNNING_DIR"/yaml r "$CONFDIR"/AppImages-direct.yaml "$INSTIMG".url)"
     wget -S --read-timeout=30 --spider "$DIRECT_APPIMAGE_URL" -o "$CONFDIR"/cache/"$INSTIMG".latest
     NEW_APPIMAGE_VERSION="$(grep -o "Location:.*" "$CONFDIR"/cache/"$INSTIMG".latest | cut -f2 -d" ")"
     NEW_APPIMAGE_VERSION="${NEW_APPIMAGE_VERSION##*/}"
@@ -242,17 +238,17 @@ appimgupgradecheckfunc () {
     fi
 }
 
-appimgupdatelistfunc () { # Regenerate AppImages-direct.lst from github, download AppImages-github.lst from github, and check versions
+appimgupdatelistfunc () { # Regenerate AppImages-direct.yaml from github, download AppImages-github.yaml from github, and check versions
     APPIMG_UPGRADE_CHECK="TRUE"
-    echo "Downloading AppImages-direct.lst from spm github repo..." # Download existing list of direct AppImages from spm github repo
+    echo "Downloading AppImages-direct.yaml from spm github repo..." # Download existing list of direct AppImages from spm github repo
     cd "$CONFDIR"
-    rm "$CONFDIR"/AppImages-direct.lst
-    wget --quiet "https://raw.githubusercontent.com/simoniz0r/spm/master/AppImages-direct.lst" || { echo "$(tput setaf 1)wget failed; exiting...$(tput sgr0)"; rm -rf "$CONFDIR"/cache/*; exit 1; }
-    echo "AppImages-direct.lst updated!"
-    echo "Downloading AppImages-github.lst from spm github repo..." # Download existing list of github AppImages from spm github repo
-    rm "$CONFDIR"/AppImages-github.lst
-    wget --quiet "https://raw.githubusercontent.com/simoniz0r/spm/master/AppImages-github.lst" || { echo "$(tput setaf 1)wget failed; exiting...$(tput sgr0)"; rm -rf "$CONFDIR"/cache/*; exit 1; }
-    echo "AppImages-github.lst updated!"
+    rm "$CONFDIR"/AppImages-direct.yaml
+    wget --quiet "https://raw.githubusercontent.com/simoniz0r/spm/master/AppImages-direct.yaml" || { echo "$(tput setaf 1)wget failed; exiting...$(tput sgr0)"; rm -rf "$CONFDIR"/cache/*; exit 1; }
+    echo "AppImages-direct.yaml updated!"
+    echo "Downloading AppImages-github.yaml from spm github repo..." # Download existing list of github AppImages from spm github repo
+    rm "$CONFDIR"/AppImages-github.yaml
+    wget --quiet "https://raw.githubusercontent.com/simoniz0r/spm/master/AppImages-github.yaml" || { echo "$(tput setaf 1)wget failed; exiting...$(tput sgr0)"; rm -rf "$CONFDIR"/cache/*; exit 1; }
+    echo "AppImages-github.yaml updated!"
     if [ -z "$1" ]; then # If no AppImage specified by user, check all installed AppImage versions
         appimgupgradecheckallfunc
     else # If user inputs AppImage, check that AppImage version
@@ -331,7 +327,7 @@ appimginstallstartfunc () {
     fi
     appimgcheckfunc "$INSTIMG" # Check whether AppImage is in lists and which list it is in
     if [ "$DIRECT_IMG" = "FALSE" ] && [ "$GITHUB_IMG" = "FALSE" ];then # If AppImage not in either list, exit
-        echo "$(tput setaf 1)$INSTIMG is not in AppImages-direct.lst or AppImages-github.lst; try running 'spm update'.$(tput sgr0)"
+        echo "$(tput setaf 1)$INSTIMG is not in AppImages-direct.yaml or AppImages-github.yaml; try running 'spm update'.$(tput sgr0)"
         rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
         exit 1
     fi

@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.4.1"
+X="0.4.2"
 # Set spm version
 CONFDIR="$HOME/.config/spm"
 SKIP_DEP_CHECKS="FALSE"
@@ -32,10 +32,10 @@ if [ ! -d "$CONFDIR" ]; then # Create dirs for configs, config files, and downlo
     echo "CONFDIR="\"$CONFDIR\""" > "$CONFDIR"/spm.conf
     echo "GITHUB_TOKEN="\"\""" >> "$CONFDIR"/spm.conf
     echo "SKIP_DEP_CHECKS="\"FALSE\""" >> "$CONFDIR"/spm.conf
-    echo "Downloading AppImages-github.lst from spm github..."
-    wget --quiet "https://raw.githubusercontent.com/simoniz0r/spm/master/AppImages-github.lst" -O "$CONFDIR"/AppImages-github.lst
-    echo "Downloading AppImages-direct.lst from spm github..."
-    wget --quiet "https://raw.githubusercontent.com/simoniz0r/spm/master/AppImages-direct.lst" -O "$CONFDIR"/AppImages-direct.lst
+    echo "Downloading AppImages-github.yaml from spm github..."
+    wget --quiet "https://raw.githubusercontent.com/simoniz0r/spm/master/AppImages-github.yaml" -O "$CONFDIR"/AppImages-github.yaml
+    echo "Downloading AppImages-direct.yaml from spm github..."
+    wget --quiet "https://raw.githubusercontent.com/simoniz0r/spm/master/AppImages-direct.yaml" -O "$CONFDIR"/AppImages-direct.yaml
     echo "Downloading tar-pkgs.json from spm github repo..."
     wget --quiet "https://raw.githubusercontent.com/simoniz0r/spm/master/tar-pkgs.json" -O "$CONFDIR"/tar-pkgs.json
     echo "First run operations complete!"
@@ -264,14 +264,14 @@ case $1 in
         exit 0
         ;;
     search|-s) # Use grep to search package lists based on user input and output matching packages and which list they are in
-        if cat "$CONFDIR"/AppImages-github.lst | cut -f1 -d" " | grep -q "$2"; then
+        if cat "$CONFDIR"/AppImages-github.yaml | cut -f1 -d" " | grep -q "$2"; then
             echo "$(tput bold)$(tput setaf 2)Github AppImage(s)$(tput sgr0):"
-            cat "$CONFDIR"/AppImages-github.lst | cut -f1 -d" " | grep "$2"
+            cat "$CONFDIR"/AppImages-github.yaml | cut -f1 -d" " | grep "$2"
             echo
         fi
-        if cat "$CONFDIR"/AppImages-direct.lst | cut -f1 -d" " | grep -q "$2"; then
+        if cat "$CONFDIR"/AppImages-direct.yaml | cut -f1 -d" " | grep -q "$2"; then
             echo "$(tput bold)$(tput setaf 2)Direct AppImage(s)$(tput sgr0):"
-            cat "$CONFDIR"/AppImages-direct.lst | cut -f1 -d" " | grep "$2"
+            cat "$CONFDIR"/AppImages-direct.yaml | cut -f1 -d" " | grep "$2"
             echo
         fi
         if echo "$TAR_LIST" | grep -q "$2"; then

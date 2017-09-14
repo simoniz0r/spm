@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.4.1"
+X="0.4.2"
 # Set spm version
 TAR_LIST="$(echo -e $(grep '"available"' "$CONFDIR"/tar-pkgs.json | cut -f7 -d" " | tr -d ',"'))"
 
@@ -44,6 +44,10 @@ targithubinfofunc () { # Gets updated_at, tar url, and description for specified
     else
         wget --quiet --auth-no-challenge --header="Authorization: token "$GITHUB_TOKEN"" "$TAR_API_URI" -O "$CONFDIR"/cache/"$TARPKG"-release || { echo "$(tput setaf 1)wget $TAR_API_URI failed; is your token valid?$(tput sgr0)"; rm -rf "$CONFDIR"/cache/*; exit 1; }
     fi
+    # cat "$CONFDIR"/cache/"$TARPKG"-release | jq --raw-output '.[].assets[] | select(.name | contains(".tar"), contains(".tar.gz")) | select(.name | contains("ia32") | not) | select(.name | contains("i386") | not) | select(.name | contains("i686") | not) | { name: .name, updated: .updated_at, url: .browser_download_url}' | sed 's%{%data:%g' | tr -d '",}' > "$CONFDIR"/cache/"$TARPKG"release
+    # NEW_TARFILE="$(cat "$CONFDIR"/cache/"$TARPKG"release | "$RUNNING_DIR"/yaml r - data.name)"
+    # TAR_GITHUB_NEW_COMMIT="$(cat "$CONFDIR"/cache/"$TARPKG"release | "$RUNNING_DIR"/yaml r - data.updated)"
+    # TAR_GITHUB_NEW_DOWNLOAD="$(cat "$CONFDIR"/cache/"$TARPKG"release | "$RUNNING_DIR"/yaml r - data.url)"
     NEW_TARFILE="$(grep -iv '.*ia32*.\|.*i686*.\|.*i386*.' $CONFDIR/cache/$TARPKG-release | grep -i "$TARPKG" | grep -im 1 '"name":*..*linux*..*.tar.*.' | cut -f4 -d'"')"
     TAR_GITHUB_NEW_COMMIT="$(grep -iv '.*ia32*.\|.*i686*.\|.*i386*.' $CONFDIR/cache/$TARPKG-release  | grep -B 1 -im 1 '"browser_download_url":*..*linux*..*.tar.*.' | cut -f4 -d'"' | head -n 1)"
     TAR_GITHUB_NEW_DOWNLOAD="$(grep -iv '.*ia32*.\|.*i686*.\|.*i386*.' $CONFDIR/cache/$TARPKG-release | grep -i "$TARPKG" | grep -im 1 '"browser_download_url":*..*linux*..*.tar.*.' | cut -f4 -d'"')"
@@ -73,34 +77,35 @@ targithubinfofunc () { # Gets updated_at, tar url, and description for specified
 }
 
 tarappcheckfunc () { # check user input against list of known apps here
-    # echo "$TAR_LIST" | grep -qwm 1 "$1"
-    # TAR_STATUS="$?"
-    if [ "$(echo "$TAR_LIST" | grep -wm 1 "$1")" = "$1" ]; then
-        KNOWN_TAR="TRUE"
-    else
-        KNOWN_TAR="FALSE"
-    fi
+    case $(cat "$CONFDIR"/tar-pkgs.json | "$RUNNING_DIR"/yaml r - "$TARPKG") in
+        null)
+            KNOWN_TAR="FALSE"
+            ;;
+        *)
+            KNOWN_TAR="TRUE"
+            ;;
+    esac
     case $KNOWN_TAR in
         TRUE)
-            TARPKG_NAME="$(cat $CONFDIR/tar-pkgs.json | tr '\\' '\n' | grep -iowm 1 "$1" | cut -f2 -d'"')"
+            # TARPKG_NAME="$(cat $CONFDIR/tar-pkgs.json | tr '\\' '\n' | grep -iowm 1 "$1" | cut -f2 -d'"')"
             if [ ! -z "$DOWNLOAD_SOURCE" ]; then
                 TAR_DOWNLOAD_SOURCE="$DOWNLOAD_SOURCE"
             fi
-            INSTDIR="$(grep -w -A 11 "\"$TARPKG_NAME\"" "$CONFDIR"/tar-pkgs.json | grep -w '"instdir"' | cut -f4 -d'"')"
-            TAR_DOWNLOAD_SOURCE="$(grep -w -A 11 "\"$TARPKG_NAME\"" "$CONFDIR"/tar-pkgs.json | grep -w '"download_source"' | cut -f4 -d'"')"
-            TARURI="$(grep -w -A 11 "\"$TARPKG_NAME\"" "$CONFDIR"/tar-pkgs.json | grep -w '"taruri"' | cut -f4 -d'"')"
-            TAR_API_URI="$(grep -w -A 11 "\"$TARPKG_NAME\"" "$CONFDIR"/tar-pkgs.json | grep -w '"apiuri"' | cut -f4 -d'"')"
-            DESKTOP_FILE_PATH="$(grep -w -A 11 "\"$TARPKG_NAME\"" "$CONFDIR"/tar-pkgs.json | grep -w '"desktop_file_path"' | cut -f4 -d'"')"
-            ICON_FILE_PATH="$(grep -w -A 11 "\"$TARPKG_NAME\"" "$CONFDIR"/tar-pkgs.json | grep -w '"icon_file_path"' | cut -f4 -d'"')"
-            EXECUTABLE_FILE_PATH="$(grep -w -A 11 "\"$TARPKG_NAME\"" "$CONFDIR"/tar-pkgs.json | grep -w '"executable_file_path"' | cut -f4 -d'"')"
-            BIN_PATH="$(grep -w -A 11 "\"$TARPKG_NAME\"" "$CONFDIR"/tar-pkgs.json | grep -w '"bin_path"' | cut -f4 -d'"')"
-            CONFIG_PATH="$(grep -w -A 11 "\"$TARPKG_NAME\"" "$CONFDIR"/tar-pkgs.json | grep -w '"config_path"' | cut -f4 -d'"')"
-            TAR_DESCRIPTION="$(grep -w -A 11 "\"$TARPKG_NAME\"" "$CONFDIR"/tar-pkgs.json | grep -w '"description"' | cut -f4 -d'"')"
-            DEPENDENCIES="$(grep -w -A 11 "\"$TARPKG_NAME\"" "$CONFDIR"/tar-pkgs.json | grep -w '"dependencies"' | cut -f4 -d'"')"
+            INSTDIR="$("$RUNNING_DIR"/yaml r "$CONFDIR"/tar-pkgs.json "$TARPKG.instdir")"
+            TAR_DOWNLOAD_SOURCE="$("$RUNNING_DIR"/yaml r "$CONFDIR"/tar-pkgs.json "$TARPKG.download_source")"
+            TARURI="$("$RUNNING_DIR"/yaml r "$CONFDIR"/tar-pkgs.json "$TARPKG.taruri")"
+            TAR_API_URI="$("$RUNNING_DIR"/yaml r "$CONFDIR"/tar-pkgs.json "$TARPKG.apiuri")"
+            DESKTOP_FILE_PATH="$("$RUNNING_DIR"/yaml r "$CONFDIR"/tar-pkgs.json "$TARPKG.desktop_file_path")"
+            ICON_FILE_PATH="$("$RUNNING_DIR"/yaml r "$CONFDIR"/tar-pkgs.json "$TARPKG.icon_file_path")"
+            EXECUTABLE_FILE_PATH="$("$RUNNING_DIR"/yaml r "$CONFDIR"/tar-pkgs.json "$TARPKG.executable_fiel_path")"
+            BIN_PATH="$("$RUNNING_DIR"/yaml r "$CONFDIR"/tar-pkgs.json "$TARPKG.bin_path")"
+            CONFIG_PATH="$("$RUNNING_DIR"/yaml r "$CONFDIR"/tar-pkgs.json "$TARPKG.config_path")"
+            TAR_DESCRIPTION="$("$RUNNING_DIR"/yaml r "$CONFDIR"/tar-pkgs.json "$TARPKG.description")"
+            DEPENDENCIES="$("$RUNNING_DIR"/yaml r "$CONFDIR"/tar-pkgs.json "$TARPKG.dependencies")"
             if [ "$TAR_DOWNLOAD_SOURCE" = "GITHUB" ]; then
                 targithubinfofunc
             else
-                tarsaveconffunc "cache/$TARPKG_NAME.conf"
+                tarsaveconffunc "cache/$TARPKG.conf"
             fi
             ;;
     esac
