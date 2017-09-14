@@ -550,10 +550,6 @@ sharexin:
     name: sharexin
     url: https://github.com/ShareXin/ShareXin/releases
     apiurl: https://api.github.com/repos/ShareXin/ShareXin/releases
-sharexin:
-    name: ShareXin
-    url: https://github.com/ShareXin/ShareXin/releases
-    apiurl: https://api.github.com/repos/ShareXin/ShareXin/releases
 shots:
     name: shots
     url: https://github.com/binjospookie/--shots/releases
