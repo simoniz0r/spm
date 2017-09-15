@@ -27,7 +27,6 @@ for image in $(dir -C -w 1 /home/$USER/github/appimage.github.io/data); do
         echo "    apiurl: https://api.github.com/repos/$REPO/releases"
     fi
 done > /home/$USER/github/spm/AppImages-github.yaml
-# FIX THE BELOW TO BE IN YAML FORMAT!!!
 # Fix/remove broken links and add any AppImages that appimagehub misses
 sed -i '1s%sharexin:%%g;1s%    name: sharexin%%g;1s%    url: https://github.com/ShareXin/ShareXin/releases%%g;1s%    apiurl: https://api.github.com/repos/ShareXin/ShareXin/releases%%g' /home/$USER/github/spm/AppImages-github.yaml # Remove duplicate
 sed -i 's%https://github.com/nteract/releases%https://github.com/nteract/nteract/releases%g;s%https://api.github.com/repos/nteract/releases%https://api.github.com/repos/nteract/nteract/releases%g' /home/$USER/github/spm/AppImages-github.yaml # Fix broken link
@@ -78,6 +77,5 @@ for image in $(dir -C -w 1 /home/$USER/github/appimage.github.io/data); do
         echo "    url: $URL"
     fi
 done > /home/$USER/github/spm/AppImages-direct.yaml
-# FIX THE BELOW TO BE IN YAML FORMAT!!!
 sed -i 's%wastesedge:%%g;s%    name: wastesedge%%g;s%    url: http://download.savannah.gnu.org/releases/adonthell/wastesedge-0.3.6-x86_64-linux.tar.gz%%g' /home/$USER/github/spm/AppImages-direct.yaml # Remove this; not going to support AppImages in tar archives
 sed -i '/^$/d' /home/$USER/github/spm/AppImages-direct.yaml # Remove blank lines
