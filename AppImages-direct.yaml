@@ -72,7 +72,7 @@ ldview:
     url: http://download.opensuse.org/repositories/home:/pbartfai/AppImage/ldview-latest-x86_64.AppImage
 libreofficedev:
     name: LibreOfficeDev
-    url: http://libreoffice.soluzioniopen.com/daily/LibreOfficeDev-6.0.0.0.alpha0_2017-08-18-x86_64.AppImage
+    url: http://libreoffice.soluzioniopen.com/daily/LibreOfficeDev-6.0.0-x86_64.AppImage
 librepcb-nightly:
     name: LibrePCB-Nightly
     url: https://dl.bintray.com/librepcb/LibrePCB-Nightly/LibrePCB-Nightly-Linux-x86_64.AppImage

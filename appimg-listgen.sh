@@ -84,5 +84,6 @@ for image in $(dir -C -w 1 /home/$USER/github/appimage.github.io/data); do
         echo "    url: $URL"
     fi
 done > /home/$USER/github/spm/AppImages-direct.yaml
+sed -i 's%    url: http://libreoffice.soluzioniopen.com/daily/LibreOfficeDev-6.0.0.0.alpha0_2017-08-18-x86_64.AppImage%    url: http://libreoffice.soluzioniopen.com/daily/LibreOfficeDev-6.0.0-x86_64.AppImage%g' /home/$USER/github/spm/AppImages-direct.yaml # Fix broken link
 sed -i 's%wastesedge:%%g;s%    name: wastesedge%%g;s%    url: http://download.savannah.gnu.org/releases/adonthell/wastesedge-0.3.6-x86_64-linux.tar.gz%%g' /home/$USER/github/spm/AppImages-direct.yaml # Remove this; not going to support AppImages in tar archives
 sed -i '/^$/d' /home/$USER/github/spm/AppImages-direct.yaml # Remove blank lines
