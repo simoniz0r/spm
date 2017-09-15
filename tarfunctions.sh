@@ -45,11 +45,11 @@ targithubinfofunc () { # Gets updated_at, tar url, and description for specified
         wget --quiet --auth-no-challenge --header="Authorization: token "$GITHUB_TOKEN"" "$TAR_API_URI" -O "$CONFDIR"/cache/"$TARPKG"-release || { echo "$(tput setaf 1)wget $TAR_API_URI failed; is your token valid?$(tput sgr0)"; rm -rf "$CONFDIR"/cache/*; exit 1; }
     fi
     JQARG=".[].assets[] | select(.name | contains(\".tar\")) | select(.name | contains(\"$TARPKG\")) | select(.name | contains(\"macos\") | not) | select(.name | contains(\"ia32\") | not) | select(.name | contains(\"i386\") | not) | select(.name | contains(\"i686\") | not) | { name: .name, updated: .updated_at, url: .browser_download_url}"
-    cat "$CONFDIR"/cache/"$TARPKG"-release | jq --raw-output "$JQARG" | sed 's%{%data:%g' | tr -d '",}' > "$CONFDIR"/cache/"$TARPKG"release
+    cat "$CONFDIR"/cache/"$TARPKG"-release |"$RUNNING_DIR"/jq --raw-output "$JQARG" | sed 's%{%data:%g' | tr -d '",}' > "$CONFDIR"/cache/"$TARPKG"release
     if [ "$(cat "$CONFDIR"/cache/"$TARPKG"release | wc -l)" = "0" ]; then
         rm "$CONFDIR"/cache/"$TARPKG"release
         JQARG=".[].assets[] | select(.name | contains(\".tar\")) | select(.name | contains(\"macos\") | not) | select(.name | contains(\"ia32\") | not) | select(.name | contains(\"i386\") | not) | select(.name | contains(\"i686\") | not) | { name: .name, updated: .updated_at, url: .browser_download_url}"
-        cat "$CONFDIR"/cache/"$TARPKG"-release | jq --raw-output "$JQARG" | sed 's%{%data:%g' | tr -d '",}' > "$CONFDIR"/cache/"$TARPKG"release
+        cat "$CONFDIR"/cache/"$TARPKG"-release |"$RUNNING_DIR"/jq --raw-output "$JQARG" | sed 's%{%data:%g' | tr -d '",}' > "$CONFDIR"/cache/"$TARPKG"release
     fi
     NEW_TARFILE="$(cat "$CONFDIR"/cache/"$TARPKG"release | "$RUNNING_DIR"/yaml r - data.name)"
     TAR_GITHUB_NEW_COMMIT="$(cat "$CONFDIR"/cache/"$TARPKG"release | "$RUNNING_DIR"/yaml r - data.updated)"
