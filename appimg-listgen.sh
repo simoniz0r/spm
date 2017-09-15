@@ -46,25 +46,32 @@ echo "    name: discord-canary" >> /home/$USER/github/spm/AppImages-github.yaml
 echo "    url: https://github.com/simoniz0r/AppImages/releases" >> /home/$USER/github/spm/AppImages-github.yaml
 echo "    apiurl: https://api.github.com/repos/simoniz0r/AppImages/releases" >> /home/$USER/github/spm/AppImages-github.yaml
 echo "discord-toolbox:" >> /home/$USER/github/spm/AppImages-github.yaml
-echo "    url: discord-toolbox https://github.com/simoniz0r/DiscordToolbox/releases" >> /home/$USER/github/spm/AppImages-github.yaml
+echo "    name: DiscordToolbox" >> /home/$USER/github/spm/AppImages-github.yaml
+echo "    url: https://github.com/simoniz0r/DiscordToolbox/releases" >> /home/$USER/github/spm/AppImages-github.yaml
 echo "    apiurl: https://api.github.com/repos/simoniz0r/DiscordToolbox/releases" >> /home/$USER/github/spm/AppImages-github.yaml
 echo "inxi:" >> /home/$USER/github/spm/AppImages-github.yaml
-echo "    url: inxi https://github.com/simoniz0r/AppImages/releases" >> /home/$USER/github/spm/AppImages-github.yaml
+echo "    name: inxi" >> /home/$USER/github/spm/AppImages-github.yaml
+echo "    url: https://github.com/simoniz0r/AppImages/releases" >> /home/$USER/github/spm/AppImages-github.yaml
 echo "    apiurl: https://api.github.com/repos/simoniz0r/AppImages/releases" >> /home/$USER/github/spm/AppImages-github.yaml
 echo "neofetch:" >> /home/$USER/github/spm/AppImages-github.yaml
-echo "    url: neofetch https://github.com/simoniz0r/AppImages/releases" >> /home/$USER/github/spm/AppImages-github.yaml
+echo "    name: neofetch" >> /home/$USER/github/spm/AppImages-github.yaml
+echo "    url: https://github.com/simoniz0r/AppImages/releases" >> /home/$USER/github/spm/AppImages-github.yaml
 echo "    apiurl: https://api.github.com/repos/simoniz0r/AppImages/releases" >> /home/$USER/github/spm/AppImages-github.yaml
 echo "todo:" >> /home/$USER/github/spm/AppImages-github.yaml
-echo "    url: todo https://github.com/simoniz0r/todo/releases" >> /home/$USER/github/spm/AppImages-github.yaml
+echo "    name: todo" >> /home/$USER/github/spm/AppImages-github.yaml
+echo "    url: https://github.com/simoniz0r/todo/releases" >> /home/$USER/github/spm/AppImages-github.yaml
 echo "    apiurl: https://api.github.com/repos/simoniz0r/todo/releases" >> /home/$USER/github/spm/AppImages-github.yaml
 echo "tc-linux:" >> /home/$USER/github/spm/AppImages-github.yaml
-echo "    url: tc-linux https://github.com/mccxiv/tc" >> /home/$USER/github/spm/AppImages-github.yaml
+echo "    name: tc-linux" >> /home/$USER/github/spm/AppImages-github.yaml
+echo "    url: https://github.com/mccxiv/tc" >> /home/$USER/github/spm/AppImages-github.yaml
 echo "    apiurl: https://api.github.com/repos/mccxiv/tc/releases" >> /home/$USER/github/spm/AppImages-github.yaml
 echo "vterm:" >> /home/$USER/github/spm/AppImages-github.yaml
-echo "    url: vterm https://github.com/vterm/vterm/releases" >> /home/$USER/github/spm/AppImages-github.yaml
+echo "    name: vterm" >> /home/$USER/github/spm/AppImages-github.yaml
+echo "    url: https://github.com/vterm/vterm/releases" >> /home/$USER/github/spm/AppImages-github.yaml
 echo "    apiurl: https://api.github.com/repos/vterm/vterm/releases" >> /home/$USER/github/spm/AppImages-github.yaml
 echo "xdgfetch:" >> /home/$USER/github/spm/AppImages-github.yaml
-echo "    url: xdgfetch https://github.com/simoniz0r/xdgfetch/releases" >> /home/$USER/github/spm/AppImages-github.yaml
+echo "    name: xdgfetch" >> /home/$USER/github/spm/AppImages-github.yaml
+echo "    url: https://github.com/simoniz0r/xdgfetch/releases" >> /home/$USER/github/spm/AppImages-github.yaml
 echo "    apiurl: https://api.github.com/repos/simoniz0r/xdgfetch/releases" >> /home/$USER/github/spm/AppImages-github.yaml
 
 # Generate a list of AppImages from sites other than github with versions that cannot be managed

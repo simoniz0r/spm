@@ -767,23 +767,30 @@ discord-canary:
     url: https://github.com/simoniz0r/AppImages/releases
     apiurl: https://api.github.com/repos/simoniz0r/AppImages/releases
 discord-toolbox:
-    url: discord-toolbox https://github.com/simoniz0r/DiscordToolbox/releases
+    name: DiscordToolbox
+    url: https://github.com/simoniz0r/DiscordToolbox/releases
     apiurl: https://api.github.com/repos/simoniz0r/DiscordToolbox/releases
 inxi:
-    url: inxi https://github.com/simoniz0r/AppImages/releases
+    name: inxi
+    url: https://github.com/simoniz0r/AppImages/releases
     apiurl: https://api.github.com/repos/simoniz0r/AppImages/releases
 neofetch:
-    url: neofetch https://github.com/simoniz0r/AppImages/releases
+    name: neofetch
+    url: https://github.com/simoniz0r/AppImages/releases
     apiurl: https://api.github.com/repos/simoniz0r/AppImages/releases
 todo:
-    url: todo https://github.com/simoniz0r/todo/releases
+    name: todo
+    url: https://github.com/simoniz0r/todo/releases
     apiurl: https://api.github.com/repos/simoniz0r/todo/releases
 tc-linux:
-    url: tc-linux https://github.com/mccxiv/tc
+    name: tc-linux
+    url: https://github.com/mccxiv/tc
     apiurl: https://api.github.com/repos/mccxiv/tc/releases
 vterm:
-    url: vterm https://github.com/vterm/vterm/releases
+    name: vterm
+    url: https://github.com/vterm/vterm/releases
     apiurl: https://api.github.com/repos/vterm/vterm/releases
 xdgfetch:
-    url: xdgfetch https://github.com/simoniz0r/xdgfetch/releases
+    name: xdgfetch
+    url: https://github.com/simoniz0r/xdgfetch/releases
     apiurl: https://api.github.com/repos/simoniz0r/xdgfetch/releases
