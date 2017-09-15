@@ -49,6 +49,7 @@ spmdepchecksfunc () { # Run dep checks, exit if deps not present. If SKIP_DEP_CH
             echo "$(tput setaf 1)Missing one or more packages required to run; exiting..."
             echo "If you are sure you have the required dependencies, but spm does not detect them"
             echo "change SKIP_DEP_CHECKS to TRUE in $CONFDIR/spm.conf$(tput sgr0)"
+            rm -rf "$CONFDIR"/cache/*
             exit 1
         fi
     fi
