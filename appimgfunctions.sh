@@ -68,24 +68,25 @@ appimgcheckfunc () { # check user input against list of known apps here
 appimggithubinfofunc () {
     GITHUB_APP_URL="$("$RUNNING_DIR"/yaml r "$CONFDIR"/AppImages-github.yaml "$INSTIMG".url)"
     APPIMG_GITHUB_API_URL="$("$RUNNING_DIR"/yaml r "$CONFDIR"/AppImages-github.yaml "$INSTIMG".apiurl)"
+    INSTIMG_NAME="$("$RUNNING_DIR"/yaml r "$CONFDIR"/AppImages-github.yaml "$INSTIMG".name)"
     if [ -z "$GITHUB_TOKEN" ]; then
-        wget --quiet "$APPIMG_GITHUB_API_URL" -O "$CONFDIR"/cache/"$INSTIMG"-release || { echo "$(tput setaf 1)wget $APPIMG_GITHUB_API_URL failed; has the repo been renamed or deleted?$(tput sgr0)"; rm -rf "$CONFDIR"/cache/*; exit 1; }
+        wget --quiet "$APPIMG_GITHUB_API_URL" -O "$CONFDIR"/cache/"$INSTIMG"full || { echo "$(tput setaf 1)wget $APPIMG_GITHUB_API_URL failed; has the repo been renamed or deleted?$(tput sgr0)"; rm -rf "$CONFDIR"/cache/*; exit 1; }
     else
-        wget --quiet --auth-no-challenge --header="Authorization: token "$GITHUB_TOKEN"" "$APPIMG_GITHUB_API_URL" -O "$CONFDIR"/cache/"$INSTIMG"-release || { echo "$(tput setaf 1)wget $APPIMG_GITHUB_API_URL failed; is your token valid?"$(tput sgr0); rm -rf "$CONFDIR"/cache/*; exit 1; }
+        wget --quiet --auth-no-challenge --header="Authorization: token "$GITHUB_TOKEN"" "$APPIMG_GITHUB_API_URL" -O "$CONFDIR"/cache/"$INSTIMG"full || { echo "$(tput setaf 1)wget $APPIMG_GITHUB_API_URL failed; is your token valid?"$(tput sgr0); rm -rf "$CONFDIR"/cache/*; exit 1; }
     fi
-    APPIMAGE_INFO="$CONFDIR/cache/$INSTIMG"-release
-    APPIMAGE_NAME="$(grep -iv '.*ia32*.\|.*i686*.\|.*i386*.' "$APPIMAGE_INFO" | grep -i "$INSTIMG" | grep -im 1 '"name":*..*AppImage"' | cut -f4 -d'"')"
-    NEW_APPIMAGE_VERSION="$(grep -iv '.*ia32*.\|.*i686*.\|.*i386*.' "$APPIMAGE_INFO" | grep -B 1 -i "$INSTIMG" | grep -B 1 -im 1 '"browser_download_url":*..*AppImage"' | head -n 1 | cut -f4 -d'"')"
-    GITHUB_APPIMAGE_URL="$(grep -iv '.*ia32*.\|.*i686*.\|.*i386*.' "$APPIMAGE_INFO" | grep -i "$INSTIMG" | grep -im 1 '"browser_download_url":*..*AppImage"' | cut -f4 -d'"')"
-    if [ -z "$APPIMAGE_NAME" ]; then
-        APPIMAGE_NAME="$(grep -iv '.*ia32*.\|.*i686*.\|.*i386*.' "$APPIMAGE_INFO" | grep -im 1 '"name":*..*AppImage"' | cut -f4 -d'"')"
-        NEW_APPIMAGE_VERSION="$(grep -iv '.*ia32*.\|.*i686*.\|.*i386*.' "$APPIMAGE_INFO" | grep -B 1 -im 1 '"browser_download_url":*..*AppImage"' | head -n 1 | cut -f4 -d'"')"
-        GITHUB_APPIMAGE_URL="$(grep -iv '.*ia32*.\|.*i686*.\|.*i386*.' "$APPIMAGE_INFO" | grep -im 1 '"browser_download_url":*..*AppImage"' | cut -f4 -d'"')"
+    JQARG=".[].assets[] | select(.name | contains(\".AppImage\"), contains(\".appimage\")) | select(.name | contains(\"$INSTIMG_NAME\")) | select(.name | contains(\"ia32\") | not) | select(.name | contains(\"i386\") | not) | select(.name | contains(\"i686\") | not) | { name: .name, updated: .updated_at, url: .browser_download_url}"
+    cat "$CONFDIR"/cache/"$INSTIMG"full | jq --raw-output "$JQARG" | sed 's%{%data:%g' | tr -d '",}' > "$CONFDIR"/cache/"$INSTIMG"release
+    if [ "$(cat "$CONFDIR"/cache/"$INSTIMG"release | wc -l)" = "0" ]; then
+        rm "$CONFDIR"/cache/"$INSTIMG"release
+        JQARG=".[].assets[] | select(.name | contains(\".AppImage\"), contains(\".appimage\")) | select(.name | contains(\"ia32\") | not) | select(.name | contains(\"i386\") | not) | select(.name | contains(\"i686\") | not) | { name: .name, updated: .updated_at, url: .browser_download_url}"
+        cat "$CONFDIR"/cache/"$INSTIMG"full | jq --raw-output "$JQARG" | sed 's%{%data:%g' | tr -d '",}' > "$CONFDIR"/cache/"$INSTIMG"release
     fi
+    APPIMAGE_NAME="$(cat "$CONFDIR"/cache/"$INSTIMG"release | "$RUNNING_DIR"/yaml r - data.name)"
+    NEW_APPIMAGE_VERSION="$(cat "$CONFDIR"/cache/"$INSTIMG"release | "$RUNNING_DIR"/yaml r - data.updated)"
+    GITHUB_APPIMAGE_URL="$(cat "$CONFDIR"/cache/"$INSTIMG"release | "$RUNNING_DIR"/yaml r - data.url)"
     if [ "$APPIMG_UPGRADE_CHECK" = "FALSE" ]; then
-        wget --quiet "$GITHUB_APP_URL" -O "$CONFDIR"/cache/"$INSTIMG"-github || { echo "$(tput setaf 1)wget $GITHUB_APP_URL failed; has the repo been renamed or deleted?$(tput sgr0)"; rm -rf "$CONFDIR"/cache/*; exit 1; }
-        APPIMG_GITHUB_INFO="$HOME/.config/spm/cache/"$INSTIMG"-github"
-        APPIMAGE_DESCRIPTION="$(grep -i '<meta name="description"' "$APPIMG_GITHUB_INFO" | cut -f4 -d'"')"
+        wget --quiet "$GITHUB_APP_URL" -O "$CONFDIR"/cache/"$INSTIMG"github || { echo "$(tput setaf 1)wget $GITHUB_APP_URL failed; has the repo been renamed or deleted?$(tput sgr0)"; rm -rf "$CONFDIR"/cache/*; exit 1; }
+        APPIMAGE_DESCRIPTION="$(grep -i '<meta name="description"' "$CONFDIR"/cache/"$INSTIMG"github | cut -f4 -d'"')"
     fi
     APPIMAGE_GITHUB_NEW_VERSION="$(echo "$GITHUB_APPIMAGE_URL" | cut -f8 -d"/")"
 }
