@@ -45,11 +45,16 @@ spmdepchecksfunc () { # Run dep checks, exit if deps not present. If SKIP_DEP_CH
             MISSING_DEPS="TRUE"
             echo "$(tput setaf 1)wget is not installed!$(tput sgr0)"
         fi
+        if [ ! -f "$RUNNING_DIR"/yaml ]; then
+            MISSING_DEPS="TRUE"
+            echo "$(tput setaf 1)$RUNNING_DIR/yaml not found!"
+        fi
+        if [ ! -f "$RUNNING_DIR"/jq ]; then
+            MISSING_DEPS="TRUE"
+            echo "$(tput setaf 1)$RUNNING_DIR/jq not found!"
+        fi
         if [ "$MISSING_DEPS" = "TRUE" ]; then
-            echo "$(tput setaf 1)Missing one or more packages required to run; exiting..."
-            echo "If you are sure you have the required dependencies, but spm does not detect them"
-            echo "change SKIP_DEP_CHECKS to TRUE in $CONFDIR/spm.conf$(tput sgr0)"
-            rm -rf "$CONFDIR"/cache/*
+            echo "$(tput setaf 1)Missing one or more packages required to run; exiting...$(tput sgr0)"
             exit 1
         fi
     fi
