@@ -243,11 +243,11 @@ appimgupdatelistfunc () { # Regenerate AppImages-direct.yaml from github, downlo
     APPIMG_UPGRADE_CHECK="TRUE"
     echo "Downloading AppImages-direct.yaml from spm github repo..." # Download existing list of direct AppImages from spm github repo
     cd "$CONFDIR"
-    rm "$CONFDIR"/AppImages-direct.yaml
+    rm -f "$CONFDIR"/AppImages-direct.yaml
     wget --quiet "https://raw.githubusercontent.com/simoniz0r/spm/master/AppImages-direct.yaml" || { echo "$(tput setaf 1)wget failed; exiting...$(tput sgr0)"; rm -rf "$CONFDIR"/cache/*; exit 1; }
     echo "AppImages-direct.yaml updated!"
     echo "Downloading AppImages-github.yaml from spm github repo..." # Download existing list of github AppImages from spm github repo
-    rm "$CONFDIR"/AppImages-github.yaml
+    rm -f "$CONFDIR"/AppImages-github.yaml
     wget --quiet "https://raw.githubusercontent.com/simoniz0r/spm/master/AppImages-github.yaml" || { echo "$(tput setaf 1)wget failed; exiting...$(tput sgr0)"; rm -rf "$CONFDIR"/cache/*; exit 1; }
     echo "AppImages-github.yaml updated!"
     if [ -z "$1" ]; then # If no AppImage specified by user, check all installed AppImage versions
