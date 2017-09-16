@@ -21,7 +21,7 @@ _spm () {
     *)
         case $words[2] in
         -l)
-            compadd "$@" $(cat ~/.config/spm/AppImages-github.yaml | cut -f1 -d' ' | cut -f1 -d':' | sed '/^$/d') $(cat ~/.config/spm/AppImages-direct.yaml | cut -f1 -d' ' | cut -f1 -d':' | sed '/^$/d')
+            compadd "$@" $(cat ~/.config/spm/AppImages-github.yaml | cut -f1 -d' ' | cut -f1 -d':' | sed '/^$/d') $(cat ~/.config/spm/AppImages-direct.yaml | cut -f1 -d' ' | cut -f1 -d':' | sed '/^$/d') $(echo -e $(grep '"available"' ~/.config/spm/tar-pkgs.json | cut -f7 -d" " | tr -d ',"'))
             ;;
         -s)
             compadd "$@"  $(cat ~/.config/spm/AppImages-github.yaml | cut -f1 -d' ' | cut -f1 -d':' | sed '/^$/d') $(cat ~/.config/spm/AppImages-direct.yaml | cut -f1 -d' ' | cut -f1 -d':' | sed '/^$/d') $(echo -e $(grep '"available"' ~/.config/spm/tar-pkgs.json | cut -f7 -d" " | tr -d ',"'))
