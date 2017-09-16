@@ -350,6 +350,10 @@ marlin-conf:
     name: marlin-conf
     url: https://github.com/akaJes/marlin-config/releases
     apiurl: https://api.github.com/repos/akaJes/marlin-config/releases
+maven:
+    name: maven
+    url: https://github.com/eugenemel/maven/releases
+    apiurl: https://api.github.com/repos/eugenemel/maven/releases
 mead:
     name: mead
     url: https://github.com/perry-mitchell/mead/releases
@@ -490,6 +494,10 @@ pupafm:
     name: PupaFM
     url: https://github.com/xwartz/PupaFM/releases
     apiurl: https://api.github.com/repos/xwartz/PupaFM/releases
+pyslvs:
+    name: Pyslvs
+    url: https://github.com/KmolYuan/Pyslvs-PyQt5/releases
+    apiurl: https://api.github.com/repos/KmolYuan/Pyslvs-PyQt5/releases
 qgroundcontrol:
     name: QGroundControl
     url: https://github.com/mavlink/qgroundcontrol/releases
