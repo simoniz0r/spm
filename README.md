@@ -5,7 +5,7 @@
 
 spm now has an AppImage release! To use the AppImage for spm, simply download it, `chmod a+x /path/to/spm-VERSION-x86_64.AppImage`, and execute `/path/to/spm-VERSION-x86_64.AppImage`.  The AppImage release for spm has wget bundled in.
 
-Dependencies: coreutils, tar, wget (wget is bundled in the AppImage release)
+Dependencies: coreutils, tar, bc,  wget (bc and wget are bundled in the AppImage release)
 
 It is recommended that you use spm to install the AppImage or tar version of spm by executing `/path/to/spm -ai spm` for the AppImage or `/path/to/spm -ti spm` for the tar version.  This will allow spm to upgrade itself when a new version is released.
 
