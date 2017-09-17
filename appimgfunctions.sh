@@ -6,12 +6,14 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.4.3"
+X="0.4.4"
 # Set spm version
 
 # Set variables
 APPIMG_UPGRADE_CHECK="FALSE"
 APPIMG_FORCE_UPGRADE="FALSE"
+APPIMAGE_SIZE="N/A"
+APPIMAGE_DOWNLOADS="N/A"
 
 appimgfunctionsexistsfunc () {
     sleep 0
@@ -26,6 +28,8 @@ appimgsaveinfofunc () { # Save install info to "$CONFDIR"/appimginstalled/AppIma
     echo "APPIMAGE_VERSION="\"$APPIMAGE_VERSION\""" >> "$CONFDIR"/"$SAVEDIR"
     if [ "$GITHUB_IMG" = "TRUE" ]; then
         echo "APPIMAGE_GITHUB_VERSION="\"$APPIMAGE_GITHUB_NEW_VERSION\""" >> "$CONFDIR"/"$SAVEDIR"
+        echo "APPIMAGE_SIZE="\"$APPIMAGE_SIZE\""" >> "$CONFDIR"/"$SAVEDIR"
+        echo "APPIMAGE_DOWNLOADS="\"$APPIMAGE_DOWNLOADS\""" >> "$CONFDIR"/"$SAVEDIR"
         echo "WEBSITE="\"$(echo "$GITHUB_APP_URL" | cut -f-5 -d'/')\""" >> "$CONFDIR"/"$SAVEDIR"
     elif [ "$DIRECT_IMG" = "TRUE" ]; then
         echo "WEBSITE="\"$(echo "$DIRECT_APPIMAGE_URL" | cut -f-3 -d'/')\""" >> "$CONFDIR"/"$SAVEDIR"
@@ -74,16 +78,19 @@ appimggithubinfofunc () {
     else
         wget --quiet --auth-no-challenge --header="Authorization: token "$GITHUB_TOKEN"" "$APPIMG_GITHUB_API_URL" -O "$CONFDIR"/cache/"$INSTIMG"full || { echo "$(tput setaf 1)wget $APPIMG_GITHUB_API_URL failed; is your token valid?"$(tput sgr0); rm -rf "$CONFDIR"/cache/*; exit 1; }
     fi
-    JQARG=".[].assets[] | select(.name | contains(\".AppImage\"), contains(\".appimage\")) | select(.name | contains(\"$INSTIMG_NAME\")) | select(.name | contains(\"ia32\") | not) | select(.name | contains(\"i386\") | not) | select(.name | contains(\"i686\") | not) | { name: .name, updated: .updated_at, url: .browser_download_url}"
+    JQARG=".[].assets[] | select(.name | contains(\".AppImage\"), contains(\".appimage\")) | select(.name | contains(\"$INSTIMG_NAME\")) | select(.name | contains(\"ia32\") | not) | select(.name | contains(\"i386\") | not) | select(.name | contains(\"i686\") | not) | { name: .name, updated: .updated_at, url: .browser_download_url, size: .size, numdls: .download_count}"
     cat "$CONFDIR"/cache/"$INSTIMG"full | "$RUNNING_DIR"/jq --raw-output "$JQARG" | sed 's%{%data:%g' | tr -d '",}' > "$CONFDIR"/cache/"$INSTIMG"release
     if [ "$(cat "$CONFDIR"/cache/"$INSTIMG"release | wc -l)" = "0" ]; then
         rm "$CONFDIR"/cache/"$INSTIMG"release
-        JQARG=".[].assets[] | select(.name | contains(\".AppImage\"), contains(\".appimage\")) | select(.name | contains(\"ia32\") | not) | select(.name | contains(\"i386\") | not) | select(.name | contains(\"i686\") | not) | { name: .name, updated: .updated_at, url: .browser_download_url}"
+        JQARG=".[].assets[] | select(.name | contains(\".AppImage\"), contains(\".appimage\")) | select(.name | contains(\"ia32\") | not) | select(.name | contains(\"i386\") | not) | select(.name | contains(\"i686\") | not) | { name: .name, updated: .updated_at, url: .browser_download_url, size: .size, numdls: .download_count}"
         cat "$CONFDIR"/cache/"$INSTIMG"full | "$RUNNING_DIR"/jq --raw-output "$JQARG" | sed 's%{%data:%g' | tr -d '",}' > "$CONFDIR"/cache/"$INSTIMG"release
     fi
     APPIMAGE_NAME="$(cat "$CONFDIR"/cache/"$INSTIMG"release | "$RUNNING_DIR"/yaml r - data.name)"
     NEW_APPIMAGE_VERSION="$(cat "$CONFDIR"/cache/"$INSTIMG"release | "$RUNNING_DIR"/yaml r - data.updated)"
     GITHUB_APPIMAGE_URL="$(cat "$CONFDIR"/cache/"$INSTIMG"release | "$RUNNING_DIR"/yaml r - data.url)"
+    APPIMAGE_SIZE="$(cat "$CONFDIR"/cache/"$INSTIMG"release | "$RUNNING_DIR"/yaml r - data.size)"
+    APPIMAGE_SIZE="$(echo "scale = 3; $APPIMAGE_SIZE / 1024 / 1024" | bc) MBs"
+    APPIMAGE_DOWNLOADS="$(cat "$CONFDIR"/cache/"$INSTIMG"release | "$RUNNING_DIR"/yaml r - data.numdls)"
     if [ "$APPIMG_UPGRADE_CHECK" = "FALSE" ]; then
         wget --quiet "$GITHUB_APP_URL" -O "$CONFDIR"/cache/"$INSTIMG"github || { echo "$(tput setaf 1)wget $GITHUB_APP_URL failed; has the repo been renamed or deleted?$(tput sgr0)"; rm -rf "$CONFDIR"/cache/*; exit 1; }
         APPIMAGE_DESCRIPTION="$(grep -i '<meta name="description"' "$CONFDIR"/cache/"$INSTIMG"github | cut -f4 -d'"')"
@@ -125,7 +132,9 @@ appimglistfunc () {
             echo "$(tput bold)$(tput setaf 2)Name$(tput sgr0):  $APPIMAGE_NAME"
         fi
         echo "$(tput bold)$(tput setaf 2)Version$(tput sgr0):  $APPIMAGE_VERSION"
+        echo "$(tput bold)$(tput setaf 2)Total DLs$(tput sgr0):  $APPIMAGE_DOWNLOADS"
         echo "$(tput bold)$(tput setaf 2)URL$(tput sgr0):  $WEBSITE"
+        echo "$(tput bold)$(tput setaf 2)Size$(tput sgr0):  $APPIMAGE_SIZE"
         echo "$(tput bold)$(tput setaf 2)Install dir$(tput sgr0): $BIN_PATH"
         echo
     else
@@ -143,7 +152,9 @@ appimglistfunc () {
                 echo "$(tput bold)$(tput setaf 2)Name$(tput sgr0):  $APPIMAGE_NAME"
             fi
             echo "$(tput bold)$(tput setaf 2)Version$(tput sgr0):  $APPIMAGE_VERSION"
+            echo "$(tput bold)$(tput setaf 2)Total DLs$(tput sgr0):  $APPIMAGE_DOWNLOADS"
             echo "$(tput bold)$(tput setaf 2)URL$(tput sgr0):  $WEBSITE"
+            echo "$(tput bold)$(tput setaf 2)Size$(tput sgr0):  $APPIMAGE_SIZE"
             echo "$(tput bold)$(tput setaf 2)Install dir$(tput sgr0): $BIN_PATH"
             echo
         else
@@ -163,7 +174,9 @@ appimglistinstalledfunc () {
             echo "$(tput bold)$(tput setaf 2)Name$(tput sgr0):  $APPIMAGE_NAME"
         fi
         echo "$(tput bold)$(tput setaf 2)Version$(tput sgr0):  $APPIMAGE_VERSION"
+        echo "$(tput bold)$(tput setaf 2)Total DLs$(tput sgr0):  $APPIMAGE_DOWNLOADS"
         echo "$(tput bold)$(tput setaf 2)URL$(tput sgr0):  $WEBSITE"
+        echo "$(tput bold)$(tput setaf 2)Size$(tput sgr0):  $APPIMAGE_SIZE"
         echo "$(tput bold)$(tput setaf 2)Install dir$(tput sgr0): $BIN_PATH"
         echo
     done
@@ -269,7 +282,9 @@ appimgupdateforcefunc () {
             echo "$(tput bold)$(tput setaf 2)Name$(tput sgr0):  $APPIMAGE_NAME"
         fi
         echo "$(tput bold)$(tput setaf 2)Version$(tput sgr0):  $APPIMAGE_VERSION"
+        echo "$(tput bold)$(tput setaf 2)Total DLs$(tput sgr0):  $APPIMAGE_DOWNLOADS"
         echo "$(tput bold)$(tput setaf 2)URL$(tput sgr0):  $WEBSITE"
+        echo "$(tput bold)$(tput setaf 2)Size$(tput sgr0):  $APPIMAGE_SIZE"
         echo "$(tput bold)$(tput setaf 2)Install dir$(tput sgr0): $BIN_PATH"
         echo
     else

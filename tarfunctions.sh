@@ -6,9 +6,11 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.4.3"
+X="0.4.4"
 # Set spm version
 TAR_LIST="$(echo -e $(grep '"available"' "$CONFDIR"/tar-pkgs.json | cut -f7 -d" " | tr -d ',"'))"
+TAR_SIZE="N/A"
+TAR_DOWNLOADS="N/A"
 
 tarfunctionsexistfunc () {
     sleep 0
@@ -20,12 +22,12 @@ tarsaveconffunc () { # Saves file containing tar package info in specified direc
     fi
     SAVEDIR="$1"
     echo "INSTDIR="\"$INSTDIR\""" > "$CONFDIR"/"$SAVEDIR"
-    if [ "$TAR_DOWNLOAD_SOURCE" != "LOCAL" ]; then
-        echo "TAR_DOWNLOAD_SOURCE="\"$TAR_DOWNLOAD_SOURCE\""" >> "$CONFDIR"/"$SAVEDIR"
-        echo "TARURI="\"$TARURI\""" >> "$CONFDIR"/"$SAVEDIR"
-        echo "TARFILE="\"$NEW_TARFILE\""" >> "$CONFDIR"/"$SAVEDIR"
-    fi
+    echo "TAR_DOWNLOAD_SOURCE="\"$TAR_DOWNLOAD_SOURCE\""" >> "$CONFDIR"/"$SAVEDIR"
+    echo "TARURI="\"$TARURI\""" >> "$CONFDIR"/"$SAVEDIR"
+    echo "TARFILE="\"$NEW_TARFILE\""" >> "$CONFDIR"/"$SAVEDIR"
     if [ "$TAR_DOWNLOAD_SOURCE" = "GITHUB" ]; then
+        echo "TAR_DOWNLOADS="\"$TAR_DOWNLOADS\""" >> "$CONFDIR"/"$SAVEDIR"
+        echo "TAR_SIZE="\"$TAR_SIZE\""" >> "$CONFDIR"/"$SAVEDIR"
         echo "TAR_GITHUB_COMMIT="\"$TAR_GITHUB_NEW_COMMIT\""" >> "$CONFDIR"/"$SAVEDIR"
         echo "TAR_GITHUB_VERSION="\"$TAR_GITHUB_NEW_VERSION\""" >> "$CONFDIR"/"$SAVEDIR"
     fi
@@ -44,16 +46,19 @@ targithubinfofunc () { # Gets updated_at, tar url, and description for specified
     else
         wget --quiet --auth-no-challenge --header="Authorization: token "$GITHUB_TOKEN"" "$TAR_API_URI" -O "$CONFDIR"/cache/"$TARPKG"-release || { echo "$(tput setaf 1)wget $TAR_API_URI failed; is your token valid?$(tput sgr0)"; rm -rf "$CONFDIR"/cache/*; exit 1; }
     fi
-    JQARG=".[].assets[] | select(.name | contains(\".tar\")) | select(.name | contains(\"$TARPKG\")) | select(.name | contains(\"macos\") | not) | select(.name | contains(\"ia32\") | not) | select(.name | contains(\"i386\") | not) | select(.name | contains(\"i686\") | not) | { name: .name, updated: .updated_at, url: .browser_download_url}"
+    JQARG=".[].assets[] | select(.name | contains(\".tar\")) | select(.name | contains(\"$TARPKG\")) | select(.name | contains(\"macos\") | not) | select(.name | contains(\"ia32\") | not) | select(.name | contains(\"i386\") | not) | select(.name | contains(\"i686\") | not) | { name: .name, updated: .updated_at, url: .browser_download_url, size: .size, numdls: .download_count}"
     cat "$CONFDIR"/cache/"$TARPKG"-release | "$RUNNING_DIR"/jq --raw-output "$JQARG" | sed 's%{%data:%g' | tr -d '",}' > "$CONFDIR"/cache/"$TARPKG"release
     if [ "$(cat "$CONFDIR"/cache/"$TARPKG"release | wc -l)" = "0" ]; then
         rm "$CONFDIR"/cache/"$TARPKG"release
-        JQARG=".[].assets[] | select(.name | contains(\".tar\")) | select(.name | contains(\"macos\") | not) | select(.name | contains(\"ia32\") | not) | select(.name | contains(\"i386\") | not) | select(.name | contains(\"i686\") | not) | { name: .name, updated: .updated_at, url: .browser_download_url}"
+        JQARG=".[].assets[] | select(.name | contains(\".tar\")) | select(.name | contains(\"macos\") | not) | select(.name | contains(\"ia32\") | not) | select(.name | contains(\"i386\") | not) | select(.name | contains(\"i686\") | not) | { name: .name, updated: .updated_at, url: .browser_download_url, size: .size, numdls: .download_count}"
         cat "$CONFDIR"/cache/"$TARPKG"-release | "$RUNNING_DIR"/jq --raw-output "$JQARG" | sed 's%{%data:%g' | tr -d '",}' > "$CONFDIR"/cache/"$TARPKG"release
     fi
     NEW_TARFILE="$(cat "$CONFDIR"/cache/"$TARPKG"release | "$RUNNING_DIR"/yaml r - data.name)"
     TAR_GITHUB_NEW_COMMIT="$(cat "$CONFDIR"/cache/"$TARPKG"release | "$RUNNING_DIR"/yaml r - data.updated)"
     TAR_GITHUB_NEW_DOWNLOAD="$(cat "$CONFDIR"/cache/"$TARPKG"release | "$RUNNING_DIR"/yaml r - data.url)"
+    TAR_SIZE="$(cat "$CONFDIR"/cache/"$TARPKG"release | "$RUNNING_DIR"/yaml r - data.size)"
+    TAR_SIZE="$(echo "scale = 3; $TAR_SIZE / 1024 / 1024" | bc) MBs"
+    TAR_DOWNLOADS="$(cat "$CONFDIR"/cache/"$TARPKG"release | "$RUNNING_DIR"/yaml r - data.numdls)"
     TAR_DOWNLOAD_SOURCE="GITHUB"
     TAR_GITHUB_NEW_VERSION="$(echo "$TAR_GITHUB_NEW_DOWNLOAD" | cut -f8 -d"/")"
     tarsaveconffunc "cache/$TARPKG.conf"
@@ -115,8 +120,9 @@ tarlistfunc () { # List info about specified package or list all packages
             else
                 echo "$(tput bold)$(tput setaf 6)Version$(tput sgr0):  $TAR_GITHUB_COMMIT"
             fi
-            echo "$(tput bold)$(tput setaf 6)Source$(tput sgr0):  $TAR_DOWNLOAD_SOURCE"
+            echo "$(tput bold)$(tput setaf 6)Total DLs$(tput sgr0):  $TAR_DOWNLOADS"
             echo "$(tput bold)$(tput setaf 6)URL$(tput sgr0):  $TARURI"
+            echo "$(tput bold)$(tput setaf 6)Size$(tput sgr0):  $TAR_SIZE"
             echo "$(tput bold)$(tput setaf 6)Install dir$(tput sgr0):  $INSTDIR"
             echo "$(tput bold)$(tput setaf 6)Bin path$(tput sgr0):  $BIN_PATH"
             echo
@@ -133,8 +139,9 @@ tarlistfunc () { # List info about specified package or list all packages
                 else
                     echo "$(tput bold)$(tput setaf 6)Version$(tput sgr0):  $TAR_GITHUB_COMMIT"
                 fi
-                echo "$(tput bold)$(tput setaf 6)Source$(tput sgr0):  $TAR_DOWNLOAD_SOURCE"
+                echo "$(tput bold)$(tput setaf 6)Total DLs$(tput sgr0):  $TAR_DOWNLOADS"
                 echo "$(tput bold)$(tput setaf 6)URL$(tput sgr0):  $TARURI"
+                echo "$(tput bold)$(tput setaf 6)Size$(tput sgr0):  $TAR_SIZE"
                 echo "$(tput bold)$(tput setaf 6)Install dir$(tput sgr0):  $INSTDIR"
                 echo "$(tput bold)$(tput setaf 6)Bin path$(tput sgr0):  $BIN_PATH"
                 echo
@@ -156,8 +163,9 @@ tarlistinstalledfunc () { # List info about installed tar packages
         else
             echo "$(tput bold)$(tput setaf 6)Version$(tput sgr0):  $TAR_GITHUB_COMMIT"
         fi
-        echo "$(tput bold)$(tput setaf 6)Source$(tput sgr0):  $TAR_DOWNLOAD_SOURCE"
+        echo "$(tput bold)$(tput setaf 6)Total DLs$(tput sgr0):  $TAR_DOWNLOADS"
         echo "$(tput bold)$(tput setaf 6)URL$(tput sgr0):  $TARURI"
+        echo "$(tput bold)$(tput setaf 6)Size$(tput sgr0):  $TAR_SIZE"
         echo "$(tput bold)$(tput setaf 6)Install dir$(tput sgr0):  $INSTDIR"
         echo "$(tput bold)$(tput setaf 6)Bin path$(tput sgr0):  $BIN_PATH"
         echo
@@ -242,8 +250,9 @@ tarupdateforcefunc () { # Mark specified tar package for upgrade without checkin
         else
             echo "$(tput bold)$(tput setaf 6)Version$(tput sgr0):  $TAR_GITHUB_COMMIT"
         fi
-        echo "$(tput bold)$(tput setaf 6)Source$(tput sgr0):  $TAR_DOWNLOAD_SOURCE"
+        echo "$(tput bold)$(tput setaf 6)Total DLs$(tput sgr0):  $TAR_DOWNLOADS"
         echo "$(tput bold)$(tput setaf 6)URL$(tput sgr0):  $TARURI"
+        echo "$(tput bold)$(tput setaf 6)Size$(tput sgr0):  $TAR_SIZE"
         echo "$(tput bold)$(tput setaf 6)Install dir$(tput sgr0):  $INSTDIR"
         echo "$(tput bold)$(tput setaf 6)Bin path$(tput sgr0):  $BIN_PATH"
         echo
