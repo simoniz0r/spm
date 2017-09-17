@@ -98,6 +98,8 @@ tarappcheckfunc () { # check user input against list of known apps here
             if [ "$TAR_DOWNLOAD_SOURCE" = "GITHUB" ]; then
                 targithubinfofunc
             else
+                TAR_SIZE="N/A"
+                TAR_DOWNLOADS="N/A"
                 tarsaveconffunc "cache/$TARPKG.conf"
             fi
             ;;

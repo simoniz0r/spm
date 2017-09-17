@@ -111,6 +111,8 @@ appimgdirectinfofunc () {
     if [ -f "$CONFDIR"/appimginstalled/"$INSTIMG" ]; then
         . "$CONFDIR"/appimginstalled/"$INSTIMG"
     fi
+    APPIMAGE_SIZE="N/A"
+    APPIMAGE_DOWNLOADS="N/A"
 }
 
 appimginfofunc () { # Set variables and temporarily store pages in "$CONFDIR"/cache to get info from them
