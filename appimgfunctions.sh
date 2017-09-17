@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.4.4"
+X="0.4.5"
 # Set spm version
 
 # Set variables
@@ -26,10 +26,10 @@ appimgsaveinfofunc () { # Save install info to "$CONFDIR"/appimginstalled/AppIma
         APPIMAGE_VERSION="$NEW_APPIMAGE_VERSION"
     fi
     echo "APPIMAGE_VERSION="\"$APPIMAGE_VERSION\""" >> "$CONFDIR"/"$SAVEDIR"
+    echo "APPIMAGE_SIZE="\"$APPIMAGE_SIZE\""" >> "$CONFDIR"/"$SAVEDIR"
+    echo "APPIMAGE_DOWNLOADS="\"$APPIMAGE_DOWNLOADS\""" >> "$CONFDIR"/"$SAVEDIR"
     if [ "$GITHUB_IMG" = "TRUE" ]; then
         echo "APPIMAGE_GITHUB_VERSION="\"$APPIMAGE_GITHUB_NEW_VERSION\""" >> "$CONFDIR"/"$SAVEDIR"
-        echo "APPIMAGE_SIZE="\"$APPIMAGE_SIZE\""" >> "$CONFDIR"/"$SAVEDIR"
-        echo "APPIMAGE_DOWNLOADS="\"$APPIMAGE_DOWNLOADS\""" >> "$CONFDIR"/"$SAVEDIR"
         echo "WEBSITE="\"$(echo "$GITHUB_APP_URL" | cut -f-5 -d'/')\""" >> "$CONFDIR"/"$SAVEDIR"
     elif [ "$DIRECT_IMG" = "TRUE" ]; then
         echo "WEBSITE="\"$(echo "$DIRECT_APPIMAGE_URL" | cut -f-3 -d'/')\""" >> "$CONFDIR"/"$SAVEDIR"

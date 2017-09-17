@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.4.4"
+X="0.4.5"
 # Set spm version
 TAR_LIST="$(echo -e $(grep '"available"' "$CONFDIR"/tar-pkgs.json | cut -f7 -d" " | tr -d ',"'))"
 TAR_SIZE="N/A"
@@ -25,9 +25,9 @@ tarsaveconffunc () { # Saves file containing tar package info in specified direc
     echo "TAR_DOWNLOAD_SOURCE="\"$TAR_DOWNLOAD_SOURCE\""" >> "$CONFDIR"/"$SAVEDIR"
     echo "TARURI="\"$TARURI\""" >> "$CONFDIR"/"$SAVEDIR"
     echo "TARFILE="\"$NEW_TARFILE\""" >> "$CONFDIR"/"$SAVEDIR"
+    echo "TAR_DOWNLOADS="\"$TAR_DOWNLOADS\""" >> "$CONFDIR"/"$SAVEDIR"
+    echo "TAR_SIZE="\"$TAR_SIZE\""" >> "$CONFDIR"/"$SAVEDIR"
     if [ "$TAR_DOWNLOAD_SOURCE" = "GITHUB" ]; then
-        echo "TAR_DOWNLOADS="\"$TAR_DOWNLOADS\""" >> "$CONFDIR"/"$SAVEDIR"
-        echo "TAR_SIZE="\"$TAR_SIZE\""" >> "$CONFDIR"/"$SAVEDIR"
         echo "TAR_GITHUB_COMMIT="\"$TAR_GITHUB_NEW_COMMIT\""" >> "$CONFDIR"/"$SAVEDIR"
         echo "TAR_GITHUB_VERSION="\"$TAR_GITHUB_NEW_VERSION\""" >> "$CONFDIR"/"$SAVEDIR"
     fi
@@ -90,7 +90,7 @@ tarappcheckfunc () { # check user input against list of known apps here
             TAR_API_URI="$("$RUNNING_DIR"/yaml r "$CONFDIR"/tar-pkgs.json "$TARPKG.apiuri")"
             DESKTOP_FILE_PATH="$("$RUNNING_DIR"/yaml r "$CONFDIR"/tar-pkgs.json "$TARPKG.desktop_file_path")"
             ICON_FILE_PATH="$("$RUNNING_DIR"/yaml r "$CONFDIR"/tar-pkgs.json "$TARPKG.icon_file_path")"
-            EXECUTABLE_FILE_PATH="$("$RUNNING_DIR"/yaml r "$CONFDIR"/tar-pkgs.json "$TARPKG.executable_fiel_path")"
+            EXECUTABLE_FILE_PATH="$("$RUNNING_DIR"/yaml r "$CONFDIR"/tar-pkgs.json "$TARPKG.executable_file_path")"
             BIN_PATH="$("$RUNNING_DIR"/yaml r "$CONFDIR"/tar-pkgs.json "$TARPKG.bin_path")"
             CONFIG_PATH="$("$RUNNING_DIR"/yaml r "$CONFDIR"/tar-pkgs.json "$TARPKG.config_path")"
             TAR_DESCRIPTION="$("$RUNNING_DIR"/yaml r "$CONFDIR"/tar-pkgs.json "$TARPKG.description")"
@@ -161,6 +161,8 @@ tarlistinstalledfunc () { # List info about installed tar packages
         echo "$(tput bold)$(tput setaf 6)Info$(tput sgr0):  $TAR_DESCRIPTION"
         echo "$(tput bold)$(tput setaf 6)Deps$(tput sgr0):  $DEPENDENCIES"
         if [ "$TAR_DOWNLOAD_SOURCE" = "DIRECT" ]; then
+            TAR_SIZE="N/A"
+            TAR_DOWNLOADS="N/A"
             echo "$(tput bold)$(tput setaf 6)Version$(tput sgr0):  $TARFILE"
         else
             echo "$(tput bold)$(tput setaf 6)Version$(tput sgr0):  $TAR_GITHUB_COMMIT"
