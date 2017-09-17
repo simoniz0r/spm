@@ -1,6 +1,6 @@
 # spm
 
-[![asciicast](https://asciinema.org/a/zWC9qGXRTXro9IyOFFMUJFQGQ.png)](https://asciinema.org/a/cIHq3tvk0L1dcBN4pdeSyWKPv)
+[![asciicast](/spmvidpreview.png)](https://asciinema.org/a/EYdkmYcVnfjEHB4E9jRzhBHb8)
 
 
 spm now has an AppImage release! To use the AppImage for spm, simply download it, `chmod a+x /path/to/spm-VERSION-x86_64.AppImage`, and execute `/path/to/spm-VERSION-x86_64.AppImage`.  The AppImage release for spm has wget bundled in.
