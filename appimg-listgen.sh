@@ -28,7 +28,7 @@ for image in $(dir -C -w 1 /home/$USER/github/appimage.github.io/data); do
     fi
 done > /home/$USER/github/spm/AppImages-github.yaml
 # Fix/remove broken links and add any AppImages that appimagehub misses
-sed -i '1s%sharexin:%%g;1s%    name: sharexin%%g;1s%    url: https://github.com/ShareXin/ShareXin/releases%%g;1s%    apiurl: https://api.github.com/repos/ShareXin/ShareXin/releases%%g' /home/$USER/github/spm/AppImages-github.yaml # Remove duplicate
+sed -i '0,/sharexin/s%sharexin:%%g;0,/    name: sharexin/s%    name: sharexin%%g;0,/    url: https*..*ShareXin*..*releases/s%    url: https*..*ShareXin*..*releases%%g;0,/    apiurl: https*..*ShareXin*..*releases/s%    apiurl: https*..*ShareXin*..*releases%%g' /home/$USER/github/spm/AppImages-github.yaml # Remove duplicate
 sed -i 's%https://github.com/nteract/releases%https://github.com/nteract/nteract/releases%g;s%https://api.github.com/repos/nteract/releases%https://api.github.com/repos/nteract/nteract/releases%g' /home/$USER/github/spm/AppImages-github.yaml # Fix broken link
 sed -i 's%    url: https://github.com/darealshinji/releases%    url: https://github.com/darealshinji/vlc-AppImage/releases%g;s%    apiurl: https://api.github.com/repos/darealshinji/releases%    apiurl: https://api.github.com/repos/darealshinji/vlc-AppImage/releases%g' /home/$USER/github/spm/AppImages-github.yaml # Fix broken link
 sed -i 's%    url: https://github.com/ozmartian/releases%    url: https://github.com/ozmartian/vidcutter/releases%g;s%    apiurl: https://api.github.com/repos/ozmartian/releases%    apiurl: https://api.github.com/repos/ozmartian/vidcutter/releases%g' /home/$USER/github/spm/AppImages-github.yaml # Fix broken link
