@@ -713,7 +713,7 @@ vessel:
 vidcutter:
     name: VidCutter
     url: https://github.com/ozmartian/vidcutter/releases
-    apiurl: https://api.github.com/ozmartian/vidcutter/releases
+    apiurl: https://api.github.com/repos/ozmartian/vidcutter/releases
 violetbug:
     name: violetbug
     url: https://github.com/belltown/violetbug/releases
