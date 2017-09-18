@@ -158,6 +158,10 @@ donut:
     name: donut
     url: https://github.com/harshjv/donut/releases
     apiurl: https://api.github.com/repos/harshjv/donut/releases
+dragoman:
+    name: Dragoman
+    url: https://github.com/peteboothroyd/Dragoman/releases
+    apiurl: https://api.github.com/repos/peteboothroyd/Dragoman/releases
 electorrent:
     name: Electorrent
     url: https://github.com/Tympanix/Electorrent/releases
@@ -555,7 +559,7 @@ shadowsocks:
     url: https://github.com/shadowsocks/shadowsocks-qt5/releases
     apiurl: https://api.github.com/repos/shadowsocks/shadowsocks-qt5/releases
 sharexin:
-    name: sharexin
+    name: ShareXin
     url: https://github.com/ShareXin/ShareXin/releases
     apiurl: https://api.github.com/repos/ShareXin/ShareXin/releases
 shots:
