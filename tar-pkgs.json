@@ -311,18 +311,5 @@
         "config_path": "$HOME/.config/yadshot",
         "description": "A bash script that uses yad to provide a GUI front end for maim/slop. Images can be copied to clipboard, uploaded to imgur, or saved.",
         "dependencies": "coreutils yad maim slop xclip curl"
-    },
-    "youtube-dl": {
-        "instdir": "/opt/youtube-dl",
-        "download_source": "GITHUB",
-        "taruri": "https://github.com/rg3/youtube-dl/releases",
-        "apiuri": "https://api.github.com/repos/rg3/youtube-dl/releases",
-        "desktop_file_path": "NONE",
-        "icon_file_path": "NONE",
-        "executable_file_path": "/opt/youtube-dl/bin/youtube-dl",
-        "bin_path": "/usr/local/bin/youtube-dl",
-        "config_path": "",
-        "description": "Command-line program to download videos from YouTube.com and other video sites",
-        "dependencies": "python"
     }
 }
