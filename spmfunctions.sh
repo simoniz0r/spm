@@ -48,11 +48,11 @@ spmdepchecksfunc () { # Run dep checks, exit if deps not present. If SKIP_DEP_CH
         fi
         if [ ! -f "$RUNNING_DIR"/yaml ]; then
             MISSING_DEPS="TRUE"
-            echo "$(tput setaf 1)$RUNNING_DIR/yaml not found!"
+            echo -e "$(tput setaf 1)$RUNNING_DIR/yaml not found! Please download the full release of spm:\nhttps://github.com/simoniz0r/spm/releases"
         fi
         if [ ! -f "$RUNNING_DIR"/jq ]; then
             MISSING_DEPS="TRUE"
-            echo "$(tput setaf 1)$RUNNING_DIR/jq not found!"
+            echo -e "$(tput setaf 1)$RUNNING_DIR/jq not found!  Please download the full release of spm:\nhttps://github.com/simoniz0r/spm/releases"
         fi
         if [ "$MISSING_DEPS" = "TRUE" ]; then
             echo "$(tput setaf 1)Missing one or more packages required to run; exiting...$(tput sgr0)"
