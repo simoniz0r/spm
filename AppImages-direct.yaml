@@ -60,13 +60,13 @@ kate:
     url: http://download.kde.org/unstable/kate/Kate-16.08-x86_64.AppImage
 kdenlive:
     name: Kdenlive
-    url: https://download.kde.org/stable/kdenlive/16.12/linux/Kdenlive-16.12-x86_64.AppImage
+    url: http://files.kde.org/kdenlive/release/Kdenlive-17.04.1b-x86_64.AppImage
 kdevelop:
     name: Kdevelop
-    url: https://download.kde.org/stable/kdevelop/5.1.1/bin/linux/KDevelop-5.1.1-x86_64.AppImage
+    url: http://kfunk.ddns.net:8080/job/kdevelop-appimage-centos/lastSuccessfulBuild/artifact/KDevelop-git-x86_64.AppImage
 krita:
     name: Krita
-    url: https://download.kde.org/stable/krita/3.1.4/krita-3.1.4-x86_64.appimage
+    url: https://download.kde.org/stable/krita/3.2.1/krita-3.2.1-x86_64.appimage
 ldview:
     name: ldview
     url: http://download.opensuse.org/repositories/home:/pbartfai/AppImage/ldview-latest-x86_64.AppImage
