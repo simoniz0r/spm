@@ -231,7 +231,7 @@ voltra:
     url: https://s3.amazonaws.com/download.voltra.co/Voltra-3.1.4-x86_64.AppImage
 xlights:
     name: xlights
-    url: https://www.adebenham.com/wp-content/uploads/xlights/xLights-2017.23.glibc2.17-x86_64.AppImage
+    url: https://www.adebenham.com/wp-content/uploads/xlights/xLights-2017.28.glibc2.17-x86_64.AppImage
 xnviewmp:
     name: XnViewMP
     url: http://download.xnview.com/XnViewMP.glibc2.14-x86_64.AppImage
