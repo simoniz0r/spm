@@ -246,7 +246,7 @@ xchat:
     url: https://bintray.com/probono/AppImages/download_file?file_path=XChat_IRC-2.8.8.glibc2.17-x86_64.AppImage
 xlights:
     name: xlights
-    url: https://www.adebenham.com/wp-content/uploads/xlights/xLights-2017.28.glibc2.17-x86_64.AppImage
+    url: https://www.adebenham.com/wp-content/uploads/xlights/xLights-2017.29-bcfbc17.glibc2.17-x86_64.AppImage
 xnviewmp:
     name: XnViewMP
     url: http://download.xnview.com/XnViewMP.glibc2.14-x86_64.AppImage
