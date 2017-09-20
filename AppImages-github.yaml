@@ -230,6 +230,10 @@ filmulator:
     name: Filmulator
     url: https://github.com/CarVac/filmulator-gui/releases
     apiurl: https://api.github.com/repos/CarVac/filmulator-gui/releases
+flatsitebuilder:
+    name: FlatSiteBuilder
+    url: https://github.com/Artanidos/FlatSiteBuilder/releases
+    apiurl: https://api.github.com/repos/Artanidos/FlatSiteBuilder/releases
 freecad:
     name: FreeCAD
     url: https://github.com/FreeCAD/FreeCAD/releases
@@ -770,6 +774,10 @@ vterm:
     name: vterm
     url: https://github.com/vterm/vterm/releases
     apiurl: https://api.github.com/repos/vterm/vterm/releases
+webcamoid:
+    name: webcamoid
+    url: https://github.com/webcamoid/webcamoid/releases
+    apiurl: https://api.github.com/repos/webcamoid/webcamoid/releases
 webrecorderplayer-electron:
     name: webrecorderplayer-electron
     url: https://github.com/webrecorder/webrecorderplayer-electron/releases
