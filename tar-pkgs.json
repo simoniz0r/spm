@@ -130,6 +130,19 @@
         "description": "A password manager that uses gpg to encrypt and decrypt passwords. Can be ran in CLI mode or in GUI mode using zenity.",
         "dependencies": "coreutils gpg xclip git wget (optional - for gpgpassman updates) apg (optinal - for generating passwords) zenity (optional - for GUI)"
     },
+    "imagewriter": {
+        "instdir": "/opt/imagewriter",
+        "download_source": "DIRECT",
+        "taruri": "http://wiki.rosalab.ru/en/images/7/7f/RosaImageWriter-2.6.2-lin-x86_64.tar.xz",
+        "apiuri": "",
+        "desktop_file_path": "NONE",
+        "icon_file_path": "NONE",
+        "executable_file_path": "/opt/imagewriter/RosaImageWriter",
+        "bin_path": "/usr/local/bin/imagewriter",
+        "config_path": "",
+        "description": "ROSA ImageWriter is a program for writing disk images to a flash disk.",
+        "dependencies": ""
+    },
     "kaku": {
         "instdir": "/opt/kaku",
         "download_source": "GITHUB",
