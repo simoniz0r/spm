@@ -154,6 +154,22 @@ dexter_dev_env:
     name: dexter_dev_env
     url: https://github.com/cfry/dde/releases
     apiurl: https://api.github.com/repos/cfry/dde/releases
+discord-canary:
+    name: discord-canary
+    url: https://github.com/simoniz0r/AppImages/releases
+    apiurl: https://api.github.com/repos/simoniz0r/AppImages/releases
+discord-ptb:
+    name: discord-ptb
+    url: https://github.com/simoniz0r/AppImages/releases
+    apiurl: https://api.github.com/repos/simoniz0r/AppImages/releases
+discord-stable:
+    name: discord-stable
+    url: https://github.com/simoniz0r/AppImages/releases
+    apiurl: https://api.github.com/repos/simoniz0r/AppImages/releases
+discord-toolbox:
+    name: discord-toolbox
+    url: https://github.com/simoniz0r/DiscordToolbox/releases
+    apiurl: https://api.github.com/repos/simoniz0r/DiscordToolbox/releases
 donut:
     name: donut
     url: https://github.com/harshjv/donut/releases
@@ -286,6 +302,10 @@ insomnia:
     name: Insomnia
     url: https://github.com/getinsomnia/insomnia/releases
     apiurl: https://api.github.com/repos/getinsomnia/insomnia/releases
+inxi:
+    name: inxi
+    url: https://github.com/simoniz0r/AppImages/releases
+    apiurl: https://api.github.com/repos/simoniz0r/AppImages/releases
 iota1k:
     name: iota1k
     url: https://github.com/xx10t4/iota1k/releases
@@ -318,6 +338,10 @@ kate_pdf_converter:
     name: kate_pdf_converter
     url: https://github.com/christian-mv/kate_pdf_converter/releases
     apiurl: https://api.github.com/repos/christian-mv/kate_pdf_converter/releases
+kawanime:
+    name: KawAnime
+    url: https://github.com/Kylart/releases
+    apiurl: https://api.github.com/repos/Kylart/releases
 keepassxc:
     name: KeePassXC
     url: https://github.com/keepassxreboot/keepassxc/releases
@@ -402,14 +426,14 @@ ncsa_mosaic:
     name: NCSA_Mosaic
     url: https://github.com/AppImage/NCSA-Mosaic-AppImage/releases
     apiurl: https://api.github.com/repos/AppImage/NCSA-Mosaic-AppImage/releases
+neofetch:
+    name: neofetch
+    url: https://github.com/simoniz0r/AppImages/releases
+    apiurl: https://api.github.com/repos/simoniz0r/AppImages/releases
 neon:
     name: Neon
     url: https://github.com/CityOfZion/neon-wallet/releases
     apiurl: https://api.github.com/repos/CityOfZion/neon-wallet/releases
-nvim:
-    name: nvim
-    url: https://github.com/neovim/neovim/releases
-    apiurl: https://api.github.com/repos/neovim/neovim/releases
 nfeh:
     name: nfeh
     url: https://github.com/fa7ad/nfeh/releases
@@ -422,6 +446,10 @@ nuclear:
     name: nuclear
     url: https://github.com/nukeop/nuclear/releases
     apiurl: https://api.github.com/repos/nukeop/nuclear/releases
+nvim:
+    name: nvim
+    url: https://github.com/neovim/neovim/releases
+    apiurl: https://api.github.com/repos/neovim/neovim/releases
 onshape:
     name: Onshape
     url: https://github.com/develar/onshape-desktop-shell/releases
@@ -642,6 +670,10 @@ tagtime-desktop:
     name: TagTime-desktop
     url: https://github.com/mykter/TagTime-desktop/releases
     apiurl: https://api.github.com/repos/mykter/TagTime-desktop/releases
+tc-linux:
+    name: tc-linux
+    url: https://github.com/mccxiv/releases
+    apiurl: https://api.github.com/repos/mccxiv/releases
 teleprompter:
     name: Teleprompter
     url: https://github.com/ImaginarySense/Teleprompter-Electron/releases
@@ -654,6 +686,10 @@ tockler:
     name: Tockler
     url: https://github.com/MayGo/tockler/releases
     apiurl: https://api.github.com/repos/MayGo/tockler/releases
+todo:
+    name: todo
+    url: https://github.com/simoniz0r/todo/releases
+    apiurl: https://api.github.com/repos/simoniz0r/todo/releases
 tomorrow-exchange:
     name: tomorrow-exchange
     url: https://github.com/uvarovserge/tomorrowex-client/releases
@@ -730,6 +766,10 @@ vnote:
     name: VNote
     url: https://github.com/tamlok/vnote/releases
     apiurl: https://api.github.com/repos/tamlok/vnote/releases
+vterm:
+    name: vterm
+    url: https://github.com/vterm/vterm/releases
+    apiurl: https://api.github.com/repos/vterm/vterm/releases
 webrecorderplayer-electron:
     name: webrecorderplayer-electron
     url: https://github.com/webrecorder/webrecorderplayer-electron/releases
@@ -766,51 +806,11 @@ xde:
     name: xde
     url: https://github.com/expo/xde/releases
     apiurl: https://api.github.com/repos/expo/xde/releases
-zulip-electron:
-    name: zulip-electron
-    url: https://github.com/zulip/zulip-electron/releases
-    apiurl: https://api.github.com/repos/zulip/zulip-electron/releases
-discord-stable:
-    name: discord-stable
-    url: https://github.com/simoniz0r/AppImages/releases
-    apiurl: https://api.github.com/repos/simoniz0r/AppImages/releases
-discord-ptb:
-    name: discord-ptb
-    url: https://github.com/simoniz0r/AppImages/releases
-    apiurl: https://api.github.com/repos/simoniz0r/AppImages/releases
-discord-canary:
-    name: discord-canary
-    url: https://github.com/simoniz0r/AppImages/releases
-    apiurl: https://api.github.com/repos/simoniz0r/AppImages/releases
-discord-toolbox:
-    name: DiscordToolbox
-    url: https://github.com/simoniz0r/DiscordToolbox/releases
-    apiurl: https://api.github.com/repos/simoniz0r/DiscordToolbox/releases
-inxi:
-    name: inxi
-    url: https://github.com/simoniz0r/AppImages/releases
-    apiurl: https://api.github.com/repos/simoniz0r/AppImages/releases
-kawanime:
-    name: KawAnime
-    url: https://github.com/Kylart/KawAnime/releases
-    apiurl: https://api.github.com/repos/Kylart/KawAnime/releases
-neofetch:
-    name: neofetch
-    url: https://github.com/simoniz0r/AppImages/releases
-    apiurl: https://api.github.com/repos/simoniz0r/AppImages/releases
-todo:
-    name: todo
-    url: https://github.com/simoniz0r/todo/releases
-    apiurl: https://api.github.com/repos/simoniz0r/todo/releases
-tc-linux:
-    name: tc-linux
-    url: https://github.com/mccxiv/tc
-    apiurl: https://api.github.com/repos/mccxiv/tc/releases
-vterm:
-    name: vterm
-    url: https://github.com/vterm/vterm/releases
-    apiurl: https://api.github.com/repos/vterm/vterm/releases
 xdgfetch:
     name: xdgfetch
     url: https://github.com/simoniz0r/xdgfetch/releases
     apiurl: https://api.github.com/repos/simoniz0r/xdgfetch/releases
+zulip-electron:
+    name: zulip-electron
+    url: https://github.com/zulip/zulip-electron/releases
+    apiurl: https://api.github.com/repos/zulip/zulip-electron/releases
