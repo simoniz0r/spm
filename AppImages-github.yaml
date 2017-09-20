@@ -790,6 +790,10 @@ inxi:
     name: inxi
     url: https://github.com/simoniz0r/AppImages/releases
     apiurl: https://api.github.com/repos/simoniz0r/AppImages/releases
+kawanime:
+    name: KawAnime
+    url: https://github.com/Kylart/KawAnime/releases
+    apiurl: https://api.github.com/repos/Kylart/KawAnime/releases
 neofetch:
     name: neofetch
     url: https://github.com/simoniz0r/AppImages/releases

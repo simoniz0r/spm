@@ -54,6 +54,10 @@ echo "inxi:" >> /home/$USER/github/spm/AppImages-github.yaml
 echo "    name: inxi" >> /home/$USER/github/spm/AppImages-github.yaml
 echo "    url: https://github.com/simoniz0r/AppImages/releases" >> /home/$USER/github/spm/AppImages-github.yaml
 echo "    apiurl: https://api.github.com/repos/simoniz0r/AppImages/releases" >> /home/$USER/github/spm/AppImages-github.yaml
+echo "kawanime:" >> /home/$USER/github/spm/AppImages-github.yaml
+echo "    name: KawAnime" >> /home/$USER/github/spm/AppImages-github.yaml
+echo "    url: https://github.com/Kylart/KawAnime/releases" >> /home/$USER/github/spm/AppImages-github.yaml
+echo "    apiurl: https://api.github.com/repos/Kylart/KawAnime/releases" >> /home/$USER/github/spm/AppImages-github.yaml
 echo "neofetch:" >> /home/$USER/github/spm/AppImages-github.yaml
 echo "    name: neofetch" >> /home/$USER/github/spm/AppImages-github.yaml
 echo "    url: https://github.com/simoniz0r/AppImages/releases" >> /home/$USER/github/spm/AppImages-github.yaml
