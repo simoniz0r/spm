@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.4.6"
+X="0.4.7"
 # Set spm version
 
 # Set variables
@@ -306,8 +306,10 @@ appimgupdateforcefunc () {
 appimgdlfunc () { # wget latest url from direct website or github repo and wget it
     if [ "$DIRECT_IMG" = "TRUE" ]; then # If AppImage is DIRECT, use method below to download it
         cd "$CONFDIR"/cache
-        wget --read-timeout=30 --trust-server-names "$DIRECT_APPIMAGE_URL" || { echo "$(tput setaf 1)wget $DIRECT_APPIMAGE_URL failed; exiting...$(tput sgr0)"; rm -rf "$CONFDIR"/cache/*; exit 1; }
-        APPIMAGE_NAME="$(dir -C -w 1 "$CONFDIR"/cache/ | grep -iw '.*AppImage')"
+        wget --read-timeout=30 "$DIRECT_APPIMAGE_URL" -O "$CONFDIR"/cache/"$APPIMAGE_NAME" || { echo "$(tput setaf 1)wget $DIRECT_APPIMAGE_URL failed; exiting...$(tput sgr0)"; rm -rf "$CONFDIR"/cache/*; exit 1; }
+        if [ -z "$APPIMAGE_NAME" ]; then
+            APPIMAGE_NAME="$(dir -C -w 1 "$CONFDIR"/cache/ | grep -iw '.*AppImage')"
+        fi
         if [ -z "$APPIMAGE_NAME" ]; then
             APPIMAGE_NAME="$(dir -C -w 1 "$CONFDIR"/cache/ | grep -iw '.*App')"
         fi
