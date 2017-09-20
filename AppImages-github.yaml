@@ -672,8 +672,8 @@ tagtime-desktop:
     apiurl: https://api.github.com/repos/mykter/TagTime-desktop/releases
 tc-linux:
     name: tc-linux
-    url: https://github.com/mccxiv/releases
-    apiurl: https://api.github.com/repos/mccxiv/releases
+    url: https://github.com/mccxiv/tc/releases
+    apiurl: https://api.github.com/repos/mccxiv/tc/releases
 teleprompter:
     name: Teleprompter
     url: https://github.com/ImaginarySense/Teleprompter-Electron/releases
