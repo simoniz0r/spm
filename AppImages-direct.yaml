@@ -196,6 +196,9 @@ serialplot:
 sigrok:
     name: Sigrok
     url: https://sigrok.org/jenkins/job/sigrok-native-appimage/platform=native-amd64/lastSuccessfulBuild/artifact/cross-compile/appimage/out/PulseView-NIGHTLY.glibc2.14-x86_64.AppImage
+simplescreenrecorder:
+    name: simplescreenrecorder
+    url: https://bintray.com/probono/AppImages/download_file?file_path=SimpleScreenRecorder-0.3.8%2B1.glibc2.14-x86_64.AppImage
 sky:
     name: Sky
     url: https://tel.red/linux/sky-latest-x86_64.AppImage
