@@ -9,7 +9,7 @@
         "icon_file_path": "/opt/atom/atom.png",
         "executable_file_path": "/opt/atom/atom",
         "bin_path": "/usr/local/bin/atom",
-        "config_path": "$HOME/.config/atom",
+        "config_path": "$HOME/.config/Atom",
         "description": "The hackable text editor",
         "dependencies": "apm libxkbfile ctags (optional - symbol indexing support) git (optional - Git and GitHub integration)"
     },
