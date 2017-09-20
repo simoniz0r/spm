@@ -8,8 +8,8 @@
 # Generate two separate lists from cloned appimagehub github repo's data folder
 
 # Generate list of github AppImages with versions that can be managed
-for image in $(dir -C -w 1 /home/$USER/github/appimage.github.io/data); do
-    URL="$(grep -v '#' /home/$USER/github/appimage.github.io/data/"$image" | grep '.*github*.' | cut -f-5 -d"/")"
+for image in $(dir -C -w 1 /home/$USER/github/spm-repo/data); do
+    URL="$(grep -v '#' /home/$USER/github/spm-repo/data/"$image" | grep '.*github*.' | cut -f-5 -d"/")"
     if [ ! -z "$URL" ]; then
         case $URL in
             *api.github*)
@@ -30,8 +30,8 @@ done > /home/$USER/github/spm/AppImages-github.yaml
 
 
 # Generate a list of AppImages from sites other than github with versions that cannot be managed
-for image in $(dir -C -w 1 /home/$USER/github/appimage.github.io/data); do
-    URL="$(grep -v '#' /home/$USER/github/appimage.github.io/data/"$image" | grep -v '.*github*.')"
+for image in $(dir -C -w 1 /home/$USER/github/spm-repo/data); do
+    URL="$(grep -v '#' /home/$USER/github/spm-repo/data/"$image" | grep -v '.*github*.')"
     if [ ! -z "$URL" ]; then
         lower_image="$(echo "$image" | tr '[:upper:]' '[:lower:]')"
         echo "$lower_image:"
