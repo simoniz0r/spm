@@ -18,7 +18,7 @@ carrot-man:
     url: https://w3g3a5v6.ssl.hwcdn.net/upload2/game/103038/336578?GoogleAccessId=507810471102@developer.gserviceaccount.com&Expires=1503077834&Signature=NSYPG%2BkIUcaRPBlPAc15LuwpaU8dyvVg3oxmhqQQFsZz5EZDWRhkXw%2BhgJmO3YBatUzddOCWFQw74UotyejxmisbrmeOtZltymQ7Mk1%2FSC2wsHd3nesYcAnqkMOP%2Bn5QMNce9LMgiViiiCgK4rnGnhcJUHZT5Spi1OnS4VAk%2B8U=&hwexp=1503078094&hwsig=b782d9d0cc39a126e7f4a1b5db855a5f
 cura:
     name: Cura
-    url: https://software.ultimaker.com/current/Cura-2.6.2.AppImage
+    url: https://software.ultimaker.com/current/Cura-2.7.0.AppImage
 cutereport:
     name: CuteReport
     url: https://sourceforge.net/projects/qreport/files/Linux/CuteReport-GPL-1.3.2.AppImage/download
@@ -40,6 +40,9 @@ emu-player:
 evothings-studio:
     name: evothings-studio
     url: https://s3-eu-west-1.amazonaws.com/evothings-download/evothings-studio-2.2.0-beta7.AppImage
+firefox:
+    name: Firefox
+    url: https://bintray.com/probono/AppImages/download_file?file_path=Firefox-55.0.glibc2.3.4-x86_64.AppImage
 flexvdi:
     name: flexVDI
     url: http://depot.flexvdi.com/clients/linux-x86_64/flexvdi-linux-client-2.2.12-3-x86_64.AppImage
@@ -97,6 +100,9 @@ mrwriter:
 ms-teams-capsule:
     name: ms-teams-capsule
     url: https://dl.karmainside.com/ms-teams-capsule/ms-teams-capsule-latest-x86_64.AppImage
+mumble:
+    name: Mumble
+    url: https://bintray.com/probono/AppImages/download_file?file_path=Mumble-1.3.0.glibc2.17-x86_64.AppImage
 musescore:
     name: MuseScore
     url: https://ftp.osuosl.org/pub/musescore/releases/MuseScore-2.1/MuseScore-2.1-x86_64.AppImage
@@ -172,9 +178,12 @@ repetier-host:
 ricin:
     name: Ricin
     url: https://cdn.konv.im/linux/ricin-0.2.8-glibc2.14-x86-64.appimage
+riot:
+    name: Riot
+    url: https://bintray.com/probono/AppImages/download_file?file_path=Riot-0.11.4.glibc2.17-x86_64.AppImage
 rpcs3:
     name: RPCS3
-    url: https://rpcs3.net/cdn/builds/rpcs3-v0.0.3-2017-08-18-d6329ea-7707_linux64.AppImage
+    url: https://rpcs3.net/cdn/builds/rpcs3-v0.0.3-2017-09-19-5c93ace-8147_linux64.AppImage
 screencloud:
     name: ScreenCloud
     url: http://download.opensuse.org/repositories/home:/olav-st:/branches:/OBS:/AppImage:/Templates/AppImage/screencloud-latest-x86_64.AppImage
@@ -201,7 +210,7 @@ stopgo:
     url: http://makerbox.org.nz/software/stopgo/stopgo-0.0.9/stopgo.AppImage
 stremio:
     name: Stremio
-    url: http://dl.strem.io/linux/v4.0.0-beta.25/Stremio+4.0.0-beta.25.appimage
+    url: https://dl.strem.io/linux/v4.0.0-beta.29/Stremio+4.0.0-beta.29.appimage
 subsurface:
     name: Subsurface
     url: https://subsurface-divelog.org/downloads/Subsurface-4.6.4-x86_64.AppImage
@@ -229,6 +238,9 @@ tubcloud:
 voltra:
     name: Voltra
     url: https://s3.amazonaws.com/download.voltra.co/Voltra-3.1.4-x86_64.AppImage
+xchat:
+    name: XChat
+    url: https://bintray.com/probono/AppImages/download_file?file_path=XChat_IRC-2.8.8.glibc2.17-x86_64.AppImage
 xlights:
     name: xlights
     url: https://www.adebenham.com/wp-content/uploads/xlights/xLights-2017.28.glibc2.17-x86_64.AppImage
