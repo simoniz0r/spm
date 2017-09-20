@@ -197,7 +197,7 @@ tarcheckfunc () { # Check to make sure downloaded file is a tar and run relevant
         *tar.gz)
             tar -xvzf "$CONFDIR"/cache/"$TARFILE" || { echo "$(tput setaf 1)tar $TARFILE failed; exiting...$(tput sgr0)"; rm -rf "$CONFDIR"/cache/*; exit 1; }
             ;;
-        *tar.bz2|*tar.tbz|*tar.tb2|*tar)
+        *tar.bz2|*tar.tbz|*tar.tb2|*tar|*tar.xz)
             tar -xvf "$CONFDIR"/cache/"$TARFILE" || { echo "$(tput setaf 1)tar $TARFILE failed; exiting...$(tput sgr0)"; rm -rf "$CONFDIR"/cache/*; exit 1; }
             ;;
         *)
