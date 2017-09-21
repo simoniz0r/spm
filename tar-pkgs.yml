@@ -1,3 +1,4 @@
+anydesk: tar-other
 atom: tar-github
 discord-canary: tar-other
 discord-ptb: tar-other
@@ -8,6 +9,7 @@ firefox-dev: tar-other
 firefox-nightly: tar-other
 firefox: tar-other
 gpgpassman: tar-github
+imagewriter: tar-other
 kaku: tar-github
 kpassman: tar-github
 nvim: tar-github
