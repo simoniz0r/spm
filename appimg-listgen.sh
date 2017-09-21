@@ -8,8 +8,8 @@
 # Generate two separate lists from cloned appimagehub github repo's data folder
 # MODIFY THIS TO OUTPUT TO INDIVIDUAL YAML FILES FOR SPM-REPO
 # Generate list of github AppImages with versions that can be managed
-for image in $(dir -C -w 1 /home/$USER/github/spm-repo/data); do
-    URL="$(grep -v '#' /home/$USER/github/spm-repo/data/"$image" | grep '.*github*.' | cut -f-5 -d"/")"
+for image in $(dir -C -w 1 $HOME/github/spm-repo/data); do
+    URL="$(grep -v '#' $HOME/github/spm-repo/data/"$image" | grep '.*github*.' | cut -f-5 -d"/")"
     if [ ! -z "$URL" ]; then
         case $URL in
             *api.github*)
@@ -22,33 +22,40 @@ for image in $(dir -C -w 1 /home/$USER/github/spm-repo/data); do
         esac
         lower_image="$(echo "$image" | tr '[:upper:]' '[:lower:]' | tr -d '.')"
         # echo "$lower_image:"
-        if [ ! -f "/home/$USER/github/spm-repo/AppImages-github/$lower_image.yml" ]; then
-            echo "name: $image" > /home/$USER/github/spm-repo/AppImages-github/"$lower_image".yml
-            echo "url: $URL/releases" >> /home/$USER/github/spm-repo/AppImages-github/"$lower_image".yml
-            echo "apiurl: https://api.github.com/repos/$REPO/releases" >> /home/$USER/github/spm-repo/AppImages-github/"$lower_image".yml
-            echo "description: $(wget --quiet "$URL" -O - | grep -i '<meta name="description"' | cut -f4 -d'"' | sed "s/[^a-zA-Z']/ /g")" >> /home/$USER/github/spm-repo/AppImages-github/"$lower_image".yml
-            echo "$(tput setaf 6)yaml file for $image has been generated!$(tput sgr0)"
+        if [ ! -f "$HOME/github/spm-repo/AppImages-github/$lower_image.yml" ]; then
+            echo "name: $image" > $HOME/github/spm-repo/AppImages-github/"$lower_image".yml
+            echo "url: $URL/releases" >> $HOME/github/spm-repo/AppImages-github/"$lower_image".yml
+            echo "apiurl: https://api.github.com/repos/$REPO/releases" >> $HOME/github/spm-repo/AppImages-github/"$lower_image".yml
+            echo "description: $(wget --quiet "$URL" -O - | grep -i '<meta name="description"' | cut -f4 -d'"' | sed "s/[^a-zA-Z']/ /g")" >> $HOME/github/spm-repo/AppImages-github/"$lower_image".yml
+            echo "$(tput setaf 1)yaml file for $image has been generated!$(tput sgr0)"
         else
-            echo "$(tput setaf 5)yaml file for $image already exists; skipping...$(tput sgr0)"
+            echo "$(tput setaf 2)yaml file for $image already exists; skipping...$(tput sgr0)"
         fi
     fi
-done # > /home/$USER/github/spm/AppImages-github.yaml
+done # > $HOME/github/spm/AppImages-github.yaml
 
 
 # Generate a list of AppImages from sites other than github with versions that cannot be managed
-for image in $(dir -C -w 1 /home/$USER/github/spm-repo/data); do
-    URL="$(grep -v '#' /home/$USER/github/spm-repo/data/"$image" | grep -v '.*github*.')"
+for image in $(dir -C -w 1 $HOME/github/spm-repo/data); do
+    URL="$(grep -v '#' $HOME/github/spm-repo/data/"$image" | grep -v '.*github*.')"
     if [ ! -z "$URL" ]; then
         lower_image="$(echo "$image" | tr '[:upper:]' '[:lower:]')"
         # echo "$lower_image:"
-        echo "name: $image" > /home/$USER/github/spm-repo/AppImages-other/"$lower_image".yml
-        echo "url: $URL" >> /home/$USER/github/spm-repo/AppImages-other/"$lower_image".yml
-        if [ ! -f "/home/$USER/github/spm-repo/AppImages-other/$lower_image.yml" ]; then
-            echo "$(tput setaf 6)yaml file for $image has been generated!$(tput sgr0)"
+        if [ ! -f "$HOME/github/spm-repo/AppImages-other/$lower_image.yml" ]; then
+            echo "name: $image" > $HOME/github/spm-repo/AppImages-other/"$lower_image".yml
+            echo "url: $URL" >> $HOME/github/spm-repo/AppImages-other/"$lower_image".yml
+            echo "$(tput setaf 1)yaml file for $image has been generated!$(tput sgr0)"
         else
-            echo "$(tput setaf 5)yaml file for $image already exists.$(tput sgr0)"
+            STORED_URL="$(yaml r $HOME/github/spm-repo/AppImages-other/$lower_image.yml url)"
+            if [ "$STORED_URL" != "$URL" ]; then
+                echo "$(tput setaf 1)New url for $image!$(tput sgr0)"
+                echo "name: $image" > $HOME/github/spm-repo/AppImages-other/"$lower_image".yml
+                echo "url: $URL" >> $HOME/github/spm-repo/AppImages-other/"$lower_image".yml
+            else
+                echo "$(tput setaf 2)No changes for $image.$(tput sgr0)"
+            fi
         fi
     fi
 
-done # > /home/$USER/github/spm/AppImages-direct.yaml
+done # > $HOME/github/spm/AppImages-direct.yaml
 
