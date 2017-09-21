@@ -28,6 +28,7 @@ for image in $(dir -C -w 1 $HOME/github/spm-repo/data); do
             echo "apiurl: https://api.github.com/repos/$REPO/releases" >> $HOME/github/spm-repo/AppImages-github/"$lower_image".yml
             echo "description: $(wget --quiet "$URL" -O - | grep -i '<meta name="description"' | cut -f4 -d'"' | sed "s/[^a-zA-Z']/ /g")" >> $HOME/github/spm-repo/AppImages-github/"$lower_image".yml
             echo "$(tput setaf 1)yaml file for $image has been generated!$(tput sgr0)"
+            echo "$lower_image: AppImages-github" >> ./AppImages.yml
         else
             echo "$(tput setaf 2)yaml file for $image already exists; skipping...$(tput sgr0)"
         fi
@@ -45,6 +46,7 @@ for image in $(dir -C -w 1 $HOME/github/spm-repo/data); do
             echo "name: $image" > $HOME/github/spm-repo/AppImages-other/"$lower_image".yml
             echo "url: $URL" >> $HOME/github/spm-repo/AppImages-other/"$lower_image".yml
             echo "$(tput setaf 1)yaml file for $image has been generated!$(tput sgr0)"
+            echo "$lower_image: AppImages-other" >> ./AppImages.yml
         else
             STORED_URL="$(yaml r $HOME/github/spm-repo/AppImages-other/$lower_image.yml url)"
             if [ "$STORED_URL" != "$URL" ]; then
@@ -58,4 +60,17 @@ for image in $(dir -C -w 1 $HOME/github/spm-repo/data); do
     fi
 
 done # > $HOME/github/spm/AppImages-direct.yaml
+
+for tar in $(dir -C -w 1 $HOME/github/spm-repo/tar-github); do
+    tar_name="$(echo "$tar" | cut -f1 -d'.')"
+    echo "$tar_name: tar-github" >> ./tar-pkgs.yml
+done
+
+for tar in $(dir -C -w 1 $HOME/github/spm-repo/tar-other); do
+    tar_name="$(echo "$tar" | cut -f1 -d'.')"
+    echo "$tar_name: tar-other" >> ./tar-pkgs.yml
+done
+
+echo "$(sort ./AppImages.yml)" > ./AppImages.yml
+echo "$(sort ./tar-pkgs.yml)" > ./tar-pkgs.yml
 
