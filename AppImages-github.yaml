@@ -246,6 +246,11 @@ gggrotto:
     name: gggrotto
     url: https://github.com/Vladar4/ng2gggrotto/releases
     apiurl: https://api.github.com/repos/Vladar4/ng2gggrotto/releases
+gifcurry:
+    name: gifcurry
+    url: https://github.com/lettier/gifcurry/releases
+    apiurl: https://api.github.com/repos/lettier/gifcurry/releases
+    description: gifcurry   Open source video to GIF maker  written in Haskell  that allows overlaid text
 glabels:
     name: gLabels
     url: https://github.com/jimevins/glabels-qt/releases
