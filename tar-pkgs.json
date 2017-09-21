@@ -1,5 +1,18 @@
 {
-    "available" : "atom\ndiscord-canary\ndiscord-ptb\ndiscord-stable\ndiscord-toolbox\nfirefox-beta\nfirefox-dev\nfirefox-nightly\nfirefox\ngpgpassman\nkaku\nkpassman\nnvim\nopenrct2\nopenttd\nrambox\nspm\ntodo\nvscode\nwavebox\nxdgfetch\nyad-mpv\nyad-twitch-streamlink\nyadshot",
+    "available" : "anydesk\natom\ndiscord-canary\ndiscord-ptb\ndiscord-stable\ndiscord-toolbox\nfirefox-beta\nfirefox-dev\nfirefox-nightly\nfirefox\ngpgpassman\nkaku\nkpassman\nnvim\nopenrct2\nopenttd\nrambox\nspm\ntodo\nvscode\nwavebox\nxdgfetch\nyad-mpv\nyad-twitch-streamlink\nyadshot",
+    "anydesk": {
+        "instdir": "/opt/anydesk",
+        "download_source": "DIRECT",
+        "taruri": "https://download.anydesk.com/linux/anydesk-2.9.5-amd64.tar.gz",
+        "apiuri": "",
+        "desktop_file_path": "DOWNLOAD",
+        "icon_file_path": "/opt/anydesk/icons/48x48/apps/anydesk.png",
+        "executable_file_path": "/opt/anydesk/anydesk",
+        "bin_path": "/usr/local/bin/anydesk",
+        "config_path": "",
+        "description": "AnyDesk Free is an All-In-One Software for Remote Support",
+        "dependencies": "binutils libpulse (optional)"
+    },
     "atom": {
         "instdir": "/opt/atom",
         "download_source": "GITHUB",
@@ -129,19 +142,6 @@
         "config_path": "$HOME/.config/gpgpassman",
         "description": "A password manager that uses gpg to encrypt and decrypt passwords. Can be ran in CLI mode or in GUI mode using zenity.",
         "dependencies": "coreutils gpg xclip git wget (optional - for gpgpassman updates) apg (optinal - for generating passwords) zenity (optional - for GUI)"
-    },
-    "imagewriter": {
-        "instdir": "/opt/imagewriter",
-        "download_source": "DIRECT",
-        "taruri": "http://wiki.rosalab.ru/en/images/7/7f/RosaImageWriter-2.6.2-lin-x86_64.tar.xz",
-        "apiuri": "",
-        "desktop_file_path": "NONE",
-        "icon_file_path": "NONE",
-        "executable_file_path": "/opt/imagewriter/RosaImageWriter",
-        "bin_path": "/usr/local/bin/imagewriter",
-        "config_path": "",
-        "description": "ROSA ImageWriter is a program for writing disk images to a flash disk.",
-        "dependencies": ""
     },
     "kaku": {
         "instdir": "/opt/kaku",
