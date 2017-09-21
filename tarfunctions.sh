@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.4.7"
+X="0.4.8"
 # Set spm version
 TAR_LIST="$(echo -e $(grep '"available"' "$CONFDIR"/tar-pkgs.json | cut -f7 -d" " | tr -d ',"'))"
 TAR_SIZE="N/A"
@@ -229,11 +229,12 @@ checktarversionfunc () { # Use info from githubinfo function or using wget -S --
         if [ "$TAR_FORCE_UPGRADE" = "TRUE" ]; then
             TAR_NEW_UPGRADE="TRUE"
             TAR_FORCE_UPGRADE="FALSE"
+        elif [ -z "$NEW_TARFILE" ]; then
+            TAR_NEW_UPGRADE="FALSE"
         elif [[ "$NEW_TARFILE" != "$TARFILE" ]]; then
             TAR_NEW_UPGRADE="TRUE"
         elif [ "$RENAMED" = "TRUE" ] && [ -d /opt/"$OLD_NAME" ]; then
             TAR_NEW_UPGRADE="TRUE"
-            RENAMED=""
         else
             TAR_NEW_UPGRADE="FALSE"
         fi
