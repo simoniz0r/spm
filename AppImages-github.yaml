@@ -50,6 +50,10 @@ baijimangaviewer:
     name: BaijiMangaViewer
     url: https://github.com/shizkun/manga-viewer/releases
     apiurl: https://api.github.com/repos/shizkun/manga-viewer/releases
+batchlabs:
+    name: BatchLabs
+    url: https://github.com/Azure/BatchLabs/releases
+    apiurl: https://api.github.com/repos/Azure/BatchLabs/releases
 belle:
     name: Belle
     url: https://github.com/fr33mind/Belle/releases
