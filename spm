@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.4.8"
+X="0.4.9"
 # Set spm version
 CONFDIR="$HOME/.config/spm"
 SKIP_DEP_CHECKS="FALSE"
@@ -32,12 +32,10 @@ if [ ! -d "$CONFDIR" ]; then # Create dirs for configs, config files, and downlo
     echo "CONFDIR="\"$CONFDIR\""" > "$CONFDIR"/spm.conf
     echo "GITHUB_TOKEN="\"\""" >> "$CONFDIR"/spm.conf
     echo "SKIP_DEP_CHECKS="\"FALSE\""" >> "$CONFDIR"/spm.conf
-    echo "Downloading AppImages-github.yaml from spm github..."
-    wget --quiet "https://raw.githubusercontent.com/simoniz0r/spm/master/AppImages-github.yaml" -O "$CONFDIR"/AppImages-github.yaml
-    echo "Downloading AppImages-direct.yaml from spm github..."
-    wget --quiet "https://raw.githubusercontent.com/simoniz0r/spm/master/AppImages-direct.yaml" -O "$CONFDIR"/AppImages-direct.yaml
-    echo "Downloading tar-pkgs.json from spm github repo..."
-    wget --quiet "https://raw.githubusercontent.com/simoniz0r/spm/master/tar-pkgs.json" -O "$CONFDIR"/tar-pkgs.json
+    echo "Downloading AppImages.yml from spm github..."
+    wget --quiet "https://raw.githubusercontent.com/simoniz0r/spm/master/AppImages.yml" -O "$CONFDIR"/AppImages.yml
+    echo "Downloading tar-pkgs.yml from spm github repo..."
+    wget --quiet "https://raw.githubusercontent.com/simoniz0r/spm/master/tar-pkgs.yml" -O "$CONFDIR"/tar-pkgs.yml
     echo "First run operations complete!"
 fi
 
@@ -202,7 +200,8 @@ case $1 in
             rm -rf "$CONFDIR"/cache/*
             exit 1
         fi
-        tarappcheckfunc "$REMPKG" # Load info about tar package using this function so tarremovefunc knows where it is
+        TARPKG="$REMPKG"
+        tarappcheckfunc # Load info about tar package using this function so tarremovefunc knows where it is
         tarremovefunc # Use info from above to remove /opt/PackageName and symlinks for .desktop and bin file
         rm -rf "$CONFDIR"/cache/*
         exit 0
@@ -234,13 +233,14 @@ case $1 in
             rm -rf "$CONFDIR"/cache/*
             exit 1
         fi
-        tarappcheckfunc "$PURGEPKG" # Load info about tar package using this function so tarremovefunc knows where it is
+        TARPKG="$REMPKG"
+        tarappcheckfunc # Load info about tar package using this function so tarremovefunc knows where it is
         tarremovepurgefunc # Use info from above to remove /opt/PackageName, config dir if listed in tar-pkgs.json, and symlinks for .desktop and bin file
         rm -rf "$CONFDIR"/cache/*
         exit 0
         ;;
     list|-l) # List installed packages or info about specified package
-        LISTIMG="$2"
+        INSTIMG="$2"
         TARPKG="$2"
         liststartfunc # Send package input to relevant list function or run both if no input
         rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
@@ -264,14 +264,9 @@ case $1 in
         exit 0
         ;;
     search|-s) # Use grep to search package lists based on user input and output matching packages and which list they are in
-        if cat "$CONFDIR"/AppImages-github.yaml | cut -f1 -d" " | grep -q "$2"; then
-            echo "$(tput bold)$(tput setaf 2)Github AppImage(s)$(tput sgr0):"
-            cat "$CONFDIR"/AppImages-github.yaml | cut -f1 -d" " | grep "$2"
-            echo
-        fi
-        if cat "$CONFDIR"/AppImages-direct.yaml | cut -f1 -d" " | grep -q "$2"; then
-            echo "$(tput bold)$(tput setaf 2)Direct AppImage(s)$(tput sgr0):"
-            cat "$CONFDIR"/AppImages-direct.yaml | cut -f1 -d" " | grep "$2"
+        if cat "$CONFDIR"/AppImages.yml | cut -f1 -d":" | grep -q "$2"; then
+            echo "$(tput bold)$(tput setaf 2)AppImage(s)$(tput sgr0):"
+            cat "$CONFDIR"/AppImages.yml | cut -f1 -d":" | grep "$2"
             echo
         fi
         if echo "$TAR_LIST" | grep -q "$2"; then

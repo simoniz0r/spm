@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.4.8"
+X="0.4.9"
 # Set spm version
 
 helpfunc () { # All unknown arguments come to this function; display help for spm
@@ -194,16 +194,39 @@ upgradestartfunc () { # Run relevant upgrade argument based on packages marked f
 }
 
 liststartfunc () { # Run relevant list function based on user input
-    if [ -z "$LISTIMG" ]; then
-        appimglistallfunc # List all AppImages available for install
+    if [ -z "$INSTIMG" ]; then
+        for file in $(sort "$CONFDIR"/*s.yml | cut -f1 -d':'); do
+            SOURCE="$(yaml r "$CONFDIR"/AppImages.yml "$file")"
+            if [ "$SOURCE" = "null" ] || [ "$last_file" = "$file" ]; then
+                SOURCE="$(yaml r "$CONFDIR"/tar-pkgs.yml "$file")"
+            fi
+            last_file="$file"
+            case $SOURCE in
+                *AppImages-github)
+                    echo "$(tput setaf 10)$file$(tput sgr0)"
+                    ;;
+                *AppImages-other)
+                    echo "$(tput setaf 2)$file$(tput sgr0)"
+                    ;;
+                *tar-github)
+                    echo "$(tput setaf 14)$file$(tput sgr0)"
+                    ;;
+                *tar-other)
+                    echo "$(tput setaf 6)$file$(tput sgr0)"
+                    ;;
+            esac
+        done | column -x -c $(tput cols)
         echo
-        tarlistfunc # List all tar packages available for install
+        echo "$(tput setaf 10)Light green = AppImages from Github"
+        echo "$(tput setaf 2)Dark green = AppImages from other sources"
+        echo "$(tput setaf 14)Light cyan = tar packages from Github"
+        echo "$(tput setaf 6)Dark cyan = tar packages from other sources"
     else
         appimglistfunc # List info for specified AppImage if available
         echo
         tarlistfunc # List info for specified tar package if available
         if [ "$APPIMG_NOT_FOUND" = "TRUE" ] && [ "$TARPKG_NOT_FOUND" = "TRUE" ]; then # If both tarfunctions.sh and appimgfunctions.sh output no packages found, tell user package not found
-            echo "$(tput setaf 1)$LISTIMG not found in package lists!$(tput sgr0)"
+            echo "$(tput setaf 1)$INSTIMG not found in package lists!$(tput sgr0)"
         fi
         rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
         exit 0

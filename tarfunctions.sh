@@ -6,9 +6,9 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.4.8"
+X="0.4.9"
 # Set spm version
-TAR_LIST="$(echo -e $(grep '"available"' "$CONFDIR"/tar-pkgs.json | cut -f7 -d" " | tr -d ',"'))"
+TAR_LIST="$(cat "$CONFDIR"/tar-pkgs.yml | cut -f1 -d":")"
 TAR_SIZE="N/A"
 TAR_DOWNLOADS="N/A"
 
@@ -70,7 +70,7 @@ targithubinfofunc () { # Gets updated_at, tar url, and description for specified
 }
 
 tarappcheckfunc () { # check user input against list of known apps here
-    case $(cat "$CONFDIR"/tar-pkgs.json | "$RUNNING_DIR"/yaml r - "$TARPKG") in
+    case $("$RUNNING_DIR"/yaml r "$CONFDIR"/tar-pkgs.yml "$TARPKG") in
         null)
             KNOWN_TAR="FALSE"
             ;;
@@ -80,21 +80,30 @@ tarappcheckfunc () { # check user input against list of known apps here
     esac
     case $KNOWN_TAR in
         TRUE)
-            # TARPKG_NAME="$(cat $CONFDIR/tar-pkgs.json | tr '\\' '\n' | grep -iowm 1 "$1" | cut -f2 -d'"')"
             if [ ! -z "$DOWNLOAD_SOURCE" ]; then
                 TAR_DOWNLOAD_SOURCE="$DOWNLOAD_SOURCE"
             fi
-            INSTDIR="$("$RUNNING_DIR"/yaml r "$CONFDIR"/tar-pkgs.json "$TARPKG.instdir")"
-            TAR_DOWNLOAD_SOURCE="$("$RUNNING_DIR"/yaml r "$CONFDIR"/tar-pkgs.json "$TARPKG.download_source")"
-            TARURI="$("$RUNNING_DIR"/yaml r "$CONFDIR"/tar-pkgs.json "$TARPKG.taruri")"
-            TAR_API_URI="$("$RUNNING_DIR"/yaml r "$CONFDIR"/tar-pkgs.json "$TARPKG.apiuri")"
-            DESKTOP_FILE_PATH="$("$RUNNING_DIR"/yaml r "$CONFDIR"/tar-pkgs.json "$TARPKG.desktop_file_path")"
-            ICON_FILE_PATH="$("$RUNNING_DIR"/yaml r "$CONFDIR"/tar-pkgs.json "$TARPKG.icon_file_path")"
-            EXECUTABLE_FILE_PATH="$("$RUNNING_DIR"/yaml r "$CONFDIR"/tar-pkgs.json "$TARPKG.executable_file_path")"
-            BIN_PATH="$("$RUNNING_DIR"/yaml r "$CONFDIR"/tar-pkgs.json "$TARPKG.bin_path")"
-            CONFIG_PATH="$("$RUNNING_DIR"/yaml r "$CONFDIR"/tar-pkgs.json "$TARPKG.config_path")"
-            TAR_DESCRIPTION="$("$RUNNING_DIR"/yaml r "$CONFDIR"/tar-pkgs.json "$TARPKG.description")"
-            DEPENDENCIES="$("$RUNNING_DIR"/yaml r "$CONFDIR"/tar-pkgs.json "$TARPKG.dependencies")"
+            SPM_TAR_REPO_BRANCH="$("$RUNNING_DIR"/yaml r "$CONFDIR"/tar-pkgs.yml "$TARPKG")"
+            case $SPM_TAR_REPO_BRANCH in
+                tar-github)
+                    TAR_DOWNLOAD_SOURCE="GITHUB"
+                    wget --quiet "https://github.com/simoniz0r/spm-repo/raw/tar-github/$TARPKG.yml" -O "$CONFDIR"/cache/"$TARPKG".yml
+                    TAR_API_URI="$("$RUNNING_DIR"/yaml r "$CONFDIR"/cache/"$TARPKG".yml apiuri)"
+                    ;;
+                tar-other)
+                    TAR_DOWNLOAD_SOURCE="DIRECT"
+                    wget --quiet "https://github.com/simoniz0r/spm-repo/raw/tar-other/$TARPKG.yml" -O "$CONFDIR"/cache/"$TARPKG".yml
+                    ;;
+            esac
+            INSTDIR="$("$RUNNING_DIR"/yaml r "$CONFDIR"/cache/"$TARPKG".yml instdir)"
+            TARURI="$("$RUNNING_DIR"/yaml r "$CONFDIR"/cache/"$TARPKG".yml taruri)"
+            DESKTOP_FILE_PATH="$("$RUNNING_DIR"/yaml r "$CONFDIR"/cache/"$TARPKG".yml desktop_file_path)"
+            ICON_FILE_PATH="$("$RUNNING_DIR"/yaml r "$CONFDIR"/cache/"$TARPKG".yml icon_file_path)"
+            EXECUTABLE_FILE_PATH="$("$RUNNING_DIR"/yaml r "$CONFDIR"/cache/"$TARPKG".yml executable_file_path)"
+            BIN_PATH="$("$RUNNING_DIR"/yaml r "$CONFDIR"/cache/"$TARPKG".yml bin_path)"
+            CONFIG_PATH="$("$RUNNING_DIR"/yaml r "$CONFDIR"/cache/"$TARPKG".yml config_path)"
+            TAR_DESCRIPTION="$("$RUNNING_DIR"/yaml r "$CONFDIR"/cache/"$TARPKG".yml description)"
+            DEPENDENCIES="$("$RUNNING_DIR"/yaml r "$CONFDIR"/cache/"$TARPKG".yml dependencies)"
             if [ "$TAR_DOWNLOAD_SOURCE" = "GITHUB" ]; then
                 targithubinfofunc
             else
@@ -107,14 +116,28 @@ tarappcheckfunc () { # check user input against list of known apps here
 }
 
 tarlistfunc () { # List info about specified package or list all packages
-    if [ -z "$TARPKG" ]; then
-        echo "$(tput bold)$(tput setaf 6)$(echo "$TAR_LIST" | wc -l) tar packages for install$(tput sgr0):"
+    if [ -f "$CONFDIR"/tarinstalled/"$TARPKG" ]; then
+        echo "$(tput bold)$(tput setaf 6)$TARPKG tar installed information$(tput sgr0):"
+        . "$CONFDIR"/tarinstalled/"$TARPKG"
+        echo "$(tput bold)$(tput setaf 6)Info$(tput sgr0):  $TAR_DESCRIPTION"
+        echo "$(tput bold)$(tput setaf 6)Deps$(tput sgr0):  $DEPENDENCIES"
+        if [ -z "$TAR_GITHUB_COMMIT" ]; then
+            echo "$(tput bold)$(tput setaf 6)Version$(tput sgr0):  $TARFILE"
+        else
+            echo "$(tput bold)$(tput setaf 6)Version$(tput sgr0):  $TAR_GITHUB_COMMIT"
+        fi
+        echo "$(tput bold)$(tput setaf 6)Total DLs$(tput sgr0):  $TAR_DOWNLOADS"
+        echo "$(tput bold)$(tput setaf 6)URL$(tput sgr0):  $TARURI"
+        echo "$(tput bold)$(tput setaf 6)Size$(tput sgr0):  $TAR_SIZE"
+        echo "$(tput bold)$(tput setaf 6)Install dir$(tput sgr0):  $INSTDIR"
+        echo "$(tput bold)$(tput setaf 6)Bin path$(tput sgr0):  $BIN_PATH"
         echo
-        echo "$TAR_LIST" | pr -tTw 125 -3
     else
-        if [ -f "$CONFDIR"/tarinstalled/"$TARPKG" ]; then
-            echo "$(tput bold)$(tput setaf 6)$TARPKG tar installed information$(tput sgr0):"
-            . "$CONFDIR"/tarinstalled/"$TARPKG"
+        tarappcheckfunc "$TARPKG"
+        if [ "$KNOWN_TAR" = "TRUE" ]; then
+            echo "$(tput bold)$(tput setaf 6)$TARPKG tar package information$(tput sgr0):"
+            tarsaveconffunc "cache/$TARPKG.conf"
+            . "$CONFDIR"/cache/"$TARPKG".conf
             echo "$(tput bold)$(tput setaf 6)Info$(tput sgr0):  $TAR_DESCRIPTION"
             echo "$(tput bold)$(tput setaf 6)Deps$(tput sgr0):  $DEPENDENCIES"
             if [ -z "$TAR_GITHUB_COMMIT" ]; then
@@ -129,27 +152,7 @@ tarlistfunc () { # List info about specified package or list all packages
             echo "$(tput bold)$(tput setaf 6)Bin path$(tput sgr0):  $BIN_PATH"
             echo
         else
-            tarappcheckfunc "$TARPKG"
-            if [ "$KNOWN_TAR" = "TRUE" ]; then
-                echo "$(tput bold)$(tput setaf 6)$TARPKG tar package information$(tput sgr0):"
-                tarsaveconffunc "cache/$TARPKG.conf"
-                . "$CONFDIR"/cache/"$TARPKG".conf
-                echo "$(tput bold)$(tput setaf 6)Info$(tput sgr0):  $TAR_DESCRIPTION"
-                echo "$(tput bold)$(tput setaf 6)Deps$(tput sgr0):  $DEPENDENCIES"
-                if [ -z "$TAR_GITHUB_COMMIT" ]; then
-                    echo "$(tput bold)$(tput setaf 6)Version$(tput sgr0):  $TARFILE"
-                else
-                    echo "$(tput bold)$(tput setaf 6)Version$(tput sgr0):  $TAR_GITHUB_COMMIT"
-                fi
-                echo "$(tput bold)$(tput setaf 6)Total DLs$(tput sgr0):  $TAR_DOWNLOADS"
-                echo "$(tput bold)$(tput setaf 6)URL$(tput sgr0):  $TARURI"
-                echo "$(tput bold)$(tput setaf 6)Size$(tput sgr0):  $TAR_SIZE"
-                echo "$(tput bold)$(tput setaf 6)Install dir$(tput sgr0):  $INSTDIR"
-                echo "$(tput bold)$(tput setaf 6)Bin path$(tput sgr0):  $BIN_PATH"
-                echo
-            else
-                TARPKG_NOT_FOUND="TRUE"
-            fi
+            TARPKG_NOT_FOUND="TRUE"
         fi
     fi
 }
@@ -294,7 +297,7 @@ tarupgradecheckallfunc () { # Run a for loop to check all installed tar packages
 
 tarupgradecheckfunc () { # Check specified tar package for upgrade
     if ! echo "$TAR_LIST" | grep -qow "$1"; then
-        echo "$(tput setaf 1)$1 is not in tar-pkgs.json; try running 'spm update'.$(tput sgr0)"
+        echo "$(tput setaf 1)$1 is not in tar-pkgs.yml; try running 'spm update'.$(tput sgr0)"
     else
         TARPKG="$1"
         echo "Checking $(tput setaf 6)$TARPKG$(tput sgr0) version..."
@@ -309,11 +312,11 @@ tarupgradecheckfunc () { # Check specified tar package for upgrade
     fi
 }
 
-tarupdatelistfunc () { # Download tar-pkgs.json from github repo and run relevant upgradecheck function based on input
-    echo "Downloading tar-pkgs.json from spm github repo..."
-    rm "$CONFDIR"/tar-pkgs.json
-    wget "https://raw.githubusercontent.com/simoniz0r/spm/master/tar-pkgs.json" -qO "$CONFDIR"/tar-pkgs.json
-    echo "tar-pkgs.json updated!"
+tarupdatelistfunc () { # Download tar-pkgs.yml from github repo and run relevant upgradecheck function based on input
+    echo "Downloading tar-pkgs.yml from spm github repo..."
+    rm "$CONFDIR"/tar-pkgs.*
+    wget "https://raw.githubusercontent.com/simoniz0r/spm/master/tar-pkgs.yml" -qO "$CONFDIR"/tar-pkgs.yml
+    echo "tar-pkgs.yml updated!"
     if [ -z "$1" ]; then
         tarupgradecheckallfunc
     else
@@ -378,7 +381,7 @@ tarinstallstartfunc () { # Check to make sure another command by the same name i
     fi
     tarappcheckfunc "$TARPKG"
     if [ "$KNOWN_TAR" = "FALSE" ];then
-        echo "$(tput setaf 1)$TARPKG is not in tar-pkgs.json; try running 'spm update' to update tar-pkgs.json$(tput sgr0)."
+        echo "$(tput setaf 1)$TARPKG is not in tar-pkgs.yml; try running 'spm update' to update tar-pkgs.yml$(tput sgr0)."
         rm -rf "$CONFDIR"/cache/*
         exit 1
     else
@@ -531,7 +534,7 @@ tarremovefunc () { # Remove tar package, .desktop and bin files, and remove conf
     echo "$(tput setaf 6)$REMPKG$(tput sgr0) has been removed!"
 }
 
-tarremovepurgefunc () { # Remove tar package, .desktop and bin files, package's config dir if listed in tar-pkgs.json, and remove config file spm used to keep track of it
+tarremovepurgefunc () { # Remove tar package, .desktop and bin files, package's config dir if listed in tar-pkgs.yml, and remove config file spm used to keep track of it
     . "$CONFDIR"/tarinstalled/"$PURGEPKG"
     echo "Removing $(tput setaf 6)$PURGEPKG$(tput sgr0)..."
     echo "All files in $INSTDIR and $CONFIG_PATH will be removed!"
