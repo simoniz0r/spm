@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.4.9"
+X="0.5.0"
 # Set spm version
 TAR_LIST="$(cat "$CONFDIR"/tar-pkgs.yml | cut -f1 -d":")"
 TAR_SIZE="N/A"
@@ -87,16 +87,22 @@ tarappcheckfunc () { # check user input against list of known apps here
             case $SPM_TAR_REPO_BRANCH in
                 tar-github)
                     TAR_DOWNLOAD_SOURCE="GITHUB"
-                    wget --quiet "https://github.com/simoniz0r/spm-repo/raw/tar-github/$TARPKG.yml" -O "$CONFDIR"/cache/"$TARPKG".yml
-                    TAR_API_URI="$("$RUNNING_DIR"/yaml r "$CONFDIR"/cache/"$TARPKG".yml apiuri)"
+                    if [ ! -f "$CONFDIR/cache/$TARPKG.yml" ]; then
+                        wget --quiet "https://github.com/simoniz0r/spm-repo/raw/tar-github/$TARPKG.yml" -O "$CONFDIR"/cache/"$TARPKG".yml
+                    fi
                     ;;
                 tar-other)
                     TAR_DOWNLOAD_SOURCE="DIRECT"
-                    wget --quiet "https://github.com/simoniz0r/spm-repo/raw/tar-other/$TARPKG.yml" -O "$CONFDIR"/cache/"$TARPKG".yml
+                    if [ ! -f "$CONFDIR/cache/$TARPKG.yml" ]; then
+                        wget --quiet "https://github.com/simoniz0r/spm-repo/raw/tar-other/$TARPKG.yml" -O "$CONFDIR"/cache/"$TARPKG".yml
+                    fi
                     ;;
             esac
             INSTDIR="$("$RUNNING_DIR"/yaml r "$CONFDIR"/cache/"$TARPKG".yml instdir)"
             TARURI="$("$RUNNING_DIR"/yaml r "$CONFDIR"/cache/"$TARPKG".yml taruri)"
+            if [ "$TAR_DOWNLOAD_SOURCE" = "GITHUB" ]; then
+                TAR_API_URI="$("$RUNNING_DIR"/yaml r "$CONFDIR"/cache/"$TARPKG".yml apiuri)"
+            fi
             DESKTOP_FILE_PATH="$("$RUNNING_DIR"/yaml r "$CONFDIR"/cache/"$TARPKG".yml desktop_file_path)"
             ICON_FILE_PATH="$("$RUNNING_DIR"/yaml r "$CONFDIR"/cache/"$TARPKG".yml icon_file_path)"
             EXECUTABLE_FILE_PATH="$("$RUNNING_DIR"/yaml r "$CONFDIR"/cache/"$TARPKG".yml executable_file_path)"
@@ -133,6 +139,9 @@ tarlistfunc () { # List info about specified package or list all packages
         echo "$(tput bold)$(tput setaf 6)Bin path$(tput sgr0):  $BIN_PATH"
         echo
     else
+        if [ -f "$CONFDIR/cache/$TARPKG.yml" ]; then
+            rm -f "$CONFDIR"/cache/"$TARPKG".yml
+        fi
         tarappcheckfunc "$TARPKG"
         if [ "$KNOWN_TAR" = "TRUE" ]; then
             echo "$(tput bold)$(tput setaf 6)$TARPKG tar package information$(tput sgr0):"
@@ -317,7 +326,14 @@ tarupdatelistfunc () { # Download tar-pkgs.yml from github repo and run relevant
     rm "$CONFDIR"/tar-pkgs.*
     wget "https://raw.githubusercontent.com/simoniz0r/spm/master/tar-pkgs.yml" -qO "$CONFDIR"/tar-pkgs.yml
     echo "tar-pkgs.yml updated!"
-    if [ -z "$1" ]; then
+    if [ -z "$1" ] && [ "$(dir -C -w 1 "$CONFDIR"/tarinstalled | wc -l)" != "0" ]; then
+        echo "Downloading new information for installed tar packages from spm-repo..."
+        for tarpkg in $(dir -C -w 1 "$CONFDIR"/tarinstalled); do
+            SPM_TAR_REPO_BRANCH="$("$RUNNING_DIR"/yaml r "$CONFDIR"/tar-pkgs.yml $tarpkg)"
+            echo "https://github.com/simoniz0r/spm-repo/raw/$SPM_TAR_REPO_BRANCH/$tarpkg.yml" >> "$CONFDIR"/cache/tar-yml-wget.list
+        done
+        cd "$CONFDIR"/cache
+        wget --no-verbose -i "$CONFDIR"/cache/tar-yml-wget.list || { echo "$(tput setaf 1)wget failed!$(tput sgr0)"; rm -rf "$CONFDIR"/cache/*; exit 1; }
         tarupgradecheckallfunc
     else
         tarupgradecheckfunc "$1"

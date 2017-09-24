@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.4.9"
+X="0.5.0"
 # Set spm version
 
 helpfunc () { # All unknown arguments come to this function; display help for spm
@@ -217,6 +217,7 @@ liststartfunc () { # Run relevant list function based on user input
             esac
         done | column -x -c $(tput cols)
         echo
+        echo "$(tput setaf 4)$(cat "$CONFDIR"/*s.yml | wc -l) packages available for install.$(tput sgr0)"
         echo "$(tput setaf 10)Light green = AppImages from Github"
         echo "$(tput setaf 2)Dark green = AppImages from other sources"
         echo "$(tput setaf 14)Light cyan = tar packages from Github"
