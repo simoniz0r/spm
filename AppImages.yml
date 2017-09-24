@@ -164,6 +164,7 @@ otter-browser: AppImages-other
 owncloud: AppImages-other
 p2p-chat: AppImages-github
 packetsender: AppImages-github
+padlock: AppImages-github
 patternpaint: AppImages-github
 pb-for-desktop: AppImages-github
 peerio: AppImages-github
