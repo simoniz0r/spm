@@ -260,15 +260,19 @@ appimgupdatelistfunc () { # Download AppImages.yml from github, and check versio
     rm -f "$CONFDIR"/AppImages-*
     wget --quiet "https://raw.githubusercontent.com/simoniz0r/spm/master/AppImages.yml" -O "$CONFDIR"/AppImages.yml || { echo "$(tput setaf 1)wget failed; exiting...$(tput sgr0)"; rm -rf "$CONFDIR"/cache/*; exit 1; }
     echo "AppImages.yml updated!"
-    if [ -z "$1" ] && [ "$(dir -C -w 1 "$CONFDIR"/appimginstalled)" != "0" ]; then # If no AppImage specified by user, check all installed AppImage versions
-        echo "Downloading new information for installed AppImages from spm-repo..."
-        for appimg in $(dir -C -w 1 "$CONFDIR"/appimginstalled); do
-            SPM_APPIMG_REPO_BRANCH="$("$RUNNING_DIR"/yaml r "$CONFDIR"/AppImages.yml $appimg)"
-            echo "https://github.com/simoniz0r/spm-repo/raw/$SPM_APPIMG_REPO_BRANCH/$appimg.yml" >> "$CONFDIR"/cache/appimg-yml-wget.list
-        done
-        cd "$CONFDIR"/cache
-        wget --no-verbose -i "$CONFDIR"/cache/appimg-yml-wget.list || { echo "$(tput setaf 1)wget failed!$(tput sgr0)"; rm -rf "$CONFDIR"/cache/*; exit 1; }
-        appimgupgradecheckallfunc
+    if [ -z "$1" ]; then # If no AppImage specified by user, check all installed AppImage versions
+        if [ "$(dir -C -w 1 "$CONFDIR"/appimginstalled)" = "0" ]; then
+            sleep 0
+        else
+            echo "Downloading new information for installed AppImages from spm-repo..."
+            for appimg in $(dir -C -w 1 "$CONFDIR"/appimginstalled); do
+                SPM_APPIMG_REPO_BRANCH="$("$RUNNING_DIR"/yaml r "$CONFDIR"/AppImages.yml $appimg)"
+                echo "https://github.com/simoniz0r/spm-repo/raw/$SPM_APPIMG_REPO_BRANCH/$appimg.yml" >> "$CONFDIR"/cache/appimg-yml-wget.list
+            done
+            cd "$CONFDIR"/cache
+            wget --no-verbose -i "$CONFDIR"/cache/appimg-yml-wget.list || { echo "$(tput setaf 1)wget failed!$(tput sgr0)"; rm -rf "$CONFDIR"/cache/*; exit 1; }
+            appimgupgradecheckallfunc
+        fi
     else # If user inputs AppImage, check that AppImage version
         INSTIMG="$1"
         appimgupgradecheckfunc

@@ -326,15 +326,19 @@ tarupdatelistfunc () { # Download tar-pkgs.yml from github repo and run relevant
     rm "$CONFDIR"/tar-pkgs.*
     wget "https://raw.githubusercontent.com/simoniz0r/spm/master/tar-pkgs.yml" -qO "$CONFDIR"/tar-pkgs.yml
     echo "tar-pkgs.yml updated!"
-    if [ -z "$1" ] && [ "$(dir -C -w 1 "$CONFDIR"/tarinstalled | wc -l)" != "0" ]; then
-        echo "Downloading new information for installed tar packages from spm-repo..."
-        for tarpkg in $(dir -C -w 1 "$CONFDIR"/tarinstalled); do
-            SPM_TAR_REPO_BRANCH="$("$RUNNING_DIR"/yaml r "$CONFDIR"/tar-pkgs.yml $tarpkg)"
-            echo "https://github.com/simoniz0r/spm-repo/raw/$SPM_TAR_REPO_BRANCH/$tarpkg.yml" >> "$CONFDIR"/cache/tar-yml-wget.list
-        done
-        cd "$CONFDIR"/cache
-        wget --no-verbose -i "$CONFDIR"/cache/tar-yml-wget.list || { echo "$(tput setaf 1)wget failed!$(tput sgr0)"; rm -rf "$CONFDIR"/cache/*; exit 1; }
-        tarupgradecheckallfunc
+    if [ -z "$1" ]; then
+        if [ "$(dir -C -w 1 "$CONFDIR"/tarinstalled | wc -l)" = "0" ]; then
+            sleep 0
+        else
+            echo "Downloading new information for installed tar packages from spm-repo..."
+            for tarpkg in $(dir -C -w 1 "$CONFDIR"/tarinstalled); do
+                SPM_TAR_REPO_BRANCH="$("$RUNNING_DIR"/yaml r "$CONFDIR"/tar-pkgs.yml $tarpkg)"
+                echo "https://github.com/simoniz0r/spm-repo/raw/$SPM_TAR_REPO_BRANCH/$tarpkg.yml" >> "$CONFDIR"/cache/tar-yml-wget.list
+            done
+            cd "$CONFDIR"/cache
+            wget --no-verbose -i "$CONFDIR"/cache/tar-yml-wget.list || { echo "$(tput setaf 1)wget failed!$(tput sgr0)"; rm -rf "$CONFDIR"/cache/*; exit 1; }
+            tarupgradecheckallfunc
+        fi
     else
         tarupgradecheckfunc "$1"
     fi
