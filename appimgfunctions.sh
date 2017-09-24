@@ -6,11 +6,10 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.5.0"
+X="0.5.1"
 # Set spm version
 
 # Set variables
-APPIMG_UPGRADE_CHECK="FALSE"
 APPIMG_FORCE_UPGRADE="FALSE"
 APPIMAGE_SIZE="N/A"
 APPIMAGE_DOWNLOADS="N/A"
@@ -90,10 +89,7 @@ appimggithubinfofunc () {
     APPIMAGE_SIZE="$(cat "$CONFDIR"/cache/"$INSTIMG"release | "$RUNNING_DIR"/yaml r - data.size)"
     APPIMAGE_SIZE="$(echo "scale = 3; $APPIMAGE_SIZE / 1024 / 1024" | bc) MBs"
     APPIMAGE_DOWNLOADS="$(cat "$CONFDIR"/cache/"$INSTIMG"release | "$RUNNING_DIR"/yaml r - data.numdls)"
-    if [ "$APPIMG_UPGRADE_CHECK" = "FALSE" ]; then
-        wget --quiet "$GITHUB_APP_URL" -O "$CONFDIR"/cache/"$INSTIMG"github || { echo "$(tput setaf 1)wget failed!$(tput sgr0)"; rm -rf "$CONFDIR"/cache/*; exit 1; }
-        APPIMAGE_DESCRIPTION="$(grep -i '<meta name="description"' "$CONFDIR"/cache/"$INSTIMG"github | cut -f4 -d'"')"
-    fi
+    APPIMAGE_DESCRIPTION="$("$RUNNING_DIR"/yaml r "$CONFDIR"/cache/"$INSTIMG".yml description | sed "s%  %%g")"
     APPIMAGE_GITHUB_NEW_VERSION="$(echo "$GITHUB_APPIMAGE_URL" | cut -f8 -d"/")"
 }
 
@@ -219,7 +215,6 @@ appimgvercheckfunc () { # Check version by getting the latest version from the b
 }
 
 appimgupgradecheckallfunc () {
-    APPIMG_UPGRADE_CHECK="TRUE" # Set this variable to avoid downloading unnecessary webpages in appimginfofunc
     for AppImage in $(dir -C -w 1 "$CONFDIR"/appimginstalled); do
         INSTIMG="$AppImage"
         echo "Checking $(tput setaf 2)$AppImage$(tput sgr0) version..."
@@ -231,14 +226,12 @@ appimgupgradecheckallfunc () {
             appimgsaveinfofunc "appimgupgrades/$AppImage"
         fi
     done
-    APPIMG_UPGRADE_CHECK="FALSE"
 }
 
 appimgupgradecheckfunc () {
     if [ ! -f "$CONFDIR"/appimginstalled/"$INSTIMG" ]; then
         echo "$(tput setaf 1)$INSTIMG is not installed...$(tput sgr0)"
     else
-        APPIMG_UPGRADE_CHECK="TRUE"
         echo "Checking $(tput setaf 2)$INSTIMG$(tput sgr0) version..."
         appimgcheckfunc "$INSTIMG" # Check whether AppImage is in lists and which list it is in
         appimginfofunc # Download web pages containing app info and set variables from them
@@ -254,7 +247,6 @@ appimgupgradecheckfunc () {
 }
 
 appimgupdatelistfunc () { # Download AppImages.yml from github, and check versions
-    APPIMG_UPGRADE_CHECK="TRUE"
     echo "Downloading AppImages.yml from spm github repo..." # Download existing list of AppImages from spm github repo
     rm -f "$CONFDIR"/AppImages.yml
     rm -f "$CONFDIR"/AppImages-*
@@ -277,7 +269,6 @@ appimgupdatelistfunc () { # Download AppImages.yml from github, and check versio
         INSTIMG="$1"
         appimgupgradecheckfunc
     fi
-    APPIMG_UPGRADE_CHECK="FALSE"
 }
 
 appimgupdateforcefunc () {
