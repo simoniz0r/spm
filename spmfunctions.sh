@@ -198,7 +198,7 @@ liststartfunc () { # Run relevant list function based on user input
         for file in $(sort "$CONFDIR"/*s.yml | cut -f1 -d':'); do
             SOURCE="$("$RUNNING_DIR"/yaml r "$CONFDIR"/AppImages.yml "$file")"
             if [ "$SOURCE" = "null" ] || [ "$last_file" = "$file" ]; then
-                SOURCE="$(yaml r "$CONFDIR"/tar-pkgs.yml "$file")"
+                SOURCE="$("$RUNNING_DIR"/yaml r "$CONFDIR"/tar-pkgs.yml "$file")"
             fi
             last_file="$file"
             case $SOURCE in
