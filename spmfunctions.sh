@@ -196,23 +196,39 @@ upgradestartfunc () { # Run relevant upgrade argument based on packages marked f
 liststartfunc () { # Run relevant list function based on user input
     if [ -z "$INSTIMG" ]; then
         for file in $(sort "$CONFDIR"/*s.yml | cut -f1 -d':'); do
-            SOURCE="$(yaml r "$CONFDIR"/AppImages.yml "$file")"
+            SOURCE="$("$RUNNING_DIR"/yaml r "$CONFDIR"/AppImages.yml "$file")"
             if [ "$SOURCE" = "null" ] || [ "$last_file" = "$file" ]; then
                 SOURCE="$(yaml r "$CONFDIR"/tar-pkgs.yml "$file")"
             fi
             last_file="$file"
             case $SOURCE in
                 *AppImages-github)
-                    echo "$(tput setaf 10)$file$(tput sgr0)"
+                    if [ -f "$CONFDIR/appimginstalled/$file" ]; then
+                        echo "$(tput setaf 10)$file$(tput sgr0) (installed)"
+                    else
+                        echo "$(tput setaf 10)$file$(tput sgr0)"
+                    fi
                     ;;
                 *AppImages-other)
-                    echo "$(tput setaf 2)$file$(tput sgr0)"
+                    if [ -f "$CONFDIR/appimginstalled/$file" ]; then
+                        echo "$(tput setaf 2)$file$(tput sgr0) (installed)"
+                    else
+                        echo "$(tput setaf 2)$file$(tput sgr0)"
+                    fi
                     ;;
                 *tar-github)
-                    echo "$(tput setaf 14)$file$(tput sgr0)"
+                    if [ -f "$CONFDIR/tarinstalled/$file" ]; then
+                        echo "$(tput setaf 14)$file$(tput sgr0) (installed)"
+                    else
+                        echo "$(tput setaf 14)$file$(tput sgr0)"
+                    fi
                     ;;
                 *tar-other)
-                    echo "$(tput setaf 6)$file$(tput sgr0)"
+                    if [ -f "$CONFDIR/tarinstalled/$file" ]; then
+                        echo "$(tput setaf 6)$file$(tput sgr0) (installed)"
+                    else
+                        echo "$(tput setaf 6)$file$(tput sgr0)"
+                    fi
                     ;;
             esac
         done | column -x -c $(tput cols)
