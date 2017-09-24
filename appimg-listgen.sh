@@ -26,7 +26,7 @@ for image in $(dir -C -w 1 $HOME/github/spm-repo/data); do
             echo "name: $image" > $HOME/github/spm-repo/AppImages-github/"$lower_image".yml
             echo "url: $URL/releases" >> $HOME/github/spm-repo/AppImages-github/"$lower_image".yml
             echo "apiurl: https://api.github.com/repos/$REPO/releases" >> $HOME/github/spm-repo/AppImages-github/"$lower_image".yml
-            echo "description: $(wget --quiet "$URL" -O - | grep -i '<meta name="description"' | cut -f4 -d'"' | sed "s/[^a-zA-Z']/ /g")" >> $HOME/github/spm-repo/AppImages-github/"$lower_image".yml
+            echo "description: $(wget --quiet "$URL" -O - | grep -i '<meta name="description"' | cut -f4 -d'"' | tr -cd '[a-zA-Z0-9 ]')" >> $HOME/github/spm-repo/AppImages-github/"$lower_image".yml
             echo "$(tput setaf 1)yaml file for $image has been generated!$(tput sgr0)"
             echo "$lower_image: AppImages-github" >> $HOME/github/spm/AppImages.yml
         else
