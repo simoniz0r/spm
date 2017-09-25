@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.5.2"
+X="0.5.3"
 # Set spm version
 
 helpfunc () { # All unknown arguments come to this function; display help for spm
@@ -38,6 +38,14 @@ See https://github.com/simoniz0r/spm for more help or to report issues.
 spm is not responsible for bugs within applications that have been
 installed using spm.  Please report any bugs that are specific to
 installed applications to their maintainers."
+}
+
+spmsaveconffunc () {
+    echo "CONFDIR="\"$CONFDIR\""" > "$CONFDIR"/spm.conf
+    echo "GITHUB_TOKEN="\"$GITHUB_TOKEN\""" >> "$CONFDIR"/spm.conf
+    echo "SKIP_DEP_CHECKS="\"FALSE\""" >> "$CONFDIR"/spm.conf
+    echo "SPM_REPO_SHA="\"$SPM_REPO_SHA\""" >> "$CONFDIR"/spm.conf
+    echo "SPM_REPO_SHA2="\"$SPM_REPO_SHA2\""" >> "$CONFDIR"/spm.conf
 }
 
 spmdepchecksfunc () { # Run dep checks, exit if deps not present. If SKIP_DEP_CHECKS has not been set to something other than "FALSE" in spm.conf, skip this function
@@ -138,6 +146,7 @@ updatestartfunc () { # Run relevant update argument based on user input
             exit 1
         fi
     else
+        NEW_SPM_REPO_SHA="$(wget --quiet "https://api.github.com/repos/simoniz0r/spm-repo/git/trees/master" -O - | "$RUNNING_DIR"/yaml r - sha)"
         UPD_START_TIME="$(date +%s)"
         appimgupdatelistfunc # Check all installed AppImages for upgrades
         echo

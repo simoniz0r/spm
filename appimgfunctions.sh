@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.5.2"
+X="0.5.3"
 # Set spm version
 
 # Set variables
@@ -51,26 +51,26 @@ appimgcheckfunc () { # check user input against list of known apps here
         AppImages-github)
             GITHUB_IMG="TRUE"
             DIRECT_IMG="FALSE"
-            if [ ! -f "$CONFDIR/cache/$INSTIMG.yml" ]; then
-                wget --quiet "https://github.com/simoniz0r/spm-repo/raw/AppImages-github/$INSTIMG.yml" -O "$CONFDIR"/cache/"$INSTIMG".yml
+            if [ ! -f "$CONFDIR/appimginstalled/.$INSTIMG.yml" ]; then
+                wget --quiet "https://github.com/simoniz0r/spm-repo/raw/AppImages-github/$INSTIMG.yml" -O "$CONFDIR"/appimginstalled/."$INSTIMG".yml
             fi
-            APPIMG_NAME="$("$RUNNING_DIR"/yaml r "$CONFDIR"/cache/"$INSTIMG".yml name)"
+            APPIMG_NAME="$("$RUNNING_DIR"/yaml r "$CONFDIR"/appimginstalled/."$INSTIMG".yml name)"
             ;;
         AppImages-other)
             GITHUB_IMG="FALSE"
             DIRECT_IMG="TRUE"
-            if [ ! -f "$CONFDIR/cache/$INSTIMG.yml" ]; then
-                wget --quiet "https://github.com/simoniz0r/spm-repo/raw/AppImages-other/$INSTIMG.yml" -O "$CONFDIR"/cache/"$INSTIMG".yml
+            if [ ! -f "$CONFDIR/appimginstalled/.$INSTIMG.yml" ]; then
+                wget --quiet "https://github.com/simoniz0r/spm-repo/raw/AppImages-other/$INSTIMG.yml" -O "$CONFDIR"/appimginstalled/."$INSTIMG".yml
             fi
-            APPIMG_NAME="$("$RUNNING_DIR"/yaml r "$CONFDIR"/cache/"$INSTIMG".yml name)"
+            APPIMG_NAME="$("$RUNNING_DIR"/yaml r "$CONFDIR"/appimginstalled/."$INSTIMG".yml name)"
             ;;
     esac
 }
 
 appimggithubinfofunc () {
-    GITHUB_APP_URL="$("$RUNNING_DIR"/yaml r "$CONFDIR"/cache/"$INSTIMG".yml url)"
-    APPIMG_GITHUB_API_URL="$("$RUNNING_DIR"/yaml r "$CONFDIR"/cache/"$INSTIMG".yml apiurl)"
-    INSTIMG_NAME="$("$RUNNING_DIR"/yaml r "$CONFDIR"/cache/"$INSTIMG".yml name)"
+    GITHUB_APP_URL="$("$RUNNING_DIR"/yaml r "$CONFDIR"/appimginstalled/."$INSTIMG".yml url)"
+    APPIMG_GITHUB_API_URL="$("$RUNNING_DIR"/yaml r "$CONFDIR"/appimginstalled/."$INSTIMG".yml apiurl)"
+    INSTIMG_NAME="$("$RUNNING_DIR"/yaml r "$CONFDIR"/appimginstalled/."$INSTIMG".yml name)"
     if [ -z "$GITHUB_TOKEN" ]; then
         wget --quiet "$APPIMG_GITHUB_API_URL" -O "$CONFDIR"/cache/"$INSTIMG"full || { echo "$(tput setaf 1)wget $APPIMG_GITHUB_API_URL failed!$(tput sgr0)"; rm -rf "$CONFDIR"/cache/*; exit 1; }
     else
@@ -89,12 +89,12 @@ appimggithubinfofunc () {
     APPIMAGE_SIZE="$(cat "$CONFDIR"/cache/"$INSTIMG"release | "$RUNNING_DIR"/yaml r - data.size)"
     APPIMAGE_SIZE="$(echo "scale = 3; $APPIMAGE_SIZE / 1024 / 1024" | bc) MBs"
     APPIMAGE_DOWNLOADS="$(cat "$CONFDIR"/cache/"$INSTIMG"release | "$RUNNING_DIR"/yaml r - data.numdls)"
-    APPIMAGE_DESCRIPTION="$("$RUNNING_DIR"/yaml r "$CONFDIR"/cache/"$INSTIMG".yml description)"
+    APPIMAGE_DESCRIPTION="$("$RUNNING_DIR"/yaml r "$CONFDIR"/appimginstalled/."$INSTIMG".yml description)"
     APPIMAGE_GITHUB_NEW_VERSION="$(echo "$GITHUB_APPIMAGE_URL" | cut -f8 -d"/")"
 }
 
 appimgdirectinfofunc () {
-    DIRECT_APPIMAGE_URL="$("$RUNNING_DIR"/yaml r "$CONFDIR"/cache/"$INSTIMG".yml url)"
+    DIRECT_APPIMAGE_URL="$("$RUNNING_DIR"/yaml r "$CONFDIR"/appimginstalled/."$INSTIMG".yml url)"
     wget -S --read-timeout=30 --spider "$DIRECT_APPIMAGE_URL" -o "$CONFDIR"/cache/"$INSTIMG".latest
     NEW_APPIMAGE_VERSION="$(grep -o "Location:.*" "$CONFDIR"/cache/"$INSTIMG".latest | cut -f2 -d" ")"
     NEW_APPIMAGE_VERSION="${NEW_APPIMAGE_VERSION##*/}"
@@ -256,13 +256,24 @@ appimgupdatelistfunc () { # Download AppImages.yml from github, and check versio
         if [ "$(dir -C -w 1 "$CONFDIR"/appimginstalled)" = "0" ]; then
             sleep 0
         else
-            echo "Downloading new information for installed AppImages from spm-repo..."
-            for appimg in $(dir -C -w 1 "$CONFDIR"/appimginstalled); do
-                SPM_APPIMG_REPO_BRANCH="$("$RUNNING_DIR"/yaml r "$CONFDIR"/AppImages.yml $appimg)"
-                echo "https://github.com/simoniz0r/spm-repo/raw/$SPM_APPIMG_REPO_BRANCH/$appimg.yml" >> "$CONFDIR"/cache/appimg-yml-wget.list
-            done
-            cd "$CONFDIR"/cache
-            wget --no-verbose -i "$CONFDIR"/cache/appimg-yml-wget.list || { echo "$(tput setaf 1)wget failed!$(tput sgr0)"; rm -rf "$CONFDIR"/cache/*; exit 1; }
+            echo "Checking for changes from spm-repo..."
+            if [ "$SPM_REPO_SHA" = "$NEW_SPM_REPO_SHA" ]; then
+                echo "No new changes from spm-repo; skipping package yml file downloads..."
+            else
+                SPM_REPO_SHA="$NEW_SPM_REPO_SHA"
+                spmsaveconffunc
+                echo "Downloading new information from spm-repo..."
+                for appimg in $(dir -C -w 1 "$CONFDIR"/appimginstalled); do
+                    SPM_APPIMG_REPO_BRANCH="$("$RUNNING_DIR"/yaml r "$CONFDIR"/AppImages.yml $appimg)"
+                    echo "https://github.com/simoniz0r/spm-repo/raw/$SPM_APPIMG_REPO_BRANCH/$appimg.yml" >> "$CONFDIR"/cache/appimg-yml-wget.list
+                done
+                cd "$CONFDIR"/cache
+                wget --no-verbose -i "$CONFDIR"/cache/appimg-yml-wget.list || { echo "$(tput setaf 1)wget failed!$(tput sgr0)"; rm -rf "$CONFDIR"/cache/*; exit 1; }
+                for ymlfile in $(dir -C -w 1 "$CONFDIR"/cache/*.yml); do
+                    ymlfile="${ymlfile##*/}"
+                    mv "$CONFDIR"/cache/"$ymlfile" "$CONFDIR"/appimginstalled/."$ymlfile"
+                done
+            fi
             appimgupgradecheckallfunc
         fi
     else # If user inputs AppImage, check that AppImage version
