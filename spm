@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.5.3"
+X="0.5.4"
 # Set spm version
 CONFDIR="$HOME/.config/spm"
 SKIP_DEP_CHECKS="FALSE"
@@ -32,11 +32,14 @@ if [ ! -d "$CONFDIR" ]; then # Create dirs for configs, config files, and downlo
     echo "CONFDIR="\"$CONFDIR\""" > "$CONFDIR"/spm.conf
     echo "GITHUB_TOKEN="\"\""" >> "$CONFDIR"/spm.conf
     echo "SKIP_DEP_CHECKS="\"FALSE\""" >> "$CONFDIR"/spm.conf
+    echo "First run operations complete!"
+fi
+
+if [ ! -f "$CONFDIR/AppImages.yml" ]; then
     echo "Downloading AppImages.yml from spm github..."
     wget --quiet "https://raw.githubusercontent.com/simoniz0r/spm/master/AppImages.yml" -O "$CONFDIR"/AppImages.yml
     echo "Downloading tar-pkgs.yml from spm github repo..."
     wget --quiet "https://raw.githubusercontent.com/simoniz0r/spm/master/tar-pkgs.yml" -O "$CONFDIR"/tar-pkgs.yml
-    echo "First run operations complete!"
 fi
 
 REALPATH="$(readlink -f $0)"

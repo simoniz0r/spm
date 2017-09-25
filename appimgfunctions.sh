@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.5.3"
+X="0.5.4"
 # Set spm version
 
 # Set variables
