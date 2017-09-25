@@ -116,6 +116,7 @@ labpowerqt: AppImages-github
 langly: AppImages-github
 ldview: AppImages-other
 lepton: AppImages-github
+lftp: AppImages-github
 libreofficedev: AppImages-other
 librepcb-nightly: AppImages-other
 linuxdeployqt: AppImages-github
@@ -169,6 +170,7 @@ padlock: AppImages-github
 patternpaint: AppImages-github
 pb-for-desktop: AppImages-github
 peerio: AppImages-github
+pendragon: AppImages-github
 peruse: AppImages-other
 photoflow: AppImages-github
 pipam: AppImages-github
