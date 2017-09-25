@@ -308,6 +308,9 @@ tarupgradecheckfunc () { # Check specified tar package for upgrade
     if ! echo "$TAR_LIST" | grep -qow "$1"; then
         echo "$(tput setaf 1)$1 is not in tar-pkgs.yml; try running 'spm update'.$(tput sgr0)"
     else
+        echo "Downloading tar-pkgs.yml from spm github repo..."
+        rm "$CONFDIR"/tar-pkgs.*
+        wget --no-verbose "https://raw.githubusercontent.com/simoniz0r/spm-repo/master/tar-pkgs.yml" -O "$CONFDIR"/tar-pkgs.yml
         TARPKG="$1"
         echo "Checking $(tput setaf 6)$TARPKG$(tput sgr0) version..."
         tarappcheckfunc "$TARPKG"
@@ -322,10 +325,6 @@ tarupgradecheckfunc () { # Check specified tar package for upgrade
 }
 
 tarupdatelistfunc () { # Download tar-pkgs.yml from github repo and run relevant upgradecheck function based on input
-    echo "Downloading tar-pkgs.yml from spm github repo..."
-    rm "$CONFDIR"/tar-pkgs.*
-    wget "https://raw.githubusercontent.com/simoniz0r/spm/master/tar-pkgs.yml" -qO "$CONFDIR"/tar-pkgs.yml
-    echo "tar-pkgs.yml updated!"
     if [ -z "$1" ]; then
         if [ "$(dir -C -w 1 "$CONFDIR"/tarinstalled | wc -l)" = "0" ]; then
             sleep 0
@@ -335,6 +334,10 @@ tarupdatelistfunc () { # Download tar-pkgs.yml from github repo and run relevant
             else
                 SPM_REPO_SHA2="$NEW_SPM_REPO_SHA"
                 spmsaveconffunc
+                echo "Downloading tar-pkgs.yml from spm github repo..."
+                rm "$CONFDIR"/tar-pkgs.*
+                wget --no-verbose "https://raw.githubusercontent.com/simoniz0r/spm-repo/master/tar-pkgs.yml" -O "$CONFDIR"/tar-pkgs.yml
+                echo "tar-pkgs.yml updated!"
                 echo "Downloading new information from spm-repo..."
                 for tarpkg in $(dir -C -w 1 "$CONFDIR"/tarinstalled); do
                     SPM_TAR_REPO_BRANCH="$("$RUNNING_DIR"/yaml r "$CONFDIR"/tar-pkgs.yml $tarpkg)"

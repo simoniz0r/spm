@@ -232,6 +232,11 @@ appimgupgradecheckfunc () {
     if [ ! -f "$CONFDIR"/appimginstalled/"$INSTIMG" ]; then
         echo "$(tput setaf 1)$INSTIMG is not installed...$(tput sgr0)"
     else
+        echo "Downloading AppImages.yml from spm github repo..." # Download existing list of AppImages from spm github repo
+        rm -f "$CONFDIR"/AppImages.yml
+        rm -f "$CONFDIR"/AppImages-*
+        wget --no-verbose "https://raw.githubusercontent.com/simoniz0r/spm-repo/master/AppImages.yml" -O "$CONFDIR"/AppImages.yml || { echo "$(tput setaf 1)wget failed; exiting...$(tput sgr0)"; rm -rf "$CONFDIR"/cache/*; exit 1; }
+        echo "AppImages.yml updated!"
         echo "Checking $(tput setaf 2)$INSTIMG$(tput sgr0) version..."
         appimgcheckfunc "$INSTIMG" # Check whether AppImage is in lists and which list it is in
         appimginfofunc # Download web pages containing app info and set variables from them
@@ -247,21 +252,21 @@ appimgupgradecheckfunc () {
 }
 
 appimgupdatelistfunc () { # Download AppImages.yml from github, and check versions
-    echo "Downloading AppImages.yml from spm github repo..." # Download existing list of AppImages from spm github repo
-    rm -f "$CONFDIR"/AppImages.yml
-    rm -f "$CONFDIR"/AppImages-*
-    wget --quiet "https://raw.githubusercontent.com/simoniz0r/spm/master/AppImages.yml" -O "$CONFDIR"/AppImages.yml || { echo "$(tput setaf 1)wget failed; exiting...$(tput sgr0)"; rm -rf "$CONFDIR"/cache/*; exit 1; }
-    echo "AppImages.yml updated!"
     if [ -z "$1" ]; then # If no AppImage specified by user, check all installed AppImage versions
         if [ "$(dir -C -w 1 "$CONFDIR"/appimginstalled)" = "0" ]; then
             sleep 0
         else
             echo "Checking for changes from spm-repo..."
             if [ "$SPM_REPO_SHA" = "$NEW_SPM_REPO_SHA" ]; then
-                echo "No new changes from spm-repo; skipping package yml file downloads..."
+                echo "No new changes from spm-repo; skipping package list updates..."
             else
                 SPM_REPO_SHA="$NEW_SPM_REPO_SHA"
                 spmsaveconffunc
+                echo "Downloading AppImages.yml from spm github repo..." # Download existing list of AppImages from spm github repo
+                rm -f "$CONFDIR"/AppImages.yml
+                rm -f "$CONFDIR"/AppImages-*
+                wget --no-verbose "https://raw.githubusercontent.com/simoniz0r/spm-repo/master/AppImages.yml" -O "$CONFDIR"/AppImages.yml || { echo "$(tput setaf 1)wget failed; exiting...$(tput sgr0)"; rm -rf "$CONFDIR"/cache/*; exit 1; }
+                echo "AppImages.yml updated!"
                 echo "Downloading new information from spm-repo..."
                 for appimg in $(dir -C -w 1 "$CONFDIR"/appimginstalled); do
                     SPM_APPIMG_REPO_BRANCH="$("$RUNNING_DIR"/yaml r "$CONFDIR"/AppImages.yml $appimg)"

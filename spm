@@ -37,9 +37,9 @@ fi
 
 if [ ! -f "$CONFDIR/AppImages.yml" ]; then
     echo "Downloading AppImages.yml from spm github..."
-    wget --quiet "https://raw.githubusercontent.com/simoniz0r/spm/master/AppImages.yml" -O "$CONFDIR"/AppImages.yml
+    wget --quiet "https://raw.githubusercontent.com/simoniz0r/spm-repo/master/AppImages.yml" -O "$CONFDIR"/AppImages.yml
     echo "Downloading tar-pkgs.yml from spm github repo..."
-    wget --quiet "https://raw.githubusercontent.com/simoniz0r/spm/master/tar-pkgs.yml" -O "$CONFDIR"/tar-pkgs.yml
+    wget --quiet "https://raw.githubusercontent.com/simoniz0r/spm-repo/master/tar-pkgs.yml" -O "$CONFDIR"/tar-pkgs.yml
 fi
 
 REALPATH="$(readlink -f $0)"
