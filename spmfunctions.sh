@@ -248,7 +248,7 @@ liststartfunc () { # Run relevant list function based on user input
         echo "$(tput setaf 10)Light green = AppImages from Github"
         echo "$(tput setaf 2)Dark green = AppImages from other sources"
         echo "$(tput setaf 14)Light cyan = tar packages from Github"
-        echo "$(tput setaf 6)Dark cyan = tar packages from other sources"
+        echo "$(tput setaf 6)Dark cyan = tar packages from other sources$(tput sgr0)"
     else
         appimglistfunc # List info for specified AppImage if available
         echo
