@@ -122,6 +122,7 @@ linuxdeployqt: AppImages-github
 linux-quiz-generator: AppImages-github
 lisk-nano: AppImages-github
 livezilla: AppImages-other
+maim: AppImages-github
 mandelbulber2: AppImages-other
 marlin-conf: AppImages-github
 maven: AppImages-github
