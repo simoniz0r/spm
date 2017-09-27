@@ -116,7 +116,7 @@ case $1 in
         ;;
     update-force|-uf|appimg-update-force|-auf|tar-update-force|-tuf) # Force AppImage to be marked for upgrade
         if [ -z "$2" ]; then
-            echo "$(tput setaf 1)AppImage input required; exiting...$(tput sgr0)"
+            echo "$(tput setaf 1)Package input required; exiting...$(tput sgr0)"
             rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
             exit 1
         fi
