@@ -35,7 +35,7 @@ tarsaveconffunc () { # Saves file containing tar package info in specified direc
     echo "ICON_FILE_PATH="\"$ICON_FILE_PATH\""" >> "$CONFDIR"/"$SAVEDIR"
     echo "EXECUTABLE_FILE_PATH="\"$EXECUTABLE_FILE_PATH\""" >> "$CONFDIR"/"$SAVEDIR"
     echo "BIN_PATH="\"$BIN_PATH\""" >> "$CONFDIR"/"$SAVEDIR"
-    echo "CONFIG_PATH="\"$CONFIG_PATH\""" >> "$CONFDIR"/"$SAVEDIR"
+    # echo "CONFIG_PATH="\"$CONFIG_PATH\""" >> "$CONFDIR"/"$SAVEDIR"
     echo "TAR_DESCRIPTION="\"$TAR_DESCRIPTION\""" >> "$CONFDIR"/"$SAVEDIR"
     echo "DEPENDENCIES="\"$DEPENDENCIES\""" >> "$CONFDIR"/"$SAVEDIR"
 }
@@ -107,7 +107,7 @@ tarappcheckfunc () { # check user input against list of known apps here
             ICON_FILE_PATH="$("$RUNNING_DIR"/yaml r "$CONFDIR"/tarinstalled/."$TARPKG".yml icon_file_path)"
             EXECUTABLE_FILE_PATH="$("$RUNNING_DIR"/yaml r "$CONFDIR"/tarinstalled/."$TARPKG".yml executable_file_path)"
             BIN_PATH="$("$RUNNING_DIR"/yaml r "$CONFDIR"/tarinstalled/."$TARPKG".yml bin_path)"
-            CONFIG_PATH="$("$RUNNING_DIR"/yaml r "$CONFDIR"/tarinstalled/."$TARPKG".yml config_path)"
+            # CONFIG_PATH="$("$RUNNING_DIR"/yaml r "$CONFDIR"/tarinstalled/."$TARPKG".yml config_path)"
             TAR_DESCRIPTION="$("$RUNNING_DIR"/yaml r "$CONFDIR"/tarinstalled/."$TARPKG".yml description)"
             DEPENDENCIES="$("$RUNNING_DIR"/yaml r "$CONFDIR"/tarinstalled/."$TARPKG".yml dependencies)"
             if [ "$TAR_DOWNLOAD_SOURCE" = "GITHUB" ]; then

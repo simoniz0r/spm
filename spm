@@ -132,46 +132,13 @@ case $1 in
         ;;
     remove|-r|appimg-remove|-ar|tar-remove|-tr)
         if [ -z "$2" ]; then
-            echo "$(tput setaf 1)AppImage input required; exiting...$(tput sgr0)"
+            echo "$(tput setaf 1)Package input required; exiting...$(tput sgr0)"
             rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
             exit 1
         fi
         TESTREM="$2"
         removestartfunc
         rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
-        exit 0
-        ;;
-    tar-remove-purge|-trp) # Remove Purge: remove pkg and also remove pkg's config files
-        if [ -z "$2" ]; then
-            echo "$(tput setaf 1)Package input required; exiting...$(tput sgr0)"
-            rm -rf "$CONFDIR"/cache/*
-            exit 1
-        fi
-        PURGEPKG="$2"
-        if [ -f "$CONFDIR"/tarinstalled/"$PURGEPKG" ]; then # Show info about package before purging, exit if not installed
-            echo "$(tput bold)$(tput setaf 6)Current installed $PURGEPKG information$(tput sgr0):"
-            . "$CONFDIR"/tarinstalled/"$PURGEPKG"
-            echo "$(tput bold)$(tput setaf 6)Info$(tput sgr0):  $TAR_DESCRIPTION"
-            echo "$(tput bold)$(tput setaf 6)Deps$(tput sgr0):  $DEPENDENCIES"
-            if [ -z "$TAR_GITHUB_COMMIT" ]; then
-                echo "$(tput bold)$(tput setaf 6)Version$(tput sgr0):  $TARFILE"
-            else
-                echo "$(tput bold)$(tput setaf 6)Version$(tput sgr0):  $TAR_GITHUB_COMMIT"
-            fi
-            echo "$(tput bold)$(tput setaf 6)Source$(tput sgr0):  $TAR_DOWNLOAD_SOURCE"
-            echo "$(tput bold)$(tput setaf 6)URL$(tput sgr0):  $TARURI"
-            echo "$(tput bold)$(tput setaf 6)Install dir$(tput sgr0):  $INSTDIR"
-            echo "$(tput bold)$(tput setaf 6)Bin path$(tput sgr0):  $BIN_PATH"
-            echo
-        else
-            echo "$(tput setaf 1)Package not found!$(tput sgr0)"
-            rm -rf "$CONFDIR"/cache/*
-            exit 1
-        fi
-        TARPKG="$REMPKG"
-        tarappcheckfunc # Load info about tar package using this function so tarremovefunc knows where it is
-        tarremovepurgefunc # Use info from above to remove /opt/PackageName, config dir if listed in tar-pkgs.json, and symlinks for .desktop and bin file
-        rm -rf "$CONFDIR"/cache/*
         exit 0
         ;;
     list|-l) # List installed packages or info about specified package
