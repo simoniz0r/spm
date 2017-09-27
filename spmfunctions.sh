@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.5.4"
+X="0.5.5"
 # Set spm version
 
 helpfunc () { # All unknown arguments come to this function; display help for spm
@@ -23,13 +23,10 @@ Arguments:
     list (-l) - list all packages known by spm or info about the specified package
     list-installed (-li) - list all installed packages and install info
     search (-s) - search package lists for packages matching input
-    appimg-install (-ai) - install an AppImage
-    tar-install (-ti) - install a precompiled tar archive
-    appimg-remove (-ar) - remove an installed AppImage
-    tar-remove (-tr) remove an installed precompiled tar archive
+    install (-i) - install an AppImage or precompiled tar archive
+    remove (-r) - remove an installed AppImage or precompiled tar archive
     update (-upd) - update package lists and check for package upgrades
-    appimg-update-force (-auf) - mark specified AppImage for upgrade without checking version
-    tar-update-force (-tuf) - mark specified precompiled tar archive for upgrade without checking version
+    update-force (-uf) - mark specified AppImage or tar archive for upgrade without checking version
     upgrade (-upg) - upgrade all installed packages that are marked for upgrade or just the specified package
     man (-m) - show spm man page
 
@@ -132,6 +129,121 @@ spmvercheckfunc () { # Check spm version when running update argument and notify
     fi
 }
 
+installstartfunc () {
+    if [ -f "$CONFDIR"/tarinstalled/"$TESTPKG" ] || [ -f "$CONFDIR"/appimginstalled/"$TESTPKG" ]; then # Exit if already installed by spm
+        echo "$(tput setaf 1)$TESTPKG is already installed."
+        echo "Use 'spm update' to check for a new version of $TESTPKG.$(tput sgr0)"
+        rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
+        exit 1
+    fi
+    if type >/dev/null 2>&1 "$TESTPKG" && [ "$TESTPKG" != "spm" ]; then # If a command by the same name as AppImage already exists on user's system, exit
+        echo "$(tput setaf 1)$TESTPKG is already installed and not managed by spm; exiting...$(tput sgr0)"
+        rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
+        exit 1
+    fi
+    if [ -f "/usr/local/bin/$TESTPKG" ]; then # If for some reason type does't pick up same file existing as AppImage name in /usr/local/bin, exit
+        echo "$(tput setaf 1)/usr/local/bin/$TESTPKG exists; exiting...$(tput sgr0)"
+        rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
+        exit 1
+    fi
+    case $("$RUNNING_DIR"/yaml r "$CONFDIR"/AppImages.yml $TESTPKG) in
+        *null*)
+            KNOWN_IMG="FALSE"
+            ;;
+        *)
+            KNOWN_IMG="TRUE"
+            ;;
+    esac
+    case $("$RUNNING_DIR"/yaml r "$CONFDIR"/tar-pkgs.yml $TESTPKG) in
+        *null*)
+            KNOWN_TAR="FALSE"
+            ;;
+        *)
+            KNOWN_TAR="TRUE"
+            ;;
+    esac
+    if [ "$KNOWN_IMG" = "TRUE" ] && [ "$KNOWN_TAR" = "TRUE" ]; then
+        echo "Both an AppImage and tar package are available for $TESTPKG; which would you like to install?"
+        read -p "1 for AppImage or 2 for tar package: 1/2 " INSTANSWER
+        echo
+        case $INSTANSWER in
+            1*)
+                INSTIMG="$TESTPKG"
+                appimginstallstartfunc # Check if specified AppImage is in list, get info for it
+                appimgdlfunc "$INSTIMG" # Download AppImage using info from above
+                appimginstallfunc # Move downloaded AppImage from $CONFDIR/cache to /usr/local/bin and save config file for spm to keep track of it
+                ;;
+            2*)
+                TARPKG="$TESTPKG"
+                tarinstallstartfunc # Check if specified tar package is in list, get info for it
+                tardlfunc "$TARPKG" # Download tar package using info from above
+                tarcheckfunc # Check to make sure file downloaded is a tar and run relevant tar arguments for file type
+                tarinstallfunc # Move extracted tar from $CONFDIR/cache to /opt/PackageName, create symlinks for .desktop and bin file, and save config file for spm to keep track of it
+                ;;
+            *)
+                echo "$INSTANSWER is not a valid choice; exiting..."
+                rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
+                exit 1
+                ;;
+        esac
+    elif [ "$KNOWN_IMG" = "TRUE" ]; then
+        INSTIMG="$TESTPKG"
+        appimginstallstartfunc # Check if specified AppImage is in list, get info for it
+        appimgdlfunc "$INSTIMG" # Download AppImage using info from above
+        appimginstallfunc # Move downloaded AppImage from $CONFDIR/cache to /usr/local/bin and save config file for spm to keep track of it
+    elif [ "$KNOWN_TAR" = "TRUE" ]; then
+        TARPKG="$TESTPKG"
+        tarinstallstartfunc # Check if specified tar package is in list, get info for it
+        tardlfunc "$TARPKG" # Download tar package using info from above
+        tarcheckfunc # Check to make sure file downloaded is a tar and run relevant tar arguments for file type
+        tarinstallfunc # Move extracted tar from $CONFDIR/cache to /opt/PackageName, create symlinks for .desktop and bin file, and save config file for spm to keep track of it
+    else
+        echo "$(tput setaf 1)$TESTPKG not found in package lists; try running the 'update' argument.$(tput sgr0)"
+    fi
+}
+
+removestartfunc () {
+    if [ -f "$CONFDIR"/appimginstalled/"$TESTREM" ]; then # Output info about AppImage before removing, exit if not installed
+        REMIMG="$TESTREM"
+        echo "$(tput bold)$(tput setaf 2)Current installed $REMIMG information$(tput sgr0):"
+        . "$CONFDIR"/appimginstalled/"$REMIMG"
+        echo "$(tput bold)$(tput setaf 2)Info$(tput sgr0):  $APPIMAGE_DESCRIPTION"
+        if [ -z "$APPIMAGE_NAME" ]; then
+            echo "$(tput bold)$(tput setaf 2)Name$(tput sgr0):  $APPIMAGE"
+        else
+            echo "$(tput bold)$(tput setaf 2)Name$(tput sgr0):  $APPIMAGE_NAME"
+        fi
+        echo "$(tput bold)$(tput setaf 2)Version$(tput sgr0):  $APPIMAGE_VERSION"
+        echo "$(tput bold)$(tput setaf 2)URL$(tput sgr0):  $WEBSITE"
+        echo "$(tput bold)$(tput setaf 2)Install dir$(tput sgr0): $BIN_PATH"
+        echo
+        appimgremovefunc # Remove AppImage from /usr/local/bin and remove conf file in $CONFDIR/appimginstalled/PackageName
+    elif [ -f "$CONFDIR"/tarinstalled/"$TESTREM" ]; then # Output info about tar package before removing, exit if not installed
+        REMPKG="$TESTREM"
+        echo "$(tput bold)$(tput setaf 6)Current installed $REMPKG information$(tput sgr0):"
+        . "$CONFDIR"/tarinstalled/"$REMPKG"
+        echo "$(tput bold)$(tput setaf 6)Info$(tput sgr0):  $TAR_DESCRIPTION"
+        echo "$(tput bold)$(tput setaf 6)Deps$(tput sgr0):  $DEPENDENCIES"
+        if [ -z "$TAR_GITHUB_COMMIT" ]; then
+            echo "$(tput bold)$(tput setaf 6)Version$(tput sgr0):  $TARFILE"
+        else
+            echo "$(tput bold)$(tput setaf 6)Version$(tput sgr0):  $TAR_GITHUB_COMMIT"
+        fi
+        echo "$(tput bold)$(tput setaf 6)Source$(tput sgr0):  $TAR_DOWNLOAD_SOURCE"
+        echo "$(tput bold)$(tput setaf 6)URL$(tput sgr0):  $TARURI"
+        echo "$(tput bold)$(tput setaf 6)Install dir$(tput sgr0):  $INSTDIR"
+        echo "$(tput bold)$(tput setaf 6)Bin path$(tput sgr0):  $BIN_PATH"
+        echo
+        TARPKG="$REMPKG"
+        tarappcheckfunc # Load info about tar package using this function so tarremovefunc knows where it is
+        tarremovefunc # Use info from above to remove /opt/PackageName and symlinks for .desktop and bin file
+    else
+        echo "$(tput setaf 1)Package not found!$(tput sgr0)"
+        rm -rf "$CONFDIR"/cache/*
+        exit 1
+    fi
+}
+
 updatestartfunc () { # Run relevant update argument based on user input
     if [ ! -z "$1" ]; then
         if [ -f "$CONFDIR"/appimginstalled/"$1" ]; then
@@ -158,6 +270,20 @@ updatestartfunc () { # Run relevant update argument based on user input
         else
             echo "$(tput setaf 2)$(dir "$CONFDIR"/appimgupgrades | wc -w) new AppImage and $(dir "$CONFDIR"/tarupgrades | wc -w) new tar package upgrade(s) available!$(tput sgr0)"
         fi
+    fi
+}
+
+updateforcestartfunc () {
+    if [ -f "$CONFDIR"/appimginstalled/"$TESTUF" ]; then
+        INSTIMG="$TESTUF"
+        appimgupdateforcefunc # Place a file containing AppImage info in $CONFDIR/appimgupgrades/PackageName for upgrade function to get info from without checking version
+    elif [ -f "$CONFDIR"/tarinstalled/"$TESTUF" ]; then
+        TARPKG="$TESTUF"
+        tarupdateforcefunc # Place a file containing tar package info in $CONFDIR/tarupgrades/PackageName for upgrade function to get info from without checking version
+    else
+        echo "$(tput setaf 1)Package not found!$(tput sgr0)"
+        rm -rf "$CONFDIR"/cache/*
+        exit 1
     fi
 }
 

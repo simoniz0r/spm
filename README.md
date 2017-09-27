@@ -29,13 +29,10 @@ Arguments:
 - list (-l) - list all packages known by spm or info about the specified package
 - list-installed (-li) - list all installed packages and install info
 - search (-s) - search package lists for packages matching input
-- appimg-install (-ai) - install an AppImage
-- tar-install (-ti) - install a precompiled tar archive
-- appimg-remove (-ar) - remove an installed AppImage
-- tar-remove (-tr) remove an installed precompiled tar archive
+- install (-i) - install an AppImage or precompiled tar archive
+- remove (-r) - remove an installed AppImage or precompiled tar archive
 - update (-upd) - update package lists and check for package upgrades
-- appimg-update-force (-auf) - mark specified AppImage for upgrade without checking version
-- tar-update-force (-tuf) - mark specified precompiled tar archive for upgrade without checking version
+- appimg-update-force (-auf) - mark specified AppImage or tar archive for upgrade without checking version
 - upgrade (-upg) - upgrade all installed packages that are marked for upgrade or just the specified package
 - man - show spm man page
 

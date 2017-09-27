@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.5.4"
+X="0.5.5"
 # Set spm version
 CONFDIR="$HOME/.config/spm"
 SKIP_DEP_CHECKS="FALSE"
@@ -97,30 +97,14 @@ fi
 echo
 
 case $1 in
-    appimg-install|-ai) # Check if package is already installed either by spm or otherwise then install package
+    install|-i|appimg-install|-ai|tarinstall|-ti) # Check if package is in either list and rout install to relevant function
         if [ -z "$2" ]; then
             echo "$(tput setaf 1)Package input required; exiting...$(tput sgr0)"
             rm -rf "$CONFDIR"/cache/*
             exit 1
         fi
-        INSTIMG="$2"
-        appimginstallstartfunc # Check if specified AppImage is in list, get info for it
-        appimgdlfunc "$INSTIMG" # Download AppImage using info from above
-        appimginstallfunc # Move downloaded AppImage from $CONFDIR/cache to /usr/local/bin and save config file for spm to keep track of it
-        rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
-        exit 0
-        ;;
-    tarinstall|-ti) # Check if package is already installed either by spm or otherwise then install package
-        if [ -z "$2" ]; then
-            echo "$(tput setaf 1)Package input required; exiting...$(tput sgr0)"
-            rm -rf "$CONFDIR"/cache/*
-            exit 1
-        fi
-        TARPKG="$2"
-        tarinstallstartfunc # Check if specified tar package is in list, get info for it
-        tardlfunc "$TARPKG" # Download tar package using info from above
-        tarcheckfunc # Check to make sure file downloaded is a tar and run relevant tar arguments for file type
-        tarinstallfunc # Move extracted tar from $CONFDIR/cache to /opt/PackageName, create symlinks for .desktop and bin file, and save config file for spm to keep track of it
+        TESTPKG="$2"
+        installstartfunc # Check package lists and route install to relevant function
         rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
         exit 0
         ;;
@@ -130,13 +114,23 @@ case $1 in
         rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
         exit 0
         ;;
-    appimg-update-force|-auf) # Force AppImage to be marked for upgrade
-        INSTIMG="$2"
-        appimgupdateforcefunc # Place a file containing AppImage info in $CONFDIR/appimgupgrades/PackageName for upgrade function to get info from without checking version
+    update-force|-uf|appimg-update-force|-auf|tar-update-force|-tuf) # Force AppImage to be marked for upgrade
+        if [ -z "$2" ]; then
+            echo "$(tput setaf 1)AppImage input required; exiting...$(tput sgr0)"
+            rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
+            exit 1
+        fi
+        TESTUF="$2"
+        updateforcestartfunc
         rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
         exit 0
         ;;
     tar-update-force|-tuf) # Force tar package to be marked for upgrade
+        if [ -z "$2" ]; then
+            echo "$(tput setaf 1)AppImage input required; exiting...$(tput sgr0)"
+            rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
+            exit 1
+        fi
         TARPKG="$2"
         tarupdateforcefunc # Place a file containing tar package info in $CONFDIR/tarupgrades/PackageName for upgrade function to get info from without checking version
         rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
@@ -147,66 +141,15 @@ case $1 in
         rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
         exit 0
         ;;
-    appimg-remove|-ar) # rm AppImage from /usr/local/bin and rm install info in "$CONFDIR"/installed
+    remove|-r|appimg-remove|-ar|tar-remove|-tr)
         if [ -z "$2" ]; then
             echo "$(tput setaf 1)AppImage input required; exiting...$(tput sgr0)"
             rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
             exit 1
         fi
-        REMIMG="$2"
-        if [ -f "$CONFDIR"/appimginstalled/"$REMIMG" ]; then # Output info about AppImage before removing, exit if not installed
-            echo "$(tput bold)$(tput setaf 2)Current installed $REMIMG information$(tput sgr0):"
-            . "$CONFDIR"/appimginstalled/"$REMIMG"
-            echo "$(tput bold)$(tput setaf 2)Info$(tput sgr0):  $APPIMAGE_DESCRIPTION"
-            if [ -z "$APPIMAGE_NAME" ]; then
-                echo "$(tput bold)$(tput setaf 2)Name$(tput sgr0):  $APPIMAGE"
-            else
-                echo "$(tput bold)$(tput setaf 2)Name$(tput sgr0):  $APPIMAGE_NAME"
-            fi
-            echo "$(tput bold)$(tput setaf 2)Version$(tput sgr0):  $APPIMAGE_VERSION"
-            echo "$(tput bold)$(tput setaf 2)URL$(tput sgr0):  $WEBSITE"
-            echo "$(tput bold)$(tput setaf 2)Install dir$(tput sgr0): $BIN_PATH"
-            echo
-            else
-            echo "$(tput setaf 1)AppImage not found!$(tput sgr0)"
-            rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
-            exit 1
-        fi
-        appimgremovefunc # Remove AppImage from /usr/local/bin and remove conf file in $CONFDIR/appimginstalled/PackageName
+        TESTREM="$2"
+        removestartfunc
         rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
-        exit 0
-        ;;
-    tar-remove|-tr) # Remove: remove pkg while leaving pkg's config files
-        if [ -z "$2" ]; then
-            echo "$(tput setaf 1)Package input required; exiting...$(tput sgr0)"
-            rm -rf "$CONFDIR"/cache/*
-            exit 1
-        fi
-        REMPKG="$2"
-        if [ -f "$CONFDIR"/tarinstalled/"$REMPKG" ]; then # Output info about tar package before removing, exit if not installed
-            echo "$(tput bold)$(tput setaf 6)Current installed $REMPKG information$(tput sgr0):"
-            . "$CONFDIR"/tarinstalled/"$REMPKG"
-            echo "$(tput bold)$(tput setaf 6)Info$(tput sgr0):  $TAR_DESCRIPTION"
-            echo "$(tput bold)$(tput setaf 6)Deps$(tput sgr0):  $DEPENDENCIES"
-            if [ -z "$TAR_GITHUB_COMMIT" ]; then
-                echo "$(tput bold)$(tput setaf 6)Version$(tput sgr0):  $TARFILE"
-            else
-                echo "$(tput bold)$(tput setaf 6)Version$(tput sgr0):  $TAR_GITHUB_COMMIT"
-            fi
-            echo "$(tput bold)$(tput setaf 6)Source$(tput sgr0):  $TAR_DOWNLOAD_SOURCE"
-            echo "$(tput bold)$(tput setaf 6)URL$(tput sgr0):  $TARURI"
-            echo "$(tput bold)$(tput setaf 6)Install dir$(tput sgr0):  $INSTDIR"
-            echo "$(tput bold)$(tput setaf 6)Bin path$(tput sgr0):  $BIN_PATH"
-            echo
-        else
-            echo "$(tput setaf 1)Package not found!$(tput sgr0)"
-            rm -rf "$CONFDIR"/cache/*
-            exit 1
-        fi
-        TARPKG="$REMPKG"
-        tarappcheckfunc # Load info about tar package using this function so tarremovefunc knows where it is
-        tarremovefunc # Use info from above to remove /opt/PackageName and symlinks for .desktop and bin file
-        rm -rf "$CONFDIR"/cache/*
         exit 0
         ;;
     tar-remove-purge|-trp) # Remove Purge: remove pkg and also remove pkg's config files

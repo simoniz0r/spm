@@ -11,7 +11,7 @@
 .Nm (simple package manager)
 .Sh SYNOPSIS             
 .Nm
-.Op Fl l,li,s,ai,ti,ar,tr,upd,auf,tuf,upg              
+.Op Fl l,li,s,i,r,upd,uf,upg              
 .Op Ar package     
 .Sh DESCRIPTION          
 .Nm
@@ -30,20 +30,14 @@ list all packages known by spm or info about the specified package
 list all installed packages and install info
 .It search (-s)
 search package lists for packages matching input
-.It appimg-install (-ai)
-install an AppImage
-.It tar-install (-ti)
-install a precompiled tar archive
-.It appimg-remove (-ar)
-remove an installed AppImage
-.It tar-remove (-tr)
-remove an installed precompiled tar archive
+.It install (-i)
+install an AppImage or precompiled tar archive
+.It remove (-r)
+remove an installed AppImage or precompiled tar archive
 .It update (-upd)
 update package lists and check for package upgrades
-.It appimg-update-force (-auf)
-mark specified AppImage for upgrade without checking version
-.It tar-update-force (-tuf)
-mark specified precompiled tar archive for upgrade without checking version
+.It update-force (-uf)
+mark specified AppImage or tar archive for upgrade without checking version
 .It upgrade (-upg)
 upgrade all installed packages that are marked for upgrade or the specified package
 .El                      \" Ends the list
@@ -77,4 +71,4 @@ you are missing dependencies needed for a package installed through
 
 
 
-.Ar spm man page version 0.5.4
+.Ar spm man page version 0.5.5

@@ -16,7 +16,7 @@ _spm () {
  
     case $state in
     args)
-        _arguments '1:arguments:(-h -l -li -ai -ar -ti -tr -upd -auf -tuf -upg -m)'
+        _arguments '1:arguments:(-h -l -li -i -r -upd -uf -upg -m)'
         ;;
     *)
         case $words[2] in
@@ -26,26 +26,17 @@ _spm () {
         -s)
             compadd "$@" $(cat ~/.config/spm/AppImages.yml | cut -f1 -d":") $(cat ~/.config/spm/tar-pkgs.yml | cut -f1 -d":")
             ;;
-        -ai)
-            compadd "$@" $(cat ~/.config/spm/AppImages.yml | cut -f1 -d":")
+        -i|-ai|-ti)
+            compadd "$@" $(cat ~/.config/spm/AppImages.yml | cut -f1 -d":") $(cat ~/.config/spm/tar-pkgs.yml | cut -f1 -d":")
             ;;
-        -ti)
-            compadd "$@" $(cat ~/.config/spm/tar-pkgs.yml | cut -f1 -d":")
-            ;;
-        -ar)
-            compadd "$@" $(dir ~/.config/spm/appimginstalled)
-            ;;
-        -tr)
-            compadd "$@" $(dir ~/.config/spm/tarinstalled)
+        -r|-ar|-tr)
+            compadd "$@" $(dir ~/.config/spm/appimginstalled) $(dir ~/.config/spm/tarinstalled)
             ;;
         -upd)
             compadd "$@" $(dir ~/.config/spm/appimginstalled) $(dir ~/.config/spm/tarinstalled)
             ;;
-        -auf)
-            compadd "$@" $(dir ~/.config/spm/appimginstalled)
-            ;;
-        -tuf)
-            compadd "$@" $(dir ~/.config/spm/tarinstalled)
+        -uf|-auf|-tuf)
+            compadd "$@" $(dir ~/.config/spm/appimginstalled) $(dir ~/.config/spm/tarinstalled)
             ;;
         -upg)
             compadd "$@" $(dir ~/.config/spm/appimgupgrades) $(dir ~/.config/spm/tarupgrades)
