@@ -7,7 +7,7 @@ spm now has an AppImage release! To use the AppImage for spm, simply download it
 
 Dependencies: coreutils, tar, bc,  wget (bc and wget are bundled in the AppImage release)
 
-It is recommended that you use spm to install the AppImage or tar version of spm by executing `/path/to/spm -ai spm` for the AppImage or `/path/to/spm -ti spm` for the tar version.  This will allow spm to upgrade itself when a new version is released.
+It is recommended that you use spm to install the AppImage or tar version of spm by executing `/path/to/spm -i spm`.  This will allow spm to upgrade itself when a new version is released.
 
 Usage: spm [option] [package]
 
