@@ -564,6 +564,7 @@ tarremovefunc () { # Remove tar package, .desktop and bin files, and remove conf
     esac
     sudo rm /usr/local/bin/"$REMPKG"
     rm "$CONFDIR"/tarinstalled/"$REMPKG"
+    rm "$CONFDIR"/tarinstalled/."$REMPKG".yml
     echo "$(tput setaf 6)$REMPKG$(tput sgr0) has been removed!"
 }
 

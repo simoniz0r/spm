@@ -466,5 +466,6 @@ appimgremovefunc () { # rm AppImage in /usr/local/bin and remove install info fi
     echo "Removing /usr/local/bin/$REMIMG ..."
     sudo rm /usr/local/bin/"$REMIMG" || { echo "Failed!"; rm -rf "$CONFDIR"/cache/*; exit 1; } # Remove AppImage from /usr/local/bin
     rm "$CONFDIR"/appimginstalled/"$REMIMG" # Remove installed info file for AppImage
+    rm "$CONFDIR"/appimginstalled/."$REMIMG".yml # Remove installed info file for AppImage
     echo "$(tput setaf 2)$REMIMG$(tput sgr0) has been removed!"
 }
