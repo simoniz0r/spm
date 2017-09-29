@@ -293,4 +293,5 @@ xdgfetch: AppImages-github
 xlights: AppImages-other
 xnviewmp: AppImages-other
 yadshot: AppImages-github
+yad-twitch-streamlink: AppImages-github
 zulip-electron: AppImages-github
