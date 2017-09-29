@@ -154,6 +154,7 @@ appimglistfunc () {
             echo "$(tput bold)$(tput setaf 2)Size$(tput sgr0):  $APPIMAGE_SIZE"
             echo "$(tput bold)$(tput setaf 2)Install dir$(tput sgr0): $BIN_PATH"
             echo
+            rm -f "$CONFDIR"/appimginstalled/."$INSTIMG".yml
         else
             APPIMG_NOT_FOUND="TRUE"
         fi

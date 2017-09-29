@@ -160,6 +160,7 @@ tarlistfunc () { # List info about specified package or list all packages
             echo "$(tput bold)$(tput setaf 6)Install dir$(tput sgr0):  $INSTDIR"
             echo "$(tput bold)$(tput setaf 6)Bin path$(tput sgr0):  $BIN_PATH"
             echo
+            rm -f "$CONFDIR"/tarinstalled/."$TARPKG".yml
         else
             TARPKG_NOT_FOUND="TRUE"
         fi
