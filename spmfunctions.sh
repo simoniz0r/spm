@@ -386,3 +386,19 @@ liststartfunc () { # Run relevant list function based on user input
         exit 0
     fi
 }
+
+listinstalledfunc () {
+    echo "$(tput bold)$(tput setaf 2)AppImages$(tput sgr0):"
+    echo
+    appimglistinstalledfunc || { echo "Failed; exiting..."; rm -rf "$CONFDIR"/cache/*; exit 1; } # List info about all installed AppImages
+    echo
+    echo "$(tput bold)$(tput setaf 6)tar packages$(tput sgr0):"
+    echo
+    tarlistinstalledfunc || { echo "Failed; exiting..."; rm -rf "$CONFDIR"/cache/*; exit 1; } # List info about all installed tar packages
+    echo "$(tput bold)$(tput setaf 2)$(dir -C -w 1 "$CONFDIR"/appimginstalled | wc -l) AppImages installed$(tput sgr0):" # Output number of and names of installed AppImages
+    dir -C -w 1 "$CONFDIR"/appimginstalled | pr -tT --column=3 -w 125
+    echo
+    echo "$(tput bold)$(tput setaf 6)$(dir -C -w 1 "$CONFDIR"/tarinstalled | wc -l) tar packages installed$(tput sgr0):" # Output number of and names of installed tar packages
+    dir -C -w 1 "$CONFDIR"/tarinstalled | pr -tT --column=3 -w 125
+    echo
+}
