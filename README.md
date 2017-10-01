@@ -2,12 +2,7 @@
 
 [![asciicast](/spmvidpreview.png)](https://asciinema.org/a/OY8FwYH8I9j590or2iPTiid0O)
 
-
-spm now has an AppImage release! To use the AppImage for spm, simply download it, `chmod a+x /path/to/spm-VERSION-x86_64.AppImage`, and execute `/path/to/spm-VERSION-x86_64.AppImage`.  The AppImage release for spm has wget bundled in.
-
 Dependencies: coreutils, tar, bc,  wget (bc and wget are bundled in the AppImage release)
-
-It is recommended that you use spm to install the AppImage or tar version of spm by executing `/path/to/spm -i spm`.  This will allow spm to upgrade itself when a new version is released.
 
 Usage: spm [option] [package]
 
@@ -39,6 +34,10 @@ Arguments:
 spm is not responsible for bugs within applications that have been
 installed using spm.  Please report any bugs that are specific to
 installed applications to their maintainers."
+
+To use the AppImage for spm, simply download it, `chmod a+x /path/to/spm-VERSION-x86_64.AppImage`, and execute `/path/to/spm-VERSION-x86_64.AppImage`.  The AppImage release for spm has wget and bc bundled in.
+
+It is recommended that you use spm to install the AppImage or tar version of spm by executing `/path/to/spm -i spm`.  This will allow spm to upgrade itself when a new version is released.
 
 # Github Rate Limit
 
