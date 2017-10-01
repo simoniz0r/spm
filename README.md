@@ -31,13 +31,13 @@ Arguments:
 - upgrade (-upg) - upgrade all installed packages that are marked for upgrade or just the specified package
 - man - show spm man page
 
-spm is not responsible for bugs within applications that have been
-installed using spm.  Please report any bugs that are specific to
-installed applications to their maintainers."
-
 To use the AppImage for spm, simply download it, `chmod a+x /path/to/spm-VERSION-x86_64.AppImage`, and execute `/path/to/spm-VERSION-x86_64.AppImage`.  The AppImage release for spm has wget and bc bundled in.
 
 It is recommended that you use spm to install the AppImage or tar version of spm by executing `/path/to/spm -i spm`.  This will allow spm to upgrade itself when a new version is released.
+
+spm is not responsible for bugs within applications that have been
+installed using spm.  Please report any bugs that are specific to
+installed applications to their maintainers.
 
 # Github Rate Limit
 
