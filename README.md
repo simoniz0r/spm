@@ -27,7 +27,7 @@ Arguments:
 - install (-i) - install an AppImage or precompiled tar archive
 - remove (-r) - remove an installed AppImage or precompiled tar archive
 - update (-upd) - update package lists and check for package upgrades
-- appimg-update-force (-auf) - mark specified AppImage or tar archive for upgrade without checking version
+- update-force (-uf) - mark specified AppImage or tar archive for upgrade without checking version
 - upgrade (-upg) - upgrade all installed packages that are marked for upgrade or just the specified package
 - man - show spm man page
 
