@@ -368,7 +368,7 @@ liststartfunc () { # Run relevant list function based on user input
                     fi
                     ;;
             esac
-        done | column -x -c $(tput cols)
+        done | pr -tTaw $(tput cols) -$(($(tput cols)/45))
         echo
         echo "$(tput setaf 4)$(cat "$CONFDIR"/*s.yml | wc -l) packages available for install.$(tput sgr0)"
         echo "$(tput setaf 10)Light green = AppImages from Github"
