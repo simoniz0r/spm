@@ -60,7 +60,9 @@ targithubinfofunc () { # Gets updated_at, tar url, and description for specified
     TAR_SIZE="$(echo "scale = 3; $TAR_SIZE / 1024 / 1024" | bc) MBs"
     TAR_DOWNLOADS="$(cat "$CONFDIR"/cache/"$TARPKG"release | "$RUNNING_DIR"/yaml r - data.numdls)"
     TAR_DOWNLOAD_SOURCE="GITHUB"
-    TAR_GITHUB_NEW_VERSION="$(echo "$TAR_GITHUB_NEW_DOWNLOAD" | cut -f8 -d"/")"
+    # TAR_GITHUB_NEW_VERSION="$(echo "$TAR_GITHUB_NEW_DOWNLOAD" | cut -f8 -d"/")"
+    TARURI="$(echo "$TARURI" | cut -f-5 -d'/')"
+    TAR_GITHUB_NEW_VERSION="$(wget --quiet "$TARURI.git/info/refs?service=git-upload-pack" -O - | cut -f3 -d'/' | tac | head -n 2 | tail -n 1)"
     tarsaveconffunc "cache/$TARPKG.conf"
     . "$CONFDIR"/cache/"$TARPKG".conf
     if [ -z "$NEW_TARFILE" ]; then
@@ -131,6 +133,7 @@ tarlistfunc () { # List info about specified package or list all packages
             echo "$(tput bold)$(tput setaf 6)Version$(tput sgr0):  $TARFILE"
         else
             echo "$(tput bold)$(tput setaf 6)Version$(tput sgr0):  $TAR_GITHUB_COMMIT"
+            echo "$(tput bold)$(tput setaf 6)Tag$(tput sgr0):  $TAR_GITHUB_VERSION"
         fi
         echo "$(tput bold)$(tput setaf 6)Total DLs$(tput sgr0):  $TAR_DOWNLOADS"
         echo "$(tput bold)$(tput setaf 6)URL$(tput sgr0):  $TARURI"
@@ -153,6 +156,7 @@ tarlistfunc () { # List info about specified package or list all packages
                 echo "$(tput bold)$(tput setaf 6)Version$(tput sgr0):  $TARFILE"
             else
                 echo "$(tput bold)$(tput setaf 6)Version$(tput sgr0):  $TAR_GITHUB_COMMIT"
+                echo "$(tput bold)$(tput setaf 6)Tag$(tput sgr0):  $TAR_GITHUB_VERSION"
             fi
             echo "$(tput bold)$(tput setaf 6)Total DLs$(tput sgr0):  $TAR_DOWNLOADS"
             echo "$(tput bold)$(tput setaf 6)URL$(tput sgr0):  $TARURI"
@@ -179,6 +183,7 @@ tarlistinstalledfunc () { # List info about installed tar packages
             echo "$(tput bold)$(tput setaf 6)Version$(tput sgr0):  $TARFILE"
         else
             echo "$(tput bold)$(tput setaf 6)Version$(tput sgr0):  $TAR_GITHUB_COMMIT"
+            echo "$(tput bold)$(tput setaf 6)Tag$(tput sgr0):  $TAR_GITHUB_VERSION"
         fi
         echo "$(tput bold)$(tput setaf 6)Total DLs$(tput sgr0):  $TAR_DOWNLOADS"
         echo "$(tput bold)$(tput setaf 6)URL$(tput sgr0):  $TARURI"
@@ -267,6 +272,7 @@ tarupdateforcefunc () { # Mark specified tar package for upgrade without checkin
             echo "$(tput bold)$(tput setaf 6)Version$(tput sgr0):  $TARFILE"
         else
             echo "$(tput bold)$(tput setaf 6)Version$(tput sgr0):  $TAR_GITHUB_COMMIT"
+            echo "$(tput bold)$(tput setaf 6)Tag$(tput sgr0):  $TAR_GITHUB_VERSION"
         fi
         echo "$(tput bold)$(tput setaf 6)Total DLs$(tput sgr0):  $TAR_DOWNLOADS"
         echo "$(tput bold)$(tput setaf 6)URL$(tput sgr0):  $TARURI"
