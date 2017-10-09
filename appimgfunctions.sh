@@ -127,7 +127,7 @@ appimglistfunc () {
         . "$CONFDIR"/appimginstalled/"$INSTIMG"
         echo "$(tput bold)$(tput setaf 2)Info$(tput sgr0):  $APPIMAGE_DESCRIPTION"
         echo "$(tput bold)$(tput setaf 2)Version$(tput sgr0):  $APPIMAGE_VERSION"
-        if [ "$GITHUB_IMG" = "TRUE" ]; then
+        if [ "$APPIMAGE_DOWNLOADS" != "N/A" ]; then
             echo "$(tput bold)$(tput setaf 2)Tag$(tput sgr0):  $APPIMAGE_GITHUB_TAG"
         fi
         echo "$(tput bold)$(tput setaf 2)Total DLs$(tput sgr0):  $APPIMAGE_DOWNLOADS"
