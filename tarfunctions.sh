@@ -62,7 +62,7 @@ targithubinfofunc () { # Gets updated_at, tar url, and description for specified
     TAR_DOWNLOAD_SOURCE="GITHUB"
     # TAR_GITHUB_NEW_VERSION="$(echo "$TAR_GITHUB_NEW_DOWNLOAD" | cut -f8 -d"/")"
     TARURI="$(echo "$TARURI" | cut -f-5 -d'/')"
-    TAR_GITHUB_NEW_VERSION="$(wget --quiet "$TARURI.git/info/refs?service=git-upload-pack" -O - | cut -f3 -d'/' | tac | head -n 2 | tail -n 1)"
+    TAR_GITHUB_NEW_VERSION="$(wget --quiet "$TARURI.git/info/refs?service=git-upload-pack" -O - | cut -f3 -d'/' | tac | head -n 2 | tail -n 1 | cut -f1 -d'^')"
     tarsaveconffunc "cache/$TARPKG.conf"
     . "$CONFDIR"/cache/"$TARPKG".conf
     if [ -z "$NEW_TARFILE" ]; then

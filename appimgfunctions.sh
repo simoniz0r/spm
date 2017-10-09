@@ -93,7 +93,7 @@ appimggithubinfofunc () {
     APPIMAGE_DOWNLOADS="$(cat "$CONFDIR"/cache/"$INSTIMG"release | "$RUNNING_DIR"/yaml r - data.numdls)"
     APPIMAGE_DESCRIPTION="$("$RUNNING_DIR"/yaml r "$CONFDIR"/appimginstalled/."$INSTIMG".yml description)"
     APPIMAGE_GITHUB_NEW_VERSION="$(echo "$GITHUB_APPIMAGE_URL" | cut -f8 -d"/")"
-    APPIMAGE_GITHUB_TAG="$(wget --quiet "$GITHUB_APP_URL.git/info/refs?service=git-upload-pack" -O - | cut -f3 -d'/' | tac | head -n 2 | tail -n 1)"
+    APPIMAGE_GITHUB_TAG="$(wget --quiet "$GITHUB_APP_URL.git/info/refs?service=git-upload-pack" -O - | cut -f3 -d'/' | tac | head -n 2 | tail -n 1 | cut -f1 -d'^')"
 }
 
 appimgdirectinfofunc () {
