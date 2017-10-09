@@ -127,7 +127,7 @@ appimglistfunc () {
         . "$CONFDIR"/appimginstalled/"$INSTIMG"
         echo "$(tput bold)$(tput setaf 2)Info$(tput sgr0):  $APPIMAGE_DESCRIPTION"
         echo "$(tput bold)$(tput setaf 2)Version$(tput sgr0):  $APPIMAGE_VERSION"
-        if [ "$APPIMAGE_DOWNLOADS" != "N/A" ]; then
+        if [ ! -z "$APPIMAGE_GITHUB_TAG" ]; then
             echo "$(tput bold)$(tput setaf 2)Tag$(tput sgr0):  $APPIMAGE_GITHUB_TAG"
         fi
         echo "$(tput bold)$(tput setaf 2)Total DLs$(tput sgr0):  $APPIMAGE_DOWNLOADS"
@@ -145,7 +145,7 @@ appimglistfunc () {
             . "$CONFDIR"/cache/"$INSTIMG".conf
             echo "$(tput bold)$(tput setaf 2)Info$(tput sgr0):  $APPIMAGE_DESCRIPTION"
             echo "$(tput bold)$(tput setaf 2)Version$(tput sgr0):  $APPIMAGE_VERSION"
-            if [ "$GITHUB_IMG" = "TRUE" ]; then
+            if [ ! -z "$APPIMAGE_GITHUB_TAG" ]; then
                 echo "$(tput bold)$(tput setaf 2)Tag$(tput sgr0):  $APPIMAGE_GITHUB_TAG"
             fi
             echo "$(tput bold)$(tput setaf 2)Total DLs$(tput sgr0):  $APPIMAGE_DOWNLOADS"
@@ -166,8 +166,9 @@ appimglistinstalledfunc () {
         . "$CONFDIR"/appimginstalled/"$AppImage"
         echo "$(tput bold)$(tput setaf 2)Info$(tput sgr0):  $APPIMAGE_DESCRIPTION"
         echo "$(tput bold)$(tput setaf 2)Version$(tput sgr0):  $APPIMAGE_VERSION"
-        if [ "$APPIMAGE_DOWNLOADS" != "N/A" ]; then
+        if [ ! -z "$APPIMAGE_GITHUB_TAG" ]; then
             echo "$(tput bold)$(tput setaf 2)Tag$(tput sgr0):  $APPIMAGE_GITHUB_TAG"
+            APPIMAGE_GITHUB_TAG=""
         fi
         echo "$(tput bold)$(tput setaf 2)Total DLs$(tput sgr0):  $APPIMAGE_DOWNLOADS"
         echo "$(tput bold)$(tput setaf 2)URL$(tput sgr0):  $WEBSITE"
@@ -290,7 +291,7 @@ appimgupdateforcefunc () {
         . "$CONFDIR"/appimginstalled/"$INSTIMG"
         echo "$(tput bold)$(tput setaf 2)Info$(tput sgr0):  $APPIMAGE_DESCRIPTION"
         echo "$(tput bold)$(tput setaf 2)Version$(tput sgr0):  $APPIMAGE_VERSION"
-        if [ "$APPIMAGE_DOWNLOADS" != "N/A" ]; then
+        if [ ! -z "$APPIMAGE_GITHUB_TAG" ]; then
             echo "$(tput bold)$(tput setaf 2)Tag$(tput sgr0):  $APPIMAGE_GITHUB_TAG"
         fi
         echo "$(tput bold)$(tput setaf 2)Total DLs$(tput sgr0):  $APPIMAGE_DOWNLOADS"
