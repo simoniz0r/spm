@@ -52,6 +52,7 @@ rm -rf "$BUILD_DIR"/deps
 
 mkdir -p "$BUILD_DIR"/spm.AppDir/usr/share/spm
 cp ~/github/spm/spm "$BUILD_DIR"/spm.AppDir/usr/share/spm/
+cp ~/github/spm/spm.1 "$BUILD_DIR"/spm.AppDir/usr/share/spm/
 cp ~/github/spm/spmfunctions.sh "$BUILD_DIR"/spm.AppDir/usr/share/spm/
 cp ~/github/spm/appimgfunctions.sh "$BUILD_DIR"/spm.AppDir/usr/share/spm/
 cp ~/github/spm/tarfunctions.sh "$BUILD_DIR"/spm.AppDir/usr/share/spm/
