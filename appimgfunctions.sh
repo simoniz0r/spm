@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.5.6"
+X="0.5.7"
 # Set spm version
 
 # Set variables
@@ -28,7 +28,6 @@ appimgsaveinfofunc () { # Save install info to "$CONFDIR"/appimginstalled/AppIma
     echo "APPIMAGE_SIZE="\"$APPIMAGE_SIZE\""" >> "$CONFDIR"/"$SAVEDIR"
     echo "APPIMAGE_DOWNLOADS="\"$APPIMAGE_DOWNLOADS\""" >> "$CONFDIR"/"$SAVEDIR"
     if [ "$GITHUB_IMG" = "TRUE" ]; then
-        echo "APPIMAGE_GITHUB_VERSION="\"$APPIMAGE_GITHUB_NEW_VERSION\""" >> "$CONFDIR"/"$SAVEDIR"
         echo "APPIMAGE_GITHUB_TAG="\"$APPIMAGE_GITHUB_TAG\""" >> "$CONFDIR"/"$SAVEDIR"
         echo "WEBSITE="\"$(echo "$GITHUB_APP_URL" | cut -f-5 -d'/')\""" >> "$CONFDIR"/"$SAVEDIR"
     elif [ "$DIRECT_IMG" = "TRUE" ]; then
@@ -85,6 +84,16 @@ appimggithubinfofunc () {
         JQARG=".[].assets[] | select(.name | contains(\".AppImage\"), contains(\".appimage\")) | select(.name | contains(\"ia32\") | not) | select(.name | contains(\"i386\") | not) | select(.name | contains(\"i686\") | not) | { name: .name, updated: .updated_at, url: .browser_download_url, size: .size, numdls: .download_count}"
         cat "$CONFDIR"/cache/"$INSTIMG"full | "$RUNNING_DIR"/jq --raw-output "$JQARG" | sed 's%{%data:%g' | tr -d '",}' > "$CONFDIR"/cache/"$INSTIMG"release
     fi
+    if [ "$(cat "$CONFDIR"/cache/"$INSTIMG"release | wc -l)" = "0" ]; then
+        rm "$CONFDIR"/cache/"$INSTIMG"release
+        JQARG=".[].assets[] | select(.name | contains(\"$INSTIMG_NAME\")) | select(.name | contains(\"ia32\") | not) | select(.name | contains(\"i386\") | not) | select(.name | contains(\"i686\") | not) | { name: .name, updated: .updated_at, url: .browser_download_url, size: .size, numdls: .download_count}"
+        cat "$CONFDIR"/cache/"$INSTIMG"full | "$RUNNING_DIR"/jq --raw-output "$JQARG" | sed 's%{%data:%g' | tr -d '",}' > "$CONFDIR"/cache/"$INSTIMG"release
+    fi
+    if [ "$(cat "$CONFDIR"/cache/"$INSTIMG"release | wc -l)" = "0" ]; then
+        rm "$CONFDIR"/cache/"$INSTIMG"release
+        JQARG=".[].assets[] | select(.name | contains(\"ia32\") | not) | select(.name | contains(\"i386\") | not) | select(.name | contains(\"i686\") | not) | { name: .name, updated: .updated_at, url: .browser_download_url, size: .size, numdls: .download_count}"
+        cat "$CONFDIR"/cache/"$INSTIMG"full | "$RUNNING_DIR"/jq --raw-output "$JQARG" | sed 's%{%data:%g' | tr -d '",}' > "$CONFDIR"/cache/"$INSTIMG"release
+    fi
     APPIMAGE_NAME="$(cat "$CONFDIR"/cache/"$INSTIMG"release | "$RUNNING_DIR"/yaml r - data.name)"
     NEW_APPIMAGE_VERSION="$(cat "$CONFDIR"/cache/"$INSTIMG"release | "$RUNNING_DIR"/yaml r - data.updated)"
     GITHUB_APPIMAGE_URL="$(cat "$CONFDIR"/cache/"$INSTIMG"release | "$RUNNING_DIR"/yaml r - data.url)"
@@ -92,8 +101,7 @@ appimggithubinfofunc () {
     APPIMAGE_SIZE="$(echo "scale = 3; $APPIMAGE_SIZE / 1024 / 1024" | bc) MBs"
     APPIMAGE_DOWNLOADS="$(cat "$CONFDIR"/cache/"$INSTIMG"release | "$RUNNING_DIR"/yaml r - data.numdls)"
     APPIMAGE_DESCRIPTION="$("$RUNNING_DIR"/yaml r "$CONFDIR"/appimginstalled/."$INSTIMG".yml description)"
-    APPIMAGE_GITHUB_NEW_VERSION="$(echo "$GITHUB_APPIMAGE_URL" | cut -f8 -d"/")"
-    APPIMAGE_GITHUB_TAG="$(wget --quiet "$GITHUB_APP_URL.git/info/refs?service=git-upload-pack" -O - | cut -f3 -d'/' | tac | head -n 2 | tail -n 1 | cut -f1 -d'^')"
+    APPIMAGE_GITHUB_TAG="$(echo "$GITHUB_APPIMAGE_URL" | cut -f8 -d"/")"
 }
 
 appimgdirectinfofunc () {
