@@ -106,8 +106,8 @@ appimggithubinfofunc () {
 
 appimgdirectinfofunc () {
     DIRECT_APPIMAGE_URL="$("$RUNNING_DIR"/yaml r "$CONFDIR"/appimginstalled/."$INSTIMG".yml url)"
-    wget -S --read-timeout=30 --spider "$DIRECT_APPIMAGE_URL" -o "$CONFDIR"/cache/"$INSTIMG".latest
-    NEW_APPIMAGE_VERSION="$(grep -o "Location:.*" "$CONFDIR"/cache/"$INSTIMG".latest | cut -f2 -d" ")"
+    # wget -S --read-timeout=30 --spider "$DIRECT_APPIMAGE_URL" -o "$CONFDIR"/cache/"$INSTIMG".latest
+    NEW_APPIMAGE_VERSION="$(wget -S --read-timeout=30 --spider "$DIRECT_APPIMAGE_URL" -O - 2>&1 | grep -m 1 'Location:')"
     NEW_APPIMAGE_VERSION="${NEW_APPIMAGE_VERSION##*/}"
     APPIMAGE_DESCRIPTION="$DIRECT_APPIMAGE_URL"
     if [ -z "$NEW_APPIMAGE_VERSION" ]; then
@@ -137,10 +137,10 @@ appimglistfunc () {
         echo "$(tput bold)$(tput setaf 2)Version$(tput sgr0):  $APPIMAGE_VERSION"
         if [ ! -z "$APPIMAGE_GITHUB_TAG" ]; then
             echo "$(tput bold)$(tput setaf 2)Tag$(tput sgr0):  $APPIMAGE_GITHUB_TAG"
+            echo "$(tput bold)$(tput setaf 2)Size$(tput sgr0):  $APPIMAGE_SIZE"
+            echo "$(tput bold)$(tput setaf 2)Total DLs$(tput sgr0):  $APPIMAGE_DOWNLOADS"
         fi
-        echo "$(tput bold)$(tput setaf 2)Total DLs$(tput sgr0):  $APPIMAGE_DOWNLOADS"
         echo "$(tput bold)$(tput setaf 2)URL$(tput sgr0):  $WEBSITE"
-        echo "$(tput bold)$(tput setaf 2)Size$(tput sgr0):  $APPIMAGE_SIZE"
         echo "$(tput bold)$(tput setaf 2)Install dir$(tput sgr0): $BIN_PATH"
         echo
     else
@@ -155,10 +155,10 @@ appimglistfunc () {
             echo "$(tput bold)$(tput setaf 2)Version$(tput sgr0):  $APPIMAGE_VERSION"
             if [ ! -z "$APPIMAGE_GITHUB_TAG" ]; then
                 echo "$(tput bold)$(tput setaf 2)Tag$(tput sgr0):  $APPIMAGE_GITHUB_TAG"
+                echo "$(tput bold)$(tput setaf 2)Size$(tput sgr0):  $APPIMAGE_SIZE"
+                echo "$(tput bold)$(tput setaf 2)Total DLs$(tput sgr0):  $APPIMAGE_DOWNLOADS"
             fi
-            echo "$(tput bold)$(tput setaf 2)Total DLs$(tput sgr0):  $APPIMAGE_DOWNLOADS"
             echo "$(tput bold)$(tput setaf 2)URL$(tput sgr0):  $WEBSITE"
-            echo "$(tput bold)$(tput setaf 2)Size$(tput sgr0):  $APPIMAGE_SIZE"
             echo "$(tput bold)$(tput setaf 2)Install dir$(tput sgr0): $BIN_PATH"
             echo
             rm -f "$CONFDIR"/appimginstalled/."$INSTIMG".yml
@@ -176,11 +176,11 @@ appimglistinstalledfunc () {
         echo "$(tput bold)$(tput setaf 2)Version$(tput sgr0):  $APPIMAGE_VERSION"
         if [ ! -z "$APPIMAGE_GITHUB_TAG" ]; then
             echo "$(tput bold)$(tput setaf 2)Tag$(tput sgr0):  $APPIMAGE_GITHUB_TAG"
+            echo "$(tput bold)$(tput setaf 2)Size$(tput sgr0):  $APPIMAGE_SIZE"
+            echo "$(tput bold)$(tput setaf 2)Total DLs$(tput sgr0):  $APPIMAGE_DOWNLOADS"
             APPIMAGE_GITHUB_TAG=""
         fi
-        echo "$(tput bold)$(tput setaf 2)Total DLs$(tput sgr0):  $APPIMAGE_DOWNLOADS"
         echo "$(tput bold)$(tput setaf 2)URL$(tput sgr0):  $WEBSITE"
-        echo "$(tput bold)$(tput setaf 2)Size$(tput sgr0):  $APPIMAGE_SIZE"
         echo "$(tput bold)$(tput setaf 2)Install dir$(tput sgr0): $BIN_PATH"
         echo
     done
@@ -301,10 +301,10 @@ appimgupdateforcefunc () {
         echo "$(tput bold)$(tput setaf 2)Version$(tput sgr0):  $APPIMAGE_VERSION"
         if [ ! -z "$APPIMAGE_GITHUB_TAG" ]; then
             echo "$(tput bold)$(tput setaf 2)Tag$(tput sgr0):  $APPIMAGE_GITHUB_TAG"
+            echo "$(tput bold)$(tput setaf 2)Size$(tput sgr0):  $APPIMAGE_SIZE"
+            echo "$(tput bold)$(tput setaf 2)Total DLs$(tput sgr0):  $APPIMAGE_DOWNLOADS"
         fi
-        echo "$(tput bold)$(tput setaf 2)Total DLs$(tput sgr0):  $APPIMAGE_DOWNLOADS"
         echo "$(tput bold)$(tput setaf 2)URL$(tput sgr0):  $WEBSITE"
-        echo "$(tput bold)$(tput setaf 2)Size$(tput sgr0):  $APPIMAGE_SIZE"
         echo "$(tput bold)$(tput setaf 2)Install dir$(tput sgr0): $BIN_PATH"
         echo
     else

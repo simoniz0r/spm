@@ -117,6 +117,15 @@ tarappcheckfunc () { # check user input against list of known apps here
             else
                 TAR_SIZE="N/A"
                 TAR_DOWNLOADS="N/A"
+                NEW_TARURI="$(wget -S --read-timeout=30 --spider "$TARURI" -O - 2>&1 | grep -m 1 'Location:')"
+                case $? in
+                    1)
+                        NEW_TARFILE="${TARURI##*/}"
+                        ;;
+                    0)
+                        NEW_TARFILE="${NEW_TARURI##*/}"
+                        ;;
+                esac
                 tarsaveconffunc "cache/$TARPKG.conf"
             fi
             ;;
@@ -134,10 +143,10 @@ tarlistfunc () { # List info about specified package or list all packages
         else
             echo "$(tput bold)$(tput setaf 6)Version$(tput sgr0):  $TAR_GITHUB_COMMIT"
             echo "$(tput bold)$(tput setaf 6)Tag$(tput sgr0):  $TAR_GITHUB_VERSION"
+            echo "$(tput bold)$(tput setaf 6)Total DLs$(tput sgr0):  $TAR_DOWNLOADS"
+            echo "$(tput bold)$(tput setaf 6)Size$(tput sgr0):  $TAR_SIZE"
         fi
-        echo "$(tput bold)$(tput setaf 6)Total DLs$(tput sgr0):  $TAR_DOWNLOADS"
         echo "$(tput bold)$(tput setaf 6)URL$(tput sgr0):  $TARURI"
-        echo "$(tput bold)$(tput setaf 6)Size$(tput sgr0):  $TAR_SIZE"
         echo "$(tput bold)$(tput setaf 6)Install dir$(tput sgr0):  $INSTDIR"
         echo "$(tput bold)$(tput setaf 6)Bin path$(tput sgr0):  $BIN_PATH"
         echo
@@ -157,10 +166,10 @@ tarlistfunc () { # List info about specified package or list all packages
             else
                 echo "$(tput bold)$(tput setaf 6)Version$(tput sgr0):  $TAR_GITHUB_COMMIT"
                 echo "$(tput bold)$(tput setaf 6)Tag$(tput sgr0):  $TAR_GITHUB_VERSION"
+                echo "$(tput bold)$(tput setaf 6)Total DLs$(tput sgr0):  $TAR_DOWNLOADS"
+                echo "$(tput bold)$(tput setaf 6)Size$(tput sgr0):  $TAR_SIZE"
             fi
-            echo "$(tput bold)$(tput setaf 6)Total DLs$(tput sgr0):  $TAR_DOWNLOADS"
             echo "$(tput bold)$(tput setaf 6)URL$(tput sgr0):  $TARURI"
-            echo "$(tput bold)$(tput setaf 6)Size$(tput sgr0):  $TAR_SIZE"
             echo "$(tput bold)$(tput setaf 6)Install dir$(tput sgr0):  $INSTDIR"
             echo "$(tput bold)$(tput setaf 6)Bin path$(tput sgr0):  $BIN_PATH"
             echo
@@ -184,10 +193,10 @@ tarlistinstalledfunc () { # List info about installed tar packages
         else
             echo "$(tput bold)$(tput setaf 6)Version$(tput sgr0):  $TAR_GITHUB_COMMIT"
             echo "$(tput bold)$(tput setaf 6)Tag$(tput sgr0):  $TAR_GITHUB_VERSION"
+            echo "$(tput bold)$(tput setaf 6)Total DLs$(tput sgr0):  $TAR_DOWNLOADS"
+            echo "$(tput bold)$(tput setaf 6)Size$(tput sgr0):  $TAR_SIZE"
         fi
-        echo "$(tput bold)$(tput setaf 6)Total DLs$(tput sgr0):  $TAR_DOWNLOADS"
         echo "$(tput bold)$(tput setaf 6)URL$(tput sgr0):  $TARURI"
-        echo "$(tput bold)$(tput setaf 6)Size$(tput sgr0):  $TAR_SIZE"
         echo "$(tput bold)$(tput setaf 6)Install dir$(tput sgr0):  $INSTDIR"
         echo "$(tput bold)$(tput setaf 6)Bin path$(tput sgr0):  $BIN_PATH"
         echo
@@ -241,9 +250,9 @@ checktarversionfunc () { # Use info from githubinfo function or using wget -S --
             TAR_NEW_UPGRADE="FALSE"
         fi
     else
-        wget -S --read-timeout=30 --spider "$TARURI" -o "$CONFDIR"/cache/"$TARPKG".latest
-        NEW_TARURI="$(grep -o "Location:.*" "$CONFDIR"/cache/"$TARPKG".latest | cut -f2 -d" ")"
-        NEW_TARFILE="${NEW_TARURI##*/}"
+        # wget -S --read-timeout=30 --spider "$TARURI" -o "$CONFDIR"/cache/"$TARPKG".latest
+        # NEW_TARURI="$(wget -S --read-timeout=30 --spider "$TARURI" -O - 2>&1 | grep -o "Location:.*" "$CONFDIR"/cache/"$TARPKG".latest | cut -f2 -d" ")"
+        # NEW_TARFILE="${NEW_TARURI##*/}"
         if [ "$TAR_FORCE_UPGRADE" = "TRUE" ]; then
             TAR_NEW_UPGRADE="TRUE"
             TAR_FORCE_UPGRADE="FALSE"
@@ -273,10 +282,11 @@ tarupdateforcefunc () { # Mark specified tar package for upgrade without checkin
         else
             echo "$(tput bold)$(tput setaf 6)Version$(tput sgr0):  $TAR_GITHUB_COMMIT"
             echo "$(tput bold)$(tput setaf 6)Tag$(tput sgr0):  $TAR_GITHUB_VERSION"
+            echo "$(tput bold)$(tput setaf 6)Total DLs$(tput sgr0):  $TAR_DOWNLOADS"
+            echo "$(tput bold)$(tput setaf 6)Size$(tput sgr0):  $TAR_SIZE"
+
         fi
-        echo "$(tput bold)$(tput setaf 6)Total DLs$(tput sgr0):  $TAR_DOWNLOADS"
         echo "$(tput bold)$(tput setaf 6)URL$(tput sgr0):  $TARURI"
-        echo "$(tput bold)$(tput setaf 6)Size$(tput sgr0):  $TAR_SIZE"
         echo "$(tput bold)$(tput setaf 6)Install dir$(tput sgr0):  $INSTDIR"
         echo "$(tput bold)$(tput setaf 6)Bin path$(tput sgr0):  $BIN_PATH"
         echo
