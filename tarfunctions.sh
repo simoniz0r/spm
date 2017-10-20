@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.5.7"
+X="0.5.8"
 # Set spm version
 TAR_LIST="$(cat "$CONFDIR"/tar-pkgs.yml | cut -f1 -d":")"
 TAR_SIZE="N/A"
@@ -46,11 +46,11 @@ targithubinfofunc () { # Gets updated_at, tar url, and description for specified
     else
         wget --quiet --auth-no-challenge --header="Authorization: token "$GITHUB_TOKEN"" "$TAR_API_URI" -O "$CONFDIR"/cache/"$TARPKG"-release || { echo "$(tput setaf 1)wget $TAR_API_URI failed; is your token valid?$(tput sgr0)"; rm -rf "$CONFDIR"/cache/*; exit 1; }
     fi
-    JQARG=".[].assets[] | select(.name | contains(\".tar\")) | select(.name | contains(\"$TARPKG\")) | select(.name | contains(\"macos\") | not) | select(.name | contains(\"ia32\") | not) | select(.name | contains(\"i386\") | not) | select(.name | contains(\"i686\") | not) | { name: .name, updated: .updated_at, url: .browser_download_url, size: .size, numdls: .download_count}"
+    JQARG=".[].assets[] | select(.name | contains(\".tar\")) | select(.name | contains(\"$TARPKG_NAME\")) | select(.name | contains(\"darwin\") | not) | select(.name | contains(\"macos\") | not) | select(.name | contains(\"ia32\") | not) | select(.name | contains(\"x32\") | not) | select(.name | contains(\"i386\") | not) | select(.name | contains(\"i686\") | not) | { name: .name, updated: .updated_at, url: .browser_download_url, size: .size, numdls: .download_count}"
     cat "$CONFDIR"/cache/"$TARPKG"-release | "$RUNNING_DIR"/jq --raw-output "$JQARG" | sed 's%{%data:%g' | tr -d '",}' > "$CONFDIR"/cache/"$TARPKG"release
     if [ "$(cat "$CONFDIR"/cache/"$TARPKG"release | wc -l)" = "0" ]; then
         rm "$CONFDIR"/cache/"$TARPKG"release
-        JQARG=".[].assets[] | select(.name | contains(\".tar\")) | select(.name | contains(\"macos\") | not) | select(.name | contains(\"ia32\") | not) | select(.name | contains(\"i386\") | not) | select(.name | contains(\"i686\") | not) | { name: .name, updated: .updated_at, url: .browser_download_url, size: .size, numdls: .download_count}"
+        JQARG=".[].assets[] | select(.name | contains(\".tar\")) | select(.name | contains(\"macos\") | not) | select(.name | contains(\"darwin\") | not) | select(.name | contains(\"ia32\") | not) | select(.name | contains(\"x32\") | not) | select(.name | contains(\"i386\") | not) | select(.name | contains(\"i686\") | not) | { name: .name, updated: .updated_at, url: .browser_download_url, size: .size, numdls: .download_count}"
         cat "$CONFDIR"/cache/"$TARPKG"-release | "$RUNNING_DIR"/jq --raw-output "$JQARG" | sed 's%{%data:%g' | tr -d '",}' > "$CONFDIR"/cache/"$TARPKG"release
     fi
     NEW_TARFILE="$(cat "$CONFDIR"/cache/"$TARPKG"release | "$RUNNING_DIR"/yaml r - data.name)"
@@ -100,6 +100,7 @@ tarappcheckfunc () { # check user input against list of known apps here
                     fi
                     ;;
             esac
+            TARPKG_NAME="$("$RUNNING_DIR"/yaml r "$CONFDIR"/tarinstalled/."$TARPKG".yml name)"
             INSTDIR="$("$RUNNING_DIR"/yaml r "$CONFDIR"/tarinstalled/."$TARPKG".yml instdir)"
             TARURI="$("$RUNNING_DIR"/yaml r "$CONFDIR"/tarinstalled/."$TARPKG".yml taruri)"
             if [ "$TAR_DOWNLOAD_SOURCE" = "GITHUB" ]; then
@@ -204,13 +205,12 @@ tarlistinstalledfunc () { # List info about installed tar packages
 }
 
 tardlfunc () { # Download tar from specified source.  If not from github, use --trust-server-names to make sure the tar file is saved with the proper file name
+    cd "$CONFDIR"/cache
     case $TAR_DOWNLOAD_SOURCE in
         GITHUB)
-            cd "$CONFDIR"/cache
             wget --read-timeout=30 "$TAR_GITHUB_NEW_DOWNLOAD" || { echo "$(tput setaf 1)wget $TARURI_DL failed; exiting...$(tput sgr0)"; rm -rf "$CONFDIR"/cache/*; exit 1; }
             ;;
         DIRECT)
-            cd "$CONFDIR"/cache
             wget --read-timeout=30 --trust-server-names "$TARURI" || { echo "$(tput setaf 1)wget $TARURI failed; exiting...$(tput sgr0)"; rm -rf "$CONFDIR"/cache/*; exit 1; }
             ;;
     esac
@@ -220,12 +220,10 @@ tardlfunc () { # Download tar from specified source.  If not from github, use --
 }
 
 tarcheckfunc () { # Check to make sure downloaded file is a tar and run relevant tar arguments for type of tar
+    mkdir "$CONFDIR"/cache/pkg
     case $TARFILE in
-        *tar.gz)
-            tar -xvzf "$CONFDIR"/cache/"$TARFILE" || { echo "$(tput setaf 1)tar $TARFILE failed; exiting...$(tput sgr0)"; rm -rf "$CONFDIR"/cache/*; exit 1; }
-            ;;
-        *tar.bz2|*tar.tbz|*tar.tb2|*tar|*tar.xz)
-            tar -xvf "$CONFDIR"/cache/"$TARFILE" || { echo "$(tput setaf 1)tar $TARFILE failed; exiting...$(tput sgr0)"; rm -rf "$CONFDIR"/cache/*; exit 1; }
+        *tar.gz|*tar.bz2|*tar.tbz|*tar.tb2|*tar|*tar.xz)
+            tar -xvf "$CONFDIR"/cache/"$TARFILE" -C "$CONFDIR"/cache/pkg || { echo "$(tput setaf 1)tar $TARFILE failed; exiting...$(tput sgr0)"; rm -rf "$CONFDIR"/cache/*; exit 1; }
             ;;
         *)
             echo "$(tput setaf 1)Unknown file type!$(tput sgr0)"
@@ -322,23 +320,26 @@ tarupgradecheckallfunc () { # Run a for loop to check all installed tar packages
 }
 
 tarupgradecheckfunc () { # Check specified tar package for upgrade
-    if ! echo "$TAR_LIST" | grep -qow "$1"; then
-        echo "$(tput setaf 1)$1 is not in tar-pkgs.yml; try running 'spm update'.$(tput sgr0)"
-    else
-        echo "Downloading tar-pkgs.yml from spm github repo..."
-        rm "$CONFDIR"/tar-pkgs.*
-        wget --no-verbose "https://raw.githubusercontent.com/simoniz0r/spm-repo/master/tar-pkgs.yml" -O "$CONFDIR"/tar-pkgs.yml
-        TARPKG="$1"
-        echo "Checking $(tput setaf 6)$TARPKG$(tput sgr0) version..."
-        tarappcheckfunc "$TARPKG"
-        checktarversionfunc
-        if [ "$TAR_NEW_UPGRADE" = "TRUE" ]; then
-            echo "$(tput setaf 6)New upgrade available for $TARPKG -- $NEW_TARFILE !$(tput sgr0)"
-            tarsaveconffunc "tarupgrades/$TARPKG"
-        else
-            echo "No new upgrade for $(tput setaf 6)$TARPKG$(tput sgr0)"
-        fi
-    fi
+    case $("$RUNNING_DIR"/yaml r "$CONFDIR"/tar-pkgs.yml "$TARPKG") in
+        null)
+            echo "$(tput setaf 1)$1 is not in tar-pkgs.yml; try running 'spm update'.$(tput sgr0)"
+            ;;
+        *)
+            echo "Downloading tar-pkgs.yml from spm github repo..."
+            rm "$CONFDIR"/tar-pkgs.*
+            wget --no-verbose "https://raw.githubusercontent.com/simoniz0r/spm-repo/master/tar-pkgs.yml" -O "$CONFDIR"/tar-pkgs.yml
+            TARPKG="$1"
+            echo "Checking $(tput setaf 6)$TARPKG$(tput sgr0) version..."
+            tarappcheckfunc "$TARPKG"
+            checktarversionfunc
+            if [ "$TAR_NEW_UPGRADE" = "TRUE" ]; then
+                echo "$(tput setaf 6)New upgrade available for $TARPKG -- $NEW_TARFILE !$(tput sgr0)"
+                tarsaveconffunc "tarupgrades/$TARPKG"
+            else
+                echo "No new upgrade for $(tput setaf 6)$TARPKG$(tput sgr0)"
+            fi
+            ;;
+    esac
 }
 
 tarupdatelistfunc () { # Download tar-pkgs.yml from github repo and run relevant upgradecheck function based on input
@@ -385,7 +386,21 @@ tardesktopfilefunc () { # Download .desktop files for tar packages that do not i
 
 tarinstallfunc () { # Move extracted tar from $CONFDIR/cache to /opt/PackageName, create symlinks for .desktop and bin files, and save config file for spm to keep track of it
     echo "Moving files to $INSTDIR..."
-    EXTRACTED_DIR_NAME="$(ls -d "$CONFDIR"/cache/*/)"
+    for file in $(ls "$CONFDIR/cache/pkg/"); do
+        if [ -f "$CONFDIR/cache/pkg/$file" ]; then
+            MOVE_CACHE_FILES="TRUE"
+        else
+            MOVE_CACHE_FILES="FALSE"
+        fi
+    done
+    if [ "$MOVE_CACHE_FILES" = "TRUE" ]; then
+        mkdir "$CONFDIR"/cache/temp
+        mv "$CONFDIR"/cache/pkg/* "$CONFDIR"/cache/temp/
+        mkdir "$CONFDIR"/cache/pkg/"$TARPKG"
+        mv "$CONFDIR"/cache/temp/* "$CONFDIR"/cache/pkg/"$TARPKG"/
+        rm -rf "$CONFDIR"/cache/temp
+    fi
+    EXTRACTED_DIR_NAME="$(ls -d "$CONFDIR"/cache/pkg/*/)"
     sudo mv "$EXTRACTED_DIR_NAME" "$INSTDIR" || { echo "Failed!"; rm -rf "$CONFDIR"/cache/*; exit 1; }
     DESKTOP_FILE_NAME="$(basename "$DESKTOP_FILE_PATH")"
     ICON_FILE_NAME="$(basename "$ICON_FILE_PATH")"
