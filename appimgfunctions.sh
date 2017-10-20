@@ -186,7 +186,7 @@ appimglistinstalledfunc () {
     done
 }
 
-appimgvercheckfunc () { # Check version by getting the latest version from the bintray website or github releases page using wget, grep, cut, and head
+appimgvercheckfunc () { # Check version
     if [ -f "$CONFDIR"/appimginstalled/"$INSTIMG" ]; then # Load installed information if AppImage is installed
         . "$CONFDIR"/appimginstalled/"$INSTIMG"
     fi
