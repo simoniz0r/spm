@@ -389,8 +389,6 @@ tarinstallfunc () { # Move extracted tar from $CONFDIR/cache to /opt/PackageName
     for file in $(ls "$CONFDIR/cache/pkg/"); do
         if [ -f "$CONFDIR/cache/pkg/$file" ]; then
             MOVE_CACHE_FILES="TRUE"
-        else
-            MOVE_CACHE_FILES="FALSE"
         fi
     done
     if [ "$MOVE_CACHE_FILES" = "TRUE" ]; then
