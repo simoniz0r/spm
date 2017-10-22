@@ -471,13 +471,13 @@ tarupgradefunc () { # Move new extracted tar from $CONFDIR/cache to /opt/Package
             echo "Removing files in $INSTDIR..."
             sudo rm -rf "$INSTDIR" || { echo "Failed!"; rm -rf "$CONFDIR"/cache/*; exit 1; }
             echo "Moving files to $INSTDIR..."
-            EXTRACTED_DIR_NAME="$(ls -d "$CONFDIR"/cache/*/)"
+            EXTRACTED_DIR_NAME="$(ls -d "$CONFDIR"/cache/pkg/*/)"
             sudo mv "$EXTRACTED_DIR_NAME" "$INSTDIR"
             ;;
         Overwrite|overwrite)
             echo "$(tput setaf 6)$TARPKG$(tput sgr0) will be upgraded to $TARFILE."
             echo "Copying files to $INSTDIR..."
-            EXTRACTED_DIR_NAME="$(ls -d "$CONFDIR"/cache/*/)"
+            EXTRACTED_DIR_NAME="$(ls -d "$CONFDIR"/cache/pkg/*/)"
             sudo cp -r "$EXTRACTED_DIR_NAME"/* "$INSTDIR"/ || { echo "Failed!"; rm -rf "$CONFDIR"/cache/*; exit 1; }
             ;;
         *)
