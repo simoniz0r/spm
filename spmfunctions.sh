@@ -49,18 +49,18 @@ spmdepchecksfunc () { # Run dep checks, exit if deps not present. If SKIP_DEP_CH
     if [ "$SKIP_DEP_CHECKS" = "FALSE" ]; then
         if ! type wget >/dev/null 2>&1; then
             MISSING_DEPS="TRUE"
-            echo "$(tput setaf 1)wget is not installed!$(tput sgr0)"
+            echo "${CLR_RED}wget is not installed!$(tput sgr0)"
         fi
         if [ ! -f "$RUNNING_DIR"/yaml ]; then
             MISSING_DEPS="TRUE"
-            echo -e "$(tput setaf 1)$RUNNING_DIR/yaml not found! Please download the full release of spm:\nhttps://github.com/simoniz0r/spm/releases"
+            echo -e "${CLR_RED}$RUNNING_DIR/yaml not found! Please download the full release of spm:\nhttps://github.com/simoniz0r/spm/releases"
         fi
         if [ ! -f "$RUNNING_DIR"/jq ]; then
             MISSING_DEPS="TRUE"
-            echo -e "$(tput setaf 1)$RUNNING_DIR/jq not found!  Please download the full release of spm:\nhttps://github.com/simoniz0r/spm/releases"
+            echo -e "${CLR_RED}$RUNNING_DIR/jq not found!  Please download the full release of spm:\nhttps://github.com/simoniz0r/spm/releases"
         fi
         if [ "$MISSING_DEPS" = "TRUE" ]; then
-            echo "$(tput setaf 1)Missing one or more packages required to run; exiting...$(tput sgr0)"
+            echo "${CLR_RED}Missing one or more packages required to run; exiting...$(tput sgr0)"
             exit 1
         fi
     fi
@@ -72,12 +72,12 @@ appimgfunctioncheckfunc () { # Checks to make sure that appimgfunctions.sh exist
     if [ -f $RUNNING_DIR/appimgfunctions.sh ]; then
         FUNCTIONS_VER="$(cat "$RUNNING_DIR"/appimgfunctions.sh | sed -n 9p | cut -f2 -d'"')"
         if [ "$X" != "$FUNCTIONS_VER" ]; then
-            echo "$(tput setaf 1)appimgfunctions.sh $FUNCTIONS_VER version does not match $X !"
+            echo "${CLR_RED}appimgfunctions.sh $FUNCTIONS_VER version does not match $X !"
             echo "appimgfunctions.sh is out of date! Please download the full release of spm from https://github.com/simoniz0r/spm/releases !$(tput sgr0)"
             exit 1
         fi
     else
-        echo "$(tput setaf 1)Missing required file $RUNNING_DIR/appimgfunctions.sh !"
+        echo "${CLR_RED}Missing required file $RUNNING_DIR/appimgfunctions.sh !"
         echo "appimgfunctions.sh is missing! Please download the full release of spm from https://github.com/simoniz0r/spm/releases !$(tput sgr0)"
         exit 1
     fi
@@ -87,12 +87,12 @@ tarfunctioncheckfunc () { # Checks to make sure that tarfunctions.sh exists and 
     if [ -f $RUNNING_DIR/tarfunctions.sh ]; then
         FUNCTIONS_VER="$(cat "$RUNNING_DIR"/tarfunctions.sh | sed -n 9p | cut -f2 -d'"')"
         if [ "$X" != "$FUNCTIONS_VER" ]; then
-            echo "$(tput setaf 1)tarfunctions.sh $FUNCTIONS_VER version does not match $X !"
+            echo "${CLR_RED}tarfunctions.sh $FUNCTIONS_VER version does not match $X !"
             echo "tarfunctions.sh is out of date! Please download the full release of spm from https://github.com/simoniz0r/spm/releases !$(tput sgr0)"
             exit 1
         fi
     else
-        echo "$(tput setaf 1)Missing required file $RUNNING_DIR/tarfunctions.sh !"
+        echo "${CLR_RED}Missing required file $RUNNING_DIR/tarfunctions.sh !"
         echo "tarfunctions.sh is missing! Please download the full release of spm from https://github.com/simoniz0r/spm/releases !$(tput sgr0)"
         exit 1
     fi
@@ -102,11 +102,11 @@ spmlockfunc () { # Create "$CONFDIR"/cache/spm.lock file and prevent multiple in
     if [ ! -f "$CONFDIR"/cache/spm.lock ]; then
         touch "$CONFDIR"/cache/spm.lock
     else
-        echo "$(tput setaf 1)spm.lock file is still present.  Did spm exit correctly?  Are you sure spm isn't running?"
+        echo "${CLR_RED}spm.lock file is still present.  Did spm exit correctly?  Are you sure spm isn't running?"
         read -p "Remove spm.lock file and run spm? Y/N $(tput sgr0)" LOCKANSWER
         case $LOCKANSWER in
             n*|N*)
-                echo "$(tput setaf 1)spm.lock file was not removed; make sure spm is finished before running spm again.$(tput sgr0)"
+                echo "${CLR_RED}spm.lock file was not removed; make sure spm is finished before running spm again.$(tput sgr0)"
                 exit 1
                 ;;
         esac
@@ -117,7 +117,7 @@ spmlockfunc () { # Create "$CONFDIR"/cache/spm.lock file and prevent multiple in
 spmvercheckfunc () { # Check spm version when running update argument and notify of new version if available
     VERTEST="$(wget -q "https://raw.githubusercontent.com/simoniz0r/spm/master/spm" -O - | sed -n '9p' | tr -d 'X="')" # Use wget sed and tr to check current spm version from github
     if [[ "$VERTEST" != "$X" ]]; then # If current version not equal to installed version, notify of new version
-        echo "$(tput setaf 2)A new version of spm is available!"
+        echo "${CLR_GREEN}A new version of spm is available!"
         echo "Current version: $VERTEST -- Installed version: $X"
         if type >/dev/null 2>&1 spm; then # If spm is installed, suggest upgrading spm through spm
             echo "Use 'spm' to upgrade to the latest version!$(tput sgr0)"
@@ -131,18 +131,18 @@ spmvercheckfunc () { # Check spm version when running update argument and notify
 
 installstartfunc () {
     if [ -f "$CONFDIR"/tarinstalled/"$TESTPKG" ] || [ -f "$CONFDIR"/appimginstalled/"$TESTPKG" ]; then # Exit if already installed by spm
-        echo "$(tput setaf 1)$TESTPKG is already installed."
+        echo "${CLR_RED}$TESTPKG is already installed."
         echo "Use 'spm update' to check for a new version of $TESTPKG.$(tput sgr0)"
         rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
         exit 1
     fi
     if type >/dev/null 2>&1 "$TESTPKG" && [ "$TESTPKG" != "spm" ]; then # If a command by the same name as AppImage already exists on user's system, exit
-        echo "$(tput setaf 1)$TESTPKG is already installed and not managed by spm; exiting...$(tput sgr0)"
+        echo "${CLR_RED}$TESTPKG is already installed and not managed by spm; exiting...$(tput sgr0)"
         rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
         exit 1
     fi
     if [ -f "/usr/local/bin/$TESTPKG" ]; then # If for some reason type does't pick up same file existing as AppImage name in /usr/local/bin, exit
-        echo "$(tput setaf 1)/usr/local/bin/$TESTPKG exists; exiting...$(tput sgr0)"
+        echo "${CLR_RED}/usr/local/bin/$TESTPKG exists; exiting...$(tput sgr0)"
         rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
         exit 1
     fi
@@ -198,47 +198,47 @@ installstartfunc () {
         tarcheckfunc # Check to make sure file downloaded is a tar and run relevant tar arguments for file type
         tarinstallfunc # Move extracted tar from $CONFDIR/cache to /opt/PackageName, create symlinks for .desktop and bin file, and save config file for spm to keep track of it
     else
-        echo "$(tput setaf 1)$TESTPKG not found in package lists; try running the 'update' argument.$(tput sgr0)"
+        echo "${CLR_RED}$TESTPKG not found in package lists; try running the 'update' argument.$(tput sgr0)"
     fi
 }
 
 removestartfunc () {
     if [ -f "$CONFDIR"/appimginstalled/"$TESTREM" ]; then # Output info about AppImage before removing, exit if not installed
         REMIMG="$TESTREM"
-        echo "$(tput bold)$(tput setaf 2)Current installed $REMIMG information$(tput sgr0):"
+        echo "$(tput bold)${CLR_GREEN}Current installed $REMIMG information$(tput sgr0):"
         . "$CONFDIR"/appimginstalled/"$REMIMG"
-        echo "$(tput bold)$(tput setaf 2)Info$(tput sgr0):  $APPIMAGE_DESCRIPTION"
+        echo "$(tput bold)${CLR_GREEN}Info$(tput sgr0):  $APPIMAGE_DESCRIPTION"
         if [ -z "$APPIMAGE_NAME" ]; then
-            echo "$(tput bold)$(tput setaf 2)Name$(tput sgr0):  $APPIMAGE"
+            echo "$(tput bold)${CLR_GREEN}Name$(tput sgr0):  $APPIMAGE"
         else
-            echo "$(tput bold)$(tput setaf 2)Name$(tput sgr0):  $APPIMAGE_NAME"
+            echo "$(tput bold)${CLR_GREEN}Name$(tput sgr0):  $APPIMAGE_NAME"
         fi
-        echo "$(tput bold)$(tput setaf 2)Version$(tput sgr0):  $APPIMAGE_VERSION"
-        echo "$(tput bold)$(tput setaf 2)URL$(tput sgr0):  $WEBSITE"
-        echo "$(tput bold)$(tput setaf 2)Install dir$(tput sgr0): $BIN_PATH"
+        echo "$(tput bold)${CLR_GREEN}Version$(tput sgr0):  $APPIMAGE_VERSION"
+        echo "$(tput bold)${CLR_GREEN}URL$(tput sgr0):  $WEBSITE"
+        echo "$(tput bold)${CLR_GREEN}Install dir$(tput sgr0): $BIN_PATH"
         echo
         appimgremovefunc # Remove AppImage from /usr/local/bin and remove conf file in $CONFDIR/appimginstalled/PackageName
     elif [ -f "$CONFDIR"/tarinstalled/"$TESTREM" ]; then # Output info about tar package before removing, exit if not installed
         REMPKG="$TESTREM"
-        echo "$(tput bold)$(tput setaf 6)Current installed $REMPKG information$(tput sgr0):"
+        echo "$(tput bold)${CLR_CYAN}Current installed $REMPKG information$(tput sgr0):"
         . "$CONFDIR"/tarinstalled/"$REMPKG"
-        echo "$(tput bold)$(tput setaf 6)Info$(tput sgr0):  $TAR_DESCRIPTION"
-        echo "$(tput bold)$(tput setaf 6)Deps$(tput sgr0):  $DEPENDENCIES"
+        echo "$(tput bold)${CLR_CYAN}Info$(tput sgr0):  $TAR_DESCRIPTION"
+        echo "$(tput bold)${CLR_CYAN}Deps$(tput sgr0):  $DEPENDENCIES"
         if [ -z "$TAR_GITHUB_COMMIT" ]; then
-            echo "$(tput bold)$(tput setaf 6)Version$(tput sgr0):  $TARFILE"
+            echo "$(tput bold)${CLR_CYAN}Version$(tput sgr0):  $TARFILE"
         else
-            echo "$(tput bold)$(tput setaf 6)Version$(tput sgr0):  $TAR_GITHUB_COMMIT"
+            echo "$(tput bold)${CLR_CYAN}Version$(tput sgr0):  $TAR_GITHUB_COMMIT"
         fi
-        echo "$(tput bold)$(tput setaf 6)Source$(tput sgr0):  $TAR_DOWNLOAD_SOURCE"
-        echo "$(tput bold)$(tput setaf 6)URL$(tput sgr0):  $TARURI"
-        echo "$(tput bold)$(tput setaf 6)Install dir$(tput sgr0):  $INSTDIR"
-        echo "$(tput bold)$(tput setaf 6)Bin path$(tput sgr0):  $BIN_PATH"
+        echo "$(tput bold)${CLR_CYAN}Source$(tput sgr0):  $TAR_DOWNLOAD_SOURCE"
+        echo "$(tput bold)${CLR_CYAN}URL$(tput sgr0):  $TARURI"
+        echo "$(tput bold)${CLR_CYAN}Install dir$(tput sgr0):  $INSTDIR"
+        echo "$(tput bold)${CLR_CYAN}Bin path$(tput sgr0):  $BIN_PATH"
         echo
         TARPKG="$REMPKG"
         tarappcheckfunc # Load info about tar package using this function so tarremovefunc knows where it is
         tarremovefunc # Use info from above to remove /opt/PackageName and symlinks for .desktop and bin file
     else
-        echo "$(tput setaf 1)Package not found!$(tput sgr0)"
+        echo "${CLR_RED}Package not found!$(tput sgr0)"
         rm -rf "$CONFDIR"/cache/*
         exit 1
     fi
@@ -253,7 +253,7 @@ updatestartfunc () { # Run relevant update argument based on user input
             TARPKG="$1"
             tarupdatelistfunc "$TARPKG" # Check specified tar package for upgrade
         else
-            echo "$(tput setaf 1)Package not found!$(tput sgr0)"
+            echo "${CLR_RED}Package not found!$(tput sgr0)"
             rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
             exit 1
         fi
@@ -268,7 +268,7 @@ updatestartfunc () { # Run relevant update argument based on user input
         if [ "$(dir "$CONFDIR"/tarupgrades | wc -w)" = "0" ] && [ "$(dir "$CONFDIR"/appimgupgrades | wc -w)" = "0" ]; then
             echo "No new AppImage or tar package upgrades available."
         else
-            echo "$(tput setaf 2)$(dir "$CONFDIR"/appimgupgrades | wc -w) new AppImage and $(dir "$CONFDIR"/tarupgrades | wc -w) new tar package upgrade(s) available!$(tput sgr0)"
+            echo "${CLR_GREEN}$(dir "$CONFDIR"/appimgupgrades | wc -w) new AppImage and $(dir "$CONFDIR"/tarupgrades | wc -w) new tar package upgrade(s) available!$(tput sgr0)"
         fi
     fi
 }
@@ -281,7 +281,7 @@ updateforcestartfunc () {
         TARPKG="$TESTUF"
         tarupdateforcefunc # Place a file containing tar package info in $CONFDIR/tarupgrades/PackageName for upgrade function to get info from without checking version
     else
-        echo "$(tput setaf 1)Package not found!$(tput sgr0)"
+        echo "${CLR_RED}Package not found!$(tput sgr0)"
         rm -rf "$CONFDIR"/cache/*
         exit 1
     fi
@@ -341,46 +341,46 @@ liststartfunc () { # Run relevant list function based on user input
             case $SOURCE in
                 *AppImages-github)
                     if [ -f "$CONFDIR/appimginstalled/$file" ]; then
-                        echo "$(tput setaf 10)$file$(tput sgr0) (installed)"
+                        echo "${CLR_LGREEN}$file$(tput sgr0) (installed)"
                     else
-                        echo "$(tput setaf 10)$file$(tput sgr0)"
+                        echo "${CLR_LGREEN}$file$(tput sgr0)"
                     fi
                     ;;
                 *AppImages-other)
                     if [ -f "$CONFDIR/appimginstalled/$file" ]; then
-                        echo "$(tput setaf 2)$file$(tput sgr0) (installed)"
+                        echo "${CLR_GREEN}$file$(tput sgr0) (installed)"
                     else
-                        echo "$(tput setaf 2)$file$(tput sgr0)"
+                        echo "${CLR_GREEN}$file$(tput sgr0)"
                     fi
                     ;;
                 *tar-github)
                     if [ -f "$CONFDIR/tarinstalled/$file" ]; then
-                        echo "$(tput setaf 14)$file$(tput sgr0) (installed)"
+                        echo "${CLR_LCYAN}$file$(tput sgr0) (installed)"
                     else
-                        echo "$(tput setaf 14)$file$(tput sgr0)"
+                        echo "${CLR_LCYAN}$file$(tput sgr0)"
                     fi
                     ;;
                 *tar-other)
                     if [ -f "$CONFDIR/tarinstalled/$file" ]; then
-                        echo "$(tput setaf 6)$file$(tput sgr0) (installed)"
+                        echo "${CLR_CYAN}$file$(tput sgr0) (installed)"
                     else
-                        echo "$(tput setaf 6)$file$(tput sgr0)"
+                        echo "${CLR_CYAN}$file$(tput sgr0)"
                     fi
                     ;;
             esac
         done | pr -tTaw $(tput cols) -$(($(tput cols)/45))
         echo
-        echo "$(tput setaf 4)$(cat "$CONFDIR"/*s.yml | wc -l) packages available for install.$(tput sgr0)"
-        echo "$(tput setaf 10)Light green = AppImages from Github"
-        echo "$(tput setaf 2)Dark green = AppImages from other sources"
-        echo "$(tput setaf 14)Light cyan = tar packages from Github"
-        echo "$(tput setaf 6)Dark cyan = tar packages from other sources$(tput sgr0)"
+        echo "${CLR_BLUE}$(cat "$CONFDIR"/*s.yml | wc -l) packages available for install.$(tput sgr0)"
+        echo "${CLR_LGREEN}Light green = AppImages from Github"
+        echo "${CLR_GREEN}Dark green = AppImages from other sources"
+        echo "${CLR_LCYAN}Light cyan = tar packages from Github"
+        echo "${CLR_CYAN}Dark cyan = tar packages from other sources$(tput sgr0)"
     else
         appimglistfunc # List info for specified AppImage if available
         echo
         tarlistfunc # List info for specified tar package if available
         if [ "$APPIMG_NOT_FOUND" = "TRUE" ] && [ "$TARPKG_NOT_FOUND" = "TRUE" ]; then # If both tarfunctions.sh and appimgfunctions.sh output no packages found, tell user package not found
-            echo "$(tput setaf 1)$INSTIMG not found in package lists!$(tput sgr0)"
+            echo "${CLR_RED}$INSTIMG not found in package lists!$(tput sgr0)"
         fi
         rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
         exit 0
@@ -388,17 +388,17 @@ liststartfunc () { # Run relevant list function based on user input
 }
 
 listinstalledfunc () {
-    echo "$(tput bold)$(tput setaf 2)AppImages$(tput sgr0):"
+    echo "$(tput bold)${CLR_GREEN}AppImages$(tput sgr0):"
     echo
     appimglistinstalledfunc || { echo "Failed; exiting..."; rm -rf "$CONFDIR"/cache/*; exit 1; } # List info about all installed AppImages
     echo
-    echo "$(tput bold)$(tput setaf 6)tar packages$(tput sgr0):"
+    echo "$(tput bold)${CLR_CYAN}tar packages$(tput sgr0):"
     echo
     tarlistinstalledfunc || { echo "Failed; exiting..."; rm -rf "$CONFDIR"/cache/*; exit 1; } # List info about all installed tar packages
-    echo "$(tput bold)$(tput setaf 2)$(dir -C -w 1 "$CONFDIR"/appimginstalled | wc -l) AppImages installed$(tput sgr0):" # Output number of and names of installed AppImages
+    echo "$(tput bold)${CLR_GREEN}$(dir -C -w 1 "$CONFDIR"/appimginstalled | wc -l) AppImages installed$(tput sgr0):" # Output number of and names of installed AppImages
     dir -C -w 1 "$CONFDIR"/appimginstalled | pr -tT --column=3 -w 125
     echo
-    echo "$(tput bold)$(tput setaf 6)$(dir -C -w 1 "$CONFDIR"/tarinstalled | wc -l) tar packages installed$(tput sgr0):" # Output number of and names of installed tar packages
+    echo "$(tput bold)${CLR_CYAN}$(dir -C -w 1 "$CONFDIR"/tarinstalled | wc -l) tar packages installed$(tput sgr0):" # Output number of and names of installed tar packages
     dir -C -w 1 "$CONFDIR"/tarinstalled | pr -tT --column=3 -w 125
     echo
 }
