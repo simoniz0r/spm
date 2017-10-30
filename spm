@@ -6,10 +6,18 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.5.8"
+X="0.5.9"
 # Set spm version
 CONFDIR="$HOME/.config/spm"
 SKIP_DEP_CHECKS="FALSE"
+CLR_CLEAR="$(tput sgr0)"
+CLR_BLUE="$(tput setaf 4)"
+CLR_LGREEN="$(tput setaf 10)"
+CLR_GREEN="$(tput setaf 2)"
+CLR_LCYAN="$(tput setaf 14)"
+CLR_CYAN="$(tput setaf 6)"
+CLR_RED="$(tput setaf 1)"
+
 
 if [ "$EUID" = "0" ]; then # Prevent spm from being ran as root
     echo "Do not run spm as root!"
@@ -32,6 +40,13 @@ if [ ! -d "$CONFDIR" ]; then # Create dirs for configs, config files, and downlo
     echo "CONFDIR="\"$CONFDIR\""" > "$CONFDIR"/spm.conf
     echo "GITHUB_TOKEN="\"\""" >> "$CONFDIR"/spm.conf
     echo "SKIP_DEP_CHECKS="\"FALSE\""" >> "$CONFDIR"/spm.conf
+    echo "CLR_CLEAR="\"$(tput sgr0)\""" >> "$CONFDIR"/spm.conf
+    echo "CLR_BLUE="\"$(tput setaf 4)\""" >> "$CONFDIR"/spm.conf
+    echo "CLR_LGREEN="\"$(tput setaf 10)\""" >> "$CONFDIR"/spm.conf
+    echo "CLR_GREEN="\"$(tput setaf 2)\""" >> "$CONFDIR"/spm.conf
+    echo "CLR_LCYAN="\"$(tput setaf 14)\""" >> "$CONFDIR"/spm.conf
+    echo "CLR_CYAN="\"$(tput setaf 6)\""" >> "$CONFDIR"/spm.conf
+    echo "CLR_RED="\"$(tput setaf 1)\""" >> "$CONFDIR"/spm.conf
     echo "First run operations complete!"
 fi
 
@@ -47,18 +62,18 @@ RUNNING_DIR="$(dirname "$REALPATH")" # Find directory script is running from
 if [ -f $RUNNING_DIR/spmfunctions.sh ]; then # Check to make sure spmfunctions.sh exists and is up to date
     FUNCTIONS_VER="$(cat "$RUNNING_DIR"/spmfunctions.sh | sed -n 9p | cut -f2 -d'"')"
     if [ "$X" != "$FUNCTIONS_VER" ]; then
-        echo "$$(tput setaf 1)spmfunctions.sh $FUNCTIONS_VER version does not match $X !"
-        echo "spmfunctions.sh is out of date! Please download the full release of spm from https://github.com/simoniz0r/spm/releases !$(tput sgr0)"
+        echo "${CLR_RED}spmfunctions.sh $FUNCTIONS_VER version does not match $X !"
+        echo "spmfunctions.sh is out of date! Please download the full release of spm from https://github.com/simoniz0r/spm/releases !${CLR_CLEAR}"
         exit 1
     fi
 else
-    echo "$(tput setaf 1)Missing required file $RUNNING_DIR/spmfunctions.sh !"
-        echo "spmfunctions.sh is missing! Please download the full release of spm from https://github.com/simoniz0r/spm/releases !$(tput sgr0)"
+    echo "${CLR_RED}Missing required file $RUNNING_DIR/spmfunctions.sh !"
+        echo "spmfunctions.sh is missing! Please download the full release of spm from https://github.com/simoniz0r/spm/releases !${CLR_CLEAR}"
         exit 1
 fi
 source "$RUNNING_DIR"/spmfunctions.sh || { echo "Sourcing spmfunctions.sh failed; exiting..."; rm -rf "$CONFDIR"/cache/*; exit 1; } # import functions from spmfunctions.sh
 
-spmdepchecksfunc || { echo "$(tput setaf 1)Could not load $RUNNING_DIR/spmfunctions.sh; exiting...$(tput sgr0)"; exit 1; } # Check for deps, exit if not present
+spmdepchecksfunc || { echo "${CLR_RED}Could not load $RUNNING_DIR/spmfunctions.sh; exiting...${CLR_CLEAR}"; exit 1; } # Check for deps, exit if not present
 
 if type spm >/dev/null 2>&1 && [ -f ~/.zshrc ] && ! grep -q 'spm.comp' ~/.zshrc; then # If using zsh and spm is installed, add tab completions for spm
     wget --quiet "https://raw.githubusercontent.com/simoniz0r/spm/master/spm.comp" -O "$CONFDIR"/spm.comp
@@ -72,11 +87,11 @@ fi
 
 appimgfunctioncheckfunc # Check to make sure appimgfunctions.sh exists and is up to date
 source "$RUNNING_DIR"/appimgfunctions.sh || { echo "Sourcing appingfunctions.sh failed; exiting..."; rm -rf "$CONFDIR"/cache/*; exit 1; } # import functions from appimgfunctions.sh
-appimgfunctionsexistsfunc  || { echo "$(tput setaf 1)Could not load $RUNNING_DIR/appimgfunctions.sh; exiting...$(tput sgr0)"; exit 1; }
+appimgfunctionsexistsfunc  || { echo "${CLR_RED}Could not load $RUNNING_DIR/appimgfunctions.sh; exiting...${CLR_CLEAR}"; exit 1; }
 
 tarfunctioncheckfunc # Check to make sure tarfunctions.sh exists and is up to date
 source "$RUNNING_DIR"/tarfunctions.sh || { echo "Sourcing tarfunctions.sh failed; exiting..."; rm -rf "$CONFDIR"/cache/*; exit 1; } # import functions from tarfunctions.sh
-tarfunctionsexistfunc || { echo "$(tput setaf 1)Could not load $RUNNING_DIR/tarfunctions.sh; exiting...$(tput sgr0)"; exit 1; }
+tarfunctionsexistfunc || { echo "${CLR_RED}Could not load $RUNNING_DIR/tarfunctions.sh; exiting...${CLR_CLEAR}"; exit 1; }
 
 spmlockfunc # Create "$CONFDIR"/cache/spm.lock file and prevent multiple instances by checking if it exists before running
 
@@ -88,9 +103,9 @@ else
     echo "Github API rate limit : $(grep -m 1 '.*X-RateLimit-Remaining:*.' "$CONFDIR"/cache/rate.limit | cut -f4 -d" ")/5000 until $(date -d@$(grep -m 1 '.*X-RateLimit-Reset:*.' "$CONFDIR"/cache/rate.limit | cut -f4 -d" ") +"%T, %F")."
 fi
 if [ "$(grep -m 1 '.*X-RateLimit-Remaining:*.' "$CONFDIR"/cache/rate.limit | cut -f4 -d" ")" = "0" ]; then # Attempt to exit to prevent errors if user's github rate limit has been used up
-    echo "$(tput setaf 1)Github API rate limit reached! Try again at $(date -d@$(grep -m 1 '.*X-RateLimit-Reset:*.' "$CONFDIR"/cache/rate.limit | cut -f4 -d" "))."
+    echo "${CLR_RED}Github API rate limit reached! Try again at $(date -d@$(grep -m 1 '.*X-RateLimit-Reset:*.' "$CONFDIR"/cache/rate.limit | cut -f4 -d" "))."
     echo "If you haven't already, you can add your token to $CONFDIR/spm.conf"
-    echo "to avoid hitting the rate limit.$(tput sgr0)"
+    echo "to avoid hitting the rate limit.${CLR_CLEAR}"
     rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
     exit 1
 fi
@@ -99,7 +114,7 @@ echo
 case $1 in
     install|-i|appimg-install|-ai|tarinstall|-ti) # Check if package is in either list and rout install to relevant function
         if [ -z "$2" ]; then
-            echo "$(tput setaf 1)Package input required; exiting...$(tput sgr0)"
+            echo "${CLR_RED}Package input required; exiting...${CLR_CLEAR}"
             rm -rf "$CONFDIR"/cache/*
             exit 1
         fi
@@ -116,7 +131,7 @@ case $1 in
         ;;
     update-force|-uf|appimg-update-force|-auf|tar-update-force|-tuf) # Force AppImage to be marked for upgrade
         if [ -z "$2" ]; then
-            echo "$(tput setaf 1)Package input required; exiting...$(tput sgr0)"
+            echo "${CLR_RED}Package input required; exiting...${CLR_CLEAR}"
             rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
             exit 1
         fi
@@ -132,7 +147,7 @@ case $1 in
         ;;
     remove|-r|appimg-remove|-ar|tar-remove|-tr)
         if [ -z "$2" ]; then
-            echo "$(tput setaf 1)Package input required; exiting...$(tput sgr0)"
+            echo "${CLR_RED}Package input required; exiting...${CLR_CLEAR}"
             rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
             exit 1
         fi
@@ -155,12 +170,12 @@ case $1 in
         ;;
     search|-s) # Use grep to search package lists based on user input and output matching packages and which list they are in
         if cat "$CONFDIR"/AppImages.yml | cut -f1 -d":" | grep -q "$2"; then
-            echo "$(tput bold)$(tput setaf 2)AppImage(s)$(tput sgr0):"
+            echo "$(tput bold)${CLR_GREEN}AppImage(s)${CLR_CLEAR}:"
             cat "$CONFDIR"/AppImages.yml | cut -f1 -d":" | grep "$2"
             echo
         fi
         if echo "$TAR_LIST" | grep -q "$2"; then
-            echo "$(tput bold)$(tput setaf 6)tar package(s)$(tput sgr0):"
+            echo "$(tput bold)${CLR_CYAN}tar package(s)${CLR_CLEAR}:"
             echo "$TAR_LIST" | grep "$2"
             echo
         fi

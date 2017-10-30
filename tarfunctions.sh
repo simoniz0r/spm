@@ -6,11 +6,12 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.5.8"
+X="0.5.9"
 # Set spm version
 TAR_LIST="$(cat "$CONFDIR"/tar-pkgs.yml | cut -f1 -d":")"
 TAR_SIZE="N/A"
 TAR_DOWNLOADS="N/A"
+TAR_CLR="${CLR_CYAN}"
 
 tarfunctionsexistfunc () {
     sleep 0
@@ -42,9 +43,9 @@ tarsaveconffunc () { # Saves file containing tar package info in specified direc
 
 targithubinfofunc () { # Gets updated_at, tar url, and description for specified package for use with listing, installing, and upgrading
     if [ -z "$GITHUB_TOKEN" ]; then
-        wget --quiet "$TAR_API_URI" -O "$CONFDIR"/cache/"$TARPKG"-release || { echo "$(tput setaf 1)wget $TAR_API_URI failed; has the repo been renamed or deleted?$(tput sgr0)"; rm -rf "$CONFDIR"/cache/*; exit 1; }
+        wget --quiet "$TAR_API_URI" -O "$CONFDIR"/cache/"$TARPKG"-release || { echo "${CLR_RED}wget $TAR_API_URI failed; has the repo been renamed or deleted?${CLR_CLEAR}"; rm -rf "$CONFDIR"/cache/*; exit 1; }
     else
-        wget --quiet --auth-no-challenge --header="Authorization: token "$GITHUB_TOKEN"" "$TAR_API_URI" -O "$CONFDIR"/cache/"$TARPKG"-release || { echo "$(tput setaf 1)wget $TAR_API_URI failed; is your token valid?$(tput sgr0)"; rm -rf "$CONFDIR"/cache/*; exit 1; }
+        wget --quiet --auth-no-challenge --header="Authorization: token "$GITHUB_TOKEN"" "$TAR_API_URI" -O "$CONFDIR"/cache/"$TARPKG"-release || { echo "${CLR_RED}wget $TAR_API_URI failed; is your token valid?${CLR_CLEAR}"; rm -rf "$CONFDIR"/cache/*; exit 1; }
     fi
     JQARG=".[].assets[] | select(.name | contains(\".tar\")) | select(.name | contains(\"$TARPKG_NAME\")) | select(.name | contains(\"darwin\") | not) | select(.name | contains(\"macos\") | not) | select(.name | contains(\"ia32\") | not) | select(.name | contains(\"x32\") | not) | select(.name | contains(\"i386\") | not) | select(.name | contains(\"i686\") | not) | { name: .name, updated: .updated_at, url: .browser_download_url, size: .size, numdls: .download_count}"
     cat "$CONFDIR"/cache/"$TARPKG"-release | "$RUNNING_DIR"/jq --raw-output "$JQARG" | sed 's%{%data:%g' | tr -d '",}' > "$CONFDIR"/cache/"$TARPKG"release
@@ -66,7 +67,7 @@ targithubinfofunc () { # Gets updated_at, tar url, and description for specified
     tarsaveconffunc "cache/$TARPKG.conf"
     . "$CONFDIR"/cache/"$TARPKG".conf
     if [ -z "$NEW_TARFILE" ]; then
-        echo "$(tput setaf 1)Error finding latest tar for $TARPKG!$(tput sgr0)"
+        echo "${CLR_RED}Error finding latest tar for $TARPKG!${CLR_CLEAR}"
         GITHUB_DOWNLOAD_ERROR="TRUE"
     fi
 }
@@ -88,12 +89,14 @@ tarappcheckfunc () { # check user input against list of known apps here
             SPM_TAR_REPO_BRANCH="$("$RUNNING_DIR"/yaml r "$CONFDIR"/tar-pkgs.yml "$TARPKG")"
             case $SPM_TAR_REPO_BRANCH in
                 tar-github)
+                    TAR_CLR="${CLR_LCYAN}"
                     TAR_DOWNLOAD_SOURCE="GITHUB"
                     if [ ! -f "$CONFDIR/tarinstalled/.$TARPKG.yml" ]; then
                         wget --quiet "https://github.com/simoniz0r/spm-repo/raw/tar-github/$TARPKG.yml" -O "$CONFDIR"/tarinstalled/."$TARPKG".yml
                     fi
                     ;;
                 tar-other)
+                    TAR_CLR="${CLR_CYAN}"
                     TAR_DOWNLOAD_SOURCE="DIRECT"
                     if [ ! -f "$CONFDIR/tarinstalled/.$TARPKG.yml" ]; then
                         wget --quiet "https://github.com/simoniz0r/spm-repo/raw/tar-other/$TARPKG.yml" -O "$CONFDIR"/tarinstalled/."$TARPKG".yml
@@ -135,21 +138,29 @@ tarappcheckfunc () { # check user input against list of known apps here
 
 tarlistfunc () { # List info about specified package or list all packages
     if [ -f "$CONFDIR"/tarinstalled/"$TARPKG" ]; then
-        echo "$(tput bold)$(tput setaf 6)$TARPKG tar installed information$(tput sgr0):"
         . "$CONFDIR"/tarinstalled/"$TARPKG"
-        echo "$(tput bold)$(tput setaf 6)Info$(tput sgr0):  $TAR_DESCRIPTION"
-        echo "$(tput bold)$(tput setaf 6)Deps$(tput sgr0):  $DEPENDENCIES"
-        if [ -z "$TAR_GITHUB_COMMIT" ]; then
-            echo "$(tput bold)$(tput setaf 6)Version$(tput sgr0):  $TARFILE"
-        else
-            echo "$(tput bold)$(tput setaf 6)Version$(tput sgr0):  $TAR_GITHUB_COMMIT"
-            echo "$(tput bold)$(tput setaf 6)Tag$(tput sgr0):  $TAR_GITHUB_VERSION"
-            echo "$(tput bold)$(tput setaf 6)Total DLs$(tput sgr0):  $TAR_DOWNLOADS"
-            echo "$(tput bold)$(tput setaf 6)Size$(tput sgr0):  $TAR_SIZE"
+        if [ ! -z "$DOWNLOAD_SOURCE" ]; then
+            TAR_DOWNLOAD_SOURCE="$DOWNLOAD_SOURCE"
         fi
-        echo "$(tput bold)$(tput setaf 6)URL$(tput sgr0):  $TARURI"
-        echo "$(tput bold)$(tput setaf 6)Install dir$(tput sgr0):  $INSTDIR"
-        echo "$(tput bold)$(tput setaf 6)Bin path$(tput sgr0):  $BIN_PATH"
+        if [ "$TAR_DOWNLOAD_SOURCE" = "GITHUB" ]; then
+            TAR_CLR="${CLR_LCYAN}"
+        else
+            TAR_CLR="${CLR_CYAN}"
+        fi
+        echo "${TAR_CLR}$TARPKG tar installed information${CLR_CLEAR}:"
+        echo "${TAR_CLR}Info${CLR_CLEAR}:  $TAR_DESCRIPTION"
+        echo "${TAR_CLR}Deps${CLR_CLEAR}:  $DEPENDENCIES"
+        if [ -z "$TAR_GITHUB_COMMIT" ]; then
+            echo "${TAR_CLR}Version${CLR_CLEAR}:  $TARFILE"
+        else
+            echo "${TAR_CLR}Version${CLR_CLEAR}:  $TAR_GITHUB_COMMIT"
+            echo "${TAR_CLR}Tag${CLR_CLEAR}:  $TAR_GITHUB_VERSION"
+            echo "${TAR_CLR}Total DLs${CLR_CLEAR}:  $TAR_DOWNLOADS"
+            echo "${TAR_CLR}Size${CLR_CLEAR}:  $TAR_SIZE"
+        fi
+        echo "${TAR_CLR}URL${CLR_CLEAR}:  $TARURI"
+        echo "${TAR_CLR}Install dir${CLR_CLEAR}:  $INSTDIR"
+        echo "${TAR_CLR}Bin path${CLR_CLEAR}:  $BIN_PATH"
         echo
     else
         if [ -f "$CONFDIR/cache/$TARPKG.yml" ]; then
@@ -157,22 +168,22 @@ tarlistfunc () { # List info about specified package or list all packages
         fi
         tarappcheckfunc "$TARPKG"
         if [ "$KNOWN_TAR" = "TRUE" ]; then
-            echo "$(tput bold)$(tput setaf 6)$TARPKG tar package information$(tput sgr0):"
+            echo "${TAR_CLR}$TARPKG tar package information${CLR_CLEAR}:"
             tarsaveconffunc "cache/$TARPKG.conf"
             . "$CONFDIR"/cache/"$TARPKG".conf
-            echo "$(tput bold)$(tput setaf 6)Info$(tput sgr0):  $TAR_DESCRIPTION"
-            echo "$(tput bold)$(tput setaf 6)Deps$(tput sgr0):  $DEPENDENCIES"
+            echo "${TAR_CLR}Info${CLR_CLEAR}:  $TAR_DESCRIPTION"
+            echo "${TAR_CLR}Deps${CLR_CLEAR}:  $DEPENDENCIES"
             if [ -z "$TAR_GITHUB_COMMIT" ]; then
-                echo "$(tput bold)$(tput setaf 6)Version$(tput sgr0):  $TARFILE"
+                echo "${TAR_CLR}Version${CLR_CLEAR}:  $TARFILE"
             else
-                echo "$(tput bold)$(tput setaf 6)Version$(tput sgr0):  $TAR_GITHUB_COMMIT"
-                echo "$(tput bold)$(tput setaf 6)Tag$(tput sgr0):  $TAR_GITHUB_VERSION"
-                echo "$(tput bold)$(tput setaf 6)Total DLs$(tput sgr0):  $TAR_DOWNLOADS"
-                echo "$(tput bold)$(tput setaf 6)Size$(tput sgr0):  $TAR_SIZE"
+                echo "${TAR_CLR}Version${CLR_CLEAR}:  $TAR_GITHUB_COMMIT"
+                echo "${TAR_CLR}Tag${CLR_CLEAR}:  $TAR_GITHUB_VERSION"
+                echo "${TAR_CLR}Total DLs${CLR_CLEAR}:  $TAR_DOWNLOADS"
+                echo "${TAR_CLR}Size${CLR_CLEAR}:  $TAR_SIZE"
             fi
-            echo "$(tput bold)$(tput setaf 6)URL$(tput sgr0):  $TARURI"
-            echo "$(tput bold)$(tput setaf 6)Install dir$(tput sgr0):  $INSTDIR"
-            echo "$(tput bold)$(tput setaf 6)Bin path$(tput sgr0):  $BIN_PATH"
+            echo "${TAR_CLR}URL${CLR_CLEAR}:  $TARURI"
+            echo "${TAR_CLR}Install dir${CLR_CLEAR}:  $INSTDIR"
+            echo "${TAR_CLR}Bin path${CLR_CLEAR}:  $BIN_PATH"
             echo
             rm -f "$CONFDIR"/tarinstalled/."$TARPKG".yml
         else
@@ -183,23 +194,31 @@ tarlistfunc () { # List info about specified package or list all packages
 
 tarlistinstalledfunc () { # List info about installed tar packages
     for tarpkg in $(dir -C -w 1 "$CONFDIR"/tarinstalled); do
-        echo "$(tput bold)$(tput setaf 6)$tarpkg installed information$(tput sgr0):"
         . "$CONFDIR"/tarinstalled/"$tarpkg"
-        echo "$(tput bold)$(tput setaf 6)Info$(tput sgr0):  $TAR_DESCRIPTION"
-        echo "$(tput bold)$(tput setaf 6)Deps$(tput sgr0):  $DEPENDENCIES"
+        if [ ! -z "$DOWNLOAD_SOURCE" ]; then
+            TAR_DOWNLOAD_SOURCE="$DOWNLOAD_SOURCE"
+        fi
+        if [ "$TAR_DOWNLOAD_SOURCE" = "GITHUB" ]; then
+            TAR_CLR="${CLR_LCYAN}"
+        else
+            TAR_CLR="${CLR_CYAN}"
+        fi
+        echo "${TAR_CLR}$tarpkg installed information${CLR_CLEAR}:"
+        echo "${TAR_CLR}Info${CLR_CLEAR}:  $TAR_DESCRIPTION"
+        echo "${TAR_CLR}Deps${CLR_CLEAR}:  $DEPENDENCIES"
         if [ "$TAR_DOWNLOAD_SOURCE" = "DIRECT" ]; then
             TAR_SIZE="N/A"
             TAR_DOWNLOADS="N/A"
-            echo "$(tput bold)$(tput setaf 6)Version$(tput sgr0):  $TARFILE"
+            echo "${TAR_CLR}Version${CLR_CLEAR}:  $TARFILE"
         else
-            echo "$(tput bold)$(tput setaf 6)Version$(tput sgr0):  $TAR_GITHUB_COMMIT"
-            echo "$(tput bold)$(tput setaf 6)Tag$(tput sgr0):  $TAR_GITHUB_VERSION"
-            echo "$(tput bold)$(tput setaf 6)Total DLs$(tput sgr0):  $TAR_DOWNLOADS"
-            echo "$(tput bold)$(tput setaf 6)Size$(tput sgr0):  $TAR_SIZE"
+            echo "${TAR_CLR}Version${CLR_CLEAR}:  $TAR_GITHUB_COMMIT"
+            echo "${TAR_CLR}Tag${CLR_CLEAR}:  $TAR_GITHUB_VERSION"
+            echo "${TAR_CLR}Total DLs${CLR_CLEAR}:  $TAR_DOWNLOADS"
+            echo "${TAR_CLR}Size${CLR_CLEAR}:  $TAR_SIZE"
         fi
-        echo "$(tput bold)$(tput setaf 6)URL$(tput sgr0):  $TARURI"
-        echo "$(tput bold)$(tput setaf 6)Install dir$(tput sgr0):  $INSTDIR"
-        echo "$(tput bold)$(tput setaf 6)Bin path$(tput sgr0):  $BIN_PATH"
+        echo "${TAR_CLR}URL${CLR_CLEAR}:  $TARURI"
+        echo "${TAR_CLR}Install dir${CLR_CLEAR}:  $INSTDIR"
+        echo "${TAR_CLR}Bin path${CLR_CLEAR}:  $BIN_PATH"
         echo
     done
 }
@@ -208,10 +227,10 @@ tardlfunc () { # Download tar from specified source.  If not from github, use --
     cd "$CONFDIR"/cache
     case $TAR_DOWNLOAD_SOURCE in
         GITHUB)
-            wget --read-timeout=30 "$TAR_GITHUB_NEW_DOWNLOAD" || { echo "$(tput setaf 1)wget $TARURI_DL failed; exiting...$(tput sgr0)"; rm -rf "$CONFDIR"/cache/*; exit 1; }
+            wget --read-timeout=30 "$TAR_GITHUB_NEW_DOWNLOAD" || { echo "${CLR_RED}wget $TARURI_DL failed; exiting...${CLR_CLEAR}"; rm -rf "$CONFDIR"/cache/*; exit 1; }
             ;;
         DIRECT)
-            wget --read-timeout=30 --trust-server-names "$TARURI" || { echo "$(tput setaf 1)wget $TARURI failed; exiting...$(tput sgr0)"; rm -rf "$CONFDIR"/cache/*; exit 1; }
+            wget --read-timeout=30 --trust-server-names "$TARURI" || { echo "${CLR_RED}wget $TARURI failed; exiting...${CLR_CLEAR}"; rm -rf "$CONFDIR"/cache/*; exit 1; }
             ;;
     esac
     TARFILE="$(dir "$CONFDIR"/cache/*.tar*)"
@@ -223,10 +242,10 @@ tarcheckfunc () { # Check to make sure downloaded file is a tar and run relevant
     mkdir "$CONFDIR"/cache/pkg
     case $TARFILE in
         *tar.gz|*tar.bz2|*tar.tbz|*tar.tb2|*tar|*tar.xz)
-            tar -xvf "$CONFDIR"/cache/"$TARFILE" -C "$CONFDIR"/cache/pkg || { echo "$(tput setaf 1)tar $TARFILE failed; exiting...$(tput sgr0)"; rm -rf "$CONFDIR"/cache/*; exit 1; }
+            tar -xvf "$CONFDIR"/cache/"$TARFILE" -C "$CONFDIR"/cache/pkg || { echo "${CLR_RED}tar $TARFILE failed; exiting...${CLR_CLEAR}"; rm -rf "$CONFDIR"/cache/*; exit 1; }
             ;;
         *)
-            echo "$(tput setaf 1)Unknown file type!$(tput sgr0)"
+            echo "${CLR_RED}Unknown file type!${CLR_CLEAR}"
             rm -rf "$CONFDIR"/cache/*
             exit 1
             ;;
@@ -248,9 +267,6 @@ checktarversionfunc () { # Use info from githubinfo function or using wget -S --
             TAR_NEW_UPGRADE="FALSE"
         fi
     else
-        # wget -S --read-timeout=30 --spider "$TARURI" -o "$CONFDIR"/cache/"$TARPKG".latest
-        # NEW_TARURI="$(wget -S --read-timeout=30 --spider "$TARURI" -O - 2>&1 | grep -o "Location:.*" "$CONFDIR"/cache/"$TARPKG".latest | cut -f2 -d" ")"
-        # NEW_TARFILE="${NEW_TARURI##*/}"
         if [ "$TAR_FORCE_UPGRADE" = "TRUE" ]; then
             TAR_NEW_UPGRADE="TRUE"
             TAR_FORCE_UPGRADE="FALSE"
@@ -265,7 +281,7 @@ checktarversionfunc () { # Use info from githubinfo function or using wget -S --
         fi
     fi
     if [ -z "$NEW_TARFILE" ] && [ -z "$NEW_COMMIT" ] && [ "$TAR_FORCE_UPGRADE" = "FALSE" ]; then
-        echo "$(tput setaf 1)Error checking new version for $TARPKG!$(tput sgr0)"
+        echo "${CLR_RED}Error checking new version for $TARPKG!${CLR_CLEAR}"
         TAR_NEW_UPGRADE="FALSE"
     fi
 }
@@ -273,47 +289,51 @@ checktarversionfunc () { # Use info from githubinfo function or using wget -S --
 tarupdateforcefunc () { # Mark specified tar package for upgrade without checking version
     if [ -f "$CONFDIR"/tarinstalled/"$TARPKG" ]; then
         . "$CONFDIR"/tarinstalled/"$TARPKG"
-        echo "$(tput bold)$(tput setaf 6)Info$(tput sgr0):  $TAR_DESCRIPTION"
-        echo "$(tput bold)$(tput setaf 6)Deps$(tput sgr0):  $DEPENDENCIES"
-        if [ -z "$TAR_GITHUB_COMMIT" ]; then
-            echo "$(tput bold)$(tput setaf 6)Version$(tput sgr0):  $TARFILE"
+        if [ ! -z "$DOWNLOAD_SOURCE" ]; then
+            TAR_DOWNLOAD_SOURCE="$DOWNLOAD_SOURCE"
+        fi
+        if [ "$TAR_DOWNLOAD_SOURCE" = "GITHUB" ]; then
+            TAR_CLR="${CLR_LCYAN}"
         else
-            echo "$(tput bold)$(tput setaf 6)Version$(tput sgr0):  $TAR_GITHUB_COMMIT"
-            echo "$(tput bold)$(tput setaf 6)Tag$(tput sgr0):  $TAR_GITHUB_VERSION"
-            echo "$(tput bold)$(tput setaf 6)Total DLs$(tput sgr0):  $TAR_DOWNLOADS"
-            echo "$(tput bold)$(tput setaf 6)Size$(tput sgr0):  $TAR_SIZE"
+            TAR_CLR="${CLR_CYAN}"
+        fi
+        echo "${TAR_CLR}Info${CLR_CLEAR}:  $TAR_DESCRIPTION"
+        echo "${TAR_CLR}Deps${CLR_CLEAR}:  $DEPENDENCIES"
+        if [ -z "$TAR_GITHUB_COMMIT" ]; then
+            echo "${TAR_CLR}Version${CLR_CLEAR}:  $TARFILE"
+        else
+            echo "${TAR_CLR}Version${CLR_CLEAR}:  $TAR_GITHUB_COMMIT"
+            echo "${TAR_CLR}Tag${CLR_CLEAR}:  $TAR_GITHUB_VERSION"
+            echo "${TAR_CLR}Total DLs${CLR_CLEAR}:  $TAR_DOWNLOADS"
+            echo "${TAR_CLR}Size${CLR_CLEAR}:  $TAR_SIZE"
 
         fi
-        echo "$(tput bold)$(tput setaf 6)URL$(tput sgr0):  $TARURI"
-        echo "$(tput bold)$(tput setaf 6)Install dir$(tput sgr0):  $INSTDIR"
-        echo "$(tput bold)$(tput setaf 6)Bin path$(tput sgr0):  $BIN_PATH"
+        echo "${TAR_CLR}URL${CLR_CLEAR}:  $TARURI"
+        echo "${TAR_CLR}Install dir${CLR_CLEAR}:  $INSTDIR"
+        echo "${TAR_CLR}Bin path${CLR_CLEAR}:  $BIN_PATH"
         echo
     else
-        echo "$(tput setaf 1)Package not found!$(tput sgr0)"
+        echo "${CLR_RED}Package not found!${CLR_CLEAR}"
         rm -rf "$CONFDIR"/cache/*
         exit 1
-    fi
-    . "$CONFDIR"/tarinstalled/"$TARPKG"
-    if [ ! -z "$DOWNLOAD_SOURCE" ]; then
-        TAR_DOWNLOAD_SOURCE="$DOWNLOAD_SOURCE"
-    fi
+    fi    
     NEW_TARFILE="$TARFILE"
     TAR_GITHUB_NEW_COMMIT="$TAR_GITHUB_COMMIT"
     TAR_GITHUB_NEW_DOWNLOAD="$TAR_GITHUB_DOWNLOAD"
     TAR_GITHUB_NEW_VERSION="$TAR_GITHUB_VERSION"
-    echo "Marking $(tput setaf 6)$TARPKG$(tput sgr0) for upgrade by force..."
-    echo "$(tput setaf 6)New upgrade available for $TARPKG!$(tput sgr0)"
+    echo "Marking ${TAR_CLR}$TARPKG${CLR_CLEAR} for upgrade by force..."
+    echo "${TAR_CLR}New upgrade available for $TARPKG!${CLR_CLEAR}"
     tarsaveconffunc "tarupgrades/$TARPKG"
 }
 
 tarupgradecheckallfunc () { # Run a for loop to check all installed tar packages for upgrades
     for package in $(dir -C -w 1 "$CONFDIR"/tarinstalled); do
         TARPKG="$package"
-        echo "Checking $(tput setaf 6)$package$(tput sgr0) version..."
         tarappcheckfunc "$package"
+        echo "Checking ${TAR_CLR}$package${CLR_CLEAR} version..."
         checktarversionfunc
         if [ "$TAR_NEW_UPGRADE" = "TRUE" ]; then
-            echo "$(tput setaf 6)$(tput bold)New upgrade available for $package -- $NEW_TARFILE !$(tput sgr0)"
+            echo "${TAR_CLR}$(tput bold)New upgrade available for $package -- $NEW_TARFILE !${CLR_CLEAR}"
             tarsaveconffunc "tarupgrades/$package"
         fi
     done
@@ -322,21 +342,21 @@ tarupgradecheckallfunc () { # Run a for loop to check all installed tar packages
 tarupgradecheckfunc () { # Check specified tar package for upgrade
     case $("$RUNNING_DIR"/yaml r "$CONFDIR"/tar-pkgs.yml "$TARPKG") in
         null)
-            echo "$(tput setaf 1)$1 is not in tar-pkgs.yml; try running 'spm update'.$(tput sgr0)"
+            echo "${CLR_RED}$1 is not in tar-pkgs.yml; try running 'spm update'.${CLR_CLEAR}"
             ;;
         *)
             echo "Downloading tar-pkgs.yml from spm github repo..."
             rm "$CONFDIR"/tar-pkgs.*
             wget --no-verbose "https://raw.githubusercontent.com/simoniz0r/spm-repo/master/tar-pkgs.yml" -O "$CONFDIR"/tar-pkgs.yml
             TARPKG="$1"
-            echo "Checking $(tput setaf 6)$TARPKG$(tput sgr0) version..."
             tarappcheckfunc "$TARPKG"
+            echo "Checking ${TAR_CLR}$TARPKG${CLR_CLEAR} version..."
             checktarversionfunc
             if [ "$TAR_NEW_UPGRADE" = "TRUE" ]; then
-                echo "$(tput setaf 6)New upgrade available for $TARPKG -- $NEW_TARFILE !$(tput sgr0)"
+                echo "${TAR_CLR}New upgrade available for $TARPKG -- $NEW_TARFILE !${CLR_CLEAR}"
                 tarsaveconffunc "tarupgrades/$TARPKG"
             else
-                echo "No new upgrade for $(tput setaf 6)$TARPKG$(tput sgr0)"
+                echo "No new upgrade for ${TAR_CLR}$TARPKG${CLR_CLEAR}"
             fi
             ;;
     esac
@@ -362,7 +382,7 @@ tarupdatelistfunc () { # Download tar-pkgs.yml from github repo and run relevant
                     echo "https://github.com/simoniz0r/spm-repo/raw/$SPM_TAR_REPO_BRANCH/$tarpkg.yml" >> "$CONFDIR"/cache/tar-yml-wget.list
                 done
                 cd "$CONFDIR"/cache
-                wget --no-verbose -i "$CONFDIR"/cache/tar-yml-wget.list || { echo "$(tput setaf 1)wget failed!$(tput sgr0)"; rm -rf "$CONFDIR"/cache/*; exit 1; }
+                wget --no-verbose -i "$CONFDIR"/cache/tar-yml-wget.list || { echo "${CLR_RED}wget failed!${CLR_CLEAR}"; rm -rf "$CONFDIR"/cache/*; exit 1; }
                 for ymlfile in $(dir -C -w 1 "$CONFDIR"/cache/*.yml); do
                     ymlfile="${ymlfile##*/}"
                     mv "$CONFDIR"/cache/"$ymlfile" "$CONFDIR"/tarinstalled/."$ymlfile"
@@ -420,40 +440,40 @@ tarinstallfunc () { # Move extracted tar from $CONFDIR/cache to /opt/PackageName
             sudo ln -s "$DESKTOP_FILE_PATH" /usr/share/applications/"$DESKTOP_FILE_NAME"
             ;;
     esac
-    echo "Creating config file for $(tput setaf 6)$TARPKG$(tput sgr0)..."
+    echo "Creating config file for ${TAR_CLR}$TARPKG${CLR_CLEAR}..."
     tarsaveconffunc "tarinstalled/$TARPKG"
-    echo "$(tput setaf 6)$TARPKG$(tput sgr0) has been installed to $INSTDIR !"
+    echo "${TAR_CLR}$TARPKG${CLR_CLEAR} has been installed to $INSTDIR !"
 }
 
 tarinstallstartfunc () { # Check to make sure another command by the same name is not on the system, tar package is in tar-pkgs.list, and tar package is not already installed
     if [ -f "$CONFDIR"/tarinstalled/"$TARPKG" ] || [ -f "$CONFDIR"/appimginstalled/"$TARPKG" ]; then # Exit if already installed by spm
-        echo "$(tput setaf 1)$TARPKG is already installed."
-        echo "Use 'spm upgrade' to install the latest version of $TARPKG.$(tput sgr0)"
+        echo "${CLR_RED}$TARPKG is already installed."
+        echo "Use 'spm upgrade' to install the latest version of $TARPKG.${CLR_CLEAR}"
         rm -rf "$CONFDIR"/cache/*
         exit 1
     fi
     if type >/dev/null 2>&1 "$TARPKG"; then
-        echo "$(tput setaf 1)$TARPKG is already installed and not managed by spm; exiting...$(tput sgr0)"
+        echo "${CLR_RED}$TARPKG is already installed and not managed by spm; exiting...${CLR_CLEAR}"
         rm -rf "$CONFDIR"/cache/*
         exit 1
     fi
     if [ -d "/opt/$TARPKG" ]; then
-        echo "$(tput setaf 1)/opt/$TARPKG exists; spm cannot install to existing directories!$(tput sgr0)"
+        echo "${CLR_RED}/opt/$TARPKG exists; spm cannot install to existing directories!${CLR_CLEAR}"
         rm -rf "$CONFDIR"/cache/*
         exit 1
     fi
     tarappcheckfunc "$TARPKG"
     if [ "$KNOWN_TAR" = "FALSE" ];then
-        echo "$(tput setaf 1)$TARPKG is not in tar-pkgs.yml; try running 'spm update' to update tar-pkgs.yml$(tput sgr0)."
+        echo "${CLR_RED}$TARPKG is not in tar-pkgs.yml; try running 'spm update' to update tar-pkgs.yml${CLR_CLEAR}."
         rm -rf "$CONFDIR"/cache/*
         exit 1
     else
         echo "tar package: $TARFILE"
-        echo "$(tput setaf 6)$TARPKG$(tput sgr0) will be installed."
+        echo "${TAR_CLR}$TARPKG${CLR_CLEAR} will be installed."
         read -p "Continue? Y/N " INSTANSWER
         case $INSTANSWER in
             N*|n*)
-                echo "$(tput setaf 1)$TARPKG was not installed.$(tput sgr0)"
+                echo "${CLR_RED}$TARPKG was not installed.${CLR_CLEAR}"
                 rm -rf "$CONFDIR"/cache/*
                 exit 0
                 ;;
@@ -467,7 +487,7 @@ tarupgradefunc () { # Move new extracted tar from $CONFDIR/cache to /opt/Package
     read -p "Choice? Clean/Overwrite " PKGUPGDMETHODANSWER
     case $PKGUPGDMETHODANSWER in
         Clean|clean)
-            echo "$(tput setaf 6)$TARPKG$(tput sgr0) will be upgraded to $TARFILE."
+            echo "${TAR_CLR}$TARPKG${CLR_CLEAR} will be upgraded to $TARFILE."
             echo "Removing files in $INSTDIR..."
             sudo rm -rf "$INSTDIR" || { echo "Failed!"; rm -rf "$CONFDIR"/cache/*; exit 1; }
             echo "Moving files to $INSTDIR..."
@@ -475,13 +495,13 @@ tarupgradefunc () { # Move new extracted tar from $CONFDIR/cache to /opt/Package
             sudo mv "$EXTRACTED_DIR_NAME" "$INSTDIR"
             ;;
         Overwrite|overwrite)
-            echo "$(tput setaf 6)$TARPKG$(tput sgr0) will be upgraded to $TARFILE."
+            echo "${TAR_CLR}$TARPKG${CLR_CLEAR} will be upgraded to $TARFILE."
             echo "Copying files to $INSTDIR..."
             EXTRACTED_DIR_NAME="$(ls -d "$CONFDIR"/cache/pkg/*/)"
             sudo cp -r "$EXTRACTED_DIR_NAME"/* "$INSTDIR"/ || { echo "Failed!"; rm -rf "$CONFDIR"/cache/*; exit 1; }
             ;;
         *)
-            echo "$(tput setaf 1)Invalid choice; $(tput setaf 1)$TARPKG was not upgraded.$(tput sgr0)"
+            echo "${CLR_RED}Invalid choice; ${CLR_RED}$TARPKG was not upgraded.${CLR_CLEAR}"
             rm -rf "$CONFDIR"/cache/*
             exit 1
             ;;
@@ -500,9 +520,9 @@ tarupgradefunc () { # Move new extracted tar from $CONFDIR/cache to /opt/Package
             sudo ln -sf "$DESKTOP_FILE_PATH" /usr/share/applications/"$DESKTOP_FILE_NAME"
             ;;
     esac
-    echo "Creating config file for $(tput setaf 6)$TARPKG$(tput sgr0)..."
+    echo "Creating config file for ${TAR_CLR}$TARPKG${CLR_CLEAR}..."
     tarsaveconffunc "tarinstalled/$TARPKG"
-    echo "$(tput setaf 6)$TARPKG$(tput sgr0) has been upgraded to version $TARFILE!"
+    echo "${TAR_CLR}$TARPKG${CLR_CLEAR} has been upgraded to version $TARFILE!"
 }
 
 tarupgradestartallfunc () { # Run upgrades on all available tar packages
@@ -510,9 +530,9 @@ tarupgradestartallfunc () { # Run upgrades on all available tar packages
         sleep 0
     else
         if [ "$(dir "$CONFDIR"/tarupgrades | wc -l)" = "1" ]; then
-            echo "$(tput setaf 6)$(dir -C -w 1 "$CONFDIR"/tarupgrades | wc -l) new tar package upgrade available.$(tput sgr0)"
+            echo "${TAR_CLR}$(dir -C -w 1 "$CONFDIR"/tarupgrades | wc -l) new tar package upgrade available.${CLR_CLEAR}"
         else
-            echo "$(tput setaf 6)$(dir -C -w 1 "$CONFDIR"/tarupgrades | wc -l) new tar package upgrades available.$(tput sgr0)"
+            echo "${TAR_CLR}$(dir -C -w 1 "$CONFDIR"/tarupgrades | wc -l) new tar package upgrades available.${CLR_CLEAR}"
         fi
         dir -C -w 1 "$CONFDIR"/tarupgrades | pr -tT --column=3 -w 125
         echo
@@ -521,7 +541,7 @@ tarupgradestartallfunc () { # Run upgrades on all available tar packages
             Y*|y*)
                 for UPGRADE_PKG in $(dir -C -w 1 "$CONFDIR"/tarupgrades); do
                     TARPKG="$UPGRADE_PKG"
-                    echo "Downloading $(tput setaf 6)$TARPKG$(tput sgr0)..."
+                    echo "Downloading ${TAR_CLR}$TARPKG${CLR_CLEAR}..."
                     tarappcheckfunc "$TARPKG"
                     if [ "$TAR_DOWNLOAD_SOURCE" = "GITHUB" ]; then
                         targithubinfofunc
@@ -535,7 +555,7 @@ tarupgradestartallfunc () { # Run upgrades on all available tar packages
                 done
                 ;;
             N*|n*)
-                echo "$(tput setaf 1)No packages were upgraded; exiting...$(tput sgr0)"
+                echo "${CLR_RED}No packages were upgraded; exiting...${CLR_CLEAR}"
                 rm -rf "$CONFDIR"/cache/*
                 exit 0
                 ;;
@@ -544,7 +564,7 @@ tarupgradestartallfunc () { # Run upgrades on all available tar packages
 }
 
 tarupgradestartfunc () { # Run upgrade on specified tar package
-    echo "$(tput setaf 6)$TARPKG$(tput sgr0) will be upgraded to the latest version."
+    echo "${TAR_CLR}$TARPKG${CLR_CLEAR} will be upgraded to the latest version."
     read -p "Continue? Y/N " UPGRADEANSWER
     case $UPGRADEANSWER in
         Y*|y*)
@@ -558,19 +578,19 @@ tarupgradestartfunc () { # Run upgrade on specified tar package
             rm "$CONFDIR"/tarupgrades/"$TARPKG"
             ;;
         N*|n*)
-            echo "$(tput setaf 1)$TARPKG was not upgraded.$(tput sgr0)"
+            echo "${CLR_RED}$TARPKG was not upgraded.${CLR_CLEAR}"
             ;;
     esac
 }
 
 tarremovefunc () { # Remove tar package, .desktop and bin files, and remove config file spm used to keep track of it
     . "$CONFDIR"/tarinstalled/"$REMPKG"
-    echo "Removing $(tput setaf 6)$REMPKG$(tput sgr0)..."
+    echo "Removing ${TAR_CLR}$REMPKG${CLR_CLEAR}..."
     echo "All files in $INSTDIR will be removed!"
     read -p "Continue? Y/N " PKGREMANSWER
     case $PKGREMANSWER in
         N*|n*)
-            echo "$(tput setaf 1)$REMPKG was not removed.$(tput sgr0)"
+            echo "${CLR_RED}$REMPKG was not removed.${CLR_CLEAR}"
             rm -rf "$CONFDIR"/cache/*
             exit 0
             ;;
@@ -595,17 +615,17 @@ tarremovefunc () { # Remove tar package, .desktop and bin files, and remove conf
     sudo rm /usr/local/bin/"$REMPKG"
     rm "$CONFDIR"/tarinstalled/"$REMPKG"
     rm "$CONFDIR"/tarinstalled/."$REMPKG".yml
-    echo "$(tput setaf 6)$REMPKG$(tput sgr0) has been removed!"
+    echo "${TAR_CLR}$REMPKG${CLR_CLEAR} has been removed!"
 }
 
 tarremovepurgefunc () { # Remove tar package, .desktop and bin files, package's config dir if listed in tar-pkgs.yml, and remove config file spm used to keep track of it
     . "$CONFDIR"/tarinstalled/"$PURGEPKG"
-    echo "Removing $(tput setaf 6)$PURGEPKG$(tput sgr0)..."
+    echo "Removing ${TAR_CLR}$PURGEPKG${CLR_CLEAR}..."
     echo "All files in $INSTDIR and $CONFIG_PATH will be removed!"
     read -p "Continue? Y/N " PKGREMANSWER
     case $PKGREMANSWER in
         N*|n*)
-            echo "$(tput setaf 1)$PURGE was not removed.$(tput sgr0)"
+            echo "${CLR_RED}$PURGE was not removed.${CLR_CLEAR}"
             rm -rf "$CONFDIR"/cache/*
             exit 0
             ;;
@@ -635,5 +655,5 @@ tarremovepurgefunc () { # Remove tar package, .desktop and bin files, package's 
         echo "No config path specified; skipping..."
     fi
     rm "$CONFDIR"/tarinstalled/"$PURGEPKG"
-    echo "$(tput setaf 6)$PURGEPKG$(tput sgr0) has been removed!"
+    echo "${TAR_CLR}$PURGEPKG${CLR_CLEAR} has been removed!"
 }

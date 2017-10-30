@@ -6,13 +6,14 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.5.8"
+X="0.5.9"
 # Set spm version
 
 # Set variables
 APPIMG_FORCE_UPGRADE="FALSE"
 APPIMAGE_SIZE="N/A"
 APPIMAGE_DOWNLOADS="N/A"
+APPIMG_CLR="${CLR_GREEN}"
 
 appimgfunctionsexistsfunc () {
     sleep 0
@@ -73,9 +74,9 @@ appimggithubinfofunc () {
     APPIMG_GITHUB_API_URL="$("$RUNNING_DIR"/yaml r "$CONFDIR"/appimginstalled/."$INSTIMG".yml apiurl)"
     INSTIMG_NAME="$("$RUNNING_DIR"/yaml r "$CONFDIR"/appimginstalled/."$INSTIMG".yml name)"
     if [ -z "$GITHUB_TOKEN" ]; then
-        wget --quiet "$APPIMG_GITHUB_API_URL" -O "$CONFDIR"/cache/"$INSTIMG"full || { echo "$(tput setaf 1)wget $APPIMG_GITHUB_API_URL failed!$(tput sgr0)"; rm -rf "$CONFDIR"/cache/*; exit 1; }
+        wget --quiet "$APPIMG_GITHUB_API_URL" -O "$CONFDIR"/cache/"$INSTIMG"full || { echo "${CLR_RED}wget $APPIMG_GITHUB_API_URL failed!${CLR_CLEAR}"; rm -rf "$CONFDIR"/cache/*; exit 1; }
     else
-        wget --quiet --auth-no-challenge --header="Authorization: token "$GITHUB_TOKEN"" "$APPIMG_GITHUB_API_URL" -O "$CONFDIR"/cache/"$INSTIMG"full || { echo "$(tput setaf 1)wget failed!$(tput sgr0)"; rm -rf "$CONFDIR"/cache/*; exit 1; }
+        wget --quiet --auth-no-challenge --header="Authorization: token "$GITHUB_TOKEN"" "$APPIMG_GITHUB_API_URL" -O "$CONFDIR"/cache/"$INSTIMG"full || { echo "${CLR_RED}wget failed!${CLR_CLEAR}"; rm -rf "$CONFDIR"/cache/*; exit 1; }
     fi
     JQARG=".[].assets[] | select(.name | contains(\".AppImage\"), contains(\".appimage\")) | select(.name | contains(\"$INSTIMG_NAME\")) | select(.name | contains(\"ia32\") | not) | select(.name | contains(\"i386\") | not) | select(.name | contains(\"i686\") | not) | { name: .name, updated: .updated_at, url: .browser_download_url, size: .size, numdls: .download_count}"
     cat "$CONFDIR"/cache/"$INSTIMG"full | "$RUNNING_DIR"/jq --raw-output "$JQARG" | sed 's%{%data:%g' | tr -d '",}' > "$CONFDIR"/cache/"$INSTIMG"release
@@ -111,7 +112,7 @@ appimgdirectinfofunc () {
     NEW_APPIMAGE_VERSION="${NEW_APPIMAGE_VERSION##*/}"
     APPIMAGE_DESCRIPTION="$DIRECT_APPIMAGE_URL"
     if [ -z "$NEW_APPIMAGE_VERSION" ]; then
-        NEW_APPIMAGE_VERSION="$(tput setaf 1)Cannot check version; upgrades will have to be forced$(tput sgr0)"
+        NEW_APPIMAGE_VERSION="${CLR_RED}Cannot check version; upgrades will have to be forced${CLR_CLEAR}"
     fi
     APPIMAGE_NAME="$NEW_APPIMAGE_VERSION"
     if [ -f "$CONFDIR"/appimginstalled/"$INSTIMG" ]; then
@@ -123,25 +124,27 @@ appimgdirectinfofunc () {
 
 appimginfofunc () { # Set variables and temporarily store pages in "$CONFDIR"/cache to get info from them
     if [ "$DIRECT_IMG" = "TRUE" ]; then
+        APPIMG_CLR="${CLR_GREEN}"
         appimgdirectinfofunc
     elif [ "$GITHUB_IMG" = "TRUE" ]; then # If AppImage is from github, use method below to get new AppImage version
+        APPIMG_CLR="${CLR_LGREEN}"
         appimggithubinfofunc
     fi
 }
 
 appimglistfunc () {
     if [ -f "$CONFDIR"/appimginstalled/"$INSTIMG" ]; then # If installed, list installed info
-        echo "$(tput bold)$(tput setaf 2)$INSTIMG AppImage installed information$(tput sgr0):"
+        echo "${APPIMG_CLR}$INSTIMG AppImage installed information${CLR_CLEAR}:"
         . "$CONFDIR"/appimginstalled/"$INSTIMG"
-        echo "$(tput bold)$(tput setaf 2)Info$(tput sgr0):  $APPIMAGE_DESCRIPTION"
-        echo "$(tput bold)$(tput setaf 2)Version$(tput sgr0):  $APPIMAGE_VERSION"
+        echo "${APPIMG_CLR}Info${CLR_CLEAR}:  $APPIMAGE_DESCRIPTION"
+        echo "${APPIMG_CLR}Version${CLR_CLEAR}:  $APPIMAGE_VERSION"
         if [ ! -z "$APPIMAGE_GITHUB_TAG" ]; then
-            echo "$(tput bold)$(tput setaf 2)Tag$(tput sgr0):  $APPIMAGE_GITHUB_TAG"
-            echo "$(tput bold)$(tput setaf 2)Size$(tput sgr0):  $APPIMAGE_SIZE"
-            echo "$(tput bold)$(tput setaf 2)Total DLs$(tput sgr0):  $APPIMAGE_DOWNLOADS"
+            echo "${APPIMG_CLR}Tag${CLR_CLEAR}:  $APPIMAGE_GITHUB_TAG"
+            echo "${APPIMG_CLR}Size${CLR_CLEAR}:  $APPIMAGE_SIZE"
+            echo "${APPIMG_CLR}Total DLs${CLR_CLEAR}:  $APPIMAGE_DOWNLOADS"
         fi
-        echo "$(tput bold)$(tput setaf 2)URL$(tput sgr0):  $WEBSITE"
-        echo "$(tput bold)$(tput setaf 2)Install dir$(tput sgr0): $BIN_PATH"
+        echo "${APPIMG_CLR}URL${CLR_CLEAR}:  $WEBSITE"
+        echo "${APPIMG_CLR}Install dir${CLR_CLEAR}: $BIN_PATH"
         echo
     else
         INSTIMG="$INSTIMG"
@@ -149,17 +152,17 @@ appimglistfunc () {
         appimginfofunc
         if [ "$GITHUB_IMG" = "TRUE" ] || [ "$DIRECT_IMG" = "TRUE" ]; then
             appimgsaveinfofunc "cache/$INSTIMG.conf"
-            echo "$(tput bold)$(tput setaf 2)$INSTIMG AppImage information$(tput sgr0):"
+            echo "${APPIMG_CLR}$INSTIMG AppImage information${CLR_CLEAR}:"
             . "$CONFDIR"/cache/"$INSTIMG".conf
-            echo "$(tput bold)$(tput setaf 2)Info$(tput sgr0):  $APPIMAGE_DESCRIPTION"
-            echo "$(tput bold)$(tput setaf 2)Version$(tput sgr0):  $APPIMAGE_VERSION"
+            echo "${APPIMG_CLR}Info${CLR_CLEAR}:  $APPIMAGE_DESCRIPTION"
+            echo "${APPIMG_CLR}Version${CLR_CLEAR}:  $APPIMAGE_VERSION"
             if [ ! -z "$APPIMAGE_GITHUB_TAG" ]; then
-                echo "$(tput bold)$(tput setaf 2)Tag$(tput sgr0):  $APPIMAGE_GITHUB_TAG"
-                echo "$(tput bold)$(tput setaf 2)Size$(tput sgr0):  $APPIMAGE_SIZE"
-                echo "$(tput bold)$(tput setaf 2)Total DLs$(tput sgr0):  $APPIMAGE_DOWNLOADS"
+                echo "${APPIMG_CLR}Tag${CLR_CLEAR}:  $APPIMAGE_GITHUB_TAG"
+                echo "${APPIMG_CLR}Size${CLR_CLEAR}:  $APPIMAGE_SIZE"
+                echo "${APPIMG_CLR}Total DLs${CLR_CLEAR}:  $APPIMAGE_DOWNLOADS"
             fi
-            echo "$(tput bold)$(tput setaf 2)URL$(tput sgr0):  $WEBSITE"
-            echo "$(tput bold)$(tput setaf 2)Install dir$(tput sgr0): $BIN_PATH"
+            echo "${APPIMG_CLR}URL${CLR_CLEAR}:  $WEBSITE"
+            echo "${APPIMG_CLR}Install dir${CLR_CLEAR}: $BIN_PATH"
             echo
             rm -f "$CONFDIR"/appimginstalled/."$INSTIMG".yml
         else
@@ -170,18 +173,26 @@ appimglistfunc () {
 
 appimglistinstalledfunc () {
     for AppImage in $(dir -C -w 1 "$CONFDIR"/appimginstalled); do
-        echo "$(tput bold)$(tput setaf 2)$AppImage installed information$(tput sgr0):"
         . "$CONFDIR"/appimginstalled/"$AppImage"
-        echo "$(tput bold)$(tput setaf 2)Info$(tput sgr0):  $APPIMAGE_DESCRIPTION"
-        echo "$(tput bold)$(tput setaf 2)Version$(tput sgr0):  $APPIMAGE_VERSION"
         if [ ! -z "$APPIMAGE_GITHUB_TAG" ]; then
-            echo "$(tput bold)$(tput setaf 2)Tag$(tput sgr0):  $APPIMAGE_GITHUB_TAG"
-            echo "$(tput bold)$(tput setaf 2)Size$(tput sgr0):  $APPIMAGE_SIZE"
-            echo "$(tput bold)$(tput setaf 2)Total DLs$(tput sgr0):  $APPIMAGE_DOWNLOADS"
+            APPIMG_CLR="${CLR_LGREEN}"
+            echo "${APPIMG_CLR}$AppImage installed information${CLR_CLEAR}:"
+            APPIMAGE_GITHUB_TAG=""
+        else
+            APPIMG_CLR="${CLR_GREEN}"
+            echo "${APPIMG_CLR}$AppImage installed information${CLR_CLEAR}:"
+        fi
+        . "$CONFDIR"/appimginstalled/"$AppImage"
+        echo "${APPIMG_CLR}Info${CLR_CLEAR}:  $APPIMAGE_DESCRIPTION"
+        echo "${APPIMG_CLR}Version${CLR_CLEAR}:  $APPIMAGE_VERSION"
+        if [ ! -z "$APPIMAGE_GITHUB_TAG" ]; then
+            echo "${APPIMG_CLR}Tag${CLR_CLEAR}:  $APPIMAGE_GITHUB_TAG"
+            echo "${APPIMG_CLR}Size${CLR_CLEAR}:  $APPIMAGE_SIZE"
+            echo "${APPIMG_CLR}Total DLs${CLR_CLEAR}:  $APPIMAGE_DOWNLOADS"
             APPIMAGE_GITHUB_TAG=""
         fi
-        echo "$(tput bold)$(tput setaf 2)URL$(tput sgr0):  $WEBSITE"
-        echo "$(tput bold)$(tput setaf 2)Install dir$(tput sgr0): $BIN_PATH"
+        echo "${APPIMG_CLR}URL${CLR_CLEAR}:  $WEBSITE"
+        echo "${APPIMG_CLR}Install dir${CLR_CLEAR}: $BIN_PATH"
         echo
     done
 }
@@ -213,9 +224,9 @@ appimgvercheckfunc () { # Check version
         APPIMAGE_ERROR="FALSE"
     fi
     if [ -z "$APPIMAGE_NAME" ] && [ "$APPIMG_FORCE_UPGRADE" = "FALSE" ] ; then # If no new AppImage version was found, output an error
-        echo "$(tput setaf 1)Error checking $INSTIMG version!$(tput sgr0)"
-        echo "$(tput setaf 1)If this error continues to happen for $INSTIMG, the maintainer may have not built a new AppImage for the latest release.$(tput sgr0)"
-        echo "$(tput setaf 1)Check $GITHUB_APP_URL to see if a new AppImage is available for $INSTIMG.$(tput sgr0)"
+        echo "${CLR_RED}Error checking $INSTIMG version!${CLR_CLEAR}"
+        echo "${CLR_RED}If this error continues to happen for $INSTIMG, the maintainer may have not built a new AppImage for the latest release.${CLR_CLEAR}"
+        echo "${CLR_RED}Check $GITHUB_APP_URL to see if a new AppImage is available for $INSTIMG.${CLR_CLEAR}"
         APPIMG_NEW_UPGRADE="FALSE"
         APPIMAGE_ERROR="TRUE"
     fi
@@ -224,12 +235,12 @@ appimgvercheckfunc () { # Check version
 appimgupgradecheckallfunc () {
     for AppImage in $(dir -C -w 1 "$CONFDIR"/appimginstalled); do
         INSTIMG="$AppImage"
-        echo "Checking $(tput setaf 2)$AppImage$(tput sgr0) version..."
         appimgcheckfunc "$AppImage"
         appimginfofunc # Download web pages containing app info and set variables from them
+        echo "Checking ${APPIMG_CLR}$AppImage${CLR_CLEAR} version..."
         appimgvercheckfunc
         if [ "$APPIMG_NEW_UPGRADE" = "TRUE" ]; then # Mark AppImage for upgrade if appimgvercheckfunc outputs APPIMG_NEW_UPGRADE="TRUE"
-            echo "$(tput setaf 2)$(tput bold)New upgrade available for $AppImage -- $NEW_APPIMAGE_VERSION !$(tput sgr0)"
+            echo "${APPIMG_CLR}$(tput bold)New upgrade available for $AppImage -- $NEW_APPIMAGE_VERSION !${CLR_CLEAR}"
             appimgsaveinfofunc "appimgupgrades/$AppImage"
         fi
     done
@@ -237,23 +248,23 @@ appimgupgradecheckallfunc () {
 
 appimgupgradecheckfunc () {
     if [ ! -f "$CONFDIR"/appimginstalled/"$INSTIMG" ]; then
-        echo "$(tput setaf 1)$INSTIMG is not installed...$(tput sgr0)"
+        echo "${CLR_RED}$INSTIMG is not installed...${CLR_CLEAR}"
     else
         echo "Downloading AppImages.yml from spm github repo..." # Download existing list of AppImages from spm github repo
         rm -f "$CONFDIR"/AppImages.yml
         rm -f "$CONFDIR"/AppImages-*
-        wget --no-verbose "https://raw.githubusercontent.com/simoniz0r/spm-repo/master/AppImages.yml" -O "$CONFDIR"/AppImages.yml || { echo "$(tput setaf 1)wget failed; exiting...$(tput sgr0)"; rm -rf "$CONFDIR"/cache/*; exit 1; }
+        wget --no-verbose "https://raw.githubusercontent.com/simoniz0r/spm-repo/master/AppImages.yml" -O "$CONFDIR"/AppImages.yml || { echo "${CLR_RED}wget failed; exiting...${CLR_CLEAR}"; rm -rf "$CONFDIR"/cache/*; exit 1; }
         echo "AppImages.yml updated!"
-        echo "Checking $(tput setaf 2)$INSTIMG$(tput sgr0) version..."
         appimgcheckfunc "$INSTIMG" # Check whether AppImage is in lists and which list it is in
         appimginfofunc # Download web pages containing app info and set variables from them
+        echo "Checking ${APPIMG_CLR}$INSTIMG${CLR_CLEAR} version..."
         appimgvercheckfunc
         if [ "$APPIMG_NEW_UPGRADE" = "TRUE" ]; then # Mark AppImage for upgrade if appimgvercheckfunc outputs APPIMG_NEW_UPGRADE="TRUE"
-            echo "$(tput setaf 2)$(tput bold)New upgrade available for $INSTIMG -- $NEW_APPIMAGE_VERSION !$(tput sgr0)"
+            echo "${APPIMG_CLR}$(tput bold)New upgrade available for $INSTIMG -- $NEW_APPIMAGE_VERSION !${CLR_CLEAR}"
             appimgsaveinfofunc "appimgupgrades/$INSTIMG"
             # echo "$INSTIMG" >> "$CONFDIR"/upgrade-list.lst
         else
-            echo "No new upgrade for $(tput setaf 2)$INSTIMG$(tput sgr0)"
+            echo "No new upgrade for ${APPIMG_CLR}$INSTIMG${CLR_CLEAR}"
         fi
     fi
 }
@@ -272,7 +283,7 @@ appimgupdatelistfunc () { # Download AppImages.yml from github, and check versio
                 echo "Downloading AppImages.yml from spm github repo..." # Download existing list of AppImages from spm github repo
                 rm -f "$CONFDIR"/AppImages.yml
                 rm -f "$CONFDIR"/AppImages-*
-                wget --no-verbose "https://raw.githubusercontent.com/simoniz0r/spm-repo/master/AppImages.yml" -O "$CONFDIR"/AppImages.yml || { echo "$(tput setaf 1)wget failed; exiting...$(tput sgr0)"; rm -rf "$CONFDIR"/cache/*; exit 1; }
+                wget --no-verbose "https://raw.githubusercontent.com/simoniz0r/spm-repo/master/AppImages.yml" -O "$CONFDIR"/AppImages.yml || { echo "${CLR_RED}wget failed; exiting...${CLR_CLEAR}"; rm -rf "$CONFDIR"/cache/*; exit 1; }
                 echo "AppImages.yml updated!"
                 echo "Downloading new information from spm-repo..."
                 for appimg in $(dir -C -w 1 "$CONFDIR"/appimginstalled); do
@@ -280,7 +291,7 @@ appimgupdatelistfunc () { # Download AppImages.yml from github, and check versio
                     echo "https://github.com/simoniz0r/spm-repo/raw/$SPM_APPIMG_REPO_BRANCH/$appimg.yml" >> "$CONFDIR"/cache/appimg-yml-wget.list
                 done
                 cd "$CONFDIR"/cache
-                wget --no-verbose -i "$CONFDIR"/cache/appimg-yml-wget.list || { echo "$(tput setaf 1)wget failed!$(tput sgr0)"; rm -rf "$CONFDIR"/cache/*; exit 1; }
+                wget --no-verbose -i "$CONFDIR"/cache/appimg-yml-wget.list || { echo "${CLR_RED}wget failed!${CLR_CLEAR}"; rm -rf "$CONFDIR"/cache/*; exit 1; }
                 for ymlfile in $(dir -C -w 1 "$CONFDIR"/cache/*.yml); do
                     ymlfile="${ymlfile##*/}"
                     mv "$CONFDIR"/cache/"$ymlfile" "$CONFDIR"/appimginstalled/."$ymlfile"
@@ -297,34 +308,39 @@ appimgupdatelistfunc () { # Download AppImages.yml from github, and check versio
 appimgupdateforcefunc () {
     if [ -f "$CONFDIR"/appimginstalled/"$INSTIMG" ]; then # Show AppImage info if installed, exit if not
         . "$CONFDIR"/appimginstalled/"$INSTIMG"
-        echo "$(tput bold)$(tput setaf 2)Info$(tput sgr0):  $APPIMAGE_DESCRIPTION"
-        echo "$(tput bold)$(tput setaf 2)Version$(tput sgr0):  $APPIMAGE_VERSION"
         if [ ! -z "$APPIMAGE_GITHUB_TAG" ]; then
-            echo "$(tput bold)$(tput setaf 2)Tag$(tput sgr0):  $APPIMAGE_GITHUB_TAG"
-            echo "$(tput bold)$(tput setaf 2)Size$(tput sgr0):  $APPIMAGE_SIZE"
-            echo "$(tput bold)$(tput setaf 2)Total DLs$(tput sgr0):  $APPIMAGE_DOWNLOADS"
+            APPIMG_CLR="${CLR_LGREEN}"
+        else
+            APPIMG_CLR="${CLR_GREEN}"
         fi
-        echo "$(tput bold)$(tput setaf 2)URL$(tput sgr0):  $WEBSITE"
-        echo "$(tput bold)$(tput setaf 2)Install dir$(tput sgr0): $BIN_PATH"
+        echo "${APPIMG_CLR}Info${CLR_CLEAR}:  $APPIMAGE_DESCRIPTION"
+        echo "${APPIMG_CLR}Version${CLR_CLEAR}:  $APPIMAGE_VERSION"
+        if [ ! -z "$APPIMAGE_GITHUB_TAG" ]; then
+            echo "${APPIMG_CLR}Tag${CLR_CLEAR}:  $APPIMAGE_GITHUB_TAG"
+            echo "${APPIMG_CLR}Size${CLR_CLEAR}:  $APPIMAGE_SIZE"
+            echo "${APPIMG_CLR}Total DLs${CLR_CLEAR}:  $APPIMAGE_DOWNLOADS"
+        fi
+        echo "${APPIMG_CLR}URL${CLR_CLEAR}:  $WEBSITE"
+        echo "${APPIMG_CLR}Install dir${CLR_CLEAR}: $BIN_PATH"
         echo
     else
-        echo "$(tput setaf 1)AppImage not found!$(tput sgr0)"
+        echo "${CLR_RED}AppImage not found!${CLR_CLEAR}"
         rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
         exit 1
     fi
-    echo "Marking $(tput setaf 2)$INSTIMG$(tput sgr0) for upgrade by force..."
+    echo "Marking ${APPIMG_CLR}$INSTIMG${CLR_CLEAR} for upgrade by force..."
     . "$CONFDIR"/appimginstalled/"$INSTIMG"
     APPIMAGE_NAME="$APPIMAGE"
     NEW_APPIMAGE_VERSION="$APPIMAGE_VERSION"
     GITHUB_APP_URL="$WEBSITE"
-    echo "$(tput setaf 2)New upgrade available for $INSTIMG!$(tput sgr0)"
+    echo "${APPIMG_CLR}New upgrade available for $INSTIMG!${CLR_CLEAR}"
     appimgsaveinfofunc "appimgupgrades/$INSTIMG"
 }
 
 appimgdlfunc () { # wget latest url from direct website or github repo and wget it
     if [ "$DIRECT_IMG" = "TRUE" ]; then # If AppImage is DIRECT, use method below to download it
         cd "$CONFDIR"/cache
-        wget --read-timeout=30 "$DIRECT_APPIMAGE_URL" -O "$CONFDIR"/cache/"$APPIMAGE_NAME" || { echo "$(tput setaf 1)wget $DIRECT_APPIMAGE_URL failed; exiting...$(tput sgr0)"; rm -rf "$CONFDIR"/cache/*; exit 1; }
+        wget --read-timeout=30 "$DIRECT_APPIMAGE_URL" -O "$CONFDIR"/cache/"$APPIMAGE_NAME" || { echo "${CLR_RED}wget $DIRECT_APPIMAGE_URL failed; exiting...${CLR_CLEAR}"; rm -rf "$CONFDIR"/cache/*; exit 1; }
         if [ -z "$APPIMAGE_NAME" ]; then
             APPIMAGE_NAME="$(dir -C -w 1 "$CONFDIR"/cache/ | grep -iw '.*AppImage')"
         fi
@@ -334,38 +350,38 @@ appimgdlfunc () { # wget latest url from direct website or github repo and wget 
         NEW_APPIMAGE_VERSION="$APPIMAGE_NAME"
         mv "$CONFDIR"/cache/"$APPIMAGE_NAME" "$CONFDIR"/cache/"$INSTIMG"
     elif [ "$GITHUB_IMG" = "TRUE" ]; then # If AppImage is from github, use method below to download it
-        wget --read-timeout=30 "$GITHUB_APPIMAGE_URL" -O "$CONFDIR"/cache/"$INSTIMG" || { echo "$(tput setaf 1)wget $GITHUB_APPIMAGE_URL failed; exiting...$(tput sgr0)"; rm -rf "$CONFDIR"/cache/*; exit 1; }
+        wget --read-timeout=30 "$GITHUB_APPIMAGE_URL" -O "$CONFDIR"/cache/"$INSTIMG" || { echo "${CLR_RED}wget $GITHUB_APPIMAGE_URL failed; exiting...${CLR_CLEAR}"; rm -rf "$CONFDIR"/cache/*; exit 1; }
     fi
 }
 
 appimginstallfunc () { # chmod and mv AppImages to /usr/local/bin and create file containing install info in "$CONFDIR"/appimginstalled
     chmod a+x "$CONFDIR"/cache/"$INSTIMG" # Make AppImage executable
-    echo "Moving $(tput setaf 2)$INSTIMG$(tput sgr0) to /usr/local/bin/$INSTIMG ..."
+    echo "Moving ${APPIMG_CLR}$INSTIMG${CLR_CLEAR} to /usr/local/bin/$INSTIMG ..."
     sudo mv "$CONFDIR"/cache/"$INSTIMG" /usr/local/bin/"$INSTIMG" || { echo "Failed!"; rm -rf "$CONFDIR"/cache/*; exit 1; } # Move AppImage to /usr/local/bin
     appimgsaveinfofunc "appimginstalled/$INSTIMG"
-    echo "$(tput setaf 2)$APPIMAGE_NAME$(tput sgr0) has been installed to /usr/local/bin/$INSTIMG !"
+    echo "${APPIMG_CLR}$APPIMAGE_NAME${CLR_CLEAR} has been installed to /usr/local/bin/$INSTIMG !"
 }
 
 appimginstallstartfunc () {
     if [ -f "$CONFDIR"/tarinstalled/"$INSTIMG" ] || [ -f "$CONFDIR"/appimginstalled/"$INSTIMG" ]; then # Exit if already installed by spm
-        echo "$(tput setaf 1)$INSTIMG is already installed."
-        echo "Use 'spm update' to check for a new version of $INSTIMG.$(tput sgr0)"
+        echo "${CLR_RED}$INSTIMG is already installed."
+        echo "Use 'spm update' to check for a new version of $INSTIMG.${CLR_CLEAR}"
         rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
         exit 1
     fi
     if type >/dev/null 2>&1 "$INSTIMG" && [ "$INSTIMG" != "spm" ]; then # If a command by the same name as AppImage already exists on user's system, exit
-        echo "$(tput setaf 1)$INSTIMG is already installed and not managed by spm; exiting...$(tput sgr0)"
+        echo "${CLR_RED}$INSTIMG is already installed and not managed by spm; exiting...${CLR_CLEAR}"
         rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
         exit 1
     fi
     if [ -f "/usr/local/bin/$INSTIMG" ]; then # If for some reason type does't pick up same file existing as AppImage name in /usr/local/bin, exit
-        echo "$(tput setaf 1)/usr/local/bin/$INSTIMG exists; exiting...$(tput sgr0)"
+        echo "${CLR_RED}/usr/local/bin/$INSTIMG exists; exiting...${CLR_CLEAR}"
         rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
         exit 1
     fi
     appimgcheckfunc "$INSTIMG" # Check whether AppImage is in lists and which list it is in
     if [ "$DIRECT_IMG" = "FALSE" ] && [ "$GITHUB_IMG" = "FALSE" ];then # If AppImage not in either list, exit
-        echo "$(tput setaf 1)$INSTIMG is not in AppImages.yml; try running 'spm update'.$(tput sgr0)"
+        echo "${CLR_RED}$INSTIMG is not in AppImages.yml; try running 'spm update'.${CLR_CLEAR}"
         rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
         exit 1
     fi
@@ -376,11 +392,11 @@ appimginstallstartfunc () {
         exit 1
     fi
     echo "AppImage: $APPIMAGE_NAME"
-    echo "AppImage for $(tput setaf 2)$INSTIMG$(tput sgr0) will be installed." # Ask user if sure they want to install AppImage
+    echo "AppImage for ${APPIMG_CLR}$INSTIMG${CLR_CLEAR} will be installed." # Ask user if sure they want to install AppImage
     read -p "Continue? Y/N " INSTANSWER
     case $INSTANSWER in
         N*|n*) # If answer is no, exit
-            echo "$(tput setaf 1)$INSTIMG was not installed.$(tput sgr0)"
+            echo "${CLR_RED}$INSTIMG was not installed.${CLR_CLEAR}"
             rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
             exit 0
             ;;
@@ -388,13 +404,13 @@ appimginstallstartfunc () {
 }
 
 appimgupgradefunc () { # rm old AppImage, chmod, and mv new AppImage to /usr/local/bin
-    echo "Removing previous $(tput setaf 2)$INSTIMG$(tput sgr0) version..."
+    echo "Removing previous ${APPIMG_CLR}$INSTIMG${CLR_CLEAR} version..."
     sudo rm /usr/local/bin/"$INSTIMG" # Remove old AppImage before upgrading
     chmod a+x "$CONFDIR"/cache/"$INSTIMG" # Make new AppImage executable
-    echo "Moving $(tput setaf 2)$INSTIMG$(tput sgr0) to /usr/local/bin/$INSTIMG ..." || { echo "$(tput setaf 1)Failed!$(tput sgr0)"; rm -rf "$CONFDIR"/cache/*; exit 1; }
+    echo "Moving ${APPIMG_CLR}$INSTIMG${CLR_CLEAR} to /usr/local/bin/$INSTIMG ..." || { echo "${CLR_RED}Failed!${CLR_CLEAR}"; rm -rf "$CONFDIR"/cache/*; exit 1; }
     sudo mv "$CONFDIR"/cache/"$INSTIMG" /usr/local/bin/"$INSTIMG" # Move new AppImage to /usr/local/bin
     appimgsaveinfofunc "appimginstalled/$INSTIMG"
-    echo "$(tput setaf 2)$INSTIMG$(tput sgr0) has been upgraded to version $APPIMAGE_VERSION !"
+    echo "${APPIMG_CLR}$INSTIMG${CLR_CLEAR} has been upgraded to version $APPIMAGE_VERSION !"
 }
 
 appimgupgradestartallfunc () {
@@ -402,11 +418,11 @@ appimgupgradestartallfunc () {
         sleep 0
     else
         if [ "$(dir "$CONFDIR"/appimgupgrades | wc -l)" = "1" ]; then
-            echo "$(tput setaf 2)$(dir -C -w 1 "$CONFDIR"/appimgupgrades | wc -l) new AppImage upgrade available.$(tput sgr0)"
+            echo "${APPIMG_CLR}$(dir -C -w 1 "$CONFDIR"/appimgupgrades | wc -l) new AppImage upgrade available.${CLR_CLEAR}"
         elif [ "$(dir "$CONFDIR"/appimgupgrades | wc -l)" = "0" ]; then
             echo "No new AppImage upgrades."
         else
-            echo "$(tput setaf 2)$(dir -C -w 1 "$CONFDIR"/appimgupgrades | wc -l) new AppImage upgrades available.$(tput sgr0)"
+            echo "${APPIMG_CLR}$(dir -C -w 1 "$CONFDIR"/appimgupgrades | wc -l) new AppImage upgrades available.${CLR_CLEAR}"
         fi
         dir -C -w 1 "$CONFDIR"/appimgupgrades | pr -tTw 125 -3 # Ouput AppImages available for upgrades
         echo
@@ -415,9 +431,9 @@ appimgupgradestartallfunc () {
             Y*|y*) # Do upgrade functions if yes
                 for UPGRADE_IMG in $(dir -C -w 1 "$CONFDIR"/appimgupgrades); do
                     INSTIMG="$UPGRADE_IMG"
-                    echo "Downloading $(tput setaf 2)$INSTIMG$(tput sgr0)..."
                     appimgcheckfunc "$INSTIMG" # Check whether AppImage is in lists and which list it is in
                     appimginfofunc
+                    echo "Downloading ${APPIMG_CLR}$INSTIMG${CLR_CLEAR}..."
                     appimgdlfunc "$INSTIMG" # Download AppImage from Direct or Github
                     appimgupgradefunc # Run upgrade function for AppImage
                     rm "$CONFDIR"/appimgupgrades/"$INSTIMG"
@@ -425,7 +441,7 @@ appimgupgradestartallfunc () {
                 done
                 ;;
             N*|n*) # Exit if no
-                echo "$(tput setaf 1)No AppImages were upgraded; exiting...$(tput sgr0)"
+                echo "${CLR_RED}No AppImages were upgraded; exiting...${CLR_CLEAR}"
                 rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
                 exit 0
                 ;;
@@ -434,7 +450,7 @@ appimgupgradestartallfunc () {
 }
 
 appimgupgradestartfunc () {
-    echo "$(tput setaf 2)$INSTIMG$(tput sgr0) will be upgraded to the latest version." # Ask user if sure about upgrade
+    echo "${APPIMG_CLR}$INSTIMG${CLR_CLEAR} will be upgraded to the latest version." # Ask user if sure about upgrade
     read -p "Continue? Y/N " UPGRADEANSWER
     case $UPGRADEANSWER in
         Y*|y*) # Do upgrade functions if yes
@@ -447,7 +463,7 @@ appimgupgradestartfunc () {
             exit 0
             ;;
         N*|n*) # Exit if no
-            echo "$(tput setaf 1)$INSTIMG was not upgraded.$(tput sgr0)"
+            echo "${CLR_RED}$INSTIMG was not upgraded.${CLR_CLEAR}"
             rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
             exit 0
             ;;
@@ -456,11 +472,16 @@ appimgupgradestartfunc () {
 
 appimgremovefunc () { # rm AppImage in /usr/local/bin and remove install info file
     . "$CONFDIR"/appimginstalled/"$REMIMG"
-    echo "Removing $(tput setaf 2)$REMIMG$(tput sgr0)..." # Ask user if sure they want to remove AppImage
+    if [ ! -z "$APPIMAGE_GITHUB_TAG" ]; then
+        APPIMG_CLR="${CLR_LGREEN}"
+    else
+        APPIMG_CLR="${CLR_GREEN}"
+    fi
+    echo "Removing ${APPIMG_CLR}$REMIMG${CLR_CLEAR}..." # Ask user if sure they want to remove AppImage
     read -p "Continue? Y/N " IMGREMANSWER
     case $IMGREMANSWER in
         N*|n*) # If user answers no, exit
-            echo "$(tput setaf 1)$REMIMG was not removed.$(tput sgr0)"
+            echo "${CLR_RED}$REMIMG was not removed.${CLR_CLEAR}"
             rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
             exit 0
             ;;
@@ -472,5 +493,5 @@ appimgremovefunc () { # rm AppImage in /usr/local/bin and remove install info fi
     sudo rm /usr/local/bin/"$REMIMG" || { echo "Failed!"; rm -rf "$CONFDIR"/cache/*; exit 1; } # Remove AppImage from /usr/local/bin
     rm "$CONFDIR"/appimginstalled/"$REMIMG" # Remove installed info file for AppImage
     rm "$CONFDIR"/appimginstalled/."$REMIMG".yml # Remove installed info file for AppImage
-    echo "$(tput setaf 2)$REMIMG$(tput sgr0) has been removed!"
+    echo "${APPIMG_CLR}$REMIMG${CLR_CLEAR} has been removed!"
 }
