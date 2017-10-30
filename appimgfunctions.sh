@@ -134,8 +134,14 @@ appimginfofunc () { # Set variables and temporarily store pages in "$CONFDIR"/ca
 
 appimglistfunc () {
     if [ -f "$CONFDIR"/appimginstalled/"$INSTIMG" ]; then # If installed, list installed info
-        echo "${APPIMG_CLR}$INSTIMG AppImage installed information${CLR_CLEAR}:"
         . "$CONFDIR"/appimginstalled/"$INSTIMG"
+        if [ ! -z "$APPIMAGE_GITHUB_TAG" ]; then
+            APPIMG_CLR="${CLR_LGREEN}"
+            echo "${APPIMG_CLR}$INSTIMG installed information${CLR_CLEAR}:"
+        else
+            APPIMG_CLR="${CLR_GREEN}"
+            echo "${APPIMG_CLR}$INSTIMG installed information${CLR_CLEAR}:"
+        fi
         echo "${APPIMG_CLR}Info${CLR_CLEAR}:  $APPIMAGE_DESCRIPTION"
         echo "${APPIMG_CLR}Version${CLR_CLEAR}:  $APPIMAGE_VERSION"
         if [ ! -z "$APPIMAGE_GITHUB_TAG" ]; then
