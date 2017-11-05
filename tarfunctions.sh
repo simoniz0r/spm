@@ -479,6 +479,7 @@ tarinstallstartfunc () { # Check to make sure another command by the same name i
 }
 
 tarupgradefunc () { # Move new extracted tar from $CONFDIR/cache to /opt/PackageName and save new config file for it
+    echo
     ssft_select_single "Would you like to do a clean upgrade (remove all files in /opt/$TARPKG before installing) or an overwrite upgrade?" "Note: If you are using Discord with client modifications, it is recommended that you do a clean upgrade. Choice?" "Clean" "Overwrite"
     case $SSFT_RESULT in
         Clean|clean)
@@ -559,7 +560,7 @@ tarupgradestartallfunc () { # Run upgrades on all available tar packages
 }
 
 tarupgradestartfunc () { # Run upgrade on specified tar package
-    ssft_select_single "${TAR_CLR}$TARPKG${CLR_CLEAR} upgrade" "$INSTIMG will be upgraded to the latest version. Continue?" "Upgrade $TARPKG" "Exit"
+    ssft_select_single "${TAR_CLR}$TARPKG${CLR_CLEAR} upgrade" "$TARPKG will be upgraded to the latest version. Continue?" "Upgrade $TARPKG" "Exit"
     case $SSFT_RESULT in
         Upgrade*|Y*|y*)
             tarappcheckfunc "$TARPKG"
