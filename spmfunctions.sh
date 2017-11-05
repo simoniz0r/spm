@@ -313,12 +313,10 @@ upgradestartfunc () { # Run relevant upgrade argument based on packages marked f
         rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
         exit 0
     elif [ "$TARUPGRADES" = "TRUE" ] || [ "$APPIMGUPGRADES" = "TRUE" ]; then # If user specifies package, upgrade that package
-        if [ "$APPIMGUPGRADES" = "TRUE" ]; then
+        if [ "$APPIMGUPGRADES" = "TRUE" ] && [ -f "$CONFDIR/appimginstalled/$1" ]; then
             INSTIMG="$1"
             appimgupgradestartfunc # Upgrade specified AppImage if available
-        fi
-        echo
-        if [ "$TARUPGRADES" = "TRUE" ]; then
+        elif [ "$TARUPGRADES" = "TRUE" ] && [ -f "$CONFDIR/tarinstalled/$1" ]; then
             TARPKG="$1"
             tarupgradestartfunc # Upgrade specified tar package if available
         fi
