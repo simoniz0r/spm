@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.5.9"
+X="0.6.0"
 # Set spm version
 TAR_LIST="$(cat "$CONFDIR"/tar-pkgs.yml | cut -f1 -d":")"
 TAR_SIZE="N/A"
@@ -43,9 +43,9 @@ tarsaveconffunc () { # Saves file containing tar package info in specified direc
 
 targithubinfofunc () { # Gets updated_at, tar url, and description for specified package for use with listing, installing, and upgrading
     if [ -z "$GITHUB_TOKEN" ]; then
-        wget --quiet "$TAR_API_URI" -O "$CONFDIR"/cache/"$TARPKG"-release || { echo "${CLR_RED}wget $TAR_API_URI failed; has the repo been renamed or deleted?${CLR_CLEAR}"; rm -rf "$CONFDIR"/cache/*; exit 1; }
+        wget --quiet "$TAR_API_URI" -O "$CONFDIR"/cache/"$TARPKG"-release || { ssft_display_error "${CLR_RED}Error" "wget $TAR_API_URI failed; has the repo been renamed or deleted?${CLR_CLEAR}"; rm -rf "$CONFDIR"/cache/*; exit 1; }
     else
-        wget --quiet --auth-no-challenge --header="Authorization: token "$GITHUB_TOKEN"" "$TAR_API_URI" -O "$CONFDIR"/cache/"$TARPKG"-release || { echo "${CLR_RED}wget $TAR_API_URI failed; is your token valid?${CLR_CLEAR}"; rm -rf "$CONFDIR"/cache/*; exit 1; }
+        wget --quiet --auth-no-challenge --header="Authorization: token "$GITHUB_TOKEN"" "$TAR_API_URI" -O "$CONFDIR"/cache/"$TARPKG"-release || { ssft_display_error "${CLR_RED}Error" "wget $TAR_API_URI failed; is your token valid?${CLR_CLEAR}"; rm -rf "$CONFDIR"/cache/*; exit 1; }
     fi
     JQARG=".[].assets[] | select(.name | contains(\".tar\")) | select(.name | contains(\"$TARPKG_NAME\")) | select(.name | contains(\"darwin\") | not) | select(.name | contains(\"macos\") | not) | select(.name | contains(\"ia32\") | not) | select(.name | contains(\"x32\") | not) | select(.name | contains(\"i386\") | not) | select(.name | contains(\"i686\") | not) | { name: .name, updated: .updated_at, url: .browser_download_url, size: .size, numdls: .download_count}"
     cat "$CONFDIR"/cache/"$TARPKG"-release | "$RUNNING_DIR"/jq --raw-output "$JQARG" | sed 's%{%data:%g' | tr -d '",}' > "$CONFDIR"/cache/"$TARPKG"release
@@ -67,7 +67,7 @@ targithubinfofunc () { # Gets updated_at, tar url, and description for specified
     tarsaveconffunc "cache/$TARPKG.conf"
     . "$CONFDIR"/cache/"$TARPKG".conf
     if [ -z "$NEW_TARFILE" ]; then
-        echo "${CLR_RED}Error finding latest tar for $TARPKG!${CLR_CLEAR}"
+        ssft_display_error "${CLR_RED}Error" "Error finding latest tar for $TARPKG!${CLR_CLEAR}"
         GITHUB_DOWNLOAD_ERROR="TRUE"
     fi
 }
@@ -227,10 +227,10 @@ tardlfunc () { # Download tar from specified source.  If not from github, use --
     cd "$CONFDIR"/cache
     case $TAR_DOWNLOAD_SOURCE in
         GITHUB)
-            wget --read-timeout=30 "$TAR_GITHUB_NEW_DOWNLOAD" || { echo "${CLR_RED}wget $TARURI_DL failed; exiting...${CLR_CLEAR}"; rm -rf "$CONFDIR"/cache/*; exit 1; }
+            wget --read-timeout=30 "$TAR_GITHUB_NEW_DOWNLOAD" || { ssft_display_error "${CLR_RED}Error" "wget $TARURI_DL failed; exiting...${CLR_CLEAR}"; rm -rf "$CONFDIR"/cache/*; exit 1; }
             ;;
         DIRECT)
-            wget --read-timeout=30 --trust-server-names "$TARURI" || { echo "${CLR_RED}wget $TARURI failed; exiting...${CLR_CLEAR}"; rm -rf "$CONFDIR"/cache/*; exit 1; }
+            wget --read-timeout=30 --trust-server-names "$TARURI" || { ssft_display_error "${CLR_RED}Error" "wget $TARURI failed; exiting...${CLR_CLEAR}"; rm -rf "$CONFDIR"/cache/*; exit 1; }
             ;;
     esac
     TARFILE="$(dir "$CONFDIR"/cache/*.tar*)"
@@ -242,10 +242,10 @@ tarcheckfunc () { # Check to make sure downloaded file is a tar and run relevant
     mkdir "$CONFDIR"/cache/pkg
     case $TARFILE in
         *tar.gz|*tar.bz2|*tar.tbz|*tar.tb2|*tar|*tar.xz)
-            tar -xvf "$CONFDIR"/cache/"$TARFILE" -C "$CONFDIR"/cache/pkg || { echo "${CLR_RED}tar $TARFILE failed; exiting...${CLR_CLEAR}"; rm -rf "$CONFDIR"/cache/*; exit 1; }
+            tar -xvf "$CONFDIR"/cache/"$TARFILE" -C "$CONFDIR"/cache/pkg || { ssft_display_error "${CLR_RED}Error" "tar $TARFILE failed; exiting...${CLR_CLEAR}"; rm -rf "$CONFDIR"/cache/*; exit 1; }
             ;;
         *)
-            echo "${CLR_RED}Unknown file type!${CLR_CLEAR}"
+            ssft_display_error "${CLR_RED}Error" "Unknown file type!${CLR_CLEAR}"
             rm -rf "$CONFDIR"/cache/*
             exit 1
             ;;
@@ -281,7 +281,7 @@ checktarversionfunc () { # Use info from githubinfo function or using wget -S --
         fi
     fi
     if [ -z "$NEW_TARFILE" ] && [ -z "$NEW_COMMIT" ] && [ "$TAR_FORCE_UPGRADE" = "FALSE" ]; then
-        echo "${CLR_RED}Error checking new version for $TARPKG!${CLR_CLEAR}"
+        ssft_display_error "${CLR_RED}Error" "Error checking new version for $TARPKG!${CLR_CLEAR}"
         TAR_NEW_UPGRADE="FALSE"
     fi
 }
@@ -313,7 +313,7 @@ tarupdateforcefunc () { # Mark specified tar package for upgrade without checkin
         echo "${TAR_CLR}Bin path${CLR_CLEAR}:  $BIN_PATH"
         echo
     else
-        echo "${CLR_RED}Package not found!${CLR_CLEAR}"
+        ssft_display_error "${CLR_RED}Error" "Package not found!${CLR_CLEAR}"
         rm -rf "$CONFDIR"/cache/*
         exit 1
     fi    
@@ -342,7 +342,7 @@ tarupgradecheckallfunc () { # Run a for loop to check all installed tar packages
 tarupgradecheckfunc () { # Check specified tar package for upgrade
     case $("$RUNNING_DIR"/yaml r "$CONFDIR"/tar-pkgs.yml "$TARPKG") in
         null)
-            echo "${CLR_RED}$1 is not in tar-pkgs.yml; try running 'spm update'.${CLR_CLEAR}"
+            ssft_display_error "${CLR_RED}Error" "$1 is not in tar-pkgs.yml; try running 'spm update'.${CLR_CLEAR}"
             ;;
         *)
             echo "Downloading tar-pkgs.yml from spm github repo..."
@@ -382,7 +382,7 @@ tarupdatelistfunc () { # Download tar-pkgs.yml from github repo and run relevant
                     echo "https://github.com/simoniz0r/spm-repo/raw/$SPM_TAR_REPO_BRANCH/$tarpkg.yml" >> "$CONFDIR"/cache/tar-yml-wget.list
                 done
                 cd "$CONFDIR"/cache
-                wget --no-verbose -i "$CONFDIR"/cache/tar-yml-wget.list || { echo "${CLR_RED}wget failed!${CLR_CLEAR}"; rm -rf "$CONFDIR"/cache/*; exit 1; }
+                wget --no-verbose -i "$CONFDIR"/cache/tar-yml-wget.list || { ssft_display_error "${CLR_RED}Error" "wget failed!${CLR_CLEAR}"; rm -rf "$CONFDIR"/cache/*; exit 1; }
                 for ymlfile in $(dir -C -w 1 "$CONFDIR"/cache/*.yml); do
                     ymlfile="${ymlfile##*/}"
                     mv "$CONFDIR"/cache/"$ymlfile" "$CONFDIR"/tarinstalled/."$ymlfile"
@@ -447,33 +447,30 @@ tarinstallfunc () { # Move extracted tar from $CONFDIR/cache to /opt/PackageName
 
 tarinstallstartfunc () { # Check to make sure another command by the same name is not on the system, tar package is in tar-pkgs.list, and tar package is not already installed
     if [ -f "$CONFDIR"/tarinstalled/"$TARPKG" ] || [ -f "$CONFDIR"/appimginstalled/"$TARPKG" ]; then # Exit if already installed by spm
-        echo "${CLR_RED}$TARPKG is already installed."
-        echo "Use 'spm upgrade' to install the latest version of $TARPKG.${CLR_CLEAR}"
+        ssft_display_error "${CLR_RED}Error" "$TARPKG is already installed. Use 'spm upgrade' to install the latest version of $TARPKG.${CLR_CLEAR}"
         rm -rf "$CONFDIR"/cache/*
         exit 1
     fi
     if type >/dev/null 2>&1 "$TARPKG"; then
-        echo "${CLR_RED}$TARPKG is already installed and not managed by spm; exiting...${CLR_CLEAR}"
+        ssft_display_error "${CLR_RED}Error" "$TARPKG is already installed and not managed by spm; exiting...${CLR_CLEAR}"
         rm -rf "$CONFDIR"/cache/*
         exit 1
     fi
     if [ -d "/opt/$TARPKG" ]; then
-        echo "${CLR_RED}/opt/$TARPKG exists; spm cannot install to existing directories!${CLR_CLEAR}"
+        ssft_display_error "${CLR_RED}Error" "/opt/$TARPKG exists; spm cannot install to existing directories!${CLR_CLEAR}"
         rm -rf "$CONFDIR"/cache/*
         exit 1
     fi
     tarappcheckfunc "$TARPKG"
     if [ "$KNOWN_TAR" = "FALSE" ];then
-        echo "${CLR_RED}$TARPKG is not in tar-pkgs.yml; try running 'spm update' to update tar-pkgs.yml${CLR_CLEAR}."
+        ssft_display_error "${CLR_RED}Error" "$TARPKG is not in tar-pkgs.yml; try running 'spm update' to update tar-pkgs.yml${CLR_CLEAR}."
         rm -rf "$CONFDIR"/cache/*
         exit 1
     else
-        echo "tar package: $TARFILE"
-        echo "${TAR_CLR}$TARPKG${CLR_CLEAR} will be installed."
-        read -p "Continue? Y/N " INSTANSWER
-        case $INSTANSWER in
-            N*|n*)
-                echo "${CLR_RED}$TARPKG was not installed.${CLR_CLEAR}"
+        ssft_select_single "${TAR_CLR}$TARPKG${CLR_CLEAR} tar package: $TARFILE" "$TARPKG will be installed. Continue?" "Install $TARPKG" "Exit"
+        case $SSFT_RESULT in
+            Exit|N*|n*)
+                ssft_display_error "${CLR_RED}Error" "$TARPKG was not installed.${CLR_CLEAR}"
                 rm -rf "$CONFDIR"/cache/*
                 exit 0
                 ;;
@@ -482,10 +479,8 @@ tarinstallstartfunc () { # Check to make sure another command by the same name i
 }
 
 tarupgradefunc () { # Move new extracted tar from $CONFDIR/cache to /opt/PackageName and save new config file for it
-    echo "Would you like to do a clean upgrade (remove all files in /opt/$TARPKG before installing) or an overwrite upgrade?"
-    echo "Note: If you are using Discord with client modifications, it is recommended that you do a clean upgrade."
-    read -p "Choice? Clean/Overwrite " PKGUPGDMETHODANSWER
-    case $PKGUPGDMETHODANSWER in
+    ssft_select_single "Would you like to do a clean upgrade (remove all files in /opt/$TARPKG before installing) or an overwrite upgrade?" "Note: If you are using Discord with client modifications, it is recommended that you do a clean upgrade. Choice?" "Clean" "Overwrite"
+    case $SSFT_RESULT in
         Clean|clean)
             echo "${TAR_CLR}$TARPKG${CLR_CLEAR} will be upgraded to $TARFILE."
             echo "Removing files in $INSTDIR..."
@@ -501,7 +496,7 @@ tarupgradefunc () { # Move new extracted tar from $CONFDIR/cache to /opt/Package
             sudo cp -r "$EXTRACTED_DIR_NAME"/* "$INSTDIR"/ || { echo "Failed!"; rm -rf "$CONFDIR"/cache/*; exit 1; }
             ;;
         *)
-            echo "${CLR_RED}Invalid choice; ${CLR_RED}$TARPKG was not upgraded.${CLR_CLEAR}"
+            ssft_display_error "${CLR_RED}Error" "Invalid choice; ${CLR_RED}$TARPKG was not upgraded.${CLR_CLEAR}"
             rm -rf "$CONFDIR"/cache/*
             exit 1
             ;;
@@ -536,9 +531,9 @@ tarupgradestartallfunc () { # Run upgrades on all available tar packages
         fi
         dir -C -w 1 "$CONFDIR"/tarupgrades | pr -tT --column=3 -w 125
         echo
-        read -p "Continue? Y/N " UPGRADEALLANSWER
-        case $UPGRADEALLANSWER in
-            Y*|y*)
+        ssft_select_single "Upgrade all" "Start upgrade?" "Start upgrade" "Exit"
+        case $SSFT_RESULT in
+            Start*|Y*|y*)
                 for UPGRADE_PKG in $(dir -C -w 1 "$CONFDIR"/tarupgrades); do
                     TARPKG="$UPGRADE_PKG"
                     echo "Downloading ${TAR_CLR}$TARPKG${CLR_CLEAR}..."
@@ -554,8 +549,8 @@ tarupgradestartallfunc () { # Run upgrades on all available tar packages
                     echo
                 done
                 ;;
-            N*|n*)
-                echo "${CLR_RED}No packages were upgraded; exiting...${CLR_CLEAR}"
+            Exit|N*|n*)
+                ssft_display_error "${CLR_RED}Error" "No packages were upgraded; exiting...${CLR_CLEAR}"
                 rm -rf "$CONFDIR"/cache/*
                 exit 0
                 ;;
@@ -564,10 +559,9 @@ tarupgradestartallfunc () { # Run upgrades on all available tar packages
 }
 
 tarupgradestartfunc () { # Run upgrade on specified tar package
-    echo "${TAR_CLR}$TARPKG${CLR_CLEAR} will be upgraded to the latest version."
-    read -p "Continue? Y/N " UPGRADEANSWER
-    case $UPGRADEANSWER in
-        Y*|y*)
+    ssft_select_single "${TAR_CLR}$TARPKG${CLR_CLEAR} upgrade" "$INSTIMG will be upgraded to the latest version. Continue?" "Upgrade $TARPKG" "Exit"
+    case $SSFT_RESULT in
+        Upgrade*|Y*|y*)
             tarappcheckfunc "$TARPKG"
             if [ "$TAR_DOWNLOAD_SOURCE" = "GITHUB" ]; then
                 targithubinfofunc
@@ -577,20 +571,18 @@ tarupgradestartfunc () { # Run upgrade on specified tar package
             tarupgradefunc
             rm "$CONFDIR"/tarupgrades/"$TARPKG"
             ;;
-        N*|n*)
-            echo "${CLR_RED}$TARPKG was not upgraded.${CLR_CLEAR}"
+        Exit|N*|n*)
+            ssft_display_error "${CLR_RED}Error" "$TARPKG was not upgraded.${CLR_CLEAR}"
             ;;
     esac
 }
 
 tarremovefunc () { # Remove tar package, .desktop and bin files, and remove config file spm used to keep track of it
     . "$CONFDIR"/tarinstalled/"$REMPKG"
-    echo "Removing ${TAR_CLR}$REMPKG${CLR_CLEAR}..."
-    echo "All files in $INSTDIR will be removed!"
-    read -p "Continue? Y/N " PKGREMANSWER
-    case $PKGREMANSWER in
-        N*|n*)
-            echo "${CLR_RED}$REMPKG was not removed.${CLR_CLEAR}"
+    ssft_select_single "Removing ${TAR_CLR}$REMPKG${CLR_CLEAR}..." "All files in $INSTDIR will be removed! Continue?" "Remove $REMPKG" "Exit"
+    case $SSFT_RESULT in
+        Exit|N*|n*)
+            ssft_display_error "${CLR_RED}Error" "$REMPKG was not removed.${CLR_CLEAR}"
             rm -rf "$CONFDIR"/cache/*
             exit 0
             ;;
@@ -620,12 +612,10 @@ tarremovefunc () { # Remove tar package, .desktop and bin files, and remove conf
 
 tarremovepurgefunc () { # Remove tar package, .desktop and bin files, package's config dir if listed in tar-pkgs.yml, and remove config file spm used to keep track of it
     . "$CONFDIR"/tarinstalled/"$PURGEPKG"
-    echo "Removing ${TAR_CLR}$PURGEPKG${CLR_CLEAR}..."
-    echo "All files in $INSTDIR and $CONFIG_PATH will be removed!"
-    read -p "Continue? Y/N " PKGREMANSWER
-    case $PKGREMANSWER in
-        N*|n*)
-            echo "${CLR_RED}$PURGE was not removed.${CLR_CLEAR}"
+    ssft_select_single "Removing ${TAR_CLR}$PURGEPKG${CLR_CLEAR}..." "All files in $INSTDIR and $CONFIG_PATH will be removed! Continue?" "Remove $PURGEPKG" "Exit"
+    case $SSFT_RESULT in
+        Exit|N*|n*)
+            ssft_display_error "${CLR_RED}Error" "$PURGE was not removed.${CLR_CLEAR}"
             rm -rf "$CONFDIR"/cache/*
             exit 0
             ;;

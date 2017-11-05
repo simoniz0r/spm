@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.5.9"
+X="0.6.0"
 # Set spm version
 
 # Set variables
@@ -74,9 +74,9 @@ appimggithubinfofunc () {
     APPIMG_GITHUB_API_URL="$("$RUNNING_DIR"/yaml r "$CONFDIR"/appimginstalled/."$INSTIMG".yml apiurl)"
     INSTIMG_NAME="$("$RUNNING_DIR"/yaml r "$CONFDIR"/appimginstalled/."$INSTIMG".yml name)"
     if [ -z "$GITHUB_TOKEN" ]; then
-        wget --quiet "$APPIMG_GITHUB_API_URL" -O "$CONFDIR"/cache/"$INSTIMG"full || { echo "${CLR_RED}wget $APPIMG_GITHUB_API_URL failed!${CLR_CLEAR}"; rm -rf "$CONFDIR"/cache/*; exit 1; }
+        wget --quiet "$APPIMG_GITHUB_API_URL" -O "$CONFDIR"/cache/"$INSTIMG"full || { ssft_display_error "${CLR_RED}Error" "wget $APPIMG_GITHUB_API_URL failed!${CLR_CLEAR}"; rm -rf "$CONFDIR"/cache/*; exit 1; }
     else
-        wget --quiet --auth-no-challenge --header="Authorization: token "$GITHUB_TOKEN"" "$APPIMG_GITHUB_API_URL" -O "$CONFDIR"/cache/"$INSTIMG"full || { echo "${CLR_RED}wget failed!${CLR_CLEAR}"; rm -rf "$CONFDIR"/cache/*; exit 1; }
+        wget --quiet --auth-no-challenge --header="Authorization: token "$GITHUB_TOKEN"" "$APPIMG_GITHUB_API_URL" -O "$CONFDIR"/cache/"$INSTIMG"full || { ssft_display_error "${CLR_RED}Error" "wget failed!${CLR_CLEAR}"; rm -rf "$CONFDIR"/cache/*; exit 1; }
     fi
     JQARG=".[].assets[] | select(.name | contains(\".AppImage\"), contains(\".appimage\")) | select(.name | contains(\"$INSTIMG_NAME\")) | select(.name | contains(\"ia32\") | not) | select(.name | contains(\"i386\") | not) | select(.name | contains(\"i686\") | not) | { name: .name, updated: .updated_at, url: .browser_download_url, size: .size, numdls: .download_count}"
     cat "$CONFDIR"/cache/"$INSTIMG"full | "$RUNNING_DIR"/jq --raw-output "$JQARG" | sed 's%{%data:%g' | tr -d '",}' > "$CONFDIR"/cache/"$INSTIMG"release
@@ -230,9 +230,7 @@ appimgvercheckfunc () { # Check version
         APPIMAGE_ERROR="FALSE"
     fi
     if [ -z "$APPIMAGE_NAME" ] && [ "$APPIMG_FORCE_UPGRADE" = "FALSE" ] ; then # If no new AppImage version was found, output an error
-        echo "${CLR_RED}Error checking $INSTIMG version!${CLR_CLEAR}"
-        echo "${CLR_RED}If this error continues to happen for $INSTIMG, the maintainer may have not built a new AppImage for the latest release.${CLR_CLEAR}"
-        echo "${CLR_RED}Check $GITHUB_APP_URL to see if a new AppImage is available for $INSTIMG.${CLR_CLEAR}"
+        ssft_display_error "${CLR_RED}Error" "Error checking $INSTIMG version!${CLR_CLEAR}" "If this error continues to happen for $INSTIMG, the maintainer may have not built a new AppImage for the latest release. Check $GITHUB_APP_URL to see if a new AppImage is available for $INSTIMG.${CLR_CLEAR}"
         APPIMG_NEW_UPGRADE="FALSE"
         APPIMAGE_ERROR="TRUE"
     fi
@@ -254,12 +252,12 @@ appimgupgradecheckallfunc () {
 
 appimgupgradecheckfunc () {
     if [ ! -f "$CONFDIR"/appimginstalled/"$INSTIMG" ]; then
-        echo "${CLR_RED}$INSTIMG is not installed...${CLR_CLEAR}"
+        ssft_display_error "${CLR_RED}Error" "$INSTIMG is not installed...${CLR_CLEAR}"
     else
         echo "Downloading AppImages.yml from spm github repo..." # Download existing list of AppImages from spm github repo
         rm -f "$CONFDIR"/AppImages.yml
         rm -f "$CONFDIR"/AppImages-*
-        wget --no-verbose "https://raw.githubusercontent.com/simoniz0r/spm-repo/master/AppImages.yml" -O "$CONFDIR"/AppImages.yml || { echo "${CLR_RED}wget failed; exiting...${CLR_CLEAR}"; rm -rf "$CONFDIR"/cache/*; exit 1; }
+        wget --no-verbose "https://raw.githubusercontent.com/simoniz0r/spm-repo/master/AppImages.yml" -O "$CONFDIR"/AppImages.yml || { ssft_display_error "${CLR_RED}Error" "wget failed; exiting...${CLR_CLEAR}"; rm -rf "$CONFDIR"/cache/*; exit 1; }
         echo "AppImages.yml updated!"
         appimgcheckfunc "$INSTIMG" # Check whether AppImage is in lists and which list it is in
         appimginfofunc # Download web pages containing app info and set variables from them
@@ -289,7 +287,7 @@ appimgupdatelistfunc () { # Download AppImages.yml from github, and check versio
                 echo "Downloading AppImages.yml from spm github repo..." # Download existing list of AppImages from spm github repo
                 rm -f "$CONFDIR"/AppImages.yml
                 rm -f "$CONFDIR"/AppImages-*
-                wget --no-verbose "https://raw.githubusercontent.com/simoniz0r/spm-repo/master/AppImages.yml" -O "$CONFDIR"/AppImages.yml || { echo "${CLR_RED}wget failed; exiting...${CLR_CLEAR}"; rm -rf "$CONFDIR"/cache/*; exit 1; }
+                wget --no-verbose "https://raw.githubusercontent.com/simoniz0r/spm-repo/master/AppImages.yml" -O "$CONFDIR"/AppImages.yml || { ssft_display_error "${CLR_RED}Error" "wget failed; exiting...${CLR_CLEAR}"; rm -rf "$CONFDIR"/cache/*; exit 1; }
                 echo "AppImages.yml updated!"
                 echo "Downloading new information from spm-repo..."
                 for appimg in $(dir -C -w 1 "$CONFDIR"/appimginstalled); do
@@ -297,7 +295,7 @@ appimgupdatelistfunc () { # Download AppImages.yml from github, and check versio
                     echo "https://github.com/simoniz0r/spm-repo/raw/$SPM_APPIMG_REPO_BRANCH/$appimg.yml" >> "$CONFDIR"/cache/appimg-yml-wget.list
                 done
                 cd "$CONFDIR"/cache
-                wget --no-verbose -i "$CONFDIR"/cache/appimg-yml-wget.list || { echo "${CLR_RED}wget failed!${CLR_CLEAR}"; rm -rf "$CONFDIR"/cache/*; exit 1; }
+                wget --no-verbose -i "$CONFDIR"/cache/appimg-yml-wget.list || { ssft_display_error "${CLR_RED}Error" "wget failed!${CLR_CLEAR}"; rm -rf "$CONFDIR"/cache/*; exit 1; }
                 for ymlfile in $(dir -C -w 1 "$CONFDIR"/cache/*.yml); do
                     ymlfile="${ymlfile##*/}"
                     mv "$CONFDIR"/cache/"$ymlfile" "$CONFDIR"/appimginstalled/."$ymlfile"
@@ -330,7 +328,7 @@ appimgupdateforcefunc () {
         echo "${APPIMG_CLR}Install dir${CLR_CLEAR}: $BIN_PATH"
         echo
     else
-        echo "${CLR_RED}AppImage not found!${CLR_CLEAR}"
+        ssft_display_error "${CLR_RED}Error" "AppImage not found!${CLR_CLEAR}"
         rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
         exit 1
     fi
@@ -346,7 +344,7 @@ appimgupdateforcefunc () {
 appimgdlfunc () { # wget latest url from direct website or github repo and wget it
     if [ "$DIRECT_IMG" = "TRUE" ]; then # If AppImage is DIRECT, use method below to download it
         cd "$CONFDIR"/cache
-        wget --read-timeout=30 "$DIRECT_APPIMAGE_URL" -O "$CONFDIR"/cache/"$APPIMAGE_NAME" || { echo "${CLR_RED}wget $DIRECT_APPIMAGE_URL failed; exiting...${CLR_CLEAR}"; rm -rf "$CONFDIR"/cache/*; exit 1; }
+        wget --read-timeout=30 "$DIRECT_APPIMAGE_URL" -O "$CONFDIR"/cache/"$APPIMAGE_NAME" || { ssft_display_error "${CLR_RED}Error" "wget $DIRECT_APPIMAGE_URL failed; exiting...${CLR_CLEAR}"; rm -rf "$CONFDIR"/cache/*; exit 1; }
         if [ -z "$APPIMAGE_NAME" ]; then
             APPIMAGE_NAME="$(dir -C -w 1 "$CONFDIR"/cache/ | grep -iw '.*AppImage')"
         fi
@@ -356,38 +354,37 @@ appimgdlfunc () { # wget latest url from direct website or github repo and wget 
         NEW_APPIMAGE_VERSION="$APPIMAGE_NAME"
         mv "$CONFDIR"/cache/"$APPIMAGE_NAME" "$CONFDIR"/cache/"$INSTIMG"
     elif [ "$GITHUB_IMG" = "TRUE" ]; then # If AppImage is from github, use method below to download it
-        wget --read-timeout=30 "$GITHUB_APPIMAGE_URL" -O "$CONFDIR"/cache/"$INSTIMG" || { echo "${CLR_RED}wget $GITHUB_APPIMAGE_URL failed; exiting...${CLR_CLEAR}"; rm -rf "$CONFDIR"/cache/*; exit 1; }
+        wget --read-timeout=30 "$GITHUB_APPIMAGE_URL" -O "$CONFDIR"/cache/"$INSTIMG" || { ssft_display_error "${CLR_RED}Error" "wget $GITHUB_APPIMAGE_URL failed; exiting...${CLR_CLEAR}"; rm -rf "$CONFDIR"/cache/*; exit 1; }
     fi
 }
 
 appimginstallfunc () { # chmod and mv AppImages to /usr/local/bin and create file containing install info in "$CONFDIR"/appimginstalled
     chmod a+x "$CONFDIR"/cache/"$INSTIMG" # Make AppImage executable
     echo "Moving ${APPIMG_CLR}$INSTIMG${CLR_CLEAR} to /usr/local/bin/$INSTIMG ..."
-    sudo mv "$CONFDIR"/cache/"$INSTIMG" /usr/local/bin/"$INSTIMG" || { echo "Failed!"; rm -rf "$CONFDIR"/cache/*; exit 1; } # Move AppImage to /usr/local/bin
+    sudo mv "$CONFDIR"/cache/"$INSTIMG" /usr/local/bin/"$INSTIMG" || { ssft_display_error "${CLR_RED}Error" "Failed!"; rm -rf "$CONFDIR"/cache/*; exit 1; } # Move AppImage to /usr/local/bin
     appimgsaveinfofunc "appimginstalled/$INSTIMG"
     echo "${APPIMG_CLR}$APPIMAGE_NAME${CLR_CLEAR} has been installed to /usr/local/bin/$INSTIMG !"
 }
 
 appimginstallstartfunc () {
     if [ -f "$CONFDIR"/tarinstalled/"$INSTIMG" ] || [ -f "$CONFDIR"/appimginstalled/"$INSTIMG" ]; then # Exit if already installed by spm
-        echo "${CLR_RED}$INSTIMG is already installed."
-        echo "Use 'spm update' to check for a new version of $INSTIMG.${CLR_CLEAR}"
+        ssft_display_error "${CLR_RED}Error" "$INSTIMG is already installed. Use 'spm update' to check for a new version of $INSTIMG.${CLR_CLEAR}"
         rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
         exit 1
     fi
     if type >/dev/null 2>&1 "$INSTIMG" && [ "$INSTIMG" != "spm" ]; then # If a command by the same name as AppImage already exists on user's system, exit
-        echo "${CLR_RED}$INSTIMG is already installed and not managed by spm; exiting...${CLR_CLEAR}"
+        ssft_display_error "${CLR_RED}Error" "$INSTIMG is already installed and not managed by spm; exiting...${CLR_CLEAR}"
         rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
         exit 1
     fi
     if [ -f "/usr/local/bin/$INSTIMG" ]; then # If for some reason type does't pick up same file existing as AppImage name in /usr/local/bin, exit
-        echo "${CLR_RED}/usr/local/bin/$INSTIMG exists; exiting...${CLR_CLEAR}"
+        ssft_display_error "${CLR_RED}Error" "/usr/local/bin/$INSTIMG exists; exiting...${CLR_CLEAR}"
         rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
         exit 1
     fi
     appimgcheckfunc "$INSTIMG" # Check whether AppImage is in lists and which list it is in
     if [ "$DIRECT_IMG" = "FALSE" ] && [ "$GITHUB_IMG" = "FALSE" ];then # If AppImage not in either list, exit
-        echo "${CLR_RED}$INSTIMG is not in AppImages.yml; try running 'spm update'.${CLR_CLEAR}"
+        ssft_display_error "${CLR_RED}Error" "$INSTIMG is not in AppImages.yml; try running 'spm update'.${CLR_CLEAR}"
         rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
         exit 1
     fi
@@ -397,12 +394,10 @@ appimginstallstartfunc () {
         rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
         exit 1
     fi
-    echo "AppImage: $APPIMAGE_NAME"
-    echo "AppImage for ${APPIMG_CLR}$INSTIMG${CLR_CLEAR} will be installed." # Ask user if sure they want to install AppImage
-    read -p "Continue? Y/N " INSTANSWER
-    case $INSTANSWER in
-        N*|n*) # If answer is no, exit
-            echo "${CLR_RED}$INSTIMG was not installed.${CLR_CLEAR}"
+    ssft_select_single "${APPIMG_CLR}$INSTIMG${CLR_CLEAR} AppImage: $APPIMAGE_NAME" "AppImage for $INSTIMG will be installed." "Install $INSTIMG" "Exit"
+    case $SSFT_RESULT in
+        Exit|N*|n*) # If answer is no, exit
+            ssft_display_error "${CLR_RED}Error" "$INSTIMG was not installed.${CLR_CLEAR}"
             rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
             exit 0
             ;;
@@ -413,7 +408,7 @@ appimgupgradefunc () { # rm old AppImage, chmod, and mv new AppImage to /usr/loc
     echo "Removing previous ${APPIMG_CLR}$INSTIMG${CLR_CLEAR} version..."
     sudo rm /usr/local/bin/"$INSTIMG" # Remove old AppImage before upgrading
     chmod a+x "$CONFDIR"/cache/"$INSTIMG" # Make new AppImage executable
-    echo "Moving ${APPIMG_CLR}$INSTIMG${CLR_CLEAR} to /usr/local/bin/$INSTIMG ..." || { echo "${CLR_RED}Failed!${CLR_CLEAR}"; rm -rf "$CONFDIR"/cache/*; exit 1; }
+    echo "Moving ${APPIMG_CLR}$INSTIMG${CLR_CLEAR} to /usr/local/bin/$INSTIMG ..." || { ssft_display_error "${CLR_RED}Error" "Failed!${CLR_CLEAR}"; rm -rf "$CONFDIR"/cache/*; exit 1; }
     sudo mv "$CONFDIR"/cache/"$INSTIMG" /usr/local/bin/"$INSTIMG" # Move new AppImage to /usr/local/bin
     appimgsaveinfofunc "appimginstalled/$INSTIMG"
     echo "${APPIMG_CLR}$INSTIMG${CLR_CLEAR} has been upgraded to version $APPIMAGE_VERSION !"
@@ -432,9 +427,9 @@ appimgupgradestartallfunc () {
         fi
         dir -C -w 1 "$CONFDIR"/appimgupgrades | pr -tTw 125 -3 # Ouput AppImages available for upgrades
         echo
-        read -p "Continue? Y/N " UPGRADEALLANSWER # Ask user if they want to upgrade
-        case $UPGRADEALLANSWER in
-            Y*|y*) # Do upgrade functions if yes
+        ssft_select_single "Upgrade packages" "Start upgrade?" "Start upgrade" "Exit"
+        case $SSFT_RESULT in
+            Start*|Y*|y*) # Do upgrade functions if yes
                 for UPGRADE_IMG in $(dir -C -w 1 "$CONFDIR"/appimgupgrades); do
                     INSTIMG="$UPGRADE_IMG"
                     appimgcheckfunc "$INSTIMG" # Check whether AppImage is in lists and which list it is in
@@ -446,8 +441,8 @@ appimgupgradestartallfunc () {
                     echo
                 done
                 ;;
-            N*|n*) # Exit if no
-                echo "${CLR_RED}No AppImages were upgraded; exiting...${CLR_CLEAR}"
+            Exit|N*|n*) # Exit if no
+                ssft_display_error "${CLR_RED}Error" "No AppImages were upgraded; exiting...${CLR_CLEAR}"
                 rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
                 exit 0
                 ;;
@@ -456,10 +451,9 @@ appimgupgradestartallfunc () {
 }
 
 appimgupgradestartfunc () {
-    echo "${APPIMG_CLR}$INSTIMG${CLR_CLEAR} will be upgraded to the latest version." # Ask user if sure about upgrade
-    read -p "Continue? Y/N " UPGRADEANSWER
-    case $UPGRADEANSWER in
-        Y*|y*) # Do upgrade functions if yes
+    ssft_select_single "${APPIMG_CLR}$INSTIMG${CLR_CLEAR} upgrade" "$INSTIMG will be upgraded to the latest version. Continue?" "Upgrade $INSTIMG" "Exit"
+    case $SSFT_RESULT in
+        Upgrade*|Y*|y*) # Do upgrade functions if yes
             appimgcheckfunc "$INSTIMG" # Check whether AppImage is in lists and which list it is in
             appimginfofunc
             appimgdlfunc "$INSTIMG" # Download AppImage from Direct or Github
@@ -468,8 +462,8 @@ appimgupgradestartfunc () {
             rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
             exit 0
             ;;
-        N*|n*) # Exit if no
-            echo "${CLR_RED}$INSTIMG was not upgraded.${CLR_CLEAR}"
+        Exit|N*|n*) # Exit if no
+            ssft_display_error "${CLR_RED}Error" "$INSTIMG was not upgraded.${CLR_CLEAR}"
             rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
             exit 0
             ;;
@@ -483,11 +477,10 @@ appimgremovefunc () { # rm AppImage in /usr/local/bin and remove install info fi
     else
         APPIMG_CLR="${CLR_GREEN}"
     fi
-    echo "Removing ${APPIMG_CLR}$REMIMG${CLR_CLEAR}..." # Ask user if sure they want to remove AppImage
-    read -p "Continue? Y/N " IMGREMANSWER
-    case $IMGREMANSWER in
-        N*|n*) # If user answers no, exit
-            echo "${CLR_RED}$REMIMG was not removed.${CLR_CLEAR}"
+    ssft_select_single "Removing ${APPIMG_CLR}$REMIMG${CLR_CLEAR}..." "$REMIMG will be removed! Continue?" "Remove $REMIMG" "Exit"
+    case $SSFT_RESULT in
+        Exit|N*|n*) # If user answers no, exit
+            ssft_display_error "${CLR_RED}Error" "$REMIMG was not removed.${CLR_CLEAR}"
             rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
             exit 0
             ;;

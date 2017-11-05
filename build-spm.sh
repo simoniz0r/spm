@@ -8,7 +8,7 @@
 # Script for building releases of spm
 
 BUILD_DIR="/media/simonizor/0d208b29-3b29-4ffc-99be-1043b9f3c258/github/all-releases"
-VERSION="0.5.9"
+VERSION="0.6.0"
 mkdir -p "$BUILD_DIR"/deps/extracted
 mkdir "$BUILD_DIR"/spm.AppDir
 
@@ -59,6 +59,7 @@ cp ~/github/spm/tarfunctions.sh "$BUILD_DIR"/spm.AppDir/usr/share/spm/
 cp ~/github/spm/LICENSE "$BUILD_DIR"/spm.AppDir/usr/share/spm/
 cp ~/github/spm/jq "$BUILD_DIR"/spm.AppDir/usr/share/spm/
 cp ~/github/spm/yaml "$BUILD_DIR"/spm.AppDir/usr/share/spm/
+cp ~/github/spm/ssft.sh "$BUILD_DIR"/spm.AppDir/usr/share/spm/
 cp ~/github/spm/spm.desktop "$BUILD_DIR"/spm.AppDir/
 cp ~/github/spm/spm.png "$BUILD_DIR"/spm.AppDir/
 
