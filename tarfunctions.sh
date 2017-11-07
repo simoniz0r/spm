@@ -532,7 +532,7 @@ tarupgradestartallfunc () { # Run upgrades on all available tar packages
         fi
         dir -C -w 1 "$CONFDIR"/tarupgrades | pr -tT --column=3 -w 125
         echo
-        ssft_select_single "Upgrade all" "Start upgrade?" "Start upgrade" "Exit"
+        ssft_select_single "               " "Start upgrade?" "Start upgrade" "Exit"
         case $SSFT_RESULT in
             Start*|Y*|y*)
                 for UPGRADE_PKG in $(dir -C -w 1 "$CONFDIR"/tarupgrades); do

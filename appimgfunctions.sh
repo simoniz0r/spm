@@ -427,7 +427,7 @@ appimgupgradestartallfunc () {
         fi
         dir -C -w 1 "$CONFDIR"/appimgupgrades | pr -tTw 125 -3 # Ouput AppImages available for upgrades
         echo
-        ssft_select_single "Upgrade packages" "Start upgrade?" "Start upgrade" "Exit"
+        ssft_select_single "               " "Start upgrade?" "Start upgrade" "Exit"
         case $SSFT_RESULT in
             Start*|Y*|y*) # Do upgrade functions if yes
                 for UPGRADE_IMG in $(dir -C -w 1 "$CONFDIR"/appimgupgrades); do
