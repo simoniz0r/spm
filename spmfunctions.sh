@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.6.0"
+X="0.6.1"
 # Set spm version
 
 helpfunc () { # All unknown arguments come to this function; display help for spm
@@ -259,10 +259,11 @@ updatestartfunc () { # Run relevant update argument based on user input
     else
         NEW_SPM_REPO_SHA="$(wget --quiet "https://api.github.com/repos/simoniz0r/spm-repo/git/trees/master" -O - | "$RUNNING_DIR"/yaml r - sha)"
         UPD_START_TIME="$(date +%s)"
-        appimgupdatelistfunc # Check all installed AppImages for upgrades
-        echo
+        appimgupdatelistfunc & # Check all installed AppImages for upgrades
         tarupdatelistfunc # Check all installed tar packages for upgrades
-        echo
+        while [ -f "$CONFDIR/cache/appimgupdate.lock" ]; do
+            sleep 0.5
+        done
         echo "Checked $(($(dir -C -w 1 "$CONFDIR"/tarinstalled | wc -l)+$(dir -C -w 1 "$CONFDIR"/appimginstalled | wc -l))) packages in $(($(date +%s)-$UPD_START_TIME)) seconds."
         if [ "$(dir "$CONFDIR"/tarupgrades | wc -w)" = "0" ] && [ "$(dir "$CONFDIR"/appimgupgrades | wc -w)" = "0" ]; then
             echo "No new AppImage or tar package upgrades available."

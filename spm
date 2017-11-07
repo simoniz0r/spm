@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.6.0"
+X="0.6.1"
 # Set spm version
 CONFDIR="$HOME/.config/spm"
 SKIP_DEP_CHECKS="FALSE"

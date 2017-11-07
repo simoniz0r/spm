@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.6.0"
+X="0.6.1"
 # Set spm version
 TAR_LIST="$(cat "$CONFDIR"/tar-pkgs.yml | cut -f1 -d":")"
 TAR_SIZE="N/A"
@@ -56,6 +56,7 @@ targithubinfofunc () { # Gets updated_at, tar url, and description for specified
     fi
     NEW_TARFILE="$(cat "$CONFDIR"/cache/"$TARPKG"release | "$RUNNING_DIR"/yaml r - data.name)"
     TAR_GITHUB_NEW_COMMIT="$(cat "$CONFDIR"/cache/"$TARPKG"release | "$RUNNING_DIR"/yaml r - data.updated)"
+    TAR_NEW_VERSION="$TAR_GITHUB_NEW_COMMIT"
     TAR_GITHUB_NEW_DOWNLOAD="$(cat "$CONFDIR"/cache/"$TARPKG"release | "$RUNNING_DIR"/yaml r - data.url)"
     TAR_SIZE="$(cat "$CONFDIR"/cache/"$TARPKG"release | "$RUNNING_DIR"/yaml r - data.size)"
     TAR_SIZE="$(echo "scale = 3; $TAR_SIZE / 1024 / 1024" | bc) MBs"
@@ -121,15 +122,16 @@ tarappcheckfunc () { # check user input against list of known apps here
             else
                 TAR_SIZE="N/A"
                 TAR_DOWNLOADS="N/A"
-                NEW_TARURI="$(wget -S --read-timeout=30 --spider "$TARURI" -O - 2>&1 | grep -m 1 'Location:')"
-                case $? in
-                    1)
-                        NEW_TARFILE="${TARURI##*/}"
-                        ;;
-                    0)
+                NEW_TARURI="$(wget -S --read-timeout=30 --spider "$TARURI" 2>&1 | grep -m 1 'Location:' | cut -f4 -d' ')"
+                case $NEW_TARURI in
+                    http*)
                         NEW_TARFILE="${NEW_TARURI##*/}"
                         ;;
+                    *)
+                        NEW_TARFILE="${TARURI##*/}"
+                        ;;
                 esac
+                TAR_NEW_VERSION="$NEW_TARFILE"
                 tarsaveconffunc "cache/$TARPKG.conf"
             fi
             ;;
@@ -333,7 +335,7 @@ tarupgradecheckallfunc () { # Run a for loop to check all installed tar packages
         echo "Checking ${TAR_CLR}$package${CLR_CLEAR} version..."
         checktarversionfunc
         if [ "$TAR_NEW_UPGRADE" = "TRUE" ]; then
-            echo "${TAR_CLR}$(tput bold)New upgrade available for $package -- $NEW_TARFILE !${CLR_CLEAR}"
+            echo "${TAR_CLR}$(tput bold)New upgrade available for $package -- $TAR_NEW_VERSION !${CLR_CLEAR}"
             tarsaveconffunc "tarupgrades/$package"
         fi
     done

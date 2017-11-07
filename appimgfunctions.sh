@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.6.0"
+X="0.6.1"
 # Set spm version
 
 # Set variables
@@ -112,7 +112,7 @@ appimgdirectinfofunc () {
     NEW_APPIMAGE_VERSION="${NEW_APPIMAGE_VERSION##*/}"
     APPIMAGE_DESCRIPTION="$DIRECT_APPIMAGE_URL"
     if [ -z "$NEW_APPIMAGE_VERSION" ]; then
-        NEW_APPIMAGE_VERSION="${CLR_RED}Cannot check version; upgrades will have to be forced${CLR_CLEAR}"
+        NEW_APPIMAGE_VERSION="${DIRECT_APPIMAGE_URL##*/}"
     fi
     APPIMAGE_NAME="$NEW_APPIMAGE_VERSION"
     if [ -f "$CONFDIR"/appimginstalled/"$INSTIMG" ]; then
@@ -237,6 +237,7 @@ appimgvercheckfunc () { # Check version
 }
 
 appimgupgradecheckallfunc () {
+    touch "$CONFDIR"/cache/appimgupdate.lock
     for AppImage in $(dir -C -w 1 "$CONFDIR"/appimginstalled); do
         INSTIMG="$AppImage"
         appimgcheckfunc "$AppImage"
@@ -248,6 +249,7 @@ appimgupgradecheckallfunc () {
             appimgsaveinfofunc "appimgupgrades/$AppImage"
         fi
     done
+    rm -f "$CONFDIR"/cache/appimgupdate.lock
 }
 
 appimgupgradecheckfunc () {
