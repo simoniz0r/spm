@@ -264,6 +264,9 @@ updatestartfunc () { # Run relevant update argument based on user input
         while [ -f "$CONFDIR/cache/appimgupdate.lock" ]; do
             sleep 0.5
         done
+        while [ -f "$CONFDIR/cache/tarupdate.lock" ]; do
+            sleep 0.5
+        done
         echo "Checked $(($(dir -C -w 1 "$CONFDIR"/tarinstalled | wc -l)+$(dir -C -w 1 "$CONFDIR"/appimginstalled | wc -l))) packages in $(($(date +%s)-$UPD_START_TIME)) seconds."
         if [ "$(dir "$CONFDIR"/tarupgrades | wc -w)" = "0" ] && [ "$(dir "$CONFDIR"/appimgupgrades | wc -w)" = "0" ]; then
             echo "No new AppImage or tar package upgrades available."

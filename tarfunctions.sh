@@ -329,6 +329,7 @@ tarupdateforcefunc () { # Mark specified tar package for upgrade without checkin
 }
 
 tarupgradecheckallfunc () { # Run a for loop to check all installed tar packages for upgrades
+    touch "$CONFDIR"/cache/tarupdate.lock
     for package in $(dir -C -w 1 "$CONFDIR"/tarinstalled); do
         TARPKG="$package"
         tarappcheckfunc "$package"
@@ -339,6 +340,7 @@ tarupgradecheckallfunc () { # Run a for loop to check all installed tar packages
             tarsaveconffunc "tarupgrades/$package"
         fi
     done
+    rm -f "$CONFDIR"/cache/tarupdate.lock
 }
 
 tarupgradecheckfunc () { # Check specified tar package for upgrade
@@ -372,6 +374,7 @@ tarupdatelistfunc () { # Download tar-pkgs.yml from github repo and run relevant
             if [ "$SPM_REPO_SHA2" = "$NEW_SPM_REPO_SHA" ]; then
                 sleep 0
             else
+                touch "$CONFDIR"/cache/tarupdate.lock
                 SPM_REPO_SHA2="$NEW_SPM_REPO_SHA"
                 spmsaveconffunc
                 echo "Downloading tar-pkgs.yml from spm github repo..."

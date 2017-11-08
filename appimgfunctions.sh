@@ -284,6 +284,7 @@ appimgupdatelistfunc () { # Download AppImages.yml from github, and check versio
             if [ "$SPM_REPO_SHA" = "$NEW_SPM_REPO_SHA" ]; then
                 echo "No new changes from spm-repo; skipping package list updates..."
             else
+                touch "$CONFDIR"/cache/appimgupdate.lock
                 SPM_REPO_SHA="$NEW_SPM_REPO_SHA"
                 spmsaveconffunc
                 echo "Downloading AppImages.yml from spm github repo..." # Download existing list of AppImages from spm github repo
