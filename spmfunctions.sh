@@ -42,7 +42,6 @@ spmsaveconffunc () {
     echo "GITHUB_TOKEN="\"$GITHUB_TOKEN\""" >> "$CONFDIR"/spm.conf
     echo "SKIP_DEP_CHECKS="\"FALSE\""" >> "$CONFDIR"/spm.conf
     echo "SPM_REPO_SHA="\"$SPM_REPO_SHA\""" >> "$CONFDIR"/spm.conf
-    echo "SPM_REPO_SHA2="\"$SPM_REPO_SHA2\""" >> "$CONFDIR"/spm.conf
     echo "CLR_BLUE="\"${CLR_BLUE}\""" >> "$CONFDIR"/spm.conf
     echo "CLR_LGREEN="\"${CLR_LGREEN}\""" >> "$CONFDIR"/spm.conf
     echo "CLR_GREEN="\"${CLR_GREEN}\""" >> "$CONFDIR"/spm.conf
@@ -267,6 +266,8 @@ updatestartfunc () { # Run relevant update argument based on user input
         while [ -f "$CONFDIR/cache/tarupdate.lock" ]; do
             sleep 0.5
         done
+        SPM_REPO_SHA="$NEW_SPM_REPO_SHA"
+        spmsaveconffunc
         echo "Checked $(($(dir -C -w 1 "$CONFDIR"/tarinstalled | wc -l)+$(dir -C -w 1 "$CONFDIR"/appimginstalled | wc -l))) packages in $(($(date +%s)-$UPD_START_TIME)) seconds."
         if [ "$(dir "$CONFDIR"/tarupgrades | wc -w)" = "0" ] && [ "$(dir "$CONFDIR"/appimgupgrades | wc -w)" = "0" ]; then
             echo "No new AppImage or tar package upgrades available."

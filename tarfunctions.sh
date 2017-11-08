@@ -371,12 +371,10 @@ tarupdatelistfunc () { # Download tar-pkgs.yml from github repo and run relevant
         if [ "$(dir -C -w 1 "$CONFDIR"/tarinstalled | wc -l)" = "0" ]; then
             sleep 0
         else
-            if [ "$SPM_REPO_SHA2" = "$NEW_SPM_REPO_SHA" ]; then
+            if [ "$SPM_REPO_SHA" = "$NEW_SPM_REPO_SHA" ]; then
                 sleep 0
             else
                 touch "$CONFDIR"/cache/tarupdate.lock
-                SPM_REPO_SHA2="$NEW_SPM_REPO_SHA"
-                spmsaveconffunc
                 echo "Downloading tar-pkgs.yml from spm github repo..."
                 rm "$CONFDIR"/tar-pkgs.*
                 wget --no-verbose "https://raw.githubusercontent.com/simoniz0r/spm-repo/master/tar-pkgs.yml" -O "$CONFDIR"/tar-pkgs.yml
