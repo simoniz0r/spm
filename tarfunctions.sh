@@ -59,7 +59,7 @@ targithubinfofunc () { # Gets updated_at, tar url, and description for specified
     TAR_NEW_VERSION="$TAR_GITHUB_NEW_COMMIT"
     TAR_GITHUB_NEW_DOWNLOAD="$(cat "$CONFDIR"/cache/"$TARPKG"release | "$RUNNING_DIR"/yaml r - data.url)"
     TAR_SIZE="$(cat "$CONFDIR"/cache/"$TARPKG"release | "$RUNNING_DIR"/yaml r - data.size)"
-    TAR_SIZE="$(echo "scale = 3; $TAR_SIZE / 1024 / 1024" | bc) MBs"
+    TAR_SIZE="$(awk "BEGIN {print ("$TAR_SIZE"/1024)/1024}" | cut -c-5) MBs"
     TAR_DOWNLOADS="$(cat "$CONFDIR"/cache/"$TARPKG"release | "$RUNNING_DIR"/yaml r - data.numdls)"
     TAR_DOWNLOAD_SOURCE="GITHUB"
     # TAR_GITHUB_NEW_VERSION="$(echo "$TAR_GITHUB_NEW_DOWNLOAD" | cut -f8 -d"/")"

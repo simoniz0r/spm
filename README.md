@@ -2,7 +2,7 @@
 
 [![asciicast](/spmvidpreview.png)](https://asciinema.org/a/OY8FwYH8I9j590or2iPTiid0O)
 
-Dependencies: coreutils, tar, bc,  wget (bc and wget are bundled in the AppImage release)
+Dependencies: coreutils, tar, wget (wget is bundled in the AppImage release)
 
 Usage: spm [option] [package]
 

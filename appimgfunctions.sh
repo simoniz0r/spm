@@ -99,7 +99,7 @@ appimggithubinfofunc () {
     NEW_APPIMAGE_VERSION="$(cat "$CONFDIR"/cache/"$INSTIMG"release | "$RUNNING_DIR"/yaml r - data.updated)"
     GITHUB_APPIMAGE_URL="$(cat "$CONFDIR"/cache/"$INSTIMG"release | "$RUNNING_DIR"/yaml r - data.url)"
     APPIMAGE_SIZE="$(cat "$CONFDIR"/cache/"$INSTIMG"release | "$RUNNING_DIR"/yaml r - data.size)"
-    APPIMAGE_SIZE="$(echo "scale = 3; $APPIMAGE_SIZE / 1024 / 1024" | bc) MBs"
+    APPIMAGE_SIZE="$(awk "BEGIN {print ("$APPIMAGE_SIZE"/1024)/1024}" | cut -c-5) MBs"
     APPIMAGE_DOWNLOADS="$(cat "$CONFDIR"/cache/"$INSTIMG"release | "$RUNNING_DIR"/yaml r - data.numdls)"
     APPIMAGE_DESCRIPTION="$("$RUNNING_DIR"/yaml r "$CONFDIR"/appimginstalled/."$INSTIMG".yml description)"
     APPIMAGE_GITHUB_TAG="$(echo "$GITHUB_APPIMAGE_URL" | cut -f8 -d"/")"

@@ -12,7 +12,6 @@ VERSION="0.6.1"
 mkdir -p "$BUILD_DIR"/deps/extracted
 mkdir "$BUILD_DIR"/spm.AppDir
 
-wget "http://ftp.us.debian.org/debian/pool/main/b/bc/bc_1.06.95-9_amd64.deb" -O "$BUILD_DIR"/deps/bc.deb
 wget "http://ftp.us.debian.org/debian/pool/main/w/wget/wget_1.16-1+deb8u2_amd64.deb" -O "$BUILD_DIR"/deps/wget.deb
 wget "http://ftp.us.debian.org/debian/pool/main/g/gnutls28/libgnutls-deb0-28_3.3.8-6+deb8u7_amd64.deb" -O "$BUILD_DIR"/deps/libgnutls.deb
 wget "http://ftp.us.debian.org/debian/pool/main/n/nettle/libnettle4_2.7.1-5+deb8u2_amd64.deb" -O "$BUILD_DIR"/deps/libnettle.deb
@@ -39,7 +38,6 @@ debextractfunc () {
     rm -rf "$BUILD_DIR"/deps/extracted/*
 }
 
-debextractfunc "bc.deb"
 debextractfunc "wget.deb"
 debextractfunc "libgnutls.deb"
 debextractfunc "libnettle.deb"
