@@ -8,6 +8,8 @@
 
 X="0.6.1"
 # Set spm version
+ARG="$1"
+PKG_INPUT="$2"
 CONFDIR="$HOME/.config/spm"
 SKIP_DEP_CHECKS="FALSE"
 CLR_CLEAR="$(tput sgr0)"
@@ -27,6 +29,26 @@ fi
 if [ -f ~/.config/spm/spm.conf ]; then
     . ~/.config/spm/spm.conf
 fi
+
+
+case $ARG in
+    -v|--verbose)
+        ARG="$2"
+        PKG_INPUT="$3"
+        set -v
+        ;;
+    -d|--debug)
+        ARG="$2"
+        PKG_INPUT="$3"
+        set -x
+        ;;
+    -n|--noexec)
+        ARG="$2"
+        PKG_INPUT="$3"
+        set -v
+        set -n
+        ;;
+esac
 
 if [ ! -d "$CONFDIR" ]; then # Create dirs for configs, config files, and download package lists if they don't exist
     echo "spm is being ran for the first time."
@@ -114,54 +136,54 @@ if [ "$(grep -m 1 '.*X-RateLimit-Remaining:*.' "$CONFDIR"/cache/rate.limit | cut
 fi
 echo
 
-case $1 in
+case $ARG in
     install|-i|appimg-install|-ai|tarinstall|-ti) # Check if package is in either list and rout install to relevant function
-        if [ -z "$2" ]; then
+        if [ -z "$PKG_INPUT" ]; then
             ssft_display_error "${CLR_RED}Error" "Package input required; exiting...${CLR_CLEAR}"
             rm -rf "$CONFDIR"/cache/*
             exit 1
         fi
-        TESTPKG="$2"
+        TESTPKG="$PKG_INPUT"
         installstartfunc || { ssft_display_error "${CLR_RED}Error" "Install failed; exiting...${CLR_CLEAR}"; rm -rf "$CONFDIR"/cache/*; exit 1; } # Check package lists and route install to relevant function
         rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
         exit 0
         ;;
     update|-upd) # Update package lists and check for package upgrades
         spmvercheckfunc || { ssft_display_error "${CLR_RED}Error" "spm version check failed; exiting...${CLR_CLEAR}"; rm -rf "$CONFDIR"/cache/*; exit 1; } # Check spm version and let user know if it is out of date
-        updatestartfunc "$2" || { sssft_display_error "${CLR_RED}Error" "Upgrade check failed; exiting...${CLR_CLEAR}"; rm -rf "$CONFDIR"/cache/*; exit 1; } # Send input to relevant update function or run both if no input
+        updatestartfunc "$PKG_INPUT" || { sssft_display_error "${CLR_RED}Error" "Upgrade check failed; exiting...${CLR_CLEAR}"; rm -rf "$CONFDIR"/cache/*; exit 1; } # Send input to relevant update function or run both if no input
         rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
         exit 0
         ;;
     update-force|-uf|appimg-update-force|-auf|tar-update-force|-tuf) # Force AppImage to be marked for upgrade
-        if [ -z "$2" ]; then
+        if [ -z "$PKG_INPUT" ]; then
             ssft_display_error "${CLR_RED}Error" "Package input required; exiting...${CLR_CLEAR}"
             rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
             exit 1
         fi
-        TESTUF="$2"
+        TESTUF="$PKG_INPUT"
         updateforcestartfunc || { ssft_display_error "${CLR_RED}Error" "Update force failed; exiting...${CLR_CLEAR}"; rm -rf "$CONFDIR"/cache/*; exit 1; }
         rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
         exit 0
         ;;
     upgrade|-upg) # upgrade packages to latest version if marked for upgrade
-        upgradestartfunc "$2" || { ssft_display_error "${CLR_RED}Error" "Upgrade failed; exiting...${CLR_CLEAR}"; rm -rf "$CONFDIR"/cache/*; exit 1; }
+        upgradestartfunc "$PKG_INPUT" || { ssft_display_error "${CLR_RED}Error" "Upgrade failed; exiting...${CLR_CLEAR}"; rm -rf "$CONFDIR"/cache/*; exit 1; }
         rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
         exit 0
         ;;
     remove|-r|appimg-remove|-ar|tar-remove|-tr)
-        if [ -z "$2" ]; then
+        if [ -z "$PKG_INPUT" ]; then
             ssft_display_error "${CLR_RED}Error" "Package input required; exiting...${CLR_CLEAR}"
             rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
             exit 1
         fi
-        TESTREM="$2"
+        TESTREM="$PKG_INPUT"
         removestartfunc || { ssft_display_error "${CLR_RED}Error" "Package remove failed; exiting...${CLR_CLEAR}"; rm -rf "$CONFDIR"/cache/*; exit 1; }
         rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
         exit 0
         ;;
     list|-l) # List installed packages or info about specified package
-        INSTIMG="$2"
-        TARPKG="$2"
+        INSTIMG="$PKG_INPUT"
+        TARPKG="$PKG_INPUT"
         liststartfunc || { ssft_display_error "${CLR_RED}Error" "List failed; exiting...${CLR_CLEAR}"; rm -rf "$CONFDIR"/cache/*; exit 1; } # Send package input to relevant list function or run both if no input
         rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
         exit 0
@@ -172,14 +194,14 @@ case $1 in
         exit 0
         ;;
     search|-s) # Use grep to search package lists based on user input and output matching packages and which list they are in
-        if cat "$CONFDIR"/AppImages.yml | cut -f1 -d":" | grep -q "$2"; then
+        if cat "$CONFDIR"/AppImages.yml | cut -f1 -d":" | grep -q "$PKG_INPUT"; then
             echo "$(tput bold)${CLR_GREEN}AppImage(s)${CLR_CLEAR}:"
-            cat "$CONFDIR"/AppImages.yml | cut -f1 -d":" | grep "$2"
+            cat "$CONFDIR"/AppImages.yml | cut -f1 -d":" | grep "$PKG_INPUT"
             echo
         fi
-        if echo "$TAR_LIST" | grep -q "$2"; then
+        if echo "$TAR_LIST" | grep -q "$PKG_INPUT"; then
             echo "$(tput bold)${CLR_CYAN}tar package(s)${CLR_CLEAR}:"
-            echo "$TAR_LIST" | grep "$2"
+            echo "$TAR_LIST" | grep "$PKG_INPUT"
             echo
         fi
         rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
@@ -196,3 +218,5 @@ case $1 in
         exit 0
         ;;
 esac
+
+set -
