@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.6.1"
+X="0.6.2"
 # Set spm version
 
 helpfunc () { # All unknown arguments come to this function; display help for spm
@@ -260,11 +260,12 @@ updatestartfunc () { # Run relevant update argument based on user input
         UPD_START_TIME="$(date +%s)"
         appimgupdatelistfunc & # Check all installed AppImages for upgrades
         tarupdatelistfunc # Check all installed tar packages for upgrades
-        while [ -f "$CONFDIR/cache/appimgupdate.lock" ]; do
-            sleep 0.5
-        done
-        while [ -f "$CONFDIR/cache/tarupdate.lock" ]; do
-            sleep 0.5
+        while true; do
+            if [ -f "$CONFDIR/cache/appimgupdate.lock" ] || [ -f "$CONFDIR/cache/tarupdate.lock" ]; then
+                sleep 0.5
+            else
+                break
+            fi
         done
         SPM_REPO_SHA="$NEW_SPM_REPO_SHA"
         spmsaveconffunc

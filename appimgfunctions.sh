@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.6.1"
+X="0.6.2"
 # Set spm version
 
 # Set variables
@@ -237,7 +237,6 @@ appimgvercheckfunc () { # Check version
 }
 
 appimgupgradecheckallfunc () {
-    touch "$CONFDIR"/cache/appimgupdate.lock
     for AppImage in $(dir -C -w 1 "$CONFDIR"/appimginstalled); do
         INSTIMG="$AppImage"
         appimgcheckfunc "$AppImage"
@@ -249,7 +248,6 @@ appimgupgradecheckallfunc () {
             appimgsaveinfofunc "appimgupgrades/$AppImage"
         fi
     done
-    rm -f "$CONFDIR"/cache/appimgupdate.lock
 }
 
 appimgupgradecheckfunc () {
@@ -277,6 +275,7 @@ appimgupgradecheckfunc () {
 
 appimgupdatelistfunc () { # Download AppImages.yml from github, and check versions
     if [ -z "$1" ]; then # If no AppImage specified by user, check all installed AppImage versions
+        touch "$CONFDIR"/cache/appimgupdate.lock
         if [ "$(dir -C -w 1 "$CONFDIR"/appimginstalled)" = "0" ]; then
             sleep 0
         else
@@ -304,6 +303,7 @@ appimgupdatelistfunc () { # Download AppImages.yml from github, and check versio
             fi
             appimgupgradecheckallfunc
         fi
+        rm -f "$CONFDIR"/cache/appimgupdate.lock
     else # If user inputs AppImage, check that AppImage version
         INSTIMG="$1"
         appimgupgradecheckfunc

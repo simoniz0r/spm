@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.6.1"
+X="0.6.2"
 # Set spm version
 TAR_LIST="$(cat "$CONFDIR"/tar-pkgs.yml | cut -f1 -d":")"
 TAR_SIZE="N/A"
@@ -329,7 +329,6 @@ tarupdateforcefunc () { # Mark specified tar package for upgrade without checkin
 }
 
 tarupgradecheckallfunc () { # Run a for loop to check all installed tar packages for upgrades
-    touch "$CONFDIR"/cache/tarupdate.lock
     for package in $(dir -C -w 1 "$CONFDIR"/tarinstalled); do
         TARPKG="$package"
         tarappcheckfunc "$package"
@@ -340,7 +339,6 @@ tarupgradecheckallfunc () { # Run a for loop to check all installed tar packages
             tarsaveconffunc "tarupgrades/$package"
         fi
     done
-    rm -f "$CONFDIR"/cache/tarupdate.lock
 }
 
 tarupgradecheckfunc () { # Check specified tar package for upgrade
@@ -368,6 +366,7 @@ tarupgradecheckfunc () { # Check specified tar package for upgrade
 
 tarupdatelistfunc () { # Download tar-pkgs.yml from github repo and run relevant upgradecheck function based on input
     if [ -z "$1" ]; then
+        touch "$CONFDIR"/cache/tarupdate.lock
         if [ "$(dir -C -w 1 "$CONFDIR"/tarinstalled | wc -l)" = "0" ]; then
             sleep 0
         else
@@ -393,6 +392,7 @@ tarupdatelistfunc () { # Download tar-pkgs.yml from github repo and run relevant
             fi
             tarupgradecheckallfunc
         fi
+        rm -f "$CONFDIR"/cache/tarupdate.lock
     else
         tarupgradecheckfunc "$1"
     fi
