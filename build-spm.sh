@@ -7,19 +7,27 @@
 # License: GPL v2.0 only
 # Script for building releases of spm
 
-BUILD_DIR="/media/simonizor/0d208b29-3b29-4ffc-99be-1043b9f3c258/github/all-releases"
-VERSION="0.6.2"
+BUILD_DIR="/run/media/simonizor/0d208b29-3b29-4ffc-99be-1043b9f3c258/github/all-releases"
+VERSION="0.6.3"
 mkdir -p "$BUILD_DIR"/deps/extracted
 mkdir "$BUILD_DIR"/spm.AppDir
 
-wget "http://ftp.us.debian.org/debian/pool/main/w/wget/wget_1.16-1+deb8u2_amd64.deb" -O "$BUILD_DIR"/deps/wget.deb
-wget "http://ftp.us.debian.org/debian/pool/main/g/gnutls28/libgnutls-deb0-28_3.3.8-6+deb8u7_amd64.deb" -O "$BUILD_DIR"/deps/libgnutls.deb
-wget "http://ftp.us.debian.org/debian/pool/main/n/nettle/libnettle4_2.7.1-5+deb8u2_amd64.deb" -O "$BUILD_DIR"/deps/libnettle.deb
-wget "http://ftp.us.debian.org/debian/pool/main/libp/libpsl/libpsl0_0.5.1-1_amd64.deb" -O "$BUILD_DIR"/deps/libpsl.deb
-wget "http://ftp.us.debian.org/debian/pool/main/i/icu/libicu52_52.1-8+deb8u5_amd64.deb" -O "$BUILD_DIR"/deps/libicu.deb
-wget "http://ftp.us.debian.org/debian/pool/main/n/nettle/libhogweed2_2.7.1-5+deb8u2_amd64.deb" -O "$BUILD_DIR"/deps/libhogweed.deb
-wget "http://ftp.us.debian.org/debian/pool/main/g/gcc-4.9/libstdc++6_4.9.2-10_amd64.deb" -O "$BUILD_DIR"/deps/libstdc++.deb
-wget "http://ftp.us.debian.org/debian/pool/main/g/gmp/libgmp10_6.0.0+dfsg-6_amd64.deb" -O "$BUILD_DIR"/deps/libgmp.deb
+debiangetlatestdebfunc () {
+    DEB_RELEASE="$1"
+    DEB_ARCH="$2"
+    DEB_NAME="$3"
+    LATEST_DEB_URL="$(wget "https://packages.debian.org/$DEB_RELEASE/$DEB_ARCH/$DEB_NAME/download" -qO - | grep "<li>*..*$DEB_ARCH.deb" | cut -f2 -d'"' | head -n 1)"
+    wget --no-verbose --read-timeout=30 "$LATEST_DEB_URL" -O "$BUILD_DIR"/deps/"$DEB_NAME".deb
+}
+debiangetlatestdebfunc "buster" amd64 "wget"
+debiangetlatestdebfunc "buster" amd64 "libgnutls30"
+debiangetlatestdebfunc "buster" amd64 "libidn2-0"
+debiangetlatestdebfunc "buster" amd64 "libunistring2"
+debiangetlatestdebfunc "buster" amd64 "libnettle6"
+debiangetlatestdebfunc "buster" amd64 "libpcre3"
+debiangetlatestdebfunc "buster" amd64 "libpsl5"
+debiangetlatestdebfunc "buster" amd64 "libuuid1"
+debiangetlatestdebfunc "buster" amd64 "zlib1g"
 
 cd "$BUILD_DIR"/deps/extracted
 debextractfunc () {
@@ -39,13 +47,14 @@ debextractfunc () {
 }
 
 debextractfunc "wget.deb"
-debextractfunc "libgnutls.deb"
-debextractfunc "libnettle.deb"
-debextractfunc "libpsl.deb"
-debextractfunc "libicu.deb"
-debextractfunc "libhogweed.deb"
-debextractfunc "libstdc++.deb"
-debextractfunc "libgmp.deb"
+debextractfunc "libgnutls30.deb"
+debextractfunc "libnettle6.deb"
+debextractfunc "libidn2-0.deb"
+debextractfunc "libunistring2.deb"
+debextractfunc "libpcre3.deb"
+debextractfunc "libpsl5.deb"
+debextractfunc "libuuid1.deb"
+debextractfunc "zlib1g.deb"
 rm -rf "$BUILD_DIR"/deps
 
 mkdir -p "$BUILD_DIR"/spm.AppDir/usr/share/spm
@@ -61,8 +70,21 @@ cp ~/github/spm/ssft.sh "$BUILD_DIR"/spm.AppDir/usr/share/spm/
 cp ~/github/spm/spm.desktop "$BUILD_DIR"/spm.AppDir/
 cp ~/github/spm/spm.png "$BUILD_DIR"/spm.AppDir/
 
-wget "https://github.com/darealshinji/AppImageKit-checkrt/releases/download/continuous/AppRun-patched-x86_64" -O "$BUILD_DIR"/spm.AppDir/AppRun
+wget "https://raw.githubusercontent.com/simoniz0r/spm-repo/aibs/resources/AppRun" -O "$BUILD_DIR"/spm.AppDir/AppRun
 chmod a+x "$BUILD_DIR"/spm.AppDir/AppRun
+
+cat >"$BUILD_DIR"/AppRun.conf << EOL
+APPRUN_SET_PATH="TRUE"
+APPRUN_SET_LD_LIBRARY_PATH="TRUE"
+APPRUN_SET_PYTHONPATH="FALSE"
+APPRUN_SET_PYTHONHOME="FALSE"
+APPRUN_SET_PYTHONDONTWRITEBYTECODE="FALSE"
+APPRUN_SET_XDG_DATA_DIRS="TRUE"
+APPRUN_SET_PERLLIB="FALSE"
+APPRUN_SET_GSETTINGS_SCHEMA_DIR="FALSE"
+APPRUN_SET_QT_PLUGIN_PATH="FALSE"
+APPRUN_EXEC="./usr/share/spm/spm"
+EOL
 
 appimagetool "$BUILD_DIR"/spm.AppDir "$BUILD_DIR"/spm-"$VERSION"-x86_64.AppImage || exit 1
 rm -rf "$BUILD_DIR"/spm.AppDir

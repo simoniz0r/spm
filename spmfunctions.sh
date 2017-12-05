@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.6.2"
+X="0.6.3"
 # Set spm version
 
 helpfunc () { # All unknown arguments come to this function; display help for spm
