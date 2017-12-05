@@ -474,6 +474,7 @@ tarinstallstartfunc () { # Check to make sure another command by the same name i
         case $SSFT_RESULT in
             Exit|N*|n*)
                 ssft_display_error "${CLR_RED}Error" "$TARPKG was not installed.${CLR_CLEAR}"
+                rm -f "$CONFDIR"/tarinstalled/."$TARPNG".yml
                 rm -rf "$CONFDIR"/cache/*
                 exit 0
                 ;;

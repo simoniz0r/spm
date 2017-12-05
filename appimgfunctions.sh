@@ -399,6 +399,7 @@ appimginstallstartfunc () {
     case $SSFT_RESULT in
         Exit|N*|n*) # If answer is no, exit
             ssft_display_error "${CLR_RED}Error" "$INSTIMG was not installed.${CLR_CLEAR}"
+            rm -f "$CONFDIR"/appimginstalled/."$INSTIMG".yml
             rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
             exit 0
             ;;
