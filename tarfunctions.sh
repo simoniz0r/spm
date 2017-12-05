@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.6.3"
+X="0.6.4"
 # Set spm version
 TAR_LIST="$(cat "$CONFDIR"/tar-pkgs.yml | cut -f1 -d":")"
 TAR_SIZE="N/A"
@@ -332,7 +332,7 @@ tarupgradecheckallfunc () { # Run a for loop to check all installed tar packages
     for package in $(dir -C -w 1 "$CONFDIR"/tarinstalled); do
         TARPKG="$package"
         tarappcheckfunc "$package"
-        echo "Checking ${TAR_CLR}$package${CLR_CLEAR} version..."
+        # echo "Checking ${TAR_CLR}$package${CLR_CLEAR} version..."
         checktarversionfunc
         if [ "$TAR_NEW_UPGRADE" = "TRUE" ]; then
             echo "${TAR_CLR}$(tput bold)New upgrade available for $package -- $TAR_NEW_VERSION !${CLR_CLEAR}"
@@ -376,18 +376,20 @@ tarupdatelistfunc () { # Download tar-pkgs.yml from github repo and run relevant
                 touch "$CONFDIR"/cache/tarupdate.lock
                 echo "Downloading tar-pkgs.yml from spm github repo..."
                 rm "$CONFDIR"/tar-pkgs.*
-                wget --no-verbose "https://raw.githubusercontent.com/simoniz0r/spm-repo/master/tar-pkgs.yml" -O "$CONFDIR"/tar-pkgs.yml
+                wget --quiet "https://raw.githubusercontent.com/simoniz0r/spm-repo/master/tar-pkgs.yml" -O "$CONFDIR"/tar-pkgs.yml
                 echo "tar-pkgs.yml updated!"
                 echo "Downloading new information from spm-repo..."
                 for tarpkg in $(dir -C -w 1 "$CONFDIR"/tarinstalled); do
                     SPM_TAR_REPO_BRANCH="$("$RUNNING_DIR"/yaml r "$CONFDIR"/tar-pkgs.yml $tarpkg)"
                     echo "https://github.com/simoniz0r/spm-repo/raw/$SPM_TAR_REPO_BRANCH/$tarpkg.yml" >> "$CONFDIR"/cache/tar-yml-wget.list
                 done
-                cd "$CONFDIR"/cache
-                wget --no-verbose -i "$CONFDIR"/cache/tar-yml-wget.list || { ssft_display_error "${CLR_RED}Error" "wget failed!${CLR_CLEAR}"; rm -rf "$CONFDIR"/cache/*; exit 1; }
-                for ymlfile in $(dir -C -w 1 "$CONFDIR"/cache/*.yml); do
+                mkdir cd "$CONFDIR"/cache/tar
+                cd "$CONFDIR"/cache/tar
+                wget --quiet -i "$CONFDIR"/cache/tar-yml-wget.list || { ssft_display_error "${CLR_RED}Error" "wget failed!${CLR_CLEAR}"; rm -rf "$CONFDIR"/cache/*; exit 1; }
+                echo "tar package info updated!"
+                for ymlfile in $(dir -C -w 1 "$CONFDIR"/cache/tar/*.yml); do
                     ymlfile="${ymlfile##*/}"
-                    mv "$CONFDIR"/cache/"$ymlfile" "$CONFDIR"/tarinstalled/."$ymlfile"
+                    mv "$CONFDIR"/cache/tar/"$ymlfile" "$CONFDIR"/tarinstalled/."$ymlfile"
                 done
             fi
             tarupgradecheckallfunc

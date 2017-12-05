@@ -6,7 +6,7 @@
 # Website: http://www.simonizor.gq
 # License: GPL v2.0 only
 
-X="0.6.3"
+X="0.6.4"
 # Set spm version
 
 # Set variables
@@ -107,8 +107,8 @@ appimggithubinfofunc () {
 
 appimgdirectinfofunc () {
     DIRECT_APPIMAGE_URL="$("$RUNNING_DIR"/yaml r "$CONFDIR"/appimginstalled/."$INSTIMG".yml url)"
-    # wget -S --read-timeout=30 --spider "$DIRECT_APPIMAGE_URL" -o "$CONFDIR"/cache/"$INSTIMG".latest
-    NEW_APPIMAGE_VERSION="$(wget -S --read-timeout=30 --spider "$DIRECT_APPIMAGE_URL" -O - 2>&1 | grep -m 1 'Location:')"
+    # wget -S --connect-timeout=15 --spider "$DIRECT_APPIMAGE_URL" -o "$CONFDIR"/cache/"$INSTIMG".latest
+    NEW_APPIMAGE_VERSION="$(wget -S --connect-timeout=15 --spider "$DIRECT_APPIMAGE_URL" -O - 2>&1 | grep -m 1 'Location:')"
     NEW_APPIMAGE_VERSION="${NEW_APPIMAGE_VERSION##*/}"
     APPIMAGE_DESCRIPTION="$DIRECT_APPIMAGE_URL"
     if [ -z "$NEW_APPIMAGE_VERSION" ]; then
@@ -241,7 +241,7 @@ appimgupgradecheckallfunc () {
         INSTIMG="$AppImage"
         appimgcheckfunc "$AppImage"
         appimginfofunc # Download web pages containing app info and set variables from them
-        echo "Checking ${APPIMG_CLR}$AppImage${CLR_CLEAR} version..."
+        # echo "Checking ${APPIMG_CLR}$AppImage${CLR_CLEAR} version..."
         appimgvercheckfunc
         if [ "$APPIMG_NEW_UPGRADE" = "TRUE" ]; then # Mark AppImage for upgrade if appimgvercheckfunc outputs APPIMG_NEW_UPGRADE="TRUE"
             echo "${APPIMG_CLR}$(tput bold)New upgrade available for $AppImage -- $NEW_APPIMAGE_VERSION !${CLR_CLEAR}"
@@ -281,24 +281,27 @@ appimgupdatelistfunc () { # Download AppImages.yml from github, and check versio
         else
             echo "Checking for changes from spm-repo..."
             if [ "$SPM_REPO_SHA" = "$NEW_SPM_REPO_SHA" ]; then
-                echo "No new changes from spm-repo; skipping package list updates..."
+                echo "No new changes from spm-repo; starting package upgrade checks..."
             else
                 touch "$CONFDIR"/cache/appimgupdate.lock
                 echo "Downloading AppImages.yml from spm github repo..." # Download existing list of AppImages from spm github repo
                 rm -f "$CONFDIR"/AppImages.yml
                 rm -f "$CONFDIR"/AppImages-*
-                wget --no-verbose "https://raw.githubusercontent.com/simoniz0r/spm-repo/master/AppImages.yml" -O "$CONFDIR"/AppImages.yml || { ssft_display_error "${CLR_RED}Error" "wget failed; exiting...${CLR_CLEAR}"; rm -rf "$CONFDIR"/cache/*; exit 1; }
+                wget --quiet "https://raw.githubusercontent.com/simoniz0r/spm-repo/master/AppImages.yml" -O "$CONFDIR"/AppImages.yml || { ssft_display_error "${CLR_RED}Error" "wget failed; exiting...${CLR_CLEAR}"; rm -rf "$CONFDIR"/cache/*; exit 1; }
                 echo "AppImages.yml updated!"
                 echo "Downloading new information from spm-repo..."
                 for appimg in $(dir -C -w 1 "$CONFDIR"/appimginstalled); do
                     SPM_APPIMG_REPO_BRANCH="$("$RUNNING_DIR"/yaml r "$CONFDIR"/AppImages.yml $appimg)"
                     echo "https://github.com/simoniz0r/spm-repo/raw/$SPM_APPIMG_REPO_BRANCH/$appimg.yml" >> "$CONFDIR"/cache/appimg-yml-wget.list
                 done
-                cd "$CONFDIR"/cache
-                wget --no-verbose -i "$CONFDIR"/cache/appimg-yml-wget.list || { ssft_display_error "${CLR_RED}Error" "wget failed!${CLR_CLEAR}"; rm -rf "$CONFDIR"/cache/*; exit 1; }
-                for ymlfile in $(dir -C -w 1 "$CONFDIR"/cache/*.yml); do
+                mkdir "$CONFDIR"/cache/appimg
+                cd "$CONFDIR"/cache/appimg
+                wget --quiet -i "$CONFDIR"/cache/appimg-yml-wget.list || { ssft_display_error "${CLR_RED}Error" "wget failed!${CLR_CLEAR}"; rm -rf "$CONFDIR"/cache/*; exit 1; }
+                echo "AppImage info updated!"
+                echo "Starting package upgrade checks..."
+                for ymlfile in $(dir -C -w 1 "$CONFDIR"/cache/appimg/*.yml); do
                     ymlfile="${ymlfile##*/}"
-                    mv "$CONFDIR"/cache/"$ymlfile" "$CONFDIR"/appimginstalled/."$ymlfile"
+                    mv "$CONFDIR"/cache/appimg/"$ymlfile" "$CONFDIR"/appimginstalled/."$ymlfile"
                 done
             fi
             appimgupgradecheckallfunc
@@ -345,7 +348,7 @@ appimgupdateforcefunc () {
 appimgdlfunc () { # wget latest url from direct website or github repo and wget it
     if [ "$DIRECT_IMG" = "TRUE" ]; then # If AppImage is DIRECT, use method below to download it
         cd "$CONFDIR"/cache
-        wget --read-timeout=30 "$DIRECT_APPIMAGE_URL" -O "$CONFDIR"/cache/"$APPIMAGE_NAME" || { ssft_display_error "${CLR_RED}Error" "wget $DIRECT_APPIMAGE_URL failed; exiting...${CLR_CLEAR}"; rm -rf "$CONFDIR"/cache/*; exit 1; }
+        wget --connect-timeout=15 "$DIRECT_APPIMAGE_URL" -O "$CONFDIR"/cache/"$APPIMAGE_NAME" || { ssft_display_error "${CLR_RED}Error" "wget $DIRECT_APPIMAGE_URL failed; exiting...${CLR_CLEAR}"; rm -rf "$CONFDIR"/cache/*; exit 1; }
         if [ -z "$APPIMAGE_NAME" ]; then
             APPIMAGE_NAME="$(dir -C -w 1 "$CONFDIR"/cache/ | grep -iw '.*AppImage')"
         fi
@@ -355,7 +358,7 @@ appimgdlfunc () { # wget latest url from direct website or github repo and wget 
         NEW_APPIMAGE_VERSION="$APPIMAGE_NAME"
         mv "$CONFDIR"/cache/"$APPIMAGE_NAME" "$CONFDIR"/cache/"$INSTIMG"
     elif [ "$GITHUB_IMG" = "TRUE" ]; then # If AppImage is from github, use method below to download it
-        wget --read-timeout=30 "$GITHUB_APPIMAGE_URL" -O "$CONFDIR"/cache/"$INSTIMG" || { ssft_display_error "${CLR_RED}Error" "wget $GITHUB_APPIMAGE_URL failed; exiting...${CLR_CLEAR}"; rm -rf "$CONFDIR"/cache/*; exit 1; }
+        wget --connect-timeout=15 "$GITHUB_APPIMAGE_URL" -O "$CONFDIR"/cache/"$INSTIMG" || { ssft_display_error "${CLR_RED}Error" "wget $GITHUB_APPIMAGE_URL failed; exiting...${CLR_CLEAR}"; rm -rf "$CONFDIR"/cache/*; exit 1; }
     fi
 }
 
