@@ -378,7 +378,6 @@ tarupdatelistfunc () { # Download tar-pkgs.yml from github repo and run relevant
                 rm "$CONFDIR"/tar-pkgs.*
                 wget --quiet "https://raw.githubusercontent.com/simoniz0r/spm-repo/master/tar-pkgs.yml" -O "$CONFDIR"/tar-pkgs.yml
                 echo "tar-pkgs.yml updated!"
-                echo "Downloading new information from spm-repo..."
                 for tarpkg in $(dir -C -w 1 "$CONFDIR"/tarinstalled); do
                     SPM_TAR_REPO_BRANCH="$("$RUNNING_DIR"/yaml r "$CONFDIR"/tar-pkgs.yml $tarpkg)"
                     echo "https://github.com/simoniz0r/spm-repo/raw/$SPM_TAR_REPO_BRANCH/$tarpkg.yml" >> "$CONFDIR"/cache/tar-yml-wget.list
