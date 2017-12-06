@@ -383,7 +383,7 @@ tarupdatelistfunc () { # Download tar-pkgs.yml from github repo and run relevant
                     SPM_TAR_REPO_BRANCH="$("$RUNNING_DIR"/yaml r "$CONFDIR"/tar-pkgs.yml $tarpkg)"
                     echo "https://github.com/simoniz0r/spm-repo/raw/$SPM_TAR_REPO_BRANCH/$tarpkg.yml" >> "$CONFDIR"/cache/tar-yml-wget.list
                 done
-                mkdir cd "$CONFDIR"/cache/tar
+                mkdir "$CONFDIR"/cache/tar
                 cd "$CONFDIR"/cache/tar
                 wget --quiet -i "$CONFDIR"/cache/tar-yml-wget.list || { ssft_display_error "${CLR_RED}Error" "wget failed!${CLR_CLEAR}"; rm -rf "$CONFDIR"/cache/*; exit 1; }
                 echo "tar package info updated!"
