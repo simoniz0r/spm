@@ -12,7 +12,7 @@ cat >"$HOME"/github/spm/spm-feed.json << EOL
 {
   "version": 1,
   "home_page_url": "https://github.com/simoniz0r/spm",
-  "feed_url": "https://github.com/simoniz0r/spm/spm-feed.json",
+  "feed_url": "https://raw.githubusercontent.com/simoniz0r/spm/master/spm-feed.json",
   "description": "json feed containing AppImage and precompiled tar package information for spm.",
   "updated_at": "$(date)",
   "expired": false,
