@@ -1,0 +1,11 @@
+name: DiscordToolbox
+instdir: /opt/discord-toolbox
+taruri: https://github.com/simoniz0r/DiscordToolbox/releases
+apiuri: https://api.github.com/repos/simoniz0r/DiscordToolbox/releases
+desktop_file_path: NONE
+icon_file_path: NONE
+executable_file_path: /opt/discord-toolbox/DiscordToolbox
+bin_path: /usr/local/bin/discord-toolbox
+config_path: $HOME/.config/DiscordToolbox
+description: A bash script that installs mods for Discord. Mods that can be installed are BeautifulDiscord mydiscord and BetterDiscord.
+dependencies: coreutils wget dialog (optional - for discord-toolbox GUI) nodejs (optional - required for BetterDiscord) npm (optional - required for BetterDiscord) python3 (optional - required for BeautifulDiscord and mydiscord) python3-pip (optional - required for BeautifulDiscord and mydiscord)

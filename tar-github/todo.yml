@@ -1,0 +1,11 @@
+name: todo
+instdir: /opt/todo
+taruri: https://github.com/simoniz0r/todo/releases
+apiuri: https://api.github.com/repos/simoniz0r/todo/releases
+desktop_file_path: NONE
+icon_file_path: NONE
+executable_file_path: /opt/todo/todo.sh
+bin_path: /usr/local/bin/todo
+config_path: 
+description: todo manages todo lists in an easy to use manner. Lists are stored in ~/.todo/ListName with each item in the list stored as a separate file in that directory.
+dependencies: coreutils

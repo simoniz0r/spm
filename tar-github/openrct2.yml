@@ -1,0 +1,11 @@
+name: OpenRCT2
+instdir: /opt/openrct2
+taruri: https://github.com/OpenRCT2/OpenRCT2/releases
+apiuri: https://api.github.com/repos/OpenRCT2/OpenRCT2/releases
+desktop_file_path: DOWNLOAD
+icon_file_path: applications-games
+executable_file_path: /opt/openrct2/openrct2
+bin_path: /usr/local/bin/openrct2
+config_path: $HOME/.config/openrct2
+description: An open source re-implementation of RollerCoaster Tycoon 2
+dependencies: sdl2 sdl2-ttf (can be disabled) fontconfig (can be disabled) libzip (>= 1.0) libpng (>= 1.2) speexdsp curl (only if building with http support) jansson (>= 2.5) openssl (>= 1.0; only if building with multiplayer support) iconv zlib gl (commonly provided by Mesa or GPU vendors; can be disabled)

@@ -1,0 +1,11 @@
+name: wrapt
+instdir: /opt/wrapt
+taruri: https://github.com/simoniz0r/wrapt/releases
+apiuri: https://api.github.com/repos/simoniz0r/wrapt/releases
+desktop_file_path: NONE
+icon_file_path: NONE
+executable_file_path: /opt/wrapt/wrapt.sh
+bin_path: /usr/local/bin/wrapt
+config_path:
+description: A simple wrapper for apt that brings all useful apt commands into one easy to use script
+dependencies: apt

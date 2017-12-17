@@ -1,0 +1,10 @@
+name: firefox-dev
+instdir: /opt/firefox-dev
+taruri: https://download.mozilla.org/?product=firefox-devedition-latest-ssl&os=linux64&lang=en-US
+desktop_file_path: DOWNLOAD
+icon_file_path: /opt/firefox-dev/browser/icons/mozicon128.png
+executable_file_path: /opt/firefox-dev/firefox
+bin_path: /usr/local/bin/firefox-dev
+config_path: $HOME/.mozilla
+description: Browse the World Wide Web
+dependencies: alsa-lib dbus-glib ffmpeg gtk2 gtk3 hunspell icu libevent libvpx libxt mime-types mozilla-common sqlite startup-notification ttf-font libnotify (optional – notification integration) networkmanager (optional – location detection via available WiFi networks) speech-dispatcher (optional – Text-to-Speech)

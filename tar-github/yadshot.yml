@@ -1,0 +1,11 @@
+name: yadshot
+instdir: /opt/yadshot
+taruri: https://github.com/simoniz0r/yadshot/releases
+apiuri: https://api.github.com/repos/simoniz0r/yadshot/releases
+desktop_file_path: /opt/yadshot/yadshot.desktop
+icon_file_path: /opt/yadshot/yadshot.png
+executable_file_path: /opt/yadshot/yadshot.sh
+bin_path: /usr/local/bin/yadshot
+config_path: $HOME/.config/yadshot
+description: A bash script that uses yad to provide a GUI front end for maim/slop. Images can be copied to clipboard uploaded to imgur or saved.
+dependencies: coreutils yad maim slop xclip curl

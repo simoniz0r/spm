@@ -1,0 +1,10 @@
+name: discord-ptb
+instdir: /opt/discord-ptb
+taruri: https://discordapp.com/api/download/ptb?platform=linux&format=tar.gz
+desktop_file_path: /opt/discord-ptb/discord-ptb.desktop
+icon_file_path: /opt/discord-ptb/discord.png
+executable_file_path: /opt/discord-ptb/DiscordPTB
+bin_path: /usr/local/bin/discord-ptb
+config_path: $HOME/.config/discordptb
+description: All-in-one voice and text chat for gamers that's free secure and works on both your desktop and phone.
+dependencies: alsa-lib gconf glibc gtk2 libc++ libnotify libxss nspr nss libpulse (optional – for pulseaudio support) noto-fonts-emoji (optional – Google font for emoji support.) ttf-symbola (optional – font for emoji support.)

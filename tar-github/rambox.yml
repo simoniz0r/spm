@@ -1,0 +1,11 @@
+name: rambox
+instdir: /opt/rambox
+taruri: https://github.com/saenzramiro/rambox/releases
+apiuri: https://api.github.com/repos/saenzramiro/rambox/releases
+desktop_file_path: DOWNLOAD
+icon_file_path: internet-mail
+executable_file_path: /opt/rambox/rambox
+bin_path: /usr/local/bin/rambox
+config_path: $HOME/.config/rambox
+description: Free and Open Source messaging and emailing app that combines common web applications into one.
+dependencies: alsa-lib gconf gtk2 libnotify libxss libxtst nss

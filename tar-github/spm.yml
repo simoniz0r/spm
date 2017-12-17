@@ -1,0 +1,11 @@
+name: spm
+instdir: /opt/spm
+taruri: https://github.com/simoniz0r/spm/releases
+apiuri: https://api.github.com/repos/simoniz0r/spm/releases
+desktop_file_path: NONE
+icon_file_path: NONE
+executable_file_path: /opt/spm/spm
+bin_path: /usr/local/bin/spm
+config_path: $HOME/.config/spm
+description: spm is a simple commandline package manager that installs AppImages and precompiled tar archives.  Install this tar to be able to use spm as a command and to allow spm to upgrade itself.
+dependencies: coreutils bc tar wget

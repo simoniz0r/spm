@@ -1,0 +1,11 @@
+name: yusm
+instdir: /opt/yusm
+taruri: https://github.com/simoniz0r/yusm/releases
+apiuri: https://api.github.com/repos/simoniz0r/yusm/releases
+desktop_file_path: /opt/yusm/yusm.desktop
+icon_file_path: /opt/yusm/yusm.png
+executable_file_path: /opt/yusm/yusm.sh
+bin_path: /usr/local/bin/yusm
+config_path:
+description: Yad uAppExplorer Snap Manager - Unofficial app for managing snaps based on uappexplorer.com/snaps 
+dependencies: snap, yad (version 0.3.9.0 or greater)

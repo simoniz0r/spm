@@ -1,0 +1,11 @@
+name: ripgrep
+instdir: /opt/rg
+taruri: https://github.com/BurntSushi/ripgrep
+apiuri: https://api.github.com/repos/BurntSushi/ripgrep
+desktop_file_path: NONE
+icon_file_path: NONE
+executable_file_path: /opt/rg/rg
+bin_path: /usr/local/bin/fd
+config_path:
+description: ripgrep combines the usability of The Silver Searcher with the raw speed of grep
+dependencies: None

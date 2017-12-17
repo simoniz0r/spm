@@ -1,0 +1,11 @@
+name: yad-twitch-streamlink
+instdir: /opt/yad-twitch-streamlink
+taruri: https://github.com/simoniz0r/yad-twitch-streamlink/releases
+apiuri: https://api.github.com/repos/simoniz0r/yad-twitch-streamlink/releases
+desktop_file_path: /opt/yad-twitch-streamlink/yad-twitch-streamlink.desktop
+icon_file_path: /opt/yad-twitch-streamlink/ytsicon.png
+executable_file_path: /opt/yad-twitch-streamlink/yad-twitch-streamlink
+bin_path: /usr/local/bin/yad-twitch-streamlink
+config_path: $HOME/.config/yad-twitch-streamlink
+description: yad-twitch-streamlink provides a list of live followed streams for playback using either streamlink or mpv. It also provides notifications for new live streams.
+dependencies: coreutils yad wget streamlink (optional - for better stream playback) mpv (optional - if streamlink is not used for stream playback)

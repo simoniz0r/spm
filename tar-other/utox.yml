@@ -1,0 +1,10 @@
+name: utox
+instdir: /opt/utox
+taruri: https://build.tox.chat/view/uTox/job/uTox_build_linux_x86-64_release/lastSuccessfulBuild/artifact/utox_linux_x86-64.tar.xz
+desktop_file_path: NONE
+icon_file_path: NONE
+executable_file_path: /opt/utox/utox
+bin_path: /usr/local/bin/utox
+config_path:
+description: µTox the lightest and fluffiest Tox client https://utox.io
+dependencies: None

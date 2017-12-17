@@ -1,0 +1,10 @@
+name: imagewriter
+instdir: /opt/imagewriter
+taruri: http://wiki.rosalab.ru/en/images/7/7f/RosaImageWriter-2.6.2-lin-x86_64.tar.xz
+desktop_file_path: NONE
+icon_file_path: NONE
+executable_file_path: /opt/imagewriter/RosaImageWriter
+bin_path: /usr/local/bin/imagewriter
+config_path: null
+description: ROSA ImageWriter is a program for writing disk images to a flash disk.
+dependencies: null

@@ -1,0 +1,10 @@
+name: vscode
+instdir: /opt/vscode
+taruri: https://go.microsoft.com/fwlink/?LinkID=620884
+desktop_file_path: DOWNLOAD
+icon_file_path: /opt/vscode/resources/app/resources/linux/code.png
+executable_file_path: /opt/vscode/code
+bin_path: /usr/local/bin/vscode
+config_path: $HOME/.vscode
+description: Visual Studio Code is a lightweight but powerful source code editor which runs on your desktop and is available for Windows macOS and Linux.
+dependencies: libnotify libnss gnupg libxkbfile libgconf

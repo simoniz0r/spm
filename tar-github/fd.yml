@@ -1,0 +1,11 @@
+name: fd
+instdir: /opt/fd
+taruri: https://github.com/sharkdp/fd/releases
+apiuri: https://api.github.com/repos/sharkdp/fd/releases
+desktop_file_path: NONE
+icon_file_path: NONE
+executable_file_path: /opt/fd/fd
+bin_path: /usr/local/bin/fd
+config_path:
+description:  A simple, fast and user-friendly alternative to find
+dependencies: None

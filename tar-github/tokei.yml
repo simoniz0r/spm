@@ -1,0 +1,11 @@
+name: tokei
+instdir: /opt/tokei
+taruri: https://github.com/Aaronepower/tokei/releases
+apiuri: https://api.github.com/repos/Aaronepower/tokei/releases
+desktop_file_path: NONE
+icon_file_path: NONE
+executable_file_path: /opt/tokei/tokei
+bin_path: /usr/local/bin/tokei
+config_path:
+description:  A program that allows you to count your code, quickly
+dependencies: None
