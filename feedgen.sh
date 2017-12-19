@@ -7,12 +7,12 @@
 # License: GPL v2.0 only
 # Generates spm-feed.json containing info for AppImages and precompiled tar packages
 
-rm -f "$HOME"/github/spm/spm-feed.json
-cat >"$HOME"/github/spm/spm-feed.json << EOL
+rm -f "$HOME"/github/index/spm-feed.json
+cat >"$HOME"/github/index/spm-feed.json << EOL
 {
   "version": 1,
   "home_page_url": "https://github.com/simoniz0r/spm",
-  "feed_url": "https://raw.githubusercontent.com/simoniz0r/spm/master/spm-feed.json",
+  "feed_url": "http://www.simonizor.gq/spm-feed.json",
   "description": "json feed containing AppImage and precompiled tar package information for spm.",
   "updated_at": "$(date)",
   "expired": false,
@@ -31,7 +31,7 @@ for image in $(dir -C -w 1 $HOME/github/spm/appimages); do
                 ;;
         esac
         # lower_image="$(echo "$image" | tr '[:upper:]' '[:lower:]' | tr -d '.')"
-        cat >>"$HOME"/github/spm/spm-feed.json << EOL
+        cat >>"$HOME"/github/index/spm-feed.json << EOL
     {
       "name": "$image",
       "type": "AppImage",
@@ -61,7 +61,7 @@ done
 for image in $(dir -C -w 1 $HOME/github/spm/appimages); do
     URL="$(grep -v '#' $HOME/github/spm/appimages/"$image" | grep -v '.*github*.')"
     if [ ! -z "$URL" ]; then
-        cat >>"$HOME"/github/spm/spm-feed.json << EOL
+        cat >>"$HOME"/github/index/spm-feed.json << EOL
     {
       "name": "$image",
       "type": "AppImage",
@@ -87,7 +87,7 @@ EOL
     fi
 done
 
-cat >>"$HOME"/github/spm/spm-feed.json << EOL
+cat >>"$HOME"/github/index/spm-feed.json << EOL
     {
       "name": "END",
       "type": "END",
@@ -114,7 +114,7 @@ EOL
 
 for tar in $(dir -C -w 1 $HOME/github/spm/tar-github); do
     # tar_name="$(echo "$tar" | cut -f1 -d'.')"
-    cat >>"$HOME"/github/spm/spm-feed.json << EOL
+    cat >>"$HOME"/github/index/spm-feed.json << EOL
     {
       "name": "$(yaml r "$HOME"/github/spm/tar-github/$tar name)",
       "type": "tar",
@@ -134,7 +134,7 @@ EOL
 done
 
 for tar in $(dir -C -w 1 $HOME/github/spm/tar-other); do
-    cat >>"$HOME"/github/spm/spm-feed.json << EOL
+    cat >>"$HOME"/github/index/spm-feed.json << EOL
     {
       "name": "$(yaml r "$HOME"/github/spm/tar-other/$tar name)",
       "type": "tar",
@@ -152,7 +152,7 @@ for tar in $(dir -C -w 1 $HOME/github/spm/tar-other); do
 EOL
 done
 
-cat >>"$HOME"/github/spm/spm-feed.json << EOL
+cat >>"$HOME"/github/index/spm-feed.json << EOL
     {
       "name": "END",
       "instdir": "END",
