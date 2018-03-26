@@ -1,0 +1,22 @@
+{
+  "sigrok": "sigrok",
+  "name": "Sigrok",
+  "type": "AppImage",
+  "description": "N/A",
+  "authors": [
+    {
+      "name": "N/A",
+      "url": "N/A"
+    }
+  ],
+  "links": [
+    {
+      "type": "Other",
+      "url": "N/A"
+    },
+    {
+      "type": "Install",
+      "url": "https://sigrok.org/jenkins/job/sigrok-native-appimage/platform=native-amd64/lastSuccessfulBuild/artifact/cross-compile/appimage/out/PulseView-NIGHTLY.glibc2.14-x86_64.AppImage"
+    }
+  ]
+}
