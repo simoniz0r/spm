@@ -1,0 +1,22 @@
+{
+  "deb2appimage": "deb2appimage",
+  "name": "deb2appimage",
+  "type": "AppImage",
+  "description": "Build AppImages from deb packages on any distro with simple json configuration",
+  "authors": [
+    {
+      "name": "simoniz0r",
+      "url": "https://github.com/simoniz0r"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "simoniz0r/deb2appimage"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/simoniz0r/deb2appimage/releases"
+    }
+  ]
+}
