@@ -2,7 +2,7 @@
   "appimageupdatetool": "appimageupdatetool",
   "name": "appimageupdatetool",
   "type": "AppImage",
-  "description": "AppImageKit - Package desktop applications as AppImages that run on common Linux-based operating systems such as RHEL CentOS openSUSE SLED Ubuntu Fedora debian and derivatives Join AppImage on ircfreenodenet",
+  "description": "AppImageUpdate lets you update AppImages in a decentral way using information embedded in the AppImage itself",
   "authors": [
     {
       "name": "AppImage",
@@ -12,11 +12,11 @@
   "links": [
     {
       "type": "GitHub",
-      "url": "AppImage/AppImageKit"
+      "url": "AppImage/AppImageUpdate"
     },
     {
       "type": "Install",
-      "url": "https://github.com/AppImage/AppImageKit/releases"
+      "url": "https://github.com/AppImage/AppImageUpdate/releases"
     }
   ]
 }
