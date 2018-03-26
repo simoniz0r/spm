@@ -1,0 +1,22 @@
+{
+  "nvim": "nvim",
+  "name": "nvim",
+  "type": "AppImage",
+  "description": "neovim - Vim-fork focused on extensibility and usability",
+  "authors": [
+    {
+      "name": "neovim",
+      "url": "https://github.com/neovim"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "neovim/neovim"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/neovim/neovim/releases"
+    }
+  ]
+}

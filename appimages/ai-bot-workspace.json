@@ -1,0 +1,22 @@
+{
+  "ai-bot-workspace": "ai-bot-workspace",
+  "name": "ai-bot-workspace",
+  "type": "AppImage",
+  "description": "ai-bot-workspace -  Graphical bot runner for Riddlesio bots",
+  "authors": [
+    {
+      "name": "jmerle",
+      "url": "https://github.com/jmerle"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "jmerle/ai-bot-workspace"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/jmerle/ai-bot-workspace/releases"
+    }
+  ]
+}

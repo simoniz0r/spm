@@ -1,0 +1,22 @@
+{
+  "cate-desktop": "cate-desktop",
+  "name": "cate-desktop",
+  "type": "AppImage",
+  "description": "cate - ESA CCI Toolbox Cate",
+  "authors": [
+    {
+      "name": "CCI-Tools",
+      "url": "https://github.com/CCI-Tools"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "CCI-Tools/cate"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/CCI-Tools/cate/releases"
+    }
+  ]
+}

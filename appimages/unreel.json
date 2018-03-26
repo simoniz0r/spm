@@ -1,0 +1,22 @@
+{
+  "unreel": "unreel",
+  "name": "unreel",
+  "type": "AppImage",
+  "description": "unreel - Unreel Reveal your ideas",
+  "authors": [
+    {
+      "name": "linux-man",
+      "url": "https://github.com/linux-man"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "linux-man/unreel"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/linux-man/unreel/releases"
+    }
+  ]
+}

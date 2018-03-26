@@ -1,0 +1,22 @@
+{
+  "ciaa_suite": "ciaa_suite",
+  "name": "CIAA_SUITE",
+  "type": "AppImage",
+  "description": "embedded-ide-builder - Embedded IDE automated build system",
+  "authors": [
+    {
+      "name": "martinribelotta",
+      "url": "https://github.com/martinribelotta"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "martinribelotta/embedded-ide-builder"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/martinribelotta/embedded-ide-builder/releases"
+    }
+  ]
+}

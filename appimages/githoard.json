@@ -1,0 +1,22 @@
+{
+  "githoard": "githoard",
+  "name": "githoard",
+  "type": "AppImage",
+  "description": "githoard - Desktop app that enables users to quickly clone git repositories",
+  "authors": [
+    {
+      "name": "jojobyte",
+      "url": "https://github.com/jojobyte"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "jojobyte/githoard"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/jojobyte/githoard/releases"
+    }
+  ]
+}

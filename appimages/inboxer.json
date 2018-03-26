@@ -1,0 +1,22 @@
+{
+  "inboxer": "inboxer",
+  "name": "inboxer",
+  "type": "AppImage",
+  "description": "inboxer - Unofficial free and open-source Inbox by Gmail Desktop App",
+  "authors": [
+    {
+      "name": "denysdovhan",
+      "url": "https://github.com/denysdovhan"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "denysdovhan/inboxer"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/denysdovhan/inboxer/releases"
+    }
+  ]
+}

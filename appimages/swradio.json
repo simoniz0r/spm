@@ -1,0 +1,22 @@
+{
+  "swradio": "swradio",
+  "name": "swradio",
+  "type": "AppImage",
+  "description": "swradio-8 - shortwave receiver for use with sdrplay",
+  "authors": [
+    {
+      "name": "JvanKatwijk",
+      "url": "https://github.com/JvanKatwijk"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "JvanKatwijk/swradio-8"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/JvanKatwijk/swradio-8/releases"
+    }
+  ]
+}

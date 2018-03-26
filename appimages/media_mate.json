@@ -1,0 +1,22 @@
+{
+  "media_mate": "media_mate",
+  "name": "media_mate",
+  "type": "AppImage",
+  "description": "mediamate - A full media serverplayerdownloaderetc - in one",
+  "authors": [
+    {
+      "name": "willyb321",
+      "url": "https://github.com/willyb321"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "willyb321/media_mate"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/willyb321/media_mate/releases"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "leocad": "leocad",
+  "name": "leocad",
+  "type": "AppImage",
+  "description": "leocad - A CAD program for creating virtual LEGO models",
+  "authors": [
+    {
+      "name": "leozide",
+      "url": "https://github.com/leozide"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "leozide/leocad"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/leozide/leocad/releases"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "lepton": "lepton",
+  "name": "Lepton",
+  "type": "AppImage",
+  "description": "Lepton -     Democratizing Code Snippets Management macOSWinLinux",
+  "authors": [
+    {
+      "name": "hackjutsu",
+      "url": "https://github.com/hackjutsu"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "hackjutsu/Lepton"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/hackjutsu/Lepton/releases"
+    }
+  ]
+}

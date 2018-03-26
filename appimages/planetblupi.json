@@ -1,0 +1,22 @@
+{
+  "planetblupi": "planetblupi",
+  "name": "planetblupi",
+  "type": "AppImage",
+  "description": "planetblupi-dev - Planet Blupi development bundle main repository",
+  "authors": [
+    {
+      "name": "blupi-games",
+      "url": "https://github.com/blupi-games"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "blupi-games/planetblupi-dev"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/blupi-games/planetblupi-dev/releases"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "electron-xiami": "electron-xiami",
+  "name": "electron-xiami",
+  "type": "AppImage",
+  "description": "electron-xiami -  Linux amp Mac  Xiami Player desktop for Linux amp Mac supported by Electron ",
+  "authors": [
+    {
+      "name": "eNkru",
+      "url": "https://github.com/eNkru"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "eNkru/electron-xiami"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/eNkru/electron-xiami/releases"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "botframework-emulator": "botframework-emulator",
+  "name": "BotFramework-Emulator",
+  "type": "AppImage",
+  "description": "BotFramework-Emulator - Bot Framework Emulator",
+  "authors": [
+    {
+      "name": "Microsoft",
+      "url": "https://github.com/Microsoft"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "Microsoft/BotFramework-Emulator"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/Microsoft/BotFramework-Emulator/releases"
+    }
+  ]
+}

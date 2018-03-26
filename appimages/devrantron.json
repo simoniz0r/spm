@@ -1,0 +1,22 @@
+{
+  "devrantron": "devrantron",
+  "name": "devRantron",
+  "type": "AppImage",
+  "description": "devRantron - A cross platform desktop application for devRant",
+  "authors": [
+    {
+      "name": "tahnik",
+      "url": "https://github.com/tahnik"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "tahnik/devRantron"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/tahnik/devRantron/releases"
+    }
+  ]
+}

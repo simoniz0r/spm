@@ -1,0 +1,22 @@
+{
+  "blackmirror": "blackmirror",
+  "name": "blackmirror",
+  "type": "AppImage",
+  "description": "blackmirror - Multi-party automatic writing tool",
+  "authors": [
+    {
+      "name": "sorentycho",
+      "url": "https://github.com/sorentycho"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "sorentycho/blackmirror"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/sorentycho/blackmirror/releases"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "mead": "mead",
+  "name": "mead",
+  "type": "AppImage",
+  "description": "mead - Mead - Dead simple markdown editor for Windows Linux and Mac",
+  "authors": [
+    {
+      "name": "perry-mitchell",
+      "url": "https://github.com/perry-mitchell"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "perry-mitchell/mead"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/perry-mitchell/mead/releases"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "webcamoid": "webcamoid",
+  "name": "webcamoid",
+  "type": "AppImage",
+  "description": "webcamoid - Webcamoid is a full featured and multiplatform webcam suite",
+  "authors": [
+    {
+      "name": "webcamoid",
+      "url": "https://github.com/webcamoid"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "webcamoid/webcamoid"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/webcamoid/webcamoid/releases"
+    }
+  ]
+}

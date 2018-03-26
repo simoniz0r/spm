@@ -1,0 +1,22 @@
+{
+  "sciencefair": "sciencefair",
+  "name": "ScienceFair",
+  "type": "AppImage",
+  "description": "sciencefair - The open source p2p desktop science library that puts users in control microscope book",
+  "authors": [
+    {
+      "name": "codeforscience",
+      "url": "https://github.com/codeforscience"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "codeforscience/sciencefair"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/codeforscience/sciencefair/releases"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "keepassxc": "keepassxc",
+  "name": "KeePassXC",
+  "type": "AppImage",
+  "description": "keepassxc - KeePassXC is a cross-platform community-driven port of the Windows application Keepass Password Safe",
+  "authors": [
+    {
+      "name": "keepassxreboot",
+      "url": "https://github.com/keepassxreboot"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "keepassxreboot/keepassxc"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/keepassxreboot/keepassxc/releases"
+    }
+  ]
+}

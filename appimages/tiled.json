@@ -1,0 +1,22 @@
+{
+  "tiled": "tiled",
+  "name": "Tiled",
+  "type": "AppImage",
+  "description": "tiled - A generic tile map editor",
+  "authors": [
+    {
+      "name": "bjorn",
+      "url": "https://github.com/bjorn"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "bjorn/tiled"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/bjorn/tiled/releases"
+    }
+  ]
+}

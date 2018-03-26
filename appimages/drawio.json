@@ -1,0 +1,22 @@
+{
+  "drawio": "drawio",
+  "name": "drawio",
+  "type": "AppImage",
+  "description": "drawio-desktop - Official electron build of drawio",
+  "authors": [
+    {
+      "name": "jgraph",
+      "url": "https://github.com/jgraph"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "jgraph/drawio-desktop"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/jgraph/drawio-desktop/releases"
+    }
+  ]
+}

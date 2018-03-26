@@ -1,0 +1,22 @@
+{
+  "ahgequip": "ahgequip",
+  "name": "AHGequip",
+  "type": "AppImage",
+  "description": "The public repository used by TroopTrack to release AHGequip",
+  "authors": [
+    {
+      "name": "TroopTrack",
+      "url": "https://github.com/TroopTrack"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "TroopTrack/AHGequip"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/TroopTrack/AHGequip/releases"
+    }
+  ]
+}

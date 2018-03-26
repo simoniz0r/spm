@@ -1,0 +1,22 @@
+{
+  "sabaki": "sabaki",
+  "name": "Sabaki",
+  "type": "AppImage",
+  "description": "Sabaki - An elegant Go board and SGF editor for a more civilized age",
+  "authors": [
+    {
+      "name": "yishn",
+      "url": "https://github.com/yishn"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "yishn/Sabaki"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/yishn/Sabaki/releases"
+    }
+  ]
+}

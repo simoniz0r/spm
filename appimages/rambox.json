@@ -1,0 +1,22 @@
+{
+  "rambox": "rambox",
+  "name": "Rambox",
+  "type": "AppImage",
+  "description": "rambox - Free and Open Source messaging and emailing app that combines common web applications into one",
+  "authors": [
+    {
+      "name": "saenzramiro",
+      "url": "https://github.com/saenzramiro"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "saenzramiro/rambox"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/saenzramiro/rambox/releases"
+    }
+  ]
+}

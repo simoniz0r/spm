@@ -1,0 +1,22 @@
+{
+  "cutepeaks": "cutepeaks",
+  "name": "CutePeaks",
+  "type": "AppImage",
+  "description": "CutePeaks - A simple viewer for Sanger file ",
+  "authors": [
+    {
+      "name": "labsquare",
+      "url": "https://github.com/labsquare"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "labsquare/CutePeaks"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/labsquare/CutePeaks/releases"
+    }
+  ]
+}

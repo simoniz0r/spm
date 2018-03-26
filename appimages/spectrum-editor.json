@@ -1,0 +1,22 @@
+{
+  "spectrum-editor": "spectrum-editor",
+  "name": "spectrum-editor",
+  "type": "AppImage",
+  "description": "spectrum-editor - Text editor with ZX Spectrum theme",
+  "authors": [
+    {
+      "name": "thorpelawrence",
+      "url": "https://github.com/thorpelawrence"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "thorpelawrence/spectrum-editor"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/thorpelawrence/spectrum-editor/releases"
+    }
+  ]
+}

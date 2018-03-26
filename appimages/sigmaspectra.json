@@ -1,0 +1,22 @@
+{
+  "sigmaspectra": "sigmaspectra",
+  "name": "SigmaSpectra",
+  "type": "AppImage",
+  "description": "sigmaspectra - GUI application for the selection and scaling of earthquake ground motions",
+  "authors": [
+    {
+      "name": "arkottke",
+      "url": "https://github.com/arkottke"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "arkottke/sigmaspectra"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/arkottke/sigmaspectra/releases"
+    }
+  ]
+}

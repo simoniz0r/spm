@@ -1,0 +1,22 @@
+{
+  "epl-viz": "epl-viz",
+  "name": "EPL-Viz",
+  "type": "AppImage",
+  "description": "Qt-Frontend for the EPL-Viz project",
+  "authors": [
+    {
+      "name": "epl-viz",
+      "url": "https://github.com/epl-viz"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "epl-viz/EPL-Viz"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/epl-viz/EPL-Viz/releases"
+    }
+  ]
+}

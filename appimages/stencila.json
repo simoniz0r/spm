@@ -1,0 +1,22 @@
+{
+  "stencila": "stencila",
+  "name": "Stencila",
+  "type": "AppImage",
+  "description": " Stencila on the desktop",
+  "authors": [
+    {
+      "name": "stencila",
+      "url": "https://github.com/stencila"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "stencila/desktop"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/stencila/desktop/releases"
+    }
+  ]
+}

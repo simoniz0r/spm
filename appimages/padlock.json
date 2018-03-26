@@ -1,0 +1,22 @@
+{
+  "padlock": "padlock",
+  "name": "padlock",
+  "type": "AppImage",
+  "description": "padlock - A minimalist open source password manager",
+  "authors": [
+    {
+      "name": "MaKleSoft",
+      "url": "https://github.com/MaKleSoft"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "MaKleSoft/padlock"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/MaKleSoft/padlock/releases"
+    }
+  ]
+}

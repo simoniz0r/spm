@@ -1,0 +1,22 @@
+{
+  "neon": "neon",
+  "name": "Neon",
+  "type": "AppImage",
+  "description": "neon-wallet - Light wallet for the NEO blockchain",
+  "authors": [
+    {
+      "name": "CityOfZion",
+      "url": "https://github.com/CityOfZion"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "CityOfZion/neon-wallet"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/CityOfZion/neon-wallet/releases"
+    }
+  ]
+}

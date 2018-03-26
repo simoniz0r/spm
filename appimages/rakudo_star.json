@@ -1,0 +1,22 @@
+{
+  "rakudo_star": "rakudo_star",
+  "name": "Rakudo_Star",
+  "type": "AppImage",
+  "description": "rakudo-appimage-module-test-automation - AppImages for Rakudo Star and Rakudo Moar Blead and Testing of Module installation and automation using the same script",
+  "authors": [
+    {
+      "name": "samcv",
+      "url": "https://github.com/samcv"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "samcv/rakudo-appimage-module-test-automation"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/samcv/rakudo-appimage-module-test-automation/releases"
+    }
+  ]
+}

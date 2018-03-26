@@ -1,0 +1,22 @@
+{
+  "auryo": "auryo",
+  "name": "Auryo",
+  "type": "AppImage",
+  "description": "auryo - A beautiful soundcloud desktop app",
+  "authors": [
+    {
+      "name": "Superjo149",
+      "url": "https://github.com/Superjo149"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "Superjo149/auryo"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/Superjo149/auryo/releases"
+    }
+  ]
+}

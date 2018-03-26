@@ -1,0 +1,22 @@
+{
+  "mkvtoolnix": "mkvtoolnix",
+  "name": "MKVToolNix",
+  "type": "AppImage",
+  "description": "mkvtoolnix-AppImage - experimental MKVToolNix AppImage",
+  "authors": [
+    {
+      "name": "darealshinji",
+      "url": "https://github.com/darealshinji"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "darealshinji/mkvtoolnix-AppImage"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/darealshinji/mkvtoolnix-AppImage/releases"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "harmony": "harmony",
+  "name": "harmony",
+  "type": "AppImage",
+  "description": "harmony - musicalnote Sleek music player for Spotify SoundCloud Google Play Music and your local files",
+  "authors": [
+    {
+      "name": "vincelwt",
+      "url": "https://github.com/vincelwt"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "vincelwt/harmony"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/vincelwt/harmony/releases"
+    }
+  ]
+}

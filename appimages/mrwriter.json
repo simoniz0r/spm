@@ -1,0 +1,22 @@
+{
+  "mrwriter": "mrwriter",
+  "name": "MrWriter",
+  "type": "AppImage",
+  "description": "MrWriter - Notetaking and blackboard replacement application Inspired by Xournal Written in CQt for Linux  Windows  Mac",
+  "authors": [
+    {
+      "name": "unruhschuh",
+      "url": "https://github.com/unruhschuh"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "unruhschuh/MrWriter"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/unruhschuh/MrWriter/releases"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "sharexin": "sharexin",
+  "name": "ShareXin",
+  "type": "AppImage",
+  "description": "ShareXin - ShareX for Linux FreeBSD and macOS",
+  "authors": [
+    {
+      "name": "ShareXin",
+      "url": "https://github.com/ShareXin"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "ShareXin/ShareXin"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/ShareXin/ShareXin/releases"
+    }
+  ]
+}

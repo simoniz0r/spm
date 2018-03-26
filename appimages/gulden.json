@@ -1,0 +1,22 @@
+{
+  "gulden": "gulden",
+  "name": "Gulden",
+  "type": "AppImage",
+  "description": "gulden-official - The official repository for Gulden core wallet updated at each release",
+  "authors": [
+    {
+      "name": "Gulden",
+      "url": "https://github.com/Gulden"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "Gulden/gulden-official"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/Gulden/gulden-official/releases"
+    }
+  ]
+}

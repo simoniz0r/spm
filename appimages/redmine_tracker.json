@@ -1,0 +1,22 @@
+{
+  "redmine_tracker": "redmine_tracker",
+  "name": "redmine_tracker",
+  "type": "AppImage",
+  "description": "redminetracker - Toggle clone directly connected to Redmine",
+  "authors": [
+    {
+      "name": "Strnadj",
+      "url": "https://github.com/Strnadj"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "Strnadj/redmine_tracker"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/Strnadj/redmine_tracker/releases"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "donut": "donut",
+  "name": "donut",
+  "type": "AppImage",
+  "description": "donut -  Dead-simple cross-platform cryptocurrency tracker",
+  "authors": [
+    {
+      "name": "harshjv",
+      "url": "https://github.com/harshjv"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "harshjv/donut"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/harshjv/donut/releases"
+    }
+  ]
+}

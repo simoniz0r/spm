@@ -1,0 +1,22 @@
+{
+  "barnacal": "barnacal",
+  "name": "barnacal",
+  "type": "AppImage",
+  "description": "Barnacal - A simple menu bar app for viewing a calendar",
+  "authors": [
+    {
+      "name": "mike-engel",
+      "url": "https://github.com/mike-engel"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "mike-engel/Barnacal"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/mike-engel/Barnacal/releases"
+    }
+  ]
+}

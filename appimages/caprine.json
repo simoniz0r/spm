@@ -1,0 +1,22 @@
+{
+  "caprine": "caprine",
+  "name": "caprine",
+  "type": "AppImage",
+  "description": "caprine - Elegant Facebook Messenger desktop app",
+  "authors": [
+    {
+      "name": "sindresorhus",
+      "url": "https://github.com/sindresorhus"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "sindresorhus/caprine"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/sindresorhus/caprine/releases"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "jag": "jag",
+  "name": "jag",
+  "type": "AppImage",
+  "description": "jag - Simple interactive grapher for 2D plots",
+  "authors": [
+    {
+      "name": "seleznevae",
+      "url": "https://github.com/seleznevae"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "seleznevae/jag"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/seleznevae/jag/releases"
+    }
+  ]
+}

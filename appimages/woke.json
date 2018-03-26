@@ -1,0 +1,22 @@
+{
+  "woke": "woke",
+  "name": "Woke",
+  "type": "AppImage",
+  "description": "Woke - A native multiplatform desktop REST client with grand ambitions and limited scope",
+  "authors": [
+    {
+      "name": "tmstieff",
+      "url": "https://github.com/tmstieff"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "tmstieff/Woke"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/tmstieff/Woke/releases"
+    }
+  ]
+}

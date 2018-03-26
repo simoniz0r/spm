@@ -1,0 +1,22 @@
+{
+  "gimp": "gimp",
+  "name": "gimp",
+  "type": "AppImage",
+  "description": "Contribute to gimp-appimage development by creating an account on GitHub",
+  "authors": [
+    {
+      "name": "aferrero2707",
+      "url": "https://github.com/aferrero2707"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "aferrero2707/gimp-appimage"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/aferrero2707/gimp-appimage/releases"
+    }
+  ]
+}

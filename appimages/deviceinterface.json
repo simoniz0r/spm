@@ -1,0 +1,22 @@
+{
+  "deviceinterface": "deviceinterface",
+  "name": "DeviceInterface",
+  "type": "AppImage",
+  "description": "Contribute to DeviceInterface development by creating an account on GitHub",
+  "authors": [
+    {
+      "name": "free-easy",
+      "url": "https://github.com/free-easy"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "free-easy/DeviceInterface"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/free-easy/DeviceInterface/releases"
+    }
+  ]
+}

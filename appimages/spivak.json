@@ -1,0 +1,22 @@
+{
+  "spivak": "spivak",
+  "name": "spivak",
+  "type": "AppImage",
+  "description": "spivak - A cross-platform Karaoke player",
+  "authors": [
+    {
+      "name": "gyunaev",
+      "url": "https://github.com/gyunaev"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "gyunaev/spivak"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/gyunaev/spivak/releases"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "cryplicity": "cryplicity",
+  "name": "Cryplicity",
+  "type": "AppImage",
+  "description": "Cryplicity - A Crypto Portfolio Tracker Tool",
+  "authors": [
+    {
+      "name": "Kthulu120",
+      "url": "https://github.com/Kthulu120"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "Kthulu120/Cryplicity"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/Kthulu120/Cryplicity/releases"
+    }
+  ]
+}

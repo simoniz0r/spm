@@ -1,0 +1,22 @@
+{
+  "ncsa_mosaic": "ncsa_mosaic",
+  "name": "NCSA_Mosaic",
+  "type": "AppImage",
+  "description": "NCSA-Mosaic-AppImage - NCSA Mosaic 27 as an AppImage for most Linux distributions",
+  "authors": [
+    {
+      "name": "AppImage",
+      "url": "https://github.com/AppImage"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "AppImage/NCSA-Mosaic-AppImage"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/AppImage/NCSA-Mosaic-AppImage/releases"
+    }
+  ]
+}

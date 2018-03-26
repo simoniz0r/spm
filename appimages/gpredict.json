@@ -1,0 +1,22 @@
+{
+  "gpredict": "gpredict",
+  "name": "Gpredict",
+  "type": "AppImage",
+  "description": "gpredict - Gpredict satellite tracking application",
+  "authors": [
+    {
+      "name": "csete",
+      "url": "https://github.com/csete"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "csete/gpredict"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/csete/gpredict/releases"
+    }
+  ]
+}

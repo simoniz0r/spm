@@ -1,0 +1,22 @@
+{
+  "mellowplayer": "mellowplayer",
+  "name": "MellowPlayer",
+  "type": "AppImage",
+  "description": "MellowPlayer - Cloud music integration for your desktop",
+  "authors": [
+    {
+      "name": "ColinDuquesnoy",
+      "url": "https://github.com/ColinDuquesnoy"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "ColinDuquesnoy/MellowPlayer"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/ColinDuquesnoy/MellowPlayer/releases"
+    }
+  ]
+}

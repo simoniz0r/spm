@@ -1,0 +1,22 @@
+{
+  "batchlabs": "batchlabs",
+  "name": "BatchLabs",
+  "type": "AppImage",
+  "description": "BatchLabs - A client tool to help create debug and monitor Azure Batch Applications ",
+  "authors": [
+    {
+      "name": "Azure",
+      "url": "https://github.com/Azure"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "Azure/BatchLabs"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/Azure/BatchLabs/releases"
+    }
+  ]
+}

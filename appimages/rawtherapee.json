@@ -1,0 +1,22 @@
+{
+  "rawtherapee": "rawtherapee",
+  "name": "rawtherapee",
+  "type": "AppImage",
+  "description": "Contribute to rt-build development by creating an account on GitHub",
+  "authors": [
+    {
+      "name": "aferrero2707",
+      "url": "https://github.com/aferrero2707"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "aferrero2707/rt-build"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/aferrero2707/rt-build/releases"
+    }
+  ]
+}

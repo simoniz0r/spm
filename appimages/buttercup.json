@@ -1,0 +1,22 @@
+{
+  "buttercup": "buttercup",
+  "name": "buttercup",
+  "type": "AppImage",
+  "description": "buttercup-desktop - key Javascript Password Vault - Multi-Platform Desktop Application",
+  "authors": [
+    {
+      "name": "buttercup",
+      "url": "https://github.com/buttercup"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "buttercup/buttercup-desktop"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/buttercup/buttercup-desktop/releases"
+    }
+  ]
+}

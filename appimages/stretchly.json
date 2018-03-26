@@ -1,0 +1,22 @@
+{
+  "stretchly": "stretchly",
+  "name": "stretchly",
+  "type": "AppImage",
+  "description": "stretchly - break time reminder app",
+  "authors": [
+    {
+      "name": "hovancik",
+      "url": "https://github.com/hovancik"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "hovancik/stretchly"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/hovancik/stretchly/releases"
+    }
+  ]
+}

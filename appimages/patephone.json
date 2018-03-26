@@ -1,0 +1,22 @@
+{
+  "patephone": "patephone",
+  "name": "patephone",
+  "type": "AppImage",
+  "description": "pathephone-desktop - Distributed audio player",
+  "authors": [
+    {
+      "name": "pathephone",
+      "url": "https://github.com/pathephone"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "pathephone/pathephone-desktop"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/pathephone/pathephone-desktop/releases"
+    }
+  ]
+}

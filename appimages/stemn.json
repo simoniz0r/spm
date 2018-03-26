@@ -1,0 +1,22 @@
+{
+  "stemn": "stemn",
+  "name": "Stemn",
+  "type": "AppImage",
+  "description": "Stemn-Desktop - rocket The Version Control System for Google Drive and Dropbox",
+  "authors": [
+    {
+      "name": "Stemn",
+      "url": "https://github.com/Stemn"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "Stemn/Stemn-Desktop"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/Stemn/Stemn-Desktop/releases"
+    }
+  ]
+}

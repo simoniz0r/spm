@@ -1,0 +1,22 @@
+{
+  "flatsitebuilder": "flatsitebuilder",
+  "name": "FlatSiteBuilder",
+  "type": "AppImage",
+  "description": "FlatSiteBuilder - CMS to be used for github pages",
+  "authors": [
+    {
+      "name": "Artanidos",
+      "url": "https://github.com/Artanidos"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "Artanidos/FlatSiteBuilder"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/Artanidos/FlatSiteBuilder/releases"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "kate_pdf_converter": "kate_pdf_converter",
+  "name": "kate_pdf_converter",
+  "type": "AppImage",
+  "description": "katepdfconverter - Kate pdf converter is an open source cross-platform application that can be used for image editing and exporting  to pdf",
+  "authors": [
+    {
+      "name": "christian-mv",
+      "url": "https://github.com/christian-mv"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "christian-mv/kate_pdf_converter"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/christian-mv/kate_pdf_converter/releases"
+    }
+  ]
+}

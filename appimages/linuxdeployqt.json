@@ -1,0 +1,22 @@
+{
+  "linuxdeployqt": "linuxdeployqt",
+  "name": "linuxdeployqt",
+  "type": "AppImage",
+  "description": "linuxdeployqt - Makes Linux applications self-contained by copying in the libraries and plugins that the application uses and optionally generates an AppImage Can be used for Qt and other applications",
+  "authors": [
+    {
+      "name": "probonopd",
+      "url": "https://github.com/probonopd"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "probonopd/linuxdeployqt"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/probonopd/linuxdeployqt/releases"
+    }
+  ]
+}

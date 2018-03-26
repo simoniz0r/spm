@@ -1,0 +1,22 @@
+{
+  "shadowsocks": "shadowsocks",
+  "name": "Shadowsocks",
+  "type": "AppImage",
+  "description": "shadowsocks-qt5 - A cross-platform shadowsocks GUI client",
+  "authors": [
+    {
+      "name": "shadowsocks",
+      "url": "https://github.com/shadowsocks"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "shadowsocks/shadowsocks-qt5"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/shadowsocks/shadowsocks-qt5/releases"
+    }
+  ]
+}

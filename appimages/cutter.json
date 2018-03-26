@@ -1,0 +1,22 @@
+{
+  "cutter": "cutter",
+  "name": "Cutter",
+  "type": "AppImage",
+  "description": "cutter - A Qt and C GUI for radare2 reverse engineering framework",
+  "authors": [
+    {
+      "name": "radareorg",
+      "url": "https://github.com/radareorg"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "radareorg/cutter"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/radareorg/cutter/releases"
+    }
+  ]
+}

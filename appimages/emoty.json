@@ -1,0 +1,22 @@
+{
+  "emoty": "emoty",
+  "name": "Emoty",
+  "type": "AppImage",
+  "description": "Emoty-Desktop - Emoty application for desktops",
+  "authors": [
+    {
+      "name": "Emotyco",
+      "url": "https://github.com/Emotyco"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "Emotyco/Emoty-Desktop"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/Emotyco/Emoty-Desktop/releases"
+    }
+  ]
+}

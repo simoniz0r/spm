@@ -1,0 +1,22 @@
+{
+  "bitshares": "bitshares",
+  "name": "BitShares",
+  "type": "AppImage",
+  "description": "bitshares-ui - Graphical User Interface for BitShares Blockchain",
+  "authors": [
+    {
+      "name": "bitshares",
+      "url": "https://github.com/bitshares"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "bitshares/bitshares-ui"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/bitshares/bitshares-ui/releases"
+    }
+  ]
+}

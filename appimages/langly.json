@@ -1,0 +1,22 @@
+{
+  "langly": "langly",
+  "name": "langly",
+  "type": "AppImage",
+  "description": "langly - Manage JSON language files in Laravel",
+  "authors": [
+    {
+      "name": "christofferok",
+      "url": "https://github.com/christofferok"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "christofferok/langly"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/christofferok/langly/releases"
+    }
+  ]
+}

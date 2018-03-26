@@ -1,0 +1,22 @@
+{
+  "cuarzobrowser": "cuarzobrowser",
+  "name": "CuarzoBrowser",
+  "type": "AppImage",
+  "description": "CuarzoBrowser - The Cuarzo OS Web Browser",
+  "authors": [
+    {
+      "name": "CuarzoSoftware",
+      "url": "https://github.com/CuarzoSoftware"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "CuarzoSoftware/CuarzoBrowser"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/CuarzoSoftware/CuarzoBrowser/releases"
+    }
+  ]
+}

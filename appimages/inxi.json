@@ -1,0 +1,22 @@
+{
+  "inxi": "inxi",
+  "name": "inxi",
+  "type": "AppImage",
+  "description": "This repository contains appimagebuild and AppImage build scripts for building AppImages easily",
+  "authors": [
+    {
+      "name": "simoniz0r",
+      "url": "https://github.com/simoniz0r"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "simoniz0r/AppImages"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/simoniz0r/AppImages/releases"
+    }
+  ]
+}

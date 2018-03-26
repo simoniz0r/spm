@@ -1,0 +1,22 @@
+{
+  "turntable": "turntable",
+  "name": "turntable",
+  "type": "AppImage",
+  "description": "turntable - Simple youtube DJ app made with Electron and Angular 5",
+  "authors": [
+    {
+      "name": "radiium",
+      "url": "https://github.com/radiium"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "radiium/turntable"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/radiium/turntable/releases"
+    }
+  ]
+}

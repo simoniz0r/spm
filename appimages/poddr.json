@@ -1,0 +1,22 @@
+{
+  "poddr": "poddr",
+  "name": "poddr",
+  "type": "AppImage",
+  "description": "Poddr - Podcast client built with Electron and Angularjs",
+  "authors": [
+    {
+      "name": "Sn8z",
+      "url": "https://github.com/Sn8z"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "Sn8z/Poddr"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/Sn8z/Poddr/releases"
+    }
+  ]
+}

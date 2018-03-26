@@ -1,0 +1,22 @@
+{
+  "htmldoc": "htmldoc",
+  "name": "htmldoc",
+  "type": "AppImage",
+  "description": "htmldoc - HTML Conversion Software",
+  "authors": [
+    {
+      "name": "KurtPfeifle",
+      "url": "https://github.com/KurtPfeifle"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "KurtPfeifle/htmldoc"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/KurtPfeifle/htmldoc/releases"
+    }
+  ]
+}

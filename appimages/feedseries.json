@@ -1,0 +1,22 @@
+{
+  "feedseries": "feedseries",
+  "name": "feedseries",
+  "type": "AppImage",
+  "description": "Contribute to feedseries development by creating an account on GitHub",
+  "authors": [
+    {
+      "name": "matthieuy",
+      "url": "https://github.com/matthieuy"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "matthieuy/feedseries"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/matthieuy/feedseries/releases"
+    }
+  ]
+}

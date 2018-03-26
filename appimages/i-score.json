@@ -1,0 +1,22 @@
+{
+  "i-score": "i-score",
+  "name": "i-score",
+  "type": "AppImage",
+  "description": "ossia score an interactive sequencer for the intermedia arts",
+  "authors": [
+    {
+      "name": "OSSIA",
+      "url": "https://github.com/OSSIA"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "OSSIA/i-score"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/OSSIA/i-score/releases"
+    }
+  ]
+}

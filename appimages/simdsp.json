@@ -1,0 +1,22 @@
+{
+  "simdsp": "simdsp",
+  "name": "simdsp",
+  "type": "AppImage",
+  "description": "SimDSP - DSP Simulator",
+  "authors": [
+    {
+      "name": "lmcapacho",
+      "url": "https://github.com/lmcapacho"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "lmcapacho/SimDSP"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/lmcapacho/SimDSP/releases"
+    }
+  ]
+}

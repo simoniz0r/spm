@@ -1,0 +1,22 @@
+{
+  "qgroundcontrol": "qgroundcontrol",
+  "name": "QGroundControl",
+  "type": "AppImage",
+  "description": "qgroundcontrol - Dronecode cross-platform ground control station for drones Android iOS Mac OS Linux Windows",
+  "authors": [
+    {
+      "name": "mavlink",
+      "url": "https://github.com/mavlink"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "mavlink/qgroundcontrol"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/mavlink/qgroundcontrol/releases"
+    }
+  ]
+}

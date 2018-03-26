@@ -1,0 +1,22 @@
+{
+  "transcribe": "transcribe",
+  "name": "Transcribe",
+  "type": "AppImage",
+  "description": "Transcribe - A tool for transcribing audio files to text",
+  "authors": [
+    {
+      "name": "p-edelman",
+      "url": "https://github.com/p-edelman"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "p-edelman/Transcribe"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/p-edelman/Transcribe/releases"
+    }
+  ]
+}

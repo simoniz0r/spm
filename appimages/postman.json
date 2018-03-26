@@ -1,0 +1,22 @@
+{
+  "postman": "postman",
+  "name": "postman",
+  "type": "AppImage",
+  "description": "Contribute to postman-appimage development by creating an account on GitHub",
+  "authors": [
+    {
+      "name": "showcheap",
+      "url": "https://github.com/showcheap"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "showcheap/postman-appimage"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/showcheap/postman-appimage/releases"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "workflowy": "workflowy",
+  "name": "WorkFlowy",
+  "type": "AppImage",
+  "description": "Contribute to desktop development by creating an account on GitHub",
+  "authors": [
+    {
+      "name": "workflowy",
+      "url": "https://github.com/workflowy"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "workflowy/desktop"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/workflowy/desktop/releases"
+    }
+  ]
+}

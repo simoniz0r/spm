@@ -1,0 +1,22 @@
+{
+  "gvim": "gvim",
+  "name": "GVim",
+  "type": "AppImage",
+  "description": "vim-appimage - AppImage for gVim",
+  "authors": [
+    {
+      "name": "vim",
+      "url": "https://github.com/vim"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "vim/vim-appimage"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/vim/vim-appimage/releases"
+    }
+  ]
+}

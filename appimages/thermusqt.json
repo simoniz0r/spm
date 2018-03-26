@@ -1,0 +1,22 @@
+{
+  "thermusqt": "thermusqt",
+  "name": "thermusqt",
+  "type": "AppImage",
+  "description": "ThermusQt - Qt implementation of Thermus the thermal statistical model",
+  "authors": [
+    {
+      "name": "yschutz",
+      "url": "https://github.com/yschutz"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "yschutz/ThermusQt"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/yschutz/ThermusQt/releases"
+    }
+  ]
+}

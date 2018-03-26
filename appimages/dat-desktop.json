@@ -1,0 +1,22 @@
+{
+  "dat-desktop": "dat-desktop",
+  "name": "dat-desktop",
+  "type": "AppImage",
+  "description": "dat-desktop - Peer to peer data sharing app built for humans",
+  "authors": [
+    {
+      "name": "datproject",
+      "url": "https://github.com/datproject"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "datproject/dat-desktop"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/datproject/dat-desktop/releases"
+    }
+  ]
+}

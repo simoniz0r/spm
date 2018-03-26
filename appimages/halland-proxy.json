@@ -1,0 +1,22 @@
+{
+  "halland-proxy": "halland-proxy",
+  "name": "halland-proxy",
+  "type": "AppImage",
+  "description": "halland-proxy - A web debugging proxy written in javascript Electron",
+  "authors": [
+    {
+      "name": "niklasi",
+      "url": "https://github.com/niklasi"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "niklasi/halland-proxy"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/niklasi/halland-proxy/releases"
+    }
+  ]
+}

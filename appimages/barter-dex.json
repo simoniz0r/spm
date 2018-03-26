@@ -1,0 +1,22 @@
+{
+  "barter-dex": "barter-dex",
+  "name": "barter-dex",
+  "type": "AppImage",
+  "description": "barter-dex - b arterdex Decentralized Cryptocurrency Exchange  KOMODO ",
+  "authors": [
+    {
+      "name": "dsslimshaddy",
+      "url": "https://github.com/dsslimshaddy"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "dsslimshaddy/barter-dex"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/dsslimshaddy/barter-dex/releases"
+    }
+  ]
+}

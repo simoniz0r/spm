@@ -1,0 +1,22 @@
+{
+  "joaldesktop": "joaldesktop",
+  "name": "joaldesktop",
+  "type": "AppImage",
+  "description": "joal-desktop - A desktop application for JOAL Plug and play no additional download or configuration needed",
+  "authors": [
+    {
+      "name": "anthonyraymond",
+      "url": "https://github.com/anthonyraymond"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "anthonyraymond/joal-desktop"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/anthonyraymond/joal-desktop/releases"
+    }
+  ]
+}

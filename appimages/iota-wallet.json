@@ -1,0 +1,22 @@
+{
+  "iota-wallet": "iota-wallet",
+  "name": "iota-wallet",
+  "type": "AppImage",
+  "description": "iota-gui-beta - Beta of IOTA GUI client",
+  "authors": [
+    {
+      "name": "iotaledger",
+      "url": "https://github.com/iotaledger"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "iotaledger/iota-gui-beta"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/iotaledger/iota-gui-beta/releases"
+    }
+  ]
+}

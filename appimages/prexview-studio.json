@@ -1,0 +1,22 @@
+{
+  "prexview-studio": "prexview-studio",
+  "name": "prexview-studio",
+  "type": "AppImage",
+  "description": "prexview-studio - It gives you the power flexibility and speed you have always wanted to craft beautiful designs to generate high volume documents in PDF HTML PNG and JPG",
+  "authors": [
+    {
+      "name": "prexview",
+      "url": "https://github.com/prexview"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "prexview/prexview-studio"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/prexview/prexview-studio/releases"
+    }
+  ]
+}

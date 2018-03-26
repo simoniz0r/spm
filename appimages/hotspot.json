@@ -1,0 +1,22 @@
+{
+  "hotspot": "hotspot",
+  "name": "hotspot",
+  "type": "AppImage",
+  "description": "hotspot - The Linux perf GUI for performance analysis",
+  "authors": [
+    {
+      "name": "KDAB",
+      "url": "https://github.com/KDAB"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "KDAB/hotspot"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/KDAB/hotspot/releases"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "multidir": "multidir",
+  "name": "MultiDir",
+  "type": "AppImage",
+  "description": "multidir - Multiple directory management tool",
+  "authors": [
+    {
+      "name": "OneMoreGres",
+      "url": "https://github.com/OneMoreGres"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "OneMoreGres/multidir"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/OneMoreGres/multidir/releases"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "imageplay": "imageplay",
+  "name": "ImagePlay",
+  "type": "AppImage",
+  "description": "ImagePlay is a rapid prototyping application for image processing",
+  "authors": [
+    {
+      "name": "cpvrlab",
+      "url": "https://github.com/cpvrlab"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "cpvrlab/ImagePlay"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/cpvrlab/ImagePlay/releases"
+    }
+  ]
+}

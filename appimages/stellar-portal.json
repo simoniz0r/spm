@@ -1,0 +1,22 @@
+{
+  "stellar-portal": "stellar-portal",
+  "name": "stellar-portal",
+  "type": "AppImage",
+  "description": "stellar-portal - Pure web client for viewing and managing Stellar accounts",
+  "authors": [
+    {
+      "name": "pakokrew",
+      "url": "https://github.com/pakokrew"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "pakokrew/stellar-portal"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/pakokrew/stellar-portal/releases"
+    }
+  ]
+}

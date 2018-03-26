@@ -1,0 +1,22 @@
+{
+  "kaidan": "kaidan",
+  "name": "Kaidan",
+  "type": "AppImage",
+  "description": "Kaidan the first fully convergant and cross-platform JabberXMPP Instant Messenger",
+  "authors": [
+    {
+      "name": "KaidanIM",
+      "url": "https://github.com/KaidanIM"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "KaidanIM/Kaidan"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/KaidanIM/Kaidan/releases"
+    }
+  ]
+}

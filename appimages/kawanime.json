@@ -1,0 +1,22 @@
+{
+  "kawanime": "kawanime",
+  "name": "KawAnime",
+  "type": "AppImage",
+  "description": "",
+  "authors": [
+    {
+      "name": "repos",
+      "url": "https://api.github.com/repos"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "repos/Kylart"
+    },
+    {
+      "type": "Install",
+      "url": "https://api.github.com/repos/Kylart/releases"
+    }
+  ]
+}

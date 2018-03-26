@@ -1,0 +1,22 @@
+{
+  "pixivdeck": "pixivdeck",
+  "name": "PixivDeck",
+  "type": "AppImage",
+  "description": "PixivDeck - twohearts pixiv client for Desktop like TweetDeck twohearts",
+  "authors": [
+    {
+      "name": "akameco",
+      "url": "https://github.com/akameco"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "akameco/PixivDeck"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/akameco/PixivDeck/releases"
+    }
+  ]
+}

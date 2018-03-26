@@ -1,0 +1,22 @@
+{
+  "minetime": "minetime",
+  "name": "MineTime",
+  "type": "AppImage",
+  "description": "MineTime public repository for issue tracking",
+  "authors": [
+    {
+      "name": "marcoancona",
+      "url": "https://github.com/marcoancona"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "marcoancona/MineTime"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/marcoancona/MineTime/releases"
+    }
+  ]
+}

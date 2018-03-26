@@ -1,0 +1,22 @@
+{
+  "brainverse": "brainverse",
+  "name": "BrainVerse",
+  "type": "AppImage",
+  "description": "brainverse - Electronic Lab Notebook",
+  "authors": [
+    {
+      "name": "ReproNim",
+      "url": "https://github.com/ReproNim"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "ReproNim/brainverse"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/ReproNim/brainverse/releases"
+    }
+  ]
+}

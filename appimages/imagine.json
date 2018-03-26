@@ -1,0 +1,22 @@
+{
+  "imagine": "imagine",
+  "name": "Imagine",
+  "type": "AppImage",
+  "description": "Imagine -  PNGJPEG optimization app for macOS Windows and Linux",
+  "authors": [
+    {
+      "name": "meowtec",
+      "url": "https://github.com/meowtec"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "meowtec/Imagine"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/meowtec/Imagine/releases"
+    }
+  ]
+}

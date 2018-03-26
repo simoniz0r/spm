@@ -1,0 +1,22 @@
+{
+  "panini": "panini",
+  "name": "panini",
+  "type": "AppImage",
+  "description": "panini - visual tool for creating perspective views from panoramic and wide angle photographs",
+  "authors": [
+    {
+      "name": "lazarus-pkgs",
+      "url": "https://github.com/lazarus-pkgs"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "lazarus-pkgs/panini"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/lazarus-pkgs/panini/releases"
+    }
+  ]
+}

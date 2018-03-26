@@ -1,0 +1,22 @@
+{
+  "ao": "ao",
+  "name": "ao",
+  "type": "AppImage",
+  "description": "ao -  Elegant Microsoft To-Do desktop app",
+  "authors": [
+    {
+      "name": "klauscfhq",
+      "url": "https://github.com/klauscfhq"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "klauscfhq/ao"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/klauscfhq/ao/releases"
+    }
+  ]
+}

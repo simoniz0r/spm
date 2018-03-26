@@ -1,0 +1,22 @@
+{
+  "wewechat": "wewechat",
+  "name": "weweChat",
+  "type": "AppImage",
+  "description": "weweChat -  Unofficial WeChat client built with React MobX and Electron",
+  "authors": [
+    {
+      "name": "trazyn",
+      "url": "https://github.com/trazyn"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "trazyn/weweChat"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/trazyn/weweChat/releases"
+    }
+  ]
+}

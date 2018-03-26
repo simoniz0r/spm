@@ -1,0 +1,22 @@
+{
+  "appium-desktop": "appium-desktop",
+  "name": "appium-desktop",
+  "type": "AppImage",
+  "description": "appium-desktop - Appium Server and Inspector in Desktop GUIs for Mac Windows and Linux",
+  "authors": [
+    {
+      "name": "appium",
+      "url": "https://github.com/appium"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "appium/appium-desktop"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/appium/appium-desktop/releases"
+    }
+  ]
+}

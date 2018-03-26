@@ -1,0 +1,22 @@
+{
+  "animationmaker": "animationmaker",
+  "name": "AnimationMaker",
+  "type": "AppImage",
+  "description": "AnimationMaker - Create animated presentations and export them to a video or xml file",
+  "authors": [
+    {
+      "name": "Artanidos",
+      "url": "https://github.com/Artanidos"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "Artanidos/AnimationMaker"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/Artanidos/AnimationMaker/releases"
+    }
+  ]
+}

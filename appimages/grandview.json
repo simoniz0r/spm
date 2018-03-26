@@ -1,0 +1,22 @@
+{
+  "grandview": "grandview",
+  "name": "GrandView",
+  "type": "AppImage",
+  "description": "grand-view - Helps you structure a large set of information units Can be used as a tool to plan and gather resources for reportstheses and so on",
+  "authors": [
+    {
+      "name": "bompi88",
+      "url": "https://github.com/bompi88"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "bompi88/grand-view"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/bompi88/grand-view/releases"
+    }
+  ]
+}

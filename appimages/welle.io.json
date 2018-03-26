@@ -1,0 +1,22 @@
+{
+  "welle.io": "welle.io",
+  "name": "welle.io",
+  "type": "AppImage",
+  "description": "welleio - A DABDAB Software Radio",
+  "authors": [
+    {
+      "name": "AlbrechtL",
+      "url": "https://github.com/AlbrechtL"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "AlbrechtL/welle.io"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/AlbrechtL/welle.io/releases"
+    }
+  ]
+}

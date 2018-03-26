@@ -1,0 +1,22 @@
+{
+  "danmaq": "danmaq",
+  "name": "danmaQ",
+  "type": "AppImage",
+  "description": "danmaQ - danmaku implemented in Qt5",
+  "authors": [
+    {
+      "name": "tuna",
+      "url": "https://github.com/tuna"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "tuna/danmaQ"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/tuna/danmaQ/releases"
+    }
+  ]
+}

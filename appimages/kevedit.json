@@ -1,0 +1,22 @@
+{
+  "kevedit": "kevedit",
+  "name": "kevedit",
+  "type": "AppImage",
+  "description": "kevedit - KevEdit ZZT editor",
+  "authors": [
+    {
+      "name": "cknave",
+      "url": "https://github.com/cknave"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "cknave/kevedit"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/cknave/kevedit/releases"
+    }
+  ]
+}

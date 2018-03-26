@@ -1,0 +1,22 @@
+{
+  "jimud": "jimud",
+  "name": "jiMUD",
+  "type": "AppImage",
+  "description": "jiMUD - MUD client for ShadowMUDcom based on webclient",
+  "authors": [
+    {
+      "name": "icewolfz",
+      "url": "https://github.com/icewolfz"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "icewolfz/jiMUD"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/icewolfz/jiMUD/releases"
+    }
+  ]
+}

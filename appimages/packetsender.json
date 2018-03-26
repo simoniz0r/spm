@@ -1,0 +1,22 @@
+{
+  "packetsender": "packetsender",
+  "name": "PacketSender",
+  "type": "AppImage",
+  "description": "PacketSender - Network utility for sending  receiving TCP UDP SSL",
+  "authors": [
+    {
+      "name": "dannagle",
+      "url": "https://github.com/dannagle"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "dannagle/PacketSender"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/dannagle/PacketSender/releases"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "nheko": "nheko",
+  "name": "nheko",
+  "type": "AppImage",
+  "description": "nheko - Desktop client for the Matrix protocol",
+  "authors": [
+    {
+      "name": "mujx",
+      "url": "https://github.com/mujx"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "mujx/nheko"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/mujx/nheko/releases"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "snake.js": "snake.js",
+  "name": "snake.js",
+  "type": "AppImage",
+  "description": "snakejs - CanvasJavaScript based Snake Game with support for controllers SNESPSXBOX",
+  "authors": [
+    {
+      "name": "aenany",
+      "url": "https://github.com/aenany"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "aenany/snake.js"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/aenany/snake.js/releases"
+    }
+  ]
+}

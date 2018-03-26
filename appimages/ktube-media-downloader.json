@@ -1,0 +1,22 @@
+{
+  "ktube-media-downloader": "ktube-media-downloader",
+  "name": "Ktube-media-downloader",
+  "type": "AppImage",
+  "description": "Ktube-media-downloader - DownloadBrowse Media from various websites    Download - ",
+  "authors": [
+    {
+      "name": "keshavbhatt",
+      "url": "https://github.com/keshavbhatt"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "keshavbhatt/Ktube-media-downloader"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/keshavbhatt/Ktube-media-downloader/releases"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "iqpuzzle": "iqpuzzle",
+  "name": "iqpuzzle",
+  "type": "AppImage",
+  "description": "iqpuzzle - A diverting IQ challenging pentomino puzzle",
+  "authors": [
+    {
+      "name": "ElTh0r0",
+      "url": "https://github.com/ElTh0r0"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "ElTh0r0/iqpuzzle"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/ElTh0r0/iqpuzzle/releases"
+    }
+  ]
+}

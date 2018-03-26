@@ -1,0 +1,22 @@
+{
+  "maven": "maven",
+  "name": "maven",
+  "type": "AppImage",
+  "description": "maven - Maven GUI Metabolomics Analysis and Visualization Engine  ",
+  "authors": [
+    {
+      "name": "eugenemel",
+      "url": "https://github.com/eugenemel"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "eugenemel/maven"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/eugenemel/maven/releases"
+    }
+  ]
+}

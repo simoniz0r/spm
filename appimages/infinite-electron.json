@@ -1,0 +1,22 @@
+{
+  "infinite-electron": "infinite-electron",
+  "name": "infinite-electron",
+  "type": "AppImage",
+  "description": "infinite-electron - An Electron-based cross-platform desktop reader for free ebooks ",
+  "authors": [
+    {
+      "name": "InfiniteLibrary",
+      "url": "https://github.com/InfiniteLibrary"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "InfiniteLibrary/infinite-electron"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/InfiniteLibrary/infinite-electron/releases"
+    }
+  ]
+}

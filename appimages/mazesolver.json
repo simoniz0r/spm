@@ -1,0 +1,22 @@
+{
+  "mazesolver": "mazesolver",
+  "name": "MazeSolver",
+  "type": "AppImage",
+  "description": "MazeSolver - Create and solve mazes using DFS or BFS algorithm",
+  "authors": [
+    {
+      "name": "Arquanite",
+      "url": "https://github.com/Arquanite"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "Arquanite/MazeSolver"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/Arquanite/MazeSolver/releases"
+    }
+  ]
+}

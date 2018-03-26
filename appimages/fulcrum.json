@@ -1,0 +1,22 @@
+{
+  "fulcrum": "fulcrum",
+  "name": "Fulcrum",
+  "type": "AppImage",
+  "description": "fulcrum-desktop - Fulcrum Desktop",
+  "authors": [
+    {
+      "name": "fulcrumapp",
+      "url": "https://github.com/fulcrumapp"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "fulcrumapp/fulcrum-desktop"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/fulcrumapp/fulcrum-desktop/releases"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "baijimangaviewer": "baijimangaviewer",
+  "name": "BaijiMangaViewer",
+  "type": "AppImage",
+  "description": "Contribute to manga-viewer development by creating an account on GitHub",
+  "authors": [
+    {
+      "name": "shizkun",
+      "url": "https://github.com/shizkun"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "shizkun/manga-viewer"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/shizkun/manga-viewer/releases"
+    }
+  ]
+}

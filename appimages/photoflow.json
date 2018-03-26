@@ -1,0 +1,22 @@
+{
+  "photoflow": "photoflow",
+  "name": "PhotoFlow",
+  "type": "AppImage",
+  "description": "PhotoFlow - A fully non-destructive photo retouching program providing a complete layer-based workflow including RAW image development",
+  "authors": [
+    {
+      "name": "aferrero2707",
+      "url": "https://github.com/aferrero2707"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "aferrero2707/PhotoFlow"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/aferrero2707/PhotoFlow/releases"
+    }
+  ]
+}

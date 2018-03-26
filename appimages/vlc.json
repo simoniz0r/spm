@@ -1,0 +1,22 @@
+{
+  "vlc": "vlc",
+  "name": "VLC",
+  "type": "AppImage",
+  "description": "vlc-AppImage - VLC AppImage inofficial",
+  "authors": [
+    {
+      "name": "darealshinji",
+      "url": "https://github.com/darealshinji"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "darealshinji/vlc-AppImage"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/darealshinji/vlc-AppImage/releases"
+    }
+  ]
+}

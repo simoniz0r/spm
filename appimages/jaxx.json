@@ -1,0 +1,22 @@
+{
+  "jaxx": "jaxx",
+  "name": "jaxx",
+  "type": "AppImage",
+  "description": "Jaxx Bitcoin Wallet",
+  "authors": [
+    {
+      "name": "Jaxx-io",
+      "url": "https://github.com/Jaxx-io"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "Jaxx-io/Jaxx"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/Jaxx-io/Jaxx/releases"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "blink1control2": "blink1control2",
+  "name": "Blink1Control2",
+  "type": "AppImage",
+  "description": "Blink1Control2 - Blink1Control in Electron React and Node  Control blink1 USB RGB LED devices",
+  "authors": [
+    {
+      "name": "todbot",
+      "url": "https://github.com/todbot"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "todbot/Blink1Control2"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/todbot/Blink1Control2/releases"
+    }
+  ]
+}

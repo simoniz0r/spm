@@ -1,0 +1,22 @@
+{
+  "iitmnetworkauthapp": "iitmnetworkauthapp",
+  "name": "iitmnetworkauthapp",
+  "type": "AppImage",
+  "description": "iitm-network-auth-app - Cross platform application for authentication inside IIT Madras campus network",
+  "authors": [
+    {
+      "name": "shahidhk",
+      "url": "https://github.com/shahidhk"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "shahidhk/iitm-network-auth-app"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/shahidhk/iitm-network-auth-app/releases"
+    }
+  ]
+}

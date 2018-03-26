@@ -1,0 +1,22 @@
+{
+  "devdocs-desktop": "devdocs-desktop",
+  "name": "devdocs-desktop",
+  "type": "AppImage",
+  "description": "devdocs-desktop -  A full-featured desktop app for DevDocsio",
+  "authors": [
+    {
+      "name": "egoist",
+      "url": "https://github.com/egoist"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "egoist/devdocs-desktop"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/egoist/devdocs-desktop/releases"
+    }
+  ]
+}

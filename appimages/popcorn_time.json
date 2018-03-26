@@ -1,0 +1,22 @@
+{
+  "popcorn_time": "popcorn_time",
+  "name": "Popcorn_Time",
+  "type": "AppImage",
+  "description": "popcorn-time-desktop -     A Modern and Experimental Popcorn Time Client",
+  "authors": [
+    {
+      "name": "amilajack",
+      "url": "https://github.com/amilajack"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "amilajack/popcorn-time-desktop"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/amilajack/popcorn-time-desktop/releases"
+    }
+  ]
+}

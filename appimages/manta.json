@@ -1,0 +1,22 @@
+{
+  "manta": "manta",
+  "name": "manta",
+  "type": "AppImage",
+  "description": "Manta -  Flexible invoicing desktop app with beautiful amp customizable templates",
+  "authors": [
+    {
+      "name": "hql287",
+      "url": "https://github.com/hql287"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "hql287/Manta"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/hql287/Manta/releases"
+    }
+  ]
+}

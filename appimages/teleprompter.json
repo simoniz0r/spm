@@ -1,0 +1,22 @@
+{
+  "teleprompter": "teleprompter",
+  "name": "Teleprompter",
+  "type": "AppImage",
+  "description": "Teleprompter-Electron - Build standalone cross-platform instances of our Teleprompter with Electron",
+  "authors": [
+    {
+      "name": "ImaginarySense",
+      "url": "https://github.com/ImaginarySense"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "ImaginarySense/Teleprompter-Electron"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/ImaginarySense/Teleprompter-Electron/releases"
+    }
+  ]
+}

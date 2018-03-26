@@ -1,0 +1,22 @@
+{
+  "tusk": "tusk",
+  "name": "Tusk",
+  "type": "AppImage",
+  "description": "tusk -  Refined Evernote desktop app",
+  "authors": [
+    {
+      "name": "champloohq",
+      "url": "https://github.com/champloohq"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "champloohq/tusk"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/champloohq/tusk/releases"
+    }
+  ]
+}

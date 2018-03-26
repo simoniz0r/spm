@@ -1,0 +1,22 @@
+{
+  "falcon-sql-client": "falcon-sql-client",
+  "name": "falcon-sql-client",
+  "type": "AppImage",
+  "description": "falcon-sql-client - Free open-source SQL client for Windows and Mac ",
+  "authors": [
+    {
+      "name": "plotly",
+      "url": "https://github.com/plotly"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "plotly/falcon-sql-client"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/plotly/falcon-sql-client/releases"
+    }
+  ]
+}

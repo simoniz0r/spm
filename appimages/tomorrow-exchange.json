@@ -1,0 +1,22 @@
+{
+  "tomorrow-exchange": "tomorrow-exchange",
+  "name": "tomorrow-exchange",
+  "type": "AppImage",
+  "description": "Contribute to tomorrowex-client development by creating an account on GitHub",
+  "authors": [
+    {
+      "name": "uvarovserge",
+      "url": "https://github.com/uvarovserge"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "uvarovserge/tomorrowex-client"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/uvarovserge/tomorrowex-client/releases"
+    }
+  ]
+}

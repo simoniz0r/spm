@@ -1,0 +1,22 @@
+{
+  "getthermal": "getthermal",
+  "name": "GetThermal",
+  "type": "AppImage",
+  "description": "GetThermal - Cross-platform USB thermal camera viewer",
+  "authors": [
+    {
+      "name": "groupgets",
+      "url": "https://github.com/groupgets"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "groupgets/GetThermal"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/groupgets/GetThermal/releases"
+    }
+  ]
+}

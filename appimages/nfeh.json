@@ -1,0 +1,22 @@
+{
+  "nfeh": "nfeh",
+  "name": "nfeh",
+  "type": "AppImage",
+  "description": "nfeh - Electron based GUI for feh",
+  "authors": [
+    {
+      "name": "fa7ad",
+      "url": "https://github.com/fa7ad"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "fa7ad/nfeh"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/fa7ad/nfeh/releases"
+    }
+  ]
+}

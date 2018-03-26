@@ -1,0 +1,22 @@
+{
+  "redtimer": "redtimer",
+  "name": "RedTimer",
+  "type": "AppImage",
+  "description": "redtimer - Redmine Time Tracker",
+  "authors": [
+    {
+      "name": "fathomssen",
+      "url": "https://github.com/fathomssen"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "fathomssen/redtimer"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/fathomssen/redtimer/releases"
+    }
+  ]
+}

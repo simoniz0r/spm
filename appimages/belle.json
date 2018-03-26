@@ -1,0 +1,22 @@
+{
+  "belle": "belle",
+  "name": "Belle",
+  "type": "AppImage",
+  "description": "Belle - A cross-platform and easy-to-use visual novel maker that deploys games for the web",
+  "authors": [
+    {
+      "name": "fr33mind",
+      "url": "https://github.com/fr33mind"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "fr33mind/Belle"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/fr33mind/Belle/releases"
+    }
+  ]
+}

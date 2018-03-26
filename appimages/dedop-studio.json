@@ -1,0 +1,22 @@
+{
+  "dedop-studio": "dedop-studio",
+  "name": "DeDop-studio",
+  "type": "AppImage",
+  "description": "dedop-studio - DeDop Desktop Application",
+  "authors": [
+    {
+      "name": "DeDop",
+      "url": "https://github.com/DeDop"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "DeDop/dedop-studio"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/DeDop/dedop-studio/releases"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "anavis": "anavis",
+  "name": "anavis",
+  "type": "AppImage",
+  "description": "anavis - AnaVis is a tool to visualize musical form",
+  "authors": [
+    {
+      "name": "learningmedia",
+      "url": "https://github.com/learningmedia"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "learningmedia/anavis"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/learningmedia/anavis/releases"
+    }
+  ]
+}

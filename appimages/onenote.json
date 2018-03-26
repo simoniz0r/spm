@@ -1,0 +1,22 @@
+{
+  "onenote": "onenote",
+  "name": "onenote",
+  "type": "AppImage",
+  "description": "onenote - Linux Electron Onenote - A Linux compatible version of OneNote",
+  "authors": [
+    {
+      "name": "patrikx3",
+      "url": "https://github.com/patrikx3"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "patrikx3/onenote"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/patrikx3/onenote/releases"
+    }
+  ]
+}

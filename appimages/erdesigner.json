@@ -1,0 +1,22 @@
+{
+  "erdesigner": "erdesigner",
+  "name": "erdesigner",
+  "type": "AppImage",
+  "description": "Quick and easy creation of beautiful ER Diagrams - httpsfvitasgithubioerdesigner",
+  "authors": [
+    {
+      "name": "felix557700",
+      "url": "https://github.com/felix557700"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "felix557700/erdesigner"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/felix557700/erdesigner/releases"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "simple-updater-example": "simple-updater-example",
+  "name": "simple-updater-example",
+  "type": "AppImage",
+  "description": "electron-simple-updater - Simple way to enable update for the electron application",
+  "authors": [
+    {
+      "name": "megahertz",
+      "url": "https://github.com/megahertz"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "megahertz/electron-simple-updater"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/megahertz/electron-simple-updater/releases"
+    }
+  ]
+}

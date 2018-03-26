@@ -1,0 +1,22 @@
+{
+  "gradestats": "gradestats",
+  "name": "GradeStats",
+  "type": "AppImage",
+  "description": "Contribute to GradeStats development by creating an account on GitHub",
+  "authors": [
+    {
+      "name": "nikolio",
+      "url": "https://github.com/nikolio"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "nikolio/GradeStats"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/nikolio/GradeStats/releases"
+    }
+  ]
+}

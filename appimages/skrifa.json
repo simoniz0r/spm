@@ -1,0 +1,22 @@
+{
+  "skrifa": "skrifa",
+  "name": "Skrifa",
+  "type": "AppImage",
+  "description": "Skrifa - A simple word processor built with web technologies",
+  "authors": [
+    {
+      "name": "Skrifa",
+      "url": "https://github.com/Skrifa"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "Skrifa/Skrifa"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/Skrifa/Skrifa/releases"
+    }
+  ]
+}

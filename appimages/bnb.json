@@ -1,0 +1,22 @@
+{
+  "bnb": "bnb",
+  "name": "bnb",
+  "type": "AppImage",
+  "description": "bnb - Run and serve your web apps in dev domains on your develop machine",
+  "authors": [
+    {
+      "name": "layerssss",
+      "url": "https://github.com/layerssss"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "layerssss/bnb"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/layerssss/bnb/releases"
+    }
+  ]
+}

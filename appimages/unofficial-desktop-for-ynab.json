@@ -1,0 +1,22 @@
+{
+  "unofficial-desktop-for-ynab": "unofficial-desktop-for-ynab",
+  "name": "unofficial-desktop-for-ynab",
+  "type": "AppImage",
+  "description": "unofficial-desktop-for-ynab - Unofficial Desktop Wrapper for YNAB using Electron",
+  "authors": [
+    {
+      "name": "toolkit-for-ynab",
+      "url": "https://github.com/toolkit-for-ynab"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "toolkit-for-ynab/unofficial-desktop-for-ynab"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/toolkit-for-ynab/unofficial-desktop-for-ynab/releases"
+    }
+  ]
+}

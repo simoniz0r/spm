@@ -1,0 +1,22 @@
+{
+  "x32-mute-matrix": "x32-mute-matrix",
+  "name": "x32-mute-matrix",
+  "type": "AppImage",
+  "description": "x32-mute-matrix - See and configure the mute status of all your Behringer X32's channels on every mixbus in one place",
+  "authors": [
+    {
+      "name": "Lange",
+      "url": "https://github.com/Lange"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "Lange/x32-mute-matrix"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/Lange/x32-mute-matrix/releases"
+    }
+  ]
+}

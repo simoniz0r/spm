@@ -1,0 +1,22 @@
+{
+  "bezique": "bezique",
+  "name": "Bezique",
+  "type": "AppImage",
+  "description": "Contribute to Bezique development by creating an account on GitHub",
+  "authors": [
+    {
+      "name": "Sriep",
+      "url": "https://github.com/Sriep"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "Sriep/Bezique"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/Sriep/Bezique/releases"
+    }
+  ]
+}

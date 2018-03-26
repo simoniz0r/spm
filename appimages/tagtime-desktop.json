@@ -1,0 +1,22 @@
+{
+  "tagtime-desktop": "tagtime-desktop",
+  "name": "TagTime-desktop",
+  "type": "AppImage",
+  "description": "TagTime-desktop - Cross-platform desktop implementation of TagTime",
+  "authors": [
+    {
+      "name": "mykter",
+      "url": "https://github.com/mykter"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "mykter/TagTime-desktop"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/mykter/TagTime-desktop/releases"
+    }
+  ]
+}

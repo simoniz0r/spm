@@ -1,0 +1,22 @@
+{
+  "billy": "billy",
+  "name": "Billy",
+  "type": "AppImage",
+  "description": "billy - A simple invoice manager built with Electron",
+  "authors": [
+    {
+      "name": "haimich",
+      "url": "https://github.com/haimich"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "haimich/billy"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/haimich/billy/releases"
+    }
+  ]
+}

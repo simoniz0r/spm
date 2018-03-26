@@ -1,0 +1,22 @@
+{
+  "patternpaint": "patternpaint",
+  "name": "PatternPaint",
+  "type": "AppImage",
+  "description": "PatternPaint - Making beautiful light shows is as easy as drawing a picture with Pattern Paint",
+  "authors": [
+    {
+      "name": "Blinkinlabs",
+      "url": "https://github.com/Blinkinlabs"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "Blinkinlabs/PatternPaint"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/Blinkinlabs/PatternPaint/releases"
+    }
+  ]
+}

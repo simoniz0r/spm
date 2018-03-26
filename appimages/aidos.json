@@ -1,0 +1,22 @@
+{
+  "aidos": "aidos",
+  "name": "Aidos",
+  "type": "AppImage",
+  "description": "aidos-wallet - Desktop wallet for Aidos Kuneen step1",
+  "authors": [
+    {
+      "name": "AidosKuneen",
+      "url": "https://github.com/AidosKuneen"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "AidosKuneen/aidos-wallet"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/AidosKuneen/aidos-wallet/releases"
+    }
+  ]
+}

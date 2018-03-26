@@ -1,0 +1,22 @@
+{
+  "homeassistantelectron": "homeassistantelectron",
+  "name": "HomeAssistantElectron",
+  "type": "AppImage",
+  "description": "HomeAssistantElectron - Desktop app for Home Assistant based on Electron",
+  "authors": [
+    {
+      "name": "matthinc",
+      "url": "https://github.com/matthinc"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "matthinc/HomeAssistantElectron"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/matthinc/HomeAssistantElectron/releases"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "gifcurry": "gifcurry",
+  "name": "gifcurry",
+  "type": "AppImage",
+  "description": "gifcurry - Your open source video to GIF maker built with Haskell",
+  "authors": [
+    {
+      "name": "lettier",
+      "url": "https://github.com/lettier"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "lettier/gifcurry"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/lettier/gifcurry/releases"
+    }
+  ]
+}

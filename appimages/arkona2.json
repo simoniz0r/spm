@@ -1,0 +1,22 @@
+{
+  "arkona2": "arkona2",
+  "name": "arkona2",
+  "type": "AppImage",
+  "description": "arkona2 - open-world version of the original",
+  "authors": [
+    {
+      "name": "uzudil",
+      "url": "https://github.com/uzudil"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "uzudil/arkona2"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/uzudil/arkona2/releases"
+    }
+  ]
+}

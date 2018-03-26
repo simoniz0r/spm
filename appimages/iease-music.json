@@ -1,0 +1,22 @@
+{
+  "iease-music": "iease-music",
+  "name": "iease-music",
+  "type": "AppImage",
+  "description": "ieaseMusic -   metal ",
+  "authors": [
+    {
+      "name": "trazyn",
+      "url": "https://github.com/trazyn"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "trazyn/ieaseMusic"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/trazyn/ieaseMusic/releases"
+    }
+  ]
+}

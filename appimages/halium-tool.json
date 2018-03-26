@@ -1,0 +1,22 @@
+{
+  "halium-tool": "halium-tool",
+  "name": "halium-tool",
+  "type": "AppImage",
+  "description": "Contribute to halium-install development by creating an account on GitHub",
+  "authors": [
+    {
+      "name": "JBBgameich",
+      "url": "https://github.com/JBBgameich"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "JBBgameich/halium-install"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/JBBgameich/halium-install/releases"
+    }
+  ]
+}

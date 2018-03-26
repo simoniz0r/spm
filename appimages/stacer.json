@@ -1,0 +1,22 @@
+{
+  "stacer": "stacer",
+  "name": "Stacer",
+  "type": "AppImage",
+  "description": "Stacer - Linux System Optimizer and Monitoring",
+  "authors": [
+    {
+      "name": "oguzhaninan",
+      "url": "https://github.com/oguzhaninan"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "oguzhaninan/Stacer"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/oguzhaninan/Stacer/releases"
+    }
+  ]
+}

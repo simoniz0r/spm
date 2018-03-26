@@ -1,0 +1,22 @@
+{
+  "lxd-ui": "lxd-ui",
+  "name": "lxd-ui",
+  "type": "AppImage",
+  "description": "lxd-ui - A LXD user interface powered by electron-vue",
+  "authors": [
+    {
+      "name": "lcherone",
+      "url": "https://github.com/lcherone"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "lcherone/lxd-ui"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/lcherone/lxd-ui/releases"
+    }
+  ]
+}

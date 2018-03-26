@@ -1,0 +1,22 @@
+{
+  "unified-communications": "unified-communications",
+  "name": "unified-communications",
+  "type": "AppImage",
+  "description": "hari",
+  "authors": [
+    {
+      "name": "aricovindanevectone",
+      "url": "https://github.com/aricovindanevectone"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "aricovindanevectone/hari"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/aricovindanevectone/hari/releases"
+    }
+  ]
+}

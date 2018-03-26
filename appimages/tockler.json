@@ -1,0 +1,22 @@
+{
+  "tockler": "tockler",
+  "name": "Tockler",
+  "type": "AppImage",
+  "description": "tockler - Application that tracks your time by monitoring your active windows only titles and idle time",
+  "authors": [
+    {
+      "name": "MayGo",
+      "url": "https://github.com/MayGo"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "MayGo/tockler"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/MayGo/tockler/releases"
+    }
+  ]
+}

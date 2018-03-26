@@ -1,0 +1,22 @@
+{
+  "whiteboard": "whiteboard",
+  "name": "whiteboard",
+  "type": "AppImage",
+  "description": "whiteboard - Activity-based slideshow application for coding webinars and presentations",
+  "authors": [
+    {
+      "name": "michaelpb",
+      "url": "https://github.com/michaelpb"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "michaelpb/whiteboard"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/michaelpb/whiteboard/releases"
+    }
+  ]
+}

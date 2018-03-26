@@ -1,0 +1,22 @@
+{
+  "openblok": "openblok",
+  "name": "OpenBlok",
+  "type": "AppImage",
+  "description": "openblok - A customizable cross platform open-source falling block game packed with a bunch of features",
+  "authors": [
+    {
+      "name": "mmatyas",
+      "url": "https://github.com/mmatyas"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "mmatyas/openblok"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/mmatyas/openblok/releases"
+    }
+  ]
+}

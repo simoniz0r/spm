@@ -1,0 +1,22 @@
+{
+  "linux-quiz-generator": "linux-quiz-generator",
+  "name": "linux-quiz-generator",
+  "type": "AppImage",
+  "description": "quizgenerator - Generator of random quizes",
+  "authors": [
+    {
+      "name": "janekolszak",
+      "url": "https://github.com/janekolszak"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "janekolszak/quizgenerator"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/janekolszak/quizgenerator/releases"
+    }
+  ]
+}

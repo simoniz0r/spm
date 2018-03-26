@@ -1,0 +1,22 @@
+{
+  "upterm": "upterm",
+  "name": "upterm",
+  "type": "AppImage",
+  "description": "upterm - A terminal emulator for the 21st century",
+  "authors": [
+    {
+      "name": "railsware",
+      "url": "https://github.com/railsware"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "railsware/upterm"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/railsware/upterm/releases"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "akiee": "akiee",
+  "name": "Akiee",
+  "type": "AppImage",
+  "description": "Contribute to akiee-release development by creating an account on GitHub",
+  "authors": [
+    {
+      "name": "rockiger",
+      "url": "https://github.com/rockiger"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "rockiger/akiee-release"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/rockiger/akiee-release/releases"
+    }
+  ]
+}

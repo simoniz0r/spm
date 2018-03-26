@@ -1,0 +1,22 @@
+{
+  "peerio": "peerio",
+  "name": "Peerio",
+  "type": "AppImage",
+  "description": "peerio-desktop - Peerio 2 for macOS Windows amp Linux",
+  "authors": [
+    {
+      "name": "PeerioTechnologies",
+      "url": "https://github.com/PeerioTechnologies"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "PeerioTechnologies/peerio-desktop"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/PeerioTechnologies/peerio-desktop/releases"
+    }
+  ]
+}

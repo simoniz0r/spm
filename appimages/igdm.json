@@ -1,0 +1,22 @@
+{
+  "igdm": "igdm",
+  "name": "IGdm",
+  "type": "AppImage",
+  "description": "igdm - Desktop application for Instagram DMs",
+  "authors": [
+    {
+      "name": "ifedapoolarewaju",
+      "url": "https://github.com/ifedapoolarewaju"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "ifedapoolarewaju/igdm"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/ifedapoolarewaju/igdm/releases"
+    }
+  ]
+}

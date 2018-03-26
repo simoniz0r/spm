@@ -1,0 +1,22 @@
+{
+  "jumpfm": "jumpfm",
+  "name": "jumpfm",
+  "type": "AppImage",
+  "description": "jumpfm - A file manager that lets you jump",
+  "authors": [
+    {
+      "name": "Gilad-Kutiel-App",
+      "url": "https://github.com/Gilad-Kutiel-App"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "Gilad-Kutiel-App/jumpfm"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/Gilad-Kutiel-App/jumpfm/releases"
+    }
+  ]
+}

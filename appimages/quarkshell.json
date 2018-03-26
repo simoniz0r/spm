@@ -1,0 +1,22 @@
+{
+  "quarkshell": "quarkshell",
+  "name": "QuarkShell",
+  "type": "AppImage",
+  "description": "Contribute to quark development by creating an account on GitHub",
+  "authors": [
+    {
+      "name": "freemountain",
+      "url": "https://github.com/freemountain"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "freemountain/quark"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/freemountain/quark/releases"
+    }
+  ]
+}

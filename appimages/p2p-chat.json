@@ -1,0 +1,22 @@
+{
+  "p2p-chat": "p2p-chat",
+  "name": "p2p-chat",
+  "type": "AppImage",
+  "description": "p2p-chat - a P2P LAN chatting and file sharing tool",
+  "authors": [
+    {
+      "name": "dgeibi",
+      "url": "https://github.com/dgeibi"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "dgeibi/p2p-chat"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/dgeibi/p2p-chat/releases"
+    }
+  ]
+}

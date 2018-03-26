@@ -1,0 +1,22 @@
+{
+  "vessel": "vessel",
+  "name": "Vessel",
+  "type": "AppImage",
+  "description": "vessel - Desktop wallet for the Steem blockchain",
+  "authors": [
+    {
+      "name": "aaroncox",
+      "url": "https://github.com/aaroncox"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "aaroncox/vessel"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/aaroncox/vessel/releases"
+    }
+  ]
+}

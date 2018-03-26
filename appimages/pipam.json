@@ -1,0 +1,22 @@
+{
+  "pipam": "pipam",
+  "name": "pipam",
+  "type": "AppImage",
+  "description": "pipam - A package manager manager",
+  "authors": [
+    {
+      "name": "pipam",
+      "url": "https://github.com/pipam"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "pipam/pipam"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/pipam/pipam/releases"
+    }
+  ]
+}

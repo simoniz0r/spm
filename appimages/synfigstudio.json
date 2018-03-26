@@ -1,0 +1,22 @@
+{
+  "synfigstudio": "synfigstudio",
+  "name": "synfigstudio",
+  "type": "AppImage",
+  "description": "synfig - This is the Official source code repository of the Synfig project",
+  "authors": [
+    {
+      "name": "synfig",
+      "url": "https://github.com/synfig"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "synfig/synfig"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/synfig/synfig/releases"
+    }
+  ]
+}

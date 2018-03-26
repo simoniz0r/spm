@@ -1,0 +1,22 @@
+{
+  "mybelka": "mybelka",
+  "name": "mybelka",
+  "type": "AppImage",
+  "description": "Contribute to mybelka development by creating an account on GitHub",
+  "authors": [
+    {
+      "name": "Leinnan",
+      "url": "https://github.com/Leinnan"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "Leinnan/mybelka"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/Leinnan/mybelka/releases"
+    }
+  ]
+}

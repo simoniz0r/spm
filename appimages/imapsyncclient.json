@@ -1,0 +1,22 @@
+{
+  "imapsyncclient": "imapsyncclient",
+  "name": "imapsyncclient",
+  "type": "AppImage",
+  "description": "ImapSyncClient - ImapSync Desktop Client",
+  "authors": [
+    {
+      "name": "ridaamirini",
+      "url": "https://github.com/ridaamirini"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "ridaamirini/ImapSyncClient"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/ridaamirini/ImapSyncClient/releases"
+    }
+  ]
+}

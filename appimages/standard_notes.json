@@ -1,0 +1,22 @@
+{
+  "standard_notes": "standard_notes",
+  "name": "Standard_Notes",
+  "type": "AppImage",
+  "description": "desktop - A simple and private notes app Mac PC amp Linux app  httpsstandardnotesorg",
+  "authors": [
+    {
+      "name": "standardnotes",
+      "url": "https://github.com/standardnotes"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "standardnotes/desktop"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/standardnotes/desktop/releases"
+    }
+  ]
+}

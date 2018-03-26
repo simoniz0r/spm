@@ -1,0 +1,22 @@
+{
+  "plover": "plover",
+  "name": "Plover",
+  "type": "AppImage",
+  "description": "plover - Open source stenotype engine",
+  "authors": [
+    {
+      "name": "openstenoproject",
+      "url": "https://github.com/openstenoproject"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "openstenoproject/plover"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/openstenoproject/plover/releases"
+    }
+  ]
+}

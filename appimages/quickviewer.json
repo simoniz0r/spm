@@ -1,0 +1,22 @@
+{
+  "quickviewer": "quickviewer",
+  "name": "QuickViewer",
+  "type": "AppImage",
+  "description": "quickviewer - A imagecomic viewer application for Windows and Linux it can show images very fast",
+  "authors": [
+    {
+      "name": "kanryu",
+      "url": "https://github.com/kanryu"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "kanryu/quickviewer"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/kanryu/quickviewer/releases"
+    }
+  ]
+}

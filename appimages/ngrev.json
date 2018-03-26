@@ -1,0 +1,22 @@
+{
+  "ngrev": "ngrev",
+  "name": "ngrev",
+  "type": "AppImage",
+  "description": "ngrev - Tool for reverse engineering of Angular applications",
+  "authors": [
+    {
+      "name": "mgechev",
+      "url": "https://github.com/mgechev"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "mgechev/ngrev"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/mgechev/ngrev/releases"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "rssguard": "rssguard",
+  "name": "rssguard",
+  "type": "AppImage",
+  "description": "rssguard - RSS Guard is simple yet powerful feed reader This is the official project repository",
+  "authors": [
+    {
+      "name": "martinrotter",
+      "url": "https://github.com/martinrotter"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "martinrotter/rssguard"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/martinrotter/rssguard/releases"
+    }
+  ]
+}

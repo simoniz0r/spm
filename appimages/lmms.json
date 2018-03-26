@@ -1,0 +1,22 @@
+{
+  "lmms": "lmms",
+  "name": "lmms",
+  "type": "AppImage",
+  "description": "lmms - cross-platform music production software",
+  "authors": [
+    {
+      "name": "tresf",
+      "url": "https://github.com/tresf"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "tresf/lmms"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/tresf/lmms/releases"
+    }
+  ]
+}

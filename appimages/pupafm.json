@@ -1,0 +1,22 @@
+{
+  "pupafm": "pupafm",
+  "name": "PupaFM",
+  "type": "AppImage",
+  "description": "PupaFM -  doubanfm Music Desktop Player",
+  "authors": [
+    {
+      "name": "xwartz",
+      "url": "https://github.com/xwartz"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "xwartz/PupaFM"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/xwartz/PupaFM/releases"
+    }
+  ]
+}

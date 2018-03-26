@@ -1,0 +1,22 @@
+{
+  "subvertise": "subvertise",
+  "name": "Subvertise",
+  "type": "AppImage",
+  "description": "subvertise - Subvert ISPs selling your data by ruining it",
+  "authors": [
+    {
+      "name": "nullism",
+      "url": "https://github.com/nullism"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "nullism/subvertise"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/nullism/subvertise/releases"
+    }
+  ]
+}

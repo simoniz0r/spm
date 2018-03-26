@@ -1,0 +1,22 @@
+{
+  "makou_reactor": "makou_reactor",
+  "name": "Makou_Reactor",
+  "type": "AppImage",
+  "description": "makoureactor - Final Fantasy VII field archive editor",
+  "authors": [
+    {
+      "name": "myst6re",
+      "url": "https://github.com/myst6re"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "myst6re/makoureactor"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/myst6re/makoureactor/releases"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "pixsrt": "pixsrt",
+  "name": "Pixsrt",
+  "type": "AppImage",
+  "description": "pixsrt - C Pixel Sorter",
+  "authors": [
+    {
+      "name": "thorpelawrence",
+      "url": "https://github.com/thorpelawrence"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "thorpelawrence/pixsrt"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/thorpelawrence/pixsrt/releases"
+    }
+  ]
+}

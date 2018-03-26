@@ -1,0 +1,22 @@
+{
+  "whatsdesktop": "whatsdesktop",
+  "name": "WhatsDesktop",
+  "type": "AppImage",
+  "description": "whatsdesktop - Unofficial WhatsApp app",
+  "authors": [
+    {
+      "name": "mawie81",
+      "url": "https://github.com/mawie81"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "mawie81/whatsdesktop"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/mawie81/whatsdesktop/releases"
+    }
+  ]
+}

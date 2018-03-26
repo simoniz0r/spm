@@ -1,0 +1,22 @@
+{
+  "imagemagick": "imagemagick",
+  "name": "ImageMagick",
+  "type": "AppImage",
+  "description": "ImageMagick",
+  "authors": [
+    {
+      "name": "ImageMagick",
+      "url": "https://github.com/ImageMagick"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "ImageMagick/ImageMagick"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/ImageMagick/ImageMagick/releases"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "cumulus": "cumulus",
+  "name": "Cumulus",
+  "type": "AppImage",
+  "description": "cumulus-qt - Qt port for Cumulus",
+  "authors": [
+    {
+      "name": "vadrian89",
+      "url": "https://github.com/vadrian89"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "vadrian89/cumulus-qt"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/vadrian89/cumulus-qt/releases"
+    }
+  ]
+}

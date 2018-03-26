@@ -1,0 +1,22 @@
+{
+  "stoplight": "stoplight",
+  "name": "StopLight",
+  "type": "AppImage",
+  "description": "The Stoplight desktop app  issues repository",
+  "authors": [
+    {
+      "name": "stoplightio",
+      "url": "https://github.com/stoplightio"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "stoplightio/desktop"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/stoplightio/desktop/releases"
+    }
+  ]
+}

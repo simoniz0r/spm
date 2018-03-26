@@ -1,0 +1,22 @@
+{
+  "beaker": "beaker",
+  "name": "beaker",
+  "type": "AppImage",
+  "description": "beaker - A peer-to-peer Web browser",
+  "authors": [
+    {
+      "name": "beakerbrowser",
+      "url": "https://github.com/beakerbrowser"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "beakerbrowser/beaker"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/beakerbrowser/beaker/releases"
+    }
+  ]
+}

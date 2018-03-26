@@ -1,0 +1,22 @@
+{
+  "colorpicker": "colorpicker",
+  "name": "colorpicker",
+  "type": "AppImage",
+  "description": "A mininal but complete colorpicker desktop app",
+  "authors": [
+    {
+      "name": "Toinane",
+      "url": "https://github.com/Toinane"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "Toinane/colorpicker"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/Toinane/colorpicker/releases"
+    }
+  ]
+}

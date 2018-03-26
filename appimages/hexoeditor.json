@@ -1,0 +1,22 @@
+{
+  "hexoeditor": "hexoeditor",
+  "name": "hexoeditor",
+  "type": "AppImage",
+  "description": "HexoEditor - this markdown Editor for hexo blog",
+  "authors": [
+    {
+      "name": "zhuzhuyule",
+      "url": "https://github.com/zhuzhuyule"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "zhuzhuyule/HexoEditor"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/zhuzhuyule/HexoEditor/releases"
+    }
+  ]
+}

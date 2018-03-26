@@ -1,0 +1,22 @@
+{
+  "electorrent": "electorrent",
+  "name": "Electorrent",
+  "type": "AppImage",
+  "description": "Electorrent - A remote control client for Torrent qBittorrent rTorrent amp Transmission",
+  "authors": [
+    {
+      "name": "Tympanix",
+      "url": "https://github.com/Tympanix"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "Tympanix/Electorrent"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/Tympanix/Electorrent/releases"
+    }
+  ]
+}

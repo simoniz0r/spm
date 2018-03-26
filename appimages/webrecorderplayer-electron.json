@@ -1,0 +1,22 @@
+{
+  "webrecorderplayer-electron": "webrecorderplayer-electron",
+  "name": "webrecorderplayer-electron",
+  "type": "AppImage",
+  "description": "webrecorderplayer-electron - Webrecorder Player for Desktop OSXWindowsLinux Built with Electron  Webrecorder",
+  "authors": [
+    {
+      "name": "webrecorder",
+      "url": "https://github.com/webrecorder"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "webrecorder/webrecorderplayer-electron"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/webrecorder/webrecorderplayer-electron/releases"
+    }
+  ]
+}

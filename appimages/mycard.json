@@ -1,0 +1,22 @@
+{
+  "mycard": "mycard",
+  "name": "mycard",
+  "type": "AppImage",
+  "description": "moecube - APP",
+  "authors": [
+    {
+      "name": "moecube",
+      "url": "https://github.com/moecube"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "moecube/moecube"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/moecube/moecube/releases"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "discord-css-injection": "discord-css-injection",
+  "name": "discord-css-injection",
+  "type": "AppImage",
+  "description": "discord-css-injection - A bash script that uses 'asar' 'grep' and 'sed' to add CSS hotloading to Discord on Linux",
+  "authors": [
+    {
+      "name": "simoniz0r",
+      "url": "https://github.com/simoniz0r"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "simoniz0r/discord-css-injection"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/simoniz0r/discord-css-injection/releases"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "kettleclient": "kettleclient",
+  "name": "KettleClient",
+  "type": "AppImage",
+  "description": "KettleClient - Graphical client for REST KettleService written in Qt",
+  "authors": [
+    {
+      "name": "Arquanite",
+      "url": "https://github.com/Arquanite"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "Arquanite/KettleClient"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/Arquanite/KettleClient/releases"
+    }
+  ]
+}

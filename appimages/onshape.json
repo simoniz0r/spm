@@ -1,0 +1,22 @@
+{
+  "onshape": "onshape",
+  "name": "Onshape",
+  "type": "AppImage",
+  "description": "onshape-desktop-shell - Onshape desktop app web application shell Unofficial",
+  "authors": [
+    {
+      "name": "develar",
+      "url": "https://github.com/develar"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "develar/onshape-desktop-shell"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/develar/onshape-desktop-shell/releases"
+    }
+  ]
+}

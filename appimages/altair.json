@@ -1,0 +1,22 @@
+{
+  "altair": "altair",
+  "name": "altair",
+  "type": "AppImage",
+  "description": "altair -  A beautiful feature-rich GraphQL Client for all platforms",
+  "authors": [
+    {
+      "name": "imolorhe",
+      "url": "https://github.com/imolorhe"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "imolorhe/altair"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/imolorhe/altair/releases"
+    }
+  ]
+}

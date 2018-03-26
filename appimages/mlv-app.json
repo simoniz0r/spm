@@ -1,0 +1,22 @@
+{
+  "mlv-app": "mlv-app",
+  "name": "MLV-App",
+  "type": "AppImage",
+  "description": "MLV-App - An all in one MLV processing app that will become great soon or maybe is already",
+  "authors": [
+    {
+      "name": "ilia3101",
+      "url": "https://github.com/ilia3101"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "ilia3101/MLV-App"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/ilia3101/MLV-App/releases"
+    }
+  ]
+}

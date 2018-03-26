@@ -1,0 +1,22 @@
+{
+  "alphat": "alphat",
+  "name": "AlphaT",
+  "type": "AppImage",
+  "description": "alphat - AlphaT is a free open-source translation application powered by Electron",
+  "authors": [
+    {
+      "name": "sigoden",
+      "url": "https://github.com/sigoden"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "sigoden/alphat"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/sigoden/alphat/releases"
+    }
+  ]
+}

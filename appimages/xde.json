@@ -1,0 +1,22 @@
+{
+  "xde": "xde",
+  "name": "xde",
+  "type": "AppImage",
+  "description": "xde - The Expo Development Environment",
+  "authors": [
+    {
+      "name": "expo",
+      "url": "https://github.com/expo"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "expo/xde"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/expo/xde/releases"
+    }
+  ]
+}

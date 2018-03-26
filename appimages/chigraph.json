@@ -1,0 +1,22 @@
+{
+  "chigraph": "chigraph",
+  "name": "Chigraph",
+  "type": "AppImage",
+  "description": "chigraph - A visual systems language for beginners compiled using LLVM",
+  "authors": [
+    {
+      "name": "chigraph",
+      "url": "https://github.com/chigraph"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "chigraph/chigraph"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/chigraph/chigraph/releases"
+    }
+  ]
+}

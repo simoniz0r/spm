@@ -1,0 +1,22 @@
+{
+  "pokenurse": "pokenurse",
+  "name": "PokeNurse",
+  "type": "AppImage",
+  "description": "PokeNurse -   A tool for Pokmon Go to aid in transferring and evolving Pokmon",
+  "authors": [
+    {
+      "name": "vinnymac",
+      "url": "https://github.com/vinnymac"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "vinnymac/PokeNurse"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/vinnymac/PokeNurse/releases"
+    }
+  ]
+}

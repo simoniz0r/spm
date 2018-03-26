@@ -1,0 +1,22 @@
+{
+  "vterm": "vterm",
+  "name": "vterm",
+  "type": "AppImage",
+  "description": "vterm - fire Extensible terminal emulator written with the web languages of the future Today",
+  "authors": [
+    {
+      "name": "vterm",
+      "url": "https://github.com/vterm"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "vterm/vterm"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/vterm/vterm/releases"
+    }
+  ]
+}

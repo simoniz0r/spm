@@ -1,0 +1,22 @@
+{
+  "playyourdamnturn.com": "playyourdamnturn.com",
+  "name": "playyourdamnturn.com",
+  "type": "AppImage",
+  "description": "Electron client that helps with playing your damn turn",
+  "authors": [
+    {
+      "name": "pydt",
+      "url": "https://github.com/pydt"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "pydt/client"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/pydt/client/releases"
+    }
+  ]
+}

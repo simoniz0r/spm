@@ -1,0 +1,22 @@
+{
+  "franz": "franz",
+  "name": "franz",
+  "type": "AppImage",
+  "description": "franz - Franz is a free messaging app for services like WhatsApp Slack Messenger and many more",
+  "authors": [
+    {
+      "name": "meetfranz",
+      "url": "https://github.com/meetfranz"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "meetfranz/franz"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/meetfranz/franz/releases"
+    }
+  ]
+}

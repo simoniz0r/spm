@@ -1,0 +1,22 @@
+{
+  "cubicsdr": "cubicsdr",
+  "name": "CubicSDR",
+  "type": "AppImage",
+  "description": "CubicSDR - Cross-Platform Software-Defined Radio Application",
+  "authors": [
+    {
+      "name": "cjcliffe",
+      "url": "https://github.com/cjcliffe"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "cjcliffe/CubicSDR"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/cjcliffe/CubicSDR/releases"
+    }
+  ]
+}

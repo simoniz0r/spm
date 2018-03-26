@@ -1,0 +1,22 @@
+{
+  "reliefvalve": "reliefvalve",
+  "name": "ReliefValve",
+  "type": "AppImage",
+  "description": "ReliefValve - A tool to help manage the Steam client",
+  "authors": [
+    {
+      "name": "l3laze",
+      "url": "https://github.com/l3laze"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "l3laze/ReliefValve"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/l3laze/ReliefValve/releases"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "qpdf": "qpdf",
+  "name": "qpdf",
+  "type": "AppImage",
+  "description": "qpdf - Primary QPDF source code and documentation",
+  "authors": [
+    {
+      "name": "qpdf",
+      "url": "https://github.com/qpdf"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "qpdf/qpdf"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/qpdf/qpdf/releases"
+    }
+  ]
+}

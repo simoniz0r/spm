@@ -1,0 +1,22 @@
+{
+  "malice": "malice",
+  "name": "Malice",
+  "type": "AppImage",
+  "description": "Malice - GTK interface for iceprog with most batteries included",
+  "authors": [
+    {
+      "name": "Cloud-V",
+      "url": "https://github.com/Cloud-V"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "Cloud-V/Malice"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/Cloud-V/Malice/releases"
+    }
+  ]
+}

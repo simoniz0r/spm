@@ -1,0 +1,22 @@
+{
+  "dexter_dev_env": "dexter_dev_env",
+  "name": "dexter_dev_env",
+  "type": "AppImage",
+  "description": "dde - Dexter Development  Environment",
+  "authors": [
+    {
+      "name": "cfry",
+      "url": "https://github.com/cfry"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "cfry/dde"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/cfry/dde/releases"
+    }
+  ]
+}

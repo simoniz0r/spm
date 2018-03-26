@@ -1,0 +1,22 @@
+{
+  "vivifyscrum": "vivifyscrum",
+  "name": "vivifyscrum",
+  "type": "AppImage",
+  "description": "Contribute to vivifyscrum2-electron development by creating an account on GitHub",
+  "authors": [
+    {
+      "name": "Vivify-Ideas",
+      "url": "https://github.com/Vivify-Ideas"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "Vivify-Ideas/vivifyscrum2-electron"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/Vivify-Ideas/vivifyscrum2-electron/releases"
+    }
+  ]
+}

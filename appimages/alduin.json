@@ -1,0 +1,22 @@
+{
+  "alduin": "alduin",
+  "name": "Alduin",
+  "type": "AppImage",
+  "description": "alduin - An RSS Atom and JSON  feed aggregator available on Windows and Linux",
+  "authors": [
+    {
+      "name": "Xstoudi",
+      "url": "https://github.com/Xstoudi"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "Xstoudi/alduin"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/Xstoudi/alduin/releases"
+    }
+  ]
+}

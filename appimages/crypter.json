@@ -1,0 +1,22 @@
+{
+  "crypter": "crypter",
+  "name": "Crypter",
+  "type": "AppImage",
+  "description": "Crypter - An innovative convenient and secure cross-platform encryption app  lt--gt",
+  "authors": [
+    {
+      "name": "HR",
+      "url": "https://github.com/HR"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "HR/Crypter"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/HR/Crypter/releases"
+    }
+  ]
+}

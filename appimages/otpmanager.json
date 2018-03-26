@@ -1,0 +1,22 @@
+{
+  "otpmanager": "otpmanager",
+  "name": "OTPManager",
+  "type": "AppImage",
+  "description": "OTPManager-build - build Repo of OPTManager",
+  "authors": [
+    {
+      "name": "Adpa18",
+      "url": "https://github.com/Adpa18"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "Adpa18/OTPManager-build"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/Adpa18/OTPManager-build/releases"
+    }
+  ]
+}

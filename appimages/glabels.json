@@ -1,0 +1,22 @@
+{
+  "glabels": "glabels",
+  "name": "gLabels",
+  "type": "AppImage",
+  "description": "glabels-qt - gLabels Label Designer QtC",
+  "authors": [
+    {
+      "name": "jimevins",
+      "url": "https://github.com/jimevins"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "jimevins/glabels-qt"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/jimevins/glabels-qt/releases"
+    }
+  ]
+}

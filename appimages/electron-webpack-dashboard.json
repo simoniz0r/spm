@@ -1,0 +1,22 @@
+{
+  "electron-webpack-dashboard": "electron-webpack-dashboard",
+  "name": "electron-webpack-dashboard",
+  "type": "AppImage",
+  "description": "electron-webpack-dashboard - Electron Desktop GUI for Webpack Dashboard",
+  "authors": [
+    {
+      "name": "FormidableLabs",
+      "url": "https://github.com/FormidableLabs"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "FormidableLabs/electron-webpack-dashboard"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/FormidableLabs/electron-webpack-dashboard/releases"
+    }
+  ]
+}

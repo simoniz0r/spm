@@ -1,0 +1,22 @@
+{
+  "eqonomize": "eqonomize",
+  "name": "Eqonomize",
+  "type": "AppImage",
+  "description": "Eqonomize Personal accounting cross-platform",
+  "authors": [
+    {
+      "name": "Eqonomize",
+      "url": "https://github.com/Eqonomize"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "Eqonomize/Eqonomize"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/Eqonomize/Eqonomize/releases"
+    }
+  ]
+}

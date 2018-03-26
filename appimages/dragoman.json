@@ -1,0 +1,22 @@
+{
+  "dragoman": "dragoman",
+  "name": "Dragoman",
+  "type": "AppImage",
+  "description": "Dragoman - GUI for polyglot",
+  "authors": [
+    {
+      "name": "peteboothroyd",
+      "url": "https://github.com/peteboothroyd"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "peteboothroyd/Dragoman"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/peteboothroyd/Dragoman/releases"
+    }
+  ]
+}

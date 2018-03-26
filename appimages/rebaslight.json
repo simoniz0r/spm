@@ -1,0 +1,22 @@
+{
+  "rebaslight": "rebaslight",
+  "name": "rebaslight",
+  "type": "AppImage",
+  "description": "rebaslight - Rebaslight - an easy to use special effects editor",
+  "authors": [
+    {
+      "name": "rebaslight",
+      "url": "https://github.com/rebaslight"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "rebaslight/rebaslight"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/rebaslight/rebaslight/releases"
+    }
+  ]
+}

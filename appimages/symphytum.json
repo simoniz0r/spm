@@ -1,0 +1,22 @@
+{
+  "symphytum": "symphytum",
+  "name": "Symphytum",
+  "type": "AppImage",
+  "description": "symphytum - Symphytum Personal Database Software",
+  "authors": [
+    {
+      "name": "giowck",
+      "url": "https://github.com/giowck"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "giowck/symphytum"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/giowck/symphytum/releases"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "tc-linux": "tc-linux",
+  "name": "tc-linux",
+  "type": "AppImage",
+  "description": "A desktop chat client for Twitch",
+  "authors": [
+    {
+      "name": "mccxiv",
+      "url": "https://github.com/mccxiv"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "mccxiv/tc"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/mccxiv/tc/releases"
+    }
+  ]
+}

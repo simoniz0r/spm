@@ -1,0 +1,22 @@
+{
+  "peek": "peek",
+  "name": "peek",
+  "type": "AppImage",
+  "description": "peek - Simple animated GIF screen recorder with an easy to use interface",
+  "authors": [
+    {
+      "name": "phw",
+      "url": "https://github.com/phw"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "phw/peek"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/phw/peek/releases"
+    }
+  ]
+}

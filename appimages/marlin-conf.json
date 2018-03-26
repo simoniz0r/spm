@@ -1,0 +1,22 @@
+{
+  "marlin-conf": "marlin-conf",
+  "name": "marlin-conf",
+  "type": "AppImage",
+  "description": "marlin-config - Marlin firmware instant configurator",
+  "authors": [
+    {
+      "name": "akaJes",
+      "url": "https://github.com/akaJes"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "akaJes/marlin-config"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/akaJes/marlin-config/releases"
+    }
+  ]
+}

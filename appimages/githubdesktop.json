@@ -1,0 +1,22 @@
+{
+  "githubdesktop": "githubdesktop",
+  "name": "GitHubDesktop",
+  "type": "AppImage",
+  "description": "Simple collaboration from your desktop",
+  "authors": [
+    {
+      "name": "shiftkey",
+      "url": "https://github.com/shiftkey"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "shiftkey/desktop"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/shiftkey/desktop/releases"
+    }
+  ]
+}

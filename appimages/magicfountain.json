@@ -1,0 +1,22 @@
+{
+  "magicfountain": "magicfountain",
+  "name": "MagicFountain",
+  "type": "AppImage",
+  "description": "magicfountain - A screenwriting program available on Linux MacOSX and Windows",
+  "authors": [
+    {
+      "name": "Aztorius",
+      "url": "https://github.com/Aztorius"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "Aztorius/magicfountain"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/Aztorius/magicfountain/releases"
+    }
+  ]
+}

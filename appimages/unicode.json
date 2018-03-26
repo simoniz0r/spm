@@ -1,0 +1,22 @@
+{
+  "unicode": "unicode",
+  "name": "Unicode",
+  "type": "AppImage",
+  "description": "unicode - All Contents code and everything related to Unicode converter App",
+  "authors": [
+    {
+      "name": "nirooj56",
+      "url": "https://github.com/nirooj56"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "nirooj56/unicode"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/nirooj56/unicode/releases"
+    }
+  ]
+}

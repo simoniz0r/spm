@@ -1,0 +1,22 @@
+{
+  "bodhi": "bodhi",
+  "name": "bodhi",
+  "type": "AppImage",
+  "description": "bodhi-app - Bodhi Prediction Market desktop application",
+  "authors": [
+    {
+      "name": "bodhiproject",
+      "url": "https://github.com/bodhiproject"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "bodhiproject/bodhi-app"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/bodhiproject/bodhi-app/releases"
+    }
+  ]
+}

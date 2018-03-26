@@ -1,0 +1,22 @@
+{
+  "cerebral-debugger": "cerebral-debugger",
+  "name": "Cerebral-Debugger",
+  "type": "AppImage",
+  "description": "cerebral-debugger - Debugger for Cerebral",
+  "authors": [
+    {
+      "name": "cerebral",
+      "url": "https://github.com/cerebral"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "cerebral/cerebral-debugger"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/cerebral/cerebral-debugger/releases"
+    }
+  ]
+}

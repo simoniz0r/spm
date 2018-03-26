@@ -1,0 +1,22 @@
+{
+  "onyx": "onyx",
+  "name": "Onyx",
+  "type": "AppImage",
+  "description": "onyx - Decentralized messaging application based on PSS",
+  "authors": [
+    {
+      "name": "MainframeHQ",
+      "url": "https://github.com/MainframeHQ"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "MainframeHQ/onyx"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/MainframeHQ/onyx/releases"
+    }
+  ]
+}

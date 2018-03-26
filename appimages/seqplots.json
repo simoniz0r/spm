@@ -1,0 +1,22 @@
+{
+  "seqplots": "seqplots",
+  "name": "SeqPlots",
+  "type": "AppImage",
+  "description": "Contribute to seqplotselectron development by creating an account on GitHub",
+  "authors": [
+    {
+      "name": "Przemol",
+      "url": "https://github.com/Przemol"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "Przemol/seqplots_electron"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/Przemol/seqplots_electron/releases"
+    }
+  ]
+}

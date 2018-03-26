@@ -1,0 +1,22 @@
+{
+  "jq": "jq",
+  "name": "jq",
+  "type": "AppImage",
+  "description": "jq - Command-line JSON processor",
+  "authors": [
+    {
+      "name": "stedolan",
+      "url": "https://github.com/stedolan"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "stedolan/jq"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/stedolan/jq/releases"
+    }
+  ]
+}

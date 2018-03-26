@@ -1,0 +1,22 @@
+{
+  "tumblr_downloader_gui": "tumblr_downloader_gui",
+  "name": "Tumblr_Downloader_GUI",
+  "type": "AppImage",
+  "description": "Contribute to tumblr-downloader-client development by creating an account on GitHub",
+  "authors": [
+    {
+      "name": "neuro-sys",
+      "url": "https://github.com/neuro-sys"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "neuro-sys/tumblr-downloader-client"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/neuro-sys/tumblr-downloader-client/releases"
+    }
+  ]
+}

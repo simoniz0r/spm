@@ -1,0 +1,22 @@
+{
+  "powershell": "powershell",
+  "name": "PowerShell",
+  "type": "AppImage",
+  "description": "PowerShell for every system",
+  "authors": [
+    {
+      "name": "PowerShell",
+      "url": "https://github.com/PowerShell"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "PowerShell/PowerShell"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/PowerShell/PowerShell/releases"
+    }
+  ]
+}

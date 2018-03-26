@@ -1,0 +1,22 @@
+{
+  "nteract": "nteract",
+  "name": "nteract",
+  "type": "AppImage",
+  "description": "nteract -  Desktop Jupyter Extension libraries and more",
+  "authors": [
+    {
+      "name": "nteract",
+      "url": "https://github.com/nteract"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "nteract/nteract"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/nteract/nteract/releases"
+    }
+  ]
+}

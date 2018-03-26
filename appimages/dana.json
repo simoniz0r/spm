@@ -1,0 +1,22 @@
+{
+  "dana": "dana",
+  "name": "dana",
+  "type": "AppImage",
+  "description": "dana - Dana Symbol of Wisdom ",
+  "authors": [
+    {
+      "name": "b00f",
+      "url": "https://github.com/b00f"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "b00f/dana"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/b00f/dana/releases"
+    }
+  ]
+}

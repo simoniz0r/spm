@@ -1,0 +1,22 @@
+{
+  "hyper": "hyper",
+  "name": "hyper",
+  "type": "AppImage",
+  "description": "hyper - A terminal built on web technologies",
+  "authors": [
+    {
+      "name": "zeit",
+      "url": "https://github.com/zeit"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "zeit/hyper"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/zeit/hyper/releases"
+    }
+  ]
+}

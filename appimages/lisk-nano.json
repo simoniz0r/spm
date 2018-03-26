@@ -1,0 +1,22 @@
+{
+  "lisk-nano": "lisk-nano",
+  "name": "lisk-nano",
+  "type": "AppImage",
+  "description": "lisk-nano -  Lisk Nano a minimal feature client",
+  "authors": [
+    {
+      "name": "LiskHQ",
+      "url": "https://github.com/LiskHQ"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "LiskHQ/lisk-nano"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/LiskHQ/lisk-nano/releases"
+    }
+  ]
+}
