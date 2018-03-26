@@ -12,30 +12,52 @@ cat >"$HOME"/github/index/spm-feed.json << EOL
 {
   "version": 1,
   "home_page_url": "https://github.com/simoniz0r/spm",
-  "feed_url": "http://www.simonizor.gq/spm-feed.json",
-  "description": "json feed containing AppImage and precompiled tar package information for spm.",
+  "feed_url": "https://simoniz0r.github.io/spm-feed.json",
+  "description": "json feed containing package information for spm.",
   "updated_at": "$(date)",
   "expired": false,
   "appimages": [
 EOL
 for image in $(dir -C -w 1 $HOME/github/spm/appimages); do
-    URL="$(grep -v '#' $HOME/github/spm/appimages/"$image" | grep '.*github*.' | cut -f-5 -d"/")"
-    if [ ! -z "$URL" ]; then
-        case $URL in
-            *api.github*)
-                REPO="$(echo $URL | cut -f5,6 -d"/")"
-                URL="https://github.com/$REPO"
-                ;;
-            *)
-                REPO="$(echo $URL | cut -f4,5 -d"/")"
-                ;;
-        esac
-        # lower_image="$(echo "$image" | tr '[:upper:]' '[:lower:]' | tr -d '.')"
-        cat >>"$HOME"/github/index/spm-feed.json << EOL
+    image="$(echo $image | rev | cut -f2- -d'.' | rev)"
+    if [ -f "$HOME/github/spm/appimages/$image.json" ]; then
+        URL="$(jq -r '.links[1].url' ~/github/spm/appimages/$image.json | grep '.*github*.')"
+        if [ ! -z "$URL" ]; then
+            echo "$image is in list; getting description from json..."
+            cat >>"$HOME"/github/index/spm-feed.json << EOL
+    {
+      "name": "$(jq -r '.name' ~/github/spm/appimages/$image.json)",
+      "type": "AppImage",
+      "description": "$(jq -r '.description' ~/github/spm/appimages/$image.json)",
+      "authors": [
+        {
+          "name": "$(echo $URL | cut -f4 -d'/')",
+          "url": "$(echo $URL | cut -f-4 -d'/')"
+        }
+      ],
+      "links": [
+        {
+          "type": "GitHub",
+          "url": "$(echo $URL | cut -f4-5 -d'/')"
+        },
+        {
+         "type": "Install",
+          "url": "$URL"
+        }
+      ]
+    },
+EOL
+        fi
+        echo "$(tput setaf 2)$image has been added to spm-feed.json$(tput sgr0)"
+    elif [ -f "$HOME/github/spm/appimages/$image" ]; then
+        echo "$image is not in list; grabbing info from github page..."
+        URL="$(grep -v '#' $HOME/github/spm/appimages/"$image" | grep '.*github*.' | cut -f-5 -d"/")"
+        if [ ! -z "$URL" ]; then
+            cat >>"$HOME"/github/index/spm-feed.json << EOL
     {
       "name": "$image",
       "type": "AppImage",
-      "description": "$(wget --quiet "$URL" -O - | grep -i '<meta name="description"' | cut -f4 -d'"' | tr -cd '[:alnum:] -')",
+      "description": "$(wget --quiet "$URL" -O - | tac | grep -m1 '<meta name="description"' | cut -f4 -d'"' | tr -cd '[:alnum:] -' | sed "s%39%'%g")",
       "authors": [
         {
           "name": "$(echo $URL | cut -f4 -d'/')",
@@ -54,27 +76,63 @@ for image in $(dir -C -w 1 $HOME/github/spm/appimages); do
       ]
     },
 EOL
-        echo "$(tput setaf 1)$image has been added to spm-feed.json$(tput sgr0)"
+            cat >>"$HOME"/github/spm/appimages/"$image".json << EOL
+    {
+      "name": "$image",
+      "type": "AppImage",
+      "description": "$(wget --quiet "$URL" -O - | tac | grep -m1 '<meta name="description"' | cut -f4 -d'"' | tr -cd '[:alnum:] -' | sed "s%39%'%g")",
+      "authors": [
+        {
+          "name": "$(echo $URL | cut -f4 -d'/')",
+          "url": "$(echo $URL | cut -f-4 -d'/')"
+        }
+      ],
+      "links": [
+        {
+          "type": "GitHub",
+          "url": "$(echo $URL | cut -f4-5 -d'/')"
+        },
+        {
+         "type": "Install",
+          "url": "$URL/releases"
+        }
+      ]
+    }
+EOL
+            rm ~/github/spm/appimages/"$image"
+            echo "$(tput setaf 2)$image has been added to spm-feed.json$(tput sgr0)"
+        fi
     fi
 done
 # Generate a list of AppImages from sites other than github with versions that cannot be managed
 for image in $(dir -C -w 1 $HOME/github/spm/appimages); do
-    URL="$(grep -v '#' $HOME/github/spm/appimages/"$image" | grep -v '.*github*.')"
-    if [ ! -z "$URL" ]; then
-        cat >>"$HOME"/github/index/spm-feed.json << EOL
+    image="$(echo $image | rev | cut -f2- -d'.' | rev)"
+    if [ -f "$HOME/github/spm/appimages/$image.json" ]; then
+        URL="$(jq -r '.links[1].url' ~/github/spm/appimages/$image.json | grep -v '.*github*.')"
+        if [ ! -z "$URL" ]; then
+            echo "$image is in list; getting description from json..."
+            if [ -f "$HOME/github/appimage.github.io/apps/$(jq -r '.name' ~/github/spm/appimages/$image.json).md" ]; then
+                DESCRIPTION="$(yq r ~/github/appimage.github.io/apps/$(jq -r '.name' ~/github/spm/appimages/$image.json).md 'description' | tr '\n' ' ')"
+                AUTHOR="$(yq r ~/github/appimage.github.io/apps/$(jq -r '.name' ~/github/spm/appimages/$image.json).md 'authors')"
+            else
+                DESCRIPTION="AppImage for $(jq -r '.name' ~/github/spm/appimages/$image.json)"
+                AUTHOR="$(echo $URL | rev | cut -f2- -d'/' | rev)"
+            fi
+            cat >>"$HOME"/github/index/spm-feed.json << EOL
     {
-      "name": "$image",
+      "name": "$(jq -r '.name' ~/github/spm/appimages/$image.json)",
       "type": "AppImage",
-        "authors": [
+      "description": "$DESCRIPTION",
+      "authors": [
         {
-          "name": "N/A",
-          "url": "N/A"
+          "name": "$AUTHOR",
+          "url": "$(echo $URL | rev | cut -f2- -d'/' | rev)"
         }
       ],
       "links": [
         {
           "type": "Other",
-          "url": "N/A"
+          "url": "$(echo $URL | rev | cut -f2- -d'/' | rev)"
         },
         {
           "type": "Install",
@@ -83,12 +141,74 @@ for image in $(dir -C -w 1 $HOME/github/spm/appimages); do
       ]
     },
 EOL
-        echo "$(tput setaf 1)$image has been added to spm-feed.json$(tput sgr0)"
+            echo "$(tput setaf 2)$image has been added to spm-feed.json$(tput sgr0)"
+        fi
+    elif [ -f "$HOME/github/spm/appimages/$image" ]; then
+        URL="$(grep -v '#' $HOME/github/spm/appimages/"$image" | grep -v '.*github*.')"
+        if [ ! -z "$URL" ]; then
+            echo "$image is in list; getting description from json..."
+            if [ -f "$HOME/github/appimage.github.io/apps/$image.md" ]; then
+                DESCRIPTION="$(yq r ~/github/appimage.github.io/apps/$image.md 'description' | tr '\n' ' ')"
+                AUTHOR="$(yq r ~/github/appimage.github.io/apps/$image.md 'authors')"
+            else
+                DESCRIPTION="AppImage for $image"
+                AUTHOR="$(echo $URL | rev | cut -f2- -d'/' | rev)"
+            fi
+            cat >>"$HOME"/github/index/spm-feed.json << EOL
+    {
+      "name": "$image",
+      "type": "AppImage",
+      "description": "$DESCRIPTION",
+      "authors": [
+        {
+          "name": "$AUTHOR",
+          "url": "$(echo $URL | rev | cut -f2- -d'/' | rev)"
+        }
+      ],
+      "links": [
+        {
+          "type": "Other",
+          "url": "$(echo $URL | rev | cut -f2- -d'/' | rev)"
+        },
+        {
+          "type": "Install",
+          "url": "$URL"
+        }
+      ]
+    },
+EOL
+            cat >>"$HOME"/github/spm/appimages/"$image".json << EOL
+    {
+      "name": "$image",
+      "type": "AppImage",
+      "description": "$DESCRIPTION",
+      "authors": [
+        {
+          "name": "$AUTHOR",
+          "url": "$(echo $URL | rev | cut -f2- -d'/' | rev)"
+        }
+      ],
+      "links": [
+        {
+          "type": "Other",
+          "url": "$(echo $URL | rev | cut -f2- -d'/' | rev)"
+        },
+        {
+          "type": "Install",
+          "url": "$URL"
+        }
+      ]
+    }
+EOL
+            rm ~/github/spm/appimages/"$image"
+            echo "$(tput setaf 2)$image has been added to spm-feed.json$(tput sgr0)"
+        fi
     fi
 done
 
 cat >>"$HOME"/github/index/spm-feed.json << EOL
     {
+      "END": "END",
       "name": "END",
       "type": "END",
         "authors": [
@@ -107,64 +227,6 @@ cat >>"$HOME"/github/index/spm-feed.json << EOL
           "url": "END"
         }
       ]
-    }
-  ],
-  "tars": [
-EOL
-
-for tar in $(dir -C -w 1 $HOME/github/spm/tar-github); do
-    # tar_name="$(echo "$tar" | cut -f1 -d'.')"
-    cat >>"$HOME"/github/index/spm-feed.json << EOL
-    {
-      "name": "$(yaml r "$HOME"/github/spm/tar-github/$tar name)",
-      "type": "tar",
-      "location": "Github",
-      "instdir": "$(yaml r "$HOME"/github/spm/tar-github/$tar instdir)",
-      "taruri": "$(yaml r "$HOME"/github/spm/tar-github/$tar taruri)",
-      "apirui": "$(yaml r "$HOME"/github/spm/tar-github/$tar apirui)",
-      "desktop_file_path": "$(yaml r "$HOME"/github/spm/tar-github/$tar desktop_file_path)",
-      "icon_file_path": "$(yaml r "$HOME"/github/spm/tar-github/$tar icon_file_path)",
-      "executable_file_path": "$(yaml r "$HOME"/github/spm/tar-github/$tar executable_file_path)",
-      "bin_path": "$(yaml r "$HOME"/github/spm/tar-github/$tar bin_path)",
-      "config_path": "$(yaml r "$HOME"/github/spm/tar-github/$tar config_path)",
-      "description": "$(yaml r "$HOME"/github/spm/tar-github/$tar description | tr -d '\n')",
-      "dependencies": "$(yaml r "$HOME"/github/spm/tar-github/$tar dependencies | tr -d '\n')"
-    },
-EOL
-done
-
-for tar in $(dir -C -w 1 $HOME/github/spm/tar-other); do
-    cat >>"$HOME"/github/index/spm-feed.json << EOL
-    {
-      "name": "$(yaml r "$HOME"/github/spm/tar-other/$tar name)",
-      "type": "tar",
-      "location": "Other",
-      "instdir": "$(yaml r "$HOME"/github/spm/tar-other/$tar instdir)",
-      "taruri": "$(yaml r "$HOME"/github/spm/tar-other/$tar taruri)",
-      "desktop_file_path": "$(yaml r "$HOME"/github/spm/tar-other/$tar desktop_file_path)",
-      "icon_file_path": "$(yaml r "$HOME"/github/spm/tar-other/$tar icon_file_path)",
-      "executable_file_path": "$(yaml r "$HOME"/github/spm/tar-other/$tar executable_file_path)",
-      "bin_path": "$(yaml r "$HOME"/github/spm/tar-other/$tar bin_path)",
-      "config_path": "$(yaml r "$HOME"/github/spm/tar-other/$tar config_path)",
-      "description": "$(yaml r "$HOME"/github/spm/tar-other/$tar description | tr -d '\n')",
-      "dependencies": "$(yaml r "$HOME"/github/spm/tar-other/$tar dependencies | tr -d '\n')"
-    },
-EOL
-done
-
-cat >>"$HOME"/github/index/spm-feed.json << EOL
-    {
-      "name": "END",
-      "instdir": "END",
-      "taruri": "END",
-      "apirui": "END",
-      "desktop_file_path": "END",
-      "icon_file_path": "END",
-      "executable_file_path": "END",
-      "bin_path": "END",
-      "config_path": "END",
-      "description": "END",
-      "dependencies": "END"
     }
   ]
 }
