@@ -1,0 +1,27 @@
+{
+  "name": "CleepDesktop",
+  "description": "Desktop application to manage your Cleep devices",
+  "categories": [
+    "Network"
+  ],
+  "authors": [
+    {
+      "name": "tangb",
+      "url": "https://github.com/tangb"
+    }
+  ],
+  "license": "Apache-2.0",
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "tangb/CleepDesktop"
+    },
+    {
+      "type": "Download",
+      "url": "https://github.com/tangb/CleepDesktop/releases"
+    }
+  ],
+  "screenshots": [
+    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/CleepDesktop/screenshot.png"
+  ]
+}
