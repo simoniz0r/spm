@@ -1,0 +1,20 @@
+language: generic
+
+sudo: true
+dist: xenial
+
+script:
+  - sudo apt-get -qq -y install libjack0 xterm xinit openbox jq x11-utils x11-apps netpbm libgl1-mesa-dri libgl1-mesa-dev mesa-utils libosmesa6
+  - cd "$HOME"
+  - git clone https://github.com/simoniz0r/spm.git
+  - cd "$HOME"/spm
+  - git checkout travisci
+  - cp "$HOME"/spm/scripts/.xinitrc "$HOME"/.xinitrc
+  - chmod +x "$HOME"/.xinitrc
+  - chmod +x "$HOME"/spm/scripts/travisci.sh
+  - startx
+  - bash -c "$HOME/spm/scripts/travisci.sh"
+
+branches:
+  only:
+    - travisci
