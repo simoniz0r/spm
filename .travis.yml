@@ -14,6 +14,9 @@ script:
   - chmod +x "$HOME"/spm/scripts/travisci.sh
   - startx
   - bash -c "$HOME/spm/scripts/travisci.sh"
+  
+after_script:
+  - openbox --exit
 
 branches:
   only:
