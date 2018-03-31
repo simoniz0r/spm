@@ -1,0 +1,27 @@
+{
+  "name": "Nitrokey",
+  "description": "Manage your Nitrokey devices",
+  "categories": [
+    "Utility"
+  ],
+  "authors": [
+    {
+      "name": "Nitrokey",
+      "url": "https://github.com/Nitrokey"
+    }
+  ],
+  "license": "GPL-3.0",
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "Nitrokey/nitrokey-app"
+    },
+    {
+      "type": "Download",
+      "url": "https://github.com/Nitrokey/nitrokey-app/releases"
+    }
+  ],
+  "screenshots": [
+    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/Nitrokey/screenshot.png"
+  ]
+}
