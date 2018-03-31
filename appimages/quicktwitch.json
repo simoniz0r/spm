@@ -1,0 +1,27 @@
+{
+  "name": "QuickTwitch",
+  "description": "electron-react-redux-boilerplate",
+  "categories": [
+    "Utility"
+  ],
+  "authors": [
+    {
+      "name": "mhmiles",
+      "url": "https://github.com/mhmiles"
+    }
+  ],
+  "license": null,
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "mhmiles/QuickTwitch"
+    },
+    {
+      "type": "Download",
+      "url": "https://github.com/mhmiles/QuickTwitch/releases"
+    }
+  ],
+  "screenshots": [
+    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/QuickTwitch/screenshot.png"
+  ]
+}
