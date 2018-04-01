@@ -1,0 +1,27 @@
+{
+  "name": "vue-calc",
+  "description": "An electron-vue project",
+  "categories": [
+    "Utility"
+  ],
+  "authors": [
+    {
+      "name": "el3um4s",
+      "url": "https://github.com/el3um4s"
+    }
+  ],
+  "license": "MIT",
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "el3um4s/vue-calc"
+    },
+    {
+      "type": "Download",
+      "url": "https://github.com/el3um4s/vue-calc/releases"
+    }
+  ],
+  "screenshots": [
+    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/vue-calc/screenshot.png"
+  ]
+}
