@@ -1,0 +1,27 @@
+{
+  "name": "marktext",
+  "description": "Next generation markdown editor",
+  "categories": [
+    "Utility"
+  ],
+  "authors": [
+    {
+      "name": "marktext",
+      "url": "https://github.com/marktext"
+    }
+  ],
+  "license": "MIT",
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "marktext/marktext"
+    },
+    {
+      "type": "Download",
+      "url": "https://github.com/marktext/marktext/releases"
+    }
+  ],
+  "screenshots": [
+    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/marktext/screenshot.png"
+  ]
+}
