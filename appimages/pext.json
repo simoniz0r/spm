@@ -1,0 +1,27 @@
+{
+  "name": "Pext",
+  "description": "",
+  "categories": [
+    "Utility"
+  ],
+  "authors": [
+    {
+      "name": "Pext",
+      "url": "https://github.com/Pext"
+    }
+  ],
+  "license": "GPL-3.0+",
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "Pext/Pext"
+    },
+    {
+      "type": "Download",
+      "url": "https://github.com/Pext/Pext/releases"
+    }
+  ],
+  "screenshots": [
+    "https://raw.githubusercontent.com/Pext/Pext/master/screenshots/pext_radiobrowser_infopanel.png"
+  ]
+}
