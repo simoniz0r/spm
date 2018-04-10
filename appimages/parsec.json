@@ -1,5 +1,5 @@
 {
-  "name": "parsec-linux-appimage",
+  "name": "parsec",
   "description": "Parsec game streaming client",
   "categories": [
     "Utility"
