@@ -2,7 +2,7 @@
   "krita": "krita",
   "name": "Krita",
   "type": "AppImage",
-  "description": "N/A",
+  "description": "Krita is a FREE and open source painting tool designed for concept artists illustrators matte and texture artists and the VFX industry",
   "authors": [
     {
       "name": "N/A",
@@ -16,7 +16,7 @@
     },
     {
       "type": "Install",
-      "url": "https://download.kde.org/stable/krita/3.3.3/krita-3.3.3-x86_64.appimage"
+      "url": "https://download.kde.org/stable/krita/4.0.0/krita-4.0.0-x86_64.appimage"
     }
   ]
 }
