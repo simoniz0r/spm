@@ -1,0 +1,27 @@
+{
+  "name": "vkap",
+  "description": "Desktop VK Audio Player",
+  "categories": [
+    "Utility"
+  ],
+  "authors": [
+    {
+      "name": "hikiko4ern",
+      "url": "https://github.com/hikiko4ern"
+    }
+  ],
+  "license": "MIT",
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "hikiko4ern/vkap"
+    },
+    {
+      "type": "Download",
+      "url": "https://github.com/hikiko4ern/vkap/releases"
+    }
+  ],
+  "screenshots": [
+    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/vkap/screenshot.png"
+  ]
+}
