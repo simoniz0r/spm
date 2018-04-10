@@ -1,0 +1,27 @@
+{
+  "name": "Instagram-Py",
+  "description": "Hack Instagram Like a Pro.",
+  "categories": [
+    "System"
+  ],
+  "authors": [
+    {
+      "name": "antony-jr",
+      "url": "https://github.com/antony-jr"
+    }
+  ],
+  "license": null,
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "antony-jr/instagram-py"
+    },
+    {
+      "type": "Download",
+      "url": "https://github.com/antony-jr/instagram-py/releases"
+    }
+  ],
+  "screenshots": [
+    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/Instagram-Py/screenshot.png"
+  ]
+}
