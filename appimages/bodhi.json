@@ -1,5 +1,4 @@
 {
-  "bodhi": "bodhi",
   "name": "bodhi",
   "type": "AppImage",
   "description": "bodhi-app - Bodhi Prediction Market desktop application",

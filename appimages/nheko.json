@@ -1,5 +1,4 @@
 {
-  "nheko": "nheko",
   "name": "nheko",
   "type": "AppImage",
   "description": "nheko - Desktop client for the Matrix protocol",

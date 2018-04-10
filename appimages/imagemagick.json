@@ -1,5 +1,4 @@
 {
-  "imagemagick": "imagemagick",
   "name": "ImageMagick",
   "type": "AppImage",
   "description": "ImageMagick",

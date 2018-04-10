@@ -1,18 +1,17 @@
 {
-  "plex": "plex",
   "name": "Plex",
   "type": "AppImage",
-  "description": "N/A",
+  "description": "AppImage for Plex",
   "authors": [
     {
-      "name": "N/A",
-      "url": "N/A"
+      "name": "https://knapsu.eu/plex",
+      "url": "https://knapsu.eu/plex"
     }
   ],
   "links": [
     {
       "type": "Other",
-      "url": "N/A"
+      "url": "https://knapsu.eu/plex"
     },
     {
       "type": "Install",

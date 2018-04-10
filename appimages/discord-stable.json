@@ -1,5 +1,4 @@
 {
-  "discord-stable": "discord-stable",
   "name": "discord-stable",
   "type": "AppImage",
   "description": "This repository contains appimagebuild and AppImage build scripts for building AppImages easily",
@@ -12,7 +11,7 @@
   "links": [
     {
       "type": "GitHub",
-      "url": "simoniz0r/AppImages"
+      "url": "simoniz0r/Discord-AppImage"
     },
     {
       "type": "Install",

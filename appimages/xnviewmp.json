@@ -1,18 +1,17 @@
 {
-  "xnviewmp": "xnviewmp",
   "name": "XnViewMP",
   "type": "AppImage",
-  "description": "N/A",
+  "description": "Graphic viewer, browser, converter ",
   "authors": [
     {
-      "name": "N/A",
-      "url": "N/A"
+      "name": "null",
+      "url": "http://download.xnview.com"
     }
   ],
   "links": [
     {
       "type": "Other",
-      "url": "N/A"
+      "url": "http://download.xnview.com"
     },
     {
       "type": "Install",

@@ -1,5 +1,4 @@
 {
-  "kettleclient": "kettleclient",
   "name": "KettleClient",
   "type": "AppImage",
   "description": "KettleClient - Graphical client for REST KettleService written in Qt",

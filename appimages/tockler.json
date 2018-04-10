@@ -1,5 +1,4 @@
 {
-  "tockler": "tockler",
   "name": "Tockler",
   "type": "AppImage",
   "description": "tockler - Application that tracks your time by monitoring your active windows only titles and idle time",

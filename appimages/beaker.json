@@ -1,5 +1,4 @@
 {
-  "beaker": "beaker",
   "name": "beaker",
   "type": "AppImage",
   "description": "beaker - A peer-to-peer Web browser",

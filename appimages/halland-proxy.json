@@ -1,5 +1,4 @@
 {
-  "halland-proxy": "halland-proxy",
   "name": "halland-proxy",
   "type": "AppImage",
   "description": "halland-proxy - A web debugging proxy written in javascript Electron",

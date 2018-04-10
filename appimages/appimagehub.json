@@ -1,5 +1,4 @@
 {
-  "appimagehub": "appimagehub",
   "name": "AppImageHub",
   "type": "AppImage",
   "description": "AppImageHub-Electron - Electron wrapper for downloading AppImages from httpsAppImagegithubio built using nativefier",

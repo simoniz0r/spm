@@ -1,18 +1,17 @@
 {
-  "peruse": "peruse",
   "name": "Peruse",
   "type": "AppImage",
-  "description": "N/A",
+  "description": "Document Viewer ",
   "authors": [
     {
-      "name": "N/A",
-      "url": "N/A"
+      "name": "null",
+      "url": "https://download.kde.org/stable/peruse"
     }
   ],
   "links": [
     {
       "type": "Other",
-      "url": "N/A"
+      "url": "https://download.kde.org/stable/peruse"
     },
     {
       "type": "Install",

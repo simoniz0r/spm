@@ -1,18 +1,17 @@
 {
-  "blender": "blender",
   "name": "Blender",
   "type": "AppImage",
-  "description": "N/A",
+  "description": "AppImage for Blender",
   "authors": [
     {
-      "name": "N/A",
-      "url": "N/A"
+      "name": "https://bintray.com/probono/AppImages",
+      "url": "https://bintray.com/probono/AppImages"
     }
   ],
   "links": [
     {
       "type": "Other",
-      "url": "N/A"
+      "url": "https://bintray.com/probono/AppImages"
     },
     {
       "type": "Install",

@@ -1,5 +1,4 @@
 {
-  "tc-linux": "tc-linux",
   "name": "tc-linux",
   "type": "AppImage",
   "description": "A desktop chat client for Twitch",

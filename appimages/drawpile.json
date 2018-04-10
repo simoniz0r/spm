@@ -1,18 +1,17 @@
 {
-  "drawpile": "drawpile",
   "name": "Drawpile",
   "type": "AppImage",
-  "description": "N/A",
+  "description": "AppImage for Drawpile",
   "authors": [
     {
-      "name": "N/A",
-      "url": "N/A"
+      "name": "https://drawpile.net/files/appimage",
+      "url": "https://drawpile.net/files/appimage"
     }
   ],
   "links": [
     {
       "type": "Other",
-      "url": "N/A"
+      "url": "https://drawpile.net/files/appimage"
     },
     {
       "type": "Install",

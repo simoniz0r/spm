@@ -1,18 +1,17 @@
 {
-  "optifmus": "optifmus",
   "name": "Optifmus",
   "type": "AppImage",
-  "description": "N/A",
+  "description": "AppImage for Optifmus",
   "authors": [
     {
-      "name": "N/A",
-      "url": "N/A"
+      "name": "https://gitlab.com/ciemat-psa/Optifmus/tree/master/bin/linux",
+      "url": "https://gitlab.com/ciemat-psa/Optifmus/tree/master/bin/linux"
     }
   ],
   "links": [
     {
       "type": "Other",
-      "url": "N/A"
+      "url": "https://gitlab.com/ciemat-psa/Optifmus/tree/master/bin/linux"
     },
     {
       "type": "Install",

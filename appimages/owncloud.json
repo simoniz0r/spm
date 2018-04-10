@@ -1,18 +1,17 @@
 {
-  "owncloud": "owncloud",
   "name": "ownCloud",
   "type": "AppImage",
-  "description": "N/A",
+  "description": "AppImage for ownCloud",
   "authors": [
     {
-      "name": "N/A",
-      "url": "N/A"
+      "name": "http://download.opensuse.org/repositories/home:/ocfreitag/AppImage",
+      "url": "http://download.opensuse.org/repositories/home:/ocfreitag/AppImage"
     }
   ],
   "links": [
     {
       "type": "Other",
-      "url": "N/A"
+      "url": "http://download.opensuse.org/repositories/home:/ocfreitag/AppImage"
     },
     {
       "type": "Install",

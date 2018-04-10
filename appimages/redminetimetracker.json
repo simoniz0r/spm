@@ -1,5 +1,4 @@
 {
-  "redminetimetracker": "redminetimetracker",
   "name": "RedmineTimeTracker",
   "type": "AppImage",
   "description": "RedmineTimeTracker - ChromeElectron app for tracking work time",

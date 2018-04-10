@@ -1,18 +1,17 @@
 {
-  "qjackctl": "qjackctl",
   "name": "QjackCtl",
   "type": "AppImage",
-  "description": "N/A",
+  "description": "AppImage for QjackCtl",
   "authors": [
     {
-      "name": "N/A",
-      "url": "N/A"
+      "name": "http://download.opensuse.org/repositories/home:/rncbc/AppImage",
+      "url": "http://download.opensuse.org/repositories/home:/rncbc/AppImage"
     }
   ],
   "links": [
     {
       "type": "Other",
-      "url": "N/A"
+      "url": "http://download.opensuse.org/repositories/home:/rncbc/AppImage"
     },
     {
       "type": "Install",

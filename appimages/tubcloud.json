@@ -1,18 +1,17 @@
 {
-  "tubcloud": "tubcloud",
   "name": "tubCloud",
   "type": "AppImage",
-  "description": "N/A",
+  "description": "tubCloud desktop synchronization client ",
   "authors": [
     {
-      "name": "N/A",
-      "url": "N/A"
+      "name": "null",
+      "url": "https://updates.tubcloud.tu-berlin.de/clients/linux/64"
     }
   ],
   "links": [
     {
       "type": "Other",
-      "url": "N/A"
+      "url": "https://updates.tubcloud.tu-berlin.de/clients/linux/64"
     },
     {
       "type": "Install",

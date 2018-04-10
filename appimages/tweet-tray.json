@@ -1,27 +1,21 @@
 {
   "name": "tweet-tray",
+  "type": "AppImage",
   "description": "Tweet quickly from the desktop without any more distractions.",
-  "categories": [
-    "Development"
-  ],
   "authors": [
     {
       "name": "jonathontoon",
       "url": "https://github.com/jonathontoon"
     }
   ],
-  "license": "MIT",
   "links": [
     {
       "type": "GitHub",
       "url": "jonathontoon/tweet-tray"
     },
     {
-      "type": "Download",
+      "type": "Install",
       "url": "https://github.com/jonathontoon/tweet-tray/releases"
     }
-  ],
-  "screenshots": [
-    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/tweet-tray/screenshot.png"
   ]
 }

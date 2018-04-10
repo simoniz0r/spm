@@ -1,5 +1,4 @@
 {
-  "iota-wallet": "iota-wallet",
   "name": "iota-wallet",
   "type": "AppImage",
   "description": "iota-gui-beta - Beta of IOTA GUI client",

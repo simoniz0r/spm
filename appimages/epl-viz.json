@@ -1,5 +1,4 @@
 {
-  "epl-viz": "epl-viz",
   "name": "EPL-Viz",
   "type": "AppImage",
   "description": "Qt-Frontend for the EPL-Viz project",

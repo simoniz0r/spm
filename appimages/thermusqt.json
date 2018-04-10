@@ -1,5 +1,4 @@
 {
-  "thermusqt": "thermusqt",
   "name": "thermusqt",
   "type": "AppImage",
   "description": "ThermusQt - Qt implementation of Thermus the thermal statistical model",

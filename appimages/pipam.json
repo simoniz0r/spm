@@ -1,5 +1,4 @@
 {
-  "pipam": "pipam",
   "name": "pipam",
   "type": "AppImage",
   "description": "pipam - A package manager manager",

@@ -1,18 +1,17 @@
 {
-  "ldview": "ldview",
   "name": "ldview",
   "type": "AppImage",
-  "description": "N/A",
+  "description": "LDraw Model Viewer ",
   "authors": [
     {
-      "name": "N/A",
-      "url": "N/A"
+      "name": "null",
+      "url": "http://download.opensuse.org/repositories/home:/pbartfai/AppImage"
     }
   ],
   "links": [
     {
       "type": "Other",
-      "url": "N/A"
+      "url": "http://download.opensuse.org/repositories/home:/pbartfai/AppImage"
     },
     {
       "type": "Install",

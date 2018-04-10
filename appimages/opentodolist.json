@@ -1,18 +1,17 @@
 {
-  "opentodolist": "opentodolist",
   "name": "OpenTodoList",
   "type": "AppImage",
-  "description": "N/A",
+  "description": "AppImage for OpenTodoList",
   "authors": [
     {
-      "name": "N/A",
-      "url": "N/A"
+      "name": "https://www.rpdev.net/public/appimages/linux/x86_64",
+      "url": "https://www.rpdev.net/public/appimages/linux/x86_64"
     }
   ],
   "links": [
     {
       "type": "Other",
-      "url": "N/A"
+      "url": "https://www.rpdev.net/public/appimages/linux/x86_64"
     },
     {
       "type": "Install",

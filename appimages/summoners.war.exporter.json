@@ -1,5 +1,4 @@
 {
-  "summoners.war.exporter": "summoners.war.exporter",
   "name": "Summoners.War.Exporter",
   "type": "AppImage",
   "description": "sw-exporter - This tool will parse intercepted data from Summoners War and extract information on the monsters and runes of the user",

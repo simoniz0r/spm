@@ -1,5 +1,4 @@
 {
-  "githoard": "githoard",
   "name": "githoard",
   "type": "AppImage",
   "description": "githoard - Desktop app that enables users to quickly clone git repositories",

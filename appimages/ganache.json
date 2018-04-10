@@ -1,5 +1,4 @@
 {
-  "ganache": "ganache",
   "name": "ganache",
   "type": "AppImage",
   "description": "ganache - Personal blockchain for Ethereum development",

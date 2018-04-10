@@ -1,5 +1,4 @@
 {
-  "langly": "langly",
   "name": "langly",
   "type": "AppImage",
   "description": "langly - Manage JSON language files in Laravel",

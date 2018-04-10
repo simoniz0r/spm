@@ -1,18 +1,17 @@
 {
-  "ocsstore": "ocsstore",
   "name": "ocsstore",
   "type": "AppImage",
-  "description": "N/A",
+  "description": "null ",
   "authors": [
     {
-      "name": "N/A",
-      "url": "N/A"
+      "name": "null",
+      "url": "https://dl.opendesktop.org/api/files/downloadfile/id/1518775872/s/d5b1b888e0961928a79693376160d777/t/1518839006/u/461440"
     }
   ],
   "links": [
     {
       "type": "Other",
-      "url": "N/A"
+      "url": "https://dl.opendesktop.org/api/files/downloadfile/id/1518775872/s/d5b1b888e0961928a79693376160d777/t/1518839006/u/461440"
     },
     {
       "type": "Install",

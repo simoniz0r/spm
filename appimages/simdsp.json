@@ -1,5 +1,4 @@
 {
-  "simdsp": "simdsp",
   "name": "simdsp",
   "type": "AppImage",
   "description": "SimDSP - DSP Simulator",

@@ -1,18 +1,17 @@
 {
-  "texstudio": "texstudio",
   "name": "TeXstudio",
   "type": "AppImage",
-  "description": "N/A",
+  "description": "LaTeX development environment ",
   "authors": [
     {
-      "name": "N/A",
-      "url": "N/A"
+      "name": "null",
+      "url": "https://dl.bintray.com/unruhschuh/AppImages"
     }
   ],
   "links": [
     {
       "type": "Other",
-      "url": "N/A"
+      "url": "https://dl.bintray.com/unruhschuh/AppImages"
     },
     {
       "type": "Install",

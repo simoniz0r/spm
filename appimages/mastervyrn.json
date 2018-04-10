@@ -1,5 +1,4 @@
 {
-  "mastervyrn": "mastervyrn",
   "name": "MasterVyrn",
   "type": "AppImage",
   "description": "MasterVyrn is a clean dedicated GBF loader build on top of electron",

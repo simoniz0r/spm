@@ -1,5 +1,4 @@
 {
-  "gifcurry": "gifcurry",
   "name": "gifcurry",
   "type": "AppImage",
   "description": "gifcurry - Your open source video to GIF maker built with Haskell",

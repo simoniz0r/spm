@@ -1,18 +1,17 @@
 {
-  "cutereport": "cutereport",
   "name": "CuteReport",
   "type": "AppImage",
-  "description": "N/A",
+  "description": "AppImage for CuteReport",
   "authors": [
     {
-      "name": "N/A",
-      "url": "N/A"
+      "name": "https://sourceforge.net/projects/qreport/files/Linux/CuteReport-GPL-1.3.2.AppImage",
+      "url": "https://sourceforge.net/projects/qreport/files/Linux/CuteReport-GPL-1.3.2.AppImage"
     }
   ],
   "links": [
     {
       "type": "Other",
-      "url": "N/A"
+      "url": "https://sourceforge.net/projects/qreport/files/Linux/CuteReport-GPL-1.3.2.AppImage"
     },
     {
       "type": "Install",

@@ -1,18 +1,17 @@
 {
-  "nootka": "nootka",
   "name": "Nootka",
   "type": "AppImage",
-  "description": "N/A",
+  "description": "Application for learning musical score notation ",
   "authors": [
     {
-      "name": "N/A",
-      "url": "N/A"
+      "name": "null",
+      "url": "https://sourceforge.net/projects/nootka/files/Nootka-1.4.3/nootka-1.4.3-x86_64.AppImage"
     }
   ],
   "links": [
     {
       "type": "Other",
-      "url": "N/A"
+      "url": "https://sourceforge.net/projects/nootka/files/Nootka-1.4.3/nootka-1.4.3-x86_64.AppImage"
     },
     {
       "type": "Install",

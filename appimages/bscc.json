@@ -1,18 +1,17 @@
 {
-  "bscc": "bscc",
   "name": "bscc",
   "type": "AppImage",
-  "description": "N/A",
+  "description": "AppImage for bscc",
   "authors": [
     {
-      "name": "N/A",
-      "url": "N/A"
+      "name": "https://ftp.brainsick.cc/pub/brainsick/bscc/v0.2.1",
+      "url": "https://ftp.brainsick.cc/pub/brainsick/bscc/v0.2.1"
     }
   ],
   "links": [
     {
       "type": "Other",
-      "url": "N/A"
+      "url": "https://ftp.brainsick.cc/pub/brainsick/bscc/v0.2.1"
     },
     {
       "type": "Install",

@@ -1,5 +1,4 @@
 {
-  "qgroundcontrol": "qgroundcontrol",
   "name": "QGroundControl",
   "type": "AppImage",
   "description": "qgroundcontrol - Dronecode cross-platform ground control station for drones Android iOS Mac OS Linux Windows",

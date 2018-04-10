@@ -1,5 +1,4 @@
 {
-  "chigraph": "chigraph",
   "name": "Chigraph",
   "type": "AppImage",
   "description": "chigraph - A visual systems language for beginners compiled using LLVM",

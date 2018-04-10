@@ -1,5 +1,4 @@
 {
-  "freecad": "freecad",
   "name": "FreeCAD",
   "type": "AppImage",
   "description": "This is the official source code of FreeCAD a free and opensource multiplatform 3D parametric modeler",

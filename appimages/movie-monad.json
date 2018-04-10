@@ -1,5 +1,4 @@
 {
-  "movie-monad": "movie-monad",
   "name": "movie-monad",
   "type": "AppImage",
   "description": "movie-monad - A free and simple to use video player built with Haskell",

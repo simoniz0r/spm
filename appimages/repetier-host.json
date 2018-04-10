@@ -1,18 +1,17 @@
 {
-  "repetier-host": "repetier-host",
   "name": "Repetier-Host",
   "type": "AppImage",
-  "description": "N/A",
+  "description": "AppImage for Repetier-Host",
   "authors": [
     {
-      "name": "N/A",
-      "url": "N/A"
+      "name": "http://download.repetier.com/files/host/linux",
+      "url": "http://download.repetier.com/files/host/linux"
     }
   ],
   "links": [
     {
       "type": "Other",
-      "url": "N/A"
+      "url": "http://download.repetier.com/files/host/linux"
     },
     {
       "type": "Install",

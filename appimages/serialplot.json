@@ -1,18 +1,17 @@
 {
-  "serialplot": "serialplot",
   "name": "SerialPlot",
   "type": "AppImage",
-  "description": "N/A",
+  "description": "Small and simple software for plotting data from serial port ",
   "authors": [
     {
-      "name": "N/A",
-      "url": "N/A"
+      "name": "null",
+      "url": "https://bitbucket.org/hyOzd/serialplot/downloads"
     }
   ],
   "links": [
     {
       "type": "Other",
-      "url": "N/A"
+      "url": "https://bitbucket.org/hyOzd/serialplot/downloads"
     },
     {
       "type": "Install",

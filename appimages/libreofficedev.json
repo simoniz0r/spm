@@ -1,18 +1,17 @@
 {
-  "libreofficedev": "libreofficedev",
   "name": "LibreOfficeDev",
   "type": "AppImage",
-  "description": "N/A",
+  "description": "The office productivity suite compatible to the open and standardized ODF document format. Supported by The Document Foundation. ",
   "authors": [
     {
-      "name": "N/A",
-      "url": "N/A"
+      "name": "null",
+      "url": "https://libreoffice.soluzioniopen.com/stable/standard"
     }
   ],
   "links": [
     {
       "type": "Other",
-      "url": "N/A"
+      "url": "https://libreoffice.soluzioniopen.com/stable/standard"
     },
     {
       "type": "Install",

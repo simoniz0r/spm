@@ -1,18 +1,17 @@
 {
-  "superproductivity": "superproductivity",
   "name": "superProductivity",
   "type": "AppImage",
-  "description": "N/A",
+  "description": "Personal Task Management App to help you with your daily struggle with JIRA etc. ",
   "authors": [
     {
-      "name": "N/A",
-      "url": "N/A"
+      "name": "null",
+      "url": "http://super-productivity.com/downloads"
     }
   ],
   "links": [
     {
       "type": "Other",
-      "url": "N/A"
+      "url": "http://super-productivity.com/downloads"
     },
     {
       "type": "Install",

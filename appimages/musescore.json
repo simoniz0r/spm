@@ -1,18 +1,17 @@
 {
-  "musescore": "musescore",
   "name": "MuseScore",
   "type": "AppImage",
-  "description": "N/A",
+  "description": "AppImage for MuseScore",
   "authors": [
     {
-      "name": "N/A",
-      "url": "N/A"
+      "name": "https://ftp.osuosl.org/pub/musescore/releases/MuseScore-2.1",
+      "url": "https://ftp.osuosl.org/pub/musescore/releases/MuseScore-2.1"
     }
   ],
   "links": [
     {
       "type": "Other",
-      "url": "N/A"
+      "url": "https://ftp.osuosl.org/pub/musescore/releases/MuseScore-2.1"
     },
     {
       "type": "Install",

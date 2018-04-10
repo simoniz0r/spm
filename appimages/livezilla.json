@@ -1,18 +1,17 @@
 {
-  "livezilla": "livezilla",
   "name": "LiveZilla",
   "type": "AppImage",
-  "description": "N/A",
+  "description": "AppImage for LiveZilla",
   "authors": [
     {
-      "name": "N/A",
-      "url": "N/A"
+      "name": "http://www.livezilla.net/downloads/pubfiles",
+      "url": "http://www.livezilla.net/downloads/pubfiles"
     }
   ],
   "links": [
     {
       "type": "Other",
-      "url": "N/A"
+      "url": "http://www.livezilla.net/downloads/pubfiles"
     },
     {
       "type": "Install",

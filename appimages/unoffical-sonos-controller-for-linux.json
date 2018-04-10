@@ -1,5 +1,4 @@
 {
-  "unoffical-sonos-controller-for-linux": "unoffical-sonos-controller-for-linux",
   "name": "unoffical-sonos-controller-for-linux",
   "type": "AppImage",
   "description": "unoffical-sonos-controller-for-linux - An Electron based linux app for controlling your sonos system",

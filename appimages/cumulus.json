@@ -1,5 +1,4 @@
 {
-  "cumulus": "cumulus",
   "name": "Cumulus",
   "type": "AppImage",
   "description": "cumulus-qt - Qt port for Cumulus",

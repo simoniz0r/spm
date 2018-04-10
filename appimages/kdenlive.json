@@ -1,18 +1,17 @@
 {
-  "kdenlive": "kdenlive",
   "name": "Kdenlive",
   "type": "AppImage",
-  "description": "N/A",
+  "description": "Video Editor ",
   "authors": [
     {
-      "name": "N/A",
-      "url": "N/A"
+      "name": "null",
+      "url": "http://files.kde.org/kdenlive/release"
     }
   ],
   "links": [
     {
       "type": "Other",
-      "url": "N/A"
+      "url": "http://files.kde.org/kdenlive/release"
     },
     {
       "type": "Install",

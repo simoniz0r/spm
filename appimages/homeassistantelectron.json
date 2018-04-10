@@ -1,5 +1,4 @@
 {
-  "homeassistantelectron": "homeassistantelectron",
   "name": "HomeAssistantElectron",
   "type": "AppImage",
   "description": "HomeAssistantElectron - Desktop app for Home Assistant based on Electron",

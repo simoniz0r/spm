@@ -1,18 +1,17 @@
 {
-  "taisei": "taisei",
   "name": "taisei",
   "type": "AppImage",
-  "description": "N/A",
+  "description": "AppImage for taisei",
   "authors": [
     {
-      "name": "N/A",
-      "url": "N/A"
+      "name": "http://download.opensuse.org/repositories/home:/lachs0r:/taisei/AppImage",
+      "url": "http://download.opensuse.org/repositories/home:/lachs0r:/taisei/AppImage"
     }
   ],
   "links": [
     {
       "type": "Other",
-      "url": "N/A"
+      "url": "http://download.opensuse.org/repositories/home:/lachs0r:/taisei/AppImage"
     },
     {
       "type": "Install",

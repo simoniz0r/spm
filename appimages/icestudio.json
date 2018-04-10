@@ -1,5 +1,4 @@
 {
-  "icestudio": "icestudio",
   "name": "icestudio",
   "type": "AppImage",
   "description": "icestudio - snowflake Experimental graphic editor for open FPGAs",

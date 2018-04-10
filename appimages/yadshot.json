@@ -1,5 +1,4 @@
 {
-  "yadshot": "yadshot",
   "name": "yadshot",
   "type": "AppImage",
   "description": "yadshot provides a GUI frontend for taking screenshots using imagemagickslop and uploads files and pastes to teknikio",

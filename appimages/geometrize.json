@@ -1,18 +1,17 @@
 {
-  "geometrize": "geometrize",
   "name": "geometrize",
   "type": "AppImage",
-  "description": "N/A",
+  "description": "AppImage for geometrize",
   "authors": [
     {
-      "name": "N/A",
-      "url": "N/A"
+      "name": "https://geometrize-installer-bucket.s3.amazonaws.com/linux",
+      "url": "https://geometrize-installer-bucket.s3.amazonaws.com/linux"
     }
   ],
   "links": [
     {
       "type": "Other",
-      "url": "N/A"
+      "url": "https://geometrize-installer-bucket.s3.amazonaws.com/linux"
     },
     {
       "type": "Install",

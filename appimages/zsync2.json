@@ -1,5 +1,4 @@
 {
-  "zsync2": "zsync2",
   "name": "zsync2",
   "type": "AppImage",
   "description": "zsync2 - Rewrite of httpsgithubcomAppImagezsync-curl using modern C providing both a library and standalone tools",

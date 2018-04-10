@@ -1,5 +1,4 @@
 {
-  "getthermal": "getthermal",
   "name": "GetThermal",
   "type": "AppImage",
   "description": "GetThermal - Cross-platform USB thermal camera viewer",

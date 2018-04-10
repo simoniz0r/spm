@@ -1,5 +1,4 @@
 {
-  "stellar-portal": "stellar-portal",
   "name": "stellar-portal",
   "type": "AppImage",
   "description": "stellar-portal - Pure web client for viewing and managing Stellar accounts",

@@ -1,5 +1,4 @@
 {
-  "botframework-emulator": "botframework-emulator",
   "name": "BotFramework-Emulator",
   "type": "AppImage",
   "description": "BotFramework-Emulator - Bot Framework Emulator",

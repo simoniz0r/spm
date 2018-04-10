@@ -1,18 +1,17 @@
 {
-  "mockoon": "mockoon",
   "name": "mockoon",
   "type": "AppImage",
-  "description": "N/A",
+  "description": "Mock servers in seconds ",
   "authors": [
     {
-      "name": "N/A",
-      "url": "N/A"
+      "name": "null",
+      "url": "https://releases.mockoon.com"
     }
   ],
   "links": [
     {
       "type": "Other",
-      "url": "N/A"
+      "url": "https://releases.mockoon.com"
     },
     {
       "type": "Install",

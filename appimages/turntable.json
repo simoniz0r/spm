@@ -1,5 +1,4 @@
 {
-  "turntable": "turntable",
   "name": "turntable",
   "type": "AppImage",
   "description": "turntable - Simple youtube DJ app made with Electron and Angular 5",

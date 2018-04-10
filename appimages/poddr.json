@@ -1,5 +1,4 @@
 {
-  "poddr": "poddr",
   "name": "poddr",
   "type": "AppImage",
   "description": "Poddr - Podcast client built with Electron and Angularjs",

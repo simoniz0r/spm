@@ -1,5 +1,4 @@
 {
-  "twitch-wrapper": "twitch-wrapper",
   "name": "twitch-wrapper",
   "type": "AppImage",
   "description": "twitch-wrapper - An Electron wrapper for Twitchtv for Linux with FrankerFaceZ and FFZAP added in  Created using nativefier",

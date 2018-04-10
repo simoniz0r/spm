@@ -1,5 +1,4 @@
 {
-  "billy": "billy",
   "name": "Billy",
   "type": "AppImage",
   "description": "billy - A simple invoice manager built with Electron",

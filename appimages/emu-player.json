@@ -1,18 +1,17 @@
 {
-  "emu-player": "emu-player",
   "name": "emu-player",
   "type": "AppImage",
-  "description": "N/A",
+  "description": "AppImage for emu-player",
   "authors": [
     {
-      "name": "N/A",
-      "url": "N/A"
+      "name": "https://downloads.emustream.tv",
+      "url": "https://downloads.emustream.tv"
     }
   ],
   "links": [
     {
       "type": "Other",
-      "url": "N/A"
+      "url": "https://downloads.emustream.tv"
     },
     {
       "type": "Install",

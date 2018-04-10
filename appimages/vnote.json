@@ -1,5 +1,4 @@
 {
-  "vnote": "vnote",
   "name": "VNote",
   "type": "AppImage",
   "description": "vnote - A Vim-inspired note-taking application that knows programmers and Markdown better",

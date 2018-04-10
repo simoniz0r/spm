@@ -1,5 +1,4 @@
 {
-  "marlin-conf": "marlin-conf",
   "name": "marlin-conf",
   "type": "AppImage",
   "description": "marlin-config - Marlin firmware instant configurator",

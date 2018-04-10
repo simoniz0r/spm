@@ -1,5 +1,4 @@
 {
-  "ngrev": "ngrev",
   "name": "ngrev",
   "type": "AppImage",
   "description": "ngrev - Tool for reverse engineering of Angular applications",

@@ -1,5 +1,4 @@
 {
-  "jq": "jq",
   "name": "jq",
   "type": "AppImage",
   "description": "jq - Command-line JSON processor",

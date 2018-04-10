@@ -1,5 +1,4 @@
 {
-  "fastqt": "fastqt",
   "name": "FastQt",
   "type": "AppImage",
   "description": "FastQt - FastQC port to Qt5 A quality control tool for high throughput sequence data",

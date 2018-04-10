@@ -1,5 +1,4 @@
 {
-  "multidir": "multidir",
   "name": "MultiDir",
   "type": "AppImage",
   "description": "multidir - Multiple directory management tool",

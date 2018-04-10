@@ -1,5 +1,4 @@
 {
-  "sigmaspectra": "sigmaspectra",
   "name": "SigmaSpectra",
   "type": "AppImage",
   "description": "sigmaspectra - GUI application for the selection and scaling of earthquake ground motions",

@@ -1,5 +1,4 @@
 {
-  "zulip-electron": "zulip-electron",
   "name": "zulip-electron",
   "type": "AppImage",
   "description": "zulip-electron - Zulip Desktop Client",

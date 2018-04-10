@@ -1,5 +1,4 @@
 {
-  "imapsyncclient": "imapsyncclient",
   "name": "imapsyncclient",
   "type": "AppImage",
   "description": "ImapSyncClient - ImapSync Desktop Client",

@@ -1,5 +1,4 @@
 {
-  "otpmanager": "otpmanager",
   "name": "OTPManager",
   "type": "AppImage",
   "description": "OTPManager-build - build Repo of OPTManager",

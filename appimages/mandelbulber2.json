@@ -1,18 +1,17 @@
 {
-  "mandelbulber2": "mandelbulber2",
   "name": "mandelbulber2",
   "type": "AppImage",
-  "description": "N/A",
+  "description": "Visit 3D Fractal World ",
   "authors": [
     {
-      "name": "N/A",
-      "url": "N/A"
+      "name": "null",
+      "url": "http://download.opensuse.org/repositories/home:/lachs0r:/mandelbulber2/AppImage"
     }
   ],
   "links": [
     {
       "type": "Other",
-      "url": "N/A"
+      "url": "http://download.opensuse.org/repositories/home:/lachs0r:/mandelbulber2/AppImage"
     },
     {
       "type": "Install",

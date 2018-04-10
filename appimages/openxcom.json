@@ -1,18 +1,17 @@
 {
-  "openxcom": "openxcom",
   "name": "OpenXcom",
   "type": "AppImage",
-  "description": "N/A",
+  "description": "AppImage for OpenXcom",
   "authors": [
     {
-      "name": "N/A",
-      "url": "N/A"
+      "name": "http://knapsu.eu/openxcom",
+      "url": "http://knapsu.eu/openxcom"
     }
   ],
   "links": [
     {
       "type": "Other",
-      "url": "N/A"
+      "url": "http://knapsu.eu/openxcom"
     },
     {
       "type": "Install",

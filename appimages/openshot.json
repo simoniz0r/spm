@@ -1,5 +1,4 @@
 {
-  "openshot": "openshot",
   "name": "OpenShot",
   "type": "AppImage",
   "description": "openshot-qt - This repo is the primary development home for OpenShot Video Editor version 2 a PyQt video editing application which utilizes the powerful libopenshot C library",

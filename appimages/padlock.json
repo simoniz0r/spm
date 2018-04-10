@@ -1,5 +1,4 @@
 {
-  "padlock": "padlock",
   "name": "padlock",
   "type": "AppImage",
   "description": "padlock - A minimalist open source password manager",

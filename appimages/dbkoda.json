@@ -1,18 +1,17 @@
 {
-  "dbkoda": "dbkoda",
   "name": "dbKoda",
   "type": "AppImage",
-  "description": "N/A",
+  "description": "AppImage for dbKoda",
   "authors": [
     {
-      "name": "N/A",
-      "url": "N/A"
+      "name": "https://s3-us-west-1.amazonaws.com/uswest-nc.release.dbkoda",
+      "url": "https://s3-us-west-1.amazonaws.com/uswest-nc.release.dbkoda"
     }
   ],
   "links": [
     {
       "type": "Other",
-      "url": "N/A"
+      "url": "https://s3-us-west-1.amazonaws.com/uswest-nc.release.dbkoda"
     },
     {
       "type": "Install",

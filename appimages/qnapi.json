@@ -1,5 +1,4 @@
 {
-  "qnapi": "qnapi",
   "name": "QNapi",
   "type": "AppImage",
   "description": "qnapi - Qt-based multi-engine multi-platform subtitle downloader",

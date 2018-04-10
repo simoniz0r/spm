@@ -1,5 +1,4 @@
 {
-  "wewechat": "wewechat",
   "name": "weweChat",
   "type": "AppImage",
   "description": "weweChat -  Unofficial WeChat client built with React MobX and Electron",

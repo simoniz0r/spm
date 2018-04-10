@@ -1,18 +1,17 @@
 {
-  "avidemux": "avidemux",
   "name": "Avidemux",
   "type": "AppImage",
-  "description": "N/A",
+  "description": "AppImage for Avidemux",
   "authors": [
     {
-      "name": "N/A",
-      "url": "N/A"
+      "name": "http://www.avidemux.org/nightly/appImage",
+      "url": "http://www.avidemux.org/nightly/appImage"
     }
   ],
   "links": [
     {
       "type": "Other",
-      "url": "N/A"
+      "url": "http://www.avidemux.org/nightly/appImage"
     },
     {
       "type": "Install",

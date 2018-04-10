@@ -1,18 +1,17 @@
 {
-  "xlights": "xlights",
   "name": "xlights",
   "type": "AppImage",
-  "description": "N/A",
+  "description": "Lighting control and sequencing ",
   "authors": [
     {
-      "name": "N/A",
-      "url": "N/A"
+      "name": "null",
+      "url": "https://www.adebenham.com/wp-content/uploads/xlights"
     }
   ],
   "links": [
     {
       "type": "Other",
-      "url": "N/A"
+      "url": "https://www.adebenham.com/wp-content/uploads/xlights"
     },
     {
       "type": "Install",

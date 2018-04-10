@@ -1,5 +1,4 @@
 {
-  "mumble": "mumble",
   "name": "Mumble",
   "type": "AppImage",
   "description": "mumble - Mirror of the Mumble VoIP ClientServer continuously building AppImages -- will be force-pushed with new commits regularly",

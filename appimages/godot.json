@@ -1,18 +1,17 @@
 {
-  "godot": "godot",
   "name": "Godot",
   "type": "AppImage",
-  "description": "N/A",
+  "description": "AppImage for Godot",
   "authors": [
     {
-      "name": "N/A",
-      "url": "N/A"
+      "name": "https://dl.bintray.com/calinou/godot",
+      "url": "https://dl.bintray.com/calinou/godot"
     }
   ],
   "links": [
     {
       "type": "Other",
-      "url": "N/A"
+      "url": "https://dl.bintray.com/calinou/godot"
     },
     {
       "type": "Install",

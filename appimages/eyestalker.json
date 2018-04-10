@@ -1,5 +1,4 @@
 {
-  "eyestalker": "eyestalker",
   "name": "EyeStalker",
   "type": "AppImage",
   "description": "eyestalker - Robust video-based eye tracking using recursive estimation of pupil characteristics",

@@ -1,18 +1,17 @@
 {
-  "kdevelop": "kdevelop",
   "name": "Kdevelop",
   "type": "AppImage",
-  "description": "N/A",
+  "description": "null ",
   "authors": [
     {
-      "name": "N/A",
-      "url": "N/A"
+      "name": "null",
+      "url": "http://kfunk.ddns.net:8080/job/kdevelop-appimage-centos/lastSuccessfulBuild/artifact"
     }
   ],
   "links": [
     {
       "type": "Other",
-      "url": "N/A"
+      "url": "http://kfunk.ddns.net:8080/job/kdevelop-appimage-centos/lastSuccessfulBuild/artifact"
     },
     {
       "type": "Install",

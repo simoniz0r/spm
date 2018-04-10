@@ -1,5 +1,4 @@
 {
-  "slic3r_pe": "slic3r_pe",
   "name": "Slic3r_PE",
   "type": "AppImage",
   "description": "Slic3r - G-code generator for 3D printers RepRap Makerbot Ultimaker etc",

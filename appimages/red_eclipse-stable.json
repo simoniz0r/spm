@@ -1,18 +1,17 @@
 {
-  "red_eclipse-stable": "red_eclipse-stable",
   "name": "Red_Eclipse-stable",
   "type": "AppImage",
-  "description": "N/A",
+  "description": "AppImage for Red_Eclipse-stable",
   "authors": [
     {
-      "name": "N/A",
-      "url": "N/A"
+      "name": "https://download.assassinate-you.net/red-eclipse/appimage/latest",
+      "url": "https://download.assassinate-you.net/red-eclipse/appimage/latest"
     }
   ],
   "links": [
     {
       "type": "Other",
-      "url": "N/A"
+      "url": "https://download.assassinate-you.net/red-eclipse/appimage/latest"
     },
     {
       "type": "Install",

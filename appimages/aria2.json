@@ -1,18 +1,17 @@
 {
-  "aria2": "aria2",
   "name": "aria2",
   "type": "AppImage",
-  "description": "N/A",
+  "description": "AppImage for aria2",
   "authors": [
     {
-      "name": "N/A",
-      "url": "N/A"
+      "name": "http://download.opensuse.org/repositories/home:/nandub:/MyAppImages/AppImage",
+      "url": "http://download.opensuse.org/repositories/home:/nandub:/MyAppImages/AppImage"
     }
   ],
   "links": [
     {
       "type": "Other",
-      "url": "N/A"
+      "url": "http://download.opensuse.org/repositories/home:/nandub:/MyAppImages/AppImage"
     },
     {
       "type": "Install",

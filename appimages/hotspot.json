@@ -1,5 +1,4 @@
 {
-  "hotspot": "hotspot",
   "name": "hotspot",
   "type": "AppImage",
   "description": "hotspot - The Linux perf GUI for performance analysis",

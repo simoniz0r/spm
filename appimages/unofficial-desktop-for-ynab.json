@@ -1,5 +1,4 @@
 {
-  "unofficial-desktop-for-ynab": "unofficial-desktop-for-ynab",
   "name": "unofficial-desktop-for-ynab",
   "type": "AppImage",
   "description": "unofficial-desktop-for-ynab - Unofficial Desktop Wrapper for YNAB using Electron",

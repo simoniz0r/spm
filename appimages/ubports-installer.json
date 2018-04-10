@@ -1,5 +1,4 @@
 {
-  "ubports-installer": "ubports-installer",
   "name": "ubports-installer",
   "type": "AppImage",
   "description": "ubports-installer - A simple tool to install Ubuntu Touch on UBports devices",

@@ -1,5 +1,4 @@
 {
-  "appimageupdate": "appimageupdate",
   "name": "AppImageUpdate",
   "type": "AppImage",
   "description": "AppImageUpdate lets you update AppImages in a decentral way using information embedded in the AppImage itself",

@@ -1,18 +1,17 @@
 {
-  "ms-teams-capsule": "ms-teams-capsule",
   "name": "ms-teams-capsule",
   "type": "AppImage",
-  "description": "N/A",
+  "description": "AppImage for ms-teams-capsule",
   "authors": [
     {
-      "name": "N/A",
-      "url": "N/A"
+      "name": "https://dl.karmainside.com/ms-teams-capsule",
+      "url": "https://dl.karmainside.com/ms-teams-capsule"
     }
   ],
   "links": [
     {
       "type": "Other",
-      "url": "N/A"
+      "url": "https://dl.karmainside.com/ms-teams-capsule"
     },
     {
       "type": "Install",

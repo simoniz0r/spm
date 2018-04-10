@@ -1,5 +1,4 @@
 {
-  "qpdf": "qpdf",
   "name": "qpdf",
   "type": "AppImage",
   "description": "qpdf - Primary QPDF source code and documentation",

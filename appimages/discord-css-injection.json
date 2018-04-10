@@ -1,5 +1,4 @@
 {
-  "discord-css-injection": "discord-css-injection",
   "name": "discord-css-injection",
   "type": "AppImage",
   "description": "discord-css-injection - A bash script that uses 'asar' 'grep' and 'sed' to add CSS hotloading to Discord on Linux",

@@ -1,5 +1,4 @@
 {
-  "mazesolver": "mazesolver",
   "name": "MazeSolver",
   "type": "AppImage",
   "description": "MazeSolver - Create and solve mazes using DFS or BFS algorithm",

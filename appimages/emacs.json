@@ -1,5 +1,4 @@
 {
-  "emacs": "emacs",
   "name": "Emacs",
   "type": "AppImage",
   "description": "EmacsAppImage - This repository builds GNU Emacs from git on Travis CI and packages it as an AppImage",

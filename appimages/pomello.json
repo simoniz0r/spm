@@ -1,18 +1,17 @@
 {
-  "pomello": "pomello",
   "name": "Pomello",
   "type": "AppImage",
-  "description": "N/A",
+  "description": "AppImage for Pomello",
   "authors": [
     {
-      "name": "N/A",
-      "url": "N/A"
+      "name": "https://pomelloapp.com/download",
+      "url": "https://pomelloapp.com/download"
     }
   ],
   "links": [
     {
       "type": "Other",
-      "url": "N/A"
+      "url": "https://pomelloapp.com/download"
     },
     {
       "type": "Install",

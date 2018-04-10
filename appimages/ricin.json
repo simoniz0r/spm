@@ -1,18 +1,17 @@
 {
-  "ricin": "ricin",
   "name": "Ricin",
   "type": "AppImage",
-  "description": "N/A",
+  "description": "A dead-simple but powerful Tox client. ",
   "authors": [
     {
-      "name": "N/A",
-      "url": "N/A"
+      "name": "null",
+      "url": "https://cdn.konv.im/linux"
     }
   ],
   "links": [
     {
       "type": "Other",
-      "url": "N/A"
+      "url": "https://cdn.konv.im/linux"
     },
     {
       "type": "Install",

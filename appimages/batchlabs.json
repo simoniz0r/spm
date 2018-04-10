@@ -1,5 +1,4 @@
 {
-  "batchlabs": "batchlabs",
   "name": "BatchLabs",
   "type": "AppImage",
   "description": "BatchLabs - A client tool to help create debug and monitor Azure Batch Applications ",

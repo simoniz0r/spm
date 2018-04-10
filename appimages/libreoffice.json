@@ -1,18 +1,17 @@
 {
-  "libreoffice": "libreoffice",
   "name": "LibreOffice",
   "type": "AppImage",
-  "description": "N/A",
+  "description": "AppImage for LibreOffice",
   "authors": [
     {
-      "name": "N/A",
-      "url": "N/A"
+      "name": "https://libreoffice.soluzioniopen.com/stable/standard",
+      "url": "https://libreoffice.soluzioniopen.com/stable/standard"
     }
   ],
   "links": [
     {
       "type": "Other",
-      "url": "N/A"
+      "url": "https://libreoffice.soluzioniopen.com/stable/standard"
     },
     {
       "type": "Install",

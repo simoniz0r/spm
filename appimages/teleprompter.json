@@ -1,5 +1,4 @@
 {
-  "teleprompter": "teleprompter",
   "name": "Teleprompter",
   "type": "AppImage",
   "description": "Teleprompter-Electron - Build standalone cross-platform instances of our Teleprompter with Electron",

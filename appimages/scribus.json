@@ -1,18 +1,17 @@
 {
-  "scribus": "scribus",
   "name": "Scribus",
   "type": "AppImage",
-  "description": "N/A",
+  "description": "Open Source Page Layout and Desktop Publishing (DTP) ",
   "authors": [
     {
-      "name": "N/A",
-      "url": "N/A"
+      "name": "null",
+      "url": "https://transfer.sh/JjAuJ"
     }
   ],
   "links": [
     {
       "type": "Other",
-      "url": "N/A"
+      "url": "https://transfer.sh/JjAuJ"
     },
     {
       "type": "Install",

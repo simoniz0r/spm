@@ -1,5 +1,4 @@
 {
-  "invoice-generator": "invoice-generator",
   "name": "invoice-generator",
   "type": "AppImage",
   "description": "Invoice-Generator-Electron - Invoice Generator For Businesses built using Electron",

@@ -1,5 +1,4 @@
 {
-  "nvim": "nvim",
   "name": "nvim",
   "type": "AppImage",
   "description": "neovim - Vim-fork focused on extensibility and usability",

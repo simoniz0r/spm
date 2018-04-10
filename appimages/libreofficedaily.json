@@ -1,18 +1,17 @@
 {
-  "libreofficedaily": "libreofficedaily",
   "name": "LibreOfficeDaily",
   "type": "AppImage",
-  "description": "N/A",
+  "description": "AppImage for LibreOfficeDaily",
   "authors": [
     {
-      "name": "N/A",
-      "url": "N/A"
+      "name": "https://libreoffice.soluzioniopen.com/daily",
+      "url": "https://libreoffice.soluzioniopen.com/daily"
     }
   ],
   "links": [
     {
       "type": "Other",
-      "url": "N/A"
+      "url": "https://libreoffice.soluzioniopen.com/daily"
     },
     {
       "type": "Install",

@@ -1,5 +1,4 @@
 {
-  "electron-webpack-dashboard": "electron-webpack-dashboard",
   "name": "electron-webpack-dashboard",
   "type": "AppImage",
   "description": "electron-webpack-dashboard - Electron Desktop GUI for Webpack Dashboard",

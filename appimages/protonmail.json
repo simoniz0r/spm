@@ -1,5 +1,4 @@
 {
-  "protonmail": "protonmail",
   "name": "protonmail",
   "type": "AppImage",
   "description": "application - envelope Unofficial Electron wrapper for ProtonMail",

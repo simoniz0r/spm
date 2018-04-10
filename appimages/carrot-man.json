@@ -1,18 +1,17 @@
 {
-  "carrot-man": "carrot-man",
   "name": "carrot-man",
   "type": "AppImage",
-  "description": "N/A",
+  "description": "AppImage for carrot-man",
   "authors": [
     {
-      "name": "N/A",
-      "url": "N/A"
+      "name": "https://w3g3a5v6.ssl.hwcdn.net/upload2/game/103038",
+      "url": "https://w3g3a5v6.ssl.hwcdn.net/upload2/game/103038"
     }
   ],
   "links": [
     {
       "type": "Other",
-      "url": "N/A"
+      "url": "https://w3g3a5v6.ssl.hwcdn.net/upload2/game/103038"
     },
     {
       "type": "Install",

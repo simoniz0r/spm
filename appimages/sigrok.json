@@ -1,18 +1,17 @@
 {
-  "sigrok": "sigrok",
   "name": "Sigrok",
   "type": "AppImage",
-  "description": "N/A",
+  "description": "AppImage for Sigrok",
   "authors": [
     {
-      "name": "N/A",
-      "url": "N/A"
+      "name": "https://sigrok.org/jenkins/job/sigrok-native-appimage/platform=native-amd64/lastSuccessfulBuild/artifact/cross-compile/appimage/out",
+      "url": "https://sigrok.org/jenkins/job/sigrok-native-appimage/platform=native-amd64/lastSuccessfulBuild/artifact/cross-compile/appimage/out"
     }
   ],
   "links": [
     {
       "type": "Other",
-      "url": "N/A"
+      "url": "https://sigrok.org/jenkins/job/sigrok-native-appimage/platform=native-amd64/lastSuccessfulBuild/artifact/cross-compile/appimage/out"
     },
     {
       "type": "Install",

@@ -1,5 +1,4 @@
 {
-  "packetsender": "packetsender",
   "name": "PacketSender",
   "type": "AppImage",
   "description": "PacketSender - Network utility for sending  receiving TCP UDP SSL",

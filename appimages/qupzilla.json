@@ -1,18 +1,17 @@
 {
-  "qupzilla": "qupzilla",
   "name": "QupZilla",
   "type": "AppImage",
-  "description": "N/A",
+  "description": "AppImage for QupZilla",
   "authors": [
     {
-      "name": "N/A",
-      "url": "N/A"
+      "name": "https://www.qupzilla.com",
+      "url": "https://www.qupzilla.com"
     }
   ],
   "links": [
     {
       "type": "Other",
-      "url": "N/A"
+      "url": "https://www.qupzilla.com"
     },
     {
       "type": "Install",

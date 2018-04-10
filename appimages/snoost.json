@@ -1,18 +1,17 @@
 {
-  "snoost": "snoost",
   "name": "Snoost",
   "type": "AppImage",
-  "description": "N/A",
+  "description": "AppImage for Snoost",
   "authors": [
     {
-      "name": "N/A",
-      "url": "N/A"
+      "name": "http://app.snoost.com/client/linux/latest/download",
+      "url": "http://app.snoost.com/client/linux/latest/download"
     }
   ],
   "links": [
     {
       "type": "Other",
-      "url": "N/A"
+      "url": "http://app.snoost.com/client/linux/latest/download"
     },
     {
       "type": "Install",

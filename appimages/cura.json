@@ -1,18 +1,17 @@
 {
-  "cura": "cura",
   "name": "Cura",
   "type": "AppImage",
-  "description": "N/A",
+  "description": "AppImage for Cura",
   "authors": [
     {
-      "name": "N/A",
-      "url": "N/A"
+      "name": "https://software.ultimaker.com/current",
+      "url": "https://software.ultimaker.com/current"
     }
   ],
   "links": [
     {
       "type": "Other",
-      "url": "N/A"
+      "url": "https://software.ultimaker.com/current"
     },
     {
       "type": "Install",

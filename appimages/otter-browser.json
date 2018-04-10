@@ -1,18 +1,17 @@
 {
-  "otter-browser": "otter-browser",
   "name": "otter-browser",
   "type": "AppImage",
-  "description": "N/A",
+  "description": "AppImage for otter-browser",
   "authors": [
     {
-      "name": "N/A",
-      "url": "N/A"
+      "name": "https://sourceforge.net/projects/otter-browser/files/latest",
+      "url": "https://sourceforge.net/projects/otter-browser/files/latest"
     }
   ],
   "links": [
     {
       "type": "Other",
-      "url": "N/A"
+      "url": "https://sourceforge.net/projects/otter-browser/files/latest"
     },
     {
       "type": "Install",

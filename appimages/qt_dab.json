@@ -1,5 +1,4 @@
 {
-  "qt_dab": "qt_dab",
   "name": "Qt_DAB",
   "type": "AppImage",
   "description": "qt-dab is a software dab decoder for use with a dabstick airspy or sdrplay for RPI and PC",

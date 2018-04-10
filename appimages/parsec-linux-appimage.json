@@ -1,0 +1,21 @@
+{
+  "name": "parsec-linux-appimage",
+  "type": "AppImage",
+  "description": "Parsec game streaming client",
+  "authors": [
+    {
+      "name": "E5ten",
+      "url": "https://github.com/E5ten"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "E5ten/parsec-linux-AppImage"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/E5ten/parsec-linux-AppImage/releases"
+    }
+  ]
+}

@@ -1,5 +1,4 @@
 {
-  "ciaa_suite": "ciaa_suite",
   "name": "CIAA_SUITE",
   "type": "AppImage",
   "description": "embedded-ide-builder - Embedded IDE automated build system",

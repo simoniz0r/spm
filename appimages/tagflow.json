@@ -1,18 +1,17 @@
 {
-  "tagflow": "tagflow",
   "name": "TagFlow",
   "type": "AppImage",
-  "description": "N/A",
+  "description": "AppImage for TagFlow",
   "authors": [
     {
-      "name": "N/A",
-      "url": "N/A"
+      "name": "http://www.tagflow.io/download/linux/appimage",
+      "url": "http://www.tagflow.io/download/linux/appimage"
     }
   ],
   "links": [
     {
       "type": "Other",
-      "url": "N/A"
+      "url": "http://www.tagflow.io/download/linux/appimage"
     },
     {
       "type": "Install",

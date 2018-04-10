@@ -1,5 +1,4 @@
 {
-  "shadowsocks": "shadowsocks",
   "name": "Shadowsocks",
   "type": "AppImage",
   "description": "shadowsocks-qt5 - A cross-platform shadowsocks GUI client",

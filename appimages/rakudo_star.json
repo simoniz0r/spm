@@ -1,5 +1,4 @@
 {
-  "rakudo_star": "rakudo_star",
   "name": "Rakudo_Star",
   "type": "AppImage",
   "description": "rakudo-appimage-module-test-automation - AppImages for Rakudo Star and Rakudo Moar Blead and Testing of Module installation and automation using the same script",

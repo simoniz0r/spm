@@ -1,5 +1,4 @@
 {
-  "lisk-nano": "lisk-nano",
   "name": "lisk-nano",
   "type": "AppImage",
   "description": "lisk-nano -  Lisk Nano a minimal feature client",

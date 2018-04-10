@@ -1,18 +1,17 @@
 {
-  "ibm_dsx_desktop": "ibm_dsx_desktop",
   "name": "IBM_DSX_Desktop",
   "type": "AppImage",
-  "description": "N/A",
+  "description": "AppImage for IBM_DSX_Desktop",
   "authors": [
     {
-      "name": "N/A",
-      "url": "N/A"
+      "name": "https://dsx-private-cloud.mybluemix.net/public/desktop",
+      "url": "https://dsx-private-cloud.mybluemix.net/public/desktop"
     }
   ],
   "links": [
     {
       "type": "Other",
-      "url": "N/A"
+      "url": "https://dsx-private-cloud.mybluemix.net/public/desktop"
     },
     {
       "type": "Install",

@@ -1,5 +1,4 @@
 {
-  "snake.js": "snake.js",
   "name": "snake.js",
   "type": "AppImage",
   "description": "snakejs - CanvasJavaScript based Snake Game with support for controllers SNESPSXBOX",

@@ -1,18 +1,17 @@
 {
-  "nbb": "nbb",
   "name": "nbb",
   "type": "AppImage",
-  "description": "N/A",
+  "description": "AppImage for nbb",
   "authors": [
     {
-      "name": "N/A",
-      "url": "N/A"
+      "name": "https://files.kuudere.moe/nbb/linux",
+      "url": "https://files.kuudere.moe/nbb/linux"
     }
   ],
   "links": [
     {
       "type": "Other",
-      "url": "N/A"
+      "url": "https://files.kuudere.moe/nbb/linux"
     },
     {
       "type": "Install",

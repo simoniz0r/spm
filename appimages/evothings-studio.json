@@ -1,18 +1,17 @@
 {
-  "evothings-studio": "evothings-studio",
   "name": "evothings-studio",
   "type": "AppImage",
-  "description": "N/A",
+  "description": "AppImage for evothings-studio",
   "authors": [
     {
-      "name": "N/A",
-      "url": "N/A"
+      "name": "https://s3-eu-west-1.amazonaws.com/evothings-download",
+      "url": "https://s3-eu-west-1.amazonaws.com/evothings-download"
     }
   ],
   "links": [
     {
       "type": "Other",
-      "url": "N/A"
+      "url": "https://s3-eu-west-1.amazonaws.com/evothings-download"
     },
     {
       "type": "Install",

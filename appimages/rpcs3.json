@@ -1,18 +1,17 @@
 {
-  "rpcs3": "rpcs3",
   "name": "RPCS3",
   "type": "AppImage",
-  "description": "N/A",
+  "description": "AppImage for RPCS3",
   "authors": [
     {
-      "name": "N/A",
-      "url": "N/A"
+      "name": "https://rpcs3.net/cdn/builds",
+      "url": "https://rpcs3.net/cdn/builds"
     }
   ],
   "links": [
     {
       "type": "Other",
-      "url": "N/A"
+      "url": "https://rpcs3.net/cdn/builds"
     },
     {
       "type": "Install",

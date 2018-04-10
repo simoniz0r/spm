@@ -1,26 +1,21 @@
 {
   "name": "Minions",
-  "categories": [
-    "System"
-  ],
+  "type": "AppImage",
+  "description": "null",
   "authors": [
     {
       "name": "blahgeek",
       "url": "https://github.com/blahgeek"
     }
   ],
-  "license": null,
   "links": [
     {
       "type": "GitHub",
       "url": "blahgeek/Minions"
     },
     {
-      "type": "Download",
+      "type": "Install",
       "url": "https://github.com/blahgeek/Minions/releases"
     }
-  ],
-  "screenshots": [
-    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/Minions/screenshot.png"
   ]
 }

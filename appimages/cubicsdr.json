@@ -1,5 +1,4 @@
 {
-  "cubicsdr": "cubicsdr",
   "name": "CubicSDR",
   "type": "AppImage",
   "description": "CubicSDR - Cross-Platform Software-Defined Radio Application",

@@ -1,18 +1,17 @@
 {
-  "digikam": "digikam",
   "name": "digiKam",
   "type": "AppImage",
-  "description": "N/A",
+  "description": "AppImage for digiKam",
   "authors": [
     {
-      "name": "N/A",
-      "url": "N/A"
+      "name": "https://download.kde.org/stable/digikam",
+      "url": "https://download.kde.org/stable/digikam"
     }
   ],
   "links": [
     {
       "type": "Other",
-      "url": "N/A"
+      "url": "https://download.kde.org/stable/digikam"
     },
     {
       "type": "Install",

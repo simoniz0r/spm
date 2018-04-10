@@ -1,18 +1,17 @@
 {
-  "prusacontrol": "prusacontrol",
   "name": "PrusaControl",
   "type": "AppImage",
-  "description": "N/A",
+  "description": "null ",
   "authors": [
     {
-      "name": "N/A",
-      "url": "N/A"
+      "name": "null",
+      "url": "http://prusacontrol.org/update"
     }
   ],
   "links": [
     {
       "type": "Other",
-      "url": "N/A"
+      "url": "http://prusacontrol.org/update"
     },
     {
       "type": "Install",

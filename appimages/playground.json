@@ -1,5 +1,4 @@
 {
-  "playground": "playground",
   "name": "playground",
   "type": "AppImage",
   "description": "graphql-playground -   GraphQL IDE for better development workflows GraphQL Subscriptions interactive docs amp collaboration",

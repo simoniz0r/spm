@@ -1,18 +1,17 @@
 {
-  "stremio": "stremio",
   "name": "Stremio",
   "type": "AppImage",
-  "description": "N/A",
+  "description": "AppImage for Stremio",
   "authors": [
     {
-      "name": "N/A",
-      "url": "N/A"
+      "name": "https://dl.strem.io/linux/v4.0.0-beta.29",
+      "url": "https://dl.strem.io/linux/v4.0.0-beta.29"
     }
   ],
   "links": [
     {
       "type": "Other",
-      "url": "N/A"
+      "url": "https://dl.strem.io/linux/v4.0.0-beta.29"
     },
     {
       "type": "Install",

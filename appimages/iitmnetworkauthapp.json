@@ -1,5 +1,4 @@
 {
-  "iitmnetworkauthapp": "iitmnetworkauthapp",
   "name": "iitmnetworkauthapp",
   "type": "AppImage",
   "description": "iitm-network-auth-app - Cross platform application for authentication inside IIT Madras campus network",

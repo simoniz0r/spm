@@ -1,5 +1,4 @@
 {
-  "embedded-ide": "embedded-ide",
   "name": "embedded-ide",
   "type": "AppImage",
   "description": "embedded-ide - IDE for C embedded development centered on bare-metal ARM systems",

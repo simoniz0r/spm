@@ -1,5 +1,4 @@
 {
-  "transcribe": "transcribe",
   "name": "Transcribe",
   "type": "AppImage",
   "description": "Transcribe - A tool for transcribing audio files to text",

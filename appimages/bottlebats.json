@@ -1,27 +1,21 @@
 {
   "name": "BottleBats",
+  "type": "AppImage",
   "description": "Client for the 2018 edition of the BottleBats AI competition",
-  "categories": [
-    "Game"
-  ],
   "authors": [
     {
       "name": "ZeusWPI",
       "url": "https://github.com/ZeusWPI"
     }
   ],
-  "license": "LGPL-3.0",
   "links": [
     {
       "type": "GitHub",
       "url": "ZeusWPI/MOZAIC"
     },
     {
-      "type": "Download",
+      "type": "Install",
       "url": "https://github.com/ZeusWPI/MOZAIC/releases"
     }
-  ],
-  "screenshots": [
-    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/BottleBats/screenshot.png"
   ]
 }

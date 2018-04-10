@@ -1,5 +1,4 @@
 {
-  "spm": "spm",
   "name": "spm",
   "type": "AppImage",
   "description": "spm is a simple commandline package manager that installs AppImages and precompiled tar archives",

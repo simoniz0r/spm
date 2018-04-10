@@ -1,5 +1,4 @@
 {
-  "lxd-ui": "lxd-ui",
   "name": "lxd-ui",
   "type": "AppImage",
   "description": "lxd-ui - A LXD user interface powered by electron-vue",

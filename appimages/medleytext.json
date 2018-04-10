@@ -1,18 +1,17 @@
 {
-  "medleytext": "medleytext",
   "name": "MedleyText",
   "type": "AppImage",
-  "description": "N/A",
+  "description": "AppImage for MedleyText",
   "authors": [
     {
-      "name": "N/A",
-      "url": "N/A"
+      "name": "https://s3.amazonaws.com/medleytext/releases",
+      "url": "https://s3.amazonaws.com/medleytext/releases"
     }
   ],
   "links": [
     {
       "type": "Other",
-      "url": "N/A"
+      "url": "https://s3.amazonaws.com/medleytext/releases"
     },
     {
       "type": "Install",

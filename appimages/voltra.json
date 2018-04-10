@@ -1,18 +1,17 @@
 {
-  "voltra": "voltra",
   "name": "Voltra",
   "type": "AppImage",
-  "description": "N/A",
+  "description": "Voltra Co. Music Player ",
   "authors": [
     {
-      "name": "N/A",
-      "url": "N/A"
+      "name": "null",
+      "url": "https://s3.amazonaws.com/download.voltra.co"
     }
   ],
   "links": [
     {
       "type": "Other",
-      "url": "N/A"
+      "url": "https://s3.amazonaws.com/download.voltra.co"
     },
     {
       "type": "Install",

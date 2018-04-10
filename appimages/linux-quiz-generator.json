@@ -1,5 +1,4 @@
 {
-  "linux-quiz-generator": "linux-quiz-generator",
   "name": "linux-quiz-generator",
   "type": "AppImage",
   "description": "quizgenerator - Generator of random quizes",

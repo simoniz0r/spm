@@ -1,18 +1,17 @@
 {
-  "sky": "sky",
   "name": "Sky",
   "type": "AppImage",
-  "description": "N/A",
+  "description": "AppImage for Sky",
   "authors": [
     {
-      "name": "N/A",
-      "url": "N/A"
+      "name": "https://tel.red/linux",
+      "url": "https://tel.red/linux"
     }
   ],
   "links": [
     {
       "type": "Other",
-      "url": "N/A"
+      "url": "https://tel.red/linux"
     },
     {
       "type": "Install",

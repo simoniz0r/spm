@@ -1,18 +1,17 @@
 {
-  "skycoin": "skycoin",
   "name": "Skycoin",
   "type": "AppImage",
-  "description": "N/A",
+  "description": "AppImage for Skycoin",
   "authors": [
     {
-      "name": "N/A",
-      "url": "N/A"
+      "name": "http://downloads.skycoin.net/wallet",
+      "url": "http://downloads.skycoin.net/wallet"
     }
   ],
   "links": [
     {
       "type": "Other",
-      "url": "N/A"
+      "url": "http://downloads.skycoin.net/wallet"
     },
     {
       "type": "Install",

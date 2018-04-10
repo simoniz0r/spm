@@ -1,5 +1,4 @@
 {
-  "envkey": "envkey",
   "name": "EnvKey",
   "type": "AppImage",
   "description": "envkey-app - Secure human-friendly cross-platform secrets and config ",

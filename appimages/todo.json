@@ -1,5 +1,4 @@
 {
-  "todo": "todo",
   "name": "todo",
   "type": "AppImage",
   "description": "todo is a bash script for Linux that manages todo lists through the command line in an easy to use manner Lists are stored in todoListName with each item in the list stored as a separate file in that directory",

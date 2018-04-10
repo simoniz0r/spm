@@ -1,5 +1,4 @@
 {
-  "tagtime-desktop": "tagtime-desktop",
   "name": "TagTime-desktop",
   "type": "AppImage",
   "description": "TagTime-desktop - Cross-platform desktop implementation of TagTime",

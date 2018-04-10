@@ -1,5 +1,4 @@
 {
-  "bunqdesktop": "bunqdesktop",
   "name": "bunqdesktop",
   "type": "AppImage",
   "description": "BunqDesktop - A desktop implementation for the bunq API",

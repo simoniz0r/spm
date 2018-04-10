@@ -1,18 +1,17 @@
 {
-  "nextcloud": "nextcloud",
   "name": "Nextcloud",
   "type": "AppImage",
-  "description": "N/A",
+  "description": "Nextcloud desktop synchronization client ",
   "authors": [
     {
-      "name": "N/A",
-      "url": "N/A"
+      "name": "null",
+      "url": "https://download.nextcloud.com/desktop/releases/Linux"
     }
   ],
   "links": [
     {
       "type": "Other",
-      "url": "N/A"
+      "url": "https://download.nextcloud.com/desktop/releases/Linux"
     },
     {
       "type": "Install",

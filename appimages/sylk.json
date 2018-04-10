@@ -1,18 +1,17 @@
 {
-  "sylk": "sylk",
   "name": "Sylk",
   "type": "AppImage",
-  "description": "N/A",
+  "description": "AppImage for Sylk",
   "authors": [
     {
-      "name": "N/A",
-      "url": "N/A"
+      "name": "http://download.ag-projects.com/Sylk",
+      "url": "http://download.ag-projects.com/Sylk"
     }
   ],
   "links": [
     {
       "type": "Other",
-      "url": "N/A"
+      "url": "http://download.ag-projects.com/Sylk"
     },
     {
       "type": "Install",

@@ -1,5 +1,4 @@
 {
-  "qemu_powerpc": "qemu_powerpc",
   "name": "qemu_powerpc",
   "type": "AppImage",
   "description": "qemu-ppc - Lets you run PowerPC operating systems on 64-bit Intel Linux hosts",

@@ -1,5 +1,4 @@
 {
-  "powershell": "powershell",
   "name": "PowerShell",
   "type": "AppImage",
   "description": "PowerShell for every system",

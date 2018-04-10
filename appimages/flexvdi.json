@@ -1,18 +1,17 @@
 {
-  "flexvdi": "flexvdi",
   "name": "flexVDI",
   "type": "AppImage",
-  "description": "N/A",
+  "description": "AppImage for flexVDI",
   "authors": [
     {
-      "name": "N/A",
-      "url": "N/A"
+      "name": "http://depot.flexvdi.com/clients/linux-x86_64",
+      "url": "http://depot.flexvdi.com/clients/linux-x86_64"
     }
   ],
   "links": [
     {
       "type": "Other",
-      "url": "N/A"
+      "url": "http://depot.flexvdi.com/clients/linux-x86_64"
     },
     {
       "type": "Install",

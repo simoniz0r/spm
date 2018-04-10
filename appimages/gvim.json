@@ -1,5 +1,4 @@
 {
-  "gvim": "gvim",
   "name": "GVim",
   "type": "AppImage",
   "description": "vim-appimage - AppImage for gVim",

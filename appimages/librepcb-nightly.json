@@ -1,18 +1,17 @@
 {
-  "librepcb-nightly": "librepcb-nightly",
   "name": "LibrePCB-Nightly",
   "type": "AppImage",
-  "description": "N/A",
+  "description": "Design Schematics and PCBs ",
   "authors": [
     {
-      "name": "N/A",
-      "url": "N/A"
+      "name": "null",
+      "url": "https://dl.bintray.com/librepcb/LibrePCB-Nightly"
     }
   ],
   "links": [
     {
       "type": "Other",
-      "url": "N/A"
+      "url": "https://dl.bintray.com/librepcb/LibrePCB-Nightly"
     },
     {
       "type": "Install",

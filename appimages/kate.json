@@ -1,18 +1,17 @@
 {
-  "kate": "kate",
   "name": "Kate",
   "type": "AppImage",
-  "description": "N/A",
+  "description": "null ",
   "authors": [
     {
-      "name": "N/A",
-      "url": "N/A"
+      "name": "null",
+      "url": "http://download.kde.org/unstable/kate"
     }
   ],
   "links": [
     {
       "type": "Other",
-      "url": "N/A"
+      "url": "http://download.kde.org/unstable/kate"
     },
     {
       "type": "Install",

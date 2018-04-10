@@ -1,18 +1,17 @@
 {
-  "easeldriver": "easeldriver",
   "name": "EaselDriver",
   "type": "AppImage",
-  "description": "N/A",
+  "description": "AppImage for EaselDriver",
   "authors": [
     {
-      "name": "N/A",
-      "url": "N/A"
+      "name": "http://download.opensuse.org/repositories/home:/mastercactapus/AppImage",
+      "url": "http://download.opensuse.org/repositories/home:/mastercactapus/AppImage"
     }
   ],
   "links": [
     {
       "type": "Other",
-      "url": "N/A"
+      "url": "http://download.opensuse.org/repositories/home:/mastercactapus/AppImage"
     },
     {
       "type": "Install",

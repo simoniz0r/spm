@@ -1,18 +1,17 @@
 {
-  "blubvolley": "blubvolley",
   "name": "blubVolley",
   "type": "AppImage",
-  "description": "N/A",
+  "description": "blubVolley - a fun volleyball game ",
   "authors": [
     {
-      "name": "N/A",
-      "url": "N/A"
+      "name": "null",
+      "url": "https://www.blub-game.com/d/linux64"
     }
   ],
   "links": [
     {
       "type": "Other",
-      "url": "N/A"
+      "url": "https://www.blub-game.com/d/linux64"
     },
     {
       "type": "Install",

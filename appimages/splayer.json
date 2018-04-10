@@ -1,27 +1,21 @@
 {
   "name": "SPlayer",
+  "type": "AppImage",
   "description": "a media player",
-  "categories": [
-    "Utility"
-  ],
   "authors": [
     {
       "name": "chiflix",
       "url": "https://github.com/chiflix"
     }
   ],
-  "license": null,
   "links": [
     {
       "type": "GitHub",
       "url": "chiflix/splayerx"
     },
     {
-      "type": "Download",
+      "type": "Install",
       "url": "https://github.com/chiflix/splayerx/releases"
     }
-  ],
-  "screenshots": [
-    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/SPlayer/screenshot.png"
   ]
 }

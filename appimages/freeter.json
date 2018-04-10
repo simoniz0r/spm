@@ -1,18 +1,17 @@
 {
-  "freeter": "freeter",
   "name": "Freeter",
   "type": "AppImage",
-  "description": "N/A",
+  "description": "AppImage for Freeter",
   "authors": [
     {
-      "name": "N/A",
-      "url": "N/A"
+      "name": "https://freeter.io/download",
+      "url": "https://freeter.io/download"
     }
   ],
   "links": [
     {
       "type": "Other",
-      "url": "N/A"
+      "url": "https://freeter.io/download"
     },
     {
       "type": "Install",
