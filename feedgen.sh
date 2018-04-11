@@ -40,6 +40,14 @@ for image in $(dir -C -w 1 $HOME/github/spm/appimages); do
           "type": "$(jq -r '.links[1].type' ~/github/spm/appimages/$image.json)",
           "url": "$(jq -r '.links[1].url' ~/github/spm/appimages/$image.json)"
         }
+      ],
+      "installinfo": [
+        {
+          "version": "Not Installed",
+          "size": "Not Installed",
+          "tag": "Not Installed",
+          "status": "Not Installed"
+        }
       ]
     },
 EOL
@@ -65,6 +73,14 @@ cat >>"$HOME"/github/index/spm-feed.json << EOL
         {
           "type": "END",
           "url": "END"
+        }
+      ],
+      "installinfo": [
+        {
+          "version": "END",
+          "size": "END",
+          "tag": "END",
+          "status": "END"
         }
       ]
     }
