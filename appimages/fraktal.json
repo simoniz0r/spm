@@ -1,0 +1,27 @@
+{
+  "name": "Fraktal",
+  "description": "Podcast Manager in Electron",
+  "categories": [
+    "Utility"
+  ],
+  "authors": [
+    {
+      "name": "Fraktal-JS",
+      "url": "https://github.com/Fraktal-JS"
+    }
+  ],
+  "license": null,
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "Fraktal-JS/fraktal"
+    },
+    {
+      "type": "Download",
+      "url": "https://github.com/Fraktal-JS/fraktal/releases"
+    }
+  ],
+  "screenshots": [
+    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/Fraktal/screenshot.png"
+  ]
+}
