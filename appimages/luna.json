@@ -1,0 +1,27 @@
+{
+  "name": "luna",
+  "description": "Manage your NPM packages.",
+  "categories": [
+    "Development"
+  ],
+  "authors": [
+    {
+      "name": "rvpanoz",
+      "url": "https://github.com/rvpanoz"
+    }
+  ],
+  "license": "GPL-3.0",
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "rvpanoz/luna"
+    },
+    {
+      "type": "Download",
+      "url": "https://github.com/rvpanoz/luna/releases"
+    }
+  ],
+  "screenshots": [
+    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/luna/screenshot.png"
+  ]
+}
