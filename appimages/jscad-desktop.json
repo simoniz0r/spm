@@ -1,0 +1,27 @@
+{
+  "name": "jscad-desktop",
+  "description": "jscad desktop application",
+  "categories": [
+    "Graphics"
+  ],
+  "authors": [
+    {
+      "name": "jscad",
+      "url": "https://github.com/jscad"
+    }
+  ],
+  "license": null,
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "jscad/jscad-desktop"
+    },
+    {
+      "type": "Download",
+      "url": "https://github.com/jscad/jscad-desktop/releases"
+    }
+  ],
+  "screenshots": [
+    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/jscad-desktop/screenshot.png"
+  ]
+}
