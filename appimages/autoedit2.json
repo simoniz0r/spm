@@ -1,0 +1,27 @@
+{
+  "name": "autoEdit2",
+  "description": "autoEdit2 Desktop Client for Linux",
+  "categories": [
+    "Utility"
+  ],
+  "authors": [
+    {
+      "name": "OpenNewsLabs",
+      "url": "https://github.com/OpenNewsLabs"
+    }
+  ],
+  "license": "MIT",
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "OpenNewsLabs/autoEdit_2"
+    },
+    {
+      "type": "Download",
+      "url": "https://github.com/OpenNewsLabs/autoEdit_2/releases"
+    }
+  ],
+  "screenshots": [
+    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/autoEdit2/screenshot.png"
+  ]
+}
