@@ -1,0 +1,27 @@
+{
+  "name": "luminance-hdr",
+  "description": "Create and tonemap HDR images",
+  "categories": [
+    "Graphics"
+  ],
+  "authors": [
+    {
+      "name": "aferrero2707",
+      "url": "https://github.com/aferrero2707"
+    }
+  ],
+  "license": "GPL-3.0",
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "aferrero2707/lhdr-appimage"
+    },
+    {
+      "type": "Download",
+      "url": "https://github.com/aferrero2707/lhdr-appimage/releases"
+    }
+  ],
+  "screenshots": [
+    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/luminance-hdr/screenshot.png"
+  ]
+}
