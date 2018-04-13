@@ -1,6 +1,6 @@
 {
-  "name": "jq",
-  "type": "AppImage",
+  "name": "jq-linux64",
+  "type": "binary",
   "description": "jq - Command-line JSON processor",
   "authors": [
     {
