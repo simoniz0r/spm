@@ -59,7 +59,7 @@ cat >>"$HOME"/github/index/spm-feed.json << EOL
     {
       "END": "END",
       "name": "END",
-      "installname": "removeme"
+      "installname": "removeme",
       "type": "END",
         "authors": [
         {
