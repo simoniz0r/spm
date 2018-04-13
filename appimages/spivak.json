@@ -1,5 +1,6 @@
 {
   "name": "spivak",
+  "installname": "spivak",
   "type": "AppImage",
   "description": "spivak - A cross-platform Karaoke player",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/gyunaev/spivak/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

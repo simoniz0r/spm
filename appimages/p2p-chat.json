@@ -1,5 +1,6 @@
 {
   "name": "p2p-chat",
+  "installname": "p2p-chat",
   "type": "AppImage",
   "description": "p2p-chat - a P2P LAN chatting and file sharing tool",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/dgeibi/p2p-chat/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

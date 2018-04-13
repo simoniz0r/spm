@@ -1,5 +1,6 @@
 {
   "name": "Avidemux",
+  "installname": "Avidemux",
   "type": "AppImage",
   "description": "AppImage for Avidemux",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "http://www.avidemux.org/nightly/appImage/avidemuxUniversal_amd64_170814_112.app"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

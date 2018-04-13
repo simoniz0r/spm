@@ -1,5 +1,6 @@
 {
   "name": "Pendragon",
+  "installname": "Pendragon",
   "type": "AppImage",
   "description": "pendragon - An exciting 2D RPG game that incorporates gossiping",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/PendragonGame/pendragon/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

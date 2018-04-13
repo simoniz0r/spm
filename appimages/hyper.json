@@ -1,5 +1,6 @@
 {
   "name": "hyper",
+  "installname": "hyper",
   "type": "AppImage",
   "description": "hyper - A terminal built on web technologies",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/zeit/hyper/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

@@ -1,5 +1,6 @@
 {
   "name": "mockoon",
+  "installname": "mockoon",
   "type": "AppImage",
   "description": "Mock servers in seconds ",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://releases.mockoon.com/mockoon-0.1.0-x86_64.AppImage"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

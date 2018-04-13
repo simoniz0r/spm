@@ -1,5 +1,6 @@
 {
   "name": "snake.js",
+  "installname": "snake.js",
   "type": "AppImage",
   "description": "snakejs - CanvasJavaScript based Snake Game with support for controllers SNESPSXBOX",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/aenany/snake.js/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

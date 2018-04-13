@@ -1,5 +1,6 @@
 {
   "name": "GitHubDesktop",
+  "installname": "GitHubDesktop",
   "type": "AppImage",
   "description": "Simple collaboration from your desktop",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/shiftkey/desktop/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

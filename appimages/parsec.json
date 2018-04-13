@@ -1,16 +1,14 @@
 {
   "name": "parsec",
+  "installname": "parsec",
+  "type": "null",
   "description": "Parsec game streaming client",
-  "categories": [
-    "Utility"
-  ],
   "authors": [
     {
       "name": "E5ten",
       "url": "https://github.com/E5ten"
     }
   ],
-  "license": null,
   "links": [
     {
       "type": "GitHub",
@@ -21,7 +19,12 @@
       "url": "https://github.com/E5ten/parsec-linux-AppImage/releases"
     }
   ],
-  "screenshots": [
-    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/parsec-linux-appimage/screenshot.png"
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
+    }
   ]
 }

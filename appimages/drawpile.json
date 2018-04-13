@@ -1,5 +1,6 @@
 {
   "name": "Drawpile",
+  "installname": "Drawpile",
   "type": "AppImage",
   "description": "AppImage for Drawpile",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://drawpile.net/files/appimage/Drawpile-2.0.5.1.AppImage"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

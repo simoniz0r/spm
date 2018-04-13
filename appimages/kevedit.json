@@ -1,5 +1,6 @@
 {
   "name": "kevedit",
+  "installname": "kevedit",
   "type": "AppImage",
   "description": "kevedit - KevEdit ZZT editor",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/cknave/kevedit/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

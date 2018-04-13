@@ -1,5 +1,6 @@
 {
   "name": "Tockler",
+  "installname": "Tockler",
   "type": "AppImage",
   "description": "tockler - Application that tracks your time by monitoring your active windows only titles and idle time",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/MayGo/tockler/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

@@ -1,5 +1,6 @@
 {
   "name": "linux-quiz-generator",
+  "installname": "linux-quiz-generator",
   "type": "AppImage",
   "description": "quizgenerator - Generator of random quizes",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/janekolszak/quizgenerator/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

@@ -1,5 +1,6 @@
 {
   "name": "lmms",
+  "installname": "lmms",
   "type": "AppImage",
   "description": "lmms - cross-platform music production software",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/tresf/lmms/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

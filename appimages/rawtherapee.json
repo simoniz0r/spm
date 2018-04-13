@@ -1,5 +1,6 @@
 {
   "name": "rawtherapee",
+  "installname": "rawtherapee",
   "type": "AppImage",
   "description": "Contribute to rt-build development by creating an account on GitHub",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/aferrero2707/rt-build/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

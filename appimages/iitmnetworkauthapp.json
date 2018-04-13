@@ -1,5 +1,6 @@
 {
   "name": "iitmnetworkauthapp",
+  "installname": "iitmnetworkauthapp",
   "type": "AppImage",
   "description": "iitm-network-auth-app - Cross platform application for authentication inside IIT Madras campus network",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/shahidhk/iitm-network-auth-app/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

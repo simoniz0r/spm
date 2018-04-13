@@ -1,5 +1,6 @@
 {
   "name": "jumpfm",
+  "installname": "jumpfm",
   "type": "AppImage",
   "description": "jumpfm - A file manager that lets you jump",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/Gilad-Kutiel-App/jumpfm/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

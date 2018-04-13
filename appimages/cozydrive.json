@@ -1,5 +1,6 @@
 {
   "name": "CozyDrive",
+  "installname": "CozyDrive",
   "type": "AppImage",
   "description": "cozy-desktop - File Synchronisation for Cozy on Desktop and Laptop",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/cozy-labs/cozy-desktop/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

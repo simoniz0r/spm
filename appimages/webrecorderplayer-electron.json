@@ -1,5 +1,6 @@
 {
   "name": "webrecorderplayer-electron",
+  "installname": "webrecorderplayer-electron",
   "type": "AppImage",
   "description": "webrecorderplayer-electron - Webrecorder Player for Desktop OSXWindowsLinux Built with Electron  Webrecorder",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/webrecorder/webrecorderplayer-electron/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

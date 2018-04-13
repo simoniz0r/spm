@@ -1,5 +1,6 @@
 {
   "name": "Emacs",
+  "installname": "Emacs",
   "type": "AppImage",
   "description": "EmacsAppImage - This repository builds GNU Emacs from git on Travis CI and packages it as an AppImage",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/probonopd/Emacs.AppImage/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

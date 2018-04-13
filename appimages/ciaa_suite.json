@@ -1,5 +1,6 @@
 {
   "name": "CIAA_SUITE",
+  "installname": "CIAA_SUITE",
   "type": "AppImage",
   "description": "embedded-ide-builder - Embedded IDE automated build system",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/martinribelotta/embedded-ide-builder/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

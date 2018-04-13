@@ -1,5 +1,6 @@
 {
   "name": "PokeNurse",
+  "installname": "PokeNurse",
   "type": "AppImage",
   "description": "PokeNurse -   A tool for Pokmon Go to aid in transferring and evolving Pokmon",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/vinnymac/PokeNurse/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

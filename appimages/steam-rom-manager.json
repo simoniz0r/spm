@@ -1,5 +1,6 @@
 {
   "name": "steam-rom-manager",
+  "installname": "steam-rom-manager",
   "type": "AppImage",
   "description": "steam-rom-manager - An app for managing ROMs in Steam",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/FrogTheFrog/steam-rom-manager/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

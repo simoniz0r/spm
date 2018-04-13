@@ -1,5 +1,6 @@
 {
   "name": "StopLight",
+  "installname": "StopLight",
   "type": "AppImage",
   "description": "The Stoplight desktop app  issues repository",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/stoplightio/desktop/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

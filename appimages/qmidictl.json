@@ -1,5 +1,6 @@
 {
   "name": "QmidiCtl",
+  "installname": "QmidiCtl",
   "type": "AppImage",
   "description": "AppImage for QmidiCtl",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "http://download.opensuse.org/repositories/home:/rncbc/AppImage/qmidictl-latest-x86_64.AppImage"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

@@ -1,5 +1,6 @@
 {
   "name": "langly",
+  "installname": "langly",
   "type": "AppImage",
   "description": "langly - Manage JSON language files in Laravel",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/christofferok/langly/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

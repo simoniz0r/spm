@@ -1,5 +1,6 @@
 {
   "name": "Auryo",
+  "installname": "Auryo",
   "type": "AppImage",
   "description": "auryo - A beautiful soundcloud desktop app",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/Superjo149/auryo/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

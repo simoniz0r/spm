@@ -1,5 +1,6 @@
 {
   "name": "EnvKey",
+  "installname": "EnvKey",
   "type": "AppImage",
   "description": "envkey-app - Secure human-friendly cross-platform secrets and config ",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/envkey/envkey-ui/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

@@ -1,5 +1,6 @@
 {
   "name": "Qt_DAB",
+  "installname": "Qt_DAB",
   "type": "AppImage",
   "description": "qt-dab is a software dab decoder for use with a dabstick airspy or sdrplay for RPI and PC",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/JvanKatwijk/qt-dab/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

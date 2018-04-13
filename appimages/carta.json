@@ -1,5 +1,6 @@
 {
   "name": "CARTA",
+  "installname": "CARTA",
   "type": "AppImage",
   "description": "carta - CARTA stands for Cube Analysis and Rendering Tool for Astronomy a new visualization tool designed for the ALMA the JVLA and the SKA",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/CARTAvis/carta/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

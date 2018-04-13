@@ -1,5 +1,6 @@
 {
   "name": "StopGo",
+  "installname": "StopGo",
   "type": "AppImage",
   "description": "AppImage for StopGo",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "http://makerbox.org.nz/software/stopgo/stopgo-0.0.9/stopgo.AppImage"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

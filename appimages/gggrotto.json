@@ -1,5 +1,6 @@
 {
   "name": "gggrotto",
+  "installname": "gggrotto",
   "type": "AppImage",
   "description": "ng2gggrotto - Glorious Glacier Grotto  The Linux Game Jam 2017 participant",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/Vladar4/ng2gggrotto/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

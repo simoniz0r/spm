@@ -1,5 +1,6 @@
 {
   "name": "MKVToolNix",
+  "installname": "MKVToolNix",
   "type": "AppImage",
   "description": "mkvtoolnix-AppImage - experimental MKVToolNix AppImage",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/darealshinji/mkvtoolnix-AppImage/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

@@ -1,5 +1,6 @@
 {
   "name": "Standard_Notes",
+  "installname": "Standard_Notes",
   "type": "AppImage",
   "description": "desktop - A simple and private notes app Mac PC amp Linux app  httpsstandardnotesorg",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/standardnotes/desktop/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

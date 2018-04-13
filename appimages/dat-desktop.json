@@ -1,5 +1,6 @@
 {
   "name": "dat-desktop",
+  "installname": "dat-desktop",
   "type": "AppImage",
   "description": "dat-desktop - Peer to peer data sharing app built for humans",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/datproject/dat-desktop/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

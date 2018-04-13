@@ -1,5 +1,6 @@
 {
   "name": "EPL-Viz",
+  "installname": "EPL-Viz",
   "type": "AppImage",
   "description": "Qt-Frontend for the EPL-Viz project",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/epl-viz/EPL-Viz/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

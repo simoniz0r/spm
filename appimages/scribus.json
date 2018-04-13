@@ -1,5 +1,6 @@
 {
   "name": "Scribus",
+  "installname": "Scribus",
   "type": "AppImage",
   "description": "Open Source Page Layout and Desktop Publishing (DTP) ",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://transfer.sh/JjAuJ/Scribus-git5a088ba-glibc2.14.glibc2.14-x86_64.AppImage"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

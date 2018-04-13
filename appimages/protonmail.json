@@ -1,5 +1,6 @@
 {
   "name": "protonmail",
+  "installname": "protonmail",
   "type": "AppImage",
   "description": "application - envelope Unofficial Electron wrapper for ProtonMail",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/protonmail-desktop/application/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

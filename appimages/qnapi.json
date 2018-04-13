@@ -1,5 +1,6 @@
 {
   "name": "QNapi",
+  "installname": "QNapi",
   "type": "AppImage",
   "description": "qnapi - Qt-based multi-engine multi-platform subtitle downloader",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/QNapi/qnapi/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

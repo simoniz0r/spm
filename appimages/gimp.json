@@ -1,5 +1,6 @@
 {
   "name": "gimp",
+  "installname": "gimp",
   "type": "AppImage",
   "description": "Contribute to gimp-appimage development by creating an account on GitHub",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/aferrero2707/gimp-appimage/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

@@ -1,5 +1,6 @@
 {
   "name": "Crypter",
+  "installname": "Crypter",
   "type": "AppImage",
   "description": "Crypter - An innovative convenient and secure cross-platform encryption app  lt--gt",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/HR/Crypter/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

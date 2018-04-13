@@ -1,5 +1,6 @@
 {
   "name": "tubCloud",
+  "installname": "tubCloud",
   "type": "AppImage",
   "description": "tubCloud desktop synchronization client ",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://updates.tubcloud.tu-berlin.de/clients/linux/64/tubCloud-latest.x86_64.AppImage"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

@@ -1,5 +1,6 @@
 {
   "name": "LaserWeb",
+  "installname": "LaserWeb",
   "type": "AppImage",
   "description": "LaserWeb4-Binaries - Installers for LaserWeb4",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/LaserWeb/LaserWeb4-Binaries/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

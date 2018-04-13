@@ -1,5 +1,6 @@
 {
   "name": "Vespucci",
+  "installname": "Vespucci",
   "type": "AppImage",
   "description": "Vespucci - A free open source cross-platform tool for spectroscopic data analysis and imaging ",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/VespucciProject/Vespucci/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

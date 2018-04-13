@@ -1,5 +1,6 @@
 {
   "name": "upterm",
+  "installname": "upterm",
   "type": "AppImage",
   "description": "upterm - A terminal emulator for the 21st century",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/railsware/upterm/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

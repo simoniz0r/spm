@@ -1,5 +1,6 @@
 {
   "name": "Skycoin",
+  "installname": "Skycoin",
   "type": "AppImage",
   "description": "AppImage for Skycoin",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "http://downloads.skycoin.net/wallet/skycoin-0.19.0-gui-linux-x64.AppImage"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

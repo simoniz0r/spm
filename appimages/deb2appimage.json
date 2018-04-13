@@ -1,5 +1,6 @@
 {
   "name": "deb2appimage",
+  "installname": "deb2appimage",
   "type": "AppImage",
   "description": "Build AppImages from deb packages on any distro with simple json configuration",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/simoniz0r/deb2appimage/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

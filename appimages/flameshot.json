@@ -1,5 +1,6 @@
 {
   "name": "flameshot",
+  "installname": "flameshot",
   "type": "AppImage",
   "description": "flameshot - Powerful yet simple to use screenshot software",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/lupoDharkael/flameshot/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

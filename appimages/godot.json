@@ -1,5 +1,6 @@
 {
   "name": "Godot",
+  "installname": "Godot",
   "type": "AppImage",
   "description": "AppImage for Godot",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://dl.bintray.com/calinou/godot/Godot-Linux-x86_64-2017-08-18.445b0ab.AppImage"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

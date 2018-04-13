@@ -1,5 +1,6 @@
 {
   "name": "Plover",
+  "installname": "Plover",
   "type": "AppImage",
   "description": "plover - Open source stenotype engine",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/openstenoproject/plover/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

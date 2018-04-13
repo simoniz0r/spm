@@ -1,5 +1,6 @@
 {
   "name": "BrainVerse",
+  "installname": "BrainVerse",
   "type": "AppImage",
   "description": "brainverse - Electronic Lab Notebook",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/ReproNim/brainverse/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

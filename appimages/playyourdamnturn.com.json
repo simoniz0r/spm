@@ -1,5 +1,6 @@
 {
   "name": "playyourdamnturn.com",
+  "installname": "playyourdamnturn.com",
   "type": "AppImage",
   "description": "Electron client that helps with playing your damn turn",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/pydt/client/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

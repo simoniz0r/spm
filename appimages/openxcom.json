@@ -1,5 +1,6 @@
 {
   "name": "OpenXcom",
+  "installname": "OpenXcom",
   "type": "AppImage",
   "description": "AppImage for OpenXcom",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "http://knapsu.eu/openxcom/OpenXcom_1.0_x86-64.AppImage"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

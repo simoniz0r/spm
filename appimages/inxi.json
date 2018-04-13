@@ -1,5 +1,6 @@
 {
   "name": "inxi",
+  "installname": "inxi",
   "type": "AppImage",
   "description": "This repository contains appimagebuild and AppImage build scripts for building AppImages easily",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/simoniz0r/AppImages/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

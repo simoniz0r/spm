@@ -1,5 +1,6 @@
 {
   "name": "tweet-tray",
+  "installname": "tweet-tray",
   "type": "AppImage",
   "description": "Tweet quickly from the desktop without any more distractions.",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/jonathontoon/tweet-tray/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

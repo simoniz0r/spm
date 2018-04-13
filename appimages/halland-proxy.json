@@ -1,5 +1,6 @@
 {
   "name": "halland-proxy",
+  "installname": "halland-proxy",
   "type": "AppImage",
   "description": "halland-proxy - A web debugging proxy written in javascript Electron",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/niklasi/halland-proxy/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

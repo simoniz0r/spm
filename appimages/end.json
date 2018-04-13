@@ -1,7 +1,8 @@
 {
-  "END": "END",
   "name": "END",
+  "installname": "END",
   "type": "END",
+  "description": "null",
   "authors": [
     {
       "name": "END",
@@ -16,6 +17,14 @@
     {
       "type": "END",
       "url": "END"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

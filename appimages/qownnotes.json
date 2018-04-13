@@ -1,5 +1,6 @@
 {
   "name": "QOwnNotes",
+  "installname": "QOwnNotes",
   "type": "AppImage",
   "description": "Plain text notepad and todo list manager with markdown support that works together with ownCloud/Nextcloud ",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://download.opensuse.org/repositories/home:/pbek:/QOwnNotes/AppImage/QOwnNotes-latest-x86_64.AppImage"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

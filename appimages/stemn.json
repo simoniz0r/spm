@@ -1,5 +1,6 @@
 {
   "name": "Stemn",
+  "installname": "Stemn",
   "type": "AppImage",
   "description": "Stemn-Desktop - rocket The Version Control System for Google Drive and Dropbox",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/Stemn/Stemn-Desktop/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

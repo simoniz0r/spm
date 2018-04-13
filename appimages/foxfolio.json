@@ -1,5 +1,6 @@
 {
   "name": "foxfolio",
+  "installname": "foxfolio",
   "type": "AppImage",
   "description": "foxfolio-desktop - Cryptocurrency portfolio management application which automatically retrieves balances and trades using exchange APIs",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/foxfolio/foxfolio-desktop/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

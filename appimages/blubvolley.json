@@ -1,5 +1,6 @@
 {
   "name": "blubVolley",
+  "installname": "blubVolley",
   "type": "AppImage",
   "description": "blubVolley - a fun volleyball game ",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://www.blub-game.com/d/linux64/blubVolley.AppImage"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

@@ -1,5 +1,6 @@
 {
   "name": "StickyPlatforms",
+  "installname": "StickyPlatforms",
   "type": "AppImage",
   "description": "StickyPlatforms - A 2D platformer for learning",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/ranjak/StickyPlatforms/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

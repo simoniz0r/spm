@@ -1,5 +1,6 @@
 {
   "name": "Vessel",
+  "installname": "Vessel",
   "type": "AppImage",
   "description": "vessel - Desktop wallet for the Steem blockchain",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/aaroncox/vessel/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

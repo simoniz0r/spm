@@ -1,5 +1,6 @@
 {
   "name": "Sylk",
+  "installname": "Sylk",
   "type": "AppImage",
   "description": "AppImage for Sylk",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "http://download.ag-projects.com/Sylk/Sylk-latest-x86_64.AppImage"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

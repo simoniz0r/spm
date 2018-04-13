@@ -1,5 +1,6 @@
 {
   "name": "yadshot",
+  "installname": "yadshot",
   "type": "AppImage",
   "description": "yadshot provides a GUI frontend for taking screenshots using imagemagickslop and uploads files and pastes to teknikio",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/simoniz0r/yadshot/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

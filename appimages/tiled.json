@@ -1,5 +1,6 @@
 {
   "name": "Tiled",
+  "installname": "Tiled",
   "type": "AppImage",
   "description": "tiled - A generic tile map editor",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/bjorn/tiled/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

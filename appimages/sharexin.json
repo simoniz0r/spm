@@ -1,5 +1,6 @@
 {
   "name": "ShareXin",
+  "installname": "ShareXin",
   "type": "AppImage",
   "description": "ShareXin - ShareX for Linux FreeBSD and macOS",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/ShareXin/ShareXin/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

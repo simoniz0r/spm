@@ -1,5 +1,6 @@
 {
   "name": "thermusqt",
+  "installname": "thermusqt",
   "type": "AppImage",
   "description": "ThermusQt - Qt implementation of Thermus the thermal statistical model",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/yschutz/ThermusQt/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

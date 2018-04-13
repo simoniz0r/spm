@@ -1,5 +1,6 @@
 {
   "name": "stretchly",
+  "installname": "stretchly",
   "type": "AppImage",
   "description": "stretchly - break time reminder app",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/hovancik/stretchly/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

@@ -1,5 +1,6 @@
 {
   "name": "zsync2",
+  "installname": "zsync2",
   "type": "AppImage",
   "description": "zsync2 - Rewrite of httpsgithubcomAppImagezsync-curl using modern C providing both a library and standalone tools",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/TheAssassin/zsync2/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

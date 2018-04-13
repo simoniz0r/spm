@@ -1,5 +1,6 @@
 {
   "name": "VLC",
+  "installname": "VLC",
   "type": "AppImage",
   "description": "vlc-AppImage - VLC AppImage inofficial",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/darealshinji/vlc-AppImage/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

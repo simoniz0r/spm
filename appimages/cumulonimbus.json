@@ -1,5 +1,6 @@
 {
   "name": "Cumulonimbus",
+  "installname": "Cumulonimbus",
   "type": "AppImage",
   "description": "cumulonimbus - CPod a simple beautiful podcast app",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/z-------------/cumulonimbus/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

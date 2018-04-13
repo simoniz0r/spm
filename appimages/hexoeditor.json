@@ -1,5 +1,6 @@
 {
   "name": "hexoeditor",
+  "installname": "hexoeditor",
   "type": "AppImage",
   "description": "HexoEditor - this markdown Editor for hexo blog",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/zhuzhuyule/HexoEditor/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

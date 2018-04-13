@@ -1,5 +1,6 @@
 {
   "name": "donut",
+  "installname": "donut",
   "type": "AppImage",
   "description": "donut -  Dead-simple cross-platform cryptocurrency tracker",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/harshjv/donut/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

@@ -1,5 +1,6 @@
 {
   "name": "Subsurface",
+  "installname": "Subsurface",
   "type": "AppImage",
   "description": "subsurface - This is the official upstream of the Subsurface divelog program",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/Subsurface-divelog/subsurface/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

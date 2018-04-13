@@ -1,5 +1,6 @@
 {
   "name": "ReliefValve",
+  "installname": "ReliefValve",
   "type": "AppImage",
   "description": "ReliefValve - A tool to help manage the Steam client",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/l3laze/ReliefValve/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

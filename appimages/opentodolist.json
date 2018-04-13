@@ -1,5 +1,6 @@
 {
   "name": "OpenTodoList",
+  "installname": "OpenTodoList",
   "type": "AppImage",
   "description": "AppImage for OpenTodoList",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://www.rpdev.net/public/appimages/linux/x86_64/OpenTodoList-stable.AppImage"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

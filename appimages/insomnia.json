@@ -1,5 +1,6 @@
 {
   "name": "Insomnia",
+  "installname": "Insomnia",
   "type": "AppImage",
   "description": "insomnia - The most intuitive cross-platform REST API Client ",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/getinsomnia/insomnia/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

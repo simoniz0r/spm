@@ -1,16 +1,14 @@
 {
   "name": "Astroffers",
+  "installname": "Astroffers",
+  "type": "null",
   "description": "Take offers to watch at given nights by the NGC2000 catalog",
-  "categories": [
-    "Astronomy"
-  ],
   "authors": [
     {
       "name": "jayhasyee",
       "url": "https://github.com/jayhasyee"
     }
   ],
-  "license": null,
   "links": [
     {
       "type": "GitHub",
@@ -21,7 +19,12 @@
       "url": "https://github.com/jayhasyee/astroffers/releases"
     }
   ],
-  "screenshots": [
-    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/Astroffers/screenshot.png"
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
+    }
   ]
 }

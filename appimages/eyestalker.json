@@ -1,5 +1,6 @@
 {
   "name": "EyeStalker",
+  "installname": "EyeStalker",
   "type": "AppImage",
   "description": "eyestalker - Robust video-based eye tracking using recursive estimation of pupil characteristics",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/tbrouns/eyestalker/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

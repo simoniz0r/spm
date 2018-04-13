@@ -1,5 +1,6 @@
 {
   "name": "MasterVyrn",
+  "installname": "MasterVyrn",
   "type": "AppImage",
   "description": "MasterVyrn is a clean dedicated GBF loader build on top of electron",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/LightouchDev/MasterVyrn/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

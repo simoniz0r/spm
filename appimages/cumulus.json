@@ -1,5 +1,6 @@
 {
   "name": "Cumulus",
+  "installname": "Cumulus",
   "type": "AppImage",
   "description": "cumulus-qt - Qt port for Cumulus",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/vadrian89/cumulus-qt/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

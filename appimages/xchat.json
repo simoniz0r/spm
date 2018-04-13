@@ -1,5 +1,6 @@
 {
   "name": "XChat",
+  "installname": "XChat",
   "type": "AppImage",
   "description": "XChat is an IRC chat program for both Linux and Windows",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/probonopd/XChat/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

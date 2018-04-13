@@ -1,5 +1,6 @@
 {
   "name": "aria2",
+  "installname": "aria2",
   "type": "AppImage",
   "description": "AppImage for aria2",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "http://download.opensuse.org/repositories/home:/nandub:/MyAppImages/AppImage/aria2-latest-x86_64.AppImage"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

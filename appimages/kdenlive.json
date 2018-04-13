@@ -1,5 +1,6 @@
 {
   "name": "Kdenlive",
+  "installname": "Kdenlive",
   "type": "AppImage",
   "description": "Video Editor ",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "http://files.kde.org/kdenlive/release/Kdenlive-17.12.0d-x86_64.AppImage"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

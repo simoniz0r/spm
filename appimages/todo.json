@@ -1,5 +1,6 @@
 {
   "name": "todo",
+  "installname": "todo",
   "type": "AppImage",
   "description": "todo is a bash script for Linux that manages todo lists through the command line in an easy to use manner Lists are stored in todoListName with each item in the list stored as a separate file in that directory",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/simoniz0r/todo/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

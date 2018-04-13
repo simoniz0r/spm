@@ -1,5 +1,6 @@
 {
   "name": "Calculist",
+  "installname": "Calculist",
   "type": "AppImage",
   "description": "calculist-desktop - the desktop version of Calculist",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/calculist/calculist-desktop/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

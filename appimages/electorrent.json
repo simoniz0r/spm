@@ -1,5 +1,6 @@
 {
   "name": "Electorrent",
+  "installname": "Electorrent",
   "type": "AppImage",
   "description": "Electorrent - A remote control client for Torrent qBittorrent rTorrent amp Transmission",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/Tympanix/Electorrent/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

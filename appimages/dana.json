@@ -1,5 +1,6 @@
 {
   "name": "dana",
+  "installname": "dana",
   "type": "AppImage",
   "description": "dana - Dana Symbol of Wisdom ",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/b00f/dana/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

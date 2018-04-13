@@ -1,5 +1,6 @@
 {
   "name": "Stencila",
+  "installname": "Stencila",
   "type": "AppImage",
   "description": " Stencila on the desktop",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/stencila/desktop/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

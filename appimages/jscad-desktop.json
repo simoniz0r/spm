@@ -1,16 +1,14 @@
 {
   "name": "jscad-desktop",
+  "installname": "jscad-desktop",
+  "type": "null",
   "description": "jscad desktop application",
-  "categories": [
-    "Graphics"
-  ],
   "authors": [
     {
       "name": "jscad",
       "url": "https://github.com/jscad"
     }
   ],
-  "license": null,
   "links": [
     {
       "type": "GitHub",
@@ -21,7 +19,12 @@
       "url": "https://github.com/jscad/jscad-desktop/releases"
     }
   ],
-  "screenshots": [
-    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/jscad-desktop/screenshot.png"
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
+    }
   ]
 }

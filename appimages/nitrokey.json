@@ -1,5 +1,6 @@
 {
   "name": "Nitrokey",
+  "installname": "Nitrokey",
   "type": "AppImage",
   "description": "Manage your Nitrokey devices",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/Nitrokey/nitrokey-app/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

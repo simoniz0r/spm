@@ -1,5 +1,6 @@
 {
   "name": "Peerio",
+  "installname": "Peerio",
   "type": "AppImage",
   "description": "peerio-desktop - Peerio 2 for macOS Windows amp Linux",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/PeerioTechnologies/peerio-desktop/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

@@ -1,5 +1,6 @@
 {
   "name": "Filmulator",
+  "installname": "Filmulator",
   "type": "AppImage",
   "description": "filmulator-gui - Filmulator --- a film emulator with all of the positives and none of the negatives",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/CarVac/filmulator-gui/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

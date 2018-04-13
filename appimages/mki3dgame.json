@@ -1,5 +1,6 @@
 {
   "name": "mki3dgame",
+  "installname": "mki3dgame",
   "type": "AppImage",
   "description": "mki3dgame - A game that uses designs produced with httpsmki1967githubiomki3d",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/mki1967/mki3dgame/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

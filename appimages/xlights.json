@@ -1,5 +1,6 @@
 {
   "name": "xlights",
+  "installname": "xlights",
   "type": "AppImage",
   "description": "Lighting control and sequencing ",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://www.adebenham.com/wp-content/uploads/xlights/xLights-2017.29-bcfbc17.glibc2.17-x86_64.AppImage"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

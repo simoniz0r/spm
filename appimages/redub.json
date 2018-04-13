@@ -1,5 +1,6 @@
 {
   "name": "Redub",
+  "installname": "Redub",
   "type": "AppImage",
   "description": "A program that allows for easily redubbing the audio in a video",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/azlyth/redub/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

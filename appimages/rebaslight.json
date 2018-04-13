@@ -1,5 +1,6 @@
 {
   "name": "rebaslight",
+  "installname": "rebaslight",
   "type": "AppImage",
   "description": "rebaslight - Rebaslight - an easy to use special effects editor",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/rebaslight/rebaslight/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

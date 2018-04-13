@@ -1,5 +1,6 @@
 {
   "name": "accessimap-lecteur-der",
+  "installname": "accessimap-lecteur-der",
   "type": "AppImage",
   "description": "accessimap-lecteur-der - Lecteur de documents en relief interactif DERi",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/makinacorpus/accessimap-lecteur-der/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

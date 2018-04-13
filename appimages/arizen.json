@@ -1,5 +1,6 @@
 {
   "name": "Arizen",
+  "installname": "Arizen",
   "type": "AppImage",
   "description": "arizen - Arizen is new API wallet for ZenCash with encrypted locally stored files",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/ZencashOfficial/arizen/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

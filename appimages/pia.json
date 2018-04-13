@@ -1,5 +1,6 @@
 {
   "name": "pia",
+  "installname": "pia",
   "type": "AppImage",
   "description": "pia-app - Excutable permettant de lancer lapplication front office PIA sur son ordinateur Cest une version portable de loutil PIA  Executable to launch the PIA application on your computer It is a stand-alone version of the PIA application",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/LINCnil/pia-app/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

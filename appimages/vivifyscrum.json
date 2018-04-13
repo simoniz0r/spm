@@ -1,5 +1,6 @@
 {
   "name": "vivifyscrum",
+  "installname": "vivifyscrum",
   "type": "AppImage",
   "description": "Contribute to vivifyscrum2-electron development by creating an account on GitHub",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/Vivify-Ideas/vivifyscrum2-electron/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

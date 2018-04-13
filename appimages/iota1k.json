@@ -1,5 +1,6 @@
 {
   "name": "iota1k",
+  "installname": "iota1k",
   "type": "AppImage",
   "description": "iotalk is a privacy-minded messaging system built on the IOTA Tangle Messages are encrypted so only the intended recipient can read them",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/xx10t4/iota1k/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

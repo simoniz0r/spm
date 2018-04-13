@@ -1,5 +1,6 @@
 {
   "name": "Gpredict",
+  "installname": "Gpredict",
   "type": "AppImage",
   "description": "gpredict - Gpredict satellite tracking application",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/csete/gpredict/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

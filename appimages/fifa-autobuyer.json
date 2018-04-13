@@ -1,5 +1,6 @@
 {
   "name": "fifa-autobuyer",
+  "installname": "fifa-autobuyer",
   "type": "AppImage",
   "description": "fifa-autobuyer - FIFA 17 Autobuyer",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/hunterjm/fifa-autobuyer/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

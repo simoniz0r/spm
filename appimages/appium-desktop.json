@@ -1,5 +1,6 @@
 {
   "name": "appium-desktop",
+  "installname": "appium-desktop",
   "type": "AppImage",
   "description": "appium-desktop - Appium Server and Inspector in Desktop GUIs for Mac Windows and Linux",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/appium/appium-desktop/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

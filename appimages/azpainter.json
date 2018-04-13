@@ -1,5 +1,6 @@
 {
   "name": "AzPainter",
+  "installname": "AzPainter",
   "type": "AppImage",
   "description": "Full color painting software for Linux for illustration drawing This is un-official little fixed repository of AzPainter based on quotmlibquot toolkit Official repository - httpsosdnnetprojectsazpainter",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/Symbian9/azpainter/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

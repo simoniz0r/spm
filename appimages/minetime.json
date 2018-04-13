@@ -1,5 +1,6 @@
 {
   "name": "MineTime",
+  "installname": "MineTime",
   "type": "AppImage",
   "description": "MineTime public repository for issue tracking",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/marcoancona/MineTime/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

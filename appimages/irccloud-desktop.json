@@ -1,5 +1,6 @@
 {
   "name": "irccloud-desktop",
+  "installname": "irccloud-desktop",
   "type": "AppImage",
   "description": "irccloud-desktop - IRCCloud Desktop App",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/irccloud/irccloud-desktop/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

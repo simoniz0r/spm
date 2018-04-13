@@ -1,5 +1,6 @@
 {
   "name": "VidCutter",
+  "installname": "VidCutter",
   "type": "AppImage",
   "description": "vidcutter - snap package available  snapcraft store see below for more details  latest release 550",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/ozmartian/vidcutter/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

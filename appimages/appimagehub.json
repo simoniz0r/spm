@@ -1,5 +1,6 @@
 {
   "name": "AppImageHub",
+  "installname": "AppImageHub",
   "type": "AppImage",
   "description": "AppImageHub-Electron - Electron wrapper for downloading AppImages from httpsAppImagegithubio built using nativefier",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/simoniz0r/AppImageHub-Electron/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

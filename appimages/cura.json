@@ -1,5 +1,6 @@
 {
   "name": "Cura",
+  "installname": "Cura",
   "type": "AppImage",
   "description": "AppImage for Cura",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://software.ultimaker.com/current/Cura-2.7.0.AppImage"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

@@ -1,5 +1,6 @@
 {
   "name": "sleep-timer",
+  "installname": "sleep-timer",
   "type": "AppImage",
   "description": "sleep-timer - Graphical sleep timer perfect for netflix and ",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/erdii/sleep-timer/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

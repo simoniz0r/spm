@@ -1,5 +1,6 @@
 {
   "name": "AtCore",
+  "installname": "AtCore",
   "type": "AppImage",
   "description": "atcore - Open Source 3D Printing Host - Core Components",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/sithlord48/atcore/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

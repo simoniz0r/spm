@@ -1,5 +1,6 @@
 {
   "name": "RedmineTimeTracker",
+  "installname": "RedmineTimeTracker",
   "type": "AppImage",
   "description": "RedmineTimeTracker - ChromeElectron app for tracking work time",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/ujiro99/RedmineTimeTracker/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

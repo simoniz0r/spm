@@ -1,5 +1,6 @@
 {
   "name": "Stremio",
+  "installname": "Stremio",
   "type": "AppImage",
   "description": "AppImage for Stremio",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://dl.strem.io/linux/v4.0.0-beta.29/Stremio+4.0.0-beta.29.appimage"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

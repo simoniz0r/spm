@@ -1,5 +1,6 @@
 {
   "name": "Fulcrum",
+  "installname": "Fulcrum",
   "type": "AppImage",
   "description": "fulcrum-desktop - Fulcrum Desktop",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/fulcrumapp/fulcrum-desktop/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

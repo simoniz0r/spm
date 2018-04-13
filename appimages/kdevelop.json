@@ -1,5 +1,6 @@
 {
   "name": "Kdevelop",
+  "installname": "Kdevelop",
   "type": "AppImage",
   "description": "null ",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "http://kfunk.ddns.net:8080/job/kdevelop-appimage-centos/lastSuccessfulBuild/artifact/KDevelop-git-x86_64.AppImage"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

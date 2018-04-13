@@ -1,5 +1,6 @@
 {
   "name": "simple-updater-example",
+  "installname": "simple-updater-example",
   "type": "AppImage",
   "description": "electron-simple-updater - Simple way to enable update for the electron application",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/megahertz/electron-simple-updater/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

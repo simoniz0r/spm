@@ -1,5 +1,6 @@
 {
   "name": "OpenShot",
+  "installname": "OpenShot",
   "type": "AppImage",
   "description": "openshot-qt - This repo is the primary development home for OpenShot Video Editor version 2 a PyQt video editing application which utilizes the powerful libopenshot C library",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "http://github.com/OpenShot/openshot-qt/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

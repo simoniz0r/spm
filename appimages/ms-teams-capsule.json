@@ -1,5 +1,6 @@
 {
   "name": "ms-teams-capsule",
+  "installname": "ms-teams-capsule",
   "type": "AppImage",
   "description": "AppImage for ms-teams-capsule",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://dl.karmainside.com/ms-teams-capsule/ms-teams-capsule-latest-x86_64.AppImage"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

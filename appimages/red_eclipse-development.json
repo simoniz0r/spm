@@ -1,5 +1,6 @@
 {
   "name": "Red_Eclipse-Development",
+  "installname": "Red_Eclipse-Development",
   "type": "AppImage",
   "description": "Play the best first-person shooter in the world! Free and open-source! ",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://download.assassinate-you.net/red-eclipse/appimage/latest/redeclipse-master-x86_64.AppImage"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

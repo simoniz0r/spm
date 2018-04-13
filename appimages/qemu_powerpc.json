@@ -1,5 +1,6 @@
 {
   "name": "qemu_powerpc",
+  "installname": "qemu_powerpc",
   "type": "AppImage",
   "description": "qemu-ppc - Lets you run PowerPC operating systems on 64-bit Intel Linux hosts",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/probonopd/qemu-ppc/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

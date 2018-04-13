@@ -1,5 +1,6 @@
 {
   "name": "hotspot",
+  "installname": "hotspot",
   "type": "AppImage",
   "description": "hotspot - The Linux perf GUI for performance analysis",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/KDAB/hotspot/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

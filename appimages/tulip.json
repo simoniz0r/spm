@@ -1,5 +1,6 @@
 {
   "name": "Tulip",
+  "installname": "Tulip",
   "type": "AppImage",
   "description": "tulip - Large graphs analysis drawing and visualization framework",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/tulip5/tulip/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

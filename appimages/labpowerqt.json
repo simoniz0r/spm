@@ -1,5 +1,6 @@
 {
   "name": "LabPowerQt",
+  "installname": "LabPowerQt",
   "type": "AppImage",
   "description": "labpowerqt - LabPowerQt is an application to control laboratory power supplies",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/crapp/labpowerqt/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

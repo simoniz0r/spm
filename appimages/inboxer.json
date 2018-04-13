@@ -1,5 +1,6 @@
 {
   "name": "inboxer",
+  "installname": "inboxer",
   "type": "AppImage",
   "description": "inboxer - Unofficial free and open-source Inbox by Gmail Desktop App",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/denysdovhan/inboxer/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

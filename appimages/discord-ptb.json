@@ -1,5 +1,6 @@
 {
   "name": "discord-ptb",
+  "installname": "discord-ptb",
   "type": "AppImage",
   "description": "All-in-one voice and text chat for gamers that's free secure and works on both your desktop and phone",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/simoniz0r/Discord-PTB-AppImage/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

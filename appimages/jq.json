@@ -1,5 +1,6 @@
 {
   "name": "jq-linux64",
+  "installname": "jq",
   "type": "binary",
   "description": "jq - Command-line JSON processor",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/stedolan/jq/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

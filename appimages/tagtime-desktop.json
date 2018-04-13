@@ -1,5 +1,6 @@
 {
   "name": "TagTime-desktop",
+  "installname": "TagTime-desktop",
   "type": "AppImage",
   "description": "TagTime-desktop - Cross-platform desktop implementation of TagTime",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/mykter/TagTime-desktop/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

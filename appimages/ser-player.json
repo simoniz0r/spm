@@ -1,5 +1,6 @@
 {
   "name": "ser-player",
+  "installname": "ser-player",
   "type": "AppImage",
   "description": "ser-player - A simple video player for playing SER files used for solar lunar and planetary astronomy-imaging",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/cgarry/ser-player/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

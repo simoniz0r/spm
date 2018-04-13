@@ -1,5 +1,6 @@
 {
   "name": "Cerebro",
+  "installname": "Cerebro",
   "type": "AppImage",
   "description": "cerebro - Open-source productivity booster with a brain",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/KELiON/cerebro/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

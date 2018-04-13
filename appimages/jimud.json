@@ -1,5 +1,6 @@
 {
   "name": "jiMUD",
+  "installname": "jiMUD",
   "type": "AppImage",
   "description": "jiMUD - MUD client for ShadowMUDcom based on webclient",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/icewolfz/jiMUD/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

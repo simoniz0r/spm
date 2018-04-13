@@ -1,5 +1,6 @@
 {
   "name": "WorkFlowy",
+  "installname": "WorkFlowy",
   "type": "AppImage",
   "description": "Contribute to desktop development by creating an account on GitHub",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/workflowy/desktop/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

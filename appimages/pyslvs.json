@@ -1,5 +1,6 @@
 {
   "name": "Pyslvs",
+  "installname": "Pyslvs",
   "type": "AppImage",
   "description": "Pyslvs-PyQt5 - Open Source Planar Linkage Mechanism Simulation and Mechanical Synthesis System",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/KmolYuan/Pyslvs-PyQt5/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

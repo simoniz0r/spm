@@ -1,5 +1,6 @@
 {
   "name": "colorpicker",
+  "installname": "colorpicker",
   "type": "AppImage",
   "description": "A mininal but complete colorpicker desktop app",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/Toinane/colorpicker/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

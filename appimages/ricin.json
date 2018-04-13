@@ -1,5 +1,6 @@
 {
   "name": "Ricin",
+  "installname": "Ricin",
   "type": "AppImage",
   "description": "A dead-simple but powerful Tox client. ",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://cdn.konv.im/linux/ricin-0.2.8-glibc2.14-x86-64.appimage"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

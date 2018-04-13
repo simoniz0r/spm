@@ -1,5 +1,6 @@
 {
   "name": "AHGequip",
+  "installname": "AHGequip",
   "type": "AppImage",
   "description": "The public repository used by TroopTrack to release AHGequip",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/TroopTrack/AHGequip/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

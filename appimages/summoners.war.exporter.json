@@ -1,5 +1,6 @@
 {
   "name": "Summoners.War.Exporter",
+  "installname": "Summoners.War.Exporter",
   "type": "AppImage",
   "description": "sw-exporter - This tool will parse intercepted data from Summoners War and extract information on the monsters and runes of the user",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/Xzandro/sw-exporter/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

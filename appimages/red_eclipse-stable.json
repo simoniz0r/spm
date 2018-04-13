@@ -1,5 +1,6 @@
 {
   "name": "Red_Eclipse-stable",
+  "installname": "Red_Eclipse-stable",
   "type": "AppImage",
   "description": "AppImage for Red_Eclipse-stable",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://download.assassinate-you.net/red-eclipse/appimage/latest/redeclipse-stable-x86_64.AppImage"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

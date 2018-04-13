@@ -1,16 +1,14 @@
 {
   "name": "Instagram-Py",
+  "installname": "Instagram-Py",
+  "type": "null",
   "description": "Hack Instagram Like a Pro.",
-  "categories": [
-    "System"
-  ],
   "authors": [
     {
       "name": "antony-jr",
       "url": "https://github.com/antony-jr"
     }
   ],
-  "license": null,
   "links": [
     {
       "type": "GitHub",
@@ -21,7 +19,12 @@
       "url": "https://github.com/antony-jr/instagram-py/releases"
     }
   ],
-  "screenshots": [
-    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/Instagram-Py/screenshot.png"
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
+    }
   ]
 }

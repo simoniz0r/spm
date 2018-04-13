@@ -1,5 +1,6 @@
 {
   "name": "githoard",
+  "installname": "githoard",
   "type": "AppImage",
   "description": "githoard - Desktop app that enables users to quickly clone git repositories",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/jojobyte/githoard/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

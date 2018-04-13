@@ -1,5 +1,6 @@
 {
   "name": "TagFlow",
+  "installname": "TagFlow",
   "type": "AppImage",
   "description": "AppImage for TagFlow",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "http://www.tagflow.io/download/linux/appimage/64"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

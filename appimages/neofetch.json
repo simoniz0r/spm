@@ -1,5 +1,6 @@
 {
   "name": "neofetch",
+  "installname": "neofetch",
   "type": "AppImage",
   "description": "A fast highly customizable system info script that supports a variety of OSes",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/simoniz0r/neofetch/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

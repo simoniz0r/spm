@@ -1,5 +1,6 @@
 {
   "name": "Stacer",
+  "installname": "Stacer",
   "type": "AppImage",
   "description": "Stacer - Linux System Optimizer and Monitoring",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/oguzhaninan/Stacer/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

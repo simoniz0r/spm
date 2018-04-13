@@ -1,5 +1,6 @@
 {
   "name": "Teleprompter",
+  "installname": "Teleprompter",
   "type": "AppImage",
   "description": "Teleprompter-Electron - Build standalone cross-platform instances of our Teleprompter with Electron",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/ImaginarySense/Teleprompter-Electron/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

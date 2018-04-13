@@ -1,5 +1,6 @@
 {
   "name": "Cutter",
+  "installname": "Cutter",
   "type": "AppImage",
   "description": "cutter - A Qt and C GUI for radare2 reverse engineering framework",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/radareorg/cutter/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

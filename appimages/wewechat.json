@@ -1,5 +1,6 @@
 {
   "name": "weweChat",
+  "installname": "weweChat",
   "type": "AppImage",
   "description": "weweChat -  Unofficial WeChat client built with React MobX and Electron",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/trazyn/weweChat/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

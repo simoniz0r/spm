@@ -1,5 +1,6 @@
 {
   "name": "appimagetool",
+  "installname": "appimagetool",
   "type": "AppImage",
   "description": "AppImageKit - Package desktop applications as AppImages that run on common Linux-based operating systems such as RHEL CentOS openSUSE SLED Ubuntu Fedora debian and derivatives Join AppImage on ircfreenodenet",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/AppImage/AppImageKit/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

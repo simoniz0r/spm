@@ -1,5 +1,6 @@
 {
   "name": "embedded-ide",
+  "installname": "embedded-ide",
   "type": "AppImage",
   "description": "embedded-ide - IDE for C embedded development centered on bare-metal ARM systems",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/martinribelotta/embedded-ide/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

@@ -1,5 +1,6 @@
 {
   "name": "spectrum-editor",
+  "installname": "spectrum-editor",
   "type": "AppImage",
   "description": "spectrum-editor - Text editor with ZX Spectrum theme",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/thorpelawrence/spectrum-editor/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

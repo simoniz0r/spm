@@ -1,5 +1,6 @@
 {
   "name": "SerialPlot",
+  "installname": "SerialPlot",
   "type": "AppImage",
   "description": "Small and simple software for plotting data from serial port ",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://bitbucket.org/hyOzd/serialplot/downloads/serialplot-0.9.1-x86_64.AppImage"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

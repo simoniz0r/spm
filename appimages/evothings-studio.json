@@ -1,5 +1,6 @@
 {
   "name": "evothings-studio",
+  "installname": "evothings-studio",
   "type": "AppImage",
   "description": "AppImage for evothings-studio",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://s3-eu-west-1.amazonaws.com/evothings-download/evothings-studio-2.2.0-beta7.AppImage"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

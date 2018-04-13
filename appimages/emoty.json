@@ -1,5 +1,6 @@
 {
   "name": "Emoty",
+  "installname": "Emoty",
   "type": "AppImage",
   "description": "Emoty-Desktop - Emoty application for desktops",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/Emotyco/Emoty-Desktop/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

@@ -1,5 +1,6 @@
 {
   "name": "Cryplicity",
+  "installname": "Cryplicity",
   "type": "AppImage",
   "description": "Cryplicity - A Crypto Portfolio Tracker Tool",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/Kthulu120/Cryplicity/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

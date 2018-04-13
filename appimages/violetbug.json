@@ -1,5 +1,6 @@
 {
   "name": "violetbug",
+  "installname": "violetbug",
   "type": "AppImage",
   "description": "violetbug - Roku Debugger Graphical Interface",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/belltown/violetbug/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

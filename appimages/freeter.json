@@ -1,5 +1,6 @@
 {
   "name": "Freeter",
+  "installname": "Freeter",
   "type": "AppImage",
   "description": "AppImage for Freeter",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://freeter.io/download/Freeter.AppImage"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

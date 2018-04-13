@@ -1,5 +1,6 @@
 {
   "name": "zulip-electron",
+  "installname": "zulip-electron",
   "type": "AppImage",
   "description": "zulip-electron - Zulip Desktop Client",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/zulip/zulip-electron/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

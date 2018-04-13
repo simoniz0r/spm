@@ -1,5 +1,6 @@
 {
   "name": "TeXstudio",
+  "installname": "TeXstudio",
   "type": "AppImage",
   "description": "LaTeX development environment ",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://dl.bintray.com/unruhschuh/AppImages/TeXstudio-2.10.8-x86_64.AppImage"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

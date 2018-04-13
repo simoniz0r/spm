@@ -1,5 +1,6 @@
 {
   "name": "Mumble",
+  "installname": "Mumble",
   "type": "AppImage",
   "description": "mumble - Mirror of the Mumble VoIP ClientServer continuously building AppImages -- will be force-pushed with new commits regularly",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/TheAssassin/mumble/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

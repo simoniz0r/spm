@@ -1,5 +1,6 @@
 {
   "name": "Unicode",
+  "installname": "Unicode",
   "type": "AppImage",
   "description": "unicode - All Contents code and everything related to Unicode converter App",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/nirooj56/unicode/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

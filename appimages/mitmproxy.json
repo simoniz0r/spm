@@ -1,5 +1,6 @@
 {
   "name": "Mitmproxy",
+  "installname": "Mitmproxy",
   "type": "AppImage",
   "description": "MitmproxyAppImage - for creating appimage for the mitmproxy python program",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/nandub/Mitmproxy.AppImage/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

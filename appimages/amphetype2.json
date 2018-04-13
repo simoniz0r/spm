@@ -1,5 +1,6 @@
 {
   "name": "amphetype2",
+  "installname": "amphetype2",
   "type": "AppImage",
   "description": "amphetype2 - Cross-platform typing practice",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/coryo/amphetype2/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

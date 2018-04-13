@@ -1,5 +1,6 @@
 {
   "name": "Voltra",
+  "installname": "Voltra",
   "type": "AppImage",
   "description": "Voltra Co. Music Player ",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://s3.amazonaws.com/download.voltra.co/Voltra-3.1.4-x86_64.AppImage"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

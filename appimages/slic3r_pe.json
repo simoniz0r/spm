@@ -1,5 +1,6 @@
 {
   "name": "Slic3r_PE",
+  "installname": "Slic3r_PE",
   "type": "AppImage",
   "description": "Slic3r - G-code generator for 3D printers RepRap Makerbot Ultimaker etc",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/prusa3d/Slic3r/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

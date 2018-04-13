@@ -1,5 +1,6 @@
 {
   "name": "shots",
+  "installname": "shots",
   "type": "AppImage",
   "description": "--shots - Simple minimalistic and task-focused application for creating screenshots Available for LInux MacOS WIndows",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/binjospookie/--shots/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

@@ -1,5 +1,6 @@
 {
   "name": "superProductivity",
+  "installname": "superProductivity",
   "type": "AppImage",
   "description": "Personal Task Management App to help you with your daily struggle with JIRA etc. ",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "http://super-productivity.com/downloads/superProductivity-latest-x86_64.AppImage"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

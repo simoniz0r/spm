@@ -1,5 +1,6 @@
 {
   "name": "Bezique",
+  "installname": "Bezique",
   "type": "AppImage",
   "description": "Contribute to Bezique development by creating an account on GitHub",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/Sriep/Bezique/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

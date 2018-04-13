@@ -1,5 +1,6 @@
 {
   "name": "arkona2",
+  "installname": "arkona2",
   "type": "AppImage",
   "description": "arkona2 - open-world version of the original",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/uzudil/arkona2/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

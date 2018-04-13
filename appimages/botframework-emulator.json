@@ -1,5 +1,6 @@
 {
   "name": "BotFramework-Emulator",
+  "installname": "BotFramework-Emulator",
   "type": "AppImage",
   "description": "BotFramework-Emulator - Bot Framework Emulator",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/Microsoft/BotFramework-Emulator/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

@@ -1,5 +1,6 @@
 {
   "name": "ubports-installer",
+  "installname": "ubports-installer",
   "type": "AppImage",
   "description": "ubports-installer - A simple tool to install Ubuntu Touch on UBports devices",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/ubports/ubports-installer/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

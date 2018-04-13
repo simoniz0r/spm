@@ -1,5 +1,6 @@
 {
   "name": "KettleClient",
+  "installname": "KettleClient",
   "type": "AppImage",
   "description": "KettleClient - Graphical client for REST KettleService written in Qt",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/Arquanite/KettleClient/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

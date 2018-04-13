@@ -1,5 +1,6 @@
 {
   "name": "pb-for-desktop",
+  "installname": "pb-for-desktop",
   "type": "AppImage",
   "description": "pb-for-desktop - The missing Desktop application for Pushbullet",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/sidneys/pb-for-desktop/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

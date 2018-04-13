@@ -1,5 +1,6 @@
 {
   "name": "TournamenterApp",
+  "installname": "TournamenterApp",
   "type": "AppImage",
   "description": "TournamenterApp -  Manage your Tournament event and show Live views to public",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/ivanseidel/TournamenterApp/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

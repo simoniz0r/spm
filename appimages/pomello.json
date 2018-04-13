@@ -1,5 +1,6 @@
 {
   "name": "Pomello",
+  "installname": "Pomello",
   "type": "AppImage",
   "description": "AppImage for Pomello",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://pomelloapp.com/download/linux?package=appimage&arch=64"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

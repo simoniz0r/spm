@@ -1,5 +1,6 @@
 {
   "name": "drawio",
+  "installname": "drawio",
   "type": "AppImage",
   "description": "drawio-desktop - Official electron build of drawio",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/jgraph/drawio-desktop/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

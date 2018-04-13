@@ -1,5 +1,6 @@
 {
   "name": "spm",
+  "installname": "spm",
   "type": "AppImage",
   "description": "spm is a simple commandline package manager that installs AppImages and precompiled tar archives",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/simoniz0r/spm/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

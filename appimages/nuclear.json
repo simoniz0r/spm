@@ -1,5 +1,6 @@
 {
   "name": "nuclear",
+  "installname": "nuclear",
   "type": "AppImage",
   "description": "nuclear - Desktop music player focused on streaming from free sources",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/nukeop/nuclear/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

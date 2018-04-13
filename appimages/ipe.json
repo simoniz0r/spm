@@ -1,5 +1,6 @@
 {
   "name": "ipe",
+  "installname": "ipe",
   "type": "AppImage",
   "description": "null ",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://dl.bintray.com/otfried/generic/ipe/7.2/ipe-7.2.7-x86_64.AppImage"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

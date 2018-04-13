@@ -1,5 +1,6 @@
 {
   "name": "twitch-wrapper",
+  "installname": "twitch-wrapper",
   "type": "AppImage",
   "description": "twitch-wrapper - An Electron wrapper for Twitchtv for Linux with FrankerFaceZ and FFZAP added in  Created using nativefier",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/simoniz0r/twitch-wrapper/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

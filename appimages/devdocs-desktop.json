@@ -1,5 +1,6 @@
 {
   "name": "devdocs-desktop",
+  "installname": "devdocs-desktop",
   "type": "AppImage",
   "description": "devdocs-desktop -  A full-featured desktop app for DevDocsio",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/egoist/devdocs-desktop/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

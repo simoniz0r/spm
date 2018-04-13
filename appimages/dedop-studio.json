@@ -1,5 +1,6 @@
 {
   "name": "DeDop-studio",
+  "installname": "DeDop-studio",
   "type": "AppImage",
   "description": "dedop-studio - DeDop Desktop Application",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/DeDop/dedop-studio/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

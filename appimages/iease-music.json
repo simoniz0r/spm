@@ -1,5 +1,6 @@
 {
   "name": "iease-music",
+  "installname": "iease-music",
   "type": "AppImage",
   "description": "ieaseMusic -   metal ",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/trazyn/ieaseMusic/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

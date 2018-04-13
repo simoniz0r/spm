@@ -1,5 +1,6 @@
 {
   "name": "MellowPlayer",
+  "installname": "MellowPlayer",
   "type": "AppImage",
   "description": "MellowPlayer - Cloud music integration for your desktop",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/ColinDuquesnoy/MellowPlayer/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

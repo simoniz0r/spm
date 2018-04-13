@@ -1,5 +1,6 @@
 {
   "name": "simdsp",
+  "installname": "simdsp",
   "type": "AppImage",
   "description": "SimDSP - DSP Simulator",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/lmcapacho/SimDSP/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

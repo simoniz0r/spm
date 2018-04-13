@@ -1,5 +1,6 @@
 {
   "name": "Pixsrt",
+  "installname": "Pixsrt",
   "type": "AppImage",
   "description": "pixsrt - C Pixel Sorter",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/thorpelawrence/pixsrt/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

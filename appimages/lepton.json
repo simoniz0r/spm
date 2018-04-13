@@ -1,5 +1,6 @@
 {
   "name": "Lepton",
+  "installname": "Lepton",
   "type": "AppImage",
   "description": "Lepton -     Democratizing Code Snippets Management macOSWinLinux",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/hackjutsu/Lepton/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

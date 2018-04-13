@@ -1,5 +1,6 @@
 {
   "name": "IBM_DSX_Desktop",
+  "installname": "IBM_DSX_Desktop",
   "type": "AppImage",
   "description": "AppImage for IBM_DSX_Desktop",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://dsx-private-cloud.mybluemix.net/public/desktop/IBM_DSX_Desktop.AppImage"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

@@ -1,5 +1,6 @@
 {
   "name": "playground",
+  "installname": "playground",
   "type": "AppImage",
   "description": "graphql-playground -   GraphQL IDE for better development workflows GraphQL Subscriptions interactive docs amp collaboration",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/graphcool/graphql-playground/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

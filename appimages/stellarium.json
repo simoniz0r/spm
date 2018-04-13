@@ -1,5 +1,6 @@
 {
   "name": "stellarium",
+  "installname": "stellarium",
   "type": "AppImage",
   "description": "stellarium - Stellarium is a free GPL software which renders realistic skies in real time with OpenGL It is available for LinuxUnix Windows and MacOSX With Stellarium you really see what you can see with your eyes binoculars or a small telescope",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/Stellarium/stellarium/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

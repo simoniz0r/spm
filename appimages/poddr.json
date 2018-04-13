@@ -1,5 +1,6 @@
 {
   "name": "poddr",
+  "installname": "poddr",
   "type": "AppImage",
   "description": "Poddr - Podcast client built with Electron and Angularjs",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/Sn8z/Poddr/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

@@ -1,5 +1,6 @@
 {
   "name": "rssguard",
+  "installname": "rssguard",
   "type": "AppImage",
   "description": "rssguard - RSS Guard is simple yet powerful feed reader This is the official project repository",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/martinrotter/rssguard/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

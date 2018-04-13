@@ -1,5 +1,6 @@
 {
   "name": "sACNView",
+  "installname": "sACNView",
   "type": "AppImage",
   "description": "sacnview - sACNView provides a tool for monitoring and sending the Streaming ACN lighting control protocol used for lighting control in theatres TV studios and architectural systems",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/docsteer/sacnview/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

@@ -1,5 +1,6 @@
 {
   "name": "OpenBlok",
+  "installname": "OpenBlok",
   "type": "AppImage",
   "description": "openblok - A customizable cross platform open-source falling block game packed with a bunch of features",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/mmatyas/openblok/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

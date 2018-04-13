@@ -1,5 +1,6 @@
 {
   "name": "Gulden",
+  "installname": "Gulden",
   "type": "AppImage",
   "description": "gulden-official - The official repository for Gulden core wallet updated at each release",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/Gulden/gulden-official/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

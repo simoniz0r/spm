@@ -1,5 +1,6 @@
 {
   "name": "dbKoda",
+  "installname": "dbKoda",
   "type": "AppImage",
   "description": "AppImage for dbKoda",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://s3-us-west-1.amazonaws.com/uswest-nc.release.dbkoda/dbkoda-latest.AppImage"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

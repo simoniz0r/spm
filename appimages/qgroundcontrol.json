@@ -1,5 +1,6 @@
 {
   "name": "QGroundControl",
+  "installname": "QGroundControl",
   "type": "AppImage",
   "description": "qgroundcontrol - Dronecode cross-platform ground control station for drones Android iOS Mac OS Linux Windows",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/mavlink/qgroundcontrol/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

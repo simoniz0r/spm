@@ -1,5 +1,6 @@
 {
   "name": "PatternPaint",
+  "installname": "PatternPaint",
   "type": "AppImage",
   "description": "PatternPaint - Making beautiful light shows is as easy as drawing a picture with Pattern Paint",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/Blinkinlabs/PatternPaint/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

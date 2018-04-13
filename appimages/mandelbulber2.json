@@ -1,5 +1,6 @@
 {
   "name": "mandelbulber2",
+  "installname": "mandelbulber2",
   "type": "AppImage",
   "description": "Visit 3D Fractal World ",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "http://download.opensuse.org/repositories/home:/lachs0r:/mandelbulber2/AppImage/mandelbulber2-latest-x86_64.AppImage"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

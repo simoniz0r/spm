@@ -1,5 +1,6 @@
 {
   "name": "storaji",
+  "installname": "storaji",
   "type": "AppImage",
   "description": "storaji - ledger The lightresponsive inventory management system available on Windows macOS and Linux",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/IndomaximTechID/storaji/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

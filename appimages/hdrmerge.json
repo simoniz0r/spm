@@ -1,16 +1,14 @@
 {
   "name": "HDRMerge",
+  "installname": "HDRMerge",
+  "type": "null",
   "description": "Merge several raw images into a single DNG raw image with high dynamic range.",
-  "categories": [
-    "Graphics"
-  ],
   "authors": [
     {
       "name": "aferrero2707",
       "url": "https://github.com/aferrero2707"
     }
   ],
-  "license": "GPL-3.0",
   "links": [
     {
       "type": "GitHub",
@@ -21,7 +19,12 @@
       "url": "https://github.com/aferrero2707/hdrmerge-appimage/releases"
     }
   ],
-  "screenshots": [
-    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/HDRMerge/screenshot.png"
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
+    }
   ]
 }

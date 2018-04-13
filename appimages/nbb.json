@@ -1,5 +1,6 @@
 {
   "name": "nbb",
+  "installname": "nbb",
   "type": "AppImage",
   "description": "AppImage for nbb",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://files.kuudere.moe/nbb/linux/nbb-1.0.1-x86_64.AppImage"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

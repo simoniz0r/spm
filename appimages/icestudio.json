@@ -1,5 +1,6 @@
 {
   "name": "icestudio",
+  "installname": "icestudio",
   "type": "AppImage",
   "description": "icestudio - snowflake Experimental graphic editor for open FPGAs",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/FPGAwars/icestudio/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

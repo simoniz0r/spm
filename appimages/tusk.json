@@ -1,5 +1,6 @@
 {
   "name": "Tusk",
+  "installname": "Tusk",
   "type": "AppImage",
   "description": "tusk -  Refined Evernote desktop app",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/champloohq/tusk/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

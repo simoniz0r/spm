@@ -1,5 +1,6 @@
 {
   "name": "RetroShare",
+  "installname": "RetroShare",
   "type": "AppImage",
   "description": "RetroShare is a Free and Open Source cross-platform Friend-2-Friend and secure decentralised communication platform upstream Repository",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/RetroShare/RetroShare/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

@@ -1,5 +1,6 @@
 {
   "name": "unoffical-sonos-controller-for-linux",
+  "installname": "unoffical-sonos-controller-for-linux",
   "type": "AppImage",
   "description": "unoffical-sonos-controller-for-linux - An Electron based linux app for controlling your sonos system",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/pascalopitz/unoffical-sonos-controller-for-linux/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

@@ -1,5 +1,6 @@
 {
   "name": "Joplin",
+  "installname": "Joplin",
   "type": "AppImage",
   "description": "joplin - Joplin - a note taking and to-do application with synchronization capabilities for Windows macOS Linux Android and iOS",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/laurent22/joplin/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

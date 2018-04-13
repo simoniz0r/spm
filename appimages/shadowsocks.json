@@ -1,5 +1,6 @@
 {
   "name": "Shadowsocks",
+  "installname": "Shadowsocks",
   "type": "AppImage",
   "description": "shadowsocks-qt5 - A cross-platform shadowsocks GUI client",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/shadowsocks/shadowsocks-qt5/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

@@ -1,5 +1,6 @@
 {
   "name": "LiveZilla",
+  "installname": "LiveZilla",
   "type": "AppImage",
   "description": "AppImage for LiveZilla",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "http://www.livezilla.net/downloads/pubfiles/livezilla_app_linux_x64_1.1.0.AppImage"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

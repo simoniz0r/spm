@@ -1,5 +1,6 @@
 {
   "name": "LibreOfficeDev",
+  "installname": "LibreOfficeDev",
   "type": "AppImage",
   "description": "The office productivity suite compatible to the open and standardized ODF document format. Supported by The Document Foundation. ",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://libreoffice.soluzioniopen.com/stable/standard/LibreOffice-fresh.standard-x86_64.AppImage"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

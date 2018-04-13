@@ -1,5 +1,6 @@
 {
   "name": "Billy",
+  "installname": "Billy",
   "type": "AppImage",
   "description": "billy - A simple invoice manager built with Electron",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/haimich/billy/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

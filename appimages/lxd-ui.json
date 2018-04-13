@@ -1,5 +1,6 @@
 {
   "name": "lxd-ui",
+  "installname": "lxd-ui",
   "type": "AppImage",
   "description": "lxd-ui - A LXD user interface powered by electron-vue",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/lcherone/lxd-ui/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }

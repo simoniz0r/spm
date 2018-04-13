@@ -1,5 +1,6 @@
 {
   "name": "infinitex",
+  "installname": "infinitex",
   "type": "AppImage",
   "description": "Infinitex - A LaTeX and WYSIWYG editor with academic search functionality and other helpful tools",
   "authors": [
@@ -16,6 +17,14 @@
     {
       "type": "Install",
       "url": "https://github.com/fetacore/Infinitex/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
     }
   ]
 }
