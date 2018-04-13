@@ -1,7 +1,7 @@
 {
   "name": "discord-canary",
   "type": "AppImage",
-  "description": "This repository contains appimagebuild and AppImage build scripts for building AppImages easily",
+  "description": "All-in-one voice and text chat for gamers that's free secure and works on both your desktop and phone",
   "authors": [
     {
       "name": "simoniz0r",

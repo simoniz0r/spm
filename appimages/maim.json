@@ -1,7 +1,7 @@
 {
   "name": "maim",
   "type": "AppImage",
-  "description": "This repository contains appimagebuild and AppImage build scripts for building AppImages easily",
+  "description": "maim takes screenshots of your desktop It has options to take only a region and relies on slop to query for regions maim is supposed to be an improved scrot",
   "authors": [
     {
       "name": "simoniz0r",
