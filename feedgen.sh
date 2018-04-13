@@ -23,6 +23,7 @@ for image in $(dir -C -w 1 $HOME/github/spm/appimages); do
     cat >>"$HOME"/github/index/spm-feed.json << EOL
     {
       "name": "$(jq -r '.name' ~/github/spm/appimages/$image.json)",
+      "installname": "$(jq -r '.installname' ~/github/spm/appimages/$image.json)",
       "type": "$(jq -r '.type' ~/github/spm/appimages/$image.json)",
       "description": "$(jq -r '.description' ~/github/spm/appimages/$image.json)",
       "authors": [
@@ -58,6 +59,7 @@ cat >>"$HOME"/github/index/spm-feed.json << EOL
     {
       "END": "END",
       "name": "END",
+      "installname": "removeme"
       "type": "END",
         "authors": [
         {
