@@ -1,222 +1,1019 @@
 #!/bin/bash -e
 # Title: spm
-# Description: Downloads and installs AppImages and precompiled tar archives.  Can also upgrade and remove installed packages.
-# Dependencies: GNU coreutils, tar, wget
+# Description: Easily install and manage packages published directly from their authors
+# Dependencies: curl, GNU coreutils, grep, jq
+# Will be installed if missing: deb2appimage (disabled until feature finished)
 # Author: simonizor
-# Website: http://www.simonizor.gq
+# Website: http://www.simonizor.net
 # License: GPL v2.0 only
 
-X="0.6.4"
-# Set spm version
-ARG="$1"
-PKG_INPUT="$2"
-CONFDIR="$HOME/.config/spm"
-SKIP_DEP_CHECKS="FALSE"
-CLR_CLEAR="$(tput sgr0)"
-CLR_BLUE="$(tput setaf 4)"
-CLR_LGREEN="$(tput setaf 10)"
-CLR_GREEN="$(tput setaf 2)"
-CLR_LCYAN="$(tput setaf 14)"
-CLR_CYAN="$(tput setaf 6)"
-CLR_RED="$(tput setaf 1)"
+# Function to handle all exits
+function spmexit() {
+    case $1 in
+        # normal exit; remove cache before exiting
+        0)
+            rm -rf ~/.local/share/spm/cache/*
+            exit 0
+            ;;
+        # all other exits; output message with exit
+        *)
+            if [ ! SPM_QUIET = "TRUE" ]; then
+                echo "$(tput smul)$2$(tput rmul)"
+                [ -n "$3" ] && echo "$3"
+                echo "Exit code $1"
+            fi
+            rm -rf ~/.local/share/spm/cache/*
+            exit $1
+            ;;
+    esac
+}
 
+# Function to display messages with an underlined title
+function displaymessage() {
+    local MESSAGE_TITLE="$1";
+    shift;
+    local MESSAGE_TEXT="$@";
+    echo "$(tput smul)$MESSAGE_TITLE$(tput rmul)"
+    echo
+    echo "$MESSAGE_TEXT"
+    echo
+}
 
-if [ "$EUID" = "0" ]; then # Prevent spm from being ran as root
+# Function to ask questions.  Automatically detects number of options inputted.
+# Detects if user inputs valid option and passes text of selected option on as SELECTED_OPTION variable
+# Exits if invalid selection is made
+function askquestion() {
+    local QUESTION_TITLE="$1" 
+    local QUESTION_TEXT="$2"
+    shift 2
+    local NUM_OPTIONS=$#
+    local QUESTION_NUMBER=1
+    echo "$(tput smul)$QUESTION_TITLE$(tput rmul)"
+    echo
+    echo -e "$QUESTION_TEXT"
+    echo
+    for option in "$@"; do
+        echo "${QUESTION_NUMBER}. $option"
+        echo "$option" >> "$CONFIG_DIR"/cache/questionoptions
+        local QUESTION_NUMBER=$(($QUESTION_NUMBER+1))
+    done
+    echo
+    read -p "Option number: (1) " -r QUESTION_SELECTION
+    [ -z "$QUESTION_SELECTION" ] && QUESTION_SELECTION=1
+    if echo "$QUESTION_SELECTION" | grep -q '^[0-9]' && [ $QUESTION_SELECTION -gt 0 ] && [ $QUESTION_SELECTION -le $NUM_OPTIONS ]; then
+        SELECTED_OPTION="$QUESTION_SELECTION"
+        rm -f "$CONFIG_DIR"/cache/questionoptions
+        echo
+    else
+        echo
+        spmexit "2" "$(tput setaf $CLR_RED)Error$(tput sgr0)" "Invalid selection made; exiting..."
+    fi
+}
+
+# Function that trap below is routed to to output error about keyboard interrupt and cleanup CONFIG_DIR/cache
+function detectinterrupt() {
+    echo
+    spmexit "2" "$(tput setaf $CLR_RED)Interrupt Detected$(tput sgr0)" "Interrupt has been detected; cleaning up and exiting..."
+}
+
+# Function that checks if dir passed as $1 is writable by user and uses sudo if it is not
+# Command is passed as $2, but shift and then $@ are used just in case
+function trywithoutsudo() {
+    local TEST_DIR="$1"
+    shift
+    local COMMAND="$@"
+    [ -z "$COMMAND" ] && spmexit "2" "$(tput setaf $CLR_RED)COMMAND variable is empty$(tput sgr0)" "Please report an issue at https://github.com/simoniz0r/spm"
+    if [ -w "$TEST_DIR" ]; then
+        $COMMAND || { spmexit "2" "$(tput setaf $CLR_RED)The following failed to execute:$(tput sgr0)" "$COMMAND"; }
+    else
+        sudo $COMMAND || { spmexit "2" "$(tput setaf $CLR_RED)The following failed to execute:$(tput sgr0)" "$COMMAND"; }
+    fi
+}
+
+# TODO Turn this into json?
+# Function to save config settings for spm
+# CONFIG_DIR can be changed, but should only be changed when no packages are being tracked by spm
+# TARGET_DIR can also be changed, but the above also applies here
+# GET_DIR can be changed at any time as packages installed to this dir are not tracked at all by spm
+# GITHUB_TOKEN is blank by default and is provided for frequent users of spm who are hitting Github's rate limit (60/hour) without it
+# When using GITHUB_TOKEN, Github's rate limit is increased to 5000/hour which should be plenty for anyone
+# CLR_* can be used to change spm's color output just in case you hate it :)
+function saveconf() {
+cat > "$CONFIG_DIR"/spm.conf << EOL
+# Please only edit this config file if you have read spm's man page.
+#
+# TARGET_DIR - Directory where packages will be installed to.
+# $HOME/bin is used by default so that installed packages
+# can be installed without requiriging root.  $HOME/bin is
+# on the PATH by default in most distros, so installed
+# packages should work from there as usual.
+# Only change this directory if you have no packages being managed by spm!
+#
+TARGET_DIR="$TARGET_DIR"
+#
+# GET_DIR - Directory where packages will be installed to when using 'get' argument.
+# packages installed to this directory will not be tracked by spm, so it is safe to change.
+#
+GET_DIR="$GET_DIR"
+#
+# DOWNGRADE_LIMIT - The maximum amount of packages that will be stored in CONFIG_DIR/downgrades for use with revert argument.
+# Can be set to 0 to disable storage completely.
+DOWNGRADE_LIMIT=$DOWNGRADE_LIMIT
+#
+# GITHUB_TOKEN - Token used to authenticate with Github's API to increase the rate limit.
+# This field can be left blank if you are not having issues hitting the rate limit.
+# If you insert your token, it must be valid and should have access to NO scopes.
+# Your token will be stored in plain text, so it is advised to use throw-away account for this.
+#
+GITHUB_TOKEN="$GITHUB_TOKEN"
+#
+# CLR_* - Colors used in spm's CLI output.
+# You can change these to any color that your terminal supports using either tput or by using escape codes.
+# Inserting invalid color codes will more than likely cause errors, so be careful.
+#
+CLR_BLUE="$CLR_BLUE"
+CLR_LGREEN="$CLR_LGREEN"
+CLR_GREEN="$CLR_GREEN"
+CLR_LCYAN="$CLR_LCYAN"
+CLR_CYAN="$CLR_CYAN"
+CLR_RED="$CLR_RED"
+
+EOL
+}
+
+# Function that checks github rate limit by using curl on https://api.github.com/rate_limit
+# Uses GITHUB_TOKEN if user has added it to CONFIG_DIR/spm.conf; rate limit is extended to 5000/hour when using it
+# Without GITHUB_TOKEN, rate limit is 60/hour.
+# If rate limit reaches 0, error message is outputted and user is told when it resets
+function ratelimitcheck() {
+    if [ -z "$GITHUB_TOKEN" ]; then
+        RATE_LIMIT=$(curl -sSL "https://api.github.com/rate_limit" | jq -r '.resources.core.remaining')
+        RATE_LIMIT_RESET=$(curl -sSL "https://api.github.com/rate_limit" | jq -r '.resources.core.reset')
+        [ -z "$RATE_LIMIT" ] && spmexit "7" "$(tput setaf $CLR_RED)Rate Limit Check Failed$(tput sgr0)" "Github rate limit check failed! Exiting..."
+        echo "$(tput setaf $CLR_GREEN)Github API rate limit: $RATE_LIMIT/60 until $(date -d@$RATE_LIMIT_RESET +"%T, %F").$(tput sgr0)"
+    else
+        RATE_LIMIT=$(curl -sSL -H "Authorization: token "$GITHUB_TOKEN"" "https://api.github.com/rate_limit" | jq -r '.resources.core.remaining')
+        RATE_LIMIT_RESET=$(curl -sSL -H "Authorization: token "$GITHUB_TOKEN"" "https://api.github.com/rate_limit" | jq -r '.resources.core.reset')
+        [ -z "$RATE_LIMIT" ] && spmexit "7" "$(tput setaf $CLR_RED)Rate Limit Check Failed$(tput sgr0)" "Github rate limit check failed! Exiting..."
+        echo "$(tput setaf $CLR_GREEN)Github API rate limit: $RATE_LIMIT/5000 until $(date -d@$RATE_LIMIT_RESET +"%T, %F").$(tput sgr0)"
+    fi
+    if [ $RATE_LIMIT -eq 0 ]; then
+        spmexit "7" "$(tput setaf $CLR_RED)Github API rate limit reached! Try again at $(date -d@$RATE_LIMIT_RESET).$(tput sgr0)" "If you haven't already, you can add your token to $CONFIG_DIR/spm.conf to avoid hitting the rate limit."
+    fi
+    echo
+}
+
+# Function that saves package info for installed packages in CONFIG_DIR/installed
+# CONFIG_DIR/installed is the main directory that spm uses to keep track of installed packages for updating and removal
+function saveappimageinfo() {
+    local PACKAGE="$1"
+    [ ! -f "$CONFIG_DIR/installed/$PACKAGE" ] && cp "$CONFIG_DIR"/list/"$PACKAGE".json "$CONFIG_DIR"/installed/"$PACKAGE"
+    if [ -z "$PACKAGE_UPDATE_STATUS" ] || [ "$PACKAGE_UPDATE_STATUS" = "Not Installed" ]; then
+        PACKAGE_UPDATE_STATUS="CLEAR"
+    fi
+    echo "$(jq -r ". | .installinfo[0].version = \"$NEW_PACKAGE_VERSION\"" "$CONFIG_DIR"/installed/"$PACKAGE")" > "$CONFIG_DIR"/installed/"$PACKAGE"
+    echo "$(jq -r ". | .installinfo[0].size = \"$PACKAGE_SIZE\"" "$CONFIG_DIR"/installed/"$PACKAGE")" > "$CONFIG_DIR"/installed/"$PACKAGE"
+    echo "$(jq -r ". | .installinfo[0].tag = \"$PACKAGE_TAG\"" "$CONFIG_DIR"/installed/"$PACKAGE")" > "$CONFIG_DIR"/installed/"$PACKAGE"
+    echo "$(jq -r ". | .installinfo[0].status = \"$PACKAGE_UPDATE_STATUS\"" "$CONFIG_DIR"/installed/"$PACKAGE")" > "$CONFIG_DIR"/installed/"$PACKAGE"
+}
+
+# Function that uses jq to parse the json files that are generated by the updatelist function
+function parsestoredinfo() {
+    local DIRECTORY="$1"
+    local PACKAGE="$2"
+    case "$PACKAGE" in
+        .*)
+            local PACKAGE_SHORT="$(echo $PACKAGE | cut -f2- -d'.')"
+            ;;
+        *.json)
+            local PACKAGE_SHORT="$(echo $PACKAGE | rev | cut -f2- -d'.' | rev)"
+            ;;
+        *)
+            local PACKAGE_SHORT="$PACKAGE"
+            ;;
+    esac
+    PACKAGE_NAME="$(jq -r '.name' "$CONFIG_DIR"/list/"$PACKAGE_SHORT".json)"
+    PACKAGE_DESCRIPTION="$(jq -r '.description' "$CONFIG_DIR"/list/"$PACKAGE_SHORT".json)"
+    PACKAGE_AUTHOR="$(jq -r '.authors[0].name' "$CONFIG_DIR"/list/"$PACKAGE_SHORT".json)"
+    PACKAGE_AUTHOR_URL="$(jq -r '.authors[0].url' "$CONFIG_DIR"/list/"$PACKAGE_SHORT".json)"
+    PACKAGE_DL_URL="$(jq -r '.links[1].url' "$CONFIG_DIR"/list/"$PACKAGE_SHORT".json)"
+    PACKAGE_TYPE="$(jq -r '.links[0].type' "$CONFIG_DIR"/list/"$PACKAGE_SHORT".json)"
+    PACKAGE_VERSION="$(jq -r '.installinfo[0].version' "$CONFIG_DIR"/"$DIRECTORY"/"$PACKAGE")"
+    PACKAGE_STORED_SIZE="$(jq -r '.installinfo[0].size' "$CONFIG_DIR"/"$DIRECTORY"/"$PACKAGE")"
+    PACKAGE_STORED_TAG="$(jq -r '.installinfo[0].tag' "$CONFIG_DIR"/"$DIRECTORY"/"$PACKAGE")"
+    PACKAGE_UPDATE_STATUS="$(jq -r '.installinfo[0].status' "$CONFIG_DIR"/"$DIRECTORY"/"$PACKAGE")"
+    case "$PACKAGE_TYPE" in
+        *GitHub*)
+            PACKAGE_API_URL="$(jq -r '.links[0].url' "$CONFIG_DIR"/list/"$PACKAGE_SHORT".json)"
+            PACKAGE_API_URL="https://api.github.com/repos/$PACKAGE_API_URL/releases"
+            ;;
+    esac
+}
+
+# Function that lists all packages in CONFIG_DIR/list
+function listavailable() {
+    dir -C -w 1 "$CONFIG_DIR"/list | rev | cut -f2- -d'.' | rev
+}
+
+# Function that lists all packages in CONFIG_DIR/installed
+function listinstalled() {
+    dir -C -w 1 "$CONFIG_DIR"/installed
+}
+
+# Function that uses jq to show the json file for any package in CONFIG_DIR/list
+function showinfo() {
+    local PACKAGE="$1"
+    if [ -f "$CONFIG_DIR/installed/$PACKAGE" ]; then
+        jq -r '. | { name: .installname, description: .description, authors: .authors[0].name, authors_url: .authors[0].url, link_type: .links[0].type, link_url: .links[1].url, release: .installinfo[0].version, version: .installinfo[0].tag, size: .installinfo[0].size, status: .installinfo[0].status }' "$CONFIG_DIR"/installed/"$PACKAGE"
+    elif [ -f "$CONFIG_DIR/list/$PACKAGE.json" ]; then
+        jq -r '. | { name: .installname, description: .description, authors: .authors[0].name, authors_url: .authors[0].url, link_type: .links[0].type, link_url: .links[1].url, release: .installinfo[0].version, version: .installinfo[0].tag, size: .installinfo[0].size, status: .installinfo[0].status }' "$CONFIG_DIR"/list/"$PACKAGE".json
+    else
+        displaymessage "$(tput setaf $CLR_RED)Error$(tput sgr0)" "$PACKAGE not found!"
+    fi
+}
+
+# Function that uses jq to show the json file for each package in CONFIG_DIR/installed
+function showinfoinstalled() {
+    for file in $(dir -C -w 1 "$CONFIG_DIR"/installed); do
+        echo "$(tput setaf $CLR_LGREEN)$file$(tput sgr0):"
+        jq -r '. | { name: .installname, description: .description, authors: .authors[0].name, authors_url: .authors[0].url, link_type: .links[0].type, link_url: .links[1].url, release: .installinfo[0].version, version: .installinfo[0].tag, size: .installinfo[0].size, status: .installinfo[0].status }' "$CONFIG_DIR"/installed/"$file"
+        echo
+    done
+    echo
+    echo "$(tput setaf $CLR_GREEN)$(dir -C -w 1 "$CONFIG_DIR"/installed | wc -l) installed package(s)$(tput sgr0)"
+}
+
+# Function to search for known packages in $CONFIG_DIR/list
+function listsearch() {
+    displaymessage "$(tput setaf $CLR_GREEN)Search results for $@ :$(tput sgr0)" "$(dir -C -w 1 "$CONFIG_DIR"/list | sed 's%.json%%g' | grep "$@" || echo "No results for $@")"
+}
+
+# Function that uses curl and jq to get the latest release info for package
+# If user has stored their GITHUB_TOKEN in CONFIG_DIR/spm.conf, it is used to extend rate limit to 5000/hour
+# The .AppImage or .AppImage extension is used in 2 of the 4 checks to make sure we only install packages
+# The package name is used in 2 of the 4 checks to try and make sure the correct package is always found
+# We also try to find only 64bit packages by making sure the package name does not contain 32bit related things
+# Each check gets less specific until we hopefully find a package on the Github release page
+# If no package is found, an error is outputted to the user
+# We also get some useful info for the users here such as the package size and number of installs
+function githubrelease () {
+    local PACKAGE="$1"
+    if [ -z "$GITHUB_TOKEN" ]; then
+        curl -sSL -o "$CONFIG_DIR"/cache/"$PACKAGE"full "$PACKAGE_API_URL" || { spmexit "3" "$(tput setaf $CLR_RED)Error$(tput sgr0)" "curl $PACKAGE_API_URL failed!"; }
+    else
+        curl -sSL -o "$CONFIG_DIR"/cache/"$PACKAGE"full -H "Authorization: token "$GITHUB_TOKEN"" "$PACKAGE_API_URL" || { spmexit "3" "$(tput setaf $CLR_RED)Error$(tput sgr0)" "curl failed!"; }
+    fi
+    cd "$CONFIG_DIR"/cache
+    JQARG=".[].assets[] | select(.name | contains(\".AppImage\"), contains(\".appimage\")) | select(.name | contains(\"$PACKAGE_NAME\")) | select(.name | contains(\".zsync\") | not) | select(.name | contains(\"ia32\") | not) | select(.name | contains(\"i386\") | not) | select(.name | contains(\"i686\") | not) | { name: .name, updated: .updated_at, url: .browser_download_url, size: .size, numdls: .download_count}"
+    cat "$CONFIG_DIR"/cache/"$PACKAGE"full | jq --raw-output "$JQARG" | csplit --digits=2 --quiet --prefix="$PACKAGE" --suffix-format=%02d.json - "/^{/" "{*}"
+    if [ ! -f "$CONFIG_DIR/cache/${PACKAGE}01.json" ]; then
+        rm -f "$CONFIG_DIR"/cache/"$PACKAGE"00.json
+        JQARG=".[].assets[] | select(.name | contains(\".AppImage\"), contains(\".appimage\")) | select(.name | contains(\".zsync\") | not) | select(.name | contains(\"ia32\") | not) | select(.name | contains(\"i386\") | not) | select(.name | contains(\"i686\") | not) | { name: .name, updated: .updated_at, url: .browser_download_url, size: .size, numdls: .download_count}"
+        cat "$CONFIG_DIR"/cache/"$PACKAGE"full | jq --raw-output "$JQARG" | csplit --digits=2 --quiet --prefix="$PACKAGE" --suffix-format=%02d.json - "/^{/" "{*}"
+    fi
+    if [ ! -f "$CONFIG_DIR/cache/${PACKAGE}01.json" ]; then
+        rm -f "$CONFIG_DIR"/cache/"$PACKAGE"00.json
+        JQARG=".[].assets[] | select(.name | contains(\"$PACKAGE_NAME\")) | select(.name | contains(\".zsync\") | not) | select(.name | contains(\"ia32\") | not) | select(.name | contains(\"i386\") | not) | select(.name | contains(\"i686\") | not) | { name: .name, updated: .updated_at, url: .browser_download_url, size: .size, numdls: .download_count}"
+        cat "$CONFIG_DIR"/cache/"$PACKAGE"full | jq --raw-output "$JQARG" | csplit --digits=2 --quiet --prefix="$PACKAGE" --suffix-format=%02d.json - "/^{/" "{*}"
+    fi
+    if [ ! -f "$CONFIG_DIR/cache/${PACKAGE}01.json" ]; then
+        rm -f "$CONFIG_DIR"/cache/"$PACKAGE"00.json
+        JQARG=".[].assets[] | select(.name | contains(\".zsync\") | not) | select(.name | contains(\"ia32\") | not) | select(.name | contains(\"i386\") | not) | select(.name | contains(\"i686\") | not) | { name: .name, updated: .updated_at, url: .browser_download_url, size: .size, numdls: .download_count}"
+        cat "$CONFIG_DIR"/cache/"$PACKAGE"full | jq --raw-output "$JQARG" | csplit --digits=2 --quiet --prefix="$PACKAGE" --suffix-format=%02d.json - "/^{/" "{*}"
+    fi
+    if [ -f "$CONFIG_DIR/cache/${PACKAGE}01.json" ]; then
+        PACKAGE_NAME="$(jq -r '.name' "$CONFIG_DIR"/cache/"$PACKAGE"01.json)"
+        NEW_PACKAGE_VERSION="$(jq -r '.updated' "$CONFIG_DIR"/cache/"$PACKAGE"01.json)"
+        PACKAGE_LATEST_URL="$(jq -r '.url' "$CONFIG_DIR"/cache/"$PACKAGE"01.json)"
+        PACKAGE_SIZE="$(jq -r '.size' "$CONFIG_DIR"/cache/"$PACKAGE"01.json)"
+        PACKAGE_SIZE="$(awk "BEGIN {print ("$PACKAGE_SIZE"/1024)/1024}" | cut -c-5) MBs"
+        PACKAGE_DOWNLOADS="$(jq -r '.numdls' "$CONFIG_DIR"/cache/"$PACKAGE"01.json)"
+        PACKAGE_TAG="$(echo "$PACKAGE_LATEST_URL" | cut -f8 -d"/")"
+    else
+        PACKAGE_NAME="Error finding $PACKAGE!"
+        NEW_PACKAGE_VERSION="Error finding $PACKAGE!"
+        PACKAGE_LATEST_URL="Error finding $PACKAGE!"
+        PACKAGE_SIZE="Error finding $PACKAGE!"
+        PACKAGE_DOWNLOADS="Error finding $PACKAGE!"
+        PACKAGE_TAG="Error finding $PACKAGE!"
+    fi
+}
+
+# Function that uses curl to get the latest download information from the header of the url for a package if it is not hosted on GitHub
+function otherrelease() {
+    local PACKAGE="$1"
+    curl -sSL -I "$PACKAGE_DL_URL" > "$CONFIG_DIR"/cache/"$PACKAGE"release || { spmexit "3" "$(tput setaf $CLR_RED)Error$(tput sgr0)" "curl $PACKAGE_DL_URL failed!"; }
+    PACKAGE_NAME="$(grep -im1 '^location:' $CONFIG_DIR/cache/${PACKAGE}release | rev | cut -f1 -d'/' | rev | tr -cd '[:alnum:]-_.')"
+    NEW_PACKAGE_VERSION="$(grep -im1 '^last-modified:' $CONFIG_DIR/cache/${PACKAGE}release | cut -f2- -d' ' | tr -cd '[:alnum:][:blank:]:')"
+    [ -z "$PACKAGE_NAME" ] && PACKAGE_NAME="$NEW_PACKAGE_VERSION"
+    PACKAGE_LATEST_URL="$PACKAGE_DL_URL"
+    # PACKAGE_LATEST_URL="$(grep -im1 '^location:' $CONFIG_DIR/cache/${PACKAGE}release | cut -f2- -d' ' | tr -cd '[:alnum:]:/.-_%&@()')"
+    # [ -z "$PACKAGE_LATEST_URL" ] && PACKAGE_LATEST_URL="$PACKAGE_DL_URL"
+    PACKAGE_SIZE=$(grep -im1 '^content-length:' $CONFIG_DIR/cache/${PACKAGE}release | cut -f2- -d' ')
+    if [ -z "$PACKAGE_SIZE" ]; then
+        PACKAGE_SIZE="N/A"
+    else
+        PACKAGE_SIZE="$(awk "BEGIN {print ("$PACKAGE_SIZE"/1000000)}" | cut -c-5) MBs"
+    fi
+    PACKAGE_DOWNLOADS="N/A"
+    PACKAGE_TAG="$PACKAGE_NAME"
+}
+
+# Function to check to make sure package exists in CONFIG_DIR/list and is not already managed by spm
+# If the TARGET_DIR is not in the user's home directory, type is used to check if a command by same name as package exists
+# Lastly, TARGET_DIR/PACKAGE is checked to make sure package does not exist in case all other checks did not find it
+function installchecks() {
+    local PACKAGE="$1"
+    if [ ! -f "$CONFIG_DIR/list/$PACKAGE.json" ]; then
+        spmexit "2" "$(tput setaf $CLR_RED)Error$(tput sgr0)" "$PACKAGE not found!"
+    fi
+    if [ -f "$CONFIG_DIR"/installed/"$PACKAGE" ]; then
+        spmexit "2" "$(tput setaf $CLR_RED)Error$(tput sgr0)" "$PACKAGE is already installed. Use 'spm update' to check for a new version of $PACKAGE."
+    fi
+    case $TARGET_DIR in
+        /usr*|*/bin*)
+            if type "$PACKAGE" >/dev/null 2>&1 && [ "$PACKAGE" != "spm" ]; then
+                spmexit 2 "$(tput setaf $CLR_RED)Error$(tput sgr0)" "$PACKAGE is already installed on your system and not managed by spm; exiting..."
+            fi
+            ;;
+        *)
+            sleep 0
+            ;;
+    esac
+    if [ -f "$TARGET_DIR/$PACKAGE" ]; then
+        spmexit "2" "$(tput setaf $CLR_RED)Error$(tput sgr0)" "$TARGET_DIR/$PACKAGE exists; exiting..."
+    fi
+}
+
+# Function to install packages to TARGET_DIR
+# parsestoredinfo function is used to read info needed from stored json files in CONFIG_DIR/list
+# githubrelease function is used to get the latest release URL, version, and release date for the package
+# package is installed to CONFIG_DIR/cache and then moved to TARGET_DIR
+# saveappimageinfo function is used to save version, size, tag, and update status for future use
+function installpackage() {
+    local PACKAGE="$1"
+    parsestoredinfo "list" "$PACKAGE.json"
+    case "$PACKAGE_TYPE" in
+        *GitHub*)
+            githubrelease "$PACKAGE"
+            ;;
+        *)
+            otherrelease "$PACKAGE"
+            ;;
+    esac
+    if [ ! -f "$CONFIG_DIR/cache/${PACKAGE}01.json" ] && [ ! -f "$CONFIG_DIR/cache/${PACKAGE}release" ]; then
+        echo
+        spmexit "3" "$(tput setaf $CLR_RED)Error$(tput sgr0)" "Could not find download for $PACKAGE from $PACKAGE_DL_URL!"
+    fi
+    askquestion "$(tput setaf $CLR_GREEN)Package $(tput setaf $CLR_LGREEN)$PACKAGE$(tput setaf $CLR_GREEN) will be installed to $TARGET_DIR/$PACKAGE$(tput sgr0)" "Version: $PACKAGE_TAG\nRelease date: $NEW_PACKAGE_VERSION\nSize: $PACKAGE_SIZE\nDownloads: $PACKAGE_DOWNLOADS" "Install $PACKAGE" "Exit"
+    case $SELECTED_OPTION in
+        2)
+            echo
+            spmexit "2" "$(tput setaf $CLR_RED)Exiting...$(tput sgr0)" "$PACKAGE was not installed."
+            ;;
+    esac
+    curl -L -o "$CONFIG_DIR"/cache/"$PACKAGE".AppImage "$PACKAGE_LATEST_URL" || { spmexit "4" "$(tput setaf $CLR_RED)Error installing $PACKAGE!$(tput sgr0)" "If this continues to happen, please report an issue at https://github.com/simoniz0r/spm$(tput sgr0)"; }
+    chmod a+x "$CONFIG_DIR"/cache/"$PACKAGE".AppImage
+    trywithoutsudo "$TARGET_DIR" "mv $CONFIG_DIR/cache/$PACKAGE.AppImage $TARGET_DIR/$PACKAGE"
+    saveappimageinfo "$PACKAGE"
+    echo
+    displaymessage "$(tput setaf $CLR_LGREEN)$PACKAGE$(tput setaf $CLR_GREEN) installed$(tput sgr0)" "$PACKAGE has been installed to $TARGET_DIR/$PACKAGE"
+}
+
+# Function to install packages to GET_DIR.
+# packages installed through this function are not tracked by spm after install (no update checks, etc)
+# Shows the 5 latest releases
+function getappimage() {
+    local PACKAGE="$1"
+    if [ ! -f "$CONFIG_DIR/list/$PACKAGE.json" ]; then
+        spmexit "2" "$(tput setaf $CLR_RED)Error$(tput sgr0)" "$PACKAGE not found!"
+    fi
+    parsestoredinfo "list" "$PACKAGE.json"
+    case "$PACKAGE_TYPE" in
+        *GitHub*)
+            githubrelease "$PACKAGE"
+            ;;
+        *)
+            spmexit "4" "$(tput setaf $CLR_RED)Error$(tput sgr0)" "The 'get' argument only works with packages hosted on GitHub, sorry."
+            ;;
+    esac
+    if [ ! -f "$CONFIG_DIR/cache/${PACKAGE}01.json" ]; then
+        echo
+        spmexit "4" "$(tput setaf $CLR_RED)Error$(tput sgr0)" "Could not find download for $PACKAGE from $PACKAGE_DL_URL!"
+    fi
+    rm -f "$CONFIG_DIR"/cache/"$PACKAGE"00.json
+    for jsonfile in $(dir -C -w 1 "$CONFIG_DIR"/cache | grep '.*\.json' ); do
+        echo "$(jq -r '.url' "$CONFIG_DIR"/cache/"$jsonfile" | cut -f9 -d'/')" >> "$CONFIG_DIR"/cache/getappimages.list
+    done
+    NUM_PACKAGES=$(cat "$CONFIG_DIR"/cache/getappimages.list | head -n 5 | wc -l)
+    EXIT_NUM=$(($NUM_PACKAGES+1))
+    echo "$(cat "$CONFIG_DIR"/cache/getappimages.list | head -n 5 | tr '\n' ' ')" > "$CONFIG_DIR"/cache/getappimages.list
+    askquestion "$(tput setaf $CLR_GREEN)$NUM_PACKAGES releases found for $(tput setaf $CLR_LGREEN)$PACKAGE$(tput setaf $CLR_GREEN)$(tput sgr0)" "Select a version of $PACKAGE to download to $GET_DIR" $(cat "$CONFIG_DIR"/cache/getappimages.list) "Exit"
+    case $SELECTED_OPTION in
+        $EXIT_NUM)
+            echo
+            spmexit "2" "$(tput setaf $CLR_RED)Exiting...$(tput sgr0)" "$PACKAGE was not downloaded."
+            ;;
+    esac
+    PACKAGE_NAME="$(jq -r '.name' "$CONFIG_DIR"/cache/"$PACKAGE"0$SELECTED_OPTION.json)"
+    NEW_PACKAGE_VERSION="$(jq -r '.updated' "$CONFIG_DIR"/cache/"$PACKAGE"0$SELECTED_OPTION.json)"
+    PACKAGE_LATEST_URL="$(jq -r '.url' "$CONFIG_DIR"/cache/"$PACKAGE"0$SELECTED_OPTION.json)"
+    PACKAGE_SIZE="$(jq -r '.size' "$CONFIG_DIR"/cache/"$PACKAGE"0$SELECTED_OPTION.json)"
+    PACKAGE_SIZE="$(awk "BEGIN {print ("$PACKAGE_SIZE"/1024)/1024}" | cut -c-5) MBs"
+    PACKAGE_DOWNLOADS="$(jq -r '.numdls' "$CONFIG_DIR"/cache/"$PACKAGE"0$SELECTED_OPTION.json)"
+    PACKAGE_TAG="$(echo "$PACKAGE_LATEST_URL" | cut -f8 -d"/")"
+    echo
+    echo "$(tput setaf $CLR_GREEN)Downloading $(tput setaf $CLR_LGREEN)$PACKAGE$(tput setaf $CLR_GREEN) Version: $PACKAGE_TAG - Release date: $NEW_PACKAGE_VERSION to $GET_DIR ...$(tput sgr0)"
+    curl -L -o "$CONFIG_DIR"/cache/"$PACKAGE"-"$PACKAGE_TAG" "$PACKAGE_LATEST_URL" || { spmexit "4" "$(tput setaf $CLR_RED)Error downloading $PACKAGE!$(tput sgr0)" "If this continues to happen, please report an issue at https://github.com/simoniz0r/spm$(tput sgr0)"; }
+    chmod a+x "$CONFIG_DIR"/cache/"$PACKAGE"-"$PACKAGE_TAG"
+    trywithoutsudo "$GET_DIR" "mv $CONFIG_DIR/cache/$PACKAGE-$PACKAGE_TAG $GET_DIR/$PACKAGE-$PACKAGE_TAG"
+    echo
+    displaymessage "$(tput setaf $CLR_LGREEN)$PACKAGE$(tput setaf $CLR_GREEN) downloaded$(tput sgr0)" "$PACKAGE has been downloaded to $GET_DIR/$PACKAGE-$PACKAGE_TAG"
+}
+
+# Function to remove installed packages
+# First checks to make sure user inputted package is being tracked by spm
+# Finally, CONFIG_DIR/upgrades is checked to see if package was marked for upgrade and removes file there if it exists
+function removepackage() {
+    local PACKAGE="$1"
+    if [ ! -f "$CONFIG_DIR/installed/$PACKAGE" ]; then
+        spmexit "2" "$(tput setaf $CLR_RED)Error$(tput sgr0)" "package not found!"
+    fi
+    askquestion "$(tput setaf $CLR_RED)Remove $PACKAGE$(tput sgr0)" "$PACKAGE will be removed! Continue?" "Remove $PACKAGE" "Exit"
+    case $SELECTED_OPTION in
+        2)
+            echo
+            spmexit "2" "$(tput setaf $CLR_RED)Exiting...$(tput sgr0)" "$PACKAGE was not removed."
+            ;;
+    esac
+    if [ -f "$CONFIG_DIR"/upgrades/"$PACKAGE" ]; then
+        rm "$CONFIG_DIR"/upgrades/"$PACKAGE"
+    fi
+    if [ -f "$CONFIG_DIR"/downgrades/"$PACKAGE" ]; then
+        rm "$CONFIG_DIR"/downgrades/"$PACKAGE"
+        rm -f "$CONFIG_DIR"/downgrades/."$PACKAGE"
+    fi
+    echo "$(tput setaf $CLR_RED)Removing $TARGET_DIR/$PACKAGE ...$(tput sgr0)"
+    trywithoutsudo "$TARGET_DIR" "rm $TARGET_DIR/$PACKAGE"
+    rm "$CONFIG_DIR"/installed/"$PACKAGE"
+    rm -f "$HOME"/.local/share/applications/appimagekit-"$PACKAGE".desktop
+    for icondir in $(dir -C -w 1 ~/.local/share/icons/hicolor); do
+        rm -f "$HOME"/.local/share/icons/hicolor/"$icondir"/apps/appimagekit-"$PACKAGE".png
+    done
+    echo
+    displaymessage "$(tput setaf $CLR_RED)$PACKAGE$(tput setaf $CLR_RED) removed$(tput sgr0)" "$PACKAGE has been removed from $TARGET_DIR/$PACKAGE !"
+}
+
+# Function that uses jq and csplit to parse https://simoniz0r.github.io/spm-feed.json into a usable format
+# The CONFIG_DIR/list directory is first moved to the CONFIG_DIR/cache directory incase of failure
+# jq outputs feed.json in a clean form, csplit splits feed.json into separate files for each package
+# Separated json files are then checked for valid links; json files without valid links are removed
+# Files are then renamed to the proper name rather than the csplit output using the name key in the json files
+# Finally, the shortened screenshot link is expanded to the full link for easier access by users
+# After the files are cleaned up so jq can parse them without errors, diff is used to check for changes
+# If the above succeeded, the stored list dir in CONFIG_DIR/cache is deleted; if not, it is moved back
+function updatelist() {
+    [ -f "$CONFIG_DIR/list/.listversion" ] && . "$CONFIG_DIR"/list/.listversion || LIST_VERSION="null"
+    NEW_LIST_VERSION="$(curl -sSL "https://simoniz0r.github.io/spm-feed.json" | jq -r '.updated_at')"
+    if [ ! "$LIST_VERSION" = "$NEW_LIST_VERSION" ]; then
+        PACKAGES_AVAILABLE="$(dir -C -w 1 "$CONFIG_DIR"/list)"
+        printf '\e[?25l' # Hide cursor to prevent progress bar looking glitchy
+        echo "$(tput setaf $CLR_GREEN)Downloading package list...$(tput sgr0)"
+        mv "$CONFIG_DIR"/list/ "$CONFIG_DIR"/cache/
+        mkdir "$CONFIG_DIR"/list
+        cd "$CONFIG_DIR"/list
+        curl -sSL "https://simoniz0r.github.io/spm-feed.json" | jq '.appimages[]' | csplit --digits=3 --quiet --prefix=appimage --suffix-format=%02d.json - "/^{/" "{*}" \
+        || { rm -rf "$CONFIG_DIR"/list; mv "$CONFIG_DIR"/cache/list "$CONFIG_DIR"/list; spmexit "5" "$(tput setaf $CLR_RED)Error updating package list!$(tput sgr0)" "If this continues to happen, please report an issue at https://github.com/simoniz0r/spm$(tput sgr0)"; }
+        rm -rf "$CONFIG_DIR"/cache/*
+        rm -f "$CONFIG_DIR"/list/appimage00.json
+        NUM_PACKAGES="$(dir -C -w 1 "$CONFIG_DIR"/list | wc -l)"
+        CURRENT_NUM=1
+        for file in $(dir -C -w 1 "$CONFIG_DIR"/list); do
+            echo -ne "$(tput setaf $CLR_GREEN)Parsing info for package $CURRENT_NUM/$NUM_PACKAGES...$(tput sgr0)\r"
+            PACKAGE_NAME="$(jq -r '.installname' "$CONFIG_DIR"/list/"$file" | tr '[:upper:]' '[:lower:]')"
+            mv "$CONFIG_DIR"/list/"$file" "$CONFIG_DIR"/list/"$PACKAGE_NAME.json"
+            CURRENT_NUM=$(($CURRENT_NUM+1))
+        done
+        rm -f "$CONFIG_DIR"/list/appimageupdatetest.json
+        rm -f "$CONFIG_DIR"/list/removeme.json
+        sleep 0.5
+        printf '\e[?25h' # Show cursor
+        NEW_PACKAGES_AVAILABLE="$(dir -C -w 1 "$CONFIG_DIR"/list)"
+        echo
+        if [ "$NEW_PACKAGES_AVAILABLE" != "$PACKAGES_AVAILABLE" ]; then
+            echo "$(tput setaf $CLR_CYAN)Package list updated. Package list changes:       $(tput sgr0)"
+            echo "$(diff -u -d --color=never <(echo "$PACKAGES_AVAILABLE") <(echo "$NEW_PACKAGES_AVAILABLE") | grep '^\-[[:alnum:]].*\|^+[[:alnum:]].*' | sed "s%.json%%g;s%^-%$(tput setaf $CLR_RED)- %g;s%^+%$(tput setaf $CLR_CYAN)+ %g")$(tput sgr0)"
+        else
+            echo "$(tput setaf $CLR_GREEN)Package list updated. No packages added/removed.             $(tput sgr0)"
+        fi
+        echo "LIST_VERSION=\"$NEW_LIST_VERSION\"" > "$CONFIG_DIR"/list/.listversion
+    else
+        echo "$(tput setaf $CLR_GREEN)Package list is up to date.$(tput sgr0)"
+    fi
+}
+
+# TODO Maybe save backup time info somewhere and only remove oldest backup?
+# Function that checks CONFIG_DIR/downgrades against the set DOWNGRADE_LIMIT number
+# If number of backups is >= DOWNGRADE_LIMIT, CONFIG_DIR/downgrades is cleared
+# packages stored in this directory will be used with the 'revert' argument in case of problems with new versinos of packages
+function savedowngrade() {
+    local PACKAGE="$1"
+    if [ $DOWNGRADE_LIMIT -gt 0 ]; then
+        if [ $(dir -C -w 1 "$CONFIG_DIR"/downgrades | wc -l) -ge $DOWNGRADE_LIMIT ]; then
+            rm -f "$CONFIG_DIR"/downgrades/*
+        fi
+        cp "$TARGET_DIR"/"$PACKAGE" "$CONFIG_DIR"/downgrades/"$PACKAGE"
+        cp "$CONFIG_DIR"/installed/"$PACKAGE" "$CONFIG_DIR"/downgrades/."$PACKAGE"
+    fi
+}
+
+# Function that updates packages in CONFIG_DIR/updates using info stored in the files from that dir
+function runupdate() {
+    rm -f "$CONFIG_DIR"/upgrades/.upgradelist
+    for package in $(dir -C -w 1 "$CONFIG_DIR"/upgrades); do
+        . "$CONFIG_DIR"/upgrades/"$package"
+        echo "$package - Version: $PACKAGE_TAG - Release: $NEW_PACKAGE_VERSION - Size: $PACKAGE_SIZE" >> "$CONFIG_DIR"/upgrades/.upgradelist
+        unset PACKAGE_TAG
+        unset NEW_PACKAGE_VERSION
+        unset PACKAGE_SIZE
+        unset PACKAGE_LATEST_URL
+    done
+    askquestion "$(tput setaf $CLR_CYAN)Update the following packages:$(tput sgr0)" "$(cat "$CONFIG_DIR"/upgrades/.upgradelist)" "Update Package(s)" "Exit"
+    case $SELECTED_OPTION in
+        2)
+            echo
+            rm -f "$CONFIG_DIR"/upgrades/.upgradelist
+            rm -f "$CONFIG_DIR"/upgrades/*
+            spmexit "2" "$(tput setaf $CLR_RED)Exiting...$(tput sgr0)" "Package(s) not updated."
+            ;;
+    esac
+    for PACKAGE in $(dir -C -w 1 "$CONFIG_DIR"/upgrades); do
+        echo "$(tput setaf $CLR_CYAN)Updating $PACKAGE$(tput setaf $CLR_CYAN)...$(tput sgr0)"
+        . "$CONFIG_DIR"/upgrades/"$PACKAGE"
+        curl -L -o "$CONFIG_DIR"/cache/"$PACKAGE".AppImage "$PACKAGE_LATEST_URL" || { echo "$(tput setaf $CLR_RED)Error installing $PACKAGE!$(tput sgr0)"; rm -f "$CONFIG_DIR"/cache/"$PACKAGE".AppImage; }
+        if [ -f "$CONFIG_DIR/cache/$PACKAGE.AppImage" ]; then
+            savedowngrade "$PACKAGE"
+            chmod a+x "$CONFIG_DIR"/cache/"$PACKAGE".AppImage
+            echo "$(tput setaf $CLR_CYAN)Moving updated $PACKAGE$(tput setaf $CLR_CYAN) to $TARGET_DIR ...$(tput sgr0)"
+            trywithoutsudo "$TARGET_DIR" "rm $TARGET_DIR/$PACKAGE"
+            trywithoutsudo "$TARGET_DIR" "mv $CONFIG_DIR/cache/$PACKAGE.AppImage $TARGET_DIR/$PACKAGE"
+            # echo "$(tput setaf $CLR_CYAN)$PACKAGE$(tput setaf $CLR_CYAN) has been updated; Version: $PACKAGE_TAG - Release date: $NEW_PACKAGE_VERSION$(tput sgr0)"
+            saveappimageinfo "$PACKAGE"
+            rm "$CONFIG_DIR"/upgrades/"$PACKAGE"
+        fi
+    done
+}
+
+# TODO use json for files in upgrades dir
+# Function to check if package can be updated using appimageupdatetool
+# Uses Github's API first to check package for new update
+# Then uses 'appimageupdatetool -d' to check if valid information for updating exists in package
+function updatecheck() {
+    local PACKAGE="$1"
+    if [ -f "$CONFIG_DIR/list/$PACKAGE.json" ]; then
+        case "$PACKAGE_TYPE" in
+            *GitHub*)
+                githubrelease "$PACKAGE"
+                ;;
+            *)
+                otherrelease "$PACKAGE"
+                ;;
+        esac
+        if [ -z "$NEW_PACKAGE_VERSION" ]; then
+            echo "$(tput setaf $CLR_RED)Error checking version for $PACKAGE; skipping...$(tput sgr0)"
+        elif [ "$NEW_PACKAGE_VERSION" != "$PACKAGE_VERSION" ]; then
+            echo "PACKAGE_LATEST_URL="\"$PACKAGE_LATEST_URL\""" > "$CONFIG_DIR"/upgrades/"$PACKAGE"
+            echo "PACKAGE_TAG="\"$PACKAGE_TAG\""" >> "$CONFIG_DIR"/upgrades/"$PACKAGE"
+            echo "PACKAGE_SIZE="\"$PACKAGE_SIZE\""" >> "$CONFIG_DIR"/upgrades/"$PACKAGE"
+            echo "NEW_PACKAGE_VERSION="\"$NEW_PACKAGE_VERSION\""" >> "$CONFIG_DIR"/upgrades/"$PACKAGE"
+        fi
+    else
+        echo "$(tput setaf $CLR_RED)$PACKAGE not found in list; skipping update check...$(tput sgr0)"
+    fi
+}
+
+# Function to start checking of updates for packages
+# Starts off by checking if package is FROZEN and routes CLEAR packages to be checked for updates
+# If user does not input specific package to check for update, a for loop is ran on CONFIG_DIR/installed and each installed package is checked
+function updatestart() {
+    local PACKAGE="$1"
+    if [ -z "$PACKAGE" ]; then
+        if [ $(dir -C -w 1 "$CONFIG_DIR"/installed | wc -l) -gt 0 ]; then
+            NUM_PACKAGES=$(dir -C -w 1 "$CONFIG_DIR"/installed | wc -l)
+            CURRENT_NUM=1
+            printf '\e[?25l' # Hide cursor to prevent progress bar looking glitchy
+            for appimage in $(dir -C -w 1 "$CONFIG_DIR"/installed); do
+                parsestoredinfo "installed" "$appimage"
+                case $PACKAGE_UPDATE_STATUS in
+                    FROZEN)
+                        echo "$(tput setaf $CLR_BLUE)$appimage marked as FROZEN; update check skipped...                  $(tput sgr0)"
+                        ;;
+                    *)
+                        echo -ne "$(tput setaf $CLR_GREEN)Checking package $CURRENT_NUM/$NUM_PACKAGES for updates...$(tput sgr0)\r"
+                        updatecheck "$appimage"
+                        ;;
+                esac
+                CURRENT_NUM=$(($CURRENT_NUM+1))
+            done
+            printf '\e[?25h' # Show cursor
+            echo
+            if [ $(dir -C -w 1 "$CONFIG_DIR"/upgrades | wc -l) -gt 0 ]; then
+                NUM_UPDATES="$(dir -C -w 1 "$CONFIG_DIR"/upgrades | wc -l)"
+                echo "$(tput setaf $CLR_CYAN)$NUM_UPDATES new package update(s)!$(tput sgr0)"
+                echo "$(tput setaf $CLR_CYAN)Finished checking for updates in $(($(date +%s)-$UPD_START_TIME)) seconds$(tput sgr0)"
+                echo
+                runupdate
+                rm -f "$CONFIG_DIR"/upgrades/*
+                rm -f "$CONFIG_DIR"/upgrades/.upgradelist
+                echo "$(tput setaf $CLR_CYAN)Finished updates in $(($(date +%s)-$UPD_START_TIME)) seconds$(tput sgr0)"
+                echo
+                displaymessage "$(tput setaf $CLR_CYAN)Updates Complete$(tput sgr0)" "$NUM_UPDATES package(s) updated!"
+            else
+                echo "$(tput setaf $CLR_GREEN)Finished checking for updates in $(($(date +%s)-$UPD_START_TIME)) seconds$(tput sgr0)"
+                echo
+                displaymessage "$(tput setaf $CLR_GREEN)Updates Complete$(tput sgr0)" "No new package updates."
+            fi
+        fi
+    else
+        if [ ! -f "$CONFIG_DIR/installed/$PACKAGE" ]; then
+            spmexit "2" "$(tput setaf $CLR_RED)Error$(tput sgr0)" "$PACKAGE not found!"
+        fi
+        echo "Checking $PACKAGE for updates..."
+        parsestoredinfo "installed" "$PACKAGE"
+        case $PACKAGE_UPDATE_STATUS in
+            FROZEN)
+                echo "$(tput setaf $CLR_BLUE)$PACKAGE$(tput setaf $CLR_BLUE) has been marked as FROZEN; skipping update check...$(tput sgr0)"
+                ;;
+            *)
+                updatecheck "$PACKAGE"
+                if [ $(dir -C -w 1 "$CONFIG_DIR"/upgrades | wc -l) -gt 0 ]; then
+                    echo "$(tput setaf $CLR_CYAN)New update for $PACKAGE!$(tput sgr0)"
+                    echo "$(tput setaf $CLR_CYAN)Finished checking for update in $(($(date +%s)-$UPD_START_TIME)) seconds$(tput sgr0)"
+                    echo
+                    runupdate
+                    rm -f "$CONFIG_DIR"/upgrades/*
+                    rm -f "$CONFIG_DIR"/upgrades/.upgradelist
+                    echo "$(tput setaf $CLR_CYAN)Finished update in $(($(date +%s)-$UPD_START_TIME)) seconds$(tput sgr0)"
+                else
+                    echo "$(tput setaf $CLR_GREEN)Finished checking for update in $(($(date +%s)-$UPD_START_TIME)) seconds$(tput sgr0)"
+                    echo
+                    displaymessage "$(tput setaf $CLR_GREEN)Update Complete$(tput sgr0)" "No new update for $PACKAGE"
+                fi
+                ;;
+        esac
+    fi
+}
+
+# Checks CONFIG_DIR/downgrades to see if backup exists, if exists, backup config is sourced
+# Backup package is moved to TARGET_DIR and backup config file is saved over the regular config file
+function revertpackage() {
+    local PACKAGE="$1"
+    if [ ! -f "$CONFIG_DIR/installed/$PACKAGE" ]; then
+        spmexit "2" "$(tput setaf $CLR_RED)Error$(tput sgr0)" "Package not found!"
+    elif [ ! -f "$CONFIG_DIR/downgrades/$PACKAGE" ]; then
+        spmexit "2" "$(tput setaf $CLR_RED)Error$(tput sgr0)" "Backup for $PACKAGE not found!"
+    fi
+    askquestion "$(tput setaf $CLR_BLUE)Downgrade $PACKAGE$(tput sgr0)" "$PACKAGE will be downgraded to the previous version and marked as FROZEN to prevent updates until UNFROZEN.  Continue?" "Revert $PACKAGE and mark as FROZEN" "Exit"
+    case $SELECTED_OPTION in
+        2)
+            echo
+            spmexit "2" "$(tput setaf $CLR_RED)Exiting...$(tput sgr0)" "$PACKAGE not reverted to previous version."
+            ;;
+    esac
+    parsestoredinfo "downgrades" ".$PACKAGE"
+    echo "$(tput setaf $CLR_BLUE)Moving stored previous version of $PACKAGE$(tput setaf $CLR_BLUE) to $TARGET_DIR/$PACKAGE ...$(tput sgr0)"
+    trywithoutsudo "$TARGET_DIR" "rm $TARGET_DIR/$PACKAGE"
+    trywithoutsudo "$TARGET_DIR" "mv $CONFIG_DIR/downgrades/$PACKAGE $TARGET_DIR/$PACKAGE"
+    NEW_PACKAGE_VERSION="$PACKAGE_VERSION"
+    PACKAGE_TAG="$PACKAGE_STORED_TAG"
+    PACKAGE_SIZE="$PACKAGE_STORED_SIZE"
+    PACKAGE_UPDATE_STATUS="FROZEN"
+    saveappimageinfo "$PACKAGE"
+    rm -f "$CONFIG_DIR"/downgrades/."$PACKAGE"
+    echo
+    displaymessage "$(tput setaf $CLR_BLUE)$PACKAGE$(tput setaf $CLR_BLUE) reverted and FROZEN$(tput sgr0)" "$PACKAGE reverted to previous version and marked as FROZEN."
+}
+
+# Function to allow users to prevent packages from being upgraded
+# Simply toggles the PACKAGE_UPDATE_STATUS variable between FROZEN and CLEAR in the config file
+# FROZEN packages are not checked for updates, CLEAR packages are checked.
+function updatestatus() {
+    local PACKAGE="$1"
+    if [ ! -f "$CONFIG_DIR/installed/$PACKAGE" ]; then
+        spmexit "2" "$(tput setaf $CLR_RED)Error$(tput sgr0)" "$PACKAGE not found!"
+    fi
+    parsestoredinfo "installed" "$PACKAGE"
+    case $PACKAGE_UPDATE_STATUS in
+        FROZEN)
+            askquestion "$(tput setaf $CLR_GREEN)Mark $(tput setaf $CLR_LGREEN)$PACKAGE$(tput setaf $CLR_GREEN) as UNFROZEN$(tput sgr0)" "$PACKAGE is already marked as FROZEN and will be marked as UNFROZEN, allowing update checks. Continue?" "Mark $PACKAGE as UNFROZEN" "Exit"
+            case $SELECTED_OPTION in
+                2)
+                    echo
+                    spmexit "2" "$(tput setaf $CLR_RED)Exiting...$(tput sgr0)" "$PACKAGE not marked as UNFROZEN."
+                    ;;
+            esac
+            NEW_PACKAGE_VERSION="$PACKAGE_VERSION"
+            PACKAGE_TAG="$PACKAGE_STORED_TAG"
+            PACKAGE_SIZE="$PACKAGE_STORED_SIZE"
+            PACKAGE_UPDATE_STATUS="CLEAR"
+            saveappimageinfo "$PACKAGE"
+            echo
+            displaymessage "$(tput setaf $CLR_LGREEN)$PACKAGE$(tput setaf $CLR_GREEN) UNFROZEN$(tput sgr0)" "$PACKAGE marked as UNFROZEN."
+            ;;
+        *)
+            askquestion "$(tput setaf $CLR_BLUE)Mark $(tput setaf $CLR_CYAN)$PACKAGE$(tput setaf $CLR_BLUE) as FROZEN$(tput sgr0)" "$PACKAGE will be marked as FROZEN, preventing update checks until UNFROZEN. Continue?" "Mark $PACKAGE as FROZEN" "Exit"
+            case $SELECTED_OPTION in
+                2)
+                    echo
+                    spmexit "2" "$(tput setaf $CLR_RED)Exiting...$(tput sgr0)" "$PACKAGE not marked as FROZEN."
+                    ;;
+            esac
+            NEW_PACKAGE_VERSION="$PACKAGE_VERSION"
+            PACKAGE_TAG="$PACKAGE_STORED_TAG"
+            PACKAGE_SIZE="$PACKAGE_STORED_SIZE"
+            PACKAGE_UPDATE_STATUS="FROZEN"
+            saveappimageinfo "$PACKAGE"
+            echo
+            displaymessage "$(tput setaf $CLR_CYAN)$PACKAGE$(tput setaf $CLR_BLUE) FROZEN$(tput sgr0)" "$PACKAGE marked as FROZEN."
+            ;;
+    esac
+}
+
+# Function that launches default EDITOR to edit spm's config file
+function spmconfig() {
+    displaymessage "$(tput setaf $CLR_RED)Warning$(tput sgr0)" "Please only edit spm.conf if you have read the man page!"
+    sleep 3
+    . "$CONFIG_DIR"/spm.conf
+    cp "$CONFIG_DIR"/spm.conf "$CONFIG_DIR"/cache/spm.conf
+    $EDITOR "$CONFIG_DIR"/spm.conf
+    if [ -f "$CONFIG_DIR/spm.conf" ]; then
+        . "$CONFIG_DIR"/spm.conf
+    else
+        mv "$CONFIG_DIR"/cache/spm.conf
+        . "$CONFIG_DIR"/spm.conf
+    fi
+}
+
+# Function to output help text
+function spmhelp() {
+printf '%s\n' "spm 0.2.00
+Usage: spm [option] [package]
+spm is a command line package manager provides packages in AppImage format.
+spm uses https://simoniz0r.github.io/spm-feed.json to get information about
+packages.
+
+Arguments:
+    list|l      - list all available packages
+    info|i      - output json file containing information for a package
+    search|se   - search for available packages
+    install|in  - install a package to $TARGET_DIR
+    get         - install a package to $GET_DIR without managing it
+    remove|rm   - remove a installed package
+    update|up   - update list of packages and check installed packages for updates
+    revert|rev  - revert an updated package to its previous version if available
+    freeze|fr   - mark or unmark a package as FROZEN to preven update checks
+    config|cf   - open spm's config file with $EDITOR
+Additional Arguments:
+    [list|info] --installed|-i   - show list or info for installed packages
+    --debug [option] [package]   - add bash option 'set -x' for debugging
+
+See https://github.com/simoniz0r/spm for more help or to report issues.
+spm is not responsible for bugs within packages that have been
+installed using spm.  Please report any bugs that are specific to
+installed packages to their maintainers."
+}
+
+# Setup a trap to detect if spm has been killed or if keyboard interrupt has been sent
+# Clears out CONFIG_DIR/cache if interrupt detected and exits with status 1
+trap "detectinterrupt" SIGINT SIGTERM
+
+# Prevent spm from being ran as root; spm will use sudo when needed
+# The script can write to areas that are owned by the user, so we don't want to be running as root all the time
+if [ "$EUID" = "0" ]; then
     echo "Do not run spm as root!"
     exit 1
 fi
 
-if [ -f ~/.config/spm/spm.conf ]; then
-    . ~/.config/spm/spm.conf
-fi
-
-
-case $ARG in
-    -v|--verbose)
-        ARG="$2"
-        PKG_INPUT="$3"
-        set -v
-        ;;
-    -d|--debug)
-        ARG="$2"
-        PKG_INPUT="$3"
-        set -x
-        ;;
-    -n|--noexec)
-        ARG="$2"
-        PKG_INPUT="$3"
-        set -v
-        set -n
-        ;;
-esac
-
-if [ ! -d "$CONFDIR" ]; then # Create dirs for configs, config files, and download package lists if they don't exist
-    echo "spm is being ran for the first time."
+CONFIG_DIR="$HOME/.local/share/spm"
+# Create dirs for configs, config files, and install package lists on first run/if do not exist
+if [ ! -d "$CONFIG_DIR" ]; then
+    echo "spm is being ran for the first time and/or config directory does not exist."
     echo "Creating config directories..."
-    mkdir "$CONFDIR"
-    mkdir "$CONFDIR"/tarinstalled
-    mkdir "$CONFDIR"/appimginstalled
-    mkdir "$CONFDIR"/tarupgrades
-    mkdir "$CONFDIR"/appimgupgrades
-    mkdir "$CONFDIR"/cache
-    echo "CONFDIR="\"$CONFDIR\""" > "$CONFDIR"/spm.conf
-    echo "GITHUB_TOKEN="\"\""" >> "$CONFDIR"/spm.conf
-    echo "SKIP_DEP_CHECKS="\"FALSE\""" >> "$CONFDIR"/spm.conf
-    echo "CLR_BLUE="\"$(tput setaf 4)\""" >> "$CONFDIR"/spm.conf
-    echo "CLR_LGREEN="\"$(tput setaf 10)\""" >> "$CONFDIR"/spm.conf
-    echo "CLR_GREEN="\"$(tput setaf 2)\""" >> "$CONFDIR"/spm.conf
-    echo "CLR_LCYAN="\"$(tput setaf 14)\""" >> "$CONFDIR"/spm.conf
-    echo "CLR_CYAN="\"$(tput setaf 6)\""" >> "$CONFDIR"/spm.conf
-    echo "CLR_RED="\"$(tput setaf 1)\""" >> "$CONFDIR"/spm.conf
+    mkdir -p "$CONFIG_DIR"
+    mkdir -p "$CONFIG_DIR"/list
+    mkdir -p "$CONFIG_DIR"/installed
+    mkdir -p "$CONFIG_DIR"/upgrades
+    mkdir -p "$CONFIG_DIR"/downgrades
+    mkdir -p "$CONFIG_DIR"/cache
+    TARGET_DIR="$HOME/bin"
+    GET_DIR="$HOME/bin"
+    DOWNGRADE_LIMIT=5
+    CLR_BLUE="4"
+    CLR_LGREEN="10"
+    CLR_GREEN="2"
+    CLR_LCYAN="14"
+    CLR_CYAN="6"
+    CLR_RED="1"
+    saveconf
+    . ~/.local/share/spm/spm.conf
+    updatelist
     echo "First run operations complete!"
 fi
 
-if [ ! -f "$CONFDIR/AppImages.yml" ]; then
-    echo "Downloading AppImages.yml from spm github..."
-    wget --quiet "https://raw.githubusercontent.com/simoniz0r/spm-repo/master/AppImages.yml" -O "$CONFDIR"/AppImages.yml
-    echo "Downloading tar-pkgs.yml from spm github repo..."
-    wget --quiet "https://raw.githubusercontent.com/simoniz0r/spm-repo/master/tar-pkgs.yml" -O "$CONFDIR"/tar-pkgs.yml
+# Load config file if it exists otherwise create it
+if [ -f "$HOME/.local/share/spm/spm.conf" ]; then
+    . ~/.local/share/spm/spm.conf
+else
+    # Set default variables to be stored in config file
+    TARGET_DIR="$HOME/bin"
+    GET_DIR="$HOME/bin"
+    DOWNGRADE_LIMIT=5
+    CLR_BLUE="4"
+    CLR_LGREEN="10"
+    CLR_GREEN="2"
+    CLR_LCYAN="14"
+    CLR_CYAN="6"
+    CLR_RED="1"
+    saveconf
+    . ~/.local/share/spm/spm.conf
 fi
 
+[ ! -d "$TARGET_DIR" ] && trywithoutsudo "$TARGET_DIR" "mkdir -p $TARGET_DIR"
+
+# detect if user passed quiet and/or skip arguments
+for SPMARG in $@; do
+    case $SPMARG in
+        -q|--quiet)
+            SPM_QUIET="TRUE"
+            shift
+            ;;
+        -y|--yes|--skip)
+            SPM_SKIP="TRUE"
+            shift
+            ;;
+        --debug)
+            set -x
+            shift
+            ;;
+    esac
+done
+
+# Find directory script is running from
 REALPATH="$(readlink -f $0)"
-RUNNING_DIR="$(dirname "$REALPATH")" # Find directory script is running from
-if [ -f "$RUNNING_DIR/ssft.sh" ]; then
-    source "$RUNNING_DIR"/ssft.sh
-    SSFT_FRONTEND="text"
-else
-    echo "${CLR_RED}Missing required file $RUNNINGDIR/ssft.sh; exiting...${CLR_CLEAR}"
-    rm -rf "$CONFDIR"/cache/*
-    exit 1
-fi
-if [ -f $RUNNING_DIR/spmfunctions.sh ]; then # Check to make sure spmfunctions.sh exists and is up to date
-    FUNCTIONS_VER="$(cat "$RUNNING_DIR"/spmfunctions.sh | sed -n 9p | cut -f2 -d'"')"
-    if [ "$X" != "$FUNCTIONS_VER" ]; then
-        ssft_display_error "${CLR_RED}spmfunctions.sh $FUNCTIONS_VER version does not match $X !" "spmfunctions.sh is out of date! Please download the full release of spm from https://github.com/simoniz0r/spm/releases !${CLR_CLEAR}"
-        exit 1
-    fi
-else
-    ssft_display_error "${CLR_RED}Missing required file $RUNNING_DIR/spmfunctions.sh !" "spmfunctions.sh is missing! Please download the full release of spm from https://github.com/simoniz0r/spm/releases !${CLR_CLEAR}"
-    exit 1
-fi
-source "$RUNNING_DIR"/spmfunctions.sh || { ssft_display_error "${CLR_RED}Error sourcing spmfunctions.sh" "Sourcing spmfunctions.sh failed; exiting...${CLR_CLEAR}"; rm -rf "$CONFDIR"/cache/*; exit 1; } # import functions from spmfunctions.sh
+RUNNING_DIR="$(dirname "$REALPATH")"
 
-spmdepchecksfunc || { ssft_display_error "${CLR_RED}Error loading spmfunctions.sh" "Could not load $RUNNING_DIR/spmfunctions.sh; exiting...${CLR_CLEAR}"; exit 1; } # Check for deps, exit if not present
-
-if type spm >/dev/null 2>&1 && [ -f ~/.zshrc ] && ! grep -q 'spm.comp' ~/.zshrc; then # If using zsh and spm is installed, add tab completions for spm
-    wget --quiet "https://raw.githubusercontent.com/simoniz0r/spm/master/spm.comp" -O "$CONFDIR"/spm.comp
-    echo "" >> ~/.zshrc
-    echo "if [ -f "$CONFDIR"/spm.comp ]; then" >> ~/.zshrc
-    echo "    source "$CONFDIR"/spm.comp" >> ~/.zshrc
-    echo "    compdef _spm spm" >> ~/.zshrc
-    echo "fi" >> ~/.zshrc
-    echo "" >> ~/.zshrc
+# Create a lock file in CONFIG_DIR/cache if it does not exist on run to prevent multiple instances
+# If lock file does exist, user is prompted to make sure spm is not running
+if [ ! -f "$CONFIG_DIR/cache/spm.lock" ] && [ -d "$CONFIG_DIR" ]; then
+    touch "$CONFIG_DIR"/cache/spm.lock
+elif [ -f "$CONFIG_DIR/cache/spm.lock" ]; then
+    askquestion "$(tput setaf $CLR_RED)spm lock file error$(tput sgr0)" "spm.lock file is still present.  Did spm exit correctly?  Are you sure spm isn't running? Remove spm.lock file and run spm?" "Remove lock file and run spm" "Exit"
+    case $SELECTED_OPTION in
+        2)
+            displaymessage "$(tput setaf $CLR_RED)Error$(tput sgr0)" "spm.lock file was not removed; make sure spm is finished before running spm again."
+            exit 1
+            ;;
+    esac
+    echo "Removing cache dir and starting spm..."
+    rm -rf "$CONFIG_DIR"/cache/*
 fi
 
-appimgfunctioncheckfunc # Check to make sure appimgfunctions.sh exists and is up to date
-source "$RUNNING_DIR"/appimgfunctions.sh || { ssft_display_error "${CLR_RED}Error sourcing appimgfunctions.sh" "Sourcing appingfunctions.sh failed; exiting...${CLR_CLEAR}"; rm -rf "$CONFDIR"/cache/*; exit 1; } # import functions from appimgfunctions.sh
-appimgfunctionsexistsfunc  || { ssft_display_error "${CLR_RED}Error loading appimgfunctions.sh" "Could not load $RUNNING_DIR/appimgfunctions.sh; exiting...${CLR_CLEAR}"; exit 1; }
-
-tarfunctioncheckfunc # Check to make sure tarfunctions.sh exists and is up to date
-source "$RUNNING_DIR"/tarfunctions.sh || { ssft_display_error "${CLR_RED}Error sourcing tarfunctions.sh" "Sourcing tarfunctions.sh failed; exiting...${CLR_CLEAR}"; rm -rf "$CONFDIR"/cache/*; exit 1; } # import functions from tarfunctions.sh
-tarfunctionsexistfunc || { ssft_display_error "${CLR_RED}Error loading tarfunctions.sh" "Could not load $RUNNING_DIR/tarfunctions.sh; exiting...${CLR_CLEAR}"; exit 1; }
-
-spmlockfunc # Create "$CONFDIR"/cache/spm.lock file and prevent multiple instances by checking if it exists before running
-
-if [ -z "$GITHUB_TOKEN" ]; then # Display github rate limit by using wget to show https://api.github.com/rate_limit
-    wget -S --spider "https://api.github.com/rate_limit" -o "$CONFDIR"/cache/rate.limit
-    echo "Github API rate limit: $(grep -m 1 '.*X-RateLimit-Remaining:*.' "$CONFDIR"/cache/rate.limit | cut -f4 -d" ")/60 until $(date -d@$(grep -m 1 '.*X-RateLimit-Reset:*.' "$CONFDIR"/cache/rate.limit | cut -f4 -d" ") +"%T, %F")."  || { echo "Github rate limit check failed; exiting..."; rm -rf "$CONFDIR"/cache/*; exit 1; }
-else
-    wget -S --spider --quiet --auth-no-challenge --header="Authorization: token "$GITHUB_TOKEN"" "https://api.github.com/rate_limit" -o "$CONFDIR"/cache/rate.limit  || { echo "Github rate limit check failed; exiting..."; rm -rf "$CONFDIR"/cache/*; exit 1; }
-    echo "Github API rate limit : $(grep -m 1 '.*X-RateLimit-Remaining:*.' "$CONFDIR"/cache/rate.limit | cut -f4 -d" ")/5000 until $(date -d@$(grep -m 1 '.*X-RateLimit-Reset:*.' "$CONFDIR"/cache/rate.limit | cut -f4 -d" ") +"%T, %F")."
+# Check to make sure all necessary dependencies are present
+if ! type jq >/dev/null 2>&1; then
+    MISSING_DEPS="TRUE"
+    displaymessage "$(tput setaf $CLR_RED)Dependency Error$(tput sgr0)" "Missing jq!"
 fi
-if [ "$(grep -m 1 '.*X-RateLimit-Remaining:*.' "$CONFDIR"/cache/rate.limit | cut -f4 -d" ")" = "0" ]; then # Attempt to exit to prevent errors if user's github rate limit has been used up
-    ssft_display_error "${CLR_RED}Github API rate limit reached! Try again at $(date -d@$(grep -m 1 '.*X-RateLimit-Reset:*.' "$CONFDIR"/cache/rate.limit | cut -f4 -d" "))." "If you haven't already, you can add your token to $CONFDIR/spm.conf to avoid hitting the rate limit.${CLR_CLEAR}"
-    rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
-    exit 1
+if ! type curl >/dev/null 2>&1; then
+    MISSING_DEPS="TRUE"
+    displaymessage "$(tput setaf $CLR_RED)Dependency Error$(tput sgr0)" "Missing curl!"
 fi
-echo
+if [ "$MISSING_DEPS" = "TRUE" ]; then
+    spmexit "1" "$(tput setaf $CLR_RED)Missing Dependencies$(tput sgr0)" "Missing one or more dependencies required to run. Try installing the AppImage release of spm. The AppImage release contains all dependencies required to run."
+fi
+# if ! type deb2appimage >/dev/null 2>&1; then
+#     displaymessage "$(tput setaf $CLR_RED)Dependency Error$(tput sgr0)" "Missing deb2appimage; installing now..."
+#     ratelimitcheck
+#     updatelist
+#     installchecks "deb2appimage"
+#     installpackage "deb2appimage"
+#     # TODO run last argument here instead of exiting
+#     echo "$(tput setaf $CLR_GREEN)deb2appimage installed; please run spm again.$(tput sgr0)"
+#     spmexit "0"
+# fi
 
+# Set and unset 'dir' alias to avoid issues on systems such as OpenSUSE that create a default 'dir' alias
+alias dir='dir'
+unalias dir
+
+# Set arguments as variables for easier management
+ARG="$1"
+PACKAGE_INPUT="$2"
+
+# TODO CREATE MAN PAGE
+# Check ARG input for valid arguments
+# Route found arguments to their matching functions
+# All unknown arguments are sent to help function
 case $ARG in
-    install|-i|appimg-install|-ai|tarinstall|-ti) # Check if package is in either list and rout install to relevant function
-        if [ -z "$PKG_INPUT" ]; then
-            ssft_display_error "${CLR_RED}Error" "Package input required; exiting...${CLR_CLEAR}"
-            rm -rf "$CONFDIR"/cache/*
-            exit 1
+    list|l)
+        case $PACKAGE_INPUT in
+            -i|--installed)
+                listinstalled
+                spmexit "0"
+                ;;
+            *)
+                listavailable
+                spmexit "0"
+                ;;
+        esac
+        ;;
+    info|i)
+        if [ -z "$PACKAGE_INPUT" ]; then
+            spmexit "2" "$(tput setaf $CLR_RED)Input Error$(tput sgr0)" "Package input required; exiting..."
         fi
-        TESTPKG="$PKG_INPUT"
-        installstartfunc || { ssft_display_error "${CLR_RED}Error" "Install failed; exiting...${CLR_CLEAR}"; rm -rf "$CONFDIR"/cache/*; exit 1; } # Check package lists and route install to relevant function
-        rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
-        exit 0
+        case $PACKAGE_INPUT in
+            -i|--installed)
+                showinfoinstalled
+                spmexit "0"
+                ;;
+            *)
+                showinfo "$PACKAGE_INPUT"
+                spmexit "0"
+                ;;
+        esac
         ;;
-    update|-upd) # Update package lists and check for package upgrades
-        spmvercheckfunc || { ssft_display_error "${CLR_RED}Error" "spm version check failed; exiting...${CLR_CLEAR}"; rm -rf "$CONFDIR"/cache/*; exit 1; } # Check spm version and let user know if it is out of date
-        updatestartfunc "$PKG_INPUT" || { sssft_display_error "${CLR_RED}Error" "Upgrade check failed; exiting...${CLR_CLEAR}"; rm -rf "$CONFDIR"/cache/*; exit 1; } # Send input to relevant update function or run both if no input
-        rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
-        exit 0
-        ;;
-    update-force|-uf|appimg-update-force|-auf|tar-update-force|-tuf) # Force AppImage to be marked for upgrade
-        if [ -z "$PKG_INPUT" ]; then
-            ssft_display_error "${CLR_RED}Error" "Package input required; exiting...${CLR_CLEAR}"
-            rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
-            exit 1
+    search|se)
+        if [ -z "$PACKAGE_INPUT" ]; then
+            spmexit "2" "$(tput setaf $CLR_RED)Input Error$(tput sgr0)" "Package input required; exiting..."
         fi
-        TESTUF="$PKG_INPUT"
-        updateforcestartfunc || { ssft_display_error "${CLR_RED}Error" "Update force failed; exiting...${CLR_CLEAR}"; rm -rf "$CONFDIR"/cache/*; exit 1; }
-        rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
-        exit 0
+        listsearch "$PACKAGE_INPUT"
+        spmexit "0"
         ;;
-    upgrade|-upg) # upgrade packages to latest version if marked for upgrade
-        upgradestartfunc "$PKG_INPUT" || { ssft_display_error "${CLR_RED}Error" "Upgrade failed; exiting...${CLR_CLEAR}"; rm -rf "$CONFDIR"/cache/*; exit 1; }
-        rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
-        exit 0
-        ;;
-    remove|-r|appimg-remove|-ar|tar-remove|-tr)
-        if [ -z "$PKG_INPUT" ]; then
-            ssft_display_error "${CLR_RED}Error" "Package input required; exiting...${CLR_CLEAR}"
-            rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
-            exit 1
+    install|in)
+        if [ -z "$PACKAGE_INPUT" ]; then
+            spmexit "2" "$(tput setaf $CLR_RED)Input Error$(tput sgr0)" "Package input required; exiting..."
         fi
-        TESTREM="$PKG_INPUT"
-        removestartfunc || { ssft_display_error "${CLR_RED}Error" "Package remove failed; exiting...${CLR_CLEAR}"; rm -rf "$CONFDIR"/cache/*; exit 1; }
-        rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
-        exit 0
+        ratelimitcheck
+        installchecks "$PACKAGE_INPUT"
+        installpackage "$PACKAGE_INPUT"
+        spmexit "0"
         ;;
-    list|-l) # List installed packages or info about specified package
-        INSTIMG="$PKG_INPUT"
-        TARPKG="$PKG_INPUT"
-        liststartfunc || { ssft_display_error "${CLR_RED}Error" "List failed; exiting...${CLR_CLEAR}"; rm -rf "$CONFDIR"/cache/*; exit 1; } # Send package input to relevant list function or run both if no input
-        rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
-        exit 0
-        ;;
-    list-installed|-li) # List information about installed packages
-        listinstalledfunc | less -R
-        rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
-        exit 0
-        ;;
-    search|-s) # Use grep to search package lists based on user input and output matching packages and which list they are in
-        if cat "$CONFDIR"/AppImages.yml | cut -f1 -d":" | grep -q "$PKG_INPUT"; then
-            echo "$(tput bold)${CLR_GREEN}AppImage(s)${CLR_CLEAR}:"
-            cat "$CONFDIR"/AppImages.yml | cut -f1 -d":" | grep "$PKG_INPUT"
-            echo
+    get)
+        if [ -z "$PACKAGE_INPUT" ]; then
+            spmexit "2" "$(tput setaf $CLR_RED)Input Error$(tput sgr0)" "Package input required; exiting..."
         fi
-        if echo "$TAR_LIST" | grep -q "$PKG_INPUT"; then
-            echo "$(tput bold)${CLR_CYAN}tar package(s)${CLR_CLEAR}:"
-            echo "$TAR_LIST" | grep "$PKG_INPUT"
-            echo
+        if [ ! -d "$GET_DIR" ]; then
+            mkdir -p "$GET_DIR"
         fi
-        rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
-        exit 0
+        ratelimitcheck
+        getappimage "$PACKAGE_INPUT"
+        spmexit "0"
         ;;
-    man|-m) # run man $RUNNING_DIR/spm.1 to show spm's man file
-        man $RUNNING_DIR/spm.1
-        rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
-        exit 0
+    remove|rm)
+        if [ -z "$PACKAGE_INPUT" ]; then
+            spmexit "2" "$(tput setaf $CLR_RED)Input Error$(tput sgr0)" "Package input required; exiting..."
+        fi
+        removepackage "$PACKAGE_INPUT"
+        spmexit "0"
         ;;
-    *) # Any unknown arguments go to help func
-        helpfunc
-        rm -rf "$CONFDIR"/cache/* # Remove any files in cache before exiting
-        exit 0
+    update|up)
+        ratelimitcheck
+        UPD_START_TIME="$(date +%s)"
+        updatelist
+        updatestart "$PACKAGE_INPUT"
+        spmexit "0"
+        ;;
+    revert|rev)
+        if [ -z "$PACKAGE_INPUT" ]; then
+            spmexit "2" "$(tput setaf $CLR_RED)Input Error$(tput sgr0)" "Package input required; exiting..."
+        fi
+        revertpackage "$PACKAGE_INPUT"
+        spmexit "0"
+        ;;
+    freeze|fr)
+        if [ -z "$PACKAGE_INPUT" ]; then
+            spmexit "2" "$(tput setaf $CLR_RED)Input Error$(tput sgr0)" "Package input required; exiting..."
+        fi
+        updatestatus "$PACKAGE_INPUT"
+        spmexit "0"
+        ;;
+    config|cf)
+        spmconfig
+        saveconf
+        spmexit "0"
+        ;;
+#     man|m)
+#         BASE_DIR="$(dirname "$RUNNING_DIR")"
+#         if [ -f "$BASE_DIR/share/spm/spm.1" ]; then
+#             man "$BASE_DIR"/share/spm/spm.1
+#         elif [ -f "$RUNNING_DIR/spm.1" ]; then
+#             man "$RUNNING_DIR"/spm.1
+#         else
+#             spmexit "2" "$(tput setaf $CLR_RED)Error$(tput sgr0)" "Could not find spm.1 !"
+#         fi
+#         spmexit "0"
+#         ;;
+    *)
+        spmhelp
+        spmexit "0"
         ;;
 esac
-
-set -
