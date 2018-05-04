@@ -1,0 +1,28 @@
+{
+  "name": "pingviewer",
+  "description": "ping viewer interface",
+  "categories": [
+    "Utility"
+  ],
+  "authors": [
+    {
+      "name": "bluerobotics",
+      "url": "https://github.com/bluerobotics"
+    }
+  ],
+  "license": null,
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "bluerobotics/ping-components"
+    },
+    {
+      "type": "Download",
+      "url": "https://github.com/bluerobotics/ping-components/releases"
+    }
+  ],
+  "icons": null,
+  "screenshots": [
+    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/pingviewer/screenshot.png"
+  ]
+}

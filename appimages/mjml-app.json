@@ -1,0 +1,30 @@
+{
+  "name": "mjml-app",
+  "description": "The desktop app for MJML",
+  "categories": [
+    "Utility"
+  ],
+  "authors": [
+    {
+      "name": "mjmlio",
+      "url": "https://github.com/mjmlio"
+    }
+  ],
+  "license": "MIT",
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "mjmlio/mjml-app"
+    },
+    {
+      "type": "Download",
+      "url": "https://github.com/mjmlio/mjml-app/releases"
+    }
+  ],
+  "icons": [
+    "mjml-app/icons/128x128/mjml-app.png"
+  ],
+  "screenshots": [
+    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/mjml-app/screenshot.png"
+  ]
+}

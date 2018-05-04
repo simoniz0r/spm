@@ -1,0 +1,27 @@
+{
+  "name": "windows2usb",
+  "categories": [
+    "Development"
+  ],
+  "authors": [
+    {
+      "name": "ValdikSS",
+      "url": "https://github.com/ValdikSS"
+    }
+  ],
+  "license": "Apache-2.0",
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "ValdikSS/windows2usb"
+    },
+    {
+      "type": "Download",
+      "url": "https://github.com/ValdikSS/windows2usb/releases"
+    }
+  ],
+  "icons": null,
+  "screenshots": [
+    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/windows2usb/screenshot.png"
+  ]
+}

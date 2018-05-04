@@ -1,0 +1,27 @@
+{
+  "name": "Pencil2D",
+  "description": "Create traditional hand-drawn animation using both bitmap and vector graphics",
+  "categories": [
+    "Graphics"
+  ],
+  "authors": [
+    {
+      "name": "pencil2d",
+      "url": "https://github.com/pencil2d"
+    }
+  ],
+  "license": "GPL-2.0",
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "pencil2d/pencil"
+    },
+    {
+      "type": "Download",
+      "url": "https://github.com/pencil2d/pencil/releases"
+    }
+  ],
+  "screenshots": [
+    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/Pencil2D/screenshot.png"
+  ]
+}

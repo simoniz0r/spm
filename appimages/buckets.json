@@ -1,0 +1,28 @@
+{
+  "name": "Buckets",
+  "description": "Buckets Family Budgeting",
+  "categories": [
+    "Finance"
+  ],
+  "authors": [
+    {
+      "name": "buckets",
+      "url": "https://github.com/buckets"
+    }
+  ],
+  "license": null,
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "buckets/application"
+    },
+    {
+      "type": "Download",
+      "url": "https://github.com/buckets/application/releases"
+    }
+  ],
+  "icons": null,
+  "screenshots": [
+    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/Buckets/screenshot.png"
+  ]
+}

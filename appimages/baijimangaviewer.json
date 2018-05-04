@@ -1,30 +1,28 @@
 {
   "name": "BaijiMangaViewer",
-  "installname": "BaijiMangaViewer",
-  "type": "AppImage",
-  "description": "Contribute to manga-viewer development by creating an account on GitHub",
+  "description": "A modern manga viewer inspired by Quivi that uses Material Design",
+  "categories": [
+    "Graphics"
+  ],
   "authors": [
     {
       "name": "shizkun",
       "url": "https://github.com/shizkun"
     }
   ],
+  "license": "GPL-3.0",
   "links": [
     {
       "type": "GitHub",
       "url": "shizkun/manga-viewer"
     },
     {
-      "type": "Install",
+      "type": "Download",
       "url": "https://github.com/shizkun/manga-viewer/releases"
     }
   ],
-  "installinfo": [
-    {
-      "version": "Not Installed",
-      "size": "Not Installed",
-      "tag": "Not Installed",
-      "status": "Not Installed"
-    }
+  "icons": null,
+  "screenshots": [
+    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/BaijiMangaViewer/screenshot.png"
   ]
 }

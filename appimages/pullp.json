@@ -1,0 +1,30 @@
+{
+  "name": "Pullp",
+  "description": "Pull request monitoring app for Github",
+  "categories": [
+    "Utility"
+  ],
+  "authors": [
+    {
+      "name": "rkclark",
+      "url": "https://github.com/rkclark"
+    }
+  ],
+  "license": "MIT",
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "rkclark/pullp"
+    },
+    {
+      "type": "Download",
+      "url": "https://github.com/rkclark/pullp/releases"
+    }
+  ],
+  "icons": [
+    "Pullp/icons/128x128/pullp.png"
+  ],
+  "screenshots": [
+    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/Pullp/screenshot.png"
+  ]
+}
