@@ -20,11 +20,15 @@ cat >"$HOME"/github/index/spm-feed.json << EOL
 EOL
 for image in $(dir -C -w 1 $HOME/github/spm/appimages); do
     image="$(echo $image | rev | cut -f2- -d'.' | rev)"
+    INSTALLNAME="$(jq -r '.installname' ~/github/spm/appimages/$image.json)"
+    [ "$INSTALLNAME" = "null" ] && INSTALLNAME="$(jq -r '.name' ~/github/spm/appimages/$image.json | tr '[:upper:]' '[:lower:]')"
+    PACKAGETYPE="$(jq -r '.type' ~/github/spm/appimages/$image.json)"
+    [ "$PACKAGETYPE" = "null" ] && PACKAGETYPE="AppImage"
     cat >>"$HOME"/github/index/spm-feed.json << EOL
     {
       "name": "$(jq -r '.name' ~/github/spm/appimages/$image.json)",
-      "installname": "$(jq -r '.installname' ~/github/spm/appimages/$image.json)",
-      "type": "$(jq -r '.type' ~/github/spm/appimages/$image.json)",
+      "installname": "$INSTALLNAME",
+      "type": "$PACKAGETYPE",
       "description": "$(jq -r '.description' ~/github/spm/appimages/$image.json)",
       "authors": [
         {
