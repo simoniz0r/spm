@@ -1,4 +1,0 @@
-Changelog for spm v0.5.7:
-
-939c132fa8c97dd136ada77071ef275549b715d9 Add tag version in info for packages from Github
-5ad66c51e0dd85b27f639a7ec93211de4e912ded Add ability to find AppImages without extension and fix tag
