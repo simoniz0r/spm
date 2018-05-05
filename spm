@@ -103,10 +103,6 @@ cat > "$CONFIG_DIR"/spm.conf << EOL
 # Please only edit this config file if you have read spm's man page.
 #
 # TARGET_DIR - Directory where packages will be installed to.
-# $HOME/bin is used by default so that installed packages
-# can be installed without requiriging root.  $HOME/bin is
-# on the PATH by default in most distros, so installed
-# packages should work from there as usual.
 # Only change this directory if you have no packages being managed by spm!
 #
 TARGET_DIR="$TARGET_DIR"
