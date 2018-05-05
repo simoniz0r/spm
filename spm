@@ -768,7 +768,7 @@ Arguments:
     search|se   - search for available packages
     install|in  - install a package to $TARGET_DIR
     get         - install a package to $GET_DIR without managing it
-    remove|rm   - remove a installed package
+    remove|rm   - remove an installed package
     update|up   - update list of packages and check installed packages for updates
     revert|rev  - revert an updated package to its previous version if available
     freeze|fr   - mark or unmark a package as FROZEN to preven update checks

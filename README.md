@@ -22,7 +22,7 @@ Dependencies: curl, jq, GNU coreutils, grep (jq is included in the AppImage rele
     
     get         - install an package to $GET_DIR without managing it
     
-    remove|rm   - remove a installed package
+    remove|rm   - remove an installed package
     
     update|up   - update list of packages and check installed packages for updates
     
