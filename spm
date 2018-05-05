@@ -902,7 +902,7 @@ alias dir='dir'
 unalias dir
 
 # If user installed tab completion file prior to this addition, touch .tab-completion-installed to bypass check
-if [ -d "/etc/bash_completion.d" ] && [ -f "/etc/bash_completion.d/spm.sh"] && [ ! -f "$CONFIG_DIR/.tab-completion-installed" ]; then
+if [ -d "/etc/bash_completion.d" ] && [ -f "/etc/bash_completion.d/spm.sh" ] && [ ! -f "$CONFIG_DIR/.tab-completion-installed" ]; then
     touch "$CONFIG_DIR"/.tab-completion-installed
 fi
 # Check if spm has been installed, if no-tab-completion file doesn't exist and if .tab-completion-installed doesn't exist
