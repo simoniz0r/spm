@@ -1,18 +1,18 @@
 {
   "name": "Krita",
-  "installname": "Krita",
+  "installname": "krita",
   "type": "AppImage",
-  "description": "Digital Painting ",
+  "description": "Digital Painting",
   "authors": [
     {
-      "name": "null",
-      "url": "https://download.kde.org/stable/krita/"
+      "name": "KDE",
+      "url": "https://krita.org/en/"
     }
   ],
   "links": [
     {
       "type": "Other",
-      "url": "https://download.kde.org/stable/krita/"
+      "url": "https://krita.org/en/download/krita-desktop/"
     },
     {
       "type": "Install",

@@ -1,18 +1,18 @@
 {
   "name": "Kate",
-  "installname": "Kate",
+  "installname": "kate",
   "type": "AppImage",
-  "description": "null ",
+  "description": "Kate is a multi-document editor",
   "authors": [
     {
-      "name": "null",
-      "url": "http://download.kde.org/unstable/kate"
+      "name": "KDE",
+      "url": "https://kate-editor.org/"
     }
   ],
   "links": [
     {
       "type": "Other",
-      "url": "http://download.kde.org/unstable/kate"
+      "url": "https://kate-editor.org/get-it/"
     },
     {
       "type": "Install",

@@ -1,22 +1,22 @@
 {
   "name": "Kdenlive",
-  "installname": "Kdenlive",
+  "installname": "kdenlive",
   "type": "AppImage",
-  "description": "Video Editor ",
+  "description": "Kdenlive is an acronym for KDE Non-Linear Video Editor",
   "authors": [
     {
-      "name": "null",
-      "url": "http://files.kde.org/kdenlive/release"
+      "name": "KDE",
+      "url": "https://kdenlive.org/en/"
     }
   ],
   "links": [
     {
       "type": "Other",
-      "url": "http://files.kde.org/kdenlive/release"
+      "url": "https://kdenlive.org/en/download/"
     },
     {
       "type": "Install",
-      "url": "http://files.kde.org/kdenlive/release/Kdenlive-17.12.0d-x86_64.AppImage"
+      "url": "https://files.kde.org/kdenlive/release/kdenlive-18.04.0-x86_64.AppImage"
     }
   ],
   "installinfo": [

@@ -1,22 +1,22 @@
 {
   "name": "Kdevelop",
-  "installname": "Kdevelop",
+  "installname": "kdevelop",
   "type": "AppImage",
-  "description": "null ",
+  "description": "KDevelop - A cross-platform IDE for C, C++, Python, QML/JavaScript and PHP",
   "authors": [
     {
-      "name": "null",
-      "url": "http://kfunk.ddns.net:8080/job/kdevelop-appimage-centos/lastSuccessfulBuild/artifact"
+      "name": "KDE",
+      "url": "https://www.kdevelop.org/"
     }
   ],
   "links": [
     {
       "type": "Other",
-      "url": "http://kfunk.ddns.net:8080/job/kdevelop-appimage-centos/lastSuccessfulBuild/artifact"
+      "url": "https://www.kdevelop.org/download"
     },
     {
       "type": "Install",
-      "url": "http://kfunk.ddns.net:8080/job/kdevelop-appimage-centos/lastSuccessfulBuild/artifact/KDevelop-git-x86_64.AppImage"
+      "url": "http://home.kfunk.org:8080/job/kdevelop-appimage-centos/lastSuccessfulBuild/artifact/KDevelop-git-x86_64.AppImage"
     }
   ],
   "installinfo": [
