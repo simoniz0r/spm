@@ -912,17 +912,18 @@ if [ -f "$TARGET_DIR/spm" ] && [ ! -f "$HOME/.local/share/spm/no-tab-completion"
     case $SELECTED_OPTION in
         1)
             # Check if zsh is installed and spm tab completion file not already present
-            if type zsh > /dev/null 2>&1 && [ ! -f "/usr/local/share/site-functions/_spm" ]; then
+            if type zsh > /dev/null 2>&1; then
+                [ ! -d "/usr/local/share/zsh/site-functions" ] && sudo mkdir -p /usr/local/share/zsh/site-functions
                 # Download zsh-completion.sh from spm's github repo
                 curl -sSL "https://raw.githubusercontent.com/simoniz0r/spm/master/zsh-completion.sh" -o "$CONFIG_DIR"/cache/zsh-completion.sh || \
                 { echo "$(tput setaf $CLR_RED)Failed to download 'zsh-completion.sh'!"; ZSH_FAILED="TRUE"; }
                 if [ ! "$ZSH_FAILED" = "TRUE" ]; then
                     # If download did not fail and site-functions dir exists, move tab completion file there
-                    sudo mv "$CONFIG_DIR"/cache/zsh-completion.sh /usr/local/share/site-functions/_spm && \
-                    echo "$(tput setaf $CLR_GREEN)zsh tab completion file installed to /usr/local/share/site-functions/_spm$(tput sgr0)" || \
+                    sudo mv "$CONFIG_DIR"/cache/zsh-completion.sh /usr/local/share/zsh/site-functions/_spm && \
+                    echo "$(tput setaf $CLR_GREEN)zsh tab completion file installed to /usr/local/share/zsh/site-functions/_spm$(tput sgr0)" || \
                     spmexit "2" "$(tput setaf $CLR_RED)Failed to install zsh tab completion script!$(tput sgr0)"
-                elif [ ! -d "/usr/local/share/site-functions" ]; then
-                    echo "$(tput setaf $CLR_RED)'/usr/local/share/site-functions' does not exist; skipping..."
+                elif [ ! -d "/usr/local/share/zsh/site-functions" ]; then
+                    echo "$(tput setaf $CLR_RED)'/usr/local/share/zsh/site-functions' does not exist; skipping..."
                 fi
             fi
             # Create /etc/bash_competion.d if it doesn't exist
