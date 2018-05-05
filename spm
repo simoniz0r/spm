@@ -498,7 +498,7 @@ function updatelist() {
         echo
         if [ "$NEW_PACKAGES_AVAILABLE" != "$PACKAGES_AVAILABLE" ]; then
             echo "$(tput setaf $CLR_CYAN)Package list updated. Package list changes:       $(tput sgr0)"
-            echo "$(diff -u -d --color=never <(echo "$PACKAGES_AVAILABLE") <(echo "$NEW_PACKAGES_AVAILABLE") | grep '^\-[[:alnum:]].*\|^+[[:alnum:]].*' | sed "s%.json%%g;s%^-%$(tput setaf $CLR_RED)- %g;s%^+%$(tput setaf $CLR_CYAN)+ %g")$(tput sgr0)"
+            echo "$(diff -u -d <(echo "$PACKAGES_AVAILABLE") <(echo "$NEW_PACKAGES_AVAILABLE") | grep '^\-[[:alnum:]].*\|^+[[:alnum:]].*' | sed "s%.json%%g;s%^-%$(tput setaf $CLR_RED)- %g;s%^+%$(tput setaf $CLR_CYAN)+ %g")$(tput sgr0)"
         else
             echo "$(tput setaf $CLR_GREEN)Package list updated. No packages added/removed.             $(tput sgr0)"
         fi
@@ -752,7 +752,7 @@ function spmconfig() {
 
 # Function to output help text
 function spmhelp() {
-printf '%s\n' "spm 0.2.01
+printf '%s\n' "spm 0.2.02
 Usage: spm [option] [package]
 spm is a command line package manager provides packages in AppImage format.
 spm uses https://simoniz0r.github.io/spm-feed.json to get information about
