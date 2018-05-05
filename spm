@@ -492,6 +492,7 @@ function updatelist() {
         done
         rm -f "$CONFIG_DIR"/list/appimageupdatetest.json
         rm -f "$CONFIG_DIR"/list/removeme.json
+        rm -f "$CONFIG_DIR"/list/end.json
         sleep 0.5
         printf '\e[?25h' # Show cursor
         NEW_PACKAGES_AVAILABLE="$(dir -C -w 1 "$CONFIG_DIR"/list)"
