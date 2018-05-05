@@ -805,7 +805,7 @@ if [ ! -d "$CONFIG_DIR" ]; then
     mkdir -p "$CONFIG_DIR"/upgrades
     mkdir -p "$CONFIG_DIR"/downgrades
     mkdir -p "$CONFIG_DIR"/cache
-    TARGET_DIR="$HOME/bin"
+    TARGET_DIR="/usr/local/bin"
     GET_DIR="$HOME/bin"
     DOWNGRADE_LIMIT=5
     CLR_BLUE="4"
@@ -825,7 +825,7 @@ if [ -f "$HOME/.local/share/spm/spm.conf" ]; then
     . ~/.local/share/spm/spm.conf
 else
     # Set default variables to be stored in config file
-    TARGET_DIR="$HOME/bin"
+    TARGET_DIR="/usr/local/bin"
     GET_DIR="$HOME/bin"
     DOWNGRADE_LIMIT=5
     CLR_BLUE="4"
