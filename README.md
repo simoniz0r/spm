@@ -14,13 +14,13 @@ Dependencies: curl, jq (jq is included in the AppImage release)
 ```    
     list|l      - list all available packages
     
-    info|i      - output information for an package
+    info|i      - output information for a package
     
     search|se   - search for available packages
     
-    install|in - install an package to $TARGET_DIR
+    install|in - install a package to $TARGET_DIR
     
-    get         - install an package to $GET_DIR without managing it
+    get         - install a package to $GET_DIR without managing it
     
     remove|rm   - remove an installed package
     
@@ -28,7 +28,7 @@ Dependencies: curl, jq (jq is included in the AppImage release)
     
     revert|rev  - revert an updated package to its previous version if available
     
-    freeze|fr   - mark or unmark an package as FROZEN to preven update checks
+    freeze|fr   - mark or unmark a package as FROZEN to preven update checks
     
     config|cf   - open spm's config file with $EDITOR
 ```
