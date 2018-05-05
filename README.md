@@ -7,7 +7,7 @@ spm is not responsible for bugs within packages that have been
 installed using spm.  Please report any bugs that are specific to
 installed packages to their maintainers.
 
-Dependencies: curl, jq, GNU coreutils, grep (jq is included in the AppImage release)
+Dependencies: curl, jq (jq is included in the AppImage release)
 
 ## Arguments
 
