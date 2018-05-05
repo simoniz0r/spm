@@ -1,7 +1,7 @@
 {
   "name": "luminance-hdr",
   "installname": "luminance-hdr",
-  "type": "null",
+  "type": "AppImage",
   "description": "Create and tonemap HDR images",
   "authors": [
     {

@@ -1,7 +1,7 @@
 {
   "name": "luna",
   "installname": "luna",
-  "type": "null",
+  "type": "AppImage",
   "description": "Manage your NPM packages.",
   "authors": [
     {

@@ -1,15 +1,14 @@
 {
   "name": "windows2usb",
-  "categories": [
-    "Development"
-  ],
+  "installname": "windows2usb",
+  "type": "AppImage",
+  "description": "null",
   "authors": [
     {
       "name": "ValdikSS",
       "url": "https://github.com/ValdikSS"
     }
   ],
-  "license": "Apache-2.0",
   "links": [
     {
       "type": "GitHub",
@@ -20,8 +19,12 @@
       "url": "https://github.com/ValdikSS/windows2usb/releases"
     }
   ],
-  "icons": null,
-  "screenshots": [
-    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/windows2usb/screenshot.png"
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
+    }
   ]
 }

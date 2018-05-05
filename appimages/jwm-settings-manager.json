@@ -1,16 +1,14 @@
 {
   "name": "jwm-settings-manager",
+  "installname": "jwm-settings-manager",
+  "type": "AppImage",
   "description": "Easy configuration of JWM",
-  "categories": [
-    "Settings"
-  ],
   "authors": [
     {
       "name": "Israel-D",
       "url": "https://github.com/Israel-D"
     }
   ],
-  "license": "GPL-3.0",
   "links": [
     {
       "type": "GitHub",
@@ -21,8 +19,12 @@
       "url": "https://github.com/Israel-D/jwm-settings-manager/releases"
     }
   ],
-  "icons": null,
-  "screenshots": [
-    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/jwm-settings-manager/screenshot.png"
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
+    }
   ]
 }

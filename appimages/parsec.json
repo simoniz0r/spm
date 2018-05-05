@@ -1,7 +1,7 @@
 {
   "name": "parsec",
   "installname": "parsec",
-  "type": "null",
+  "type": "AppImage",
   "description": "Parsec game streaming client",
   "authors": [
     {

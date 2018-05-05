@@ -1,16 +1,14 @@
 {
   "name": "SigmaSpectra",
+  "installname": "sigmaspectra",
+  "type": "AppImage",
   "description": "Semi-automated selection and scaling of time series",
-  "categories": [
-    "Science"
-  ],
   "authors": [
     {
       "name": "arkottke",
       "url": "https://github.com/arkottke"
     }
   ],
-  "license": null,
   "links": [
     {
       "type": "GitHub",
@@ -21,8 +19,12 @@
       "url": "https://github.com/arkottke/sigmaspectra/releases"
     }
   ],
-  "icons": null,
-  "screenshots": [
-    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/SigmaSpectra/screenshot.png"
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
+    }
   ]
 }

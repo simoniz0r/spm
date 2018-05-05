@@ -1,16 +1,14 @@
 {
   "name": "gsubs",
+  "installname": "gsubs",
+  "type": "AppImage",
   "description": "Finds you the perfect subtitle match",
-  "categories": [
-    "Utility"
-  ],
   "authors": [
     {
       "name": "sanjevirau",
       "url": "https://github.com/sanjevirau"
     }
   ],
-  "license": "MIT",
   "links": [
     {
       "type": "GitHub",
@@ -21,10 +19,12 @@
       "url": "https://github.com/sanjevirau/gsubs/releases"
     }
   ],
-  "icons": [
-    "gsubs/icons/128x128/gsubs.png"
-  ],
-  "screenshots": [
-    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/gsubs/screenshot.png"
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
+    }
   ]
 }

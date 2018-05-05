@@ -1,16 +1,14 @@
 {
   "name": "Joplin",
+  "installname": "joplin",
+  "type": "AppImage",
   "description": "Joplin for Desktop",
-  "categories": [
-    "Office"
-  ],
   "authors": [
     {
       "name": "laurent22",
       "url": "https://github.com/laurent22"
     }
   ],
-  "license": "MIT",
   "links": [
     {
       "type": "GitHub",
@@ -21,8 +19,12 @@
       "url": "https://github.com/laurent22/joplin/releases"
     }
   ],
-  "icons": null,
-  "screenshots": [
-    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/Joplin/screenshot.png"
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
+    }
   ]
 }

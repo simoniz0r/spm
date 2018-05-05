@@ -1,16 +1,14 @@
 {
   "name": "UHK.Agent",
+  "installname": "uhk.agent",
+  "type": "AppImage",
   "description": "Agent is the configuration application of the Ultimate Hacking Keyboard.",
-  "categories": [
-    "Utility"
-  ],
   "authors": [
     {
       "name": "UltimateHackingKeyboard",
       "url": "https://github.com/UltimateHackingKeyboard"
     }
   ],
-  "license": "GPL-3.0",
   "links": [
     {
       "type": "GitHub",
@@ -21,8 +19,12 @@
       "url": "https://github.com/UltimateHackingKeyboard/agent/releases"
     }
   ],
-  "icons": null,
-  "screenshots": [
-    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/UHK.Agent/screenshot.png"
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
+    }
   ]
 }

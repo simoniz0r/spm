@@ -1,16 +1,14 @@
 {
   "name": "pingviewer",
+  "installname": "pingviewer",
+  "type": "AppImage",
   "description": "ping viewer interface",
-  "categories": [
-    "Utility"
-  ],
   "authors": [
     {
       "name": "bluerobotics",
       "url": "https://github.com/bluerobotics"
     }
   ],
-  "license": null,
   "links": [
     {
       "type": "GitHub",
@@ -21,8 +19,12 @@
       "url": "https://github.com/bluerobotics/ping-components/releases"
     }
   ],
-  "icons": null,
-  "screenshots": [
-    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/pingviewer/screenshot.png"
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
+    }
   ]
 }

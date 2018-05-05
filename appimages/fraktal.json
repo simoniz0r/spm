@@ -1,7 +1,7 @@
 {
   "name": "Fraktal",
   "installname": "Fraktal",
-  "type": "null",
+  "type": "AppImage",
   "description": "Podcast Manager in Electron",
   "authors": [
     {

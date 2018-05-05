@@ -1,7 +1,7 @@
 {
   "name": "jscad-desktop",
   "installname": "jscad-desktop",
-  "type": "null",
+  "type": "AppImage",
   "description": "jscad desktop application",
   "authors": [
     {

@@ -1,7 +1,7 @@
 {
   "name": "Gingko",
   "installname": "Gingko",
-  "type": "null",
+  "type": "AppImage",
   "description": "Gingko client rewritten in Elm, packaged with Electron.",
   "authors": [
     {

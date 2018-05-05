@@ -1,7 +1,7 @@
 {
   "name": "vkap",
   "installname": "vkap",
-  "type": "null",
+  "type": "AppImage",
   "description": "Desktop VK Audio Player",
   "authors": [
     {

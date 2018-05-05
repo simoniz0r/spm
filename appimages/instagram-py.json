@@ -1,7 +1,7 @@
 {
   "name": "Instagram-Py",
   "installname": "Instagram-Py",
-  "type": "null",
+  "type": "AppImage",
   "description": "Hack Instagram Like a Pro.",
   "authors": [
     {

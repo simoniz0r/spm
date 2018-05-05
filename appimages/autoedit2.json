@@ -1,7 +1,7 @@
 {
   "name": "autoEdit2",
   "installname": "autoEdit2",
-  "type": "null",
+  "type": "AppImage",
   "description": "autoEdit2 Desktop Client for Linux",
   "authors": [
     {
