@@ -1,0 +1,30 @@
+{
+  "name": "Steem_Messenger",
+  "description": "Messer for Steem",
+  "categories": [
+    "Utility"
+  ],
+  "authors": [
+    {
+      "name": "therealwolf42",
+      "url": "https://github.com/therealwolf42"
+    }
+  ],
+  "license": "MIT",
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "therealwolf42/steemmessenger"
+    },
+    {
+      "type": "Download",
+      "url": "https://github.com/therealwolf42/steemmessenger/releases"
+    }
+  ],
+  "icons": [
+    "Steem_Messenger/icons/256x256/steemmessenger.png"
+  ],
+  "screenshots": [
+    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/Steem_Messenger/screenshot.png"
+  ]
+}
