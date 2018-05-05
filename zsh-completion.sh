@@ -1,6 +1,6 @@
-#compdef spm2
+#compdef spm
 
-_spm2() {
+_spm() {
     local curcontext="$curcontext" state line
     typeset -A opt_args
  
@@ -24,4 +24,4 @@ _spm2() {
     esac
 }
 
-_spm2
+_spm

@@ -1,4 +1,4 @@
-__spm2() {
+__spm() {
     local cur prev opts base
     COMPREPLY=()
     cur="${COMP_WORDS[COMP_CWORD]}"
@@ -32,4 +32,4 @@ __spm2() {
    return 0
 }
 
-complete -F __spm2 spm2
+complete -F __spm spm
