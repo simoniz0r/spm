@@ -752,7 +752,7 @@ function spmconfig() {
 
 # Function to output help text
 function spmhelp() {
-printf '%s\n' "spm 0.2.02
+printf '%s\n' "spm 0.2.03
 Usage: spm [option] [package]
 spm is a command line package manager provides packages in AppImage format.
 spm uses https://simoniz0r.github.io/spm-feed.json to get information about
@@ -900,6 +900,49 @@ fi
 # Set and unset 'dir' alias to avoid issues on systems such as OpenSUSE that create a default 'dir' alias
 alias dir='dir'
 unalias dir
+
+# Check if spm has been installed, if no-tab-completion file doesn't exist and if .tab-completion-installed doesn't exist
+if [ -f "$TARGET_DIR/spm" ] && [ ! -f "$HOME/.local/share/spm/no-tab-completion" ] && [ ! -f "$CONFIG_DIR/.tab-completion-installed" ]; then
+    # If all checks pass, ask to install scripts
+    askquestion "$(tput setaf $CLR_GREEN)Install tab completion scripts$(tput sgr0)" "Would you like to install the tab completion scripts for spm? (requires root)" "Install" "Do not install"
+    case $SELECTED_OPTION in
+        1)
+            # Check if zsh is installed and spm tab completion file not already present
+            if type zsh > /dev/null 2>&1 && [ ! -f "/usr/share/zsh/site-functions/_spm" ]; then
+                # Download zsh-completion.sh from spm's github repo
+                curl -sSL "https://raw.githubusercontent.com/simoniz0r/spm/master/zsh-completion.sh" -o "$CONFIG_DIR"/cache/zsh-completion.sh || \
+                echo "$(tput setaf $CLR_RED)Failed to download 'zsh-completion.sh'!" && ZSH_FAILED="TRUE"
+                if [ ! "$ZSH_FAILED" = "TRUE" ] && [ -d "/usr/share/zsh/site-functions" ]; then
+                    # If download did not fail and site-functions dir exists, move tab completion file there
+                    sudo mv "$CONFIG_DIR"/cache/zsh-completion.sh /usr/share/zsh/site-functions/_spm && \
+                    echo "$(tput setaf $CLR_GREEN)zsh tab completion file installed to /usr/share/zsh/site-functions/_spm$(tput sgr0)" || \
+                    spmexit "2" "$(tput setaf $CLR_RED)Failed to install zsh tab completion script!$(tput sgr0)"
+                elif [ ! -d "/usr/share/zsh/site-functions" ]; then
+                    echo "$(tput setaf $CLR_RED)'/usr/share/zsh/site-functions' does not exist; skipping..."
+                fi
+            fi
+            # Create /etc/bash_competion.d if it doesn't exist
+            [ ! -d "/etc/bash_completion.d" ] && sudo mkdir -p /etc/bash_completion.d
+            if [ ! -f "/etc/bash_completion.d/spm.sh" ]; then
+                # Download bash-completion.sh from spm's github repo
+                curl -sSL "https://raw.githubusercontent.com/simoniz0r/spm/master/bash-completion.sh" -o "$CONFIG_DIR"/cache/bash-completion.sh || \
+                echo "$(tput setaf $CLR_RED)Failed to download 'bash-completion.sh'!" && BASH_FAILED="TRUE"
+                if [ ! "$BASH_FAILED" = "TRUE" ]; then
+                    # If download did not fail, move tab completion file to /etc/bash_completion.d/spm.sh
+                    sudo mv "$CONFIG_DIR"/cache/bash-completion.sh /etc/bash_completion.d/spm.sh && \
+                    echo "$(tput setaf $CLR_GREEN)bash tab completion file installed to /etc/bash_completion.d/spm.sh$(tput sgr0)" && \
+                    # If everything above succeeded, touch .tab-completion-installed to skip this check in the future
+                    touch "$CONFIG_DIR"/.tab-completion-installed || \
+                    spmexit "2" "$(tput setaf $CLR_RED)Failed to install bash tab completion script!$(tput sgr0)"
+                fi
+            fi
+            ;;
+        *)
+            echo "$(tput setaf $CLR_RED)Tab completion files not installed.  Delete "$CONFIG_DIR"/no-tab-completion if you change your mind."
+            touch "$CONFIG_DIR"/no-tab-completion
+            ;;
+    esac
+fi
 
 # Set arguments as variables for easier management
 ARG="$1"
