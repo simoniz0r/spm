@@ -1,0 +1,30 @@
+{
+  "name": "fltk-dialog",
+  "installname": "fltk-dialog",
+  "type": "Binary",
+  "description": " Simple FLTK dialog application",
+  "authors": [
+    {
+      "name": "darealshinji",
+      "url": "https://github.com/darealshinji"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "darealshinji/fltk-dialog"
+    },
+    {
+      "type": "Download",
+      "url": "https://github.com/darealshinji/fltk-dialog/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
+    }
+  ]
+}
