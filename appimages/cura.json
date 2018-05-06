@@ -2,11 +2,11 @@
   "name": "Cura",
   "installname": "Cura",
   "type": "AppImage",
-  "description": "AppImage for Cura",
+  "description": "Ultimaker Cura prepares your model for 3D printing",
   "authors": [
     {
-      "name": "https://software.ultimaker.com/current",
-      "url": "https://software.ultimaker.com/current"
+      "name": "Ultimaker",
+      "url": "https://ultimaker.com/en/products/ultimaker-cura-software"
     }
   ],
   "links": [
@@ -16,7 +16,7 @@
     },
     {
       "type": "Install",
-      "url": "https://software.ultimaker.com/current/Cura-2.7.0.AppImage"
+      "url": "https://software.ultimaker.com/current/Cura-3.3.1.AppImage"
     }
   ],
   "installinfo": [
