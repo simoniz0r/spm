@@ -1,0 +1,30 @@
+{
+    "name": "Wexond",
+    "installname": "wexond",
+    "type": "AppImage",
+    "description": "Extensible, fast and innovative web browser with material UI.",
+    "authors": [
+    {
+        "name": "wexond",
+        "url": "https://github.com/wexond"
+    }
+    ],
+    "links": [
+    {
+        "type": "GitHub",
+        "url": "wexond/wexond"
+    },
+    {
+        "type": "Download",
+        "url": "https://github.com/wexond/wexond/releases"
+    }
+    ],
+    "installinfo": [
+    {
+        "version": "Not Installed",
+        "size": "Not Installed",
+        "tag": "Not Installed",
+        "status": "Not Installed"
+    }
+    ]
+}
