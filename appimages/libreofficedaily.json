@@ -5,14 +5,14 @@
   "description": "AppImage for LibreOfficeDaily",
   "authors": [
     {
-      "name": "https://libreoffice.soluzioniopen.com/daily",
-      "url": "https://libreoffice.soluzioniopen.com/daily"
+      "name": "LibreOffice",
+      "url": "https://libreoffice.soluzioniopen.com"
     }
   ],
   "links": [
     {
       "type": "Other",
-      "url": "https://libreoffice.soluzioniopen.com/daily"
+      "url": "https://libreoffice.soluzioniopen.com"
     },
     {
       "type": "Install",
