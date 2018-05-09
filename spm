@@ -460,7 +460,7 @@ function removepackage() {
     displaymessage "$(tput setaf $CLR_RED)$PACKAGE$(tput setaf $CLR_RED) removed$(tput sgr0)" "$PACKAGE has been removed from $TARGET_DIR/$PACKAGE !"
 }
 
-# Function that uses jq and csplit to parse https://simoniz0r.github.io/spm-feed.json into a usable format
+# Function that uses jq and csplit to parse https://github.com/simoniz0r/spm/releases/download/feed/spm-feed.json into a usable format
 # The CONFIG_DIR/list directory is first moved to the CONFIG_DIR/cache directory incase of failure
 # jq outputs feed.json in a clean form, csplit splits feed.json into separate files for each package
 # Separated json files are then checked for valid links; json files without valid links are removed
@@ -470,7 +470,7 @@ function removepackage() {
 # If the above succeeded, the stored list dir in CONFIG_DIR/cache is deleted; if not, it is moved back
 function updatelist() {
     [ -f "$CONFIG_DIR/list/.listversion" ] && . "$CONFIG_DIR"/list/.listversion || LIST_VERSION="null"
-    NEW_LIST_VERSION="$(curl -sSL "https://simoniz0r.github.io/spm-feed.json" | jq -r '.updated_at')"
+    NEW_LIST_VERSION="$(curl -sSL "https://github.com/simoniz0r/spm/releases/download/feed/spm-feed.json" | jq -r '.updated_at')"
     if [ ! "$LIST_VERSION" = "$NEW_LIST_VERSION" ]; then
         PACKAGES_AVAILABLE="$(dir -C -w 1 "$CONFIG_DIR"/list)"
         printf '\e[?25l' # Hide cursor to prevent progress bar looking glitchy
@@ -478,7 +478,7 @@ function updatelist() {
         mv "$CONFIG_DIR"/list/ "$CONFIG_DIR"/cache/
         mkdir "$CONFIG_DIR"/list
         cd "$CONFIG_DIR"/list
-        curl -sSL "https://simoniz0r.github.io/spm-feed.json" | jq '.appimages[]' | csplit --digits=3 --quiet --prefix=appimage --suffix-format=%02d.json - "/^{/" "{*}" \
+        curl -sSL "https://github.com/simoniz0r/spm/releases/download/feed/spm-feed.json" | jq '.appimages[]' | csplit --digits=3 --quiet --prefix=appimage --suffix-format=%02d.json - "/^{/" "{*}" \
         || { rm -rf "$CONFIG_DIR"/list; mv "$CONFIG_DIR"/cache/list "$CONFIG_DIR"/list; spmexit "5" "$(tput setaf $CLR_RED)Error updating package list!$(tput sgr0)" "If this continues to happen, please report an issue at https://github.com/simoniz0r/spm$(tput sgr0)"; }
         rm -rf "$CONFIG_DIR"/cache/*
         rm -f "$CONFIG_DIR"/list/appimage00.json
@@ -753,11 +753,11 @@ function spmconfig() {
 
 # Function to output help text
 function spmhelp() {
-printf '%s\n' "spm 0.2.03
+printf '%s\n' "spm 0.2.04
 Usage: spm [option] [package]
 spm is a command line package manager provides packages in AppImage format.
-spm uses https://simoniz0r.github.io/spm-feed.json to get information about
-packages.
+spm uses https://github.com/simoniz0r/spm/releases/download/feed/spm-feed.json
+to get information about packages.
 
 Arguments:
     list|l      - list all available packages
