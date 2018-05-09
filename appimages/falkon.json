@@ -1,0 +1,30 @@
+{
+  "name": "Falkon",
+  "installname": "falkon",
+  "type": "AppImage",
+  "description": "Falkon is a QtWebEngine based cross-platform web browser",
+  "authors": [
+    {
+      "name": "KDE",
+      "url": "https://community.kde.org/Incubator/Projects/Falkon"
+    }
+  ],
+  "links": [
+    {
+      "type": "Other",
+      "url": "https://community.kde.org/Incubator/Projects/Falkon"
+    },
+    {
+      "type": "Install",
+      "url": "https://download.kde.org/stable/falkon/3.0.1/Falkon-3.0.1.AppImage"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
+    }
+  ]
+}
