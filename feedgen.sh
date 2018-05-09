@@ -7,8 +7,8 @@
 # License: GPL v2.0 only
 # Generates spm-feed.json containing info for AppImages and precompiled tar packages
 
-rm -f "$HOME"/github/index/spm-feed.json
-cat >"$HOME"/github/index/spm-feed.json << EOL
+rm -f "$HOME"/github/spm/spm-feed.json
+cat >"$HOME"/github/spm/spm-feed.json << EOL
 {
   "version": 1,
   "home_page_url": "https://github.com/simoniz0r/spm",
@@ -24,7 +24,7 @@ for image in $(dir -C -w 1 $HOME/github/spm/appimages); do
     [ "$INSTALLNAME" = "null" ] && INSTALLNAME="$(jq -r '.name' ~/github/spm/appimages/$image.json | tr '[:upper:]' '[:lower:]')"
     PACKAGETYPE="$(jq -r '.type' ~/github/spm/appimages/$image.json)"
     [ "$PACKAGETYPE" = "null" ] && PACKAGETYPE="AppImage"
-    cat >>"$HOME"/github/index/spm-feed.json << EOL
+    cat >>"$HOME"/github/spm/spm-feed.json << EOL
     {
       "name": "$(jq -r '.name' ~/github/spm/appimages/$image.json)",
       "installname": "$INSTALLNAME",
@@ -59,7 +59,7 @@ EOL
     echo "$(tput setaf 2)$image has been added to spm-feed.json$(tput sgr0)"
 done
 
-cat >>"$HOME"/github/index/spm-feed.json << EOL
+cat >>"$HOME"/github/spm/spm-feed.json << EOL
     {
       "END": "END",
       "name": "END",
