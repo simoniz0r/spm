@@ -1,0 +1,30 @@
+{
+  "name": "LibreOfficeFresh",
+  "installname": "libreofficefresh",
+  "type": "AppImage",
+  "description": "The office productivity suite compatible to the open and standardized ODF document format. Supported by The Document Foundation.",
+  "authors": [
+    {
+      "name": "LibreOffice",
+      "url": "https://libreoffice.soluzioniopen.com"
+    }
+  ],
+  "links": [
+    {
+      "type": "Other",
+      "url": "https://libreoffice.soluzioniopen.com"
+    },
+    {
+      "type": "Install",
+      "url": "https://libreoffice.soluzioniopen.com/stable/full/LibreOffice-fresh.full-x86_64.AppImage"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
+    }
+  ]
+}
