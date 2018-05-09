@@ -309,7 +309,7 @@ function otherrelease() {
     if [ -z "$PACKAGE_SIZE" ]; then
         PACKAGE_SIZE="N/A"
     else
-        PACKAGE_SIZE="$(awk "BEGIN {print ("$PACKAGE_SIZE"/1000000)}" | cut -c-5) MBs"
+        PACKAGE_SIZE="$(awk "BEGIN {print ("$PACKAGE_SIZE"/1024)/1024}" | cut -c-5) MBs"
     fi
     PACKAGE_DOWNLOADS="N/A"
     PACKAGE_TAG="$PACKAGE_NAME"
