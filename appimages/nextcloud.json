@@ -1,22 +1,22 @@
 {
   "name": "Nextcloud",
-  "installname": "Nextcloud",
+  "installname": "nextcloud",
   "type": "AppImage",
-  "description": "Nextcloud desktop synchronization client ",
+  "description": "Nextcloud desktop synchronization client",
   "authors": [
     {
-      "name": "null",
-      "url": "https://download.nextcloud.com/desktop/releases/Linux"
+      "name": "Nextcloud",
+      "url": "https://nextcloud.com/"
     }
   ],
   "links": [
     {
       "type": "Other",
-      "url": "https://download.nextcloud.com/desktop/releases/Linux"
+      "url": "https://nextcloud.com/"
     },
     {
       "type": "Install",
-      "url": "https://download.nextcloud.com/desktop/releases/Linux/Nextcloud-2.3.2-x86_64.AppImage"
+      "url": "https://download.nextcloud.com/desktop/releases/Linux/Nextcloud-2.3.3-x86_64.AppImage"
     }
   ],
   "installinfo": [

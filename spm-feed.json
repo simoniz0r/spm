@@ -3,7 +3,7 @@
   "home_page_url": "https://github.com/simoniz0r/spm",
   "feed_url": "https://simoniz0r.github.io/spm-feed.json",
   "description": "json feed containing package information for spm.",
-  "updated_at": "Wed May  9 16:15:32 CDT 2018",
+  "updated_at": "Wed May  9 22:10:24 CDT 2018",
   "expired": false,
   "appimages": [
     {
@@ -7628,23 +7628,23 @@
     },
     {
       "name": "Nextcloud",
-      "installname": "Nextcloud",
+      "installname": "nextcloud",
       "type": "AppImage",
-      "description": "Nextcloud desktop synchronization client ",
+      "description": "Nextcloud desktop synchronization client",
       "authors": [
         {
-          "name": "null",
-          "url": "https://download.nextcloud.com/desktop/releases/Linux"
+          "name": "Nextcloud",
+          "url": "https://nextcloud.com/"
         }
       ],
       "links": [
         {
           "type": "Other",
-          "url": "https://download.nextcloud.com/desktop/releases/Linux"
+          "url": "https://nextcloud.com/"
         },
         {
           "type": "Install",
-          "url": "https://download.nextcloud.com/desktop/releases/Linux/Nextcloud-2.3.2-x86_64.AppImage"
+          "url": "https://download.nextcloud.com/desktop/releases/Linux/Nextcloud-2.3.3-x86_64.AppImage"
         }
       ],
       "installinfo": [
