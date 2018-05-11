@@ -16,7 +16,7 @@
     },
     {
       "type": "Install",
-      "url": "https://bintray.com/probono/AppImages/download_file?file_path=Firefox-60.0.glibc2.7-x86_64.AppImage"
+      "url": "https://dl.bintray.com/probono/AppImages/:Firefox-60.0.glibc2.7-x86_64.AppImage"
     }
   ],
   "installinfo": [
