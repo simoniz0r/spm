@@ -16,7 +16,7 @@
     },
     {
       "type": "Install",
-      "url": "https://files.kde.org/kdenlive/release/kdenlive-18.04.0-x86_64.AppImage"
+      "url": "https://files.kde.org/kdenlive/release/kdenlive-18.04.1-x86_64.AppImage"
     }
   ],
   "installinfo": [
