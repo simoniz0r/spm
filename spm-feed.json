@@ -3,7 +3,7 @@
   "home_page_url": "https://github.com/simoniz0r/spm",
   "feed_url": "https://simoniz0r.github.io/spm-feed.json",
   "description": "json feed containing package information for spm.",
-  "updated_at": "Wed May  9 22:10:24 CDT 2018",
+  "updated_at": "Thu May 10 22:19:24 CDT 2018",
   "expired": false,
   "appimages": [
     {
@@ -1687,36 +1687,6 @@
       ]
     },
     {
-      "name": "carrot-man",
-      "installname": "carrot-man",
-      "type": "AppImage",
-      "description": "AppImage for carrot-man",
-      "authors": [
-        {
-          "name": "https://w3g3a5v6.ssl.hwcdn.net/upload2/game/103038",
-          "url": "https://w3g3a5v6.ssl.hwcdn.net/upload2/game/103038"
-        }
-      ],
-      "links": [
-        {
-          "type": "Other",
-          "url": "https://w3g3a5v6.ssl.hwcdn.net/upload2/game/103038"
-        },
-        {
-          "type": "Install",
-          "url": "https://w3g3a5v6.ssl.hwcdn.net/upload2/game/103038/336578?GoogleAccessId=507810471102@developer.gserviceaccount.com&Expires=1503077834&Signature=NSYPG%2BkIUcaRPBlPAc15LuwpaU8dyvVg3oxmhqQQFsZz5EZDWRhkXw%2BhgJmO3YBatUzddOCWFQw74UotyejxmisbrmeOtZltymQ7Mk1%2FSC2wsHd3nesYcAnqkMOP%2Bn5QMNce9LMgiViiiCgK4rnGnhcJUHZT5Spi1OnS4VAk%2B8U=&hwexp=1503078094&hwsig=b782d9d0cc39a126e7f4a1b5db855a5f"
-        }
-      ],
-      "installinfo": [
-        {
-          "version": "Not Installed",
-          "size": "Not Installed",
-          "tag": "Not Installed",
-          "status": "Not Installed"
-        }
-      ]
-    },
-    {
       "name": "CARTA",
       "installname": "CARTA",
       "type": "AppImage",
@@ -2634,7 +2604,7 @@
         },
         {
           "type": "Install",
-          "url": "https://download.kde.org/stable/digikam/digikam-5.7.0-01-x86-64.appimage"
+          "url": "https://download.kde.org/stable/digikam/digikam-5.9.0-01-x86-64.appimage"
         }
       ],
       "installinfo": [
@@ -2874,7 +2844,7 @@
         },
         {
           "type": "Install",
-          "url": "https://drawpile.net/files/appimage/Drawpile-2.0.5.1.AppImage"
+          "url": "https://drawpile.net/files/appimage/Drawpile-srv-2.0.9.AppImage"
         }
       ],
       "installinfo": [
@@ -2904,7 +2874,7 @@
         },
         {
           "type": "Install",
-          "url": "http://download.opensuse.org/repositories/home:/mastercactapus/AppImage/EaselDriver-0.3.8-latest-x86_64.AppImage"
+          "url": "http://download.opensuse.org/repositories/home:/mastercactapus/AppImage/EaselDriver-latest-x86_64.AppImage"
         }
       ],
       "installinfo": [
@@ -3100,21 +3070,21 @@
       "name": "emu-player",
       "installname": "emu-player",
       "type": "AppImage",
-      "description": "AppImage for emu-player",
+      "description": "Live TV Streamer",
       "authors": [
         {
-          "name": "https://downloads.emustream.tv",
-          "url": "https://downloads.emustream.tv"
+          "name": "emu-player",
+          "url": "https://emustream.tv/download.html"
         }
       ],
       "links": [
         {
           "type": "Other",
-          "url": "https://downloads.emustream.tv"
+          "url": "https://emustream.tv/download.html"
         },
         {
           "type": "Install",
-          "url": "https://downloads.emustream.tv/emu-player-64-1.0.5.appimage"
+          "url": "https://downloads.emustream.tv/emu-player-64-1.0.6.appimage"
         }
       ],
       "installinfo": [
@@ -3624,7 +3594,7 @@
         },
         {
           "type": "Install",
-          "url": "http://depot.flexvdi.com/clients/linux-x86_64/flexvdi-linux-client-2.2.12-3-x86_64.AppImage"
+          "url": "https://depot.flexvdi.com/clients/linux-x86_64/flexvdi-linux-client-2.2.14-x86_64.AppImage"
         }
       ],
       "installinfo": [
@@ -3877,36 +3847,6 @@
       ]
     },
     {
-      "name": "geometrize",
-      "installname": "geometrize",
-      "type": "AppImage",
-      "description": "AppImage for geometrize",
-      "authors": [
-        {
-          "name": "https://geometrize-installer-bucket.s3.amazonaws.com/linux",
-          "url": "https://geometrize-installer-bucket.s3.amazonaws.com/linux"
-        }
-      ],
-      "links": [
-        {
-          "type": "Other",
-          "url": "https://geometrize-installer-bucket.s3.amazonaws.com/linux"
-        },
-        {
-          "type": "Install",
-          "url": "https://geometrize-installer-bucket.s3.amazonaws.com/linux/geometrize_200.1_linux_g%2B%2B-7.AppImage"
-        }
-      ],
-      "installinfo": [
-        {
-          "version": "Not Installed",
-          "size": "Not Installed",
-          "tag": "Not Installed",
-          "status": "Not Installed"
-        }
-      ]
-    },
-    {
       "name": "GetThermal",
       "installname": "GetThermal",
       "type": "AppImage",
@@ -4135,36 +4075,6 @@
         {
           "type": "Install",
           "url": "https://github.com/jimevins/glabels-qt/releases"
-        }
-      ],
-      "installinfo": [
-        {
-          "version": "Not Installed",
-          "size": "Not Installed",
-          "tag": "Not Installed",
-          "status": "Not Installed"
-        }
-      ]
-    },
-    {
-      "name": "Godot",
-      "installname": "Godot",
-      "type": "AppImage",
-      "description": "AppImage for Godot",
-      "authors": [
-        {
-          "name": "https://dl.bintray.com/calinou/godot",
-          "url": "https://dl.bintray.com/calinou/godot"
-        }
-      ],
-      "links": [
-        {
-          "type": "Other",
-          "url": "https://dl.bintray.com/calinou/godot"
-        },
-        {
-          "type": "Install",
-          "url": "https://dl.bintray.com/calinou/godot/Godot-Linux-x86_64-2017-08-18.445b0ab.AppImage"
         }
       ],
       "installinfo": [
@@ -5694,7 +5604,7 @@
         },
         {
           "type": "Install",
-          "url": "https://files.kde.org/kdenlive/release/kdenlive-18.04.0-x86_64.AppImage"
+          "url": "https://files.kde.org/kdenlive/release/kdenlive-18.04.1-x86_64.AppImage"
         }
       ],
       "installinfo": [
@@ -6324,7 +6234,7 @@
         },
         {
           "type": "Install",
-          "url": "http://www.livezilla.net/downloads/pubfiles/livezilla_app_linux_x64_1.1.0.AppImage"
+          "url": "http://www.livezilla.net/downloads/pubfiles/livezilla_app_linux_x64_1.2.3.AppImage"
         }
       ],
       "installinfo": [
@@ -7434,7 +7344,7 @@
         },
         {
           "type": "Install",
-          "url": "https://ftp.osuosl.org/pub/musescore/releases/MuseScore-2.1/MuseScore-2.1-x86_64.AppImage"
+          "url": "https://ftp.osuosl.org/pub/musescore/releases/MuseScore-2.2/MuseScore-2.2-x86_64.AppImage"
         }
       ],
       "installinfo": [
@@ -7524,7 +7434,7 @@
         },
         {
           "type": "Install",
-          "url": "https://files.kuudere.moe/nbb/linux/nbb-1.0.1-x86_64.AppImage"
+          "url": "https://files.kuudere.moe/nbb/linux/nbb-1.1.0-x86_64.AppImage"
         }
       ],
       "installinfo": [
@@ -7784,17 +7694,17 @@
       "authors": [
         {
           "name": "null",
-          "url": "https://sourceforge.net/projects/nootka/files/Nootka-1.4.3/nootka-1.4.3-x86_64.AppImage"
+          "url": "https://sourceforge.net/projects/nootka/"
         }
       ],
       "links": [
         {
           "type": "Other",
-          "url": "https://sourceforge.net/projects/nootka/files/Nootka-1.4.3/nootka-1.4.3-x86_64.AppImage"
+          "url": "https://sourceforge.net/projects/nootka/"
         },
         {
           "type": "Install",
-          "url": "https://sourceforge.net/projects/nootka/files/Nootka-1.4.3/nootka-1.4.3-x86_64.AppImage/download"
+          "url": "https://sourceforge.net/projects/nootka/files/Nootka-1.4.5/nootka-1.4.5-x86_64.AppImage/download"
         }
       ],
       "installinfo": [
@@ -9024,7 +8934,7 @@
         },
         {
           "type": "Install",
-          "url": "https://knapsu.eu/plex/Plex_Media_Player_2.1.1.703-79cdfa5c_x86-64.AppImage"
+          "url": "https://knapsu.eu/data/plex/Plex_Media_Player_2.10.0.849-e02dbeca_x64.AppImage"
         }
       ],
       "installinfo": [
@@ -10357,36 +10267,6 @@
       ]
     },
     {
-      "name": "Ricin",
-      "installname": "Ricin",
-      "type": "AppImage",
-      "description": "A dead-simple but powerful Tox client. ",
-      "authors": [
-        {
-          "name": "null",
-          "url": "https://cdn.konv.im/linux"
-        }
-      ],
-      "links": [
-        {
-          "type": "Other",
-          "url": "https://cdn.konv.im/linux"
-        },
-        {
-          "type": "Install",
-          "url": "https://cdn.konv.im/linux/ricin-0.2.8-glibc2.14-x86-64.appimage"
-        }
-      ],
-      "installinfo": [
-        {
-          "version": "Not Installed",
-          "size": "Not Installed",
-          "tag": "Not Installed",
-          "status": "Not Installed"
-        }
-      ]
-    },
-    {
       "name": "RPCS3",
       "installname": "RPCS3",
       "type": "AppImage",
@@ -10404,7 +10284,7 @@
         },
         {
           "type": "Install",
-          "url": "https://rpcs3.net/cdn/builds/rpcs3-v0.0.3-2017-09-19-5c93ace-8147_linux64.AppImage"
+          "url": "https://rpcs3.net/cdn/builds/rpcs3-v0.0.5-6697-753d8170_linux64.AppImage"
         }
       ],
       "installinfo": [
@@ -10525,36 +10405,6 @@
         {
           "type": "Install",
           "url": "https://github.com/codeforscience/sciencefair/releases"
-        }
-      ],
-      "installinfo": [
-        {
-          "version": "Not Installed",
-          "size": "Not Installed",
-          "tag": "Not Installed",
-          "status": "Not Installed"
-        }
-      ]
-    },
-    {
-      "name": "Scribus",
-      "installname": "Scribus",
-      "type": "AppImage",
-      "description": "Open Source Page Layout and Desktop Publishing (DTP) ",
-      "authors": [
-        {
-          "name": "null",
-          "url": "https://transfer.sh/JjAuJ"
-        }
-      ],
-      "links": [
-        {
-          "type": "Other",
-          "url": "https://transfer.sh/JjAuJ"
-        },
-        {
-          "type": "Install",
-          "url": "https://transfer.sh/JjAuJ/Scribus-git5a088ba-glibc2.14.glibc2.14-x86_64.AppImage"
         }
       ],
       "installinfo": [
@@ -11544,7 +11394,7 @@
         },
         {
           "type": "Install",
-          "url": "http://makerbox.org.nz/software/stopgo/stopgo-0.0.9/stopgo.AppImage"
+          "url": "http://makerbox.org.nz/software/stopgo/stopgo-0.33.0/stopgo.AppImage"
         }
       ],
       "installinfo": [
@@ -11620,21 +11470,21 @@
       "name": "Stremio",
       "installname": "Stremio",
       "type": "AppImage",
-      "description": "AppImage for Stremio",
+      "description": "All the Video Content You Enjoy in One Place",
       "authors": [
         {
-          "name": "https://dl.strem.io/linux/v4.0.0-beta.29",
-          "url": "https://dl.strem.io/linux/v4.0.0-beta.29"
+          "name": "strem.io",
+          "url": "https://strem.io"
         }
       ],
       "links": [
         {
           "type": "Other",
-          "url": "https://dl.strem.io/linux/v4.0.0-beta.29"
+          "url": "https://strem.io"
         },
         {
           "type": "Install",
-          "url": "https://dl.strem.io/linux/v4.0.0-beta.29/Stremio+4.0.0-beta.29.appimage"
+          "url": "https://dl.strem.io/linux/v4.0.17/Stremio+4.0.17.appimage"
         }
       ],
       "installinfo": [
@@ -11893,18 +11743,18 @@
       "description": "AppImage for SynfigStudio",
       "authors": [
         {
-          "name": "https://sourceforge.net/projects/synfig/files/snapshots/1.3.4-20170810/SynfigStudio-1.3.4-testing-17.08.10-linux64-9fecd.appimage",
-          "url": "https://sourceforge.net/projects/synfig/files/snapshots/1.3.4-20170810/SynfigStudio-1.3.4-testing-17.08.10-linux64-9fecd.appimage"
+          "name": "synfig",
+          "url": "https://sourceforge.net/projects/synfig/"
         }
       ],
       "links": [
         {
           "type": "Other",
-          "url": "https://sourceforge.net/projects/synfig/files/snapshots/1.3.4-20170810/SynfigStudio-1.3.4-testing-17.08.10-linux64-9fecd.appimage"
+          "url": "https://sourceforge.net/projects/synfig/"
         },
         {
           "type": "Install",
-          "url": "https://sourceforge.net/projects/synfig/files/snapshots/1.3.4-20170810/SynfigStudio-1.3.4-testing-17.08.10-linux64-9fecd.appimage/download"
+          "url": "https://sourceforge.net/projects/synfig/files/snapshots/1.3.6-20180126/SynfigStudio-1.3.6-testing-18.01.26-linux64-600b6.appimage/download"
         }
       ],
       "installinfo": [
