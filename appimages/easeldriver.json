@@ -16,7 +16,7 @@
     },
     {
       "type": "Install",
-      "url": "http://download.opensuse.org/repositories/home:/mastercactapus/AppImage/EaselDriver-0.3.8-latest-x86_64.AppImage"
+      "url": "http://download.opensuse.org/repositories/home:/mastercactapus/AppImage/EaselDriver-latest-x86_64.AppImage"
     }
   ],
   "installinfo": [
