@@ -3,7 +3,7 @@
   "home_page_url": "https://github.com/simoniz0r/spm",
   "feed_url": "https://simoniz0r.github.io/spm-feed.json",
   "description": "json feed containing package information for spm.",
-  "updated_at": "Thu May 10 22:35:30 CDT 2018",
+  "updated_at": "Thu May 10 22:39:06 CDT 2018",
   "expired": false,
   "appimages": [
     {
@@ -3534,7 +3534,7 @@
         },
         {
           "type": "Install",
-          "url": "https://dl.bintray.com/probono/AppImages/:Firefox-60.0.glibc2.7-x86_64.AppImage"
+          "url": "https://dl.bintray.com/probono/AppImages/Firefox-60.0.glibc2.7-x86_64.AppImage"
         }
       ],
       "installinfo": [
