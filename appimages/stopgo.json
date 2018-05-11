@@ -16,7 +16,7 @@
     },
     {
       "type": "Install",
-      "url": "http://makerbox.org.nz/software/stopgo/stopgo-0.0.9/stopgo.AppImage"
+      "url": "http://makerbox.org.nz/software/stopgo/stopgo-0.33.0/stopgo.AppImage"
     }
   ],
   "installinfo": [
