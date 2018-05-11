@@ -2,21 +2,21 @@
   "name": "Stremio",
   "installname": "Stremio",
   "type": "AppImage",
-  "description": "AppImage for Stremio",
+  "description": "All the Video Content You Enjoy in One Place",
   "authors": [
     {
-      "name": "https://dl.strem.io/linux/v4.0.0-beta.29",
-      "url": "https://dl.strem.io/linux/v4.0.0-beta.29"
+      "name": "strem.io",
+      "url": "https://strem.io"
     }
   ],
   "links": [
     {
       "type": "Other",
-      "url": "https://dl.strem.io/linux/v4.0.0-beta.29"
+      "url": "https://strem.io"
     },
     {
       "type": "Install",
-      "url": "https://dl.strem.io/linux/v4.0.0-beta.29/Stremio+4.0.0-beta.29.appimage"
+      "url": "https://dl.strem.io/linux/v4.0.17/Stremio+4.0.17.appimage"
     }
   ],
   "installinfo": [
