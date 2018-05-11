@@ -486,7 +486,7 @@ function updatelist() {
         CURRENT_NUM=1
         for file in $(dir -C -w 1 "$CONFIG_DIR"/list); do
             echo -ne "$(tput setaf $CLR_GREEN)Parsing info for package $CURRENT_NUM/$NUM_PACKAGES...$(tput sgr0)\r"
-            PACKAGE_NAME="$(jq -r '.installname' "$CONFIG_DIR"/list/"$file" | tr '[:upper:]' '[:lower:]')"
+            PACKAGE_NAME="$(grep '"installname":' "$CONFIG_DIR"/list/"$file" | cut -f4 -d'"' | tr '[:upper:]' '[:lower:]')"
             mv "$CONFIG_DIR"/list/"$file" "$CONFIG_DIR"/list/"$PACKAGE_NAME.json"
             CURRENT_NUM=$(($CURRENT_NUM+1))
         done
