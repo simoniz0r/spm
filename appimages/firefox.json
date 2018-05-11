@@ -1,0 +1,30 @@
+{
+  "name": "Firefox",
+  "installname": "firefox",
+  "type": "AppImage",
+  "description": "",
+  "authors": [
+    {
+      "name": "Mozilla",
+      "url": "https://mozilla.org"
+    }
+  ],
+  "links": [
+    {
+      "type": "Other",
+      "url": "https://bintray.com/probono/AppImages/Firefox"
+    },
+    {
+      "type": "Install",
+      "url": "https://bintray.com/probono/AppImages/download_file?file_path=Firefox-60.0.glibc2.7-x86_64.AppImage"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
+    }
+  ]
+}

@@ -3,7 +3,7 @@
   "home_page_url": "https://github.com/simoniz0r/spm",
   "feed_url": "https://simoniz0r.github.io/spm-feed.json",
   "description": "json feed containing package information for spm.",
-  "updated_at": "Thu May 10 22:19:24 CDT 2018",
+  "updated_at": "Thu May 10 22:30:04 CDT 2018",
   "expired": false,
   "appimages": [
     {
@@ -3505,6 +3505,36 @@
         {
           "type": "Install",
           "url": "https://github.com/CarVac/filmulator-gui/releases"
+        }
+      ],
+      "installinfo": [
+        {
+          "version": "Not Installed",
+          "size": "Not Installed",
+          "tag": "Not Installed",
+          "status": "Not Installed"
+        }
+      ]
+    },
+    {
+      "name": "Firefox",
+      "installname": "firefox",
+      "type": "AppImage",
+      "description": "",
+      "authors": [
+        {
+          "name": "Mozilla",
+          "url": "https://mozilla.org"
+        }
+      ],
+      "links": [
+        {
+          "type": "Other",
+          "url": "https://bintray.com/probono/AppImages/Firefox"
+        },
+        {
+          "type": "Install",
+          "url": "https://bintray.com/probono/AppImages/download_file?file_path=Firefox-60.0.glibc2.7-x86_64.AppImage"
         }
       ],
       "installinfo": [
