@@ -2,21 +2,21 @@
   "name": "emu-player",
   "installname": "emu-player",
   "type": "AppImage",
-  "description": "AppImage for emu-player",
+  "description": "Live TV Streamer",
   "authors": [
     {
-      "name": "https://downloads.emustream.tv",
-      "url": "https://downloads.emustream.tv"
+      "name": "emu-player",
+      "url": "https://emustream.tv/download.html"
     }
   ],
   "links": [
     {
       "type": "Other",
-      "url": "https://downloads.emustream.tv"
+      "url": "https://emustream.tv/download.html"
     },
     {
       "type": "Install",
-      "url": "https://downloads.emustream.tv/emu-player-64-1.0.5.appimage"
+      "url": "https://downloads.emustream.tv/emu-player-64-1.0.6.appimage"
     }
   ],
   "installinfo": [
