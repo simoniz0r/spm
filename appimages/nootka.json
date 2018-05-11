@@ -6,17 +6,17 @@
   "authors": [
     {
       "name": "null",
-      "url": "https://sourceforge.net/projects/nootka/files/Nootka-1.4.3/nootka-1.4.3-x86_64.AppImage"
+      "url": "https://sourceforge.net/projects/nootka/"
     }
   ],
   "links": [
     {
       "type": "Other",
-      "url": "https://sourceforge.net/projects/nootka/files/Nootka-1.4.3/nootka-1.4.3-x86_64.AppImage"
+      "url": "https://sourceforge.net/projects/nootka/"
     },
     {
       "type": "Install",
-      "url": "https://sourceforge.net/projects/nootka/files/Nootka-1.4.3/nootka-1.4.3-x86_64.AppImage/download"
+      "url": "https://sourceforge.net/projects/nootka/files/Nootka-1.4.5/nootka-1.4.5-x86_64.AppImage/download"
     }
   ],
   "installinfo": [
