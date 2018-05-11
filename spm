@@ -753,7 +753,7 @@ function spmconfig() {
 
 # Function to output help text
 function spmhelp() {
-printf '%s\n' "spm 0.2.04
+printf '%s\n' "spm 0.2.05
 Usage: spm [option] [package]
 spm is a command line package manager provides packages in AppImage format.
 spm uses https://github.com/simoniz0r/spm/releases/download/feed/spm-feed.json
