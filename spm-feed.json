@@ -3,7 +3,7 @@
   "home_page_url": "https://github.com/simoniz0r/spm",
   "feed_url": "https://simoniz0r.github.io/spm-feed.json",
   "description": "json feed containing package information for spm.",
-  "updated_at": "Thu May 17 03:09:15 CDT 2018",
+  "updated_at": "Thu May 17 03:14:40 CDT 2018",
   "expired": false,
   "appimages": [
     {
@@ -13627,7 +13627,7 @@
       ]
     },
     {
-      "name": "zulip",
+      "name": "Zulip",
       "installname": "zulip",
       "type": "AppImage",
       "description": "zulip - Zulip Desktop Client",
