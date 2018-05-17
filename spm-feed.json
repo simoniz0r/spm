@@ -3,7 +3,7 @@
   "home_page_url": "https://github.com/simoniz0r/spm",
   "feed_url": "https://simoniz0r.github.io/spm-feed.json",
   "description": "json feed containing package information for spm.",
-  "updated_at": "Thu May 10 22:39:06 CDT 2018",
+  "updated_at": "Wed May 16 22:55:30 CDT 2018",
   "expired": false,
   "appimages": [
     {
@@ -7513,18 +7513,18 @@
       "description": "A fast highly customizable system info script that supports a variety of OSes",
       "authors": [
         {
-          "name": "simoniz0r",
-          "url": "https://github.com/simoniz0r"
+          "name": "dylanaraps",
+          "url": "https://github.com/dylanaraps"
         }
       ],
       "links": [
         {
           "type": "GitHub",
-          "url": "simoniz0r/neofetch"
+          "url": "dylanaraps/neofetch"
         },
         {
           "type": "Install",
-          "url": "https://github.com/simoniz0r/neofetch/releases"
+          "url": "https://github.com/dylanaraps/neofetch/releases"
         }
       ],
       "installinfo": [
