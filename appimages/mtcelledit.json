@@ -1,0 +1,30 @@
+{
+  "name": "mtCellEdit",
+  "description": "Lightweight spreadsheet program",
+  "categories": [
+    "Office"
+  ],
+  "authors": [
+    {
+      "name": "matyler",
+      "url": "https://github.com/matyler"
+    }
+  ],
+  "license": "GPL-3.0",
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "matyler/mtCellEdit"
+    },
+    {
+      "type": "Download",
+      "url": "https://github.com/matyler/mtCellEdit/releases"
+    }
+  ],
+  "icons": [
+    "mtCellEdit/icons/scalable/mtcelledit-qt4.svg"
+  ],
+  "screenshots": [
+    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/mtCellEdit/screenshot.png"
+  ]
+}
