@@ -1,16 +1,14 @@
 {
   "name": "IGdm",
+  "installname": "igdm",
+  "type": "AppImage",
   "description": "Desktop application for Instagram DMs",
-  "categories": [
-    "Chat"
-  ],
   "authors": [
     {
       "name": "ifedapoolarewaju",
       "url": "https://github.com/ifedapoolarewaju"
     }
   ],
-  "license": "MIT",
   "links": [
     {
       "type": "GitHub",
@@ -21,10 +19,12 @@
       "url": "https://github.com/ifedapoolarewaju/igdm/releases"
     }
   ],
-  "icons": [
-    "IGdm/icons/128x128/igdm.png"
-  ],
-  "screenshots": [
-    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/IGdm/screenshot.png"
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
+    }
   ]
 }

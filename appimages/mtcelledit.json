@@ -1,16 +1,14 @@
 {
   "name": "mtCellEdit",
+  "installname": "mtcelledit",
+  "type": "AppImage",
   "description": "Lightweight spreadsheet program",
-  "categories": [
-    "Office"
-  ],
   "authors": [
     {
       "name": "matyler",
       "url": "https://github.com/matyler"
     }
   ],
-  "license": "GPL-3.0",
   "links": [
     {
       "type": "GitHub",
@@ -21,10 +19,12 @@
       "url": "https://github.com/matyler/mtCellEdit/releases"
     }
   ],
-  "icons": [
-    "mtCellEdit/icons/scalable/mtcelledit-qt4.svg"
-  ],
-  "screenshots": [
-    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/mtCellEdit/screenshot.png"
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
+    }
   ]
 }

@@ -1,16 +1,14 @@
 {
   "name": "Museeks",
+  "installname": "museeks",
+  "type": "AppImage",
   "description": "A simple, clean and cross-platform music player, written with Node.js, Electron and React.js.",
-  "categories": [
-    "AudioVideo"
-  ],
   "authors": [
     {
       "name": "KeitIG",
       "url": "https://github.com/KeitIG"
     }
   ],
-  "license": "MIT",
   "links": [
     {
       "type": "GitHub",
@@ -21,10 +19,12 @@
       "url": "https://github.com/KeitIG/museeks/releases"
     }
   ],
-  "icons": [
-    "Museeks/icons/128x128/museeks.png"
-  ],
-  "screenshots": [
-    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/Museeks/screenshot.png"
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
+    }
   ]
 }
