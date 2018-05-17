@@ -1,0 +1,30 @@
+{
+  "name": "ImageMosaicWall",
+  "description": "Create a Mosaic Image Wall from a set of images",
+  "categories": [
+    "Graphics"
+  ],
+  "authors": [
+    {
+      "name": "scheckmedia",
+      "url": "https://github.com/scheckmedia"
+    }
+  ],
+  "license": "GPL-3.0",
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "scheckmedia/ImageMosaicWall"
+    },
+    {
+      "type": "Download",
+      "url": "https://github.com/scheckmedia/ImageMosaicWall/releases"
+    }
+  ],
+  "icons": [
+    "ImageMosaicWall/icons/256x256/ImageMosaicWall.png"
+  ],
+  "screenshots": [
+    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/ImageMosaicWall/screenshot.png"
+  ]
+}
