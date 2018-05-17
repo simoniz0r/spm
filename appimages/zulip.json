@@ -1,8 +1,8 @@
 {
-  "name": "zulip-electron",
-  "installname": "zulip-electron",
+  "name": "zulip",
+  "installname": "zulip",
   "type": "AppImage",
-  "description": "zulip-electron - Zulip Desktop Client",
+  "description": "zulip - Zulip Desktop Client",
   "authors": [
     {
       "name": "zulip",
