@@ -1,0 +1,30 @@
+{
+  "name": "Insight",
+  "description": "The GUI front-end of GDB with Tcl/Tk.",
+  "categories": [
+    "System"
+  ],
+  "authors": [
+    {
+      "name": "antony-jr",
+      "url": "https://github.com/antony-jr"
+    }
+  ],
+  "license": "MIT",
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "antony-jr/insight"
+    },
+    {
+      "type": "Download",
+      "url": "https://github.com/antony-jr/insight/releases"
+    }
+  ],
+  "icons": [
+    "Insight/icons/150x60/insight-icon.png"
+  ],
+  "screenshots": [
+    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/Insight/screenshot.png"
+  ]
+}
