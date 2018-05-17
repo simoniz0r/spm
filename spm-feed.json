@@ -3,7 +3,7 @@
   "home_page_url": "https://github.com/simoniz0r/spm",
   "feed_url": "https://simoniz0r.github.io/spm-feed.json",
   "description": "json feed containing package information for spm.",
-  "updated_at": "Wed May 16 22:55:30 CDT 2018",
+  "updated_at": "Thu May 17 03:09:15 CDT 2018",
   "expired": false,
   "appimages": [
     {
@@ -4658,9 +4658,9 @@
     },
     {
       "name": "IGdm",
-      "installname": "IGdm",
+      "installname": "igdm",
       "type": "AppImage",
-      "description": "igdm - Desktop application for Instagram DMs",
+      "description": "Desktop application for Instagram DMs",
       "authors": [
         {
           "name": "ifedapoolarewaju",
@@ -4673,7 +4673,7 @@
           "url": "ifedapoolarewaju/igdm"
         },
         {
-          "type": "Install",
+          "type": "Download",
           "url": "https://github.com/ifedapoolarewaju/igdm/releases"
         }
       ],
@@ -4735,6 +4735,36 @@
         {
           "type": "Install",
           "url": "https://github.com/ImageMagick/ImageMagick/releases"
+        }
+      ],
+      "installinfo": [
+        {
+          "version": "Not Installed",
+          "size": "Not Installed",
+          "tag": "Not Installed",
+          "status": "Not Installed"
+        }
+      ]
+    },
+    {
+      "name": "ImageMosaicWall",
+      "installname": "imagemosaicwall",
+      "type": "AppImage",
+      "description": "Create a Mosaic Image Wall from a set of images",
+      "authors": [
+        {
+          "name": "scheckmedia",
+          "url": "https://github.com/scheckmedia"
+        }
+      ],
+      "links": [
+        {
+          "type": "GitHub",
+          "url": "scheckmedia/ImageMosaicWall"
+        },
+        {
+          "type": "Download",
+          "url": "https://github.com/scheckmedia/ImageMosaicWall/releases"
         }
       ],
       "installinfo": [
@@ -4915,6 +4945,36 @@
         {
           "type": "Install",
           "url": "https://github.com/fetacore/Infinitex/releases"
+        }
+      ],
+      "installinfo": [
+        {
+          "version": "Not Installed",
+          "size": "Not Installed",
+          "tag": "Not Installed",
+          "status": "Not Installed"
+        }
+      ]
+    },
+    {
+      "name": "Insight",
+      "installname": "insight",
+      "type": "AppImage",
+      "description": "The GUI front-end of GDB with Tcl/Tk.",
+      "authors": [
+        {
+          "name": "antony-jr",
+          "url": "https://github.com/antony-jr"
+        }
+      ],
+      "links": [
+        {
+          "type": "GitHub",
+          "url": "antony-jr/insight"
+        },
+        {
+          "type": "Download",
+          "url": "https://github.com/antony-jr/insight/releases"
         }
       ],
       "installinfo": [
@@ -7255,6 +7315,36 @@
         {
           "type": "Install",
           "url": "https://dl.karmainside.com/ms-teams-capsule/ms-teams-capsule-latest-x86_64.AppImage"
+        }
+      ],
+      "installinfo": [
+        {
+          "version": "Not Installed",
+          "size": "Not Installed",
+          "tag": "Not Installed",
+          "status": "Not Installed"
+        }
+      ]
+    },
+    {
+      "name": "mtCellEdit",
+      "installname": "mtcelledit",
+      "type": "AppImage",
+      "description": "Lightweight spreadsheet program",
+      "authors": [
+        {
+          "name": "matyler",
+          "url": "https://github.com/matyler"
+        }
+      ],
+      "links": [
+        {
+          "type": "GitHub",
+          "url": "matyler/mtCellEdit"
+        },
+        {
+          "type": "Download",
+          "url": "https://github.com/matyler/mtCellEdit/releases"
         }
       ],
       "installinfo": [
@@ -13537,10 +13627,10 @@
       ]
     },
     {
-      "name": "zulip-electron",
-      "installname": "zulip-electron",
+      "name": "zulip",
+      "installname": "zulip",
       "type": "AppImage",
-      "description": "zulip-electron - Zulip Desktop Client",
+      "description": "zulip - Zulip Desktop Client",
       "authors": [
         {
           "name": "zulip",
