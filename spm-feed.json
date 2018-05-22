@@ -3,7 +3,7 @@
   "home_page_url": "https://github.com/simoniz0r/spm",
   "feed_url": "https://simoniz0r.github.io/spm-feed.json",
   "description": "json feed containing package information for spm.",
-  "updated_at": "Thu May 17 03:14:40 CDT 2018",
+  "updated_at": "Tue May 22 18:42:22 CDT 2018",
   "expired": false,
   "appimages": [
     {
@@ -115,6 +115,36 @@
         {
           "type": "Install",
           "url": "https://github.com/AidosKuneen/aidos-wallet/releases"
+        }
+      ],
+      "installinfo": [
+        {
+          "version": "Not Installed",
+          "size": "Not Installed",
+          "tag": "Not Installed",
+          "status": "Not Installed"
+        }
+      ]
+    },
+    {
+      "name": "aillio-ts",
+      "installname": "aillio-ts",
+      "type": "AppImage",
+      "description": "The desktop application for Aillio Bullet R1",
+      "authors": [
+        {
+          "name": "roastworld",
+          "url": "https://github.com/roastworld"
+        }
+      ],
+      "links": [
+        {
+          "type": "GitHub",
+          "url": "roastworld/roast-time-release"
+        },
+        {
+          "type": "Download",
+          "url": "https://github.com/roastworld/roast-time-release/releases"
         }
       ],
       "installinfo": [
@@ -2857,6 +2887,36 @@
       ]
     },
     {
+      "name": "Dwyco_Phoo",
+      "installname": "dwyco_phoo",
+      "type": "AppImage",
+      "description": "Dwyco Phoo Chat and Video Calling",
+      "authors": [
+        {
+          "name": "blindchimp",
+          "url": "https://github.com/blindchimp"
+        }
+      ],
+      "links": [
+        {
+          "type": "GitHub",
+          "url": "blindchimp/dwyco"
+        },
+        {
+          "type": "Download",
+          "url": "https://github.com/blindchimp/dwyco/releases"
+        }
+      ],
+      "installinfo": [
+        {
+          "version": "Not Installed",
+          "size": "Not Installed",
+          "tag": "Not Installed",
+          "status": "Not Installed"
+        }
+      ]
+    },
+    {
       "name": "EaselDriver",
       "installname": "EaselDriver",
       "type": "AppImage",
@@ -3955,6 +4015,36 @@
         {
           "type": "Install",
           "url": "https://github.com/lettier/gifcurry/releases"
+        }
+      ],
+      "installinfo": [
+        {
+          "version": "Not Installed",
+          "size": "Not Installed",
+          "tag": "Not Installed",
+          "status": "Not Installed"
+        }
+      ]
+    },
+    {
+      "name": "Gigantum",
+      "installname": "gigantum",
+      "type": "AppImage",
+      "description": "Gigantum",
+      "authors": [
+        {
+          "name": "gigantum",
+          "url": "https://github.com/gigantum"
+        }
+      ],
+      "links": [
+        {
+          "type": "GitHub",
+          "url": "gigantum/gigantum-desktop"
+        },
+        {
+          "type": "Download",
+          "url": "https://github.com/gigantum/gigantum-desktop/releases"
         }
       ],
       "installinfo": [
@@ -5827,6 +5917,36 @@
       ]
     },
     {
+      "name": "KeyboardClient",
+      "installname": "keyboardclient",
+      "type": "AppImage",
+      "description": "Keyboard Settings Client",
+      "authors": [
+        {
+          "name": "chrisandreae",
+          "url": "https://github.com/chrisandreae"
+        }
+      ],
+      "links": [
+        {
+          "type": "GitHub",
+          "url": "chrisandreae/keyboard-firmware"
+        },
+        {
+          "type": "Download",
+          "url": "https://github.com/chrisandreae/keyboard-firmware/releases"
+        }
+      ],
+      "installinfo": [
+        {
+          "version": "Not Installed",
+          "size": "Not Installed",
+          "tag": "Not Installed",
+          "status": "Not Installed"
+        }
+      ]
+    },
+    {
       "name": "Krita",
       "installname": "krita",
       "type": "AppImage",
@@ -5844,7 +5964,7 @@
         },
         {
           "type": "Install",
-          "url": "https://download.kde.org/stable/krita/4.0.1/krita-4.0.1-x86_64.appimage"
+          "url": "https://download.kde.org/stable/krita/4.0.3/krita-4.0.3-x86_64.appimage"
         }
       ],
       "installinfo": [
@@ -8827,6 +8947,36 @@
       ]
     },
     {
+      "name": "Pile",
+      "installname": "pile",
+      "type": "AppImage",
+      "description": "A simple & powerful app to organize your piled work at one place",
+      "authors": [
+        {
+          "name": "mtobeiyf",
+          "url": "https://github.com/mtobeiyf"
+        }
+      ],
+      "links": [
+        {
+          "type": "GitHub",
+          "url": "mtobeiyf/pile"
+        },
+        {
+          "type": "Download",
+          "url": "https://github.com/mtobeiyf/pile/releases"
+        }
+      ],
+      "installinfo": [
+        {
+          "version": "Not Installed",
+          "size": "Not Installed",
+          "tag": "Not Installed",
+          "status": "Not Installed"
+        }
+      ]
+    },
+    {
       "name": "pingviewer",
       "installname": "pingviewer",
       "type": "AppImage",
@@ -11077,6 +11227,36 @@
       ]
     },
     {
+      "name": "Sovren.Batch.Parser",
+      "installname": "sovren.batch.parser",
+      "type": "AppImage",
+      "description": "Sovren Batch Parser",
+      "authors": [
+        {
+          "name": "sovren",
+          "url": "https://github.com/sovren"
+        }
+      ],
+      "links": [
+        {
+          "type": "GitHub",
+          "url": "sovren/batch-utility"
+        },
+        {
+          "type": "Download",
+          "url": "https://github.com/sovren/batch-utility/releases"
+        }
+      ],
+      "installinfo": [
+        {
+          "version": "Not Installed",
+          "size": "Not Installed",
+          "tag": "Not Installed",
+          "status": "Not Installed"
+        }
+      ]
+    },
+    {
       "name": "spectrum-editor",
       "installname": "spectrum-editor",
       "type": "AppImage",
@@ -12127,6 +12307,36 @@
       ]
     },
     {
+      "name": "TimeCampDesktop",
+      "installname": "timecampdesktop",
+      "type": "AppImage",
+      "description": "TimeCamp Desktop Application",
+      "authors": [
+        {
+          "name": "timecamp",
+          "url": "https://github.com/timecamp"
+        }
+      ],
+      "links": [
+        {
+          "type": "GitHub",
+          "url": "timecamp/timecamp-desktop"
+        },
+        {
+          "type": "Download",
+          "url": "https://github.com/timecamp/timecamp-desktop/releases"
+        }
+      ],
+      "installinfo": [
+        {
+          "version": "Not Installed",
+          "size": "Not Installed",
+          "tag": "Not Installed",
+          "status": "Not Installed"
+        }
+      ]
+    },
+    {
       "name": "Tockler",
       "installname": "Tockler",
       "type": "AppImage",
@@ -13075,6 +13285,36 @@
         {
           "type": "Install",
           "url": "https://github.com/webcamoid/webcamoid/releases"
+        }
+      ],
+      "installinfo": [
+        {
+          "version": "Not Installed",
+          "size": "Not Installed",
+          "tag": "Not Installed",
+          "status": "Not Installed"
+        }
+      ]
+    },
+    {
+      "name": "WebCatalog",
+      "installname": "webcatalog",
+      "type": "AppImage",
+      "description": "Run Web Apps like Real Desktop Apps",
+      "authors": [
+        {
+          "name": "webcatalog",
+          "url": "https://getwebcatalog.com/"
+        }
+      ],
+      "links": [
+        {
+          "type": "GitHub",
+          "url": "webcatalog/webcatalog"
+        },
+        {
+          "type": "Install",
+          "url": "https://github.com/webcatalog/webcatalog/releases"
         }
       ],
       "installinfo": [
