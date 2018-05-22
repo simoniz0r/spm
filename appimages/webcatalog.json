@@ -1,0 +1,30 @@
+{
+  "name": "WebCatalog",
+  "installname": "webcatalog",
+  "type": "AppImage",
+  "description": "Run Web Apps like Real Desktop Apps",
+  "authors": [
+    {
+      "name": "webcatalog",
+      "url": "https://getwebcatalog.com/"
+    }
+  ],
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "webcatalog/webcatalog"
+    },
+    {
+      "type": "Install",
+      "url": "https://github.com/webcatalog/webcatalog/releases"
+    }
+  ],
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
+    }
+  ]
+}

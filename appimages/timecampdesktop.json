@@ -1,0 +1,30 @@
+{
+  "name": "TimeCampDesktop",
+  "description": "TimeCamp Desktop Application",
+  "categories": [
+    "Office"
+  ],
+  "authors": [
+    {
+      "name": "timecamp",
+      "url": "https://github.com/timecamp"
+    }
+  ],
+  "license": null,
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "timecamp/timecamp-desktop"
+    },
+    {
+      "type": "Download",
+      "url": "https://github.com/timecamp/timecamp-desktop/releases"
+    }
+  ],
+  "icons": [
+    "TimeCampDesktop/icons/128x122/TimeCampDesktop.png"
+  ],
+  "screenshots": [
+    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/TimeCampDesktop/screenshot.png"
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "name": "Dwyco_Phoo",
+  "description": "Dwyco Phoo Chat and Video Calling",
+  "categories": [
+    "Network"
+  ],
+  "authors": [
+    {
+      "name": "blindchimp",
+      "url": "https://github.com/blindchimp"
+    }
+  ],
+  "license": "MPL-2.0",
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "blindchimp/dwyco"
+    },
+    {
+      "type": "Download",
+      "url": "https://github.com/blindchimp/dwyco/releases"
+    }
+  ],
+  "icons": [
+    "Dwyco_Phoo/icons/32x32/phoo.png"
+  ],
+  "screenshots": [
+    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/Dwyco_Phoo/screenshot.png"
+  ]
+}

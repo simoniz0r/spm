@@ -1,0 +1,30 @@
+{
+  "name": "Gigantum",
+  "description": "Gigantum",
+  "categories": [
+    "Utility"
+  ],
+  "authors": [
+    {
+      "name": "gigantum",
+      "url": "https://github.com/gigantum"
+    }
+  ],
+  "license": "MIT",
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "gigantum/gigantum-desktop"
+    },
+    {
+      "type": "Download",
+      "url": "https://github.com/gigantum/gigantum-desktop/releases"
+    }
+  ],
+  "icons": [
+    "Gigantum/icons/128x128/gigantum.png"
+  ],
+  "screenshots": [
+    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/Gigantum/screenshot.png"
+  ]
+}
