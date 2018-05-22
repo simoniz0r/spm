@@ -1,16 +1,14 @@
 {
   "name": "Sovren.Batch.Parser",
+  "installname": "sovren.batch.parser",
+  "type": "AppImage",
   "description": "Sovren Batch Parser",
-  "categories": [
-    "Utility"
-  ],
   "authors": [
     {
       "name": "sovren",
       "url": "https://github.com/sovren"
     }
   ],
-  "license": "Apache-2.0",
   "links": [
     {
       "type": "GitHub",
@@ -21,10 +19,12 @@
       "url": "https://github.com/sovren/batch-utility/releases"
     }
   ],
-  "icons": [
-    "Sovren.Batch.Parser/icons/128x128/sovren-batch-utility.png"
-  ],
-  "screenshots": [
-    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/Sovren.Batch.Parser/screenshot.png"
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
+    }
   ]
 }

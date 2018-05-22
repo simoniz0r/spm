@@ -1,16 +1,14 @@
 {
   "name": "Gigantum",
+  "installname": "gigantum",
+  "type": "AppImage",
   "description": "Gigantum",
-  "categories": [
-    "Utility"
-  ],
   "authors": [
     {
       "name": "gigantum",
       "url": "https://github.com/gigantum"
     }
   ],
-  "license": "MIT",
   "links": [
     {
       "type": "GitHub",
@@ -21,10 +19,12 @@
       "url": "https://github.com/gigantum/gigantum-desktop/releases"
     }
   ],
-  "icons": [
-    "Gigantum/icons/128x128/gigantum.png"
-  ],
-  "screenshots": [
-    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/Gigantum/screenshot.png"
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
+    }
   ]
 }

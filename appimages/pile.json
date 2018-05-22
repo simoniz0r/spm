@@ -1,16 +1,14 @@
 {
   "name": "Pile",
+  "installname": "pile",
+  "type": "AppImage",
   "description": "A simple & powerful app to organize your piled work at one place",
-  "categories": [
-    "Utility"
-  ],
   "authors": [
     {
       "name": "mtobeiyf",
       "url": "https://github.com/mtobeiyf"
     }
   ],
-  "license": "GPL-3.0",
   "links": [
     {
       "type": "GitHub",
@@ -21,10 +19,12 @@
       "url": "https://github.com/mtobeiyf/pile/releases"
     }
   ],
-  "icons": [
-    "Pile/icons/256x256/pile.png"
-  ],
-  "screenshots": [
-    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/Pile/screenshot.png"
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
+    }
   ]
 }

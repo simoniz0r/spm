@@ -1,16 +1,14 @@
 {
   "name": "aillio-ts",
+  "installname": "aillio-ts",
+  "type": "AppImage",
   "description": "The desktop application for Aillio Bullet R1",
-  "categories": [
-    "Utility"
-  ],
   "authors": [
     {
       "name": "roastworld",
       "url": "https://github.com/roastworld"
     }
   ],
-  "license": null,
   "links": [
     {
       "type": "GitHub",
@@ -21,10 +19,12 @@
       "url": "https://github.com/roastworld/roast-time-release/releases"
     }
   ],
-  "icons": [
-    "aillio-ts/icons/256x256/aillio-ts.png"
-  ],
-  "screenshots": [
-    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/aillio-ts/screenshot.png"
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
+    }
   ]
 }

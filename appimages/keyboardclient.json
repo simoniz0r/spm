@@ -1,16 +1,14 @@
 {
   "name": "KeyboardClient",
+  "installname": "keyboardclient",
+  "type": "AppImage",
   "description": "Keyboard Settings Client",
-  "categories": [
-    "Utility"
-  ],
   "authors": [
     {
       "name": "chrisandreae",
       "url": "https://github.com/chrisandreae"
     }
   ],
-  "license": null,
   "links": [
     {
       "type": "GitHub",
@@ -21,10 +19,12 @@
       "url": "https://github.com/chrisandreae/keyboard-firmware/releases"
     }
   ],
-  "icons": [
-    "KeyboardClient/icons/scalable/KeyboardClient.svg"
-  ],
-  "screenshots": [
-    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/KeyboardClient/screenshot.png"
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
+    }
   ]
 }
