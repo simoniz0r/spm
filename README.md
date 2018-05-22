@@ -1,7 +1,7 @@
 ## spm
 
 spm is a command line package manager that mainly provides AppImages.
-spm uses https://simoniz0r.github.io/spm-feed.json to get information about packages.
+spm uses [spm-feed.json from the releases page](https://github.com/simoniz0r/spm/releases/feed) to get information about packages.
 
 spm is not responsible for bugs within packages that have been
 installed using spm.  Please report any bugs that are specific to
