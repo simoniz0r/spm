@@ -1,16 +1,14 @@
 {
   "name": "Spectrum",
+  "installname": "spectrum",
+  "type": "AppImage",
   "description": "The community platform for the future.",
-  "categories": [
-    "Network"
-  ],
   "authors": [
     {
       "name": "withspectrum",
       "url": "https://github.com/withspectrum"
     }
   ],
-  "license": "BSD-3-Clause",
   "links": [
     {
       "type": "GitHub",
@@ -21,10 +19,12 @@
       "url": "https://github.com/withspectrum/spectrum/releases"
     }
   ],
-  "icons": [
-    "Spectrum/icons/512x512/spectrum.png"
-  ],
-  "screenshots": [
-    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/Spectrum/screenshot.png"
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
+    }
   ]
 }

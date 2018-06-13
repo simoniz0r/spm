@@ -1,15 +1,14 @@
 {
   "name": "PrinterClient",
-  "categories": [
-    "Utility"
-  ],
+  "installname": "printerclient",
+  "type": "AppImage",
+  "description": "null",
   "authors": [
     {
       "name": "DevTeamSCH",
       "url": "https://github.com/DevTeamSCH"
     }
   ],
-  "license": null,
   "links": [
     {
       "type": "GitHub",
@@ -20,10 +19,12 @@
       "url": "https://github.com/DevTeamSCH/printer-client/releases"
     }
   ],
-  "icons": [
-    "PrinterClient/icons/256x256/icon.png"
-  ],
-  "screenshots": [
-    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/PrinterClient/screenshot.png"
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
+    }
   ]
 }

@@ -1,16 +1,14 @@
 {
   "name": "Bitwarden_Connector",
+  "installname": "bitwarden_connector",
+  "type": "AppImage",
   "description": "Sync your user directory to your Bitwarden organization.",
-  "categories": [
-    "Utility"
-  ],
   "authors": [
     {
       "name": "bitwarden",
       "url": "https://github.com/bitwarden"
     }
   ],
-  "license": "GPL-3.0",
   "links": [
     {
       "type": "GitHub",
@@ -21,10 +19,12 @@
       "url": "https://github.com/bitwarden/directory-connector/releases"
     }
   ],
-  "icons": [
-    "Bitwarden_Connector/icons/128x128/bitwarden-directory-connector.png"
-  ],
-  "screenshots": [
-    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/Bitwarden_Connector/screenshot.png"
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
+    }
   ]
 }

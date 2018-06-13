@@ -1,16 +1,14 @@
 {
   "name": "MLV-App",
+  "installname": "mlv-app",
+  "type": "AppImage",
   "description": "Magic Lantern Video Processing Application",
-  "categories": [
-    "AudioVideo"
-  ],
   "authors": [
     {
       "name": "ilia3101",
       "url": "https://github.com/ilia3101"
     }
   ],
-  "license": "GPL-3.0",
   "links": [
     {
       "type": "GitHub",
@@ -21,8 +19,12 @@
       "url": "https://github.com/ilia3101/MLV-App/releases"
     }
   ],
-  "icons": null,
-  "screenshots": [
-    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/MLV-App/screenshot.png"
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
+    }
   ]
 }

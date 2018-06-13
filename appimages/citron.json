@@ -1,16 +1,14 @@
 {
   "name": "Citron",
+  "installname": "citron",
+  "type": "AppImage",
   "description": "Citron Interp",
-  "categories": [
-    "Development"
-  ],
   "authors": [
     {
       "name": "alimpfard",
       "url": "https://github.com/alimpfard"
     }
   ],
-  "license": null,
   "links": [
     {
       "type": "GitHub",
@@ -21,10 +19,12 @@
       "url": "https://github.com/alimpfard/citron/releases"
     }
   ],
-  "icons": [
-    "Citron/icons/256x256/citron.png"
-  ],
-  "screenshots": [
-    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/Citron/screenshot.png"
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
+    }
   ]
 }

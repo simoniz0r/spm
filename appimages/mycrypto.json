@@ -1,16 +1,14 @@
 {
   "name": "MyCrypto",
+  "installname": "mycrypto",
+  "type": "AppImage",
   "description": "MyCrypto web and electron app",
-  "categories": [
-    "Finance"
-  ],
   "authors": [
     {
       "name": "MyCryptoHQ",
       "url": "https://github.com/MyCryptoHQ"
     }
   ],
-  "license": "MIT",
   "links": [
     {
       "type": "GitHub",
@@ -21,10 +19,12 @@
       "url": "https://github.com/MyCryptoHQ/MyCrypto/releases"
     }
   ],
-  "icons": [
-    "MyCrypto/icons/256x256/mycrypto.png"
-  ],
-  "screenshots": [
-    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/MyCrypto/screenshot.png"
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
+    }
   ]
 }

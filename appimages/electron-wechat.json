@@ -1,16 +1,14 @@
 {
   "name": "electron-wechat",
+  "installname": "electron-wechat",
+  "type": "AppImage",
   "description": "Wechat desktop application",
-  "categories": [
-    "Network"
-  ],
   "authors": [
     {
       "name": "eNkru",
       "url": "https://github.com/eNkru"
     }
   ],
-  "license": "MIT",
   "links": [
     {
       "type": "GitHub",
@@ -21,10 +19,12 @@
       "url": "https://github.com/eNkru/electron-wechat/releases"
     }
   ],
-  "icons": [
-    "electron-wechat/icons/128x128/electron-wechat.png"
-  ],
-  "screenshots": [
-    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/electron-wechat/screenshot.png"
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
+    }
   ]
 }

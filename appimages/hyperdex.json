@@ -1,16 +1,14 @@
 {
   "name": "HyperDEX",
+  "installname": "hyperdex",
+  "type": "AppImage",
   "description": "BarterDEX desktop app",
-  "categories": [
-    "Finance"
-  ],
   "authors": [
     {
       "name": "lukechilds",
       "url": "https://github.com/lukechilds"
     }
   ],
-  "license": "MIT",
   "links": [
     {
       "type": "GitHub",
@@ -21,10 +19,12 @@
       "url": "https://github.com/lukechilds/hyperdex/releases"
     }
   ],
-  "icons": [
-    "HyperDEX/icons/128x128/hyperdex.png"
-  ],
-  "screenshots": [
-    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/HyperDEX/screenshot.png"
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
+    }
   ]
 }

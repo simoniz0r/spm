@@ -1,16 +1,14 @@
 {
   "name": "LANShare",
+  "installname": "lanshare",
+  "type": "AppImage",
   "description": "Local Area Network (LAN) File Transfer",
-  "categories": [
-    "Network"
-  ],
   "authors": [
     {
       "name": "abdularis",
       "url": "https://github.com/abdularis"
     }
   ],
-  "license": "GPL-3.0",
   "links": [
     {
       "type": "GitHub",
@@ -21,10 +19,12 @@
       "url": "https://github.com/abdularis/LAN-Share/releases"
     }
   ],
-  "icons": [
-    "LANShare/icons/128x128/lanshare.png"
-  ],
-  "screenshots": [
-    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/LANShare/screenshot.png"
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
+    }
   ]
 }
