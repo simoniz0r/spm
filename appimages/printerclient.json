@@ -1,0 +1,29 @@
+{
+  "name": "PrinterClient",
+  "categories": [
+    "Utility"
+  ],
+  "authors": [
+    {
+      "name": "DevTeamSCH",
+      "url": "https://github.com/DevTeamSCH"
+    }
+  ],
+  "license": null,
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "DevTeamSCH/printer-client"
+    },
+    {
+      "type": "Download",
+      "url": "https://github.com/DevTeamSCH/printer-client/releases"
+    }
+  ],
+  "icons": [
+    "PrinterClient/icons/256x256/icon.png"
+  ],
+  "screenshots": [
+    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/PrinterClient/screenshot.png"
+  ]
+}

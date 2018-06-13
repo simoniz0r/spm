@@ -1,6 +1,6 @@
 {
-  "name": "PowerShell",
-  "installname": "PowerShell",
+  "name": "powershell",
+  "installname": "powershell",
   "type": "AppImage",
   "description": "PowerShell for every system",
   "authors": [

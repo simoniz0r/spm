@@ -1,0 +1,30 @@
+{
+  "name": "ONLYOFFICE",
+  "description": "Edit office documents",
+  "categories": [
+    "Office"
+  ],
+  "authors": [
+    {
+      "name": "ONLYOFFICE",
+      "url": "https://github.com/ONLYOFFICE"
+    }
+  ],
+  "license": "AGPL-3.0",
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "ONLYOFFICE/appimage-desktopeditors"
+    },
+    {
+      "type": "Download",
+      "url": "https://github.com/ONLYOFFICE/appimage-desktopeditors/releases"
+    }
+  ],
+  "icons": [
+    "ONLYOFFICE/icons/128x128/asc-de.png"
+  ],
+  "screenshots": [
+    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/ONLYOFFICE/screenshot.png"
+  ]
+}

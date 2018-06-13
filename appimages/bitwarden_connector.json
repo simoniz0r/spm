@@ -1,0 +1,30 @@
+{
+  "name": "Bitwarden_Connector",
+  "description": "Sync your user directory to your Bitwarden organization.",
+  "categories": [
+    "Utility"
+  ],
+  "authors": [
+    {
+      "name": "bitwarden",
+      "url": "https://github.com/bitwarden"
+    }
+  ],
+  "license": "GPL-3.0",
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "bitwarden/directory-connector"
+    },
+    {
+      "type": "Download",
+      "url": "https://github.com/bitwarden/directory-connector/releases"
+    }
+  ],
+  "icons": [
+    "Bitwarden_Connector/icons/128x128/bitwarden-directory-connector.png"
+  ],
+  "screenshots": [
+    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/Bitwarden_Connector/screenshot.png"
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "name": "ArcadeManager",
+  "description": "Arcade games manager to be used with Retropie and Recalbox",
+  "categories": [
+    "Game"
+  ],
+  "authors": [
+    {
+      "name": "cosmo0",
+      "url": "https://github.com/cosmo0"
+    }
+  ],
+  "license": "MIT",
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "cosmo0/arcade-manager"
+    },
+    {
+      "type": "Download",
+      "url": "https://github.com/cosmo0/arcade-manager/releases"
+    }
+  ],
+  "icons": [
+    "ArcadeManager/icons/128x128/arcade-manager.png"
+  ],
+  "screenshots": [
+    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/ArcadeManager/screenshot.png"
+  ]
+}

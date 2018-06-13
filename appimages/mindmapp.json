@@ -1,0 +1,30 @@
+{
+  "name": "Mindmapp",
+  "description": "Electron application to draw mind maps",
+  "categories": [
+    "Graphics"
+  ],
+  "authors": [
+    {
+      "name": "Mindmapp",
+      "url": "https://github.com/Mindmapp"
+    }
+  ],
+  "license": "MIT",
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "Mindmapp/mindmapp"
+    },
+    {
+      "type": "Download",
+      "url": "https://github.com/Mindmapp/mindmapp/releases"
+    }
+  ],
+  "icons": [
+    "Mindmapp/icons/128x128/mindmapp.png"
+  ],
+  "screenshots": [
+    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/Mindmapp/screenshot.png"
+  ]
+}

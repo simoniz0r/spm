@@ -3,7 +3,7 @@
   "home_page_url": "https://github.com/simoniz0r/spm",
   "feed_url": "https://simoniz0r.github.io/spm-feed.json",
   "description": "json feed containing package information for spm.",
-  "updated_at": "Tue May 22 18:42:22 CDT 2018",
+  "updated_at": "Tue Jun 12 21:17:25 CDT 2018",
   "expired": false,
   "appimages": [
     {
@@ -637,6 +637,36 @@
       ]
     },
     {
+      "name": "ArcadeManager",
+      "installname": "arcademanager",
+      "type": "AppImage",
+      "description": "Arcade games manager to be used with Retropie and Recalbox",
+      "authors": [
+        {
+          "name": "cosmo0",
+          "url": "https://github.com/cosmo0"
+        }
+      ],
+      "links": [
+        {
+          "type": "GitHub",
+          "url": "cosmo0/arcade-manager"
+        },
+        {
+          "type": "Download",
+          "url": "https://github.com/cosmo0/arcade-manager/releases"
+        }
+      ],
+      "installinfo": [
+        {
+          "version": "Not Installed",
+          "size": "Not Installed",
+          "tag": "Not Installed",
+          "status": "Not Installed"
+        }
+      ]
+    },
+    {
       "name": "aria2",
       "installname": "aria2",
       "type": "AppImage",
@@ -1195,6 +1225,36 @@
         {
           "type": "Install",
           "url": "https://github.com/bitshares/bitshares-ui/releases"
+        }
+      ],
+      "installinfo": [
+        {
+          "version": "Not Installed",
+          "size": "Not Installed",
+          "tag": "Not Installed",
+          "status": "Not Installed"
+        }
+      ]
+    },
+    {
+      "name": "Bitwarden_Connector",
+      "installname": "bitwarden_connector",
+      "type": "AppImage",
+      "description": "Sync your user directory to your Bitwarden organization.",
+      "authors": [
+        {
+          "name": "bitwarden",
+          "url": "https://github.com/bitwarden"
+        }
+      ],
+      "links": [
+        {
+          "type": "GitHub",
+          "url": "bitwarden/directory-connector"
+        },
+        {
+          "type": "Download",
+          "url": "https://github.com/bitwarden/directory-connector/releases"
         }
       ],
       "installinfo": [
@@ -1885,6 +1945,36 @@
         {
           "type": "Install",
           "url": "https://github.com/martinribelotta/embedded-ide-builder/releases"
+        }
+      ],
+      "installinfo": [
+        {
+          "version": "Not Installed",
+          "size": "Not Installed",
+          "tag": "Not Installed",
+          "status": "Not Installed"
+        }
+      ]
+    },
+    {
+      "name": "Citron",
+      "installname": "citron",
+      "type": "AppImage",
+      "description": "Citron Interp",
+      "authors": [
+        {
+          "name": "alimpfard",
+          "url": "https://github.com/alimpfard"
+        }
+      ],
+      "links": [
+        {
+          "type": "GitHub",
+          "url": "alimpfard/citron"
+        },
+        {
+          "type": "Download",
+          "url": "https://github.com/alimpfard/citron/releases"
         }
       ],
       "installinfo": [
@@ -2995,6 +3085,36 @@
         {
           "type": "Install",
           "url": "https://github.com/FormidableLabs/electron-webpack-dashboard/releases"
+        }
+      ],
+      "installinfo": [
+        {
+          "version": "Not Installed",
+          "size": "Not Installed",
+          "tag": "Not Installed",
+          "status": "Not Installed"
+        }
+      ]
+    },
+    {
+      "name": "electron-wechat",
+      "installname": "electron-wechat",
+      "type": "AppImage",
+      "description": "Wechat desktop application",
+      "authors": [
+        {
+          "name": "eNkru",
+          "url": "https://github.com/eNkru"
+        }
+      ],
+      "links": [
+        {
+          "type": "GitHub",
+          "url": "eNkru/electron-wechat"
+        },
+        {
+          "type": "Download",
+          "url": "https://github.com/eNkru/electron-wechat/releases"
         }
       ],
       "installinfo": [
@@ -4627,6 +4747,36 @@
       ]
     },
     {
+      "name": "HyperDEX",
+      "installname": "hyperdex",
+      "type": "AppImage",
+      "description": "BarterDEX desktop app",
+      "authors": [
+        {
+          "name": "lukechilds",
+          "url": "https://github.com/lukechilds"
+        }
+      ],
+      "links": [
+        {
+          "type": "GitHub",
+          "url": "lukechilds/hyperdex"
+        },
+        {
+          "type": "Download",
+          "url": "https://github.com/lukechilds/hyperdex/releases"
+        }
+      ],
+      "installinfo": [
+        {
+          "version": "Not Installed",
+          "size": "Not Installed",
+          "tag": "Not Installed",
+          "status": "Not Installed"
+        }
+      ]
+    },
+    {
       "name": "hyper",
       "installname": "hyper",
       "type": "AppImage",
@@ -6097,6 +6247,36 @@
       ]
     },
     {
+      "name": "LANShare",
+      "installname": "lanshare",
+      "type": "AppImage",
+      "description": "Local Area Network (LAN) File Transfer",
+      "authors": [
+        {
+          "name": "abdularis",
+          "url": "https://github.com/abdularis"
+        }
+      ],
+      "links": [
+        {
+          "type": "GitHub",
+          "url": "abdularis/LAN-Share"
+        },
+        {
+          "type": "Download",
+          "url": "https://github.com/abdularis/LAN-Share/releases"
+        }
+      ],
+      "installinfo": [
+        {
+          "version": "Not Installed",
+          "size": "Not Installed",
+          "tag": "Not Installed",
+          "status": "Not Installed"
+        }
+      ]
+    },
+    {
       "name": "LaserWeb",
       "installname": "LaserWeb",
       "type": "AppImage",
@@ -7057,6 +7237,36 @@
       ]
     },
     {
+      "name": "Mindmapp",
+      "installname": "mindmapp",
+      "type": "AppImage",
+      "description": "Electron application to draw mind maps",
+      "authors": [
+        {
+          "name": "Mindmapp",
+          "url": "https://github.com/Mindmapp"
+        }
+      ],
+      "links": [
+        {
+          "type": "GitHub",
+          "url": "Mindmapp/mindmapp"
+        },
+        {
+          "type": "Download",
+          "url": "https://github.com/Mindmapp/mindmapp/releases"
+        }
+      ],
+      "installinfo": [
+        {
+          "version": "Not Installed",
+          "size": "Not Installed",
+          "tag": "Not Installed",
+          "status": "Not Installed"
+        }
+      ]
+    },
+    {
       "name": "MineTime",
       "installname": "MineTime",
       "type": "AppImage",
@@ -7298,9 +7508,9 @@
     },
     {
       "name": "MLV-App",
-      "installname": "MLV-App",
+      "installname": "mlv-app",
       "type": "AppImage",
-      "description": "MLV-App - An all in one MLV processing app that will become great soon or maybe is already",
+      "description": "Magic Lantern Video Processing Application",
       "authors": [
         {
           "name": "ilia3101",
@@ -7313,7 +7523,7 @@
           "url": "ilia3101/MLV-App"
         },
         {
-          "type": "Install",
+          "type": "Download",
           "url": "https://github.com/ilia3101/MLV-App/releases"
         }
       ],
@@ -7645,6 +7855,36 @@
         {
           "type": "Install",
           "url": "https://github.com/moecube/moecube/releases"
+        }
+      ],
+      "installinfo": [
+        {
+          "version": "Not Installed",
+          "size": "Not Installed",
+          "tag": "Not Installed",
+          "status": "Not Installed"
+        }
+      ]
+    },
+    {
+      "name": "MyCrypto",
+      "installname": "mycrypto",
+      "type": "AppImage",
+      "description": "MyCrypto web and electron app",
+      "authors": [
+        {
+          "name": "MyCryptoHQ",
+          "url": "https://github.com/MyCryptoHQ"
+        }
+      ],
+      "links": [
+        {
+          "type": "GitHub",
+          "url": "MyCryptoHQ/MyCrypto"
+        },
+        {
+          "type": "Download",
+          "url": "https://github.com/MyCryptoHQ/MyCrypto/releases"
         }
       ],
       "installinfo": [
@@ -8125,6 +8365,36 @@
         {
           "type": "Install",
           "url": "https://github.com/patrikx3/onenote/releases"
+        }
+      ],
+      "installinfo": [
+        {
+          "version": "Not Installed",
+          "size": "Not Installed",
+          "tag": "Not Installed",
+          "status": "Not Installed"
+        }
+      ]
+    },
+    {
+      "name": "ONLYOFFICE",
+      "installname": "onlyoffice",
+      "type": "AppImage",
+      "description": "Edit office documents",
+      "authors": [
+        {
+          "name": "ONLYOFFICE",
+          "url": "https://github.com/ONLYOFFICE"
+        }
+      ],
+      "links": [
+        {
+          "type": "GitHub",
+          "url": "ONLYOFFICE/appimage-desktopeditors"
+        },
+        {
+          "type": "Download",
+          "url": "https://github.com/ONLYOFFICE/appimage-desktopeditors/releases"
         }
       ],
       "installinfo": [
@@ -9397,8 +9667,8 @@
       ]
     },
     {
-      "name": "PowerShell",
-      "installname": "PowerShell",
+      "name": "powershell",
+      "installname": "powershell",
       "type": "AppImage",
       "description": "PowerShell for every system",
       "authors": [
@@ -9445,6 +9715,36 @@
         {
           "type": "Install",
           "url": "https://github.com/prexview/prexview-studio/releases"
+        }
+      ],
+      "installinfo": [
+        {
+          "version": "Not Installed",
+          "size": "Not Installed",
+          "tag": "Not Installed",
+          "status": "Not Installed"
+        }
+      ]
+    },
+    {
+      "name": "PrinterClient",
+      "installname": "printerclient",
+      "type": "AppImage",
+      "description": "null",
+      "authors": [
+        {
+          "name": "DevTeamSCH",
+          "url": "https://github.com/DevTeamSCH"
+        }
+      ],
+      "links": [
+        {
+          "type": "GitHub",
+          "url": "DevTeamSCH/printer-client"
+        },
+        {
+          "type": "Download",
+          "url": "https://github.com/DevTeamSCH/printer-client/releases"
         }
       ],
       "installinfo": [
@@ -11275,6 +11575,36 @@
         {
           "type": "Install",
           "url": "https://github.com/thorpelawrence/spectrum-editor/releases"
+        }
+      ],
+      "installinfo": [
+        {
+          "version": "Not Installed",
+          "size": "Not Installed",
+          "tag": "Not Installed",
+          "status": "Not Installed"
+        }
+      ]
+    },
+    {
+      "name": "Spectrum",
+      "installname": "spectrum",
+      "type": "AppImage",
+      "description": "The community platform for the future.",
+      "authors": [
+        {
+          "name": "withspectrum",
+          "url": "https://github.com/withspectrum"
+        }
+      ],
+      "links": [
+        {
+          "type": "GitHub",
+          "url": "withspectrum/spectrum"
+        },
+        {
+          "type": "Download",
+          "url": "https://github.com/withspectrum/spectrum/releases"
         }
       ],
       "installinfo": [
@@ -13255,6 +13585,36 @@
         {
           "type": "Install",
           "url": "https://github.com/el3um4s/vue-calc/releases"
+        }
+      ],
+      "installinfo": [
+        {
+          "version": "Not Installed",
+          "size": "Not Installed",
+          "tag": "Not Installed",
+          "status": "Not Installed"
+        }
+      ]
+    },
+    {
+      "name": "WatchFlower",
+      "installname": "watchflower",
+      "type": "AppImage",
+      "description": "Read and plot datas from your Xiaomi "Flower Care" devices!",
+      "authors": [
+        {
+          "name": "emericg",
+          "url": "https://github.com/emericg"
+        }
+      ],
+      "links": [
+        {
+          "type": "GitHub",
+          "url": "emericg/WatchFlower"
+        },
+        {
+          "type": "Download",
+          "url": "https://github.com/emericg/WatchFlower/releases"
         }
       ],
       "installinfo": [

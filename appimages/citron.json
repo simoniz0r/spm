@@ -1,0 +1,30 @@
+{
+  "name": "Citron",
+  "description": "Citron Interp",
+  "categories": [
+    "Development"
+  ],
+  "authors": [
+    {
+      "name": "alimpfard",
+      "url": "https://github.com/alimpfard"
+    }
+  ],
+  "license": null,
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "alimpfard/citron"
+    },
+    {
+      "type": "Download",
+      "url": "https://github.com/alimpfard/citron/releases"
+    }
+  ],
+  "icons": [
+    "Citron/icons/256x256/citron.png"
+  ],
+  "screenshots": [
+    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/Citron/screenshot.png"
+  ]
+}

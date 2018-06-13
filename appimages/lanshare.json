@@ -1,0 +1,30 @@
+{
+  "name": "LANShare",
+  "description": "Local Area Network (LAN) File Transfer",
+  "categories": [
+    "Network"
+  ],
+  "authors": [
+    {
+      "name": "abdularis",
+      "url": "https://github.com/abdularis"
+    }
+  ],
+  "license": "GPL-3.0",
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "abdularis/LAN-Share"
+    },
+    {
+      "type": "Download",
+      "url": "https://github.com/abdularis/LAN-Share/releases"
+    }
+  ],
+  "icons": [
+    "LANShare/icons/128x128/lanshare.png"
+  ],
+  "screenshots": [
+    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/LANShare/screenshot.png"
+  ]
+}
