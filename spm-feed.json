@@ -3,7 +3,7 @@
   "home_page_url": "https://github.com/simoniz0r/spm",
   "feed_url": "https://simoniz0r.github.io/spm-feed.json",
   "description": "json feed containing package information for spm.",
-  "updated_at": "Tue Jun 12 21:17:25 CDT 2018",
+  "updated_at": "Tue Jun 12 21:25:59 CDT 2018",
   "expired": false,
   "appimages": [
     {
@@ -13600,7 +13600,7 @@
       "name": "WatchFlower",
       "installname": "watchflower",
       "type": "AppImage",
-      "description": "Read and plot datas from your Xiaomi "Flower Care" devices!",
+      "description": "Read and plot datas from your Xiaomi Flower Care devices!",
       "authors": [
         {
           "name": "emericg",
