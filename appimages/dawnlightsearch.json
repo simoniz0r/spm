@@ -1,0 +1,30 @@
+{
+  "name": "DawnlightSearch",
+  "description": "Dawnlight Search Engine",
+  "categories": [
+    "Utility"
+  ],
+  "authors": [
+    {
+      "name": "chg-hou",
+      "url": "https://github.com/chg-hou"
+    }
+  ],
+  "license": "GPL-3.0",
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "chg-hou/DawnlightSearch"
+    },
+    {
+      "type": "Download",
+      "url": "https://github.com/chg-hou/DawnlightSearch/releases"
+    }
+  ],
+  "icons": [
+    "DawnlightSearch/icons/128x128/dawnlightsearch.png"
+  ],
+  "screenshots": [
+    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/DawnlightSearch/screenshot.png"
+  ]
+}

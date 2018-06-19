@@ -1,0 +1,30 @@
+{
+  "name": "timer",
+  "description": "Time recurring events",
+  "categories": [
+    "Utility"
+  ],
+  "authors": [
+    {
+      "name": "tdeo",
+      "url": "https://github.com/tdeo"
+    }
+  ],
+  "license": null,
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "tdeo/timer"
+    },
+    {
+      "type": "Download",
+      "url": "https://github.com/tdeo/timer/releases"
+    }
+  ],
+  "icons": [
+    "timer/icons/640x640/timer.png"
+  ],
+  "screenshots": [
+    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/timer/screenshot.png"
+  ]
+}

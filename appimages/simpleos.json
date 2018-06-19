@@ -1,0 +1,30 @@
+{
+  "name": "SimplEOS",
+  "description": "EOS Blockchain Interface & Wallet",
+  "categories": [
+    "Network"
+  ],
+  "authors": [
+    {
+      "name": "eosrio",
+      "url": "https://github.com/eosrio"
+    }
+  ],
+  "license": null,
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "eosrio/simpleos"
+    },
+    {
+      "type": "Download",
+      "url": "https://github.com/eosrio/simpleos/releases"
+    }
+  ],
+  "icons": [
+    "SimplEOS/icons/256x256/simpleos.png"
+  ],
+  "screenshots": [
+    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/SimplEOS/screenshot.png"
+  ]
+}

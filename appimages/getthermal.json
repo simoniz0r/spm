@@ -1,14 +1,16 @@
 {
   "name": "GetThermal",
-  "installname": "GetThermal",
-  "type": "AppImage",
-  "description": "GetThermal - Cross-platform USB thermal camera viewer",
+  "description": "Cross-platform Thermal Camera Viewer",
+  "categories": [
+    "Utility"
+  ],
   "authors": [
     {
       "name": "groupgets",
       "url": "https://github.com/groupgets"
     }
   ],
+  "license": null,
   "links": [
     {
       "type": "GitHub",
@@ -19,12 +21,8 @@
       "url": "https://github.com/groupgets/GetThermal/releases"
     }
   ],
-  "installinfo": [
-    {
-      "version": "Not Installed",
-      "size": "Not Installed",
-      "tag": "Not Installed",
-      "status": "Not Installed"
-    }
+  "icons": null,
+  "screenshots": [
+    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/GetThermal/screenshot.png"
   ]
 }

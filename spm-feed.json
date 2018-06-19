@@ -3,7 +3,7 @@
   "home_page_url": "https://github.com/simoniz0r/spm",
   "feed_url": "https://simoniz0r.github.io/spm-feed.json",
   "description": "json feed containing package information for spm.",
-  "updated_at": "Tue Jun 12 21:25:59 CDT 2018",
+  "updated_at": "Tue Jun 19 01:57:43 CDT 2018",
   "expired": false,
   "appimages": [
     {
@@ -2077,6 +2077,36 @@
       ]
     },
     {
+      "name": "CRG_Data_Tool",
+      "installname": "crg_data_tool",
+      "type": "AppImage",
+      "description": "A tool for working with Games Data files from CRG",
+      "authors": [
+        {
+          "name": "AdamSmasherDerby",
+          "url": "https://github.com/AdamSmasherDerby"
+        }
+      ],
+      "links": [
+        {
+          "type": "GitHub",
+          "url": "AdamSmasherDerby/CRG-To-Statsbook"
+        },
+        {
+          "type": "Download",
+          "url": "https://github.com/AdamSmasherDerby/CRG-To-Statsbook/releases"
+        }
+      ],
+      "installinfo": [
+        {
+          "version": "Not Installed",
+          "size": "Not Installed",
+          "tag": "Not Installed",
+          "status": "Not Installed"
+        }
+      ]
+    },
+    {
       "name": "Cryplicity",
       "installname": "Cryplicity",
       "type": "AppImage",
@@ -2455,6 +2485,36 @@
         {
           "type": "Install",
           "url": "https://github.com/datproject/dat-desktop/releases"
+        }
+      ],
+      "installinfo": [
+        {
+          "version": "Not Installed",
+          "size": "Not Installed",
+          "tag": "Not Installed",
+          "status": "Not Installed"
+        }
+      ]
+    },
+    {
+      "name": "DawnlightSearch",
+      "installname": "dawnlightsearch",
+      "type": "AppImage",
+      "description": "Dawnlight Search Engine",
+      "authors": [
+        {
+          "name": "chg-hou",
+          "url": "https://github.com/chg-hou"
+        }
+      ],
+      "links": [
+        {
+          "type": "GitHub",
+          "url": "chg-hou/DawnlightSearch"
+        },
+        {
+          "type": "Download",
+          "url": "https://github.com/chg-hou/DawnlightSearch/releases"
         }
       ],
       "installinfo": [
@@ -3025,6 +3085,36 @@
         {
           "type": "Install",
           "url": "http://download.opensuse.org/repositories/home:/mastercactapus/AppImage/EaselDriver-latest-x86_64.AppImage"
+        }
+      ],
+      "installinfo": [
+        {
+          "version": "Not Installed",
+          "size": "Not Installed",
+          "tag": "Not Installed",
+          "status": "Not Installed"
+        }
+      ]
+    },
+    {
+      "name": "eDEX-UI",
+      "installname": "edex-ui",
+      "type": "AppImage",
+      "description": "A science fiction desktop running everywhere. Awesome.",
+      "authors": [
+        {
+          "name": "GitSquared",
+          "url": "https://github.com/GitSquared"
+        }
+      ],
+      "links": [
+        {
+          "type": "GitHub",
+          "url": "GitSquared/edex-ui"
+        },
+        {
+          "type": "Download",
+          "url": "https://github.com/GitSquared/edex-ui/releases"
         }
       ],
       "installinfo": [
@@ -4058,9 +4148,9 @@
     },
     {
       "name": "GetThermal",
-      "installname": "GetThermal",
+      "installname": "getthermal",
       "type": "AppImage",
-      "description": "GetThermal - Cross-platform USB thermal camera viewer",
+      "description": "Cross-platform Thermal Camera Viewer",
       "authors": [
         {
           "name": "groupgets",
@@ -4105,6 +4195,36 @@
         {
           "type": "Install",
           "url": "https://github.com/Vladar4/ng2gggrotto/releases"
+        }
+      ],
+      "installinfo": [
+        {
+          "version": "Not Installed",
+          "size": "Not Installed",
+          "tag": "Not Installed",
+          "status": "Not Installed"
+        }
+      ]
+    },
+    {
+      "name": "gibs",
+      "installname": "gibs",
+      "type": "AppImage",
+      "description": "Generally In-source Build System - build C++ projects without a project file",
+      "authors": [
+        {
+          "name": "sierdzio",
+          "url": "https://github.com/sierdzio"
+        }
+      ],
+      "links": [
+        {
+          "type": "GitHub",
+          "url": "sierdzio/gibs"
+        },
+        {
+          "type": "Download",
+          "url": "https://github.com/sierdzio/gibs/releases"
         }
       ],
       "installinfo": [
@@ -6337,6 +6457,36 @@
       ]
     },
     {
+      "name": "ledger-live-desktop",
+      "installname": "ledger-live-desktop",
+      "type": "AppImage",
+      "description": "Ledger Live - Desktop",
+      "authors": [
+        {
+          "name": "LedgerHQ",
+          "url": "https://github.com/LedgerHQ"
+        }
+      ],
+      "links": [
+        {
+          "type": "GitHub",
+          "url": "LedgerHQ/ledger-live-desktop"
+        },
+        {
+          "type": "Download",
+          "url": "https://github.com/LedgerHQ/ledger-live-desktop/releases"
+        }
+      ],
+      "installinfo": [
+        {
+          "version": "Not Installed",
+          "size": "Not Installed",
+          "tag": "Not Installed",
+          "status": "Not Installed"
+        }
+      ]
+    },
+    {
       "name": "leocad",
       "installname": "leocad",
       "type": "AppImage",
@@ -6758,9 +6908,9 @@
     },
     {
       "name": "MagicFountain",
-      "installname": "MagicFountain",
+      "installname": "magicfountain",
       "type": "AppImage",
-      "description": "magicfountain - A screenwriting program available on Linux MacOSX and Windows",
+      "description": "Screenwriter",
       "authors": [
         {
           "name": "Aztorius",
@@ -6773,7 +6923,7 @@
           "url": "Aztorius/magicfountain"
         },
         {
-          "type": "Install",
+          "type": "Download",
           "url": "https://github.com/Aztorius/magicfountain/releases"
         }
       ],
@@ -9097,6 +9247,36 @@
       ]
     },
     {
+      "name": "perl-executing-browser",
+      "installname": "perl-executing-browser",
+      "type": "AppImage",
+      "description": "HTML interface for Perl 5 desktop applications",
+      "authors": [
+        {
+          "name": "ddmitov",
+          "url": "https://github.com/ddmitov"
+        }
+      ],
+      "links": [
+        {
+          "type": "GitHub",
+          "url": "ddmitov/perl-executing-browser"
+        },
+        {
+          "type": "Download",
+          "url": "https://github.com/ddmitov/perl-executing-browser/releases"
+        }
+      ],
+      "installinfo": [
+        {
+          "version": "Not Installed",
+          "size": "Not Installed",
+          "tag": "Not Installed",
+          "status": "Not Installed"
+        }
+      ]
+    },
+    {
       "name": "Peruse",
       "installname": "Peruse",
       "type": "AppImage",
@@ -10987,6 +11167,36 @@
       ]
     },
     {
+      "name": "Scraper",
+      "installname": "scraper",
+      "type": "AppImage",
+      "description": "Simple desktop scraper app.",
+      "authors": [
+        {
+          "name": "cedoor",
+          "url": "https://github.com/cedoor"
+        }
+      ],
+      "links": [
+        {
+          "type": "GitHub",
+          "url": "cedoor/scraper"
+        },
+        {
+          "type": "Download",
+          "url": "https://github.com/cedoor/scraper/releases"
+        }
+      ],
+      "installinfo": [
+        {
+          "version": "Not Installed",
+          "size": "Not Installed",
+          "tag": "Not Installed",
+          "status": "Not Installed"
+        }
+      ]
+    },
+    {
       "name": "SeqPlots",
       "installname": "SeqPlots",
       "type": "AppImage",
@@ -11227,6 +11437,36 @@
       ]
     },
     {
+      "name": "Silverkey",
+      "installname": "silverkey",
+      "type": "AppImage",
+      "description": "The best Qt Application Ever",
+      "authors": [
+        {
+          "name": "metacoma",
+          "url": "https://github.com/metacoma"
+        }
+      ],
+      "links": [
+        {
+          "type": "GitHub",
+          "url": "metacoma/silverkey"
+        },
+        {
+          "type": "Download",
+          "url": "https://github.com/metacoma/silverkey/releases"
+        }
+      ],
+      "installinfo": [
+        {
+          "version": "Not Installed",
+          "size": "Not Installed",
+          "tag": "Not Installed",
+          "status": "Not Installed"
+        }
+      ]
+    },
+    {
       "name": "simdsp",
       "installname": "simdsp",
       "type": "AppImage",
@@ -11245,6 +11485,36 @@
         {
           "type": "Install",
           "url": "https://github.com/lmcapacho/SimDSP/releases"
+        }
+      ],
+      "installinfo": [
+        {
+          "version": "Not Installed",
+          "size": "Not Installed",
+          "tag": "Not Installed",
+          "status": "Not Installed"
+        }
+      ]
+    },
+    {
+      "name": "SimplEOS",
+      "installname": "simpleos",
+      "type": "AppImage",
+      "description": "EOS Blockchain Interface & Wallet",
+      "authors": [
+        {
+          "name": "eosrio",
+          "url": "https://github.com/eosrio"
+        }
+      ],
+      "links": [
+        {
+          "type": "GitHub",
+          "url": "eosrio/simpleos"
+        },
+        {
+          "type": "Download",
+          "url": "https://github.com/eosrio/simpleos/releases"
         }
       ],
       "installinfo": [
@@ -11785,6 +12055,36 @@
         {
           "type": "Install",
           "url": "https://github.com/standardnotes/desktop/releases"
+        }
+      ],
+      "installinfo": [
+        {
+          "version": "Not Installed",
+          "size": "Not Installed",
+          "tag": "Not Installed",
+          "status": "Not Installed"
+        }
+      ]
+    },
+    {
+      "name": "Statsbook_Tool",
+      "installname": "statsbook_tool",
+      "type": "AppImage",
+      "description": "A tool for error checking WFTDA Statsbooks",
+      "authors": [
+        {
+          "name": "AdamSmasherDerby",
+          "url": "https://github.com/AdamSmasherDerby"
+        }
+      ],
+      "links": [
+        {
+          "type": "GitHub",
+          "url": "AdamSmasherDerby/Statsbook-Tool"
+        },
+        {
+          "type": "Download",
+          "url": "https://github.com/AdamSmasherDerby/Statsbook-Tool/releases"
         }
       ],
       "installinfo": [
@@ -12607,6 +12907,36 @@
       ]
     },
     {
+      "name": "thorium-client",
+      "installname": "thorium-client",
+      "type": "AppImage",
+      "description": "A client application for Thorium",
+      "authors": [
+        {
+          "name": "Thorium-Sim",
+          "url": "https://github.com/Thorium-Sim"
+        }
+      ],
+      "links": [
+        {
+          "type": "GitHub",
+          "url": "Thorium-Sim/thorium-kiosk"
+        },
+        {
+          "type": "Download",
+          "url": "https://github.com/Thorium-Sim/thorium-kiosk/releases"
+        }
+      ],
+      "installinfo": [
+        {
+          "version": "Not Installed",
+          "size": "Not Installed",
+          "tag": "Not Installed",
+          "status": "Not Installed"
+        }
+      ]
+    },
+    {
       "name": "Tiled",
       "installname": "Tiled",
       "type": "AppImage",
@@ -12655,6 +12985,36 @@
         {
           "type": "Download",
           "url": "https://github.com/timecamp/timecamp-desktop/releases"
+        }
+      ],
+      "installinfo": [
+        {
+          "version": "Not Installed",
+          "size": "Not Installed",
+          "tag": "Not Installed",
+          "status": "Not Installed"
+        }
+      ]
+    },
+    {
+      "name": "timer",
+      "installname": "timer",
+      "type": "AppImage",
+      "description": "Time recurring events",
+      "authors": [
+        {
+          "name": "tdeo",
+          "url": "https://github.com/tdeo"
+        }
+      ],
+      "links": [
+        {
+          "type": "GitHub",
+          "url": "tdeo/timer"
+        },
+        {
+          "type": "Download",
+          "url": "https://github.com/tdeo/timer/releases"
         }
       ],
       "installinfo": [
@@ -13975,6 +14335,36 @@
         {
           "type": "Install",
           "url": "https://github.com/workflowy/desktop/releases"
+        }
+      ],
+      "installinfo": [
+        {
+          "version": "Not Installed",
+          "size": "Not Installed",
+          "tag": "Not Installed",
+          "status": "Not Installed"
+        }
+      ]
+    },
+    {
+      "name": "Wrapbox",
+      "installname": "wrapbox",
+      "type": "AppImage",
+      "description": "An Electron wrapper for web pages",
+      "authors": [
+        {
+          "name": "peterdanis",
+          "url": "https://github.com/peterdanis"
+        }
+      ],
+      "links": [
+        {
+          "type": "GitHub",
+          "url": "peterdanis/wrapbox"
+        },
+        {
+          "type": "Download",
+          "url": "https://github.com/peterdanis/wrapbox/releases"
         }
       ],
       "installinfo": [

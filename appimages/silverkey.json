@@ -1,0 +1,30 @@
+{
+  "name": "Silverkey",
+  "description": "The best Qt Application Ever",
+  "categories": [
+    "Office"
+  ],
+  "authors": [
+    {
+      "name": "metacoma",
+      "url": "https://github.com/metacoma"
+    }
+  ],
+  "license": null,
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "metacoma/silverkey"
+    },
+    {
+      "type": "Download",
+      "url": "https://github.com/metacoma/silverkey/releases"
+    }
+  ],
+  "icons": [
+    "Silverkey/icons/958x1354/silverkey-qt.png"
+  ],
+  "screenshots": [
+    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/Silverkey/screenshot.png"
+  ]
+}

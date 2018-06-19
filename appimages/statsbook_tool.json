@@ -1,0 +1,30 @@
+{
+  "name": "Statsbook_Tool",
+  "description": "A tool for error checking WFTDA Statsbooks",
+  "categories": [
+    "Utility"
+  ],
+  "authors": [
+    {
+      "name": "AdamSmasherDerby",
+      "url": "https://github.com/AdamSmasherDerby"
+    }
+  ],
+  "license": "MIT",
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "AdamSmasherDerby/Statsbook-Tool"
+    },
+    {
+      "type": "Download",
+      "url": "https://github.com/AdamSmasherDerby/Statsbook-Tool/releases"
+    }
+  ],
+  "icons": [
+    "Statsbook_Tool/icons/256x256/statsbooktool.png"
+  ],
+  "screenshots": [
+    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/Statsbook_Tool/screenshot.png"
+  ]
+}

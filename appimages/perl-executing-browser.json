@@ -1,0 +1,30 @@
+{
+  "name": "perl-executing-browser",
+  "description": "HTML interface for Perl 5 desktop applications",
+  "categories": [
+    "Development"
+  ],
+  "authors": [
+    {
+      "name": "ddmitov",
+      "url": "https://github.com/ddmitov"
+    }
+  ],
+  "license": "LGPL-3.0",
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "ddmitov/perl-executing-browser"
+    },
+    {
+      "type": "Download",
+      "url": "https://github.com/ddmitov/perl-executing-browser/releases"
+    }
+  ],
+  "icons": [
+    "perl-executing-browser/icons/32x32/peb.png"
+  ],
+  "screenshots": [
+    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/perl-executing-browser/screenshot.png"
+  ]
+}

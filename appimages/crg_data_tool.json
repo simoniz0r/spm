@@ -1,0 +1,30 @@
+{
+  "name": "CRG_Data_Tool",
+  "description": "A tool for working with Games Data files from CRG",
+  "categories": [
+    "Utility"
+  ],
+  "authors": [
+    {
+      "name": "AdamSmasherDerby",
+      "url": "https://github.com/AdamSmasherDerby"
+    }
+  ],
+  "license": "MIT",
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "AdamSmasherDerby/CRG-To-Statsbook"
+    },
+    {
+      "type": "Download",
+      "url": "https://github.com/AdamSmasherDerby/CRG-To-Statsbook/releases"
+    }
+  ],
+  "icons": [
+    "CRG_Data_Tool/icons/256x256/crgdatatool.png"
+  ],
+  "screenshots": [
+    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/CRG_Data_Tool/screenshot.png"
+  ]
+}
