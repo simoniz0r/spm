@@ -1,16 +1,14 @@
 {
   "name": "ledger-live-desktop",
+  "installname": "ledger-live-desktop",
+  "type": "AppImage",
   "description": "Ledger Live - Desktop",
-  "categories": [
-    "Finance"
-  ],
   "authors": [
     {
       "name": "LedgerHQ",
       "url": "https://github.com/LedgerHQ"
     }
   ],
-  "license": "MIT",
   "links": [
     {
       "type": "GitHub",
@@ -21,10 +19,12 @@
       "url": "https://github.com/LedgerHQ/ledger-live-desktop/releases"
     }
   ],
-  "icons": [
-    "ledger-live-desktop/icons/512x512/ledger-live-desktop.png"
-  ],
-  "screenshots": [
-    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/ledger-live-desktop/screenshot.png"
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
+    }
   ]
 }

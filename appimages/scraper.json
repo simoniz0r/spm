@@ -1,16 +1,14 @@
 {
   "name": "Scraper",
+  "installname": "scraper",
+  "type": "AppImage",
   "description": "Simple desktop scraper app.",
-  "categories": [
-    "Utility"
-  ],
   "authors": [
     {
       "name": "cedoor",
       "url": "https://github.com/cedoor"
     }
   ],
-  "license": "MIT",
   "links": [
     {
       "type": "GitHub",
@@ -21,10 +19,12 @@
       "url": "https://github.com/cedoor/scraper/releases"
     }
   ],
-  "icons": [
-    "Scraper/icons/128x128/scraper.png"
-  ],
-  "screenshots": [
-    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/Scraper/screenshot.png"
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
+    }
   ]
 }

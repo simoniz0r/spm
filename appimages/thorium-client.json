@@ -1,16 +1,14 @@
 {
   "name": "thorium-client",
+  "installname": "thorium-client",
+  "type": "AppImage",
   "description": "A client application for Thorium",
-  "categories": [
-    "Utility"
-  ],
   "authors": [
     {
       "name": "Thorium-Sim",
       "url": "https://github.com/Thorium-Sim"
     }
   ],
-  "license": null,
   "links": [
     {
       "type": "GitHub",
@@ -21,8 +19,12 @@
       "url": "https://github.com/Thorium-Sim/thorium-kiosk/releases"
     }
   ],
-  "icons": null,
-  "screenshots": [
-    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/thorium-client/screenshot.png"
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
+    }
   ]
 }

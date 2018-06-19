@@ -1,16 +1,14 @@
 {
   "name": "Wrapbox",
+  "installname": "wrapbox",
+  "type": "AppImage",
   "description": "An Electron wrapper for web pages",
-  "categories": [
-    "Utility"
-  ],
   "authors": [
     {
       "name": "peterdanis",
       "url": "https://github.com/peterdanis"
     }
   ],
-  "license": "MIT",
   "links": [
     {
       "type": "GitHub",
@@ -21,10 +19,12 @@
       "url": "https://github.com/peterdanis/wrapbox/releases"
     }
   ],
-  "icons": [
-    "Wrapbox/icons/128x128/wrapbox.png"
-  ],
-  "screenshots": [
-    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/Wrapbox/screenshot.png"
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
+    }
   ]
 }

@@ -1,16 +1,14 @@
 {
   "name": "gibs",
+  "installname": "gibs",
+  "type": "AppImage",
   "description": "Generally In-source Build System - build C++ projects without a project file",
-  "categories": [
-    "Development"
-  ],
   "authors": [
     {
       "name": "sierdzio",
       "url": "https://github.com/sierdzio"
     }
   ],
-  "license": null,
   "links": [
     {
       "type": "GitHub",
@@ -21,10 +19,12 @@
       "url": "https://github.com/sierdzio/gibs/releases"
     }
   ],
-  "icons": [
-    "gibs/icons/512x512/gibs.png"
-  ],
-  "screenshots": [
-    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/gibs/screenshot.png"
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
+    }
   ]
 }

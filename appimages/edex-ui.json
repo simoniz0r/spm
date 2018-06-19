@@ -1,16 +1,14 @@
 {
   "name": "eDEX-UI",
+  "installname": "edex-ui",
+  "type": "AppImage",
   "description": "A science fiction desktop running everywhere. Awesome.",
-  "categories": [
-    "System"
-  ],
   "authors": [
     {
       "name": "GitSquared",
       "url": "https://github.com/GitSquared"
     }
   ],
-  "license": "GPL-3.0",
   "links": [
     {
       "type": "GitHub",
@@ -21,10 +19,12 @@
       "url": "https://github.com/GitSquared/edex-ui/releases"
     }
   ],
-  "icons": [
-    "eDEX-UI/icons/128x128/edex-ui.png"
-  ],
-  "screenshots": [
-    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/eDEX-UI/screenshot.png"
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
+    }
   ]
 }

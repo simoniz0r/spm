@@ -1,16 +1,14 @@
 {
   "name": "MagicFountain",
+  "installname": "magicfountain",
+  "type": "AppImage",
   "description": "Screenwriter",
-  "categories": [
-    "Office"
-  ],
   "authors": [
     {
       "name": "Aztorius",
       "url": "https://github.com/Aztorius"
     }
   ],
-  "license": "GPL-3.0",
   "links": [
     {
       "type": "GitHub",
@@ -21,10 +19,12 @@
       "url": "https://github.com/Aztorius/magicfountain/releases"
     }
   ],
-  "icons": [
-    "MagicFountain/icons/48x48/magicfountain.png"
-  ],
-  "screenshots": [
-    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/MagicFountain/screenshot.png"
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
+    }
   ]
 }
