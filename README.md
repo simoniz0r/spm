@@ -28,7 +28,7 @@ Dependencies: curl, jq (jq is included in the AppImage release)
     
     revert|rev  - revert an updated package to its previous version if available
     
-    freeze|fr   - mark or unmark a package as FROZEN to preven update checks
+    freeze|fr   - mark or unmark a package as FROZEN to prevent update checks
     
     config|cf   - open spm's config file with $EDITOR
 ```
