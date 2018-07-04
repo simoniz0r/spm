@@ -1,0 +1,30 @@
+{
+  "name": "ehdev-shell",
+  "description": "An electron based developing tool for feds.",
+  "categories": [
+    "Development"
+  ],
+  "authors": [
+    {
+      "name": "EHDFE",
+      "url": "https://github.com/EHDFE"
+    }
+  ],
+  "license": "MIT",
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "EHDFE/ehdev-shell"
+    },
+    {
+      "type": "Download",
+      "url": "https://github.com/EHDFE/ehdev-shell/releases"
+    }
+  ],
+  "icons": [
+    "ehdev-shell/icons/128x128/Jarvis.png"
+  ],
+  "screenshots": [
+    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/ehdev-shell/screenshot.png"
+  ]
+}

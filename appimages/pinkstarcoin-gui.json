@@ -1,0 +1,30 @@
+{
+  "name": "pinkstarcoin-gui",
+  "description": "PinkstarcoinV2 wallet",
+  "categories": [
+    "Office"
+  ],
+  "authors": [
+    {
+      "name": "mtl1979",
+      "url": "https://github.com/mtl1979"
+    }
+  ],
+  "license": "LGPL-3.0",
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "mtl1979/pinkstarcoin-gui"
+    },
+    {
+      "type": "Download",
+      "url": "https://github.com/mtl1979/pinkstarcoin-gui/releases"
+    }
+  ],
+  "icons": [
+    "pinkstarcoin-gui/icons/64x64/pinkstarcoin.png"
+  ],
+  "screenshots": [
+    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/pinkstarcoin-gui/screenshot.png"
+  ]
+}

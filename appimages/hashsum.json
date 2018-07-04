@@ -1,0 +1,28 @@
+{
+  "name": "hashsum",
+  "description": "Calculates hash sums",
+  "categories": [
+    "Utility"
+  ],
+  "authors": [
+    {
+      "name": "posktomten",
+      "url": "https://github.com/posktomten"
+    }
+  ],
+  "license": null,
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "posktomten/hashsum"
+    },
+    {
+      "type": "Download",
+      "url": "https://github.com/posktomten/hashsum/releases"
+    }
+  ],
+  "icons": null,
+  "screenshots": [
+    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/hashsum/screenshot.png"
+  ]
+}

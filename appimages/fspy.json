@@ -1,0 +1,30 @@
+{
+  "name": "fSpy",
+  "description": "An open source, cross platform app for still image camera matching",
+  "categories": [
+    "Utility"
+  ],
+  "authors": [
+    {
+      "name": "stuffmatic",
+      "url": "https://github.com/stuffmatic"
+    }
+  ],
+  "license": null,
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "stuffmatic/fSpy"
+    },
+    {
+      "type": "Download",
+      "url": "https://github.com/stuffmatic/fSpy/releases"
+    }
+  ],
+  "icons": [
+    "fSpy/icons/128x128/fspy.png"
+  ],
+  "screenshots": [
+    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/fSpy/screenshot.png"
+  ]
+}

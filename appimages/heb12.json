@@ -1,0 +1,30 @@
+{
+  "name": "heb12",
+  "description": "A simple program for reading the Bible",
+  "categories": [
+    "Education"
+  ],
+  "authors": [
+    {
+      "name": "heb12",
+      "url": "https://github.com/heb12"
+    }
+  ],
+  "license": null,
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "heb12/heb12"
+    },
+    {
+      "type": "Download",
+      "url": "https://github.com/heb12/heb12/releases"
+    }
+  ],
+  "icons": [
+    "heb12/icons/128x128/heb12.png"
+  ],
+  "screenshots": [
+    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/heb12/screenshot.png"
+  ]
+}

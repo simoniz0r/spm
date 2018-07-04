@@ -1,0 +1,30 @@
+{
+  "name": "Tumblr_Scraper",
+  "description": "a utility to scrape a Tumblr profile for user uploadede posts",
+  "categories": [
+    "Utility"
+  ],
+  "authors": [
+    {
+      "name": "lluisrojass",
+      "url": "https://github.com/lluisrojass"
+    }
+  ],
+  "license": null,
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "lluisrojass/tumblr-scraper"
+    },
+    {
+      "type": "Download",
+      "url": "https://github.com/lluisrojass/tumblr-scraper/releases"
+    }
+  ],
+  "icons": [
+    "Tumblr_Scraper/icons/256x256/tumblr-scraper.png"
+  ],
+  "screenshots": [
+    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/Tumblr_Scraper/screenshot.png"
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "name": "Sharp-Tune",
+  "description": "Lightweight Cross-platform music player build upon the node using the electron framework.",
+  "categories": [
+    "Audio"
+  ],
+  "authors": [
+    {
+      "name": "MD-AZMAL",
+      "url": "https://github.com/MD-AZMAL"
+    }
+  ],
+  "license": "MIT",
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "MD-AZMAL/Sharp-Tune"
+    },
+    {
+      "type": "Download",
+      "url": "https://github.com/MD-AZMAL/Sharp-Tune/releases"
+    }
+  ],
+  "icons": [
+    "Sharp-Tune/icons/128x128/sharp-tune.png"
+  ],
+  "screenshots": [
+    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/Sharp-Tune/screenshot.png"
+  ]
+}

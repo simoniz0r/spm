@@ -1,0 +1,30 @@
+{
+  "name": "SlackBackup",
+  "description": "An application to archive Slack messages and perform some simple account maintenance",
+  "categories": [
+    "Development"
+  ],
+  "authors": [
+    {
+      "name": "jcolag",
+      "url": "https://github.com/jcolag"
+    }
+  ],
+  "license": null,
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "jcolag/SlackBackup"
+    },
+    {
+      "type": "Download",
+      "url": "https://github.com/jcolag/SlackBackup/releases"
+    }
+  ],
+  "icons": [
+    "SlackBackup/icons/128x128/slack-backup.png"
+  ],
+  "screenshots": [
+    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/SlackBackup/screenshot.png"
+  ]
+}

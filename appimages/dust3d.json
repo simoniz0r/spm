@@ -1,0 +1,30 @@
+{
+  "name": "Dust3D",
+  "description": "",
+  "categories": [
+    "Graphics"
+  ],
+  "authors": [
+    {
+      "name": "huxingyi",
+      "url": "https://github.com/huxingyi"
+    }
+  ],
+  "license": "MIT",
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "huxingyi/dust3d"
+    },
+    {
+      "type": "Download",
+      "url": "https://github.com/huxingyi/dust3d/releases"
+    }
+  ],
+  "icons": [
+    "Dust3D/icons/250x250/icon.png"
+  ],
+  "screenshots": [
+    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/Dust3D/screenshot.png"
+  ]
+}

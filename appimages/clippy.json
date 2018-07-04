@@ -1,0 +1,30 @@
+{
+  "name": "clippy",
+  "description": "Clipboard History",
+  "categories": [
+    "Development"
+  ],
+  "authors": [
+    {
+      "name": "ikouchiha47",
+      "url": "https://github.com/ikouchiha47"
+    }
+  ],
+  "license": null,
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "ikouchiha47/clippy"
+    },
+    {
+      "type": "Download",
+      "url": "https://github.com/ikouchiha47/clippy/releases"
+    }
+  ],
+  "icons": [
+    "clippy/icons/512x512/clippy.png"
+  ],
+  "screenshots": [
+    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/clippy/screenshot.png"
+  ]
+}

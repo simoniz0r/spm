@@ -3,7 +3,7 @@
   "home_page_url": "https://github.com/simoniz0r/spm",
   "feed_url": "https://simoniz0r.github.io/spm-feed.json",
   "description": "json feed containing package information for spm.",
-  "updated_at": "Tue Jun 19 01:57:43 CDT 2018",
+  "updated_at": "Wed Jul  4 12:48:33 CDT 2018",
   "expired": false,
   "appimages": [
     {
@@ -2017,6 +2017,36 @@
       ]
     },
     {
+      "name": "clippy",
+      "installname": "clippy",
+      "type": "AppImage",
+      "description": "Clipboard History",
+      "authors": [
+        {
+          "name": "ikouchiha47",
+          "url": "https://github.com/ikouchiha47"
+        }
+      ],
+      "links": [
+        {
+          "type": "GitHub",
+          "url": "ikouchiha47/clippy"
+        },
+        {
+          "type": "Download",
+          "url": "https://github.com/ikouchiha47/clippy/releases"
+        }
+      ],
+      "installinfo": [
+        {
+          "version": "Not Installed",
+          "size": "Not Installed",
+          "tag": "Not Installed",
+          "status": "Not Installed"
+        }
+      ]
+    },
+    {
       "name": "colorpicker",
       "installname": "colorpicker",
       "type": "AppImage",
@@ -3037,6 +3067,36 @@
       ]
     },
     {
+      "name": "Dust3D",
+      "installname": "dust3d",
+      "type": "AppImage",
+      "description": "",
+      "authors": [
+        {
+          "name": "huxingyi",
+          "url": "https://github.com/huxingyi"
+        }
+      ],
+      "links": [
+        {
+          "type": "GitHub",
+          "url": "huxingyi/dust3d"
+        },
+        {
+          "type": "Download",
+          "url": "https://github.com/huxingyi/dust3d/releases"
+        }
+      ],
+      "installinfo": [
+        {
+          "version": "Not Installed",
+          "size": "Not Installed",
+          "tag": "Not Installed",
+          "status": "Not Installed"
+        }
+      ]
+    },
+    {
       "name": "Dwyco_Phoo",
       "installname": "dwyco_phoo",
       "type": "AppImage",
@@ -3115,6 +3175,36 @@
         {
           "type": "Download",
           "url": "https://github.com/GitSquared/edex-ui/releases"
+        }
+      ],
+      "installinfo": [
+        {
+          "version": "Not Installed",
+          "size": "Not Installed",
+          "tag": "Not Installed",
+          "status": "Not Installed"
+        }
+      ]
+    },
+    {
+      "name": "ehdev-shell",
+      "installname": "ehdev-shell",
+      "type": "AppImage",
+      "description": "An electron based developing tool for feds.",
+      "authors": [
+        {
+          "name": "EHDFE",
+          "url": "https://github.com/EHDFE"
+        }
+      ],
+      "links": [
+        {
+          "type": "GitHub",
+          "url": "EHDFE/ehdev-shell"
+        },
+        {
+          "type": "Download",
+          "url": "https://github.com/EHDFE/ehdev-shell/releases"
         }
       ],
       "installinfo": [
@@ -4087,6 +4177,36 @@
       ]
     },
     {
+      "name": "fSpy",
+      "installname": "fspy",
+      "type": "AppImage",
+      "description": "An open source, cross platform app for still image camera matching",
+      "authors": [
+        {
+          "name": "stuffmatic",
+          "url": "https://github.com/stuffmatic"
+        }
+      ],
+      "links": [
+        {
+          "type": "GitHub",
+          "url": "stuffmatic/fSpy"
+        },
+        {
+          "type": "Download",
+          "url": "https://github.com/stuffmatic/fSpy/releases"
+        }
+      ],
+      "installinfo": [
+        {
+          "version": "Not Installed",
+          "size": "Not Installed",
+          "tag": "Not Installed",
+          "status": "Not Installed"
+        }
+      ]
+    },
+    {
       "name": "Fulcrum",
       "installname": "Fulcrum",
       "type": "AppImage",
@@ -4135,6 +4255,36 @@
         {
           "type": "Install",
           "url": "https://github.com/trufflesuite/ganache/releases"
+        }
+      ],
+      "installinfo": [
+        {
+          "version": "Not Installed",
+          "size": "Not Installed",
+          "tag": "Not Installed",
+          "status": "Not Installed"
+        }
+      ]
+    },
+    {
+      "name": "Genesis",
+      "installname": "genesis",
+      "type": "AppImage",
+      "description": "null",
+      "authors": [
+        {
+          "name": "GenesisKernel",
+          "url": "https://github.com/GenesisKernel"
+        }
+      ],
+      "links": [
+        {
+          "type": "GitHub",
+          "url": "GenesisKernel/genesis-front"
+        },
+        {
+          "type": "Download",
+          "url": "https://github.com/GenesisKernel/genesis-front/releases"
         }
       ],
       "installinfo": [
@@ -4717,6 +4867,36 @@
       ]
     },
     {
+      "name": "hashsum",
+      "installname": "hashsum",
+      "type": "AppImage",
+      "description": "Calculates hash sums",
+      "authors": [
+        {
+          "name": "posktomten",
+          "url": "https://github.com/posktomten"
+        }
+      ],
+      "links": [
+        {
+          "type": "GitHub",
+          "url": "posktomten/hashsum"
+        },
+        {
+          "type": "Download",
+          "url": "https://github.com/posktomten/hashsum/releases"
+        }
+      ],
+      "installinfo": [
+        {
+          "version": "Not Installed",
+          "size": "Not Installed",
+          "tag": "Not Installed",
+          "status": "Not Installed"
+        }
+      ]
+    },
+    {
       "name": "HDRMerge",
       "installname": "HDRMerge",
       "type": "AppImage",
@@ -4735,6 +4915,36 @@
         {
           "type": "Download",
           "url": "https://github.com/aferrero2707/hdrmerge-appimage/releases"
+        }
+      ],
+      "installinfo": [
+        {
+          "version": "Not Installed",
+          "size": "Not Installed",
+          "tag": "Not Installed",
+          "status": "Not Installed"
+        }
+      ]
+    },
+    {
+      "name": "heb12",
+      "installname": "heb12",
+      "type": "AppImage",
+      "description": "A simple program for reading the Bible",
+      "authors": [
+        {
+          "name": "heb12",
+          "url": "https://github.com/heb12"
+        }
+      ],
+      "links": [
+        {
+          "type": "GitHub",
+          "url": "heb12/heb12"
+        },
+        {
+          "type": "Download",
+          "url": "https://github.com/heb12/heb12/releases"
         }
       ],
       "installinfo": [
@@ -6234,7 +6444,7 @@
         },
         {
           "type": "Install",
-          "url": "https://download.kde.org/stable/krita/4.0.3/krita-4.0.3-x86_64.appimage"
+          "url": "https://files.kde.org/kdenlive/unstable/kdenlive-18.08-beta17-x86_64.AppImage"
         }
       ],
       "installinfo": [
@@ -7375,6 +7585,36 @@
         {
           "type": "Install",
           "url": "https://github.com/ColinDuquesnoy/MellowPlayer/releases"
+        }
+      ],
+      "installinfo": [
+        {
+          "version": "Not Installed",
+          "size": "Not Installed",
+          "tag": "Not Installed",
+          "status": "Not Installed"
+        }
+      ]
+    },
+    {
+      "name": "MieSimulatorGUI",
+      "installname": "miesimulatorgui",
+      "type": "AppImage",
+      "description": "null",
+      "authors": [
+        {
+          "name": "VirtualPhotonics",
+          "url": "https://github.com/VirtualPhotonics"
+        }
+      ],
+      "links": [
+        {
+          "type": "GitHub",
+          "url": "VirtualPhotonics/MieSimulatorGUI"
+        },
+        {
+          "type": "Download",
+          "url": "https://github.com/VirtualPhotonics/MieSimulatorGUI/releases"
         }
       ],
       "installinfo": [
@@ -8977,6 +9217,36 @@
       ]
     },
     {
+      "name": "Paper",
+      "installname": "paper",
+      "type": "AppImage",
+      "description": "A CLI Tool to set a random wallpaper from Unsplash.com",
+      "authors": [
+        {
+          "name": "anupam-git",
+          "url": "https://github.com/anupam-git"
+        }
+      ],
+      "links": [
+        {
+          "type": "GitHub",
+          "url": "anupam-git/paper"
+        },
+        {
+          "type": "Download",
+          "url": "https://github.com/anupam-git/paper/releases"
+        }
+      ],
+      "installinfo": [
+        {
+          "version": "Not Installed",
+          "size": "Not Installed",
+          "tag": "Not Installed",
+          "status": "Not Installed"
+        }
+      ]
+    },
+    {
       "name": "parsec",
       "installname": "parsec",
       "type": "AppImage",
@@ -9445,6 +9715,36 @@
         {
           "type": "Download",
           "url": "https://github.com/bluerobotics/ping-components/releases"
+        }
+      ],
+      "installinfo": [
+        {
+          "version": "Not Installed",
+          "size": "Not Installed",
+          "tag": "Not Installed",
+          "status": "Not Installed"
+        }
+      ]
+    },
+    {
+      "name": "pinkstarcoin-gui",
+      "installname": "pinkstarcoin-gui",
+      "type": "AppImage",
+      "description": "PinkstarcoinV2 wallet",
+      "authors": [
+        {
+          "name": "mtl1979",
+          "url": "https://github.com/mtl1979"
+        }
+      ],
+      "links": [
+        {
+          "type": "GitHub",
+          "url": "mtl1979/pinkstarcoin-gui"
+        },
+        {
+          "type": "Download",
+          "url": "https://github.com/mtl1979/pinkstarcoin-gui/releases"
         }
       ],
       "installinfo": [
@@ -11347,6 +11647,36 @@
       ]
     },
     {
+      "name": "Sharp-Tune",
+      "installname": "sharp-tune",
+      "type": "AppImage",
+      "description": "Lightweight Cross-platform music player build upon the node using the electron framework.",
+      "authors": [
+        {
+          "name": "MD-AZMAL",
+          "url": "https://github.com/MD-AZMAL"
+        }
+      ],
+      "links": [
+        {
+          "type": "GitHub",
+          "url": "MD-AZMAL/Sharp-Tune"
+        },
+        {
+          "type": "Download",
+          "url": "https://github.com/MD-AZMAL/Sharp-Tune/releases"
+        }
+      ],
+      "installinfo": [
+        {
+          "version": "Not Installed",
+          "size": "Not Installed",
+          "tag": "Not Installed",
+          "status": "Not Installed"
+        }
+      ]
+    },
+    {
       "name": "shots",
       "installname": "shots",
       "type": "AppImage",
@@ -11677,6 +12007,36 @@
       ]
     },
     {
+      "name": "SlackBackup",
+      "installname": "slackbackup",
+      "type": "AppImage",
+      "description": "An application to archive Slack messages and perform some simple account maintenance",
+      "authors": [
+        {
+          "name": "jcolag",
+          "url": "https://github.com/jcolag"
+        }
+      ],
+      "links": [
+        {
+          "type": "GitHub",
+          "url": "jcolag/SlackBackup"
+        },
+        {
+          "type": "Download",
+          "url": "https://github.com/jcolag/SlackBackup/releases"
+        }
+      ],
+      "installinfo": [
+        {
+          "version": "Not Installed",
+          "size": "Not Installed",
+          "tag": "Not Installed",
+          "status": "Not Installed"
+        }
+      ]
+    },
+    {
       "name": "sleep-timer",
       "installname": "sleep-timer",
       "type": "AppImage",
@@ -11755,6 +12115,36 @@
         {
           "type": "Install",
           "url": "https://github.com/aenany/snake.js/releases"
+        }
+      ],
+      "installinfo": [
+        {
+          "version": "Not Installed",
+          "size": "Not Installed",
+          "tag": "Not Installed",
+          "status": "Not Installed"
+        }
+      ]
+    },
+    {
+      "name": "SnippetStore",
+      "installname": "snippetstore",
+      "type": "AppImage",
+      "description": "A snippet management app for developers",
+      "authors": [
+        {
+          "name": "ZeroX-DG",
+          "url": "https://github.com/ZeroX-DG"
+        }
+      ],
+      "links": [
+        {
+          "type": "GitHub",
+          "url": "ZeroX-DG/SnippetStore"
+        },
+        {
+          "type": "Download",
+          "url": "https://github.com/ZeroX-DG/SnippetStore/releases"
         }
       ],
       "installinfo": [
@@ -13267,6 +13657,36 @@
       ]
     },
     {
+      "name": "Tumblr_Scraper",
+      "installname": "tumblr_scraper",
+      "type": "AppImage",
+      "description": "a utility to scrape a Tumblr profile for user uploadede posts",
+      "authors": [
+        {
+          "name": "lluisrojass",
+          "url": "https://github.com/lluisrojass"
+        }
+      ],
+      "links": [
+        {
+          "type": "GitHub",
+          "url": "lluisrojass/tumblr-scraper"
+        },
+        {
+          "type": "Download",
+          "url": "https://github.com/lluisrojass/tumblr-scraper/releases"
+        }
+      ],
+      "installinfo": [
+        {
+          "version": "Not Installed",
+          "size": "Not Installed",
+          "tag": "Not Installed",
+          "status": "Not Installed"
+        }
+      ]
+    },
+    {
       "name": "turntable",
       "installname": "turntable",
       "type": "AppImage",
@@ -13435,6 +13855,36 @@
         {
           "type": "Download",
           "url": "https://github.com/UltimateHackingKeyboard/agent/releases"
+        }
+      ],
+      "installinfo": [
+        {
+          "version": "Not Installed",
+          "size": "Not Installed",
+          "tag": "Not Installed",
+          "status": "Not Installed"
+        }
+      ]
+    },
+    {
+      "name": "UltimateQRCode",
+      "installname": "ultimateqrcode",
+      "type": "AppImage",
+      "description": "QR Code generator",
+      "authors": [
+        {
+          "name": "arabine",
+          "url": "https://github.com/arabine"
+        }
+      ],
+      "links": [
+        {
+          "type": "GitHub",
+          "url": "arabine/ultimateqrcode"
+        },
+        {
+          "type": "Download",
+          "url": "https://github.com/arabine/ultimateqrcode/releases"
         }
       ],
       "installinfo": [
@@ -13735,6 +14185,36 @@
         {
           "type": "Install",
           "url": "https://github.com/belltown/violetbug/releases"
+        }
+      ],
+      "installinfo": [
+        {
+          "version": "Not Installed",
+          "size": "Not Installed",
+          "tag": "Not Installed",
+          "status": "Not Installed"
+        }
+      ]
+    },
+    {
+      "name": "VirtScreen",
+      "installname": "virtscreen",
+      "type": "AppImage",
+      "description": "Make your iPad/tablet/computer as a secondary monitor on Linux",
+      "authors": [
+        {
+          "name": "kbumsik",
+          "url": "https://github.com/kbumsik"
+        }
+      ],
+      "links": [
+        {
+          "type": "GitHub",
+          "url": "kbumsik/VirtScreen"
+        },
+        {
+          "type": "Download",
+          "url": "https://github.com/kbumsik/VirtScreen/releases"
         }
       ],
       "installinfo": [

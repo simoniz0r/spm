@@ -1,0 +1,30 @@
+{
+  "name": "SnippetStore",
+  "description": "A snippet management app for developers",
+  "categories": [
+    "Development"
+  ],
+  "authors": [
+    {
+      "name": "ZeroX-DG",
+      "url": "https://github.com/ZeroX-DG"
+    }
+  ],
+  "license": null,
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "ZeroX-DG/SnippetStore"
+    },
+    {
+      "type": "Download",
+      "url": "https://github.com/ZeroX-DG/SnippetStore/releases"
+    }
+  ],
+  "icons": [
+    "SnippetStore/icons/512x512/snippetstore.png"
+  ],
+  "screenshots": [
+    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/SnippetStore/screenshot.png"
+  ]
+}

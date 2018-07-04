@@ -1,0 +1,30 @@
+{
+  "name": "Paper",
+  "description": "A CLI Tool to set a random wallpaper from Unsplash.com",
+  "categories": [
+    "Utility"
+  ],
+  "authors": [
+    {
+      "name": "anupam-git",
+      "url": "https://github.com/anupam-git"
+    }
+  ],
+  "license": "MIT",
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "anupam-git/paper"
+    },
+    {
+      "type": "Download",
+      "url": "https://github.com/anupam-git/paper/releases"
+    }
+  ],
+  "icons": [
+    "Paper/icons/scalable/paper.svg"
+  ],
+  "screenshots": [
+    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/Paper/screenshot.png"
+  ]
+}

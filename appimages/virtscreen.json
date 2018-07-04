@@ -1,0 +1,30 @@
+{
+  "name": "VirtScreen",
+  "description": "Make your iPad/tablet/computer as a secondary monitor on Linux",
+  "categories": [
+    "Application"
+  ],
+  "authors": [
+    {
+      "name": "kbumsik",
+      "url": "https://github.com/kbumsik"
+    }
+  ],
+  "license": "GPL-3.0",
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "kbumsik/VirtScreen"
+    },
+    {
+      "type": "Download",
+      "url": "https://github.com/kbumsik/VirtScreen/releases"
+    }
+  ],
+  "icons": [
+    "VirtScreen/icons/156x178/virtscreen.png"
+  ],
+  "screenshots": [
+    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/VirtScreen/screenshot.png"
+  ]
+}
