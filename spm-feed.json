@@ -3,7 +3,7 @@
   "home_page_url": "https://github.com/simoniz0r/spm",
   "feed_url": "https://simoniz0r.github.io/spm-feed.json",
   "description": "json feed containing package information for spm.",
-  "updated_at": "Wed Jul  4 12:48:33 CDT 2018",
+  "updated_at": "Wed Jul  4 12:58:58 CDT 2018",
   "expired": false,
   "appimages": [
     {
@@ -6264,7 +6264,7 @@
         },
         {
           "type": "Install",
-          "url": "https://files.kde.org/kdenlive/release/kdenlive-18.04.1-x86_64.AppImage"
+          "url": "https://files.kde.org/kdenlive/unstable/kdenlive-18.08-beta17-x86_64.AppImage"
         }
       ],
       "installinfo": [
@@ -6444,7 +6444,7 @@
         },
         {
           "type": "Install",
-          "url": "https://files.kde.org/kdenlive/unstable/kdenlive-18.08-beta17-x86_64.AppImage"
+          "url": "https://download.kde.org/stable/krita/4.0.3/krita-4.0.3-x86_64.appimage"
         }
       ],
       "installinfo": [
