@@ -1,16 +1,14 @@
 {
   "name": "Dust3D",
+  "installname": "dust3d",
+  "type": "AppImage",
   "description": "",
-  "categories": [
-    "Graphics"
-  ],
   "authors": [
     {
       "name": "huxingyi",
       "url": "https://github.com/huxingyi"
     }
   ],
-  "license": "MIT",
   "links": [
     {
       "type": "GitHub",
@@ -21,10 +19,12 @@
       "url": "https://github.com/huxingyi/dust3d/releases"
     }
   ],
-  "icons": [
-    "Dust3D/icons/250x250/icon.png"
-  ],
-  "screenshots": [
-    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/Dust3D/screenshot.png"
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
+    }
   ]
 }

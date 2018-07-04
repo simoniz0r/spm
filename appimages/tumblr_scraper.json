@@ -1,16 +1,14 @@
 {
   "name": "Tumblr_Scraper",
+  "installname": "tumblr_scraper",
+  "type": "AppImage",
   "description": "a utility to scrape a Tumblr profile for user uploadede posts",
-  "categories": [
-    "Utility"
-  ],
   "authors": [
     {
       "name": "lluisrojass",
       "url": "https://github.com/lluisrojass"
     }
   ],
-  "license": null,
   "links": [
     {
       "type": "GitHub",
@@ -21,10 +19,12 @@
       "url": "https://github.com/lluisrojass/tumblr-scraper/releases"
     }
   ],
-  "icons": [
-    "Tumblr_Scraper/icons/256x256/tumblr-scraper.png"
-  ],
-  "screenshots": [
-    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/Tumblr_Scraper/screenshot.png"
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
+    }
   ]
 }

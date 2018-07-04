@@ -1,16 +1,14 @@
 {
   "name": "pinkstarcoin-gui",
+  "installname": "pinkstarcoin-gui",
+  "type": "AppImage",
   "description": "PinkstarcoinV2 wallet",
-  "categories": [
-    "Office"
-  ],
   "authors": [
     {
       "name": "mtl1979",
       "url": "https://github.com/mtl1979"
     }
   ],
-  "license": "LGPL-3.0",
   "links": [
     {
       "type": "GitHub",
@@ -21,10 +19,12 @@
       "url": "https://github.com/mtl1979/pinkstarcoin-gui/releases"
     }
   ],
-  "icons": [
-    "pinkstarcoin-gui/icons/64x64/pinkstarcoin.png"
-  ],
-  "screenshots": [
-    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/pinkstarcoin-gui/screenshot.png"
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
+    }
   ]
 }

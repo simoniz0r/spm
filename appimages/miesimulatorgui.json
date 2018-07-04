@@ -1,15 +1,14 @@
 {
   "name": "MieSimulatorGUI",
-  "categories": [
-    "Science"
-  ],
+  "installname": "miesimulatorgui",
+  "type": "AppImage",
+  "description": "null",
   "authors": [
     {
       "name": "VirtualPhotonics",
       "url": "https://github.com/VirtualPhotonics"
     }
   ],
-  "license": null,
   "links": [
     {
       "type": "GitHub",
@@ -20,8 +19,12 @@
       "url": "https://github.com/VirtualPhotonics/MieSimulatorGUI/releases"
     }
   ],
-  "icons": null,
-  "screenshots": [
-    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/MieSimulatorGUI/screenshot.png"
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
+    }
   ]
 }

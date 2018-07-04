@@ -1,15 +1,14 @@
 {
   "name": "Genesis",
-  "categories": [
-    "Utility"
-  ],
+  "installname": "genesis",
+  "type": "AppImage",
+  "description": "null",
   "authors": [
     {
       "name": "GenesisKernel",
       "url": "https://github.com/GenesisKernel"
     }
   ],
-  "license": "MIT",
   "links": [
     {
       "type": "GitHub",
@@ -20,10 +19,12 @@
       "url": "https://github.com/GenesisKernel/genesis-front/releases"
     }
   ],
-  "icons": [
-    "Genesis/icons/128x128/genesis-front.png"
-  ],
-  "screenshots": [
-    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/Genesis/screenshot.png"
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
+    }
   ]
 }

@@ -1,16 +1,14 @@
 {
   "name": "UltimateQRCode",
+  "installname": "ultimateqrcode",
+  "type": "AppImage",
   "description": "QR Code generator",
-  "categories": [
-    "Graphics"
-  ],
   "authors": [
     {
       "name": "arabine",
       "url": "https://github.com/arabine"
     }
   ],
-  "license": null,
   "links": [
     {
       "type": "GitHub",
@@ -21,10 +19,12 @@
       "url": "https://github.com/arabine/ultimateqrcode/releases"
     }
   ],
-  "icons": [
-    "UltimateQRCode/icons/512x512/ultimateqrcode_logo.png"
-  ],
-  "screenshots": [
-    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/UltimateQRCode/screenshot.png"
+  "installinfo": [
+    {
+      "version": "Not Installed",
+      "size": "Not Installed",
+      "tag": "Not Installed",
+      "status": "Not Installed"
+    }
   ]
 }
