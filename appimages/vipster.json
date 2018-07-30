@@ -1,0 +1,30 @@
+{
+  "name": "Vipster",
+  "description": "Visual periodic structure editor",
+  "categories": [
+    "Science"
+  ],
+  "authors": [
+    {
+      "name": "sgsaenger",
+      "url": "https://github.com/sgsaenger"
+    }
+  ],
+  "license": "GPL-3.0",
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "sgsaenger/vipster"
+    },
+    {
+      "type": "Download",
+      "url": "https://github.com/sgsaenger/vipster/releases"
+    }
+  ],
+  "icons": [
+    "Vipster/icons/128x128/vipster.png"
+  ],
+  "screenshots": [
+    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/Vipster/screenshot.png"
+  ]
+}

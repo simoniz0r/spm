@@ -1,30 +1,30 @@
 {
   "name": "TeXstudio",
-  "installname": "TeXstudio",
-  "type": "AppImage",
-  "description": "LaTeX development environment ",
+  "description": "LaTeX development environment",
+  "categories": [
+    "Office"
+  ],
   "authors": [
     {
-      "name": "null",
-      "url": "https://dl.bintray.com/unruhschuh/AppImages"
+      "name": "texstudio-org",
+      "url": "https://github.com/texstudio-org"
     }
   ],
+  "license": "GPL-3.0",
   "links": [
     {
-      "type": "Other",
-      "url": "https://dl.bintray.com/unruhschuh/AppImages"
+      "type": "GitHub",
+      "url": "texstudio-org/texstudio"
     },
     {
-      "type": "Install",
-      "url": "https://dl.bintray.com/unruhschuh/AppImages/TeXstudio-2.10.8-x86_64.AppImage"
+      "type": "Download",
+      "url": "https://github.com/texstudio-org/texstudio/releases"
     }
   ],
-  "installinfo": [
-    {
-      "version": "Not Installed",
-      "size": "Not Installed",
-      "tag": "Not Installed",
-      "status": "Not Installed"
-    }
+  "icons": [
+    "TeXstudio/icons/scalable/texstudio.svg"
+  ],
+  "screenshots": [
+    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/TeXstudio/screenshot.png"
   ]
 }

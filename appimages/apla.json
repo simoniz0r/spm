@@ -1,0 +1,29 @@
+{
+  "name": "Apla",
+  "categories": [
+    "Utility"
+  ],
+  "authors": [
+    {
+      "name": "AplaProject",
+      "url": "https://github.com/AplaProject"
+    }
+  ],
+  "license": "MIT",
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "AplaProject/apla-front"
+    },
+    {
+      "type": "Download",
+      "url": "https://github.com/AplaProject/apla-front/releases"
+    }
+  ],
+  "icons": [
+    "Apla/icons/256x256/apla-front.png"
+  ],
+  "screenshots": [
+    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/Apla/screenshot.png"
+  ]
+}

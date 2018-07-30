@@ -1,0 +1,30 @@
+{
+  "name": "Explorook",
+  "description": "Rookout’s site addon to support local files and folders",
+  "categories": [
+    "Utility"
+  ],
+  "authors": [
+    {
+      "name": "Rookout",
+      "url": "https://github.com/Rookout"
+    }
+  ],
+  "license": "Apache-2.0",
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "Rookout/explorook"
+    },
+    {
+      "type": "Download",
+      "url": "https://github.com/Rookout/explorook/releases"
+    }
+  ],
+  "icons": [
+    "Explorook/icons/128x128/explorook.png"
+  ],
+  "screenshots": [
+    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/Explorook/screenshot.png"
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "name": "laravel-kit",
+  "description": "Easy Laravel application management",
+  "categories": [
+    "Development"
+  ],
+  "authors": [
+    {
+      "name": "tarequemdhanif",
+      "url": "https://github.com/tarequemdhanif"
+    }
+  ],
+  "license": "MIT",
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "tarequemdhanif/laravel-kit"
+    },
+    {
+      "type": "Download",
+      "url": "https://github.com/tarequemdhanif/laravel-kit/releases"
+    }
+  ],
+  "icons": [
+    "laravel-kit/icons/128x128/laravel-kit.png"
+  ],
+  "screenshots": [
+    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/laravel-kit/screenshot.png"
+  ]
+}

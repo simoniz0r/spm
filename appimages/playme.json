@@ -1,0 +1,30 @@
+{
+  "name": "PlayMe",
+  "description": "Elegant YouTube Music desktop app",
+  "categories": [
+    "AudioVideo"
+  ],
+  "authors": [
+    {
+      "name": "filipuic",
+      "url": "https://github.com/filipuic"
+    }
+  ],
+  "license": null,
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "filipuic/playme"
+    },
+    {
+      "type": "Download",
+      "url": "https://github.com/filipuic/playme/releases"
+    }
+  ],
+  "icons": [
+    "PlayMe/icons/128x128/playme.png"
+  ],
+  "screenshots": [
+    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/PlayMe/screenshot.png"
+  ]
+}

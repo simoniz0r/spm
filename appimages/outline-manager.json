@@ -1,0 +1,30 @@
+{
+  "name": "Outline-Manager",
+  "description": "Create and manage access to Outline servers",
+  "categories": [
+    "Network"
+  ],
+  "authors": [
+    {
+      "name": "Jigsaw-Code",
+      "url": "https://github.com/Jigsaw-Code"
+    }
+  ],
+  "license": null,
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "Jigsaw-Code/outline-server"
+    },
+    {
+      "type": "Download",
+      "url": "https://github.com/Jigsaw-Code/outline-server/releases"
+    }
+  ],
+  "icons": [
+    "Outline-Manager/icons/128x128/outline-manager.png"
+  ],
+  "screenshots": [
+    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/Outline-Manager/screenshot.png"
+  ]
+}

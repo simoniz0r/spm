@@ -1,0 +1,30 @@
+{
+  "name": "Musicalypse",
+  "description": "A modern audio player built with Web technologies.",
+  "categories": [
+    "AudioVideo"
+  ],
+  "authors": [
+    {
+      "name": "tgambet",
+      "url": "https://github.com/tgambet"
+    }
+  ],
+  "license": null,
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "tgambet/musicalypse"
+    },
+    {
+      "type": "Download",
+      "url": "https://github.com/tgambet/musicalypse/releases"
+    }
+  ],
+  "icons": [
+    "Musicalypse/icons/128x128/musicalypse.png"
+  ],
+  "screenshots": [
+    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/Musicalypse/screenshot.png"
+  ]
+}

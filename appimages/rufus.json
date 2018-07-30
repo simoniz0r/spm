@@ -1,0 +1,30 @@
+{
+  "name": "Rufus",
+  "description": "Logiciel de gestion de cabinet d'Ophtalmologie",
+  "categories": [
+    "Office"
+  ],
+  "authors": [
+    {
+      "name": "ukinoki",
+      "url": "https://github.com/ukinoki"
+    }
+  ],
+  "license": null,
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "ukinoki/Rufus"
+    },
+    {
+      "type": "Download",
+      "url": "https://github.com/ukinoki/Rufus/releases"
+    }
+  ],
+  "icons": [
+    "Rufus/icons/256x256/rufus.png"
+  ],
+  "screenshots": [
+    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/Rufus/screenshot.png"
+  ]
+}

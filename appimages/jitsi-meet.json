@@ -1,0 +1,30 @@
+{
+  "name": "jitsi-meet",
+  "description": "Jitsi Meet Desktop App",
+  "categories": [
+    "VideoConference"
+  ],
+  "authors": [
+    {
+      "name": "jitsi",
+      "url": "https://github.com/jitsi"
+    }
+  ],
+  "license": "Apache-2.0",
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "jitsi/jitsi-meet-electron"
+    },
+    {
+      "type": "Download",
+      "url": "https://github.com/jitsi/jitsi-meet-electron/releases"
+    }
+  ],
+  "icons": [
+    "jitsi-meet/icons/128x128/jitsi-meet.png"
+  ],
+  "screenshots": [
+    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/jitsi-meet/screenshot.png"
+  ]
+}

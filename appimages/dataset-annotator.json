@@ -1,0 +1,30 @@
+{
+  "name": "dataset-annotator",
+  "description": "An annotation tool for a dataset.",
+  "categories": [
+    "Utility"
+  ],
+  "authors": [
+    {
+      "name": "omenyayl",
+      "url": "https://github.com/omenyayl"
+    }
+  ],
+  "license": "MIT",
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "omenyayl/dataset-annotator"
+    },
+    {
+      "type": "Download",
+      "url": "https://github.com/omenyayl/dataset-annotator/releases"
+    }
+  ],
+  "icons": [
+    "dataset-annotator/icons/128x128/dataset-annotator.png"
+  ],
+  "screenshots": [
+    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/dataset-annotator/screenshot.png"
+  ]
+}

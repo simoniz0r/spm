@@ -1,0 +1,30 @@
+{
+  "name": "snapshot-slider",
+  "description": "A slider to present, print and email Snapshots of modern mathematics from Oberwolfach",
+  "categories": [
+    "Education"
+  ],
+  "authors": [
+    {
+      "name": "IMAGINARY",
+      "url": "https://github.com/IMAGINARY"
+    }
+  ],
+  "license": "Apache-2.0",
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "IMAGINARY/snapshot-slider"
+    },
+    {
+      "type": "Download",
+      "url": "https://github.com/IMAGINARY/snapshot-slider/releases"
+    }
+  ],
+  "icons": [
+    "snapshot-slider/icons/128x128/snapshot-slider.png"
+  ],
+  "screenshots": [
+    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/snapshot-slider/screenshot.png"
+  ]
+}

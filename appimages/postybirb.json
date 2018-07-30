@@ -1,0 +1,30 @@
+{
+  "name": "PostyBirb",
+  "description": "Multimedia crossposter for multimedia websites",
+  "categories": [
+    "Network"
+  ],
+  "authors": [
+    {
+      "name": "mvdicarlo",
+      "url": "https://github.com/mvdicarlo"
+    }
+  ],
+  "license": null,
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "mvdicarlo/postybirb"
+    },
+    {
+      "type": "Download",
+      "url": "https://github.com/mvdicarlo/postybirb/releases"
+    }
+  ],
+  "icons": [
+    "PostyBirb/icons/256x256/postybirb.png"
+  ],
+  "screenshots": [
+    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/PostyBirb/screenshot.png"
+  ]
+}

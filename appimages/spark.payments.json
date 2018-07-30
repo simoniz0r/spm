@@ -1,0 +1,30 @@
+{
+  "name": "Spark.Payments",
+  "description": "An external terminal application for processing DASH payments in brick and mortar stores.",
+  "categories": [
+    "Finance"
+  ],
+  "authors": [
+    {
+      "name": "kodaxx",
+      "url": "https://github.com/kodaxx"
+    }
+  ],
+  "license": "MIT",
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "kodaxx/spark-dash-desktop"
+    },
+    {
+      "type": "Download",
+      "url": "https://github.com/kodaxx/spark-dash-desktop/releases"
+    }
+  ],
+  "icons": [
+    "Spark.Payments/icons/128x128/spark.png"
+  ],
+  "screenshots": [
+    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/Spark.Payments/screenshot.png"
+  ]
+}

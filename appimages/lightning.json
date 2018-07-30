@@ -1,0 +1,30 @@
+{
+  "name": "Lightning",
+  "description": "Lightning Wallet Application",
+  "categories": [
+    "Network"
+  ],
+  "authors": [
+    {
+      "name": "lightninglabs",
+      "url": "https://github.com/lightninglabs"
+    }
+  ],
+  "license": null,
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "lightninglabs/lightning-app"
+    },
+    {
+      "type": "Download",
+      "url": "https://github.com/lightninglabs/lightning-app/releases"
+    }
+  ],
+  "icons": [
+    "Lightning/icons/512x512/lightning-app.png"
+  ],
+  "screenshots": [
+    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/Lightning/screenshot.png"
+  ]
+}

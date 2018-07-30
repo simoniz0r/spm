@@ -1,0 +1,30 @@
+{
+  "name": "Demonizer",
+  "description": "Demonic corruption fantasy shmup",
+  "categories": [
+    "Development"
+  ],
+  "authors": [
+    {
+      "name": "IoriBranford",
+      "url": "https://github.com/IoriBranford"
+    }
+  ],
+  "license": null,
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "IoriBranford/demonizer"
+    },
+    {
+      "type": "Download",
+      "url": "https://github.com/IoriBranford/demonizer/releases"
+    }
+  ],
+  "icons": [
+    "Demonizer/icons/scalable/game.svg"
+  ],
+  "screenshots": [
+    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/Demonizer/screenshot.png"
+  ]
+}

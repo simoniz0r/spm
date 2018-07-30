@@ -1,0 +1,30 @@
+{
+  "name": "elcalc",
+  "description": "Simple, Cross-Platform calculator built with Electron.",
+  "categories": [
+    "Utility"
+  ],
+  "authors": [
+    {
+      "name": "elcalc",
+      "url": "https://github.com/elcalc"
+    }
+  ],
+  "license": "MIT",
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "elcalc/elcalc"
+    },
+    {
+      "type": "Download",
+      "url": "https://github.com/elcalc/elcalc/releases"
+    }
+  ],
+  "icons": [
+    "elcalc/icons/128x128/elcalc.png"
+  ],
+  "screenshots": [
+    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/elcalc/screenshot.png"
+  ]
+}

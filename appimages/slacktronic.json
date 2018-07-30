@@ -1,0 +1,30 @@
+{
+  "name": "Slacktronic",
+  "description": "Connect your Slack workspace to Arduino",
+  "categories": [
+    "Development"
+  ],
+  "authors": [
+    {
+      "name": "migmartri",
+      "url": "https://github.com/migmartri"
+    }
+  ],
+  "license": "Apache-2.0",
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "migmartri/slacktronic"
+    },
+    {
+      "type": "Download",
+      "url": "https://github.com/migmartri/slacktronic/releases"
+    }
+  ],
+  "icons": [
+    "Slacktronic/icons/128x128/slacktronic.png"
+  ],
+  "screenshots": [
+    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/Slacktronic/screenshot.png"
+  ]
+}

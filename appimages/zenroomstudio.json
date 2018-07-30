@@ -1,0 +1,30 @@
+{
+  "name": "ZenroomStudio",
+  "description": "Zenroom Studio",
+  "categories": [
+    "Development"
+  ],
+  "authors": [
+    {
+      "name": "DECODEproject",
+      "url": "https://github.com/DECODEproject"
+    }
+  ],
+  "license": "AGPL-3.0",
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "DECODEproject/zenroom-studio"
+    },
+    {
+      "type": "Download",
+      "url": "https://github.com/DECODEproject/zenroom-studio/releases"
+    }
+  ],
+  "icons": [
+    "ZenroomStudio/icons/128x128/zenroom-studio.png"
+  ],
+  "screenshots": [
+    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/ZenroomStudio/screenshot.png"
+  ]
+}

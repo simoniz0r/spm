@@ -1,0 +1,30 @@
+{
+  "name": "Aphelion_Wallet",
+  "description": "Aphelion Desktop Wallet",
+  "categories": [
+    "Utility"
+  ],
+  "authors": [
+    {
+      "name": "aphtoken",
+      "url": "https://github.com/aphtoken"
+    }
+  ],
+  "license": null,
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "aphtoken/aph-wallet-gui"
+    },
+    {
+      "type": "Download",
+      "url": "https://github.com/aphtoken/aph-wallet-gui/releases"
+    }
+  ],
+  "icons": [
+    "Aphelion_Wallet/icons/256x256/aphelion-desktop-wallet.png"
+  ],
+  "screenshots": [
+    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/Aphelion_Wallet/screenshot.png"
+  ]
+}

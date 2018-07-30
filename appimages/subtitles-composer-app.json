@@ -1,0 +1,30 @@
+{
+  "name": "subtitles-composer-app",
+  "description": "subtitlescomposer Desktop Client for Linux",
+  "categories": [
+    "Video"
+  ],
+  "authors": [
+    {
+      "name": "pietrop",
+      "url": "https://github.com/pietrop"
+    }
+  ],
+  "license": "CC0-1.0",
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "pietrop/subtitlesComposer-app"
+    },
+    {
+      "type": "Download",
+      "url": "https://github.com/pietrop/subtitlesComposer-app/releases"
+    }
+  ],
+  "icons": [
+    "subtitles-composer-app/icons/128x128/subtitles-composer-app.png"
+  ],
+  "screenshots": [
+    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/subtitles-composer-app/screenshot.png"
+  ]
+}

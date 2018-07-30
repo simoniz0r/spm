@@ -1,0 +1,30 @@
+{
+  "name": "MicroPad",
+  "description": "µPad is an open digital note taking app.",
+  "categories": [
+    "Office"
+  ],
+  "authors": [
+    {
+      "name": "MicroPad",
+      "url": "https://github.com/MicroPad"
+    }
+  ],
+  "license": "MPL-2.0",
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "MicroPad/Electron"
+    },
+    {
+      "type": "Download",
+      "url": "https://github.com/MicroPad/Electron/releases"
+    }
+  ],
+  "icons": [
+    "MicroPad/icons/512x512/micropad.png"
+  ],
+  "screenshots": [
+    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/MicroPad/screenshot.png"
+  ]
+}

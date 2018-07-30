@@ -1,0 +1,30 @@
+{
+  "name": "ridereceipts",
+  "description": "Simple automation desktop app to download and organize your tax invoices from Uber.",
+  "categories": [
+    "Utility"
+  ],
+  "authors": [
+    {
+      "name": "ridereceipts",
+      "url": "https://github.com/ridereceipts"
+    }
+  ],
+  "license": "MIT",
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "ridereceipts/ridereceipts"
+    },
+    {
+      "type": "Download",
+      "url": "https://github.com/ridereceipts/ridereceipts/releases"
+    }
+  ],
+  "icons": [
+    "ridereceipts/icons/256x256/ridereceipts.png"
+  ],
+  "screenshots": [
+    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/ridereceipts/screenshot.png"
+  ]
+}

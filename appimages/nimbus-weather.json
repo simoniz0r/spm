@@ -1,0 +1,30 @@
+{
+  "name": "nimbus-weather",
+  "description": "The desktop app for Nimbus Weather.",
+  "categories": [
+    "Development"
+  ],
+  "authors": [
+    {
+      "name": "tgrowden",
+      "url": "https://github.com/tgrowden"
+    }
+  ],
+  "license": "MIT",
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "tgrowden/nimbus-weather"
+    },
+    {
+      "type": "Download",
+      "url": "https://github.com/tgrowden/nimbus-weather/releases"
+    }
+  ],
+  "icons": [
+    "nimbus-weather/icons/128x128/nimbus-weather-electron.png"
+  ],
+  "screenshots": [
+    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/nimbus-weather/screenshot.png"
+  ]
+}

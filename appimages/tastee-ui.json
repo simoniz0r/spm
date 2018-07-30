@@ -1,0 +1,30 @@
+{
+  "name": "tastee-ui",
+  "description": "UI For TASTEE",
+  "categories": [
+    "Development"
+  ],
+  "authors": [
+    {
+      "name": "tastee",
+      "url": "https://github.com/tastee"
+    }
+  ],
+  "license": "MIT",
+  "links": [
+    {
+      "type": "GitHub",
+      "url": "tastee/tastee-ui"
+    },
+    {
+      "type": "Download",
+      "url": "https://github.com/tastee/tastee-ui/releases"
+    }
+  ],
+  "icons": [
+    "tastee-ui/icons/128x128/tastee-ui.png"
+  ],
+  "screenshots": [
+    "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/tastee-ui/screenshot.png"
+  ]
+}

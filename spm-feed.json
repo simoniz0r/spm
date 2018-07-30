@@ -3,7 +3,7 @@
   "home_page_url": "https://github.com/simoniz0r/spm",
   "feed_url": "https://simoniz0r.github.io/spm-feed.json",
   "description": "json feed containing package information for spm.",
-  "updated_at": "Wed Jul  4 12:58:58 CDT 2018",
+  "updated_at": "Mon Jul 30 00:09:29 CDT 2018",
   "expired": false,
   "appimages": [
     {
@@ -415,6 +415,66 @@
         {
           "type": "Install",
           "url": "https://github.com/klauscfhq/ao/releases"
+        }
+      ],
+      "installinfo": [
+        {
+          "version": "Not Installed",
+          "size": "Not Installed",
+          "tag": "Not Installed",
+          "status": "Not Installed"
+        }
+      ]
+    },
+    {
+      "name": "Aphelion_Wallet",
+      "installname": "aphelion_wallet",
+      "type": "AppImage",
+      "description": "Aphelion Desktop Wallet",
+      "authors": [
+        {
+          "name": "aphtoken",
+          "url": "https://github.com/aphtoken"
+        }
+      ],
+      "links": [
+        {
+          "type": "GitHub",
+          "url": "aphtoken/aph-wallet-gui"
+        },
+        {
+          "type": "Download",
+          "url": "https://github.com/aphtoken/aph-wallet-gui/releases"
+        }
+      ],
+      "installinfo": [
+        {
+          "version": "Not Installed",
+          "size": "Not Installed",
+          "tag": "Not Installed",
+          "status": "Not Installed"
+        }
+      ]
+    },
+    {
+      "name": "Apla",
+      "installname": "apla",
+      "type": "AppImage",
+      "description": "null",
+      "authors": [
+        {
+          "name": "AplaProject",
+          "url": "https://github.com/AplaProject"
+        }
+      ],
+      "links": [
+        {
+          "type": "GitHub",
+          "url": "AplaProject/apla-front"
+        },
+        {
+          "type": "Download",
+          "url": "https://github.com/AplaProject/apla-front/releases"
         }
       ],
       "installinfo": [
@@ -2047,6 +2107,36 @@
       ]
     },
     {
+      "name": "Cloud_Browser",
+      "installname": "cloud_browser",
+      "type": "AppImage",
+      "description": "null",
+      "authors": [
+        {
+          "name": "lemourin",
+          "url": "https://github.com/lemourin"
+        }
+      ],
+      "links": [
+        {
+          "type": "GitHub",
+          "url": "lemourin/libcloudstorage"
+        },
+        {
+          "type": "Download",
+          "url": "https://github.com/lemourin/libcloudstorage/releases"
+        }
+      ],
+      "installinfo": [
+        {
+          "version": "Not Installed",
+          "size": "Not Installed",
+          "tag": "Not Installed",
+          "status": "Not Installed"
+        }
+      ]
+    },
+    {
       "name": "colorpicker",
       "installname": "colorpicker",
       "type": "AppImage",
@@ -2497,6 +2587,36 @@
       ]
     },
     {
+      "name": "dataset-annotator",
+      "installname": "dataset-annotator",
+      "type": "AppImage",
+      "description": "An annotation tool for a dataset.",
+      "authors": [
+        {
+          "name": "omenyayl",
+          "url": "https://github.com/omenyayl"
+        }
+      ],
+      "links": [
+        {
+          "type": "GitHub",
+          "url": "omenyayl/dataset-annotator"
+        },
+        {
+          "type": "Download",
+          "url": "https://github.com/omenyayl/dataset-annotator/releases"
+        }
+      ],
+      "installinfo": [
+        {
+          "version": "Not Installed",
+          "size": "Not Installed",
+          "tag": "Not Installed",
+          "status": "Not Installed"
+        }
+      ]
+    },
+    {
       "name": "dat-desktop",
       "installname": "dat-desktop",
       "type": "AppImage",
@@ -2635,6 +2755,36 @@
         {
           "type": "Install",
           "url": "https://github.com/DeDop/dedop-studio/releases"
+        }
+      ],
+      "installinfo": [
+        {
+          "version": "Not Installed",
+          "size": "Not Installed",
+          "tag": "Not Installed",
+          "status": "Not Installed"
+        }
+      ]
+    },
+    {
+      "name": "Demonizer",
+      "installname": "demonizer",
+      "type": "AppImage",
+      "description": "Demonic corruption fantasy shmup",
+      "authors": [
+        {
+          "name": "IoriBranford",
+          "url": "https://github.com/IoriBranford"
+        }
+      ],
+      "links": [
+        {
+          "type": "GitHub",
+          "url": "IoriBranford/demonizer"
+        },
+        {
+          "type": "Download",
+          "url": "https://github.com/IoriBranford/demonizer/releases"
         }
       ],
       "installinfo": [
@@ -3217,6 +3367,36 @@
       ]
     },
     {
+      "name": "elcalc",
+      "installname": "elcalc",
+      "type": "AppImage",
+      "description": "Simple, Cross-Platform calculator built with Electron.",
+      "authors": [
+        {
+          "name": "elcalc",
+          "url": "https://github.com/elcalc"
+        }
+      ],
+      "links": [
+        {
+          "type": "GitHub",
+          "url": "elcalc/elcalc"
+        },
+        {
+          "type": "Download",
+          "url": "https://github.com/elcalc/elcalc/releases"
+        }
+      ],
+      "installinfo": [
+        {
+          "version": "Not Installed",
+          "size": "Not Installed",
+          "tag": "Not Installed",
+          "status": "Not Installed"
+        }
+      ]
+    },
+    {
       "name": "Electorrent",
       "installname": "Electorrent",
       "type": "AppImage",
@@ -3655,6 +3835,36 @@
         {
           "type": "Install",
           "url": "https://s3-eu-west-1.amazonaws.com/evothings-download/evothings-studio-2.2.0-beta7.AppImage"
+        }
+      ],
+      "installinfo": [
+        {
+          "version": "Not Installed",
+          "size": "Not Installed",
+          "tag": "Not Installed",
+          "status": "Not Installed"
+        }
+      ]
+    },
+    {
+      "name": "Explorook",
+      "installname": "explorook",
+      "type": "AppImage",
+      "description": "Rookout’s site addon to support local files and folders",
+      "authors": [
+        {
+          "name": "Rookout",
+          "url": "https://github.com/Rookout"
+        }
+      ],
+      "links": [
+        {
+          "type": "GitHub",
+          "url": "Rookout/explorook"
+        },
+        {
+          "type": "Download",
+          "url": "https://github.com/Rookout/explorook/releases"
         }
       ],
       "installinfo": [
@@ -5947,6 +6157,36 @@
       ]
     },
     {
+      "name": "jitsi-meet",
+      "installname": "jitsi-meet",
+      "type": "AppImage",
+      "description": "Jitsi Meet Desktop App",
+      "authors": [
+        {
+          "name": "jitsi",
+          "url": "https://github.com/jitsi"
+        }
+      ],
+      "links": [
+        {
+          "type": "GitHub",
+          "url": "jitsi/jitsi-meet-electron"
+        },
+        {
+          "type": "Download",
+          "url": "https://github.com/jitsi/jitsi-meet-electron/releases"
+        }
+      ],
+      "installinfo": [
+        {
+          "version": "Not Installed",
+          "size": "Not Installed",
+          "tag": "Not Installed",
+          "status": "Not Installed"
+        }
+      ]
+    },
+    {
       "name": "joaldesktop",
       "installname": "joaldesktop",
       "type": "AppImage",
@@ -6607,6 +6847,36 @@
       ]
     },
     {
+      "name": "laravel-kit",
+      "installname": "laravel-kit",
+      "type": "AppImage",
+      "description": "Easy Laravel application management",
+      "authors": [
+        {
+          "name": "tarequemdhanif",
+          "url": "https://github.com/tarequemdhanif"
+        }
+      ],
+      "links": [
+        {
+          "type": "GitHub",
+          "url": "tarequemdhanif/laravel-kit"
+        },
+        {
+          "type": "Download",
+          "url": "https://github.com/tarequemdhanif/laravel-kit/releases"
+        }
+      ],
+      "installinfo": [
+        {
+          "version": "Not Installed",
+          "size": "Not Installed",
+          "tag": "Not Installed",
+          "status": "Not Installed"
+        }
+      ]
+    },
+    {
       "name": "LaserWeb",
       "installname": "LaserWeb",
       "type": "AppImage",
@@ -6865,6 +7135,36 @@
         {
           "type": "Install",
           "url": "https://dl.bintray.com/librepcb/LibrePCB-Nightly/LibrePCB-Nightly-Linux-x86_64.AppImage"
+        }
+      ],
+      "installinfo": [
+        {
+          "version": "Not Installed",
+          "size": "Not Installed",
+          "tag": "Not Installed",
+          "status": "Not Installed"
+        }
+      ]
+    },
+    {
+      "name": "Lightning",
+      "installname": "lightning",
+      "type": "AppImage",
+      "description": "Lightning Wallet Application",
+      "authors": [
+        {
+          "name": "lightninglabs",
+          "url": "https://github.com/lightninglabs"
+        }
+      ],
+      "links": [
+        {
+          "type": "GitHub",
+          "url": "lightninglabs/lightning-app"
+        },
+        {
+          "type": "Download",
+          "url": "https://github.com/lightninglabs/lightning-app/releases"
         }
       ],
       "installinfo": [
@@ -7597,6 +7897,36 @@
       ]
     },
     {
+      "name": "MicroPad",
+      "installname": "micropad",
+      "type": "AppImage",
+      "description": "µPad is an open digital note taking app.",
+      "authors": [
+        {
+          "name": "MicroPad",
+          "url": "https://github.com/MicroPad"
+        }
+      ],
+      "links": [
+        {
+          "type": "GitHub",
+          "url": "MicroPad/Electron"
+        },
+        {
+          "type": "Download",
+          "url": "https://github.com/MicroPad/Electron/releases"
+        }
+      ],
+      "installinfo": [
+        {
+          "version": "Not Installed",
+          "size": "Not Installed",
+          "tag": "Not Installed",
+          "status": "Not Installed"
+        }
+      ]
+    },
+    {
       "name": "MieSimulatorGUI",
       "installname": "miesimulatorgui",
       "type": "AppImage",
@@ -8197,6 +8527,36 @@
       ]
     },
     {
+      "name": "Musicalypse",
+      "installname": "musicalypse",
+      "type": "AppImage",
+      "description": "A modern audio player built with Web technologies.",
+      "authors": [
+        {
+          "name": "tgambet",
+          "url": "https://github.com/tgambet"
+        }
+      ],
+      "links": [
+        {
+          "type": "GitHub",
+          "url": "tgambet/musicalypse"
+        },
+        {
+          "type": "Download",
+          "url": "https://github.com/tgambet/musicalypse/releases"
+        }
+      ],
+      "installinfo": [
+        {
+          "version": "Not Installed",
+          "size": "Not Installed",
+          "tag": "Not Installed",
+          "status": "Not Installed"
+        }
+      ]
+    },
+    {
       "name": "mybelka",
       "installname": "mybelka",
       "type": "AppImage",
@@ -8515,6 +8875,36 @@
         {
           "type": "Install",
           "url": "https://github.com/mujx/nheko/releases"
+        }
+      ],
+      "installinfo": [
+        {
+          "version": "Not Installed",
+          "size": "Not Installed",
+          "tag": "Not Installed",
+          "status": "Not Installed"
+        }
+      ]
+    },
+    {
+      "name": "nimbus-weather",
+      "installname": "nimbus-weather",
+      "type": "AppImage",
+      "description": "The desktop app for Nimbus Weather.",
+      "authors": [
+        {
+          "name": "tgrowden",
+          "url": "https://github.com/tgrowden"
+        }
+      ],
+      "links": [
+        {
+          "type": "GitHub",
+          "url": "tgrowden/nimbus-weather"
+        },
+        {
+          "type": "Download",
+          "url": "https://github.com/tgrowden/nimbus-weather/releases"
         }
       ],
       "installinfo": [
@@ -9055,6 +9445,36 @@
         {
           "type": "Install",
           "url": "https://sourceforge.net/projects/otter-browser/files/latest/download?source=files"
+        }
+      ],
+      "installinfo": [
+        {
+          "version": "Not Installed",
+          "size": "Not Installed",
+          "tag": "Not Installed",
+          "status": "Not Installed"
+        }
+      ]
+    },
+    {
+      "name": "Outline-Manager",
+      "installname": "outline-manager",
+      "type": "AppImage",
+      "description": "Create and manage access to Outline servers",
+      "authors": [
+        {
+          "name": "Jigsaw-Code",
+          "url": "https://github.com/Jigsaw-Code"
+        }
+      ],
+      "links": [
+        {
+          "type": "GitHub",
+          "url": "Jigsaw-Code/outline-server"
+        },
+        {
+          "type": "Download",
+          "url": "https://github.com/Jigsaw-Code/outline-server/releases"
         }
       ],
       "installinfo": [
@@ -9907,6 +10327,36 @@
       ]
     },
     {
+      "name": "PlayMe",
+      "installname": "playme",
+      "type": "AppImage",
+      "description": "Elegant YouTube Music desktop app",
+      "authors": [
+        {
+          "name": "filipuic",
+          "url": "https://github.com/filipuic"
+        }
+      ],
+      "links": [
+        {
+          "type": "GitHub",
+          "url": "filipuic/playme"
+        },
+        {
+          "type": "Download",
+          "url": "https://github.com/filipuic/playme/releases"
+        }
+      ],
+      "installinfo": [
+        {
+          "version": "Not Installed",
+          "size": "Not Installed",
+          "tag": "Not Installed",
+          "status": "Not Installed"
+        }
+      ]
+    },
+    {
       "name": "playyourdamnturn.com",
       "installname": "playyourdamnturn.com",
       "type": "AppImage",
@@ -10135,6 +10585,36 @@
         {
           "type": "Install",
           "url": "https://github.com/showcheap/postman-appimage/releases"
+        }
+      ],
+      "installinfo": [
+        {
+          "version": "Not Installed",
+          "size": "Not Installed",
+          "tag": "Not Installed",
+          "status": "Not Installed"
+        }
+      ]
+    },
+    {
+      "name": "PostyBirb",
+      "installname": "postybirb",
+      "type": "AppImage",
+      "description": "Multimedia crossposter for multimedia websites",
+      "authors": [
+        {
+          "name": "mvdicarlo",
+          "url": "https://github.com/mvdicarlo"
+        }
+      ],
+      "links": [
+        {
+          "type": "GitHub",
+          "url": "mvdicarlo/postybirb"
+        },
+        {
+          "type": "Download",
+          "url": "https://github.com/mvdicarlo/postybirb/releases"
         }
       ],
       "installinfo": [
@@ -11317,6 +11797,36 @@
       ]
     },
     {
+      "name": "ridereceipts",
+      "installname": "ridereceipts",
+      "type": "AppImage",
+      "description": "Simple automation desktop app to download and organize your tax invoices from Uber.",
+      "authors": [
+        {
+          "name": "ridereceipts",
+          "url": "https://github.com/ridereceipts"
+        }
+      ],
+      "links": [
+        {
+          "type": "GitHub",
+          "url": "ridereceipts/ridereceipts"
+        },
+        {
+          "type": "Download",
+          "url": "https://github.com/ridereceipts/ridereceipts/releases"
+        }
+      ],
+      "installinfo": [
+        {
+          "version": "Not Installed",
+          "size": "Not Installed",
+          "tag": "Not Installed",
+          "status": "Not Installed"
+        }
+      ]
+    },
+    {
       "name": "RPCS3",
       "installname": "RPCS3",
       "type": "AppImage",
@@ -11365,6 +11875,36 @@
         {
           "type": "Install",
           "url": "https://github.com/martinrotter/rssguard/releases"
+        }
+      ],
+      "installinfo": [
+        {
+          "version": "Not Installed",
+          "size": "Not Installed",
+          "tag": "Not Installed",
+          "status": "Not Installed"
+        }
+      ]
+    },
+    {
+      "name": "Rufus",
+      "installname": "rufus",
+      "type": "AppImage",
+      "description": "Logiciel de gestion de cabinet d'Ophtalmologie",
+      "authors": [
+        {
+          "name": "ukinoki",
+          "url": "https://github.com/ukinoki"
+        }
+      ],
+      "links": [
+        {
+          "type": "GitHub",
+          "url": "ukinoki/Rufus"
+        },
+        {
+          "type": "Download",
+          "url": "https://github.com/ukinoki/Rufus/releases"
         }
       ],
       "installinfo": [
@@ -12037,6 +12577,36 @@
       ]
     },
     {
+      "name": "Slacktronic",
+      "installname": "slacktronic",
+      "type": "AppImage",
+      "description": "Connect your Slack workspace to Arduino",
+      "authors": [
+        {
+          "name": "migmartri",
+          "url": "https://github.com/migmartri"
+        }
+      ],
+      "links": [
+        {
+          "type": "GitHub",
+          "url": "migmartri/slacktronic"
+        },
+        {
+          "type": "Download",
+          "url": "https://github.com/migmartri/slacktronic/releases"
+        }
+      ],
+      "installinfo": [
+        {
+          "version": "Not Installed",
+          "size": "Not Installed",
+          "tag": "Not Installed",
+          "status": "Not Installed"
+        }
+      ]
+    },
+    {
       "name": "sleep-timer",
       "installname": "sleep-timer",
       "type": "AppImage",
@@ -12127,6 +12697,36 @@
       ]
     },
     {
+      "name": "snapshot-slider",
+      "installname": "snapshot-slider",
+      "type": "AppImage",
+      "description": "A slider to present, print and email Snapshots of modern mathematics from Oberwolfach",
+      "authors": [
+        {
+          "name": "IMAGINARY",
+          "url": "https://github.com/IMAGINARY"
+        }
+      ],
+      "links": [
+        {
+          "type": "GitHub",
+          "url": "IMAGINARY/snapshot-slider"
+        },
+        {
+          "type": "Download",
+          "url": "https://github.com/IMAGINARY/snapshot-slider/releases"
+        }
+      ],
+      "installinfo": [
+        {
+          "version": "Not Installed",
+          "size": "Not Installed",
+          "tag": "Not Installed",
+          "status": "Not Installed"
+        }
+      ]
+    },
+    {
       "name": "SnippetStore",
       "installname": "snippetstore",
       "type": "AppImage",
@@ -12205,6 +12805,36 @@
         {
           "type": "Download",
           "url": "https://github.com/sovren/batch-utility/releases"
+        }
+      ],
+      "installinfo": [
+        {
+          "version": "Not Installed",
+          "size": "Not Installed",
+          "tag": "Not Installed",
+          "status": "Not Installed"
+        }
+      ]
+    },
+    {
+      "name": "Spark.Payments",
+      "installname": "spark.payments",
+      "type": "AppImage",
+      "description": "An external terminal application for processing DASH payments in brick and mortar stores.",
+      "authors": [
+        {
+          "name": "kodaxx",
+          "url": "https://github.com/kodaxx"
+        }
+      ],
+      "links": [
+        {
+          "type": "GitHub",
+          "url": "kodaxx/spark-dash-desktop"
+        },
+        {
+          "type": "Download",
+          "url": "https://github.com/kodaxx/spark-dash-desktop/releases"
         }
       ],
       "installinfo": [
@@ -12877,6 +13507,36 @@
       ]
     },
     {
+      "name": "subtitles-composer-app",
+      "installname": "subtitles-composer-app",
+      "type": "AppImage",
+      "description": "subtitlescomposer Desktop Client for Linux",
+      "authors": [
+        {
+          "name": "pietrop",
+          "url": "https://github.com/pietrop"
+        }
+      ],
+      "links": [
+        {
+          "type": "GitHub",
+          "url": "pietrop/subtitlesComposer-app"
+        },
+        {
+          "type": "Download",
+          "url": "https://github.com/pietrop/subtitlesComposer-app/releases"
+        }
+      ],
+      "installinfo": [
+        {
+          "version": "Not Installed",
+          "size": "Not Installed",
+          "tag": "Not Installed",
+          "status": "Not Installed"
+        }
+      ]
+    },
+    {
       "name": "Subvertise",
       "installname": "Subvertise",
       "type": "AppImage",
@@ -13177,6 +13837,36 @@
       ]
     },
     {
+      "name": "tastee-ui",
+      "installname": "tastee-ui",
+      "type": "AppImage",
+      "description": "UI For TASTEE",
+      "authors": [
+        {
+          "name": "tastee",
+          "url": "https://github.com/tastee"
+        }
+      ],
+      "links": [
+        {
+          "type": "GitHub",
+          "url": "tastee/tastee-ui"
+        },
+        {
+          "type": "Download",
+          "url": "https://github.com/tastee/tastee-ui/releases"
+        }
+      ],
+      "installinfo": [
+        {
+          "version": "Not Installed",
+          "size": "Not Installed",
+          "tag": "Not Installed",
+          "status": "Not Installed"
+        }
+      ]
+    },
+    {
       "name": "tc-linux",
       "installname": "tc-linux",
       "type": "AppImage",
@@ -13238,23 +13928,23 @@
     },
     {
       "name": "TeXstudio",
-      "installname": "TeXstudio",
+      "installname": "texstudio",
       "type": "AppImage",
-      "description": "LaTeX development environment ",
+      "description": "LaTeX development environment",
       "authors": [
         {
-          "name": "null",
-          "url": "https://dl.bintray.com/unruhschuh/AppImages"
+          "name": "texstudio-org",
+          "url": "https://github.com/texstudio-org"
         }
       ],
       "links": [
         {
-          "type": "Other",
-          "url": "https://dl.bintray.com/unruhschuh/AppImages"
+          "type": "GitHub",
+          "url": "texstudio-org/texstudio"
         },
         {
-          "type": "Install",
-          "url": "https://dl.bintray.com/unruhschuh/AppImages/TeXstudio-2.10.8-x86_64.AppImage"
+          "type": "Download",
+          "url": "https://github.com/texstudio-org/texstudio/releases"
         }
       ],
       "installinfo": [
@@ -14197,6 +14887,36 @@
       ]
     },
     {
+      "name": "Vipster",
+      "installname": "vipster",
+      "type": "AppImage",
+      "description": "Visual periodic structure editor",
+      "authors": [
+        {
+          "name": "sgsaenger",
+          "url": "https://github.com/sgsaenger"
+        }
+      ],
+      "links": [
+        {
+          "type": "GitHub",
+          "url": "sgsaenger/vipster"
+        },
+        {
+          "type": "Download",
+          "url": "https://github.com/sgsaenger/vipster/releases"
+        }
+      ],
+      "installinfo": [
+        {
+          "version": "Not Installed",
+          "size": "Not Installed",
+          "tag": "Not Installed",
+          "status": "Not Installed"
+        }
+      ]
+    },
+    {
       "name": "VirtScreen",
       "installname": "virtscreen",
       "type": "AppImage",
@@ -15055,6 +15775,36 @@
         {
           "type": "Install",
           "url": "https://github.com/mikefarah/yq/releases"
+        }
+      ],
+      "installinfo": [
+        {
+          "version": "Not Installed",
+          "size": "Not Installed",
+          "tag": "Not Installed",
+          "status": "Not Installed"
+        }
+      ]
+    },
+    {
+      "name": "ZenroomStudio",
+      "installname": "zenroomstudio",
+      "type": "AppImage",
+      "description": "Zenroom Studio",
+      "authors": [
+        {
+          "name": "DECODEproject",
+          "url": "https://github.com/DECODEproject"
+        }
+      ],
+      "links": [
+        {
+          "type": "GitHub",
+          "url": "DECODEproject/zenroom-studio"
+        },
+        {
+          "type": "Download",
+          "url": "https://github.com/DECODEproject/zenroom-studio/releases"
         }
       ],
       "installinfo": [
