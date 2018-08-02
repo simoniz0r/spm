@@ -16,7 +16,7 @@
     },
     {
       "type": "Install",
-      "url": "https://download.kde.org/stable/krita/4.0.3/krita-4.0.3-x86_64.appimage"
+      "url": "https://download.kde.org/stable/krita/4.1.1/krita-4.1.1-x86_64.appimage"
     }
   ],
   "installinfo": [

@@ -16,7 +16,7 @@
     },
     {
       "type": "Install",
-      "url": "http://home.kfunk.org:8080/job/kdevelop-appimage-centos/lastSuccessfulBuild/artifact/KDevelop-git-x86_64.AppImage"
+      "url": "https://download.kde.org/stable/kdevelop/5.2.3/bin/linux/KDevelop-5.2.3-x86_64.AppImage"
     }
   ],
   "installinfo": [
