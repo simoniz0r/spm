@@ -9,7 +9,7 @@
 
 # Function to handle all exits
 function puylet() {
-
+    puyo="$HOME/.puyo"
     case "$1" in
         install)
             fetch $@
