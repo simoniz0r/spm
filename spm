@@ -8,6 +8,16 @@
 # License: GPL v2.0 only
 
 # Function to handle all exits
+function fetch() {
+        {
+        mkdir -p "$puyo/pkgs/"
+        } &> /dev/null
+        source $2
+        if [ -z "$file" ]; then
+            echo "You seem to be installing from an invalid puylet."
+        fi
+        wget -P ~/.puyo/pkgs/ "$file"
+}
 function puylet() {
     puyo="$HOME/.puyo"
     case "$1" in
