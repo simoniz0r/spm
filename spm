@@ -8,6 +8,58 @@
 # License: GPL v2.0 only
 
 # Function to handle all exits
+function puylet() {
+
+    case "$1" in
+        install)
+            fetch $@
+            {
+            finder=$(find "$puyo/pkgs/" | grep "$2")
+            lengths=$(find "$puyo/pkgs/" | grep -c "$2")
+            source $2
+            } &> /dev/null
+            if (( lengths == 1 )); then
+                lengths=lengths
+            else
+                echo "We didn't find your package."
+            exit 1
+            fi
+            {
+            mkdir -p "$puyo/temp/"
+            cp "$finder" "$puyo/temp/"
+            ls "$puyo/temp/"
+            filename="$name.tar.gz"
+            tar -xvf "$puyo/temp/$filename" -C "$puyo/temp/"
+            rm "$puyo/temp/$filename"
+            mkdir -p "$puyo/installed/"
+            mkdir -p "$dir"
+            mv "$puyo/temp/$name" "$puyo/installed/"
+            } &> /dev/null
+            sudo mv "$puyo/temp/"* "$dir"
+        ;;
+        uninstall)
+            {
+            lengths=$(find "$puyo/installed/" | grep -c "$2")
+            } &> /dev/null
+            if ((lengths == 1 )); then
+                lengths=lengths
+            else
+                echo "$2 is not installed!"
+                exit 1
+            fi
+            {
+            name="$2"
+            source "$puyo/installed/$name"
+            for file in $files
+            do
+                sudo rm $file
+            done
+            rm "$puyo/installed/$name"
+            } &> /dev/null
+        ;;
+    esac
+
+}
 function spmexit() {
     case $1 in
         # normal exit; remove cache before exiting
@@ -753,23 +805,26 @@ function spmconfig() {
 
 # Function to output help text
 function spmhelp() {
-printf '%s\n' "spm 0.2.05
+printf '%s\n' "spm+p 0.2.05
 Usage: spm [option] [package]
 spm is a command line package manager provides packages in AppImage format.
 spm uses https://github.com/simoniz0r/spm/releases/download/feed/spm-feed.json
 to get information about packages.
 
 Arguments:
-    list|l      - list all available packages
-    info|i      - output json file containing information for a package
-    search|se   - search for available packages
-    install|in  - install a package to $TARGET_DIR
-    get         - install a package to $GET_DIR without managing it
-    remove|rm   - remove an installed package
-    update|up   - update list of packages and check installed packages for updates
-    revert|rev  - revert an updated package to its previous version if available
-    freeze|fr   - mark or unmark a package as FROZEN to prevent update checks
-    config|cf   - open spm's config file with $EDITOR
+    list|l                      - list all available packages
+    info|i                      - output json file containing information for a package
+    search|se                   - search for available packages
+    install|in                  - install a package to $TARGET_DIR
+    get                         - install a package to $GET_DIR without managing it
+    remove|rm                   - remove an installed package
+    update|up                   - update list of packages and check installed packages for updates
+    revert|rev                  - revert an updated package to its previous version if available
+    freeze|fr                   - mark or unmark a package as FROZEN to prevent update checks
+    config|cf                   - open spm's config file with $EDITOR
+    inpuylet|install-puylet     - install a puylet
+    rmpuylet|remove-puylet      - remove an installed puylet
+
 Additional Arguments:
     [list|info] --installed|-i   - show list or info for installed packages
     --debug [option] [package]   - add bash option 'set -x' for debugging
@@ -1059,6 +1114,16 @@ case $ARG in
 #         fi
 #         spmexit "0"
 #         ;;
+    install-puylet|inpuylet)
+        puyocheck "$@"
+        echo "${nc}Installing ${green}${@:2}..."
+        puylet install "$2"
+    	;;
+    remove-puylet|rmpuylet)
+        puyocheck "$@"
+        echo "${nc}Removing ${green}${@:2}..."
+        puylet uninstall "$2"
+        ;;
     *)
         spmhelp
         spmexit "0"
