@@ -18,7 +18,7 @@ Dependencies: curl, jq (jq is included in the AppImage release)
     
     search|se                   - search for available packages
     
-    install|in                  - install a package to /usr/local/bin
+    install|in                  - install a package to $TARGET_DIR
     
     get                         - install a package to /home/diamond/bin without managing it
     
