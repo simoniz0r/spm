@@ -20,7 +20,7 @@ Dependencies: curl, jq (jq is included in the AppImage release)
     
     install|in                  - install a package to $TARGET_DIR
     
-    get                         - install a package to /home/diamond/bin without managing it
+    get                         - install a package to $GET_DIR
     
     remove|rm                   - remove an installed package
     
