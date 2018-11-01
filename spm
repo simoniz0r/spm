@@ -208,12 +208,12 @@ function parsestoredinfo() {
 
 # Function that lists all packages in CONFIG_DIR/list
 function listavailable() {
-    dir -C -w 1 "$CONFIG_DIR"/list | rev | cut -f2- -d'.' | rev
+    ls -C -w 1 "$CONFIG_DIR"/list | rev | cut -f2- -d'.' | rev
 }
 
 # Function that lists all packages in CONFIG_DIR/installed
 function listinstalled() {
-    dir -C -w 1 "$CONFIG_DIR"/installed
+    ls -C -w 1 "$CONFIG_DIR"/installed
 }
 
 # Function that uses jq to show the json file for any package in CONFIG_DIR/list
@@ -230,18 +230,18 @@ function showinfo() {
 
 # Function that uses jq to show the json file for each package in CONFIG_DIR/installed
 function showinfoinstalled() {
-    for file in $(dir -C -w 1 "$CONFIG_DIR"/installed); do
+    for file in $(ls -C -w 1 "$CONFIG_DIR"/installed); do
         echo "$(tput setaf $CLR_LGREEN)$file$(tput sgr0):"
         jq -r '. | { name: .installname, description: .description, authors: .authors[0].name, authors_url: .authors[0].url, link_type: .links[0].type, link_url: .links[1].url, release: .installinfo[0].version, version: .installinfo[0].tag, size: .installinfo[0].size, status: .installinfo[0].status }' "$CONFIG_DIR"/installed/"$file"
         echo
     done
     echo
-    echo "$(tput setaf $CLR_GREEN)$(dir -C -w 1 "$CONFIG_DIR"/installed | wc -l) installed package(s)$(tput sgr0)"
+    echo "$(tput setaf $CLR_GREEN)$(ls -C -w 1 "$CONFIG_DIR"/installed | wc -l) installed package(s)$(tput sgr0)"
 }
 
 # Function to search for known packages in $CONFIG_DIR/list
 function listsearch() {
-    displaymessage "$(tput setaf $CLR_GREEN)Search results for $@ :$(tput sgr0)" "$(dir -C -w 1 "$CONFIG_DIR"/list | sed 's%.json%%g' | grep "$@" || echo "No results for $@")"
+    displaymessage "$(tput setaf $CLR_GREEN)Search results for $@ :$(tput sgr0)" "$(ls -C -w 1 "$CONFIG_DIR"/list | sed 's%.json%%g' | grep "$@" || echo "No results for $@")"
 }
 
 # Function that uses curl and jq to get the latest release info for package
@@ -398,7 +398,7 @@ function getappimage() {
         spmexit "4" "$(tput setaf $CLR_RED)Error$(tput sgr0)" "Could not find download for $PACKAGE from $PACKAGE_DL_URL!"
     fi
     rm -f "$CONFIG_DIR"/cache/"$PACKAGE"00.json
-    for jsonfile in $(dir -C -w 1 "$CONFIG_DIR"/cache | grep '.*\.json' ); do
+    for jsonfile in $(ls -C -w 1 "$CONFIG_DIR"/cache | grep '.*\.json' ); do
         echo "$(jq -r '.url' "$CONFIG_DIR"/cache/"$jsonfile" | cut -f9 -d'/')" >> "$CONFIG_DIR"/cache/getappimages.list
     done
     NUM_PACKAGES=$(cat "$CONFIG_DIR"/cache/getappimages.list | head -n 5 | wc -l)
@@ -453,7 +453,7 @@ function removepackage() {
     trywithoutsudo "$TARGET_DIR" "rm $TARGET_DIR/$PACKAGE"
     rm "$CONFIG_DIR"/installed/"$PACKAGE"
     rm -f "$HOME"/.local/share/applications/appimagekit-"$PACKAGE".desktop
-    for icondir in $(dir -C -w 1 ~/.local/share/icons/hicolor); do
+    for icondir in $(ls -C -w 1 ~/.local/share/icons/hicolor); do
         rm -f "$HOME"/.local/share/icons/hicolor/"$icondir"/apps/appimagekit-"$PACKAGE".png
     done
     echo
@@ -472,7 +472,7 @@ function updatelist() {
     [ -f "$CONFIG_DIR/list/.listversion" ] && . "$CONFIG_DIR"/list/.listversion || LIST_VERSION="null"
     NEW_LIST_VERSION="$(curl -sSL "https://github.com/simoniz0r/spm/releases/download/feed/spm-feed.json" | jq -r '.updated_at')"
     if [ ! "$LIST_VERSION" = "$NEW_LIST_VERSION" ]; then
-        PACKAGES_AVAILABLE="$(dir -C -w 1 "$CONFIG_DIR"/list)"
+        PACKAGES_AVAILABLE="$(ls -C -w 1 "$CONFIG_DIR"/list)"
         printf '\e[?25l' # Hide cursor to prevent progress bar looking glitchy
         echo "$(tput setaf $CLR_GREEN)Downloading package list...$(tput sgr0)"
         mv "$CONFIG_DIR"/list/ "$CONFIG_DIR"/cache/
@@ -482,9 +482,9 @@ function updatelist() {
         || { rm -rf "$CONFIG_DIR"/list; mv "$CONFIG_DIR"/cache/list "$CONFIG_DIR"/list; spmexit "5" "$(tput setaf $CLR_RED)Error updating package list!$(tput sgr0)" "If this continues to happen, please report an issue at https://github.com/simoniz0r/spm$(tput sgr0)"; }
         rm -rf "$CONFIG_DIR"/cache/*
         rm -f "$CONFIG_DIR"/list/appimage00.json
-        NUM_PACKAGES="$(dir -C -w 1 "$CONFIG_DIR"/list | wc -l)"
+        NUM_PACKAGES="$(ls -C -w 1 "$CONFIG_DIR"/list | wc -l)"
         CURRENT_NUM=1
-        for file in $(dir -C -w 1 "$CONFIG_DIR"/list); do
+        for file in $(ls -C -w 1 "$CONFIG_DIR"/list); do
             echo -ne "$(tput setaf $CLR_GREEN)Parsing info for package $CURRENT_NUM/$NUM_PACKAGES...$(tput sgr0)\r"
             PACKAGE_NAME="$(grep '"installname":' "$CONFIG_DIR"/list/"$file" | cut -f4 -d'"' | tr '[:upper:]' '[:lower:]')"
             mv "$CONFIG_DIR"/list/"$file" "$CONFIG_DIR"/list/"$PACKAGE_NAME.json"
@@ -495,7 +495,7 @@ function updatelist() {
         rm -f "$CONFIG_DIR"/list/end.json
         sleep 0.5
         printf '\e[?25h' # Show cursor
-        NEW_PACKAGES_AVAILABLE="$(dir -C -w 1 "$CONFIG_DIR"/list)"
+        NEW_PACKAGES_AVAILABLE="$(ls -C -w 1 "$CONFIG_DIR"/list)"
         echo
         if [ "$NEW_PACKAGES_AVAILABLE" != "$PACKAGES_AVAILABLE" ]; then
             echo "$(tput setaf $CLR_CYAN)Package list updated. Package list changes:       $(tput sgr0)"
@@ -516,7 +516,7 @@ function updatelist() {
 function savedowngrade() {
     local PACKAGE="$1"
     if [ $DOWNGRADE_LIMIT -gt 0 ]; then
-        if [ $(dir -C -w 1 "$CONFIG_DIR"/downgrades | wc -l) -ge $DOWNGRADE_LIMIT ]; then
+        if [ $(ls -C -w 1 "$CONFIG_DIR"/downgrades | wc -l) -ge $DOWNGRADE_LIMIT ]; then
             rm -f "$CONFIG_DIR"/downgrades/*
         fi
         cp "$TARGET_DIR"/"$PACKAGE" "$CONFIG_DIR"/downgrades/"$PACKAGE"
@@ -527,7 +527,7 @@ function savedowngrade() {
 # Function that updates packages in CONFIG_DIR/updates using info stored in the files from that dir
 function runupdate() {
     rm -f "$CONFIG_DIR"/upgrades/.upgradelist
-    for package in $(dir -C -w 1 "$CONFIG_DIR"/upgrades); do
+    for package in $(ls -C -w 1 "$CONFIG_DIR"/upgrades); do
         . "$CONFIG_DIR"/upgrades/"$package"
         echo "$package - Version: $PACKAGE_TAG - Release: $NEW_PACKAGE_VERSION - Size: $PACKAGE_SIZE" >> "$CONFIG_DIR"/upgrades/.upgradelist
         unset PACKAGE_TAG
@@ -544,7 +544,7 @@ function runupdate() {
             spmexit "2" "$(tput setaf $CLR_RED)Exiting...$(tput sgr0)" "Package(s) not updated."
             ;;
     esac
-    for PACKAGE in $(dir -C -w 1 "$CONFIG_DIR"/upgrades); do
+    for PACKAGE in $(ls -C -w 1 "$CONFIG_DIR"/upgrades); do
         echo "$(tput setaf $CLR_CYAN)Updating $PACKAGE$(tput setaf $CLR_CYAN)...$(tput sgr0)"
         . "$CONFIG_DIR"/upgrades/"$PACKAGE"
         curl -L -o "$CONFIG_DIR"/cache/"$PACKAGE".AppImage "$PACKAGE_LATEST_URL" || { echo "$(tput setaf $CLR_RED)Error installing $PACKAGE!$(tput sgr0)"; rm -f "$CONFIG_DIR"/cache/"$PACKAGE".AppImage; }
@@ -595,11 +595,11 @@ function updatecheck() {
 function updatestart() {
     local PACKAGE="$1"
     if [ -z "$PACKAGE" ]; then
-        if [ $(dir -C -w 1 "$CONFIG_DIR"/installed | wc -l) -gt 0 ]; then
-            NUM_PACKAGES=$(dir -C -w 1 "$CONFIG_DIR"/installed | wc -l)
+        if [ $(ls -C -w 1 "$CONFIG_DIR"/installed | wc -l) -gt 0 ]; then
+            NUM_PACKAGES=$(ls -C -w 1 "$CONFIG_DIR"/installed | wc -l)
             CURRENT_NUM=1
             printf '\e[?25l' # Hide cursor to prevent progress bar looking glitchy
-            for appimage in $(dir -C -w 1 "$CONFIG_DIR"/installed); do
+            for appimage in $(ls -C -w 1 "$CONFIG_DIR"/installed); do
                 parsestoredinfo "installed" "$appimage"
                 case $PACKAGE_UPDATE_STATUS in
                     FROZEN)
@@ -614,8 +614,8 @@ function updatestart() {
             done
             printf '\e[?25h' # Show cursor
             echo
-            if [ $(dir -C -w 1 "$CONFIG_DIR"/upgrades | wc -l) -gt 0 ]; then
-                NUM_UPDATES="$(dir -C -w 1 "$CONFIG_DIR"/upgrades | wc -l)"
+            if [ $(ls -C -w 1 "$CONFIG_DIR"/upgrades | wc -l) -gt 0 ]; then
+                NUM_UPDATES="$(ls -C -w 1 "$CONFIG_DIR"/upgrades | wc -l)"
                 echo "$(tput setaf $CLR_CYAN)$NUM_UPDATES new package update(s)!$(tput sgr0)"
                 echo "$(tput setaf $CLR_CYAN)Finished checking for updates in $(($(date +%s)-$UPD_START_TIME)) seconds$(tput sgr0)"
                 echo
@@ -643,7 +643,7 @@ function updatestart() {
                 ;;
             *)
                 updatecheck "$PACKAGE"
-                if [ $(dir -C -w 1 "$CONFIG_DIR"/upgrades | wc -l) -gt 0 ]; then
+                if [ $(ls -C -w 1 "$CONFIG_DIR"/upgrades | wc -l) -gt 0 ]; then
                     echo "$(tput setaf $CLR_CYAN)New update for $PACKAGE!$(tput sgr0)"
                     echo "$(tput setaf $CLR_CYAN)Finished checking for update in $(($(date +%s)-$UPD_START_TIME)) seconds$(tput sgr0)"
                     echo
@@ -899,8 +899,8 @@ fi
 # fi
 
 # Set and unset 'dir' alias to avoid issues on systems such as OpenSUSE that create a default 'dir' alias
-alias dir='dir'
-unalias dir
+alias ls='ls'
+unalias ls
 
 # If user installed tab completion file prior to this addition, touch .tab-completion-installed to bypass check
 if [ -d "/etc/bash_completion.d" ] && [ -f "/etc/bash_completion.d/spm.sh" ] && [ ! -f "$CONFIG_DIR/.tab-completion-installed" ]; then
