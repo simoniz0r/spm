@@ -104,6 +104,9 @@ cat > "$CONFIG_DIR"/spm.conf << EOL
 #
 # TARGET_DIR - Directory where packages will be installed to.
 # Only change this directory if you have no packages being managed by spm!
+
+# choose a subdir below /home/...  to avoid the need for "sudo" to access files below /usr/share/...
+
 #
 TARGET_DIR="$TARGET_DIR"
 #
