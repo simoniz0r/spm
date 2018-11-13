@@ -12,25 +12,29 @@ Dependencies: curl, jq (jq is included in the AppImage release)
 ## Arguments
 
 ```    
-    list|l      - list all available packages
+    list|l                      - list all available packages
     
-    info|i      - output information for a package
+    info|i                      - output json file containing information for a package
     
-    search|se   - search for available packages
+    search|se                   - search for available packages
     
-    install|in - install a package to $TARGET_DIR
+    install|in                  - install a package to $TARGET_DIR
     
-    get         - install a package to $GET_DIR without managing it
+    get                         - install a package to $GET_DIR without managing it
     
-    remove|rm   - remove an installed package
+    remove|rm                   - remove an installed package
     
-    update|up   - update list of packages and check installed packages for updates
+    update|up                   - update list of packages and check installed packages for updates
     
-    revert|rev  - revert an updated package to its previous version if available
+    revert|rev                  - revert an updated package to its previous version if available
     
-    freeze|fr   - mark or unmark a package as FROZEN to prevent update checks
+    freeze|fr                   - mark or unmark a package as FROZEN to prevent update checks
     
-    config|cf   - open spm's config file with $EDITOR
+    config|cf                   - open spm's config file with /usr/bin/nano
+    
+    inpuylet|install-puylet     - install a puylet
+    
+    rmpuylet|remove-puylet      - remove an installed puylet
 ```
 
 ## Additional Arguments
